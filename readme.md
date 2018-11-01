@@ -160,18 +160,19 @@ saves time on standardizing markup and assets of reusable components.
 Getting a running site takes only a few steps for a project.
 
 1. [Install Docksal](http://docksal.readthedocs.io/en/master/getting-started/env-setup/) if it's not already installed.
-1. Duplicate the contents of the KIT repository into a new repository
-    1. Copy the repository into a new folder.
-        ```
-        git clone --depth=1 --branch=master ssh://git@bitbucket-ssh.uhub.biz:7999/vmlnadrupal/drupal-8-kit.git [FOLDER_NAME_HERE]
-        ```
+1. [Install Composer](https://getcomposer.org/doc/00-intro.md) if it's not already installed.
+1. Install the project.
+    1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
+       ```
+       composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*
+       ```
     1. Change into the directory.
         ```
         cd [FOLDER_NAME_HERE]
         ```
-    1. Remove KIT's .git file and initialize a new repository.
+    1. Initialize the new repository.
         ```
-        rm -rf .git && git init
+        git init
         ```
     1. Add your new projects remote repository
         ```
