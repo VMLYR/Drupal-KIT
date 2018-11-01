@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+## Sets up and cleans project dependencies
+##
+## Usage: fin init-deps
+
+#-------------------------- Helper functions --------------------------------
+
+source "${PROJECT_ROOT}/.docksal/functions.sh"
+
+#-------------------------- END: Helper functions --------------------------------
+
+#-------------------------- Sanity Check --------------------------------
+
+if [[ "$PROJECT_ROOT" == "" ]]; then
+  echo-red "\$PROJECT_ROOT is not set"
+  exit 1
+fi
+
+#-------------------------- END: Sanity Check --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+subheader "Initializing Dependencies"
+section=Dependencies
+step=1
+
+step_header "Installing Composer"
+if [[ $BUILDER == "true" ]]; then
+  fin composer install --prefer-dist --no-dev --no-progress -o -n
+else
+  fin composer install
+fi
+
+step_header "Upgrading NPM"
+fin exec npm install --global npm@latest
+
+step_header "Cleaning git submodules..."
+# Fix file/folder permissions
+find vendor -type d -name ".git" -prune -exec rm -rf {} \;
+find ${PROJECT_ROOT}/${DOCROOT}/modules/contrib -type d -name ".git" -prune -exec rm -rf {} \;
+find ${PROJECT_ROOT}/${DOCROOT}/libraries -type d -name ".git" -prune -exec rm -rf {} \;
+# find ${DOCROOT_PATH}/themes/contrib -type d -name ".git" -prune -exec rm -rf {} \;
+
+#-------------------------- END: Execution --------------------------------

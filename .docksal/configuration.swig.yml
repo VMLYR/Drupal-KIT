@@ -1,0 +1,20 @@
+commands:
+  - name: npm
+    run: 'npm install'
+  - name: npm-ci
+    run: 'npm ci'
+  - name: gulp-build
+    run: 'npm run gulp build'
+  - name: gulp-build-dev
+    run: 'npm run gulp build--dev'
+  - name: gulp-watch
+    run: 'npm run gulp watch'
+themes:
+#  - name: Source
+#    path: source
+#    cmds:
+#      - npm
+#      - npm-ci
+#      - gulp-build
+#      - gulp-build-dev
+#      - gulp-watch

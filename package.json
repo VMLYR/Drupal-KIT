@@ -1,0 +1,6 @@
+{
+  "name": "VML Drupal",
+  "description": "A base Drupal distribution built and maintained by VML.",
+  "license": "GPL-2.0",
+  "private": true
+}

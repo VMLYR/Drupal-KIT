@@ -1,0 +1,60 @@
+#!/bin/bash
+
+export PATH=/usr/local/bin:$PATH
+
+# If you want to allow non-ASCII filenames set this variable to true.
+allownonascii=$(git config --bool hooks.allownonascii)
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Cross platform projects tend to avoid non-ASCII filenames; prevent
+# them from being added to the repository. We exploit the fact that the
+# printable range starts at the space character and ends with tilde.
+if [ "$allownonascii" != "true" ] &&
+    # Note that the use of brackets around a tr range is ok here, (it's
+    # even required, for portability to Solaris 10's /usr/bin/tr), since
+    # the square bracket bytes happen to fall in the designated range.
+    test $(git diff --cached --name-only --diff-filter=A -z $against |
+      LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+then
+    cat <<\EOF
+Error: Attempt to add a non-ASCII file name.
+This can cause problems if you want to work with people on other platforms.
+To be portable it is advisable to rename the file.
+If you know what you are doing you can disable this check using:
+
+  git config hooks.allownonascii true
+EOF
+    exit 1
+fi
+
+PROJECT=`php -r "echo dirname(dirname(realpath('$0')));"`
+PROJECT=$(sed 's/ /\\ /g' <<< "$PROJECT");
+
+
+if [ "$#" -eq 2 ]
+then
+    ##CMD="git rev-list $(git rev-list --first-parent ^$1 $2 | tail -n1)^^!"
+    #CMD="diff -u <(git rev-list --first-parent $1) <(git rev-list --first-parent $2) | sed -ne 's/^ //p' | head -1"
+    CMD="git merge-base $1 $2"
+    COMMIT=$($CMD)
+    echo ${COMMIT}
+    STAGED_FILES=`git --no-pager diff --cached --name-only --diff-filter=ACMR ${COMMIT}`
+    echo ${STAGED_FILES}
+elif [ "$#" -eq 1 ]
+then
+    STAGED_FILES=`git --no-pager diff --cached --name-only --diff-filter=ACMR ${1}`
+else
+    STAGED_FILES=`git diff --cached --name-only --diff-filter=ACMR HEAD`
+fi
+
+if [ -n "$STAGED_FILES" ]
+then
+  fin kit/lint ${STAGED_FILES}
+fi
+
+exit $?
+
+# If there are whitespace errors, print the offending file names and fail.
+exec git diff-index --check --cached $against --
