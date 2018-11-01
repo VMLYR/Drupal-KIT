@@ -100,7 +100,7 @@ This composer project comes with 2 VMLY&R-created Drupal profiles:
 ### Multi-environment configuration and development
 
 Multi-environment configuration is pre-configured as part of the
-distribution via the default `settings.php` file and the _Profilo_ profile.
+distribution via the default `settings.php` file and the _Profilo_ and _Kastoro_ profiles.
 
 #### Environments + _Settings.php_ file
 The each site's default `settings.php file` includes the
@@ -118,13 +118,13 @@ regularly without a certain environment taking accidental precedence.
 Development and docksal settings files are automatically included via
 the `environment.settings.php` file, if they exist. These files are
 ignored by git and helpful for development overrides such as disabling
-cache or allowing verbose error reporting. The fin `init-project` / `init-sites`
-commands automatically copy a `settings.local.php` and
-`settings.docksal.php` into each sites directories to better assist
+cache or allowing verbose error reporting. The KitScriptHandler script,
+which is ran by composer, automatically copies a `settings.local.php`
+and `settings.docksal.php` into each sites directories to better assist
 local development.
 
-#### Environments + _Profilo_ Profile
-The _Profilo_ profile includes config-split options by default, and has
+#### Environments + the VMLY&R Profiles (_Profilo_ and _Kastoro_)
+The VMLY&R profiles include config-split options by default, and have
 additional tasks during install to establish the default configuration
 and each split's configuration, as well as import as the local
 environment before the installation is complete.
@@ -143,17 +143,52 @@ The four included default configurations include:
 
 Multi-site support is baked into the project via our supplied Docksal
 tools. When another site needs to be added, it's as simple as creating a
-the new drush alias file and running `init-sites`. The command will
+the new drush alias file and running `composer install`. The command will
 build out the site folder structure, copy the default settings.php file
-into the site directory and is then ready for installation. The `sync`
-and `conf` tools both support syncing and exporting/importing any site
-in a multi-site Drupal instance.
+into the site directory and is then ready for installation. The `kit/sync`
+and `kit/conf` tools both support syncing and exporting/importing any
+site in a multi-site Drupal instance.
 
-### Standardized theme management and structure (WIP)
-KIT will eventually include a Drupal base theme (named Bazo), which will
-feature a standardized library and theme architecture that more-easily
-enables the interaction between frontend and backend development and
-saves time on standardizing markup and assets of reusable components.
+### Standardized theme management and structure
+KIT automatically includes a base theme (Bazo) and two scaffolding
+themes which use Bazo as a base theme.
+
+#### _Bazo_ base theme
+The _Bazo_ base theme is meant to help assist its child-themes. It
+includes standard templates but moves most of the classes into its
+preprocesses to allow them to be more-easily removed later by the child
+preprocess. The two more-important factors of the subtheme are:
+ - Automatic Drupal library attachment – Bazo automatically attaches
+ child-theme libraries to their related entities as long as they follow
+ a naming convention:
+   - theme-name/entity-id
+   - theme-name/entity-id--view-mode
+   - theme-name/entity-id--view-mode--bundle
+
+   This not only helps your project stay organized, but it allows
+ front-end developers to attach their libraries to components without
+ needing to touch PHP.
+
+   Note: notice the _entity-id--view-mode--bundle_ is different than
+ Drupal's default theme-name convention of _entity-id--bundle--view-mode_.
+ This was done purposely, because typically all bundles of a certain
+ view-mode will share a library versus all view-modes sharing a library
+ of a certain bundle. This allows a universal library to be included for
+ view-modes and then more-specific implementations that are
+ bundle-specific also be included .
+ - Automatic attribute-variable conversion – Baso automatically converts
+ specified arrays to attribute variables in a "postprocess" function
+ that are listed in the preprocess's
+ `$variables['#attribute_variables']` array. IE:
+   - `$variables['#attribute_variables'][] = 'figcaption_attributes';`
+   - `$variables['#attribute_variables'][] = 'wrapper_attributes';`
+   - `$variables['#attribute_variables'][] = 'figcaption_attributes';`
+   - `$variables['#attribute_variables'][] = 'image_attributes';`
+
+#### Scaffolded child-themes via a Docksal command
+VMLY&R has a couple scaffolding themes included to build from, but
+they're not included in the project directly. Instead they can be
+generated via the `fin kit/init-theme` command.
 
 ## Installation
 
@@ -170,21 +205,19 @@ Getting a running site takes only a few steps for a project.
         ```
         cd [FOLDER_NAME_HERE]
         ```
-    1. Initialize the new repository.
+    1. If this directory was not already a git project, initialize the
+    new repository and add the remote origin
         ```
         git init
-        ```
-    1. Add your new projects remote repository
-        ```
         git remote add origin [REMOTE_REPOSITORY_URL_HERE]
         ```
-1. Run `fin start` to create the Docksal project.
+1. Run `fin start` in the project to create the Docksal project.
 1. Open each site's Drush alias file (`/drush/sites/` to update the
 local URI as well as any relevant server information if it's already
 known. _(note: Your local should have been listed by Docksal at the end
 of running `fin start`)_
-1. Open `/sites/sites.php` folder to make sure domains are mapped to
-the correct site.
+1. If running a multisite install, open `/sites/sites.php` folder to
+ make sure domains are mapped to the correct site.
 
     **Docksal's domain name is the project folder name in alphanumeric
     appended with .docksal. (I.E. _drupal-8-kit_ becomes
@@ -219,16 +252,21 @@ the site install page.
 automatically start installing after a profile is selected; if it
 doesn't, and it asks for database settings, reload the
 `/core/install.php` URL without any GET parameters)_
-1. Fill out the site configuration. If using the _Profilo_ Profile and the
-environment URLs are unknown, make a best guess at what they could be
+1. Fill out the site configuration. If using either of the VMLY&R
+Profiles and the environment URLs are unknown, make a best guess at what
+they could be
 _(we suggest following the `//ENV-WWW.SITE_PROD.DOMAIN` structure)_.
 The domains are used for indicating current environment and using other
 environment's assets via _Stage File Proxy_. Setting these up now helps
 not needing to set these in multiple places later on during development.
-1. If you selected the _Profilo_ profile, upon saving configuration the site
-should export all relevant configuration into the site's sync directory
-and import as the local environment.
+1. If you selected either of the VMLY&R profiles, upon saving
+configuration, the site should export all relevant configuration into
+the site's sync directory and import as the local environment.
 1. Installation is complete once redirected to the homepage of the site.
+1. To start building your own theme, run `fin kit/init-theme` to
+generate a new theme + theme source setup based on our example scaffold
+themes. If the _Kastoro_ profile was installed, we suggest scaffolding
+from _Denim_.
 
 ## Notes and suggestions
 #### Environment aliases
