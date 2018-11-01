@@ -35,6 +35,7 @@
         "drush/drush": "^9.0.0",
         "php": ">=7.1",
         "vlucas/phpdotenv": "^2.4",
+        "vmlyr-drupal/kit-docksal-commands": "^8.0",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
 
@@ -95,7 +96,6 @@
         "vmlyr-drupal/kastoro": "^8.0"
     },
     "require-dev": {
-        "vmlyr-drupal/kit-docksal-commands": "^8.0",
         "webflo/drupal-core-require-dev": "~8.6"
     },
     "conflict": {

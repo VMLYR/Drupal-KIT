@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab4bcab0033fdd6a103650dc588386c9",
+    "content-hash": "285baf42ec4a597d164e7ae2dba21ded",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6719,6 +6719,48 @@
             "time": "2018-10-10T09:24:14+00:00"
         },
         {
+            "name": "oomphinc/composer-installers-extender",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oomphinc/composer-installers-extender.git",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "composer/installers": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "OomphInc\\ComposerInstallersExtender\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Beemsterboer",
+                    "email": "stephen@oomphinc.com",
+                    "homepage": "https://github.com/balbuf"
+                }
+            ],
+            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
+            "homepage": "http://www.oomphinc.com/",
+            "time": "2017-03-31T16:57:39+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.17",
             "source": {
@@ -8930,6 +8972,83 @@
             "time": "2018-10-31T20:28:40+00:00"
         },
         {
+            "name": "vmlyr-drupal/kit-docksal-commands",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VML/Drupal-KIT-Docksal-Commands.git",
+                "reference": "29ec95e04570eb3964e3304fa62a7d88eec1d68e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VML/Drupal-KIT-Docksal-Commands/zipball/29ec95e04570eb3964e3304fa62a7d88eec1d68e",
+                "reference": "29ec95e04570eb3964e3304fa62a7d88eec1d68e",
+                "shasum": ""
+            },
+            "require": {
+                "oomphinc/composer-installers-extender": "^1.0",
+                "vmlyr-drupal/kit-docksal-utilities": "^8.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Garrett Rathbone",
+                    "email": "garrett.rathbone@vml.com"
+                }
+            ],
+            "description": "Docksal Commands for VMLYR Drupal KIT",
+            "homepage": "https://github.com/VML/Drupal-KIT-Docksal-Commands",
+            "time": "2018-10-31T17:58:52+00:00"
+        },
+        {
+            "name": "vmlyr-drupal/kit-docksal-utilities",
+            "version": "8.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VML/Drupal-KIT-Docksal-Utilities.git",
+                "reference": "8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VML/Drupal-KIT-Docksal-Utilities/zipball/8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b",
+                "reference": "8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "symfony/console": "~2.8|~3.0",
+                "symfony/filesystem": "~2.8|~3.0",
+                "symfony/finder": "~2.8|~3.0",
+                "symfony/process": "~2.8|~3.0",
+                "symfony/yaml": "~2.8|~3.0",
+                "webflo/drupal-finder": "^1.0",
+                "webmozart/path-util": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DrupalKit\\Docksal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Garrett Rathbone",
+                    "email": "garrett.rathbone@vml.com"
+                }
+            ],
+            "description": "Docksal Utilities for VMLYR Drupal KIT",
+            "homepage": "https://github.com/VML/Drupal-KIT-Docksal-Utilities",
+            "time": "2018-10-31T20:10:33+00:00"
+        },
+        {
             "name": "vmlyr-drupal/profilo",
             "version": "8.0.0",
             "source": {
@@ -9953,48 +10072,6 @@
                 "object graph"
             ],
             "time": "2018-06-11T23:09:50+00:00"
-        },
-        {
-            "name": "oomphinc/composer-installers-extender",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oomphinc/composer-installers-extender.git",
-                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
-                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "composer/installers": "^1.0"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "OomphInc\\ComposerInstallersExtender\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stephen Beemsterboer",
-                    "email": "stephen@oomphinc.com",
-                    "homepage": "https://github.com/balbuf"
-                }
-            ],
-            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
-            "homepage": "http://www.oomphinc.com/",
-            "time": "2017-03-31T16:57:39+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -11477,83 +11554,6 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2017-04-07T12:08:54+00:00"
-        },
-        {
-            "name": "vmlyr-drupal/kit-docksal-commands",
-            "version": "8.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VML/Drupal-KIT-Docksal-Commands.git",
-                "reference": "29ec95e04570eb3964e3304fa62a7d88eec1d68e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-KIT-Docksal-Commands/zipball/29ec95e04570eb3964e3304fa62a7d88eec1d68e",
-                "reference": "29ec95e04570eb3964e3304fa62a7d88eec1d68e",
-                "shasum": ""
-            },
-            "require": {
-                "oomphinc/composer-installers-extender": "^1.0",
-                "vmlyr-drupal/kit-docksal-utilities": "^8.0"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "Docksal Commands for VMLYR Drupal KIT",
-            "homepage": "https://github.com/VML/Drupal-KIT-Docksal-Commands",
-            "time": "2018-10-31T17:58:52+00:00"
-        },
-        {
-            "name": "vmlyr-drupal/kit-docksal-utilities",
-            "version": "8.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VML/Drupal-KIT-Docksal-Utilities.git",
-                "reference": "8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-KIT-Docksal-Utilities/zipball/8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b",
-                "reference": "8a91cfb37cb2f88a1c032b31ae8b4dd49030fe8b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "symfony/console": "~2.8|~3.0",
-                "symfony/filesystem": "~2.8|~3.0",
-                "symfony/finder": "~2.8|~3.0",
-                "symfony/process": "~2.8|~3.0",
-                "symfony/yaml": "~2.8|~3.0",
-                "webflo/drupal-finder": "^1.0",
-                "webmozart/path-util": "^2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DrupalKit\\Docksal\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "Docksal Utilities for VMLYR Drupal KIT",
-            "homepage": "https://github.com/VML/Drupal-KIT-Docksal-Utilities",
-            "time": "2018-10-31T20:10:33+00:00"
         },
         {
             "name": "webflo/drupal-core-require-dev",

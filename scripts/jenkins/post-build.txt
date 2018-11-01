@@ -8,6 +8,7 @@
 # NOTES:
 # - USE IN CONJUNCTION WITH THE "build.txt" SCRIPT IN THIS FOLDER.
 
+set -ex
 
 # Initialize variables.
 PROJECT="project-name-here"

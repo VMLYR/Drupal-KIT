@@ -38,28 +38,32 @@ if [[ $DOCKER_RUNNING == "false" ]]; then
 fi
 
 # Initialize git
-PRE_COMMIT_PATH="${PROJECT_ROOT}/hooks/pre-commit"
-GIT_DIRECTORY_PATH="${PROJECT_ROOT}/.git"
-GIT_HOOKS_PATH="${GIT_DIRECTORY_PATH}/hooks"
-GIT_PRE_COMMIT_PATH="${GIT_HOOKS_PATH}/pre-commit"
-if [[ -d $GIT_DIRECTORY_PATH ]]; then
+if [[ $BUILDER == "false" ]]; then
+  PRE_COMMIT_PATH="${PROJECT_ROOT}/hooks/pre-commit"
+  GIT_DIRECTORY_PATH="${PROJECT_ROOT}/.git"
+  GIT_HOOKS_PATH="${GIT_DIRECTORY_PATH}/hooks"
+  GIT_PRE_COMMIT_PATH="${GIT_HOOKS_PATH}/pre-commit"
+  if [[ -d $GIT_DIRECTORY_PATH ]]; then
 
-  if [[ ! -d $GIT_HOOKS_PATH ]]; then
-    mkdir "$GIT_HOOKS_PATH"
-  fi
+    if [[ ! -d $GIT_HOOKS_PATH ]]; then
+      mkdir "$GIT_HOOKS_PATH"
+    fi
 
-  if [[ ! -d $GIT_HOOKS_PATH ]]; then
-    step_header "Skipping: git pre-commit creation (.git/hooks directory could not be created)"
-  elif [[ -f $GIT_PRE_COMMIT_PATH ]]; then
-    step_header "Skipping: git pre-commit creation (pre-commit already set)"
-  elif [[ ! -f $PRE_COMMIT_PATH ]]; then
-    step_header "Skipping: git pre-commit creation (source pre-commit file missing)"
+    if [[ ! -d $GIT_HOOKS_PATH ]]; then
+      step_header "Skipping: git pre-commit creation (.git/hooks directory could not be created)"
+    elif [[ -f $GIT_PRE_COMMIT_PATH ]]; then
+      step_header "Skipping: git pre-commit creation (pre-commit already set)"
+    elif [[ ! -f $PRE_COMMIT_PATH ]]; then
+      step_header "Skipping: git pre-commit creation (source pre-commit file missing)"
+    else
+      step_header "Running: git pre-commit creation"
+      ln -s $PRE_COMMIT_PATH $GIT_PRE_COMMIT_PATH
+    fi
   else
-    step_header "Running: git pre-commit creation"
-    ln -s $PRE_COMMIT_PATH $GIT_PRE_COMMIT_PATH
+    step_header "Skipping: git pre-commit creation (.git directory missing)"
   fi
 else
-  step_header "Skipping: git pre-commit creation (.git directory missing)"
+  step_header "Skipping: git pre-commit creation (in build mode)"
 fi
 
 # Initialize dependencies
