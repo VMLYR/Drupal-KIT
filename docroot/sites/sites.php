@@ -56,6 +56,12 @@
  * @see https://www.drupal.org/documentation/install/multi-site
  */
 
+// Default the current host to the provided host and override below.
+// (This would be removed in a multi-site implementation)
+if (isset($http_host)) {
+  $sites[$http_host] = 'www';
+}
+
 // Main site.
 # $sites['DOMAINNAMEHERE.docksal'] = 'www';
 # $sites['www.DOMAINNAMEHERE.docksal'] = 'www';
