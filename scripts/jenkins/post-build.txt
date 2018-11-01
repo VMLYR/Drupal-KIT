@@ -1,0 +1,32 @@
+# JENKINS CONFIG:
+# - Select "Conditional step (single)"
+# - Select "Current build status" under "Run?" dropdown
+# - Select "Aborted" under "Worst status" dropdown
+# - Select "Success" under "Best status" dropdown
+# - Paste the following code into the "Command" field, replacing relevant variable values in the "Initialize variables"
+#   section.
+# NOTES:
+# - USE IN CONJUNCTION WITH THE "build.txt" SCRIPT IN THIS FOLDER.
+
+
+# Initialize variables.
+PROJECT="project-name-here"
+BUILD_DIR="project-name-here--environment-here"
+
+cd /docksal/projects/${PROJECT}
+
+# Cleanup if the build still exists.
+echo "Stop and remove docksal if not already done"
+if [ -d "$BUILD_DIR" ]; then
+
+  # Make sure docksal is shut down and removed.
+  cd ${BUILD_DIR}
+  fin stop
+  fin remove -f
+
+  # Cleanup
+  cd /docksal/projects/${PROJECT}
+  rm -rf ${BUILD_DIR}
+  rm -f ${BUILD_DIR}_tmp.patch
+
+fi

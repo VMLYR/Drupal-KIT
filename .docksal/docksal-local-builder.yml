@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  cli:
+    environment:
+      - COMPOSER_CACHE_DIR
+    volumes:
+      # Project root volume
+      - project_root:/var/www:rw,nocopy
+      # Shared ssh-agent socket
+      - docksal_ssh_agent:/.ssh-agent:ro
+      # Shared composer cache
+      - composer_cache:/home/docker/.composer/cache:rw
+      # Shared db backup dir
+      - db_backup:/db_backup:rw
+
+volumes:
+  composer_cache:
+    external: true
+  db_backup:
+    external: true

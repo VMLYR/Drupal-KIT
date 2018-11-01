@@ -1,0 +1,9 @@
+commands:
+  - name: 'Updating Database'
+    drush: 'updatedb -y'
+  - name: 'Updating Entities'
+    drush: 'entup -y'
+  - name: 'Importing configuration'
+    drush: 'cim sync -y'
+  - name: 'Rebuilding Cache'
+    drush: 'cr'

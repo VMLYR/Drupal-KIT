@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+
+## Initialize Project
+##
+## Usage: fin init-project
+
+#-------------------------- Helper functions --------------------------------
+
+source "${PROJECT_ROOT}/.docksal/functions.sh"
+
+#-------------------------- END: Helper functions --------------------------------
+
+#-------------------------- Sanity Check --------------------------------
+
+if [[ "$PROJECT_ROOT" == "" ]]; then
+  echo-red "\$PROJECT_ROOT is not set"
+  exit 1
+fi
+
+#-------------------------- END: Sanity Check --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+header "Project initialization"
+section=Project
+step=1
+
+step_header "Starting project initialization"
+
+# Project initialization steps
+if [[ $DOCKER_RUNNING == "false" ]]; then
+  step_header "Creating volumes"
+  fin docker volume list | grep composer_cache > /dev/null 2>&1 || fin docker volume create composer_cache > /dev/null 2>&1
+  fin docker volume list | grep db_backup > /dev/null 2>&1 || fin docker volume create db_backup > /dev/null 2>&1
+
+  step_header "Starting services"
+  fin up > /dev/null 2>&1
+fi
+
+# Initialize git
+PRE_COMMIT_PATH="${PROJECT_ROOT}/hooks/pre-commit"
+GIT_DIRECTORY_PATH="${PROJECT_ROOT}/.git"
+GIT_HOOKS_PATH="${GIT_DIRECTORY_PATH}/hooks"
+GIT_PRE_COMMIT_PATH="${GIT_HOOKS_PATH}/pre-commit"
+if [[ -d $GIT_DIRECTORY_PATH ]]; then
+
+  if [[ ! -d $GIT_HOOKS_PATH ]]; then
+    mkdir "$GIT_HOOKS_PATH"
+  fi
+
+  if [[ ! -d $GIT_HOOKS_PATH ]]; then
+    step_header "Skipping: git pre-commit creation (.git/hooks directory could not be created)"
+  elif [[ -f $GIT_PRE_COMMIT_PATH ]]; then
+    step_header "Skipping: git pre-commit creation (pre-commit already set)"
+  elif [[ ! -f $PRE_COMMIT_PATH ]]; then
+    step_header "Skipping: git pre-commit creation (source pre-commit file missing)"
+  else
+    step_header "Running: git pre-commit creation"
+    ln -s $PRE_COMMIT_PATH $GIT_PRE_COMMIT_PATH
+  fi
+else
+  step_header "Skipping: git pre-commit creation (.git directory missing)"
+fi
+
+# Initialize dependencies
+if [[ $BUILDER == "true" ]]; then
+  fin init-deps builder
+else
+  fin init-deps
+fi
+
+# Initialize sites
+if [[ $BUILDER == "false" ]]; then
+  fin kit/init-db
+fi
+
+# Re-set placeholders
+section=Project
+step=4
+
+# Build theme src files
+step_header "Building front end artifacts"
+fin kit/swig npm-ci gulp-build
+
+# Synchronize environment
+if [[ $BUILDER == "false" ]]; then
+step_header "Syncronizing Environment"
+# @todo uncomment when a test server environment exists
+#  fin kit/sync --skip-composer -y
+fi
+
+# Run Builder cleanip
+if [[ $BUILDER == "true" ]]; then
+  step_header "Removing files unnecessary for production"
+  cd $PROJECT_ROOT
+  rm -rf patches
+  rm -rf scripts/composer
+  rm -rf source
+  rm -rf .gitignore
+  rm -rf .travis.yml
+  # @note Don't remove composer.json file - Drush9 does not play well on Acquia if composer.json doesn't exist.
+  # rm -rf composer.json
+  rm -rf composer.lock
+  rm -rf LICENSE
+  rm -rf package.json
+  rm -rf phpunit.xml.dist
+  rm -rf README.md
+fi
+
+step_header "Finished project initialization"
+
+#-------------------------- END: Execution --------------------------------

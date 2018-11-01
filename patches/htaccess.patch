@@ -1,0 +1,81 @@
+diff --git a/docroot/.htaccess b/docroot/.htaccess
+index 83cb71a..628cd48 100644
+--- a/docroot/.htaccess
++++ b/docroot/.htaccess
+@@ -69,6 +69,11 @@ AddEncoding gzip svgz
+ <IfModule mod_rewrite.c>
+   RewriteEngine on
+ 
++  # Force the site to always be served via https.
++  RewriteCond %{HTTP_HOST}  \.
++  RewriteCond %{HTTP:X-Forwarded-Proto} !https
++  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
++
+   # Set "protossl" to "s" if we were accessed via https://.  This is used later
+   # if you enable "www." stripping or enforcement, in order to ensure that
+   # you don't bounce between http and https.
+@@ -102,10 +107,11 @@ AddEncoding gzip svgz
+   # To redirect all users to access the site WITH the 'www.' prefix,
+   # (http://example.com/foo will be redirected to http://www.example.com/foo)
+   # uncomment the following:
+-  # RewriteCond %{HTTP_HOST} .
+-  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+-  # RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+-  #
++  RewriteCond %{HTTP_HOST} .
++  RewriteCond %{HTTP_HOST} ^([^.]+)\.([^.]+)$ [NC]
++  RewriteCond %{HTTP_HOST} !^www\. [NC]
++  RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
++
+   # To redirect all users to access the site WITHOUT the 'www.' prefix,
+   # (http://www.example.com/foo will be redirected to http://example.com/foo)
+   # uncomment the following:
+@@ -187,3 +193,48 @@ AddEncoding gzip svgz
+   # Disable Proxy header, since it's an attack vector.
+   RequestHeader unset Proxy
+ </IfModule>
++
++
++#
++# Additional VML-related settings:
++#
++
++
++# Add mime type for webfonts
++AddType application/font-woff .woff
++AddType application/font-woff2 .woff2
++
++# @todo is this needed?
++# Enabling gzip compression
++<IfModule mod_deflate.c>
++  # Compress HTML, CSS, JavaScript, Text, XML and fonts
++  AddOutputFilterByType DEFLATE application/javascript
++  AddOutputFilterByType DEFLATE application/rss+xml
++  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
++  AddOutputFilterByType DEFLATE application/x-font
++  AddOutputFilterByType DEFLATE application/x-font-opentype
++  AddOutputFilterByType DEFLATE application/x-font-otf
++  AddOutputFilterByType DEFLATE application/x-font-truetype
++  AddOutputFilterByType DEFLATE application/x-font-ttf
++  AddOutputFilterByType DEFLATE application/x-javascript
++  AddOutputFilterByType DEFLATE application/xhtml+xml
++  AddOutputFilterByType DEFLATE application/xml
++  AddOutputFilterByType DEFLATE font/opentype
++  AddOutputFilterByType DEFLATE font/otf
++  AddOutputFilterByType DEFLATE font/ttf
++  AddOutputFilterByType DEFLATE image/svg+xml
++  AddOutputFilterByType DEFLATE image/x-icon
++  AddOutputFilterByType DEFLATE text/css
++  AddOutputFilterByType DEFLATE text/html
++  AddOutputFilterByType DEFLATE text/javascript
++  AddOutputFilterByType DEFLATE text/plain
++  AddOutputFilterByType DEFLATE text/xml
++
++  # Remove browser bugs (only needed for really old browsers)
++  BrowserMatch ^Mozilla/4 gzip-only-text/html
++  BrowserMatch ^Mozilla/4\.0[678] no-gzip
++  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
++  <IfModule mod_headers.c>
++    Header append Vary User-Agent
++  </IfModule>
++</IfModule>

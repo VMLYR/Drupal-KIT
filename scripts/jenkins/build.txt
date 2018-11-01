@@ -1,0 +1,99 @@
+# JENKINS CONFIG:
+# - Select "Execute shell script on remote host using ssh"
+# - Paste the following code into the "Command" field, replacing relevant variable values in the "Initialize variables"
+#   section.
+# NOTES:
+# - USE IN CONJUNCTION WITH THE "post-build.txt" SCRIPT IN THIS FOLDER.
+# - THIS SCRIPT DOES NOT ENSURE JENKINS CAN ACCESS RELEVANT REPOSITORIES OR BUILD SERVERS.
+
+set -ex
+
+cd /docksal/projects
+
+# Initialize variables.
+PROJECT="project-name-here"
+BUILD_DIR="project-name-here--environment-here"
+BUILD_TAG="environment-here"
+REPO_SRC="source-repo-here"
+REPO_BUILD="destination-repo-here"
+BRANCH_SRC="master"
+BRANCH_BUILD="build/master"
+TAG="build/${BUILD_TAG}/${BUILD_NUMBER}"
+
+# Make sure project directory exists before using it.
+if [ ! -d "$PROJECT" ]; then
+  mkdir ${PROJECT}
+fi
+cd ${PROJECT}
+
+# Make sure this build's directory exists before using it.
+rm -rf ${BUILD_DIR}
+git clone ${REPO_BUILD} ${BUILD_DIR} --quiet
+cd ${BUILD_DIR}
+
+# Fetch the most recent commit and check out the branch.
+git remote add src ${REPO_SRC}
+git fetch src ${BRANCH_SRC} --depth=1
+git checkout src/${BRANCH_SRC}
+
+# Copy builder config to override settings.
+cp .docksal/docksal-local-builder.yml .docksal/docksal-local.yml
+cp .docksal/docksal-local-builder.env .docksal/docksal-local.env
+
+# Make sure shared volumes are created.
+fin docker volume list | grep composer_cache || fin docker volume create composer_cache
+fin docker volume list | grep db_backup || fin docker volume create db_backup
+
+# Start docksal container.
+COMPOSE_HTTP_TIMEOUT=480 fin start
+
+# Make sure directories get mounted correctly by doing an initial restart.
+fin restart
+
+# Run builder script.
+fin init-project builder
+
+# Stop and remove docksal container.
+fin stop
+fin remove -f
+
+# Remove docksal container and .gitignore file.
+rm -rf .docksal
+
+# Create tmp patch from tag 
+# (This is done using a patch to make sure we get a true difference between branches.
+#  Otherwise, histories get merged and don't always correctly make branch updates)
+git add -A 
+git diff-index --binary origin/${BRANCH_BUILD} > ../${BUILD_DIR}_tmp.patch
+
+# Clear and reset directory.
+rm -rf *
+git reset --hard
+
+# Checkout build branch.
+git checkout ${BRANCH_BUILD}
+
+# Apply and remove patch.
+git apply ../${BUILD_DIR}_tmp.patch
+rm -f ../${BUILD_DIR}_tmp.patch
+
+# Add changes to repository.
+git add -A --force
+
+# Let the user know how many files changed.
+git diff origin --stat | tail -n1
+
+# Either commit or state that there is nothing changed.
+if git diff-index --quiet HEAD --; then
+    echo "Nothing to commit."
+else
+  # Push the commit.
+  git commit -m "Adding compiled assets." --no-verify
+
+  # Tag the build.
+  git tag -a $TAG -m "Jenkins build $BUILD_DISPLAY_NAME" -m "$BUILD_URL"
+
+  # Push the updated code.
+  git push origin ${BRANCH_BUILD} -vvv
+  git push origin ${TAG}
+fi

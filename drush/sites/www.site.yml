@@ -1,0 +1,22 @@
+local:
+  site-env: local
+  root: /var/www/docroot
+  uri: http://www.PROJECTNAME.docksal
+remote_dev:
+  site-env: dev
+  host:
+  user:
+  root:
+  uri: http://dev-www.PROJECTNAME.com
+remote_stage:
+  site-env: stage
+  host:
+  user:
+  root:
+  uri: http://stg-www.PROJECTNAME.com
+remote_prod:
+  site-env: prod
+  host:
+  user:
+  root:
+  uri: http://www.PROJECTNAME.com
