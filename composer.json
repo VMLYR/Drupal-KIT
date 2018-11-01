@@ -1,6 +1,6 @@
 {
-    "name": "drupal-composer/drupal-project",
-    "description": "Project template for bazo VML pod.",
+    "name": "vmlyr-drupal/kit",
+    "description": "Project template for VMLY&R Drupal 8 projects with composer.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -113,7 +113,8 @@
         "classmap": [
             "scripts/composer/ScriptHandler.php",
             "scripts/composer/KitScriptHandler.php"
-        ]
+        ],
+        "files": ["load.environment.php"]
     },
     "scripts": {
         "drupal-scaffold": [

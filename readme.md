@@ -1,6 +1,6 @@
 # Drupal 8 KIT
 
-VML's Drupal 8 KIT is a distribution which helps build and maintain
+VMLY&R's Drupal 8 KIT is a distribution which helps build and maintain
 Drupal 8 projects. Via a suite of Docksal commands, an installation
 profile, and a forthcoming base theme, the distribution provides support
 for the following:
@@ -36,7 +36,7 @@ KIT enforces structure by adding it's own scaffolding, which runs after
 Drupal's default scaffolding on composer install and update. Drupal's
 scaffolding automatically wipes and re-copies the files which get copied
 outside of Drupal core and into public directories
-(like default.settings.php, htaccess, robots.txt, etc.). VML
+(like default.settings.php, htaccess, robots.txt, etc.). VMLY&R
 additionally creates the standard config folder structure, as well as
 removes and updates files that should be modified via patches
 (like .htaccess) or compiled (like drupal.settings.additional.php
@@ -45,80 +45,62 @@ repository directly.
 
 ### Docksal command suite
 The project uses [Docksal](https://docksal.io/) for local-environment
-development and project-building. The following is a list of
-KIT-specific Docksal commands:
- - `check-url` – Runs through the collection of URLs listed in the
- `.docksal/configuration.urlcheck.yml` file and checks whether any of
- them return a 200.
- - `check-watchdog` – Counts the current number of errors currently
- listed in a sites watchdog log. This is best used in-tandem with
- check-urls on CI pull-request builds to check whether any of the pages
- are throwing warnings or errors. The builder can then set a threshold
- on allowed number of warnings or errors.
- - `composer` – Run `composer` inside the docksal container with no need
- to install composer locally. First removes all relevant dependency
- folders and files to help resolve any folder/file permission issues
- that can arise due to Drupal's permissions-hardening
- - `conf` – A wrapper command used in lieu of `drush cex`/`cim` which
- helps handle environment-specific configuration export and import.
- **Please Note: To correctly export _as_ an environment, the environment
- first needs to be imported. The changes can then be made and exported.
- This makes sure that there is no environment cross-polution. Typically,
- importing and exporting as "local" is the most fool-proof way of
- handling configuration unless an environment-specific change needs to
- be made.**
- - `ddrush` – Runs any Drush command inside the project docroot.
- - `eslint` – Run eslint against specified files and/or directories.
+development and project-building. The following is a list of Docksal
+commands that come included in the project:
  - `init-project` – Typically used when building or rebuilding the project
  and its dependencies. The command will start docksal, download
  dependencies, make sure that the project's relevant sites' directories
  and databases exits, build front-end artifacts, and import databases
- from another environment.
+ from another environment. The command takes an optional parameter
+ `builder`, which is explained in detail below under the
+ "Docksal + CI and build processes" section.
  - `init-deps` – Used when project-based command and tool dependencies
  need to be redownloaded and installed. Currently consists of Composer
  and NPM.
- - `init-db` – To initialize or reinitialize one or multiple site's
-  databases based on their drush alias files.
- - `lint` – Run lint against specified files and/or directories.
- - `phpcbf` – Run Code Beautifier & Fixer (`phpcbf`) against a given
- path.
- - `phpcs` – Run Code Sniffer (`phpcs`) against a given path.
- - `swig` – A wrapper for running front-end development tools, like
- `gulp-watch` and `gulp-build`.
- - `sync` – Sync database (and optionally files) to a local environment
- from an external environment. After the database is imported, the site
- runs various updates and imports configuration as a specified
- (default: local) environment.
 
+Additional commands are included via the `vmlyr-drupal/kit-docksal-commands`
+package and installed under a "kit" sub directory in the docksal commands
+directory. See the README.md file in that directory after composer is
+installed for more information on those commands.
 
 ### Docksal + CI and build processes
 
 Docksal and KIT's commands can be used for running build processes. The
 command `init-project` can toggle "build mode" by running appending the
-`builder` command: `fin init-project builder`.
+`builder` command: `fin init-project builder`. This is best used when
+docksal is used to create the build files to be released. By default,
+the builder runs composer in --no-dev mode, and auto-removes
+build-related files amound other things.
 
 ### Drupal site configuration
-KIT comes with a VML profile, which has a lot of required
-site-configuration and relevant modules installed and setup by default.
-It's fairly bare-bones besides items related to best-practices and
-standardization, but it does take care of a lot of monotony that comes
-with installing a new Drupal instance. Some examples are:
- - Default environments (local, remote_dev, remote_stage, remote_prod)
- and their relevant config-splits and settings and modules.
- - Core files modified/removed by default, like .htaccess _https_
- overrides, default settings.php changes, using RobotsTXT module instead
- of the included core file, etc.
- - Lighthouse-related settings, like Image Optimization, Responsive
- Images + Focal Point, Advanced Aggregation, Blazy, etc.
- - Various settings and needed for go-live on new sites, like setting up
- Advanced Aggregation for production instances, default metatags for
- global and Node pages, XML Sitemap defaults, disabling anonymous user
- registration, etc.
+This composer project comes with 2 VMLY&R-created Drupal profiles:
+ - _Profilo_ – This profile has a lot of required site-configuration and
+ relevant modules installed and setup by default. It's fairly bare-bones
+ besides items related to best-practices and standardization, but it
+ does take care of a lot of monotony that comes with installing a new
+ Drupal instance. Some examples are:
+   - Default environments (local, remote_dev, remote_stage, remote_prod)
+   and their relevant config-splits and settings and modules.
+   - Core files modified/removed by default, like .htaccess _https_
+   overrides, default settings.php changes, using RobotsTXT module
+   instead of the included core file, etc.
+   - Lighthouse-related settings, like Image Optimization, Responsive
+   Images + Focal Point, Advanced Aggregation, Blazy, etc.
+   - Various settings and needed for go-live on new sites, like setting
+   up Advanced Aggregation for production instances, default metatags
+   for global and Node pages, XML Sitemap defaults, disabling anonymous
+   user registration, etc.
+ - _Kastoro_ – This profile builds off of the _Profilo_ profile, but is
+ a little more opinionated. It includes helpful Paragraph components,
+ Image Styles, Media implementations, among a slew of additional
+ configuration. To get the full use of the additional components, make
+ sure to run `fin/init-theme` and generate a new theme off of the "Denim"
+ theme option.
 
 ### Multi-environment configuration and development
 
 Multi-environment configuration is pre-configured as part of the
-distribution via the default `settings.php` file and the VML profile.
+distribution via the default `settings.php` file and the _Profilo_ profile.
 
 #### Environments + _Settings.php_ file
 The each site's default `settings.php file` includes the
@@ -141,8 +123,8 @@ commands automatically copy a `settings.local.php` and
 `settings.docksal.php` into each sites directories to better assist
 local development.
 
-#### Environments + VML Profile
-The VML profile includes config-split options by default, and has
+#### Environments + _Profilo_ Profile
+The _Profilo_ profile includes config-split options by default, and has
 additional tasks during install to establish the default configuration
 and each split's configuration, as well as import as the local
 environment before the installation is complete.
@@ -236,13 +218,13 @@ the site install page.
 automatically start installing after a profile is selected; if it
 doesn't, and it asks for database settings, reload the
 `/core/install.php` URL without any GET parameters)_
-1. Fill out the site configuration. If using the VML Profile and the
+1. Fill out the site configuration. If using the _Profilo_ Profile and the
 environment URLs are unknown, make a best guess at what they could be
 _(we suggest following the `//ENV-WWW.SITE_PROD.DOMAIN` structure)_.
 The domains are used for indicating current environment and using other
 environment's assets via _Stage File Proxy_. Setting these up now helps
 not needing to set these in multiple places later on during development.
-1. If you selected the VML profile, upon saving configuration the site
+1. If you selected the _Profilo_ profile, upon saving configuration the site
 should export all relevant configuration into the site's sync directory
 and import as the local environment.
 1. Installation is complete once redirected to the homepage of the site.
