@@ -33,6 +33,7 @@ class KitScriptHandler {
       'Drupal Core' => "{$drupalRoot}/core",
       'Libraries' => "{$drupalRoot}/libraries/*/",
       'Contrib Modules' => "{$drupalRoot}/modules/contrib",
+      'Contrib Profiles' => "{$drupalRoot}/profiles/contrib",
       'Contrib Themes' => "{$drupalRoot}/themes/contrib"
     ];
 
