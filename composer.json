@@ -148,6 +148,15 @@
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"]
         },
+        "installer-paths-clean": {
+            "KIT Docksal Tools": ".docksal/commands/kit/",
+            "Vendor": "vendor/",
+            "Drupal Core": "docroot/core",
+            "Libraries": "docroot/libraries/*/",
+            "Contrib Modules": "docroot/modules/contrib",
+            "Contrib Profiles": "docroot/profiles/contrib",
+            "Contrib Themes": "docroot/themes/contrib"
+        },
         "patches": {
             "drupal/advagg": {
                 "https://www.drupal.org/node/2790693": "https://www.drupal.org/files/issues/remove-redundant-performance-tab.patch",

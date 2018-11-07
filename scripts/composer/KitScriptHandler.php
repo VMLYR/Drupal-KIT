@@ -16,31 +16,17 @@ class KitScriptHandler {
   public static function cleanDirectories($event) {
     self::write($event, '=== Running KIT pre-install ===', 'success');
 
-    // Exit early if DrupalFinder doesn't exist.
-    if (!class_exists('DrupalFinder\DrupalFinder')) {
-      self::write($event, 'Skipping directory cleaning: DrupalFinder doesn\'t exist');
-      return;
-    }
+    // Get package extras.
+    $extras = $event->getComposer()->getPackage()->getExtra();
 
-    // Initialize filesystem.
-    $drupalFinder = new DrupalFinder();
-    $drupalFinder->locateRoot(getcwd());
-    $drupalRoot = $drupalFinder->getDrupalRoot();
-
-    $dirs = [
-      'KIT Docksal Tools' => '.docksal/commands/kit/',
-      'Vendor' => 'vendor/',
-      'Drupal Core' => "{$drupalRoot}/core",
-      'Libraries' => "{$drupalRoot}/libraries/*/",
-      'Contrib Modules' => "{$drupalRoot}/modules/contrib",
-      'Contrib Profiles' => "{$drupalRoot}/profiles/contrib",
-      'Contrib Themes' => "{$drupalRoot}/themes/contrib"
-    ];
-
-    // Remove directories.
-    foreach ($dirs as $title => $dir) {
-      self::write($event, "Removing directory: {$title}");
-      exec("sudo rm -rf $dir");
+    // Check whether installer-paths-clean is in the package's extras section.
+    if (array_key_exists('installer-paths-clean', $extras) && is_array($extras['installer-paths-clean'])) {
+      // Remove directories.
+      foreach ($extras['installer-paths-clean'] as $title => $dir) {
+        $dir = escapeshellarg($dir);
+        self::write($event, "Removing directory: {$title} ({$dir})");
+        exec("sudo rm -rf $dir");
+      }
     }
 
     // Reloading package repositories.
