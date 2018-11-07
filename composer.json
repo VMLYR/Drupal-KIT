@@ -122,11 +122,14 @@
             "DrupalProject\\composer\\KitScriptHandler::scaffold",
             "patch -p1 < patches/htaccess.patch"
         ],
+        "fix-nfs": "ls -aLR > /dev/null",
         "pre-install-cmd": [
+            "@fix-nfs",
             "DrupalProject\\composer\\KitScriptHandler::cleanDirectories",
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "pre-update-cmd": [
+            "@fix-nfs",
             "DrupalProject\\composer\\KitScriptHandler::cleanDirectories",
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
