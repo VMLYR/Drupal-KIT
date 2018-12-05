@@ -32,8 +32,8 @@ else
   fin composer install
 fi
 
-step_header "Upgrading NPM"
-fin exec npm install --global npm@latest
+#step_header "Upgrading NPM"
+#fin exec npm install --global npm@latest
 
 step_header "Cleaning git submodules..."
 # Fix file/folder permissions
