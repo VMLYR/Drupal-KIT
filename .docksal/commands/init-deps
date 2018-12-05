@@ -36,8 +36,10 @@ step_header "Upgrading NPM"
 fin exec npm install --global npm@latest
 
 step_header "Installing Global Codesniffer"
+fin composer global remove drupal/coder squizlabs/php_codesniffer
 fin composer global require drupal/coder:8.3.1 squizlabs/php_codesniffer:^3.3.2
 fin exec phpcs --config-set installed_paths /home/docker/.composer/vendor/drupal/coder/coder_sniffer
+fin exec phpcs -i
 
 step_header "Cleaning git submodules..."
 # Fix file/folder permissions
