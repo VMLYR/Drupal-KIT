@@ -12,6 +12,8 @@
 
 files:
   include: '**/*.s+(a|c)ss'
+  ignore:
+    - '**/vendor/**/*.scss'
 options:
   merge-default-rules: false
 rules:
