@@ -20,6 +20,11 @@ var include = require('gulp-include');
 var Stream = require('stream');
 var newer = require('gulp-newer');
 var browserSync = require('browser-sync').create();
+var iconfont = require('gulp-iconfont');
+var iconfontCss = require('gulp-iconfont-css');
+
+var runTimestamp = Math.round(Date.now()/1000);
+var iconFontName = 'themeIcons';
 
 gulpUtil.env.type = 'production';
 gulpUtil.env.build_type = 'build';
@@ -60,6 +65,7 @@ gulp.task('watch', 'Watch source files for changes and build on update', ['build
   var javascriptSources = [];
   var sassSources = [];
   var imageSources = [];
+  var fontSources = [];
 
   Object.keys(CONFIGS).forEach(function (key) {
     var config = CONFIGS[key];
@@ -75,12 +81,50 @@ gulp.task('watch', 'Watch source files for changes and build on update', ['build
     if (config.images && config.images.src && config.images.dest) {
       imageSources.push(config.images.src);
     }
+
+    if (config.fonts && config.fonts.src && config.fonts.dest) {
+      fontSources.push(config.fonts.src);
+    }
   });
 
   gulp.watch(javascriptSources, () => runSequence('_build.javascript', '_js-lint'));
   gulp.watch(sassSources, () => runSequence('_build.sass'));
   gulp.watch(imageSources, () => runSequence('_build.images'));
+  gulp.watch(fontSources, () => runSequence('_build.fonts'));
 });
+
+gulp.task('_build.iconFont', 'Build the icon font and move to distribute', () => {
+  var tasks = [];
+  Object.keys(CONFIGS).forEach(function (key) {
+    var config = CONFIGS[key];
+
+    if (config.iconFont && config.iconFont.src && config.iconFont.dest && config.iconFont.scssFile && config.iconFont.filePath) {
+      tasks.push(gulp.src(config.iconFont.src)
+        // .pipe(include()).on('error', console.log)
+        .pipe(iconfontCss({
+          fontName: iconFontName,
+          path: 'scss',
+          targetPath: config.iconFont.scssFile,
+          fontPath: config.iconFont.filePath,
+        }))
+        .pipe(iconfont({
+          fontName: iconFontName, // required
+          prependUnicode: false, // recommended option
+          formats: ['ttf', 'eot', 'woff'], // default, 'woff2' and 'svg' are available
+          timestamp: runTimestamp, // recommended to get consistent builds when watching files
+          normalize: true, // scale them to the height of the highest icon
+          fontHeight: 1001
+        }))
+        .on('glyphs', function (glyphs, options) {
+          // CSS templating, e.g.
+          // console.log(glyphs, options);
+        })
+        .pipe(gulp.dest(config.iconFont.dest)));
+    }
+  });
+  return merge(tasks);
+});
+
 
 gulp.task('_build.javascript', 'Build JavaScript and move to distribute', () => {
   var tasks = [];
@@ -174,15 +218,30 @@ gulp.task('_build.images', 'Compress and distribute images', () => {
         .pipe(gulp.dest(config.images.dest)));
     }
   });
+  return merge(tasks);
+});
 
+gulp.task('_build.fonts', 'Distribute local fonts', () => {
+
+  var tasks = [];
+
+  Object.keys(CONFIGS).forEach(function (key) {
+    var config = CONFIGS[key];
+    if (config.fonts && config.fonts.src && config.fonts.dest) {
+      tasks.push(gulp.src(config.fonts.src)
+          .pipe(isBuild() ? gulpUtil.noop() : changed(config.fonts.dest))
+          .pipe(newer(config.fonts.dest))
+          .pipe(gulp.dest(config.fonts.dest)));
+    }
+  });
   return merge(tasks);
 });
 
 function build(done) {
-    runSequence(
-        ['_build.images', '_build.javascript', '_js-lint', '_build.sass', '_sass-lint'],
-        done
-    );
+  runSequence(
+      ['_build.fonts', '_build.iconFont', '_build.images', '_build.javascript', '_js-lint', '_build.sass', '_sass-lint'],
+      done
+  );
 }
 
 function swallowError(error) {
