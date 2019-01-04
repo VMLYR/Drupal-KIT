@@ -2,7 +2,7 @@
 # - Select "Conditional step (single)"
 # - Select "Current build status" under "Run?" dropdown
 # - Select "Aborted" under "Worst status" dropdown
-# - Select "Success" under "Best status" dropdown
+# - Select "Unstable" under "Best status" dropdown
 # - Paste the following code into the "Command" field, replacing relevant variable values in the "Initialize variables"
 #   section.
 # NOTES:
