@@ -33,7 +33,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
         "drush/drush": "^9.0.0",
-        "php": ">=7.1",
+        "php": ">=7.2",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
@@ -106,7 +106,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.1"
+            "php": "7.2"
         }
     },
     "autoload": {

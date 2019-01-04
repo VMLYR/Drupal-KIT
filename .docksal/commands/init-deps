@@ -32,8 +32,8 @@ else
   fin composer install
 fi
 
-step_header "Upgrading NPM"
-fin exec npm install --global npm@latest
+#step_header "Upgrading NPM"
+#fin exec npm install --global npm@latest
 
 if [[ $BUILDER == "false" ]]; then
     step_header "Installing Global Codesniffer"
