@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+## A shortcut for kit/ commands.
+##
+## Usage: fin k drush <command>, fin k swig <command>, etc.
+
+#-------------------------- Execution --------------------------------
+
+fin kit/$@
+
+#-------------------------- END: Execution --------------------------------
