@@ -17,6 +17,8 @@
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^4.0.2",
     "gulp-help": "^1.6.1",
+    "gulp-iconfont": "^10.0.2",
+    "gulp-iconfont-css": "^2.3.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-include": "^2.3.1",
     "gulp-jshint": "^2.0.1",
