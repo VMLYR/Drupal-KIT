@@ -84,12 +84,12 @@ fin kit/swig npm-ci gulp-build
 
 # Synchronize environment
 if [[ $BUILDER == "false" ]]; then
-step_header "Syncronizing Environment"
+step_header "Synchronizing Environment"
 # @todo uncomment when a test server environment exists
 #  fin kit/sync --skip-composer -y
 fi
 
-# Run Builder cleanip
+# Run Builder cleanup
 if [[ $BUILDER == "true" ]]; then
   step_header "Removing files unnecessary for production"
   cd $PROJECT_ROOT
