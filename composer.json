@@ -34,7 +34,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
         "drush/drush": "^9.0.0",
-        "php": ">=7.2",
+        "php": ">=7.1",
         "vlucas/phpdotenv": "^2.4",
         "vmlyr-drupal/kit-docksal-commands": "^8.0",
         "webflo/drupal-finder": "^1.0.0",

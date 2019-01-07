@@ -195,11 +195,10 @@ generated via the `fin kit/init-theme` command.
 Getting a running site takes only a few steps for a project.
 
 1. [Install Docksal](http://docksal.readthedocs.io/en/master/getting-started/env-setup/) if it's not already installed.
-1. [Install Composer](https://getcomposer.org/doc/00-intro.md) if it's not already installed.
 1. Install the project.
     1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
        ```
-       composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*
+       fin run-cli composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*
        ```
     1. Change into the directory.
         ```
