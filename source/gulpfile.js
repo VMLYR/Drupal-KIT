@@ -98,14 +98,14 @@ gulp.task('_build.iconFont', 'Build the icon font and move to distribute', () =>
   Object.keys(CONFIGS).forEach(function (key) {
     var config = CONFIGS[key];
 
-    if (config.iconFont && config.iconFont.src && config.iconFont.dest && config.iconFont.scssFile && config.iconFont.filePath) {
+    if (config.iconFont && config.iconFont.src && config.iconFont.dest && config.iconFont.scssTemplate && config.iconFont.scssFile && config.iconFont.filePath) {
       tasks.push(gulp.src(config.iconFont.src)
-        // .pipe(include()).on('error', console.log)
+        .pipe(include()).on('error', console.log)
         .pipe(iconfontCss({
           fontName: iconFontName,
-          path: 'scss',
+          path: config.iconFont.scssTemplate,
           targetPath: config.iconFont.scssFile,
-          fontPath: config.iconFont.filePath,
+          fontPath: config.iconFont.filePath
         }))
         .pipe(iconfont({
           fontName: iconFontName, // required
@@ -117,6 +117,7 @@ gulp.task('_build.iconFont', 'Build the icon font and move to distribute', () =>
         }))
         .on('glyphs', function (glyphs, options) {
           // CSS templating, e.g.
+          // uncomment to see full logging output
           // console.log(glyphs, options);
         })
         .pipe(gulp.dest(config.iconFont.dest)));
