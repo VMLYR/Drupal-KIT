@@ -194,7 +194,7 @@ generated via the `fin kit/init-theme` command.
 
 Getting a running site takes only a few steps for a project.
 
-1. [Install Docksal](http://docksal.readthedocs.io/en/master/getting-started/env-setup/) if it's not already installed.
+1. [Install Docksal](https://docksal.io/installation) if it's not already installed.
 1. Install the project.
     1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
        ```
