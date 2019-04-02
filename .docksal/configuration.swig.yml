@@ -10,11 +10,11 @@ commands:
   - name: gulp-watch
     run: 'npm run gulp watch'
 themes:
-#  - name: Source
-#    path: source
-#    cmds:
-#      - npm
-#      - npm-ci
-#      - gulp-build
-#      - gulp-build-dev
-#      - gulp-watch
+  - name: Source
+    path: source
+    cmds:
+      - npm
+      - npm-ci
+      - gulp-build
+      - gulp-build-dev
+      - gulp-watch
