@@ -198,7 +198,7 @@ Getting a running site takes only a few steps for a project.
 1. Install the project.
     1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
        ```
-       fin run-cli composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*
+       fin run-cli "composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*"
        ```
     1. Change into the directory.
         ```
