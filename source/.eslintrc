@@ -1,6 +1,7 @@
 {
   "extends": "../docroot/core/.eslintrc.legacy.json",
   "env": {
+    "browser": true,
     "es6": true
   },
   "globals": {
@@ -8,7 +9,7 @@
     "ga": true,
     "GMaps": true,
     "google": true,
-    "Waypoint": true,
+    "Waypoint": true
   },
   "rules": {
     "no-unused-vars": [1, {"vars": "all", "args": "none"}],
