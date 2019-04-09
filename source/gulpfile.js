@@ -98,7 +98,7 @@ function buildJavascript() {
       .pipe(sourcemaps.init())
       .pipe(changed('../docroot/themes/custom/' + entry.themeName + '/js'))
       .pipe(sourcemaps.write('./maps'))
-      .pipe(dest('../docroot/themes/custom/' + '/' + customDest + '/js'));
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/js'));
   });
 
   return merge(tasks);
@@ -109,7 +109,7 @@ function buildImages() {
     return src('themes/custom/' + entry.themeName + '/images/**/*')
       .pipe(changed(entry.destDir + '/img'))
       .pipe(imagemin({progressive: true}))
-      .pipe(dest('../docroot/themes/custom/' + '/' + customDest + '/images'));
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/images'));
   });
 
   return merge(tasks);
@@ -119,7 +119,7 @@ function buildFonts() {
   const tasks = config.map(function(entry) {
     return src('themes/custom/' + entry.themeName + '/fonts/**/*')
       .pipe(changed('../docroot/themes/custom/' + entry.themeName + '/fonts'))
-      .pipe(dest('../docroot/themes/custom/' + '/' + customDest + '/fonts'));
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/fonts'));
   });
 
   return merge(tasks);
