@@ -20,9 +20,7 @@
 
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
-const mode = require('gulp-mode')();
 const changed = require('gulp-changed');
-const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 const iconfont = require('gulp-iconfont');
 const iconfontCss = require('gulp-iconfont-css');
@@ -53,19 +51,15 @@ for (const value of files) {
 function buildSass() {
   const tasks = config.map(function(entry) {
     return src(['themes/custom/' + entry.themeName + '/styles/**/*.scss', '!themes/custom/' + entry.themeName + '/styles/**/example.*.scss'])
-        .pipe(mode.development(sourcemaps.init()))
-        .pipe(mode.production(sass({
-          outputStyle: 'compressed',
-          includePaths: []
-        })))
-        .pipe(mode.development(sass({
+        .pipe(sourcemaps.init())
+        .pipe(sass({
           noCache: true,
-          outputStyle: 'compressed',
+          outputStyle: 'compact',
           lineNumbers: false,
           includePaths: [],
           sourceMap: true
-        })))
-        .pipe(mode.development(sourcemaps.write('./maps')))
+        }))
+        .pipe(sourcemaps.write('./maps'))
         .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/css'));
   });
 
@@ -75,10 +69,9 @@ function buildSass() {
 function buildJavascript() {
   const tasks = config.map(function(entry) {
     return src(['themes/custom/' + entry.themeName + '/scripts/**/*.js', '!themes/custom/themes/custom/' + entry.themeName + '/scripts/**/example.*.js'])
-      .pipe(mode.development(changed('../docroot/themes/custom/' + entry.themeName + '/js')))
-      .pipe(mode.development(sourcemaps.init()))
-      .pipe(mode.production(uglify()))
-      .pipe(mode.development(sourcemaps.write('./maps')))
+      .pipe(sourcemaps.init())
+      .pipe(changed('../docroot/themes/custom/' + entry.themeName + '/js'))
+      .pipe(sourcemaps.write('./maps'))
       .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/js'));
   });
 
@@ -88,7 +81,7 @@ function buildJavascript() {
 function buildImages() {
   const tasks = config.map(function(entry) {
     return src('themes/custom/' + entry.themeName + '/images/**/*')
-      .pipe(mode.development(changed(entry.destDir + '/img')))
+      .pipe(changed(entry.destDir + '/img'))
       .pipe(imagemin({progressive: true}))
       .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/images'));
   });
@@ -99,7 +92,6 @@ function buildImages() {
 function buildFonts() {
   const tasks = config.map(function(entry) {
     return src('themes/custom/' + entry.themeName + '/fonts/**/*')
-      .pipe(mode.development(changed('../docroot/themes/custom/' + entry.themeName + '/fonts')))
       .pipe(changed('../docroot/themes/custom/' + entry.themeName + '/fonts'))
       .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/fonts'));
   });
