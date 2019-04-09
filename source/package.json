@@ -1,6 +1,6 @@
 {
-  "name": "unitedrentals",
-  "description": "UR: Drupal 8 KIT common theme support",
+  "name": "subtheme",
+  "description": "Subtheme file for us in KIT-related projects",
   "author": "",
   "version": "1.0.0",
   "devDependencies": {
