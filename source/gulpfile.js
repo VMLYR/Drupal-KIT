@@ -107,7 +107,7 @@ function buildJavascript() {
 function buildImages() {
   const tasks = config.map(function(entry) {
     return src('themes/custom/' + entry.themeName + '/images/**/*')
-      .pipe(changed(entry.destDir + '/img'))
+      .pipe(changed('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/images'))
       .pipe(imagemin({progressive: true}))
       .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/images'));
   });

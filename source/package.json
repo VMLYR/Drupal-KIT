@@ -2,7 +2,7 @@
   "name": "subtheme",
   "description": "Subtheme file for us in KIT-related projects",
   "author": "",
-  "version": "1.0.0",
+  "version": "8.2.0",
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
