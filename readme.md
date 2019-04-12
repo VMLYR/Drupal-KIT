@@ -265,7 +265,7 @@ the site's sync directory and import as the local environment.
 1. To start building your own theme, run `fin kit/init-theme` to
 generate a new theme + theme source setup based on our example scaffold
 themes. If the _Kastoro_ profile was installed, we suggest scaffolding
-from _Denim_.
+from _Denim_. If you're not using _Kastoro_ and want a simpler starting point for you theme we suggest scaffolding from Skeleto.
 
 ## Notes and suggestions
 #### Environment aliases
@@ -279,3 +279,28 @@ We've found that adding an environment prefix to the production url is a
 low-effort/high-reward action. This allows for environment URLs that are
 easier to remember and access, both for those working on the site and
 for clients.
+
+## Theme Development
+
+When creating a new theme using the `fin kit/init-theme` command you'll have two directory structures created for you:
+
+1. **docroot/themes/custom/yourtheme** - This is meant to only contain the files Drupal needs to render the site - e.g. css, javascript, images, template files. It does **not** contain any source files used to generate those files (e.g. sass files). It's important to note that some files under this directory are generated (see next point) and some (e.g. template files) should be edited directly.
+
+1. **source/themes/custom/yourtheme** - Contains all of the source files used to generate the files in docroot/themes/custom/yourtheme.
+
+Gulp is used to process the files in _source_ and writes the corresponding output to the matching theme directory under _docroot_. The default gulp file (source/gulpfile.js) is set up with a set of basic tasks needed by most themes. It is also set up to run those tasks in all of the directories under source/themes/custom. This allows the developer to have multiple themes (e.g. a base theme and child themes) under development and use a single command to build them all.
+
+The following functionality is provided by the default gulp file:
+
+- Sass - Processes all of the scss files under _styles_ in each theme directory and generates source maps. The output is places in _docroot/themes/custom/yourtheme/css_.
+- Javascript - Copies and generates source maps for all js files under _scripts_ in each theme directory. The output is placed in _docroot/custom/yourtheme/js_. 
+- Images - Minifies all images under _images_ and places the output in _docroot/custom/yourtheme/images_.
+- Fonts - Copies all the files under _fonts_ to _docroot/custom/yourtheme/fonts_.
+- Icons - Compiles all the svg files under _icons_ and writes the out put to the _docroot/custom/yourtheme/styles/vendor_ and _docroot/custom/yourtheme/fonts/icons_ directories.
+- Testing - Linting of sass and javascript files as configured in _source/.sass-lint.yml_ and _source/.eslintrc_.
+
+Tasks provided by the default gulp file are:
+
+- default - Builds the Sass, Javascript, Images, Fonts, and Icons as described above.
+- test - Runs the sass and javascript linters.
+- watch - Builds everything included in the default task as file change in the _source_ directory structure.
