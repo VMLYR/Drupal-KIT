@@ -279,3 +279,40 @@ We've found that adding an environment prefix to the production url is a
 low-effort/high-reward action. This allows for environment URLs that are
 easier to remember and access, both for those working on the site and
 for clients.
+
+#### Gulp
+The gulpfile is set up to run standard build and testing tasks over ALL themes in the theme/custom directory.
+
+😃 No changes are needed on startup. 😃
+ 
+**!!! Files are NOT minified !!!**
+Minification should be handled through Advanced Aggregation Drupal module
+
+#####Piping
+ 
+Provided in this file are the default path and task configurations. Files follows the same path as where it started from.
+
+* scss to css
+* js to js
+* images to images
+* icons to icons
+* fonts to fonts
+
+ex: `source/themes/custom/project/js` is piped to `docroot/themes/custom/project/js`
+
+#####Linting
+**Eslint:** Uses the Drupal core legacy settings found in `/docroot/core/.eslintrc.legacy.json`
+
+**Sasslint:** Two files are provided one base `.sass-lint.yml` and one opinionated `.sass-lint-opinionated.yml`. 
+
+The base one is used by default and the file can be changed in the gulp **testSassLint** task.
+
+#####Example files
+An `example.` prefix can be added to scss and js files. The prefixed files will not be linted or piped.
+
+ex: `styles/libraries/node/example.full.scss`
+
+#####Preset tasks
+ * gulp = runs all build tasks
+ * gulp test = runs all testing tasks
+ * gulp watch = starts the watchers (builds & tests)
