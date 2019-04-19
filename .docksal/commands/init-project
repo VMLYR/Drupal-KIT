@@ -84,7 +84,8 @@ step=4
 
 # Build theme src files
 step_header "Building front end artifacts"
-fin kit/swig npm-ci gulp-build
+fin kit/npm install
+fin kit/gulp
 
 # Synchronize environment
 if [[ $BUILDER == "false" ]]; then
