@@ -99,8 +99,8 @@ class KitScriptHandler {
     }
 
     // Get drush aliases
-    exec('drush sa --format=php', $output);
-    $drush_aliases = unserialize(implode('', $output));
+    exec('drush sa --format=json --root=' . $drupalRoot, $output);
+    $drush_aliases = json_decode(implode('', $output), TRUE);
 
     // Get sites from aliases.
     $sites = [];
@@ -109,7 +109,7 @@ class KitScriptHandler {
     }
     $sites = array_unique($sites);
 
-    // Create each site's directories andfiles.
+    // Create each site's directories and files.
     foreach ($sites as $site) {
       self::write($event, 'Site: ' . $site, 'success');
 
