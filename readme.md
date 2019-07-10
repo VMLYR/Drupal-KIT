@@ -1,31 +1,43 @@
 # Drupal 8 KIT
 
 VMLY&R's Drupal 8 KIT is a distribution which helps build and maintain
-Drupal 8 projects. Via a suite of Docksal commands, an installation
-profile, and a forthcoming base theme, the distribution provides support
-for the following:
- * Common modules
- * Composer project scaffolding
- * Docksal command suite
- * Using Docksal for CI and build processes
- * Drupal site configuration
- * Multi-environment configuration and development
- * Multi-site configuration and development
- * Standardized theme management and structure
+Drupal 8 projects.
 
-### Common modules (composer.json)
+* [About KIT](#about-kit)
+* [Getting Started](#installation)
+* [Notes & Suggestions](#notes-and-suggestions)
+* [Theme Development](#theme-development)
+
+
+
+## About KIT
+
+Via a suite of Docksal commands, an installation
+profile, and a base theme, the distribution provides support
+for the following:
+ * [Common modules](#common-modules-+-_composer.json_)
+ * [Composer project scaffolding](#composer-project-scaffolding)
+ * [Docksal command suite](#docksal-command-suite)
+ * [Using Docksal for CI and build processes](#docksal-+-ci-and-build-processes)
+ * [Drupal site configuration](#drupal-site-configuration)
+ * [Multi-environment configuration and development](#multi-environment-configuration-and-development)
+ * [Multi-site configuration and development](#multi-site-support)
+ * [Standardized theme management and structure](#standardized-theme-management-and-structure)
+ 
+ 
+### Common modules + _composer.json_
 
 KIT uses composer for handling project dependencies. The distribution
 includes a selection of Modules and libraries by default. The list was
 determined using either the following criteria:
- - Best-practices – Drupal 8 Core is a much more viable product
+ - *Best-practices* – Drupal 8 Core is a much more viable product
  out-of-the-box than Drupal 7 was, but there are still certain modules
  and configuration that we need and should be using for every site,
  including support for multiple environments. Examples of these are
  Blazy for lazy-loading images, Advanced Aggregation for better
  style/script management, Configuration Sync + Config Split (instead of
  Features).
- - Standardization – being an open-source project, Drupal has a tendency
+ - *Standardization* – being an open-source project, Drupal has a tendency
   to having multiple modules with similar solutions to similar problems.
   We've added items to the list by default to help standardize the tools
   to handle certain problems, an example being a field to include a view
@@ -123,7 +135,7 @@ which is ran by composer, automatically copies a `settings.local.php`
 and `settings.docksal.php` into each sites directories to better assist
 local development.
 
-#### Environments + the VMLY&R Profiles (_Profilo_ and _Kastoro_)
+#### Environments + the VMLY&R Profiles _Profilo_ and _Kastoro_
 The VMLY&R profiles include config-split options by default, and have
 additional tasks during install to establish the default configuration
 and each split's configuration, as well as import as the local
@@ -205,11 +217,15 @@ Getting a running site takes only a few steps for a project.
         cd [FOLDER_NAME_HERE]
         ```
     1. If this directory was not already a git project, initialize the
-    new repository and add the remote origin
+    new repository
         ```
         git init
+        ```
+    1. If this project has a remote repository, add the remote origin
+        ```
         git remote add origin [REMOTE_REPOSITORY_URL_HERE]
         ```
+        
 1. Run `fin start` in the project to create the Docksal project.
 1. Open each site's Drush alias file (`/drush/sites/` to update the
 local URI as well as any relevant server information if it's already

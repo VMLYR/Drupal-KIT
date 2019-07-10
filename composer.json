@@ -92,14 +92,14 @@
         "drupal/video_embed_field": "^2.0",
         "drupal/viewsreference": "^2.0@alpha",
         "drush/drush": "^9.0.0",
+        "topfloor/composer-cleanup-vcs-dirs": "^1.0",
         "vlucas/phpdotenv": "^2.4",
         "vmlyr-drupal/bazo": "^8.0",
         "vmlyr-drupal/kastoro": "^8.0",
-        "vmlyr-drupal/kit-docksal-commands": "^8.0",
+        "vmlyr-drupal/kit-docksal-commands": "^8.1",
         "vmlyr-drupal/profilo": "^8.0",
         "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
         "webflo/drupal-core-require-dev": "~8.6"
@@ -131,12 +131,10 @@
         "fix-nfs": "find . -type d > /dev/null",
         "pre-install-cmd": [
             "@fix-nfs",
-            "DrupalProject\\composer\\KitScriptHandler::cleanDirectories",
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "pre-update-cmd": [
             "@fix-nfs",
-            "DrupalProject\\composer\\KitScriptHandler::cleanDirectories",
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
@@ -155,7 +153,7 @@
             "docroot/modules/contrib/{$name}": ["type:drupal-module"],
             "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/contrib/{$name}": ["type:drupal-drush"]
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
         },
         "installer-paths-clean": {
             "KIT Docksal Tools": ".docksal/commands/kit/",
