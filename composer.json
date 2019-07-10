@@ -99,7 +99,8 @@
         "vmlyr-drupal/kit-docksal-commands": "^8.1",
         "vmlyr-drupal/profilo": "^8.0",
         "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "zaporylie/composer-drupal-optimizations": "^1.1"
     },
     "require-dev": {
         "webflo/drupal-core-require-dev": "~8.6"
