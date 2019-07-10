@@ -13,7 +13,7 @@ Drupal 8 projects.
 ## About KIT
 
 Via a suite of Docksal commands, an installation
-profile, and a forthcoming base theme, the distribution provides support
+profile, and a base theme, the distribution provides support
 for the following:
  * [Common modules](#common-modules-+-_composer.json_)
  * [Composer project scaffolding](#composer-project-scaffolding)
