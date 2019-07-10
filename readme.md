@@ -5,7 +5,7 @@ Drupal 8 projects. Via a suite of Docksal commands, an installation
 profile, and a forthcoming base theme, the distribution provides support
 for the following:
  * [Common modules](#common-modules-(composer.json))
- * Composer project scaffolding
+ * [Composer project scaffolding](#composer-project-scaffolding)
  * Docksal command suite
  * Using Docksal for CI and build processes
  * Drupal site configuration
