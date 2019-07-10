@@ -217,11 +217,15 @@ Getting a running site takes only a few steps for a project.
         cd [FOLDER_NAME_HERE]
         ```
     1. If this directory was not already a git project, initialize the
-    new repository and add the remote origin
+    new repository
         ```
         git init
+        ```
+    1. If this project has a remote repository, add the remote origin
+        ```
         git remote add origin [REMOTE_REPOSITORY_URL_HERE]
         ```
+        
 1. Run `fin start` in the project to create the Docksal project.
 1. Open each site's Drush alias file (`/drush/sites/` to update the
 local URI as well as any relevant server information if it's already
