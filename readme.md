@@ -4,7 +4,7 @@ VMLY&R's Drupal 8 KIT is a distribution which helps build and maintain
 Drupal 8 projects. Via a suite of Docksal commands, an installation
 profile, and a forthcoming base theme, the distribution provides support
 for the following:
- * Common modules
+ * [Common modules](#common-modules-(composer.json))
  * Composer project scaffolding
  * Docksal command suite
  * Using Docksal for CI and build processes
