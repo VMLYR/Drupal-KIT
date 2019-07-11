@@ -5,7 +5,8 @@
     "es6": true
   },
   "globals": {
-  	"module": true,
+    "drupalSettings": true,
+    "module": true,
     "ga": true,
     "GMaps": true,
     "google": true,
