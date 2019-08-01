@@ -86,7 +86,7 @@ build-related files amound other things.
 
 ### Drupal site configuration
 This composer project comes with 2 VMLY&R-created Drupal profiles:
- - _Profilo_ – This profile has a lot of required site-configuration and
+ - _Biplane_ – This profile has a lot of required site-configuration and
  relevant modules installed and setup by default. It's fairly bare-bones
  besides items related to best-practices and standardization, but it
  does take care of a lot of monotony that comes with installing a new
@@ -102,17 +102,17 @@ This composer project comes with 2 VMLY&R-created Drupal profiles:
    up Advanced Aggregation for production instances, default metatags
    for global and Node pages, XML Sitemap defaults, disabling anonymous
    user registration, etc.
- - _Kastoro_ – This profile builds off of the _Profilo_ profile, but is
+ - _Blackbird_ – This profile builds off of the _Biplane_ profile, but is
  a little more opinionated. It includes helpful Paragraph components,
  Image Styles, Media implementations, among a slew of additional
  configuration. To get the full use of the additional components, make
- sure to run `fin/init-theme` and generate a new theme off of the "Denim"
- theme option.
+ sure to run `fin kit/theme` and generate a new theme off of the 
+ "Blackbird" option of the same name.
 
 ### Multi-environment configuration and development
 
 Multi-environment configuration is pre-configured as part of the
-distribution via the default `settings.php` file and the _Profilo_ and _Kastoro_ profiles.
+distribution via the default `settings.php` file and the _Biplane_ and _Blackbird_ profiles.
 
 #### Environments + _Settings.php_ file
 The each site's default `settings.php file` includes the
@@ -135,7 +135,7 @@ which is ran by composer, automatically copies a `settings.local.php`
 and `settings.docksal.php` into each sites directories to better assist
 local development.
 
-#### Environments + the VMLY&R Profiles _Profilo_ and _Kastoro_
+#### Environments + the VMLY&R Profiles _Biplane_ and _Blackbird_
 The VMLY&R profiles include config-split options by default, and have
 additional tasks during install to establish the default configuration
 and each split's configuration, as well as import as the local
@@ -280,8 +280,10 @@ the site's sync directory and import as the local environment.
 1. Installation is complete once redirected to the homepage of the site.
 1. To start building your own theme, run `fin kit/init-theme` to
 generate a new theme + theme source setup based on our example scaffold
-themes. If the _Kastoro_ profile was installed, we suggest scaffolding
-from _Denim_. If you're not using _Kastoro_ and want a simpler starting point for you theme we suggest scaffolding from Skeleto.
+themes. If the _Blackbird_ profile was installed, we suggest scaffolding
+from the _Blackbird_ theme option of the same name. If you're not using 
+_Blackbird_ and want a more simple starting point for you theme we 
+suggest scaffolding from Biplane scaffold theme.
 
 ## Notes and suggestions
 #### Environment aliases
