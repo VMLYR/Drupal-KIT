@@ -4,3 +4,27 @@
 # Docs at https://github.com/drush-ops/drush/blob/master/examples/example.drush.yml
 #
 # Edit or remove this file as needed.
+
+kit:
+  theme:
+    source_directory: source/themes
+    scaffold_themes:
+      biplane:
+        title: Bi-Plane
+        description: A basic, no-frills HTML5 starter theme.
+        theme_repo: https://github.com/VML/Drupal-Theme-Biplane.git
+        theme_repo_branch: master
+        source_repo: https://github.com/VML/Drupal-Theme-Source-Biplane.git
+        source_repo_branch: master
+      blackbird:
+        title: Blackbird
+        description: A feature-filled starter theme that works well with the Blackbird profile of the same name.
+        theme_repo: https://github.com/VML/Drupal-Theme-Blackbird.git
+        theme_repo_branch: master
+        source_repo: https://github.com/VML/Drupal-Theme-Source-Blackbird.git
+        source_repo_branch: master
+  url_check:
+    urls:
+      'http://www.test-url-here.docksal/': 301
+      '/this/page/doesnt/exist': 404
+      '/': 200

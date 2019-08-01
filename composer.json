@@ -95,9 +95,9 @@
         "topfloor/composer-cleanup-vcs-dirs": "^1.0",
         "vlucas/phpdotenv": "^2.4",
         "vmlyr-drupal/bazo": "^8.0",
-        "vmlyr-drupal/kastoro": "^8.0",
+        "vmlyr-drupal/biplane": "^8.0",
+        "vmlyr-drupal/blackbird": "^8.0",
         "vmlyr-drupal/kit-docksal-commands": "^8.1",
-        "vmlyr-drupal/profilo": "^8.0",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.1"

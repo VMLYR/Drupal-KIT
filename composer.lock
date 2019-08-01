@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "84f38150cbe19c426ffc9192c379bcc5",
+    "content-hash": "660812c03e0a1ed6c021076b699d98a9",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2206,7 +2206,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.4",
-                    "datestamp": "1554332581",
+                    "datestamp": "1527081784",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2223,16 +2223,8 @@
                     "homepage": "https://www.drupal.org/user/86106"
                 },
                 {
-                    "name": "dww",
-                    "homepage": "https://www.drupal.org/user/46549"
-                },
-                {
                     "name": "googletorp",
                     "homepage": "https://www.drupal.org/user/386230"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
                 },
                 {
                     "name": "rszrama",
@@ -2242,7 +2234,7 @@
             "description": "Provides functionality for storing, validating and displaying international postal addresses.",
             "homepage": "http://drupal.org/project/address",
             "support": {
-                "source": "https://git.drupalcode.org/project/address"
+                "source": "http://cgit.drupalcode.org/address"
             }
         },
         {
@@ -2269,7 +2261,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.25",
-                    "datestamp": "1549218480",
+                    "datestamp": "1542915384",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2401,10 +2393,6 @@
                 {
                     "name": "rupl",
                     "homepage": "https://www.drupal.org/user/411999"
-                },
-                {
-                    "name": "thalles",
-                    "homepage": "https://www.drupal.org/user/3589086"
                 }
             ],
             "description": "Improved aggregation of CSS/JS files to speed up page load times.",
@@ -2459,7 +2447,7 @@
             "description": "Limit which text formats are available for each field instance.",
             "homepage": "https://www.drupal.org/project/allowed_formats",
             "support": {
-                "source": "https://git.drupalcode.org/project/allowed_formats"
+                "source": "http://cgit.drupalcode.org/allowed_formats"
             }
         },
         {
@@ -2486,7 +2474,7 @@
                 },
                 "drupal": {
                     "version": "8.x-3.0-alpha5",
-                    "datestamp": "1550449381",
+                    "datestamp": "1540513084",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -2498,10 +2486,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Etroid",
-                    "homepage": "https://www.drupal.org/user/3048985"
-                },
                 {
                     "name": "chr.fritsch",
                     "homepage": "https://www.drupal.org/user/2103716"
@@ -2515,6 +2499,10 @@
                     "homepage": "https://www.drupal.org/user/192273"
                 },
                 {
+                    "name": "mortona2k",
+                    "homepage": "https://www.drupal.org/user/1029484"
+                },
+                {
                     "name": "rlhawk",
                     "homepage": "https://www.drupal.org/user/352283"
                 }
@@ -2522,7 +2510,7 @@
             "description": "Provides advanced options (such as links, checkboxes, or jQueryUI widgets) for exposed Views elements.",
             "homepage": "https://www.drupal.org/project/better_exposed_filters",
             "support": {
-                "source": "https://git.drupalcode.org/project/better_exposed_filters"
+                "source": "http://cgit.drupalcode.org/better_exposed_filters"
             }
         },
         {
@@ -2557,7 +2545,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.3",
-                    "datestamp": "1548427384",
+                    "datestamp": "1546024980",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2591,7 +2579,7 @@
             "description": "This module provides an image formatter who allows you to set an image in background of a container.",
             "homepage": "https://drupal.org/project/bg_image_formatter",
             "support": {
-                "source": "https://git.drupalcode.org/project/bg_image_formatter"
+                "source": "http://cgit.drupalcode.org/bg_image_formatter"
             }
         },
         {
@@ -2807,16 +2795,12 @@
                 {
                     "name": "jrockowitz",
                     "homepage": "https://www.drupal.org/user/371407"
-                },
-                {
-                    "name": "michaellander",
-                    "homepage": "https://www.drupal.org/user/636494"
                 }
             ],
             "description": "Provides a field that allows a content entity to create and configure custom block instances.",
             "homepage": "https://www.drupal.org/project/block_field",
             "support": {
-                "source": "https://git.drupalcode.org/project/block_field"
+                "source": "http://cgit.drupalcode.org/block_field"
             }
         },
         {
@@ -2883,7 +2867,7 @@
             "description": "The CAPTCHA module provides this feature to virtually any user facing web form on a Drupal site.",
             "homepage": "https://www.drupal.org/project/captcha",
             "support": {
-                "source": "https://git.drupalcode.org/project/captcha"
+                "source": "http://cgit.drupalcode.org/captcha"
             }
         },
         {
@@ -2938,7 +2922,7 @@
             "description": "Allows an editor to apply a class to paragraphs.",
             "homepage": "https://www.drupal.org/project/classy_paragraphs",
             "support": {
-                "source": "https://git.drupalcode.org/project/classy_paragraphs"
+                "source": "http://cgit.drupalcode.org/classy_paragraphs"
             }
         },
         {
@@ -3238,7 +3222,7 @@
             "description": "Provides basic revert and update functionality for other modules",
             "homepage": "https://www.drupal.org/project/config_update",
             "support": {
-                "source": "https://git.drupalcode.org/project/config_update"
+                "source": "http://cgit.drupalcode.org/config_update"
             }
         },
         {
@@ -3767,10 +3751,10 @@
                 },
                 "drupal": {
                     "version": "8.x-1.8",
-                    "datestamp": "1549500480",
+                    "datestamp": "1510354084",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
                     }
                 }
             },
@@ -3784,10 +3768,6 @@
                     "homepage": "https://www.drupal.org/user/1194228",
                     "email": "asilgag@gmail.com",
                     "role": "Maintainer"
-                },
-                {
-                    "name": "keopx",
-                    "homepage": "https://www.drupal.org/user/377362"
                 }
             ],
             "description": "Inlines a critical CSS file into a page's HTML head",
@@ -3852,7 +3832,7 @@
             "description": "Provides storage and API for image crops.",
             "homepage": "https://www.drupal.org/project/crop",
             "support": {
-                "source": "https://git.drupalcode.org/project/crop",
+                "source": "http://cgit.drupalcode.org/crop",
                 "issues": "https://www.drupal.org/project/issues/crop"
             }
         },
@@ -3880,7 +3860,7 @@
                 },
                 "drupal": {
                     "version": "8.x-3.0",
-                    "datestamp": "1549603381",
+                    "datestamp": "1493401742",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4141,7 +4121,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.3",
-                    "datestamp": "1554478985",
+                    "datestamp": "1542624480",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4161,7 +4141,7 @@
             "description": "Allow users to link uploaded files in the text Editor.",
             "homepage": "https://www.drupal.org/project/editor_file",
             "support": {
-                "source": "https://git.drupalcode.org/project/editor_file"
+                "source": "http://cgit.drupalcode.org/editor_file"
             }
         },
         {
@@ -4283,7 +4263,7 @@
             "description": "Adds a Entity Reference field type with revision support.",
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
-                "source": "https://git.drupalcode.org/project/entity_reference_revisions"
+                "source": "http://cgit.drupalcode.org/entity_reference_revisions"
             }
         },
         {
@@ -4397,7 +4377,7 @@
             "description": "Provides the field_group module.",
             "homepage": "https://www.drupal.org/project/field_group",
             "support": {
-                "source": "https://git.drupalcode.org/project/field_group"
+                "source": "http://cgit.drupalcode.org/field_group"
             }
         },
         {
@@ -4449,7 +4429,7 @@
                 "Field Group"
             ],
             "support": {
-                "source": "https://git.drupalcode.org/project/field_group_settings"
+                "source": "http://cgit.drupalcode.org/field_group_settings"
             }
         },
         {
@@ -4480,7 +4460,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta6",
-                    "datestamp": "1553270584",
+                    "datestamp": "1519932484",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4500,7 +4480,7 @@
             "description": "Allows users to specify the focal point of an image for use during cropping.",
             "homepage": "https://www.drupal.org/project/focal_point",
             "support": {
-                "source": "https://git.drupalcode.org/project/focal_point"
+                "source": "http://cgit.drupalcode.org/focal_point"
             }
         },
         {
@@ -4602,7 +4582,7 @@
             "description": "Define pipelines for image optimization and provide integration with core image styles.",
             "homepage": "https://www.drupal.org/project/imageapi_optimize",
             "support": {
-                "source": "https://git.drupalcode.org/project/imageapi_optimize"
+                "source": "http://cgit.drupalcode.org/imageapi_optimize"
             }
         },
         {
@@ -4650,7 +4630,7 @@
             "description": "Provide a reSmush.it optimizer for ImageAPI Optimize.",
             "homepage": "https://www.drupal.org/project/imageapi_optimize_resmushit",
             "support": {
-                "source": "https://git.drupalcode.org/project/imageapi_optimize_resmushit"
+                "source": "http://cgit.drupalcode.org/imageapi_optimize_resmushit"
             }
         },
         {
@@ -4697,7 +4677,7 @@
             "description": "Provide a widget to Link field type for adding class to link.",
             "homepage": "https://www.drupal.org/project/link_class",
             "support": {
-                "source": "https://git.drupalcode.org/project/link_class"
+                "source": "http://cgit.drupalcode.org/link_class"
             }
         },
         {
@@ -4801,7 +4781,7 @@
             "description": "Allow users to log in with either their username OR email address using the same input box on the login form.",
             "homepage": "https://www.drupal.org/project/login_emailusername",
             "support": {
-                "source": "https://git.drupalcode.org/project/login_emailusername"
+                "source": "http://cgit.drupalcode.org/login_emailusername"
             }
         },
         {
@@ -4849,10 +4829,6 @@
                     "homepage": "https://www.drupal.org/user/84263"
                 },
                 {
-                    "name": "Manuel Garcia",
-                    "homepage": "https://www.drupal.org/user/213194"
-                },
-                {
                     "name": "Nafes",
                     "homepage": "https://www.drupal.org/user/2489926"
                 },
@@ -4868,7 +4844,7 @@
             "description": "Mail System",
             "homepage": "https://www.drupal.org/project/mailsystem",
             "support": {
-                "source": "https://git.drupalcode.org/project/mailsystem"
+                "source": "http://cgit.drupalcode.org/mailsystem"
             }
         },
         {
@@ -4916,7 +4892,7 @@
             "description": "Adds a field formatter for Media references which displays a responsive image.",
             "homepage": "https://www.drupal.org/project/media_responsive_thumbnail",
             "support": {
-                "source": "https://git.drupalcode.org/project/media_responsive_thumbnail"
+                "source": "http://cgit.drupalcode.org/media_responsive_thumbnail"
             }
         },
         {
@@ -4987,7 +4963,7 @@
             "description": "High performance integration with memcache.",
             "homepage": "http://drupal.org/project/memcache",
             "support": {
-                "source": "https://git.drupalcode.org/project/memcache",
+                "source": "http://cgit.drupalcode.org/memcache",
                 "issues": "https://www.drupal.org/project/issues/memcache"
             }
         },
@@ -5077,7 +5053,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.7",
-                    "datestamp": "1550692511",
+                    "datestamp": "1535726393",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5288,7 +5264,7 @@
             "description": "Filter the modules list.",
             "homepage": "https://www.drupal.org/project/module_filter",
             "support": {
-                "source": "https://git.drupalcode.org/project/module_filter"
+                "source": "http://cgit.drupalcode.org/module_filter"
             }
         },
         {
@@ -5332,7 +5308,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.5",
-                    "datestamp": "1550692525",
+                    "datestamp": "1541009695",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5368,7 +5344,7 @@
             "description": "Enables the creation of Paragraphs entities.",
             "homepage": "https://www.drupal.org/project/paragraphs",
             "support": {
-                "source": "https://git.drupalcode.org/project/paragraphs"
+                "source": "http://cgit.drupalcode.org/paragraphs"
             }
         },
         {
@@ -5397,7 +5373,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.3",
-                    "datestamp": "1554239887",
+                    "datestamp": "1536407884",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5429,7 +5405,7 @@
             "description": "Provides a mechanism for modules to automatically generate aliases for the content they manage.",
             "homepage": "https://www.drupal.org/project/pathauto",
             "support": {
-                "source": "https://git.drupalcode.org/project/pathauto"
+                "source": "http://cgit.drupalcode.org/pathauto"
             }
         },
         {
@@ -5476,7 +5452,7 @@
             "description": "Create a filter for permission page.",
             "homepage": "https://www.drupal.org/project/permissions_filter",
             "support": {
-                "source": "https://git.drupalcode.org/project/permissions_filter"
+                "source": "http://cgit.drupalcode.org/permissions_filter"
             }
         },
         {
@@ -5504,7 +5480,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.3",
-                    "datestamp": "1548967980",
+                    "datestamp": "1521320880",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5596,7 +5572,7 @@
             "description": "Allows users to redirect from old URLs to new URLs.",
             "homepage": "https://www.drupal.org/project/redirect",
             "support": {
-                "source": "https://git.drupalcode.org/project/redirect"
+                "source": "http://cgit.drupalcode.org/redirect"
             }
         },
         {
@@ -5776,7 +5752,7 @@
             "description": "Creates a general shield for the site.",
             "homepage": "https://www.drupal.org/project/shield",
             "support": {
-                "source": "https://git.drupalcode.org/project/shield"
+                "source": "http://cgit.drupalcode.org/shield"
             }
         },
         {
@@ -5933,7 +5909,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-alpha3",
-                    "datestamp": "1555515785",
+                    "datestamp": "1499900942",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -5984,7 +5960,7 @@
             "description": "Provides stage_file_proxy module.",
             "homepage": "https://www.drupal.org/project/stage_file_proxy",
             "support": {
-                "source": "https://git.drupalcode.org/project/stage_file_proxy"
+                "source": "http://cgit.drupalcode.org/stage_file_proxy"
             }
         },
         {
@@ -6105,7 +6081,7 @@
             "description": "Swiftmailer",
             "homepage": "https://www.drupal.org/project/swiftmailer",
             "support": {
-                "source": "https://git.drupalcode.org/project/swiftmailer"
+                "source": "http://cgit.drupalcode.org/swiftmailer"
             }
         },
         {
@@ -6136,7 +6112,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta1",
-                    "datestamp": "1549031580",
+                    "datestamp": "1492638542",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -6157,7 +6133,7 @@
             "description": "Additional formatters to Telephone field.",
             "homepage": "https://www.drupal.org/project/telephone_formatter",
             "support": {
-                "source": "https://git.drupalcode.org/project/telephone_formatter",
+                "source": "http://cgit.drupalcode.org/telephone_formatter",
                 "issues": "http://drupal.org/project/issues/telephone_formatter"
             }
         },
@@ -6187,7 +6163,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.1",
-                    "datestamp": "1549289280",
+                    "datestamp": "1527165785",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6207,7 +6183,7 @@
             "description": "Use 3rd party library to validate telephone field.",
             "homepage": "http://drupal.org/project/telephone_validation",
             "support": {
-                "source": "https://git.drupalcode.org/project/telephone_validation",
+                "source": "http://cgit.drupalcode.org/telephone_validation",
                 "issues": "http://drupal.org/project/issues/telephone_validation"
             }
         },
@@ -6260,7 +6236,7 @@
             "description": "This is a very simple module to allow Theme path to be used as filters.",
             "homepage": "https://www.drupal.org/project/theme_filter",
             "support": {
-                "source": "https://git.drupalcode.org/project/theme_filter",
+                "source": "http://cgit.drupalcode.org/theme_filter",
                 "issues": "https://www.drupal.org/project/issues/theme_filter"
             }
         },
@@ -6328,7 +6304,7 @@
             "description": "Provides a user interface for the Token API and some missing core tokens.",
             "homepage": "https://www.drupal.org/project/token",
             "support": {
-                "source": "https://git.drupalcode.org/project/token"
+                "source": "http://cgit.drupalcode.org/token"
             }
         },
         {
@@ -6389,7 +6365,7 @@
             "description": "A pluggable field type for storing videos from external video hosts such as Vimeo and YouTube.",
             "homepage": "https://www.drupal.org/project/video_embed_field",
             "support": {
-                "source": "https://git.drupalcode.org/project/video_embed_field"
+                "source": "http://cgit.drupalcode.org/video_embed_field"
             }
         },
         {
@@ -6432,12 +6408,12 @@
             ],
             "authors": [
                 {
-                    "name": "joekers",
-                    "homepage": "https://www.drupal.org/user/2229066"
+                    "name": "New Zeal",
+                    "homepage": "https://www.drupal.org/user/93571"
                 },
                 {
-                    "name": "kent@passingphase.nz",
-                    "homepage": "https://www.drupal.org/user/93571"
+                    "name": "joekers",
+                    "homepage": "https://www.drupal.org/user/2229066"
                 },
                 {
                     "name": "seanB",
@@ -9872,17 +9848,17 @@
             "time": "2019-01-04T16:59:24+00:00"
         },
         {
-            "name": "vmlyr-drupal/kastoro",
-            "version": "8.0.1",
+            "name": "vmlyr-drupal/biplane",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/VML/Drupal-Profile-Kastoro.git",
-                "reference": "250055dc67ca59ad052fe742a5c2a30114ea1aa3"
+                "url": "https://github.com/VML/Drupal-Profile-Biplane.git",
+                "reference": "586fd4eb3c47595654b485630207f618a474f675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Profile-Kastoro/zipball/250055dc67ca59ad052fe742a5c2a30114ea1aa3",
-                "reference": "250055dc67ca59ad052fe742a5c2a30114ea1aa3",
+                "url": "https://api.github.com/repos/VML/Drupal-Profile-Biplane/zipball/586fd4eb3c47595654b485630207f618a474f675",
+                "reference": "586fd4eb3c47595654b485630207f618a474f675",
                 "shasum": ""
             },
             "type": "drupal-profile",
@@ -9896,9 +9872,38 @@
                     "email": "garrett.rathbone@vml.com"
                 }
             ],
-            "description": "Common but opinionated profile with helpful components to fast-track site setup and development.",
-            "homepage": "https://github.com/VML/Drupal-Profile-Kastoro",
-            "time": "2019-01-03T16:58:34+00:00"
+            "description": "Common configuration to fast-track site setup and development.",
+            "homepage": "https://github.com/VML/Drupal-Profile-Biplane",
+            "time": "2019-08-01T14:46:36+00:00"
+        },
+        {
+            "name": "vmlyr-drupal/blackbird",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VML/Drupal-Profile-Blackbird.git",
+                "reference": "686b9719ac26c0908c50b4d9aae273bc8a06ca14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VML/Drupal-Profile-Blackbird/zipball/686b9719ac26c0908c50b4d9aae273bc8a06ca14",
+                "reference": "686b9719ac26c0908c50b4d9aae273bc8a06ca14",
+                "shasum": ""
+            },
+            "type": "drupal-profile",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Garrett Rathbone",
+                    "email": "garrett.rathbone@vml.com"
+                }
+            ],
+            "description": "An opinionated Drupal profile with helpful components to take care of repeated tasks for new websites.",
+            "homepage": "https://github.com/VML/Drupal-Profile-Blackbird",
+            "time": "2019-08-01T14:45:38+00:00"
         },
         {
             "name": "vmlyr-drupal/kit-docksal-commands",
@@ -9935,25 +9940,23 @@
         },
         {
             "name": "vmlyr-drupal/kit-drush-commands",
-            "version": "8.0.4",
+            "version": "8.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VML/Drupal-KIT-Drush-Commands.git",
-                "reference": "41a165fa0f7b8e594a3deb1f6134595d6532f3ca"
+                "reference": "a23f6fd7279f10cb9bb1495e26d88ccd55772cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-KIT-Drush-Commands/zipball/41a165fa0f7b8e594a3deb1f6134595d6532f3ca",
-                "reference": "41a165fa0f7b8e594a3deb1f6134595d6532f3ca",
+                "url": "https://api.github.com/repos/VML/Drupal-KIT-Drush-Commands/zipball/a23f6fd7279f10cb9bb1495e26d88ccd55772cda",
+                "reference": "a23f6fd7279f10cb9bb1495e26d88ccd55772cda",
                 "shasum": ""
             },
             "require": {
+                "drush/drush": "^9.6.0",
                 "oomphinc/composer-installers-extender": "^1.0"
             },
             "type": "drupal-drush",
-            "extra": {
-                "branch-alias": []
-            },
             "autoload": {
                 "psr-4": {
                     "Drush\\Commands\\kit_drush_commands\\Util\\": "src/Util"
@@ -9971,36 +9974,7 @@
             ],
             "description": "Drush Commands for VMLYR Drupal KIT",
             "homepage": "https://github.com/VML/Drupal-KIT-Drush-Commands",
-            "time": "2019-05-04T14:45:06+00:00"
-        },
-        {
-            "name": "vmlyr-drupal/profilo",
-            "version": "8.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VML/Drupal-Profile-Profilo.git",
-                "reference": "49693c6d290ac885e131a28625ee8da84d012cd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Profile-Profilo/zipball/49693c6d290ac885e131a28625ee8da84d012cd6",
-                "reference": "49693c6d290ac885e131a28625ee8da84d012cd6",
-                "shasum": ""
-            },
-            "type": "drupal-profile",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "Common configuration to fast-track site setup and development.",
-            "homepage": "https://github.com/VML/Drupal-Profile-Profilo",
-            "time": "2018-10-31T20:28:56+00:00"
+            "time": "2019-06-07T18:30:05+00:00"
         },
         {
             "name": "webflo/drupal-finder",
