@@ -180,12 +180,10 @@
                 "https://www.drupal.org/node/2642122": "https://www.drupal.org/files/issues/2018-09-14/2642122-87.patch",
                 "https://www.drupal.org/node/2827921": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "https://www.drupal.org/node/2891603": "https://www.drupal.org/files/issues/2018-11-07/2891603-18.patch",
-                "https://www.drupal.org/node/2998816": "https://www.drupal.org/files/issues/2018-09-11/arraystringconversion-2998816-12768980.patch",
-                "https://www.drupal.org/node/3001587": "https://www.drupal.org/files/issues/2018-09-28/media-library-error-in-install-profile-3001587-3.patch"
+                "https://www.drupal.org/node/2998816": "https://www.drupal.org/files/issues/2018-09-11/arraystringconversion-2998816-12768980.patch"
             },
             "drupal/linkit": {
-                "https://www.drupal.org/node/2712951": "https://www.drupal.org/files/issues/2018-08-17/linkit_for_link_field-2712951-84.patch",
-                "https://www.drupal.org/node/2979652": "https://www.drupal.org/files/issues/2018-06-14/linkit-media_nonfile_substitution-2979652-2.patch"
+                "https://www.drupal.org/node/2712951": "https://www.drupal.org/files/issues/2018-08-17/linkit_for_link_field-2712951-84.patch"
             },
             "drupal/simple_gmap": {
                 "https://www.drupal.org/node/2863979": "https://www.drupal.org/files/issues/2018-11-21/simple_gmap-address-formatter-2863979-36.patch"
