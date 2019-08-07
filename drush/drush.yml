@@ -6,6 +6,16 @@
 # Edit or remove this file as needed.
 
 kit:
+  reset:
+    commands:
+      - name: 'Updating Database'
+        drush: 'updatedb -y'
+      - name: 'Updating Entities'
+        drush: 'entup -y'
+      - name: 'Importing configuration'
+        drush: 'cim sync -y'
+      - name: 'Rebuilding Cache'
+        drush: 'cr'
   theme:
     source_directory: source/themes
     scaffold_themes:

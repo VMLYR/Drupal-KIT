@@ -1,0 +1,13 @@
+diff --git a/src/Plugin/Linkit/Matcher/EntityMatcher.php b/src/Plugin/Linkit/Matcher/EntityMatcher.php
+index 9d56a47..db7e260 100644
+--- a/src/Plugin/Linkit/Matcher/EntityMatcher.php
++++ b/src/Plugin/Linkit/Matcher/EntityMatcher.php
+@@ -441,7 +441,7 @@ class EntityMatcher extends ConfigurableMatcherBase {
+    *   The label for this entity.
+    */
+   protected function buildLabel(EntityInterface $entity) {
+-    return Html::escape($entity->label());
++    return $entity->label();
+   }
+ 
+   /**
