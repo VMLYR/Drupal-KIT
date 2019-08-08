@@ -17,10 +17,9 @@ kit:
       - name: 'Rebuilding Cache'
         drush: 'cr'
   theme:
-    source_directory: source/themes
     scaffold_themes:
       biplane:
-        title: Bi-Plane
+        title: Biplane
         description: A basic, no-frills HTML5 starter theme.
         theme_repo: https://github.com/VML/Drupal-Theme-Biplane.git
         theme_repo_branch: master

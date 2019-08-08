@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7ef4cf7aa0befc7f153ab2b721d97db",
+    "content-hash": "419dc8e5f74609a3cef26b5065e8da7a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2669,6 +2669,9 @@
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "https://www.drupal.org/node/2994020": "https://www.drupal.org/files/issues/2018-09-04/blazy-2994020-4.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -10484,11 +10487,17 @@
         },
         {
             "name": "vmlyr-drupal/kit-drush-commands",
-            "version": "8.0.6",
+            "version": "8.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VML/Drupal-KIT-Drush-Commands.git",
-                "reference": "ec1852dd203c6b74f70367ca6089d7c7883b9430"
+                "reference": "5739ae5ac6069fd9322b045a4fb8c13684482411"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VML/Drupal-KIT-Drush-Commands/zipball/5739ae5ac6069fd9322b045a4fb8c13684482411",
+                "reference": "5739ae5ac6069fd9322b045a4fb8c13684482411",
+                "shasum": ""
             },
             "require": {
                 "drush/drush": "^9.6.0",
@@ -10500,6 +10509,7 @@
                     "Drush\\Commands\\kit_drush_commands\\Util\\": "src/Util"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
@@ -10511,7 +10521,7 @@
             ],
             "description": "Drush Commands for VMLYR Drupal KIT",
             "homepage": "https://github.com/VML/Drupal-KIT-Drush-Commands",
-            "time": "2019-08-01T15:04:43+00:00"
+            "time": "2019-08-08T01:13:40+00:00"
         },
         {
             "name": "webflo/drupal-finder",
