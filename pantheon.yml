@@ -1,0 +1,28 @@
+# Put overrides to your pantheon.upstream.yml file here.
+# For more information, see: https://pantheon.io/docs/pantheon-yml/
+api_version: 1
+drush_version: 9
+
+# filemount set to /sites/default/files and symlinked from /sites/www/files.
+# This is super disgusting but the only way pantheon allows custom filemount directories.
+# https://pantheon.io/docs/pantheon-yml#filemount-path
+# https://pantheon.io/docs/non-standard-file-paths
+# filemount: /sites/default/files
+
+web_docroot: true
+workflows:
+  clone_database:
+    after:
+      - type: webphp
+        description: Running post deploy commands.
+        script: private/scripts/post_deploy.php
+  deploy:
+    after:
+      - type: webphp
+        description: Running post deploy commands.
+        script: private/scripts/post_deploy.php
+  sync_code:
+    after:
+      - type: webphp
+        description: Running post deploy commands.
+        script: private/scripts/post_deploy.php

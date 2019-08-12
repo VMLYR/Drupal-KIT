@@ -5,6 +5,7 @@ Drupal 8 projects.
 
 * [About KIT](#about-kit)
 * [Getting Started](#installation)
+* [Post-installation and provider-related configuration](#post-installation-and-provider-related-configuration)
 * [Notes & Suggestions](#notes-and-suggestions)
 * [Theme Development](#theme-development)
 
@@ -210,7 +211,7 @@ Getting a running site takes only a few steps for a project.
 1. Install the project.
     1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
        ```
-       fin run-cli "composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*"
+       fin run-cli "composer create-project --no-install vmlyr-drupal/kit [FOLDER_NAME_HERE]"
        ```
     1. Change into the directory.
         ```
@@ -284,6 +285,91 @@ themes. If the _Blackbird_ profile was installed, we suggest scaffolding
 from the _Blackbird_ theme option of the same name. If you're not using 
 _Blackbird_ and want a more simple starting point for you theme we 
 suggest scaffolding from Biplane scaffold theme.
+
+## Post-installation and provider-related configuration
+Based on the hosting provider, some configuration needs to be created or 
+updated. Similarly, some configuration will also be unneeded and can be 
+removed.
+
+### Bitbucket pipelines
+To enable bitbucket pipeline builds, rename `bitbucket-pipelines-example.yml` 
+to `bitbucket-pipelines.yml`. Note: Bitbucket Pipelines needs to be 
+enabled in bitbucket to work.
+
+### Files included in KIT
+The following are grouped to give context for which 
+files/directories can be modified or removed.
+
+###### Provider-specific files: Acquia
+- `/hooks/common`
+- `/hooks/dev`
+- `/hooks/prod`
+- `/hooks/samples`
+- `/hooks/test`
+###### Provider-specific files: AWS
+- `/.ebextensions`
+###### Provider-specific files: Pantheon
+- `/pantheon.yml`
+- `/scripts/pantheon/*`
+###### Provider-specific files: Platform
+###### Universal files
+- `/env.example` (we don't suggest env files; kept for reference if needed in the project)
+- `/package.json` (was used by packagist to create project and no longer needed)
+- `/travis.yml` (we don't typically use travis; kept for reference if needed in the project)
+
+### Jenkins
+@TODO Jenkins setup walk-through.
+
+### Provider-specific modifications
+Modifications to make to the project based on which hosting provider is 
+chosen.
+
+###### Provider-specific modifications: Acquia
+1. Remove unnecessary files and directories for Acquia:
+    - [List of universal files to remove](#universal-files)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+###### Provider-specific modifications: AWS
+1. Remove unnecessary files and directories for Platform.sh:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+###### Provider-specific modifications: Pantheon
+1. Remove unnecessary files and directories for Pantheon:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+1. [Rename /docroot to /web](#renaming-docroot-to-web).
+1. Create symlink from installed sites directory to sites/default/files
+    1. cd to /sites/www (or other site directory if multisite).
+    1. run `rm -rf files` to remove current files directory.
+    1. run `ln -s ../default/files/ files` to create symlink to default files directory (which is then symlinked to /files on pantheons end).
+    1. run `git add files` and commit symlink to repo.
+1. Place post-deploy script in the correct place for pantheon to read it (inside the web directory).
+    1. Create `/web/private` directory.
+    1. Create `web/private/scripts` directory.
+    1. Move `scripts/pantheon/post_deploy.php` into `/web/private/scripts`.
+    1. Remove empty `/scripts/pantheon` folder.
+###### Provider-specific modifications: Platform.sh
+1. Remove unnecessary files and directories for Platform.sh:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+
+### Renaming docroot to web
+Some providers require a different docroot directory.
+1. Rename `docroot` directory to `web`.
+1. Update `docroot` references to `web` in the following files:
+    - `/.docksal/docksal.env`
+    - `/.gitignore`
+    - `/composer.json` (will need to run composer install afterward to regenerate autoload.php file)
+    - `/drush/*` files (`/drush/sites/www.site.yml`, etc.)
+    - `/patches/htaccess.patch`
+    - `/source/gulpfile.js`
 
 ## Notes and suggestions
 #### Environment aliases

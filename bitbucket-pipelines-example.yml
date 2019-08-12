@@ -1,0 +1,145 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: docksal/cli:2.6-php7.2
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          caches:
+            - composer
+          script:
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/node /usr/bin/node
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/npm /usr/bin/npm
+            - ln -s /home/docker/.composer/vendor/bin/phpcs  /usr/bin/phpcs
+            - composer install --prefer-dist --no-dev --no-progress -o -n
+            - cd source
+            - npm ci
+            - npm run gulp build
+            - npm install eslint
+            - node_modules/.bin/eslint themes/vmc --quiet
+            - cd ../
+            - phpcs --standard=Drupal -n --extensions="php,module,inc,install,test,profile,theme" --ignore="*.pages*.inc,*.yml,.docksal,*.css,*.js,*.jpg,*.png,settings*.php,*.txt" docroot/modules/custom
+            - phpcs --standard=Drupal -n --extensions="php,module,inc,install,test,profile,theme" --ignore="*.pages*.inc,*.yml,.docksal,*.css,*.js,*.jpg,*.png,settings*.php,*.txt" docroot/themes/custom
+  branches:
+    develop:
+      - step:
+          caches:
+            - composer
+            - pip
+          script:
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/node /usr/bin/node
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/npm /usr/bin/npm
+            - composer install --prefer-dist --no-dev --no-progress -o -n
+            - cd source
+            - npm ci
+            - npm run gulp build
+            - cd ../
+            - rm -rf patches
+            - rm -rf scripts/composer
+            - rm -rf source
+            - rm -rf .gitignore
+            - rm -rf .travis.yml
+            - rm -rf LICENSE
+            - rm -rf package.json
+            - rm -rf phpunit.xml.dist
+            - rm -rf README.md
+            # Using the || to re-run the process in case apt/apt-get fails, which seems to happen alot.
+            - apt update || apt update
+            - apt-get update || apt-get update
+            - apt-get install -y git unzip python-pip
+            - pip install awsebcli --ignore-installed setuptools --upgrade
+            - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+            - export AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION"
+            - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+            - cp .ebextensions-dev/* .ebextensions
+            - eb init visitmusiccity -r us-east-1 -p php
+            - eb deploy vmcdev
+    uat:
+      - step:
+          caches:
+            - composer
+            - pip
+          script:
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/node /usr/bin/node
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/npm /usr/bin/npm
+            - composer install --prefer-dist --no-dev --no-progress -o -n
+            - cd source
+            - npm ci
+            - npm run gulp build
+            - cd ../
+            - rm -rf patches
+            - rm -rf scripts/composer
+            - rm -rf source
+            - rm -rf .gitignore
+            - rm -rf .travis.yml
+            - rm -rf LICENSE
+            - rm -rf package.json
+            - rm -rf phpunit.xml.dist
+            - rm -rf README.md
+            # Using the || to re-run the process in case apt/apt-get fails, which seems to happen alot.
+            - apt update || apt update
+            - apt-get update || apt-get update
+            - apt-get install -y git unzip python-pip
+            - pip install awsebcli --ignore-installed setuptools --upgrade
+            - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+            - export AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION"
+            - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+            - cp .ebextensions-uat/* .ebextensions
+            - eb init visitmusiccity -r us-east-1 -p php
+            - eb deploy vmcuat
+    master:
+      - step:
+          caches:
+            - composer
+            - pip
+          script:
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/node /usr/bin/node
+            - ln -s /home/docker/.nvm/versions/node/v10.15.0/bin/npm /usr/bin/npm
+            - composer install --prefer-dist --no-dev --no-progress -o -n
+            - cd source
+            - npm ci
+            - npm run gulp build
+            - cd ../
+            - rm -rf patches
+            - rm -rf scripts/composer
+            - rm -rf source
+            - rm -rf .gitignore
+            - rm -rf .travis.yml
+            - rm -rf LICENSE
+            - rm -rf package.json
+            - rm -rf phpunit.xml.dist
+            - rm -rf README.md
+            # Using the || to re-run the process in case apt/apt-get fails, which seems to happen alot.
+            - apt update || apt update
+            - apt-get update || apt-get update
+            - apt-get install -y git unzip python-pip
+            - pip install awsebcli --ignore-installed setuptools --upgrade
+            - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+            - export AWS_DEFAULT_REGION="$AWS_DEFAULT_REGION"
+            - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+            - cp .ebextensions-prod/* .ebextensions
+            - eb init visitmusiccity -r us-east-1 -p php
+            - eb deploy vmcprod
+#  default:
+#    - step:
+#        caches:
+#          - composer
+#        script:
+#          - composer install --prefer-dist --no-dev --no-progress -o -n
+#          - cd source
+#          - npm ci
+#          - npm run gulp build
+#          - cd ../
+#          - rm -rf patches
+#          - rm -rf scripts/composer
+#          - rm -rf source
+#          - rm -rf .gitignore
+#          - rm -rf .travis.yml
+#          - rm -rf LICENSE
+#          - rm -rf package.json
+#          - rm -rf phpunit.xml.dist
+#          - rm -rf README.md
