@@ -380,6 +380,8 @@ chosen.
     1. Uncomment the Platform.sh portion.
     1. Remove uneeded server-specific configuration from other providers.
 
+@TODO Some files and configuration are missing for Platform.sh, which still needed to be included in KIT.
+
 ### Renaming docroot to web
 Some providers require a different docroot directory.
 1. Rename `docroot` directory to `web`.
