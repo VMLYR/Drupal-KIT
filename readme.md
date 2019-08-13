@@ -331,7 +331,7 @@ chosen.
     - [List of Pantheon files and directories](#provider-specific-files-pantheon)
     - [List of Platform.sh files and directories](#provider-specific-files-platform)
 1. Settings.php modifications
-    1. Open `sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
     1. Uncomment the Acquia portion.
     1. Remove uneeded server-specific configuration from other providers.
 ###### Provider-specific modifications: AWS
@@ -341,7 +341,7 @@ chosen.
     - [List of Pantheon files and directories](#provider-specific-files-pantheon)
     - [List of Platform.sh files and directories](#provider-specific-files-platform)
 1. Settings.php modifications
-    1. Open `sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
     1. Uncomment the AWS portion.
     1. Modify appropriately.
     1. Remove uneeded server-specific configuration from other providers.
@@ -355,16 +355,15 @@ chosen.
 1. Create symlink from installed sites directory to sites/default/files
     1. cd to /sites/www (or other site directory if multisite).
     1. run `rm -rf files` to remove current files directory.
-    1. run `ln -s ../default/files/ files` to create symlink to default files directory (which is then symlinked to /files on Pantheon's end).
+    1. run `ln -s ../default/files files` to create symlink to default files directory (which is then symlinked to /files on Pantheon's end).
     1. run `git add files` and commit symlink to repo.
 1. Place post-deploy script in the correct place for pantheon to read it (inside the web directory).
-    1. Create `/web/private` directory.
-    1. Create `web/private/scripts` directory.
-    1. Move `scripts/pantheon/post_deploy.php` into `/web/private/scripts`.
+    1. Create `/web/private/scripts` directory.
+    1. Move `/scripts/pantheon/post_deploy.php` file into `/web/private/scripts`.
     1. Remove empty `/scripts/pantheon` folder.
 1. Settings.php modifications
     1. Copy over the settings.pantheon.php file from your initial pantheon install into your `www` (or relevant sites directory).
-    1. Open `sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Open `/web/sites/www/settings.php` and find the "Include server-specific configuration." section.
     1. Uncomment the Pantheon portion.
     1. Remove uneeded server-specific configuration from other providers.
     
@@ -376,7 +375,7 @@ chosen.
     - [List of Pantheon files and directories](#provider-specific-files-pantheon)
 1. Settings.php modifications
     1. Copy over the settings.platformsh.php file from your initial Platform.sh install into your `www` (or relevant sites directory).
-    1. Open `sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
     1. Uncomment the Platform.sh portion.
     1. Remove uneeded server-specific configuration from other providers.
 
