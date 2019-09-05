@@ -150,7 +150,7 @@
         ]
     },
     "extra": {
-        "installer-types": ["library"],
+        "installer-types": ["library", "drupal-console-language"],
         "installer-paths": {
             ".docksal/commands/kit": ["vmlyr-drupal/kit-docksal-commands"],
             "docroot/core": ["type:drupal-core"],
