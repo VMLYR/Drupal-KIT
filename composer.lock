@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "419dc8e5f74609a3cef26b5065e8da7a",
+    "content-hash": "2c74379afa33acc64b0e1d271c077516",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2407,8 +2407,7 @@
                     "services": {
                         "drush.services.yml": "^9"
                     }
-                },
-                "patches_applied": []
+                }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
@@ -2503,7 +2502,7 @@
             "description": "Limit which text formats are available for each field instance.",
             "homepage": "https://www.drupal.org/project/allowed_formats",
             "support": {
-                "source": "http://cgit.drupalcode.org/allowed_formats"
+                "source": "https://git.drupalcode.org/project/allowed_formats"
             }
         },
         {
@@ -2853,12 +2852,16 @@
                 {
                     "name": "jrockowitz",
                     "homepage": "https://www.drupal.org/user/371407"
+                },
+                {
+                    "name": "michaellander",
+                    "homepage": "https://www.drupal.org/user/636494"
                 }
             ],
             "description": "Provides a field that allows a content entity to create and configure custom block instances.",
             "homepage": "https://www.drupal.org/project/block_field",
             "support": {
-                "source": "http://cgit.drupalcode.org/block_field"
+                "source": "https://git.drupalcode.org/project/block_field"
             }
         },
         {
@@ -2925,7 +2928,7 @@
             "description": "The CAPTCHA module provides this feature to virtually any user facing web form on a Drupal site.",
             "homepage": "https://www.drupal.org/project/captcha",
             "support": {
-                "source": "http://cgit.drupalcode.org/captcha"
+                "source": "https://git.drupalcode.org/project/captcha"
             }
         },
         {
@@ -2973,14 +2976,14 @@
                     "homepage": "https://www.drupal.org/user/86970"
                 },
                 {
-                    "name": "murrayw",
-                    "homepage": "https://www.drupal.org/user/595658"
+                    "name": "i-trokhanenko",
+                    "homepage": "https://www.drupal.org/user/3546872"
                 }
             ],
             "description": "Allows an editor to apply a class to paragraphs.",
             "homepage": "https://www.drupal.org/project/classy_paragraphs",
             "support": {
-                "source": "http://cgit.drupalcode.org/classy_paragraphs"
+                "source": "https://git.drupalcode.org/project/classy_paragraphs"
             }
         },
         {
@@ -3280,7 +3283,7 @@
             "description": "Provides basic revert and update functionality for other modules",
             "homepage": "https://www.drupal.org/project/config_update",
             "support": {
-                "source": "http://cgit.drupalcode.org/config_update"
+                "source": "https://git.drupalcode.org/project/config_update"
             }
         },
         {
@@ -3845,7 +3848,7 @@
             "description": "Provides storage and API for image crops.",
             "homepage": "https://www.drupal.org/project/crop",
             "support": {
-                "source": "http://cgit.drupalcode.org/crop",
+                "source": "https://git.drupalcode.org/project/crop",
                 "issues": "https://www.drupal.org/project/issues/crop"
             }
         },
@@ -4315,6 +4318,10 @@
             ],
             "authors": [
                 {
+                    "name": "Berdir",
+                    "homepage": "https://www.drupal.org/user/214652"
+                },
+                {
                     "name": "Frans",
                     "homepage": "https://www.drupal.org/user/514222"
                 },
@@ -4330,7 +4337,7 @@
             "description": "Adds a Entity Reference field type with revision support.",
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
-                "source": "http://cgit.drupalcode.org/entity_reference_revisions"
+                "source": "https://git.drupalcode.org/project/entity_reference_revisions"
             }
         },
         {
@@ -4499,7 +4506,7 @@
             "description": "Provides the field_group module.",
             "homepage": "https://www.drupal.org/project/field_group",
             "support": {
-                "source": "http://cgit.drupalcode.org/field_group"
+                "source": "https://git.drupalcode.org/project/field_group"
             }
         },
         {
@@ -4551,7 +4558,7 @@
                 "Field Group"
             ],
             "support": {
-                "source": "http://cgit.drupalcode.org/field_group_settings"
+                "source": "https://git.drupalcode.org/project/field_group_settings"
             }
         },
         {
@@ -4629,7 +4636,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.1",
-                    "datestamp": "1534988884",
+                    "datestamp": "1567174084",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4649,7 +4656,7 @@
             "description": "Allows your website analytics to be managed using Google Tag Manager.",
             "homepage": "https://www.drupal.org/project/google_tag",
             "support": {
-                "source": "http://cgit.drupalcode.org/google_tag"
+                "source": "https://git.drupalcode.org/project/google_tag"
             }
         },
         {
@@ -4704,7 +4711,7 @@
             "description": "Define pipelines for image optimization and provide integration with core image styles.",
             "homepage": "https://www.drupal.org/project/imageapi_optimize",
             "support": {
-                "source": "http://cgit.drupalcode.org/imageapi_optimize"
+                "source": "https://git.drupalcode.org/project/imageapi_optimize"
             }
         },
         {
@@ -4752,7 +4759,7 @@
             "description": "Provide a reSmush.it optimizer for ImageAPI Optimize.",
             "homepage": "https://www.drupal.org/project/imageapi_optimize_resmushit",
             "support": {
-                "source": "http://cgit.drupalcode.org/imageapi_optimize_resmushit"
+                "source": "https://git.drupalcode.org/project/imageapi_optimize_resmushit"
             }
         },
         {
@@ -4954,7 +4961,7 @@
             "description": "Allow users to log in with either their username OR email address using the same input box on the login form.",
             "homepage": "https://www.drupal.org/project/login_emailusername",
             "support": {
-                "source": "http://cgit.drupalcode.org/login_emailusername"
+                "source": "https://git.drupalcode.org/project/login_emailusername"
             }
         },
         {
@@ -5002,6 +5009,10 @@
                     "homepage": "https://www.drupal.org/user/84263"
                 },
                 {
+                    "name": "Manuel Garcia",
+                    "homepage": "https://www.drupal.org/user/213194"
+                },
+                {
                     "name": "Nafes",
                     "homepage": "https://www.drupal.org/user/2489926"
                 },
@@ -5017,7 +5028,7 @@
             "description": "Mail System",
             "homepage": "https://www.drupal.org/project/mailsystem",
             "support": {
-                "source": "http://cgit.drupalcode.org/mailsystem"
+                "source": "https://git.drupalcode.org/project/mailsystem"
             }
         },
         {
@@ -5065,7 +5076,7 @@
             "description": "Adds a field formatter for Media references which displays a responsive image.",
             "homepage": "https://www.drupal.org/project/media_responsive_thumbnail",
             "support": {
-                "source": "http://cgit.drupalcode.org/media_responsive_thumbnail"
+                "source": "https://git.drupalcode.org/project/media_responsive_thumbnail"
             }
         },
         {
@@ -5136,7 +5147,7 @@
             "description": "High performance integration with memcache.",
             "homepage": "http://drupal.org/project/memcache",
             "support": {
-                "source": "http://cgit.drupalcode.org/memcache",
+                "source": "https://git.drupalcode.org/project/memcache",
                 "issues": "https://www.drupal.org/project/issues/memcache"
             }
         },
@@ -5281,7 +5292,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.9",
-                    "datestamp": "1563995941",
+                    "datestamp": "1567099985",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5493,7 +5504,7 @@
             "description": "Filter the modules list.",
             "homepage": "https://www.drupal.org/project/module_filter",
             "support": {
-                "source": "http://cgit.drupalcode.org/module_filter"
+                "source": "https://git.drupalcode.org/project/module_filter"
             }
         },
         {
@@ -5537,7 +5548,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.8",
-                    "datestamp": "1553618281",
+                    "datestamp": "1565881389",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5981,7 +5992,7 @@
             "description": "Creates a general shield for the site.",
             "homepage": "https://www.drupal.org/project/shield",
             "support": {
-                "source": "http://cgit.drupalcode.org/shield"
+                "source": "https://git.drupalcode.org/project/shield"
             }
         },
         {
@@ -6252,7 +6263,7 @@
             "description": "Tool for syncing structural data that is stored as content.",
             "homepage": "https://www.drupal.org/project/structure_sync",
             "support": {
-                "source": "http://cgit.drupalcode.org/structure_sync"
+                "source": "https://git.drupalcode.org/project/structure_sync"
             }
         },
         {
@@ -6360,7 +6371,7 @@
             "description": "Swiftmailer",
             "homepage": "https://www.drupal.org/project/swiftmailer",
             "support": {
-                "source": "http://cgit.drupalcode.org/swiftmailer"
+                "source": "https://git.drupalcode.org/project/swiftmailer"
             }
         },
         {
@@ -6515,7 +6526,7 @@
             "description": "This is a very simple module to allow Theme path to be used as filters.",
             "homepage": "https://www.drupal.org/project/theme_filter",
             "support": {
-                "source": "http://cgit.drupalcode.org/theme_filter",
+                "source": "https://git.drupalcode.org/project/theme_filter",
                 "issues": "https://www.drupal.org/project/issues/theme_filter"
             }
         },
@@ -6583,7 +6594,7 @@
             "description": "Provides a user interface for the Token API and some missing core tokens.",
             "homepage": "https://www.drupal.org/project/token",
             "support": {
-                "source": "http://cgit.drupalcode.org/token"
+                "source": "https://git.drupalcode.org/project/token"
             }
         },
         {
@@ -6687,12 +6698,12 @@
             ],
             "authors": [
                 {
-                    "name": "New Zeal",
-                    "homepage": "https://www.drupal.org/user/93571"
-                },
-                {
                     "name": "joekers",
                     "homepage": "https://www.drupal.org/user/2229066"
+                },
+                {
+                    "name": "kent@passingphase.nz",
+                    "homepage": "https://www.drupal.org/user/93571"
                 },
                 {
                     "name": "seanB",
@@ -6898,14 +6909,14 @@
             "authors": [
                 {
                     "name": "Nicholas Humfrey",
+                    "role": "Developer",
                     "email": "njh@aelius.com",
-                    "homepage": "http://www.aelius.com/njh/",
-                    "role": "Developer"
+                    "homepage": "http://www.aelius.com/njh/"
                 },
                 {
                     "name": "Alexey Zakhlestin",
-                    "email": "indeyets@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "indeyets@gmail.com"
                 }
             ],
             "description": "EasyRdf is a PHP library designed to make it easy to consume and produce RDF.",
@@ -7998,18 +8009,18 @@
             "authors": [
                 {
                     "name": "Greg Beaver",
-                    "email": "cellog@php.net",
-                    "role": "Helper"
+                    "role": "Helper",
+                    "email": "cellog@php.net"
                 },
                 {
                     "name": "Andrei Zmievski",
-                    "email": "andrei@php.net",
-                    "role": "Lead"
+                    "role": "Lead",
+                    "email": "andrei@php.net"
                 },
                 {
                     "name": "Stig Bakken",
-                    "email": "stig@php.net",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "stig@php.net"
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Console_Getopt",
@@ -8052,8 +8063,8 @@
             "authors": [
                 {
                     "name": "Christian Weiske",
-                    "email": "cweiske@php.net",
-                    "role": "Lead"
+                    "role": "Lead",
+                    "email": "cweiske@php.net"
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
@@ -10396,16 +10407,16 @@
         },
         {
             "name": "vmlyr-drupal/biplane",
-            "version": "8.0.1",
+            "version": "8.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VML/Drupal-Profile-Biplane.git",
-                "reference": "afc90009e9fcc758d3098abfc9a76f0ebe17a167"
+                "reference": "2cffa493471dabf32207886b7aa304066fac0e90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Profile-Biplane/zipball/afc90009e9fcc758d3098abfc9a76f0ebe17a167",
-                "reference": "afc90009e9fcc758d3098abfc9a76f0ebe17a167",
+                "url": "https://api.github.com/repos/VML/Drupal-Profile-Biplane/zipball/2cffa493471dabf32207886b7aa304066fac0e90",
+                "reference": "2cffa493471dabf32207886b7aa304066fac0e90",
                 "shasum": ""
             },
             "type": "drupal-profile",
@@ -10421,7 +10432,7 @@
             ],
             "description": "Common configuration to fast-track site setup and development.",
             "homepage": "https://github.com/VML/Drupal-Profile-Biplane",
-            "time": "2019-08-01T15:47:12+00:00"
+            "time": "2019-09-05T21:01:52+00:00"
         },
         {
             "name": "vmlyr-drupal/blackbird",
@@ -11213,7 +11224,7 @@
             "version": "8.3.5",
             "source": {
                 "type": "git",
-                "url": "https://git.drupal.org/project/coder.git",
+                "url": "https://git.drupalcode.org/project/coder.git",
                 "reference": "35277fc8675b6a2cbb194f8880145a9c85c845c4"
             },
             "require": {
@@ -11340,13 +11351,13 @@
             "authors": [
                 {
                     "name": "Justin Bishop",
-                    "email": "jubishop@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "jubishop@gmail.com"
                 },
                 {
                     "name": "Anthon Pang",
-                    "email": "apang@softwaredevelopment.ca",
-                    "role": "Fork Maintainer"
+                    "role": "Fork Maintainer",
+                    "email": "apang@softwaredevelopment.ca"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -11672,18 +11683,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -13111,8 +13122,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
