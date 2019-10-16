@@ -27,9 +27,10 @@
 /docroot/.eslintrc.json
 /docroot/.gitattributes
 /docroot/.ht.router.php
+/docroot/web.config
 
-# Ignore database dump folder
-/db_backup/
+# Ignore database backup/dump folder
+/database_backups/
 
 # Ignore SimpleTest multi-site environment.
 /docroot/sites/simpletest
@@ -45,8 +46,19 @@ node_modules
 
 # Ignore any generated theme files
 /docroot/themes/custom/*/css/
-/docroot/themes/custom/*/img/
+/docroot/themes/custom/*/fonts/icons
+/docroot/themes/custom/*/icons/
+/docroot/themes/custom/*/images/
 /docroot/themes/custom/*/js/
+/source/themes/custom/*/styles/vendor/_icons.scss
 
 # Ignore docksal kit commands
 /.docksal/commands/kit
+
+# FOR TESTING PURPOSES ONLY
+/docroot/themes/custom/biplane/
+/docroot/themes/custom/blackbird/
+/docroot/themes/custom/blackbirdtheme/
+/source/themes/custom/biplane/
+/source/themes/custom/blackbird/
+/source/themes/custom/blackbirdtheme/

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Initializes and installs project services (like npm, phpcs, etc.).
+##
+## Usage: fin init-services
+
+#-------------------------- BEGIN: Helper functions --------------------------------
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT=${PROJECT_ROOT:-"${SCRIPT_PATH}/../../"}
+source "${PROJECT_ROOT}/.docksal/functions.sh"
+
+#-------------------------- CLOSE: Helper functions --------------------------------
+
+#-------------------------- BEGIN: Execution --------------------------------
+
+header "Service Installation"
+section=Services
+step=1
+
+# Make sure NVM is available to register services.
+step_header "Validating NVM"
+. "${HOME}/.nvm/nvm.sh"
+# Register Node.
+step_header "Validating Node"
+sudo ln -fs "/home/docker/.nvm/versions/node/$(nvm current)/bin/node" /usr/local/bin/node
+echo-green "Node is available."
+# Register NPM.
+step_header "Validating NPM"
+sudo ln -fs "/home/docker/.nvm/versions/node/$(nvm current)/bin/npm" /usr/local/bin/npm
+echo-green "NPM is available."
+
+step_header "Installing Global Codesniffer"
+composer global require drupal/coder:8.3.1 squizlabs/php_codesniffer:^3.3.2
+composer global remove drupal/coder squizlabs/php_codesniffer
+composer global require drupal/coder:8.3.1 squizlabs/php_codesniffer:^3.3.2
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  sudo ln -fs "/home/docker/.composer/vendor/bin/phpcbf" /usr/local/bin/phpcbf
+  sudo ln -fs "/home/docker/.composer/vendor/bin/phpcs" /usr/local/bin/phpcs
+fi
+phpcs --config-set installed_paths /home/docker/.composer/vendor/drupal/coder/coder_sniffer
+
+
+#-------------------------- CLOSE: Execution --------------------------------

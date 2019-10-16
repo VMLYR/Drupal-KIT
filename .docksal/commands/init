@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+## Initialize Project
+##
+## Usage: fin init
+
+#-------------------------- BEGIN: Helper functions --------------------------------
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT=${PROJECT_ROOT:-"${SCRIPT_PATH}/../../"}
+source "${PROJECT_ROOT}/.docksal/functions.sh"
+
+#-------------------------- CLOSE: Helper functions --------------------------------
+
+#-------------------------- BEGIN: Execution --------------------------------
+
+# ================================================ #
+# Run project initialization and installation.     #
+# ================================================ #
+header "Project initialization"
+section=Initialization
+step=1
+
+# Start docksal project if not running.
+step_header "Starting project"
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  echo-yellow "Skipping – in CI mode."
+else
+  if [[ "$DOCKER_RUNNING" == "false" ]]; then
+    fin up
+    echo-green "Project is now running."
+  else
+    echo-yellow "Skipping – already running."
+  fi
+fi
+
+# Add pre-commit hook
+step_header "Creating git pre-commit"
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  echo-yellow "Skipping – in CI mode."
+else
+  PRE_COMMIT_PATH="${PROJECT_ROOT}/hooks/pre-commit"
+  GIT_DIRECTORY_PATH="${PROJECT_ROOT}/.git"
+  GIT_HOOKS_PATH="${GIT_DIRECTORY_PATH}/hooks"
+  GIT_PRE_COMMIT_PATH="${GIT_HOOKS_PATH}/pre-commit"
+  if [[ -d $GIT_DIRECTORY_PATH ]]; then
+
+    if [[ ! -d $GIT_HOOKS_PATH ]]; then
+      mkdir "$GIT_HOOKS_PATH"
+    fi
+
+    if [[ ! -d $GIT_HOOKS_PATH ]]; then
+      echo-yellow "Skipping – .git/hooks directory could not be created."
+    elif [[ -f $GIT_PRE_COMMIT_PATH ]]; then
+      echo-yellow "Skipping – pre-commit already set"
+    elif [[ ! -f $PRE_COMMIT_PATH ]]; then
+      echo-yellow "Skipping – source pre-commit file missing."
+    else
+      ln -s $PRE_COMMIT_PATH $GIT_PRE_COMMIT_PATH
+      echo-yellow "Pre-commit file created."
+    fi
+  else
+    echo-yellow "Skipping – .git directory missing."
+  fi
+fi
+
+
+# ================================================ #
+# Run database initialization.    #
+# ================================================ #
+header "Initializing Databases"
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  echo-yellow "Skipping – in CI mode."
+else
+  fin kit/init-db
+  echo-green "Databases initialized using drush aliases."
+fi
+
+
+# ================================================ #
+# Run services initialization and installation.    #
+# ================================================ #
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  run_command init-services ci
+else
+  fin init-services
+fi
+
+
+# ================================================ #
+# Run dependency initialization and installation.  #
+# ================================================ #
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  run_command init-deps ci
+else
+  fin init-deps
+fi
+
+
+# ================================================ #
+# Run artifact generation.                         #
+# ================================================ #
+header "Generating artifacts"
+section=Artifacts
+
+# Generate frontend artifactds.
+step=1
+step_header "Generating frontend artifacts"
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  run_command kit/gulp
+else
+  fin kit/gulp
+fi
+
+
+# ================================================ #
+# Run environment synchronization.                 #
+# ================================================ #
+header "Environment Synchronization"
+section=Synchronization
+step=1
+
+# Sync from remote environment.
+step_header "Synchronizing with remote environment"
+if [[ $"$RUN_AS_CI" = "true" ]]; then
+  echo-yellow "Skipping – in CI mode."
+else
+  echo-yellow "Skipping - uncomment line in 'init' when relevant source environment exists."
+  # run_command kit/sync --skip-composer -y
+fi
+
+#-------------------------- CLOSE: Execution --------------------------------

@@ -101,7 +101,7 @@
         "vmlyr-drupal/bazo": "^8.0",
         "vmlyr-drupal/biplane": "^8.0",
         "vmlyr-drupal/blackbird": "^8.0",
-        "vmlyr-drupal/kit-docksal-commands": "^8.1",
+        "vmlyr-drupal/kit-docksal-commands": "^8.2",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.1"
@@ -182,6 +182,7 @@
             },
             "drupal/core": {
                 "https://www.drupal.org/node/2429699": "https://www.drupal.org/files/issues/2019-05-07/generic_entityreference_filter_22429699-162.patch",
+                "https://www.drupal.org/node/2516938": "https://www.drupal.org/files/issues/2019-10-11/2516938_42.patch",
                 "https://www.drupal.org/node/2642122": "https://www.drupal.org/files/issues/2018-09-14/2642122-87.patch",
                 "https://www.drupal.org/node/2827921": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "https://www.drupal.org/node/2891603": "https://www.drupal.org/files/issues/2018-11-07/2891603-18.patch",

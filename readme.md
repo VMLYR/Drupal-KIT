@@ -24,8 +24,7 @@ for the following:
  * [Multi-environment configuration and development](#multi-environment-configuration-and-development)
  * [Multi-site configuration and development](#multi-site-support)
  * [Standardized theme management and structure](#standardized-theme-management-and-structure)
- 
- 
+
 ### Common modules + _composer.json_
 
 KIT uses composer for handling project dependencies. The distribution
@@ -39,7 +38,7 @@ determined using either the following criteria:
  style/script management, Configuration Sync + Config Split (instead of
  Features).
  - *Standardization* – being an open-source project, Drupal has a tendency
-  to having multiple modules with similar solutions to similar problems.
+  of having multiple modules with similar solutions to similar problems.
   We've added items to the list by default to help standardize the tools
   to handle certain problems, an example being a field to include a view
   on an entity.
@@ -60,16 +59,23 @@ repository directly.
 The project uses [Docksal](https://docksal.io/) for local-environment
 development and project-building. The following is a list of Docksal
 commands that come included in the project:
- - `init-project` – Typically used when building or rebuilding the project
+ - `init` – Typically used when building or rebuilding the project
  and its dependencies. The command will start docksal, download
  dependencies, make sure that the project's relevant sites' directories
  and databases exits, build front-end artifacts, and import databases
  from another environment. The command takes an optional parameter
  `builder`, which is explained in detail below under the
  "Docksal + CI and build processes" section.
- - `init-deps` – Used when project-based command and tool dependencies
- need to be redownloaded and installed. Currently consists of Composer
- and NPM.
+ - `init-deps` – Used when project dependencies need to be redownloaded 
+ and installed. Currently consists of Composer and NPM.
+ - `init-services` – Used when project-based command and tool dependencies
+ need to be redownloaded and installed. Currently consists of validating 
+ that nvm, npm, and node are available in the container.
+ - `k` – A simple wrapper command to make it easier to run kit commands.
+ For example, `fin k gulp` instead of `fin kit/gulp`.
+ - `pre-deploy` – This is used in situations where there needs to be 
+ pre-deployment cleanup / modifications. Currently used to remove files 
+ from build artifact that don't need to be on an external environment.
 
 Additional commands are included via the `vmlyr-drupal/kit-docksal-commands`
 package and installed under a "kit" sub directory in the docksal commands
@@ -79,8 +85,8 @@ installed for more information on those commands.
 ### Docksal + CI and build processes
 
 Docksal and KIT's commands can be used for running build processes. The
-command `init-project` can toggle "build mode" by running appending the
-`builder` command: `fin init-project builder`. This is best used when
+command `init` can toggle "CI mode" by running appending the
+`ci` command: `fin init ci`. This is best used when
 docksal is used to create the build files to be released. By default,
 the builder runs composer in --no-dev mode, and auto-removes
 build-related files amound other things.
@@ -261,7 +267,7 @@ of running `fin start`)_
     $sites['stg-subdomain.domainname.com'] = 'subdomain';
     $sites['prod-subdomain.domainname.com'] = 'subdomain';
     ```
-1. Run `fin init-project`
+1. Run `fin init`
 1. Open a browser and go to the site; it should have been redirected to
 the site install page.
 1. Walk through the install process. _(note: the site should
@@ -291,10 +297,29 @@ Based on the hosting provider, some configuration needs to be created or
 updated. Similarly, some configuration will also be unneeded and can be 
 removed.
 
+### Jenkins
+@TODO Jenkins setup walk-through.
+
 ### Bitbucket pipelines
 To enable bitbucket pipeline builds, rename `bitbucket-pipelines-example.yml` 
 to `bitbucket-pipelines.yml`. Note: Bitbucket Pipelines needs to be 
 enabled in bitbucket to work.
+#### Setup
+There is a small amount of configuration to get pipelines talking to 
+your external repository after copying the pipelines file into the 
+repository. In your Bitbucket account:
+- go to Settings > Pipelines > Settings and toggle "Enable Pipelines"
+- go to Settings > Pipelines > Repository Variables and add a variable named `DESTINATION_REPOSITORY` with the url to your hosting providers repository (example: `ssh://codeserver.example.drush.in:2222/~/repository.git` for Pantheon).
+- go to Settings > Pipelines > Deployments and configure/create the Deployment environments you want to connect to.
+  - Rename the environment, make sure it matches the `deployment` key:value inside your pipelines file (example: `deployment: Development`)
+  - Add a variable here named `DESTINATION_REPOSITORY_BRANCH` and put the value as the branch you want to push into on your hosting providers repository (example: `master`).
+- go to Settings > Pipelines > SSH Keys. These keys are what are used to connect to your hosting provider repository.
+  - Generate a key pair.
+  - Take the public key and add it to a user on the hosting provider repository. It's best to use either a deployment key if the provider supports it, or create a service account solely for connecting the provider to pipelines (example: a user on the provider with pipelines@yourwebsite.com that is solely for holding the connection to pipelines).
+  - Take the host address of the hosting provider's repository and place it in the "Host addresses" field in the Known Hosts area, then fetch the fingerprint to make sure the connection is validated.
+You should now be able to push up your change and watch the pipelines kick off. 
+
+_Note: sometimes it takes some playing-around-with to make sure that pipelines can connect to the hosting-provider repository, such as recreating the key pairs._
 
 ### Files included in KIT
 The following are grouped to give context for which 
@@ -313,12 +338,10 @@ files/directories can be modified or removed.
 - `/scripts/pantheon/*`
 ###### Provider-specific files: Platform
 ###### Universal files
+- `/docroot/web.config` (we don't typically use ASP.NET; kept for reference if needed in the project)
 - `/env.example` (we don't suggest env files; kept for reference if needed in the project)
 - `/package.json` (was used by packagist to create project and no longer needed)
 - `/travis.yml` (we don't typically use travis; kept for reference if needed in the project)
-
-### Jenkins
-@TODO Jenkins setup walk-through.
 
 ### Provider-specific modifications
 Modifications to make to the project based on which hosting provider is 
@@ -355,7 +378,7 @@ chosen.
 1. Create symlink from installed sites directory to sites/default/files
     1. cd to /sites/www (or other site directory if multisite).
     1. run `rm -rf files` to remove current files directory.
-    1. run `ln -s ../default/files files` to create symlink to default files directory (which is then symlinked to /files on Pantheon's end).
+    1. run `ln -s ../default/files files` to create symlink to default files directory (which is then symlinked to /files on Pantheon's end). Make sure that a /default/files directory exists locally so files have a place to go.
     1. run `git add files` and commit symlink to repo.
 1. Place post-deploy script in the correct place for pantheon to read it (inside the web directory).
     1. Create `/web/private/scripts` directory.
@@ -391,6 +414,7 @@ Some providers require a different docroot directory.
     - `/drush/*` files (`/drush/sites/www.site.yml`, etc.)
     - `/patches/htaccess.patch`
     - `/source/gulpfile.js`
+    - `/source/eslintrc.js`
 
 ## Notes and suggestions
 #### Environment aliases

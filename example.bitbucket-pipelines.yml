@@ -1,0 +1,107 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image:
+  name: docksal/cli:2.6-php7.2
+  run-as-user: 1000
+
+clone:
+  depth: 1
+
+definitions:
+  caches:
+    node-source: source/node_modules
+  steps:
+    - step: &build-package
+        name: Build package
+        caches:
+          - composer
+          - node-source
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export DOCROOT=web
+
+          # Run init script in CI mode.
+          - .docksal/commands/init ci
+        artifacts:
+          - "**"
+    - step: &test-package
+        name: Test package
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export DOCROOT=web
+
+          # Run service initialization to make sure we have access to all installed services.
+          - .docksal/commands/init-services ci
+
+          # Lint and code-sniff files.
+          - .docksal/commands/kit/lint
+        artifacts:
+          - "**"
+    - step: &deploy-package
+        name: Deploy package
+        deployment: Development
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export DOCROOT=web
+
+          # Run pre-deploy script, then remove .docksal and .gitignore files (to allow us to check-in every file).
+          - .docksal/commands/pre-deploy ci
+          - rm -rf .docksal .gitignore bitbucket-pipelines.yml
+
+          # Set relevant GIT variables.
+          - COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          - TAG="build-${BITBUCKET_BUILD_NUMBER}"
+          - TAG_MESSAGE="Bitbucket Pipelines build ${BITBUCKET_BUILD_NUMBER}"
+
+          # Remove and reinitialize git.
+          - rm -rf .git
+          - git init
+          - git config user.name bitbucket-pipelines
+          - git config user.email commits-noreply@bitbucket.org
+          - git config push.default current
+          - git remote add origin $DESTINATION_REPOSITORY
+          - git fetch origin
+
+          # Add all files and create patch (patch allows to not merge histories and catch every single file change).
+          - git add -A
+          - git diff-index --binary origin/$DESTINATION_REPOSITORY_BRANCH > ~/build.patch
+
+          # Clear and reset directory.
+          - rm -rf *
+          - git reset --hard
+
+          # Checkout destination branch and apply patch.
+          - git checkout $DESTINATION_REPOSITORY_BRANCH
+          - git apply ~/build.patch
+
+          # Add changes to repository and let user know what all changed.
+          - git add -A --force
+
+          # Commit and tag the build.
+          - git commit -m "${COMMIT_MESSAGE}" --no-verify
+          - git tag -a $TAG -m "${TAG_MESSAGE}"
+
+          # Push the updated code.
+          - git push origin $DESTINATION_REPOSITORY_BRANCH --force
+          - git push origin $TAG
+
+pipelines:
+  branches:
+    master:
+      - step: *build-package
+      - step:
+          <<: *deploy-package
+          deployment: Development
+  pull-requests:
+    '**':
+      - step: *build-package
+      - step: *test-package
