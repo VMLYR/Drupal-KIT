@@ -201,7 +201,7 @@ preprocess. The two more-important factors of the subtheme are:
 #### Scaffolded child-themes via a Docksal command
 VMLY&R has a couple scaffolding themes included to build from, but
 they're not included in the project directly. Instead they can be
-generated via the `fin kit/init-theme` command.
+generated via the `fin kit/theme` command.
 
 ## Installation
 
@@ -279,7 +279,7 @@ not needing to set these in multiple places later on during development.
 configuration, the site should export all relevant configuration into
 the site's sync directory and import as the local environment.
 1. Installation is complete once redirected to the homepage of the site.
-1. To start building your own theme, run `fin kit/init-theme` to
+1. To start building your own theme, run `fin kit/theme` to
 generate a new theme + theme source setup based on our example scaffold
 themes. If the _Blackbird_ profile was installed, we suggest scaffolding
 from the _Blackbird_ theme option of the same name. If you're not using 
@@ -407,7 +407,7 @@ for clients.
 
 ## Theme Development
 
-When creating a new theme using the `fin kit/init-theme` command you'll have two directory structures created for you:
+When creating a new theme using the `fin kit/theme` command you'll have two directory structures created for you:
 
 1. **docroot/themes/custom/yourtheme** - This is meant to only contain the files Drupal needs to render the site - e.g. css, javascript, images, template files. It does **not** contain any source files used to generate those files (e.g. sass files). It's important to note that some files under this directory are generated (see next point) and some (e.g. template files) should be edited directly.
 
