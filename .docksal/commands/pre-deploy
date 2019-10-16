@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+## Pre-deploy cleanup
+##
+## Usage: fin post-build
+
+#-------------------------- BEGIN: Helper functions --------------------------------
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT=${PROJECT_ROOT:-"${SCRIPT_PATH}/../../"}
+source "${PROJECT_ROOT}/.docksal/functions.sh"
+
+#-------------------------- CLOSE: Helper functions --------------------------------
+
+#-------------------------- BEGIN: Execution --------------------------------
+
+# ================================================ #
+# Run ci post-build cleanup.                       #
+# ================================================ #
+header "Pre-deploy cleanup"
+section="Pre-deploy"
+step=1
+
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  step_header "Removing files unnecessary for deployment"
+  cd $PROJECT_ROOT
+  rm -rf hooks
+  rm -rf patches
+  rm -rf scripts
+  rm -rf source
+  rm -rf .gitignore
+  rm -rf .travis.yml
+  rm -rf composer.lock
+  rm -rf LICENSE
+  rm -rf package.json
+  rm -rf phpunit.xml.dist
+  rm -rf readme.md
+  rm -rf web/web.config
+fi
+
+#-------------------------- CLOSE: Execution --------------------------------

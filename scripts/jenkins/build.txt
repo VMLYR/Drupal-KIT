@@ -35,10 +35,11 @@ cd ${BUILD_DIR}
 git remote add src ${REPO_SRC}
 git fetch src ${BRANCH_SRC} --depth=1
 git checkout src/${BRANCH_SRC}
+COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
 # Copy builder config to override settings.
-cp .docksal/docksal-local-builder.yml .docksal/docksal-local.yml
-cp .docksal/docksal-local-builder.env .docksal/docksal-local.env
+cp .docksal/ci.docksal-local.yml .docksal/docksal-local.yml
+cp .docksal/ci.docksal-local.env .docksal/docksal-local.env
 
 # Make sure shared volumes are created.
 fin docker volume list | grep composer_cache || fin docker volume create composer_cache
@@ -51,7 +52,10 @@ COMPOSE_HTTP_TIMEOUT=480 fin start
 fin restart
 
 # Run builder script.
-fin init-project builder
+fin init ci
+
+# Run pre-deploy cleanup.
+fin pre-deploy ci
 
 # Stop and remove docksal container.
 fin stop
@@ -88,7 +92,7 @@ if git diff-index --quiet HEAD --; then
     echo "Nothing to commit."
 else
   # Push the commit.
-  git commit -m "Adding compiled assets." --no-verify
+  git commit -m "$COMMIT_MESSAGE" --no-verify
 
   # Tag the build.
   git tag -a $TAG -m "Jenkins build $BUILD_DISPLAY_NAME" -m "$BUILD_URL"

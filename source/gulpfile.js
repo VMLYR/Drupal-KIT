@@ -16,7 +16,7 @@
  *
  * `source/themes/custom/project/js`
  *  is piped to
- * `docroot/themes/custom/project/js`
+ * `web/themes/custom/project/js`
  *
  * === Example files ===
  * An `example.` prefix can be added to scss and js files.
@@ -77,16 +77,16 @@ const customDest = '';
 function buildSass() {
   const tasks = config.map(function(entry) {
     return src(['themes/custom/' + entry.themeName + '/styles/**/*.scss', '!themes/custom/' + entry.themeName + '/styles/**/example.*.scss'])
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-          noCache: true,
-          outputStyle: 'compact',
-          lineNumbers: false,
-          includePaths: [],
-          sourceMap: true
-        }))
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/css'));
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+        noCache: true,
+        outputStyle: 'compact',
+        lineNumbers: false,
+        includePaths: [],
+        sourceMap: true
+      }))
+      .pipe(sourcemaps.write('./maps'))
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/css'));
   });
 
   return merge(tasks);
@@ -127,14 +127,17 @@ function buildFonts() {
 
 function buildIcons() {
   const runTimestamp = Math.round(Date.now()/1000);
+  var cacheBusterNumber = Math.random();
 
   const tasks = config.map(function(entry) {
     return src('themes/custom/' + entry.themeName + '/icons/**/*.svg')
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/icons'))
       .pipe(iconfontCss({
         fontName: 'themeIcons',
         path: 'themes/custom/' + entry.themeName + '/styles/vendor/_icons-template.scss',
         targetPath: '../../../../../../source/themes/custom/' + entry.themeName + '/styles/vendor/_icons.scss',
-        fontPath: 'themes/custom/' + entry.themeName + '/' + customDest + '/fonts/icons'
+        fontPath: '/themes/custom/' + entry.themeName + '/fonts/icons/',
+        cacheBuster: cacheBusterNumber
       }))
       .pipe(iconfont({
         fontName: 'themeIcons',
@@ -142,9 +145,10 @@ function buildIcons() {
         formats: ['ttf', 'eot', 'woff'],
         timestamp: runTimestamp,
         normalize: true,
-        fontHeight: 1001
+        fontHeight: 1001,
+        cacheBuster: cacheBusterNumber
       }))
-      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/fonts/icons'));
+      .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/fonts/icons'));
   });
 
   return merge(tasks);
@@ -182,31 +186,31 @@ function testJsLint() {
 
 function watchSass() {
   config.map(function(entry) {
-    watch(['themes/custom/' + entry.themeName + '/styles/**/*.scss', '!themes/custom/' + entry.themeName + '/styles/**/example.*.scss'], series(buildSass, testSassLint));
+    watch(['themes/custom/' + entry.themeName + '/styles/**/*.scss', '!themes/custom/' + entry.themeName + '/styles/**/example.*.scss'], {usePolling: true, interval: 1000}, series(buildSass, testSassLint));
   });
 }
 
 function watchJavascript() {
   config.map(function(entry) {
-    watch(['themes/custom/' + entry.themeName + '/scripts/**/*.js', '!themes/custom/' + entry.themeName + '/scripts/**/example.*.js'], series(buildJavascript, testJsLint));
+    watch(['themes/custom/' + entry.themeName + '/scripts/**/*.js', '!themes/custom/' + entry.themeName + '/scripts/**/example.*.js'], {usePolling: true, interval: 1000}, series(buildJavascript, testJsLint));
   });
 }
 
 function watchImages() {
   config.map(function(entry) {
-    watch('themes/custom/' + entry.themeName + '/images/**/*', buildImages);
+    watch('themes/custom/' + entry.themeName + '/images/**/*', {usePolling: true, interval: 1000}, buildImages);
   });
 }
 
 function watchFonts() {
   config.map(function(entry) {
-    watch('themes/custom/' + entry.themeName + '/fonts/**/*', buildFonts);
+    watch('themes/custom/' + entry.themeName + '/fonts/**/*', {usePolling: true, interval: 1000}, buildFonts);
   });
 }
 
 function watchIcons() {
   config.map(function(entry) {
-    watch('themes/custom/' + entry.themeName + '/icons/**/*.svg', buildIcons);
+    watch('themes/custom/' + entry.themeName + '/icons/**/*.svg', {usePolling: true, interval: 1000}, buildIcons);
   });
 }
 
@@ -214,6 +218,6 @@ function watchIcons() {
  * 5. Exports                         *
  **************************************/
 
-exports.default = series(buildFonts, buildIcons, buildImages, buildJavascript, buildSass);
+exports.default = series(buildFonts, buildIcons, buildImages, testJsLint, buildJavascript, testSassLint, buildSass);
 exports.test = series(testJsLint, testSassLint);
 exports.watch = parallel(watchFonts, watchImages, watchIcons, watchJavascript, watchSass);

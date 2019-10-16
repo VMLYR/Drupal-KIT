@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Contains admin_toolbar_local_tasks.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function admin_toolbar_local_tasks_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the admin_toolbar_local_tasks module.
+    case 'help.page.admin_toolbar_local_tasks':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Adds local tasks to the Admin Toolbar for non-admin pages.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function admin_toolbar_local_tasks_toolbar() {
+  $items = [];
+  $items['local_tasks'] = [
+    '#cache' => [
+      'contexts' => [
+        'user.permissions',
+      ],
+    ],
+  ];
+
+  // Exit early if path is an admin route.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return $items;
+  }
+
+  // Exit early if local tasks are empty.
+  $local_tasks = menu_local_tasks();
+  if (empty($local_tasks['tabs'])) {
+    return $items;
+  }
+
+  /** @var \Drupal\Core\Cache\CacheableMetadata $cacheable_metadata */
+  $cacheable_metadata = $local_tasks['cacheability'];
+  $cacheable_metadata->applyTo($items);
+  $items['local_tasks']['#cache']['contexts'][] = 'user.permissions';
+
+  // Sort into correct order.
+  uasort($local_tasks['tabs'], 'Drupal\Component\Utility\SortArray::sortByWeightProperty');
+
+  // Compile links that we have access to.
+  $links = [];
+  foreach ($local_tasks['tabs'] as $route_name => $value) {
+    if ($value['#access']->isAllowed()) {
+      $links[$route_name] = $value['#link'];
+    }
+  }
+
+  // Add the menu local tasks into the toolbar.
+  $items['local_tasks'] += [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'html_tag',
+      '#tag' => 'button',
+      '#value' => t('Current Page'),
+      '#attributes' => [
+        'title' => t('Local tasks'),
+        'class' => ['toolbar-icon', 'toolbar-icon-edit'],
+      ],
+    ],
+    'tray' => [
+      '#heading' => t('Local tasks'),
+      'toolbar_administration' => [
+        '#attributes' => [
+          'class' => ['toolbar-menu'],
+        ],
+        '#links' => $links,
+        '#theme' => 'links__toolbar',
+      ],
+    ],
+    '#weight' => -1000,
+    '#wrapper_attributes' => [
+      'class' => ['local-tasks-toolbar-tab'],
+    ],
+  ];
+
+  return $items;
+}

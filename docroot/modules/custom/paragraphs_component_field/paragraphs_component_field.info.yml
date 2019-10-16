@@ -1,0 +1,7 @@
+name: 'Paragraphs Component Field'
+type: module
+description: 'Adds a Paragraph widget to be used for single-cardinality component fields on a page.'
+core: 8.x
+package: 'Paragraphs'
+dependencies:
+  - paragraphs

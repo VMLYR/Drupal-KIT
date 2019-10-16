@@ -5,6 +5,7 @@ Drupal 8 projects.
 
 * [About KIT](#about-kit)
 * [Getting Started](#installation)
+* [Post-installation and provider-related configuration](#post-installation-and-provider-related-configuration)
 * [Notes & Suggestions](#notes-and-suggestions)
 * [Theme Development](#theme-development)
 
@@ -23,8 +24,7 @@ for the following:
  * [Multi-environment configuration and development](#multi-environment-configuration-and-development)
  * [Multi-site configuration and development](#multi-site-support)
  * [Standardized theme management and structure](#standardized-theme-management-and-structure)
- 
- 
+
 ### Common modules + _composer.json_
 
 KIT uses composer for handling project dependencies. The distribution
@@ -38,7 +38,7 @@ determined using either the following criteria:
  style/script management, Configuration Sync + Config Split (instead of
  Features).
  - *Standardization* – being an open-source project, Drupal has a tendency
-  to having multiple modules with similar solutions to similar problems.
+  of having multiple modules with similar solutions to similar problems.
   We've added items to the list by default to help standardize the tools
   to handle certain problems, an example being a field to include a view
   on an entity.
@@ -59,16 +59,23 @@ repository directly.
 The project uses [Docksal](https://docksal.io/) for local-environment
 development and project-building. The following is a list of Docksal
 commands that come included in the project:
- - `init-project` – Typically used when building or rebuilding the project
+ - `init` – Typically used when building or rebuilding the project
  and its dependencies. The command will start docksal, download
  dependencies, make sure that the project's relevant sites' directories
  and databases exits, build front-end artifacts, and import databases
  from another environment. The command takes an optional parameter
  `builder`, which is explained in detail below under the
  "Docksal + CI and build processes" section.
- - `init-deps` – Used when project-based command and tool dependencies
- need to be redownloaded and installed. Currently consists of Composer
- and NPM.
+ - `init-deps` – Used when project dependencies need to be redownloaded 
+ and installed. Currently consists of Composer and NPM.
+ - `init-services` – Used when project-based command and tool dependencies
+ need to be redownloaded and installed. Currently consists of validating 
+ that nvm, npm, and node are available in the container.
+ - `k` – A simple wrapper command to make it easier to run kit commands.
+ For example, `fin k gulp` instead of `fin kit/gulp`.
+ - `pre-deploy` – This is used in situations where there needs to be 
+ pre-deployment cleanup / modifications. Currently used to remove files 
+ from build artifact that don't need to be on an external environment.
 
 Additional commands are included via the `vmlyr-drupal/kit-docksal-commands`
 package and installed under a "kit" sub directory in the docksal commands
@@ -78,15 +85,15 @@ installed for more information on those commands.
 ### Docksal + CI and build processes
 
 Docksal and KIT's commands can be used for running build processes. The
-command `init-project` can toggle "build mode" by running appending the
-`builder` command: `fin init-project builder`. This is best used when
+command `init` can toggle "CI mode" by running appending the
+`ci` command: `fin init ci`. This is best used when
 docksal is used to create the build files to be released. By default,
 the builder runs composer in --no-dev mode, and auto-removes
 build-related files amound other things.
 
 ### Drupal site configuration
 This composer project comes with 2 VMLY&R-created Drupal profiles:
- - _Profilo_ – This profile has a lot of required site-configuration and
+ - _Biplane_ – This profile has a lot of required site-configuration and
  relevant modules installed and setup by default. It's fairly bare-bones
  besides items related to best-practices and standardization, but it
  does take care of a lot of monotony that comes with installing a new
@@ -102,17 +109,17 @@ This composer project comes with 2 VMLY&R-created Drupal profiles:
    up Advanced Aggregation for production instances, default metatags
    for global and Node pages, XML Sitemap defaults, disabling anonymous
    user registration, etc.
- - _Kastoro_ – This profile builds off of the _Profilo_ profile, but is
+ - _Blackbird_ – This profile builds off of the _Biplane_ profile, but is
  a little more opinionated. It includes helpful Paragraph components,
  Image Styles, Media implementations, among a slew of additional
  configuration. To get the full use of the additional components, make
- sure to run `fin/init-theme` and generate a new theme off of the "Denim"
- theme option.
+ sure to run `fin kit/theme` and generate a new theme off of the 
+ "Blackbird" option of the same name.
 
 ### Multi-environment configuration and development
 
 Multi-environment configuration is pre-configured as part of the
-distribution via the default `settings.php` file and the _Profilo_ and _Kastoro_ profiles.
+distribution via the default `settings.php` file and the _Biplane_ and _Blackbird_ profiles.
 
 #### Environments + _Settings.php_ file
 The each site's default `settings.php file` includes the
@@ -135,7 +142,7 @@ which is ran by composer, automatically copies a `settings.local.php`
 and `settings.docksal.php` into each sites directories to better assist
 local development.
 
-#### Environments + the VMLY&R Profiles _Profilo_ and _Kastoro_
+#### Environments + the VMLY&R Profiles _Biplane_ and _Blackbird_
 The VMLY&R profiles include config-split options by default, and have
 additional tasks during install to establish the default configuration
 and each split's configuration, as well as import as the local
@@ -200,7 +207,7 @@ preprocess. The two more-important factors of the subtheme are:
 #### Scaffolded child-themes via a Docksal command
 VMLY&R has a couple scaffolding themes included to build from, but
 they're not included in the project directly. Instead they can be
-generated via the `fin kit/init-theme` command.
+generated via the `fin kit/theme` command.
 
 ## Installation
 
@@ -210,7 +217,7 @@ Getting a running site takes only a few steps for a project.
 1. Install the project.
     1. Use composer to create the new project. *Note: try not to use hyphenated project names if possible, docksal currently has weird issues with projects with hyphens.*
        ```
-       fin run-cli "composer create-project vmlyr-drupal/kit [FOLDER_NAME_HERE] 8.*"
+       fin run-cli "composer create-project --no-install vmlyr-drupal/kit [FOLDER_NAME_HERE]"
        ```
     1. Change into the directory.
         ```
@@ -260,7 +267,7 @@ of running `fin start`)_
     $sites['stg-subdomain.domainname.com'] = 'subdomain';
     $sites['prod-subdomain.domainname.com'] = 'subdomain';
     ```
-1. Run `fin init-project`
+1. Run `fin init`
 1. Open a browser and go to the site; it should have been redirected to
 the site install page.
 1. Walk through the install process. _(note: the site should
@@ -278,10 +285,161 @@ not needing to set these in multiple places later on during development.
 configuration, the site should export all relevant configuration into
 the site's sync directory and import as the local environment.
 1. Installation is complete once redirected to the homepage of the site.
-1. To start building your own theme, run `fin kit/init-theme` to
+1. To start building your own theme, run `fin kit/theme` to
 generate a new theme + theme source setup based on our example scaffold
-themes. If the _Kastoro_ profile was installed, we suggest scaffolding
-from _Denim_. If you're not using _Kastoro_ and want a simpler starting point for you theme we suggest scaffolding from Skeleto.
+themes. If the _Blackbird_ profile was installed, we suggest scaffolding
+from the _Blackbird_ theme option of the same name. If you're not using 
+_Blackbird_ and want a more simple starting point for you theme we 
+suggest scaffolding from Biplane scaffold theme.
+
+## Post-installation and provider-related configuration
+Based on the hosting provider, some configuration needs to be created or 
+updated. Similarly, some configuration will also be unneeded and can be 
+removed.
+
+### Jenkins
+@TODO Jenkins setup walk-through.
+
+### Bitbucket pipelines
+To enable bitbucket pipeline builds, rename `bitbucket-pipelines-example.yml` 
+to `bitbucket-pipelines.yml`. Note: Bitbucket Pipelines needs to be 
+enabled in bitbucket to work.
+#### Setup
+There is a small amount of configuration to get pipelines talking to 
+your external repository after copying the pipelines file into the 
+repository. In your Bitbucket account:
+- go to Settings > Pipelines > Settings and toggle "Enable Pipelines"
+- go to Settings > Pipelines > Repository Variables and add a variable named `DESTINATION_REPOSITORY` with the url to your hosting providers repository (example: `ssh://codeserver.example.drush.in:2222/~/repository.git` for Pantheon).
+- go to Settings > Pipelines > Deployments and configure/create the Deployment environments you want to connect to.
+  - Rename the environment, make sure it matches the `deployment` key:value inside your pipelines file (example: `deployment: Development`)
+  - Add a variable here named `DESTINATION_REPOSITORY_BRANCH` and put the value as the branch you want to push into on your hosting providers repository (example: `master`).
+- go to Settings > Pipelines > SSH Keys. These keys are what are used to connect to your hosting provider repository.
+  - Generate a key pair.
+  - Take the public key and add it to a user on the hosting provider repository. It's best to use either a deployment key if the provider supports it, or create a service account solely for connecting the provider to pipelines (example: a user on the provider with pipelines@yourwebsite.com that is solely for holding the connection to pipelines).
+  - Take the host address of the hosting provider's repository and place it in the "Host addresses" field in the Known Hosts area, then fetch the fingerprint to make sure the connection is validated.
+You should now be able to push up your change and watch the pipelines kick off. 
+
+_Note: sometimes it takes some playing-around-with to make sure that pipelines can connect to the hosting-provider repository, such as recreating the key pairs._
+
+#### Default pipelines provided
+##### Branch: Master
+This pipeline watches the master branch, and when code is merged into it, automatically builds and deploys the code to the relevant "Development" environment repository.
+
+This pipeline uses the default "Build package" and "Deploy package" pipeline steps. The "Deploy package" step defaults to run the "Development" deployment. 
+
+_In scenarios where there should be a development branch building to the Development environment, and the master branch building to Stage or Production environments, the `deployment` would be changed to the relevant environment name, and a new branch-based pipeline would be created to push to Development._
+##### Custom: Feature
+This pipeline takes any branch and allows to build to a custom "feature" branch on the hosting provider repository. This allows for easily creating "Feature" environments on the hosting provider.
+
+This pipeline uses the default "Build package" and "Deploy package" pipeline steps. "The Deploy package" step defaults to run a "Feature" deployment, which will need to be created under the Settings > Pipelines > Deployments tab on Bitbucket Pipelines. 
+
+To run this pipeline:
+- go to the "Branches" section of your Bitbucket account
+- click the "..." to the very right of the branch that you want to build
+- select "Run pipeline for a branch"
+- select the "custom: feature" pipeline
+- fill out what you want the feature branch on the hosting provider repo to be called in the "DESTINATION_REPOSITORY_BRANCH" field (ex: feature/header-redesign)
+- click "Run"
+
+##### Pull-Requests
+This pipeline automatically runs on pull-requests. It does a full build and then lints the code; it fails if any issues arise.
+
+This pipeline uses the default "Build package" and "Test package" pipeline steps. It does not deploy code.
+
+### Files included in KIT
+The following are grouped to give context for which 
+files/directories can be modified or removed.
+
+###### Provider-specific files: Acquia
+- `/hooks/common`
+- `/hooks/dev`
+- `/hooks/prod`
+- `/hooks/samples`
+- `/hooks/test`
+###### Provider-specific files: AWS
+- `/.ebextensions`
+###### Provider-specific files: Pantheon
+- `/pantheon.yml`
+- `/scripts/pantheon/*`
+###### Provider-specific files: Platform
+###### Universal files
+- `/docroot/web.config` (we don't typically use ASP.NET; kept for reference if needed in the project)
+- `/env.example` (we don't suggest env files; kept for reference if needed in the project)
+- `/package.json` (was used by packagist to create project and no longer needed)
+- `/travis.yml` (we don't typically use travis; kept for reference if needed in the project)
+
+### Provider-specific modifications
+Modifications to make to the project based on which hosting provider is 
+chosen.
+
+###### Provider-specific modifications: Acquia
+1. Remove unnecessary files and directories for Acquia:
+    - [List of universal files to remove](#universal-files)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+1. Settings.php modifications
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Uncomment the Acquia portion.
+    1. Remove uneeded server-specific configuration from other providers.
+###### Provider-specific modifications: AWS
+1. Remove unnecessary files and directories for Platform.sh:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+1. Settings.php modifications
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Uncomment the AWS portion.
+    1. Modify appropriately.
+    1. Remove uneeded server-specific configuration from other providers.
+###### Provider-specific modifications: Pantheon
+1. Remove unnecessary files and directories for Pantheon:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Platform.sh files and directories](#provider-specific-files-platform)
+1. [Rename /docroot to /web](#renaming-docroot-to-web).
+1. Create symlink from installed sites directory to sites/default/files
+    1. cd to /sites/www (or other site directory if multisite).
+    1. run `rm -rf files` to remove current files directory.
+    1. run `ln -s ../default/files files` to create symlink to default files directory (which is then symlinked to /files on Pantheon's end). Make sure that a /default/files directory exists locally so files have a place to go.
+    1. run `git add files` and commit symlink to repo.
+1. Place post-deploy script in the correct place for pantheon to read it (inside the web directory).
+    1. Create `/web/private/scripts` directory.
+    1. Move `/scripts/pantheon/post_deploy.php` file into `/web/private/scripts`.
+    1. Remove empty `/scripts/pantheon` folder.
+1. Settings.php modifications
+    1. Copy over the settings.pantheon.php file from your initial pantheon install into your `www` (or relevant sites directory).
+    1. Open `/web/sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Uncomment the Pantheon portion.
+    1. Remove uneeded server-specific configuration from other providers.
+    
+###### Provider-specific modifications: Platform.sh
+1. Remove unnecessary files and directories for Platform.sh:
+    - [List of universal files to remove](#universal-files)
+    - [List of Acquia files and directories](#provider-specific-files-acquia)
+    - [List of AWS files and directories](#provider-specific-files-aws)
+    - [List of Pantheon files and directories](#provider-specific-files-pantheon)
+1. Settings.php modifications
+    1. Copy over the settings.platformsh.php file from your initial Platform.sh install into your `www` (or relevant sites directory).
+    1. Open `/docroot/sites/www/settings.php` and find the "Include server-specific configuration." section.
+    1. Uncomment the Platform.sh portion.
+    1. Remove uneeded server-specific configuration from other providers.
+
+@TODO Some files and configuration are missing for Platform.sh, which still needed to be included in KIT.
+
+### Renaming docroot to web
+Some providers require a different docroot directory.
+1. Rename `docroot` directory to `web`.
+1. Update `docroot` references to `web` in the following files:
+    - `/.docksal/docksal.env`
+    - `/.gitignore`
+    - `/composer.json` (will need to run composer install afterward to regenerate autoload.php file)
+    - `/drush/*` files (`/drush/sites/www.site.yml`, etc.)
+    - `/patches/htaccess.patch`
+    - `/source/gulpfile.js`
+    - `/source/eslintrc.js`
 
 ## Notes and suggestions
 #### Environment aliases
@@ -298,7 +456,7 @@ for clients.
 
 ## Theme Development
 
-When creating a new theme using the `fin kit/init-theme` command you'll have two directory structures created for you:
+When creating a new theme using the `fin kit/theme` command you'll have two directory structures created for you:
 
 1. **docroot/themes/custom/yourtheme** - This is meant to only contain the files Drupal needs to render the site - e.g. css, javascript, images, template files. It does **not** contain any source files used to generate those files (e.g. sass files). It's important to note that some files under this directory are generated (see next point) and some (e.g. template files) should be edited directly.
 

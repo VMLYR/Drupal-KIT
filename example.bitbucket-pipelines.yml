@@ -1,0 +1,109 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image:
+  name: docksal/cli:2.6-php7.2
+  run-as-user: 1000
+
+clone:
+  depth: 1
+
+definitions:
+  caches:
+    node-source: source/node_modules
+  steps:
+    - step: &build-package
+        name: Build package
+        caches:
+          - composer
+          - node-source
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
+
+          # Run init script in CI mode.
+          - .docksal/commands/init ci
+        artifacts:
+          - "**"
+    - step: &test-package
+        name: Test package
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
+
+          # Run service initialization to make sure we have access to all installed services.
+          - .docksal/commands/init-services ci
+
+          # Lint and code-sniff files.
+          - .docksal/commands/kit/lint
+        artifacts:
+          - "**"
+    - step: &deploy-package
+        name: Deploy package
+        deployment: Development
+        script:
+          # Initialize to mimic as if we're running docksal.
+          - sudo chown -R docker:docker .
+          - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
+
+          # Set variables needed for the commit.
+          - COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          - TAG="build-${BITBUCKET_BUILD_NUMBER}"
+          - TAG_MESSAGE="Bitbucket Pipelines build ${BITBUCKET_BUILD_NUMBER}"
+          - USER_NAME="bitbucket-pipelines"
+          - USER_EMAIL="commits-noreply@bitbucket.org"
+
+          # Run pre-deploy script, then remove files unwanted for deploy.
+          - .docksal/commands/pre-deploy ci
+          - rm -rf .docksal .git .gitignore bitbucket-pipelines.yml
+
+          # Pull destination repository and branch (creating branch if it doesn't exist; allows for "feature" branches).
+          - mkdir ~/deploy && cd ~/deploy
+          - git clone $DESTINATION_REPOSITORY .
+          - git config user.name $USER_NAME
+          - git config user.email $USER_EMAIL
+          - git checkout -B $DESTINATION_REPOSITORY_BRANCH
+
+          # Sync build files to deploy directory, removing files with exception of the .git folder.
+          - rsync -rav --delete --exclude ".git/" "${BITBUCKET_CLONE_DIR}/" .
+
+          # Add changes to repository and let user know what all changed.
+          - git add -A --force
+
+          # Commit and tag the build.
+          - git commit -m "${COMMIT_MESSAGE}" --no-verify
+          - git tag -a $TAG -m "${TAG_MESSAGE}"
+
+          # Push the updated code.
+          - git push origin $DESTINATION_REPOSITORY_BRANCH --force
+          - git push origin $TAG
+
+pipelines:
+  branches:
+    master:
+      - step: *build-package
+      - step:
+          <<: *deploy-package
+          deployment: Development
+  custom:
+    feature:
+      - variables:
+          - name: 'DESTINATION_REPOSITORY_BRANCH'
+      - step: *build-package
+      - step:
+          <<: *deploy-package
+          deployment: Feature
+  pull-requests:
+    '**':
+      - step: *build-package
+      - step: *test-package

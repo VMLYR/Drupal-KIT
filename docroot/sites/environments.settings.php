@@ -38,6 +38,7 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
 switch ($site_environment) {
   case 'remote_prod':
   case 'prod':
+  case 'live':
     $config['config_split.config_split.remote_prod']['status'] = TRUE;
     $config['environment_indicator.indicator']['bg_color'] = '#000000';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
