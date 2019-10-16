@@ -23,7 +23,8 @@ definitions:
           # Initialize to mimic as if we're running docksal.
           - sudo chown -R docker:docker .
           - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
-          - export DOCROOT=web
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
 
           # Run init script in CI mode.
           - .docksal/commands/init ci
@@ -35,7 +36,8 @@ definitions:
           # Initialize to mimic as if we're running docksal.
           - sudo chown -R docker:docker .
           - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
-          - export DOCROOT=web
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
 
           # Run service initialization to make sure we have access to all installed services.
           - .docksal/commands/init-services ci
@@ -51,37 +53,29 @@ definitions:
           # Initialize to mimic as if we're running docksal.
           - sudo chown -R docker:docker .
           - export PROJECT_ROOT="${BITBUCKET_CLONE_DIR}"
-          - export DOCROOT=web
+          - export $(grep '^DOCROOT=' .docksal/docksal.env)
+          - export DOCROOT=${DOCROOT:-docroot}
 
-          # Run pre-deploy script, then remove .docksal and .gitignore files (to allow us to check-in every file).
-          - .docksal/commands/pre-deploy ci
-          - rm -rf .docksal .gitignore bitbucket-pipelines.yml
-
-          # Set relevant GIT variables.
+          # Set variables needed for the commit.
           - COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           - TAG="build-${BITBUCKET_BUILD_NUMBER}"
           - TAG_MESSAGE="Bitbucket Pipelines build ${BITBUCKET_BUILD_NUMBER}"
+          - USER_NAME="bitbucket-pipelines"
+          - USER_EMAIL="commits-noreply@bitbucket.org"
 
-          # Remove and reinitialize git.
-          - rm -rf .git
-          - git init
-          - git config user.name bitbucket-pipelines
-          - git config user.email commits-noreply@bitbucket.org
-          - git config push.default current
-          - git remote add origin $DESTINATION_REPOSITORY
-          - git fetch origin
+          # Run pre-deploy script, then remove files unwanted for deploy.
+          - .docksal/commands/pre-deploy ci
+          - rm -rf .docksal .git .gitignore bitbucket-pipelines.yml
 
-          # Add all files and create patch (patch allows to not merge histories and catch every single file change).
-          - git add -A
-          - git diff-index --binary origin/$DESTINATION_REPOSITORY_BRANCH > ~/build.patch
+          # Pull destination repository and branch (creating branch if it doesn't exist; allows for "feature" branches).
+          - mkdir ~/deploy && cd ~/deploy
+          - git clone $DESTINATION_REPOSITORY .
+          - git config user.name $USER_NAME
+          - git config user.email $USER_EMAIL
+          - git checkout -B $DESTINATION_REPOSITORY_BRANCH
 
-          # Clear and reset directory.
-          - rm -rf *
-          - git reset --hard
-
-          # Checkout destination branch and apply patch.
-          - git checkout $DESTINATION_REPOSITORY_BRANCH
-          - git apply ~/build.patch
+          # Sync build files to deploy directory, removing files with exception of the .git folder.
+          - rsync -rav --delete --exclude ".git/" "${BITBUCKET_CLONE_DIR}/" .
 
           # Add changes to repository and let user know what all changed.
           - git add -A --force
@@ -101,6 +95,14 @@ pipelines:
       - step:
           <<: *deploy-package
           deployment: Development
+  custom:
+    feature:
+      - variables:
+          - name: 'DESTINATION_REPOSITORY_BRANCH'
+      - step: *build-package
+      - step:
+          <<: *deploy-package
+          deployment: Feature
   pull-requests:
     '**':
       - step: *build-package

@@ -321,6 +321,31 @@ You should now be able to push up your change and watch the pipelines kick off.
 
 _Note: sometimes it takes some playing-around-with to make sure that pipelines can connect to the hosting-provider repository, such as recreating the key pairs._
 
+#### Default pipelines provided
+##### Branch: Master
+This pipeline watches the master branch, and when code is merged into it, automatically builds and deploys the code to the relevant "Development" environment repository.
+
+This pipeline uses the default "Build package" and "Deploy package" pipeline steps. The "Deploy package" step defaults to run the "Development" deployment. 
+
+_In scenarios where there should be a development branch building to the Development environment, and the master branch building to Stage or Production environments, the `deployment` would be changed to the relevant environment name, and a new branch-based pipeline would be created to push to Development._
+##### Custom: Feature
+This pipeline takes any branch and allows to build to a custom "feature" branch on the hosting provider repository. This allows for easily creating "Feature" environments on the hosting provider.
+
+This pipeline uses the default "Build package" and "Deploy package" pipeline steps. "The Deploy package" step defaults to run a "Feature" deployment, which will need to be created under the Settings > Pipelines > Deployments tab on Bitbucket Pipelines. 
+
+To run this pipeline:
+- go to the "Branches" section of your Bitbucket account
+- click the "..." to the very right of the branch that you want to build
+- select "Run pipeline for a branch"
+- select the "custom: feature" pipeline
+- fill out what you want the feature branch on the hosting provider repo to be called in the "DESTINATION_REPOSITORY_BRANCH" field (ex: feature/header-redesign)
+- click "Run"
+
+##### Pull-Requests
+This pipeline automatically runs on pull-requests. It does a full build and then lints the code; it fails if any issues arise.
+
+This pipeline uses the default "Build package" and "Test package" pipeline steps. It does not deploy code.
+
 ### Files included in KIT
 The following are grouped to give context for which 
 files/directories can be modified or removed.
