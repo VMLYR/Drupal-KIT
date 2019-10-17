@@ -31,4 +31,9 @@ step_header "Validating NPM"
 sudo ln -fs "/home/docker/.nvm/versions/node/$(nvm current)/bin/npm" /usr/local/bin/npm
 echo-green "NPM is available."
 
+step_header "Validating PHP Codesniffer"
+sudo ln -fs "/home/docker/.composer/vendor/bin/phpcbf" /usr/local/bin/phpcbf
+sudo ln -fs "/home/docker/.composer/vendor/bin/phpcs" /usr/local/bin/phpcs
+echo-green "PHP Codesniffer is available."
+
 #-------------------------- CLOSE: Execution --------------------------------
