@@ -314,7 +314,7 @@ repository. In your Bitbucket account:
   - Rename the environment, make sure it matches the `deployment` key:value inside your pipelines file (example: `deployment: Development`)
   - Add a variable here named `DESTINATION_REPOSITORY_BRANCH` and put the value as the branch you want to push into on your hosting providers repository (example: `master`).
 - go to Settings > Pipelines > SSH Keys. These keys are what are used to connect to your hosting provider repository.
-  - Generate a key pair.
+  - Generate a key pair. _Note: Acquia requires a stronger key-pair than the default that Bitbucket generates. Instead of clicking the generate button that Bitbucket provides, you will need to create the keypair manually by running `ssh-keygen -b 4096` in your local terminal (consider naming it something descriptive) and then adding its private and public keys to Bitbucket._
   - Take the public key and add it to a user on the hosting provider repository. It's best to use either a deployment key if the provider supports it, or create a service account solely for connecting the provider to pipelines (example: a user on the provider with pipelines@yourwebsite.com that is solely for holding the connection to pipelines).
   - Take the host address of the hosting provider's repository and place it in the "Host addresses" field in the Known Hosts area, then fetch the fingerprint to make sure the connection is validated.
 You should now be able to push up your change and watch the pipelines kick off. 
