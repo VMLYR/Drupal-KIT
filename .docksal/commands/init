@@ -26,11 +26,13 @@ if [[ "$RUN_AS_CI" = "true" ]]; then
   echo-yellow "Skipping – in CI mode."
 else
   if [[ "$DOCKER_RUNNING" == "false" ]]; then
-    fin up
-    echo-green "Project is now running."
-  else
-    echo-yellow "Skipping – already running."
+    echo-yellow "Starting docksal."
+    fin system start
+    echo-green "Started docksal."
   fi
+
+  fin start
+  echo-green "Validated that project is running."
 fi
 
 # Add pre-commit hook
@@ -65,6 +67,34 @@ fi
 
 
 # ================================================ #
+# Run services initialization and installation.    #
+# ================================================ #
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  if [[ "$FIN_EXISTS" = "true" ]]; then
+    fin init-services ci
+  else
+    run_command init-services ci
+  fi
+else
+  fin init-services
+fi
+
+
+# ================================================ #
+# Run dependency initialization and installation.  #
+# ================================================ #
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  if [[ "$FIN_EXISTS" = "true" ]]; then
+    fin init-deps ci
+  else
+    run_command init-deps ci
+  fi
+else
+  fin init-deps
+fi
+
+
+# ================================================ #
 # Run database initialization.    #
 # ================================================ #
 header "Initializing Databases"
@@ -77,26 +107,6 @@ fi
 
 
 # ================================================ #
-# Run services initialization and installation.    #
-# ================================================ #
-if [[ "$RUN_AS_CI" = "true" ]]; then
-  run_command init-services ci
-else
-  fin init-services
-fi
-
-
-# ================================================ #
-# Run dependency initialization and installation.  #
-# ================================================ #
-if [[ "$RUN_AS_CI" = "true" ]]; then
-  run_command init-deps ci
-else
-  fin init-deps
-fi
-
-
-# ================================================ #
 # Run artifact generation.                         #
 # ================================================ #
 header "Generating artifacts"
@@ -105,12 +115,11 @@ section=Artifacts
 # Generate frontend artifactds.
 step=1
 step_header "Generating frontend artifacts"
-if [[ "$RUN_AS_CI" = "true" ]]; then
-  run_command kit/gulp
-else
+if [[ "$FIN_EXISTS" = "true" ]]; then
   fin kit/gulp
+else
+  run_command kit/gulp
 fi
-
 
 # ================================================ #
 # Run environment synchronization.                 #
@@ -125,7 +134,7 @@ if [[ $"$RUN_AS_CI" = "true" ]]; then
   echo-yellow "Skipping – in CI mode."
 else
   echo-yellow "Skipping - uncomment line in 'init' when relevant source environment exists."
-  # run_command kit/sync --skip-composer -y
+  # fin kit/sync www remote_stage --skip-composer -y
 fi
 
 #-------------------------- CLOSE: Execution --------------------------------

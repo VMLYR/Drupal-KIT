@@ -19,6 +19,12 @@ do
   esac
 done
 
+# Check whether the fin function exists.
+FIN_EXISTS="false"
+if command -vvv fin > /dev/null 2>&1; then
+  FIN_EXISTS="true"
+fi
+
 # Console colors
 red='\033[0;31m'
 green='\033[0;32m'
