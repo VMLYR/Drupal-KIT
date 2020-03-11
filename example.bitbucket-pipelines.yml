@@ -72,7 +72,7 @@ definitions:
           - git clone $DESTINATION_REPOSITORY .
           - git config user.name $USER_NAME
           - git config user.email $USER_EMAIL
-          - git checkout -B $DESTINATION_REPOSITORY_BRANCH
+          - git checkout $DESTINATION_REPOSITORY_BRANCH || git checkout -B $DESTINATION_REPOSITORY_BRANCH
 
           # Sync build files to deploy directory, removing files with exception of the .git folder.
           - rsync -rav --delete --exclude ".git/" "${BITBUCKET_CLONE_DIR}/" .

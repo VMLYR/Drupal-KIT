@@ -112,7 +112,7 @@ fi
 header "Generating artifacts"
 section=Artifacts
 
-# Generate frontend artifactds.
+# Generate frontend artifacts.
 step=1
 step_header "Generating frontend artifacts"
 if [[ "$FIN_EXISTS" = "true" ]]; then

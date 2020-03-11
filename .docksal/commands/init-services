@@ -31,9 +31,14 @@ step_header "Validating NPM"
 sudo ln -fs "/home/docker/.nvm/versions/node/$(nvm current)/bin/npm" /usr/local/bin/npm
 echo-green "NPM is available."
 
-step_header "Validating PHP Codesniffer"
-sudo ln -fs "/home/docker/.composer/vendor/bin/phpcbf" /usr/local/bin/phpcbf
-sudo ln -fs "/home/docker/.composer/vendor/bin/phpcs" /usr/local/bin/phpcs
-echo-green "PHP Codesniffer is available."
+step_header "Installing Global Codesniffer"
+composer global require drupal/coder:8.3.1 squizlabs/php_codesniffer:^3.3.2
+composer global remove drupal/coder squizlabs/php_codesniffer
+composer global require drupal/coder:8.3.1 squizlabs/php_codesniffer:^3.3.2
+if [[ "$RUN_AS_CI" = "true" ]]; then
+  sudo ln -fs "/home/docker/.composer/vendor/bin/phpcbf" /usr/local/bin/phpcbf
+  sudo ln -fs "/home/docker/.composer/vendor/bin/phpcs" /usr/local/bin/phpcs
+fi
+phpcs --config-set installed_paths /home/docker/.composer/vendor/drupal/coder/coder_sniffer
 
 #-------------------------- CLOSE: Execution --------------------------------
