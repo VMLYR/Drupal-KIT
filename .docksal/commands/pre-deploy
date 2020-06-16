@@ -23,18 +23,20 @@ step=1
 if [[ "$RUN_AS_CI" = "true" ]]; then
   step_header "Removing files unnecessary for deployment"
   cd $PROJECT_ROOT
-  rm -rf hooks
+  rm -rf hooks/pre-commit
+  rm -rf hooks/samples
   rm -rf patches
-  rm -rf scripts
+  rm -rf scripts/composer
   rm -rf source
   rm -rf .gitignore
   rm -rf .travis.yml
-  rm -rf composer.lock
   rm -rf LICENSE
-  rm -rf package.json
   rm -rf phpunit.xml.dist
   rm -rf readme.md
   rm -rf web/web.config
+  # @note Don't remove composer.json file - Drush9 does not play well on Acquia if composer.json doesn't exist.
+  # rm -rf composer.lock
+  # rm -rf package.json
 fi
 
 #-------------------------- CLOSE: Execution --------------------------------

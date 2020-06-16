@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Site\Settings;
+
 // Set hash_salt from file.
 $settings['hash_salt'] = file_get_contents($app_root . '/../config/salt.txt');
 
@@ -9,7 +11,7 @@ $settings['hash_salt'] = file_get_contents($app_root . '/../config/salt.txt');
 // site-specific config directory (IE "/config/www/default/" instead of
 // "/config/www/"). This makes sure other site-specific files, like a hash-salt
 // file or config-split-specific files, can be associated and read.
-$config_directories[CONFIG_SYNC_DIRECTORY] = $app_root . '/../config/' . basename($site_path) . '/default';
+$config_directories[Settings::get('config_sync_directory')] = $app_root . '/../config/' . basename($site_path) . '/default';
 
 // Setup per-environment config sync settings.
 $config['config_split.config_split.remote_dev']['status'] = FALSE;

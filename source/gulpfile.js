@@ -36,6 +36,7 @@
  * 5. Exports
  */
 
+const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const changed = require('gulp-changed');
@@ -46,6 +47,7 @@ const sassLint = require('gulp-sass-lint');
 const eslint = require('gulp-eslint');
 const fs = require('fs');
 const merge  = require('merge2');
+const packageJson = require('./package.json');
 const { src, dest, watch, parallel, series } = require('gulp');
 
 /**************************************
@@ -84,6 +86,9 @@ function buildSass() {
         lineNumbers: false,
         includePaths: [],
         sourceMap: true
+      }))
+      .pipe(autoprefixer({
+        overrideBrowsersList: packageJson.browserslist,
       }))
       .pipe(sourcemaps.write('./maps'))
       .pipe(dest('../docroot/themes/custom/' + entry.themeName + '/' + customDest + '/css'));

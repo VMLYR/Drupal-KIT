@@ -41,5 +41,4 @@ if [[ "$RUN_AS_CI" = "true" ]]; then
 fi
 phpcs --config-set installed_paths /home/docker/.composer/vendor/drupal/coder/coder_sniffer
 
-
 #-------------------------- CLOSE: Execution --------------------------------
