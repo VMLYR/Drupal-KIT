@@ -7,100 +7,42 @@
 
 namespace DrupalProject\composer;
 
-use Composer\Script\Event;
+use Drupal\Component\Utility\Crypt;
+use Drupal\Composer\Plugin\Scaffold\Handler;
 use DrupalFinder\DrupalFinder;
 use Symfony\Component\Filesystem\Filesystem;
 
 class KitScriptHandler {
 
-  public static function cleanDirectories($event) {
-    self::write($event, '=== Running KIT pre-install ===', 'success');
+  /**
+   * Modify core-composer-scaffold config prior to scaffold event.
+   *
+   * @param \Composer\Script\Event $event
+   *   The composer event.
+   */
+  public static function scaffold($event) {
+    /** @var \Composer\Script\Event $event */
 
-    // Get package extras.
-    $extras = $event->getComposer()->getPackage()->getExtra();
-
-    // Check whether installer-paths-clean is in the package's extras section.
-    if (array_key_exists('installer-paths-clean', $extras) && is_array($extras['installer-paths-clean'])) {
-      // Remove directories.
-      foreach ($extras['installer-paths-clean'] as $title => $dir) {
-        $dir = escapeshellarg($dir);
-        self::write($event, "Removing directory: {$title} ({$dir})");
-        exec("sudo rm -rf $dir");
-      }
+    // Exit early if this isn't ran as a script.
+    if (!is_a($event, \Composer\Script\Event::class)) {
+      return;
     }
 
-    // Reloading package repositories.
-    self::write($event, 'Reloading: packages');
-    $event->getComposer()->getRepositoryManager()->getLocalRepository()->reload();
-  }
-
-  public static function scaffold(Event $event) {
-    self::write($event, '=== Running KIT post-install ===', 'success');
+    // Get Dev mode from environment variable (set on install or update).
+    $dev_mode = (getenv('COMPOSER_DEV_MODE') === '1' || getenv('COMPOSER_DEV_MODE') === FALSE);
     $fs = new Filesystem();
+    $composer = $event->getComposer();
     $drupalFinder = new DrupalFinder();
     $drupalFinder->locateRoot(getcwd());
     $drupalRoot = $drupalFinder->getDrupalRoot();
 
-    $dir_config = "{$drupalRoot}/../config";
-    $dir_sites = "{$drupalRoot}/sites";
-
-    $dirs = [
-      '../config',
-      'libraries',
-      'modules',
-      'profiles',
-      'themes',
-    ];
-
-    // Creating required directories.
-    self::write($event, 'Creating: required directories');
-    foreach ($dirs as $dir) {
-      if (!$fs->exists($drupalRoot . '/'. $dir)) {
-        $fs->mkdir($drupalRoot . '/'. $dir);
-        $fs->touch($drupalRoot . '/'. $dir . '/.gitkeep');
-      }
-    }
-
-    // Remove various scaffolded files.
-    self::write($event, 'Removing: various scaffolded files');
-    $files = [
-      $drupalRoot . '/robots.txt',
-      $drupalRoot . '/../.docksal/commands/kit/.git',
-      $drupalRoot . '/../.docksal/commands/kit/composer.json'
-    ];
-    foreach ($files  as $file) {
-      if ($fs->exists($file)) {
-        $fs->remove($file);
-      }
-    }
-
-    // Set file names to create compiled default settings file.
-    $file_name_default = $drupalRoot . '/sites/default/default.settings.php';
-    $file_name_additional = $drupalRoot . '/sites/default/default.settings.additional.php';
-
-    // Make sure that the contents were successfully loaded (offset set to 5 to
-    // remove <?php at the beginning of the file).
-    $additional_content = file_get_contents($file_name_additional, false, NULL, 6);
-    if (is_bool($additional_content)) {
-      $additional_content = '';
-    }
-
-    // Append additional filed to compiled file.
-    self::write($event,'Updating: default.settings.php file');
-    file_put_contents($file_name_default, $additional_content, FILE_APPEND);
-
-    // Creating hash-salt.
-    if (!$fs->exists($dir_config . '/salt.txt')) {
-      self::writeSub($event,'Invoking: hash-salt file creation');
-      $fs->dumpFile($dir_config . '/salt.txt', \Drupal\Component\Utility\Crypt::randomBytesBase64(55));
-    }
-    else {
-      self::write($event,'Skipping: hash-salt file creation - already exists');
-    }
+    // Clear scripts so that we don't re-run the scaffold pre- and post-commands twice.
+    $composer->getPackage()->setScripts([]);
 
     // Get drush aliases
     exec('drush sa --format=json --root=' . $drupalRoot, $output);
-    $drush_aliases = json_decode(implode('', $output), TRUE);
+    $drush_aliases = (is_array($output)) ? json_decode(implode('', $output), TRUE) : [];
+    $drush_aliases = (is_array($drush_aliases)) ? array_diff_key($drush_aliases, ['self' => [], 'none' => []]) : [];
 
     // Get sites from aliases.
     $sites = [];
@@ -109,80 +51,69 @@ class KitScriptHandler {
     }
     $sites = array_unique($sites);
 
+    // Get extra config to modify it.
+    $extra = $event->getComposer()->getPackage()->getExtra();
+    $web_root = isset($extra['drupal-scaffold']['locations']['web-root']) ? $extra['drupal-scaffold']['locations']['web-root']: '';
+    $config_root = isset($extra['drupal-scaffold']['locations']['config-root']) ? $extra['drupal-scaffold']['locations']['config-root'] : 'config/';
+
+    // Reset file mapping.
+    $extra['drupal-scaffold']['file-mapping'] = [];
+
+
+    // Removing core from packages and resetting allowed-packages to nothing so
+    // that way no packages are ran other than our current scaffold script.
+    $package_core = $composer->getRepositoryManager()->getLocalRepository()->findPackage('drupal/core', '*');
+    $composer->getRepositoryManager()->getLocalRepository()->removePackage($package_core);
+    $extra['drupal-scaffold']['allowed-packages'] = [];
+
     // Create each site's directories and files.
     foreach ($sites as $site) {
-      self::write($event, 'Site: ' . $site, 'success');
+      $extra['drupal-scaffold']['file-mapping']["{$config_root}/{$site}/default/.gitkeep"] = [
+        'path' => 'scripts/scaffold/.gitkeep',
+        'overwrite' => FALSE,
+      ];
+      $extra['drupal-scaffold']['file-mapping']["[web-root]/sites/{$site}/files/.htaccess"] = [
+        'path' => "scripts/scaffold/default-sites-files.htaccess",
+        'overwrite' => FALSE,
+      ];
 
-      // Create site directory.
-      $dir_site = "{$dir_sites}/{$site}";
-      if (!$fs->exists($dir_site)) {
-        self::writeSub($event,'Invoking: site folder creation');
-        $fs->mkdir($dir_site);
-      }
-      else {
-        self::writeSub($event,'Skipping: site folder creation - already exists');
-      }
-
-      // Update site directory permissions.
-      self::writeSub($event,'Invoking: update site folder permissions');
-      $fs->chmod($dir_site, 0755);
-
-      // Create site settings file.
-      if (!$fs->exists($dir_site . '/settings.php')) {
-        self::writeSub($event,'Invoking: site settings.php replication from default');
-        $fs->copy($drupalRoot . '/sites/default/default.settings.php', $dir_site . '/settings.php');
-      }
-      else {
-        self::writeSub($event,'Skipping: site settings.php replication - already exists');
+      // Check whether the file exists before adding it (append doesn't
+      // support overwrite, so this is the only way to handle this).
+      if (!$fs->exists("{$web_root}/sites/{$site}/settings.php")) {
+        $extra['drupal-scaffold']['file-mapping']["[web-root]/sites/{$site}/settings.php"] = [
+          'append' => 'scripts/scaffold/default.settings.php--append.txt',
+          'default' => "{$web_root}/core/assets/scaffold/files/default.settings.php",
+        ];
       }
 
-      // Create site docksal settings file.
-      if (!$event->isDevMode()) {
-        self::writeSub($event,'Skipping: site settings.docksal.php replication - operating in no-dev mode');
-      }
-      else if (!$fs->exists($dir_site . '/settings.docksal.php')) {
-        self::writeSub($event,'Invoking: site settings.docksal.php replication from default');
-        $fs->copy($drupalRoot . '/sites/default/default.settings.docksal.php', $dir_site . '/settings.docksal.php');
-      }
-      else {
-        self::writeSub($event,'Skipping: site settings.docksal.php replication - already exists');
-      }
+      // Only run when in dev mode (not in ci).
+      if ($dev_mode) {
+        $extra['drupal-scaffold']['file-mapping']["[web-root]/sites/{$site}/settings.docksal.php"] = [
+          'path' => 'scripts/scaffold/example.settings.docksal.php',
+          'overwrite' => FALSE,
+        ];
 
-      // Create site local settings file.
-      if (!$event->isDevMode()) {
-        self::writeSub($event,'Skipping: site settings.local.php replication - operating in no-dev mode');
-      }
-      else if (!$fs->exists($dir_site . '/settings.local.php')) {
-        self::writeSub($event,'Invoking: site settings.local.php replication from default');
-        $fs->copy($drupalRoot . '/sites/example.settings.local.php', $dir_site . '/settings.local.php');
-      }
-      else {
-        self::writeSub($event,'Skipping: site settings.local.php replication - already exists');
-      }
-
-      // Create site config directory.
-      $dir_config_site = "{$dir_config}/{$site}";
-      if (!$fs->exists($dir_config_site)) {
-        self::writeSub($event,'Invoking: site config folder creation');
-        $fs->mkdir($dir_config_site);
-        $fs->touch($dir_config_site . '/.gitkeep');
-      }
-      else {
-        self::writeSub($event,'Skipping: site config folder creation');
-      }
-
-      // Create site default config directory.
-      $dir_config_site_default = $dir_config_site . '/default';
-      if (!$fs->exists($dir_config_site_default)) {
-        self::writeSub($event,'Invoking: site default config folder creation');
-        $fs->mkdir($dir_config_site_default);
-        $fs->touch($dir_config_site_default . '/.gitkeep');
-      }
-      else {
-        self::writeSub($event,'Skipping: site default config folder creation - already exists');
+        // Check whether the file exists before adding it (append doesn't
+        // support overwrite, so this is the only way to handle this).
+        if (!$fs->exists("{$web_root}/sites/{$site}/settings.local.php")) {
+          $extra['drupal-scaffold']['file-mapping']["[web-root]/sites/{$site}/settings.local.php"] = [
+            'append' => 'scripts/scaffold/example.settings.local.php--append.txt',
+            'default' => "{$web_root}/core/assets/scaffold/files/example.settings.local.php",
+          ];
+        }
       }
     }
 
+    // Add additional items back to the package.
+    $composer->getPackage()->setExtra($extra);
+
+    // Re-generate hashsalt.
+    $event->getIO()->write('Generating Hash Salt');
+    $fs->dumpFile($config_root . '/salt.txt', Crypt::randomBytesBase64(55));
+
+    // Run modified scaffold.
+    $handler = new Handler($composer, $event->getIO());
+    $handler->scaffold();
   }
 
   /**
