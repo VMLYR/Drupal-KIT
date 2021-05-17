@@ -1,7 +1,7 @@
 name: 'Admin Toolbar Local Tasks'
 type: module
 description: 'Adds local tasks to the Admin Toolbar for non-admin pages.'
-core: 8.x
+core_version_requirement: ^8 || ^9
 package: 'Administration'
 dependencies:
   - admin_toolbar
