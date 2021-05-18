@@ -233,7 +233,6 @@
                 "https://www.drupal.org/node/2827921": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "https://www.drupal.org/node/2998816": "https://www.drupal.org/files/issues/2018-09-11/arraystringconversion-2998816-12768980.patch",
                 "https://www.drupal.org/node/3006729": "https://www.drupal.org/files/issues/2019-05-28/add-context-to-media-iframe-3006729-5.patch",
-                "https://www.drupal.org/node/3128548": "https://www.drupal.org/files/issues/2021-02-08/3128548-59.patch",
                 "https://www.drupal.org/node/3188588": "https://www.drupal.org/files/issues/2020-12-15/3188588-02.patch"
             },
             "drupal/field_group": {
@@ -255,10 +254,6 @@
             },
             "drupal/simple_gmap": {
                 "https://www.drupal.org/node/2863979": "https://www.drupal.org/files/issues/2018-11-21/simple_gmap-address-formatter-2863979-36.patch"
-            },
-            "drupal/simple_sitemap": {
-                "https://www.drupal.org/project/simple_sitemap/issues/3070132": "https://www.drupal.org/files/issues/2020-03-04/3070132-changefreq-notice-message.patch",
-                "https://www.drupal.org/project/simple_sitemap/issues/3114593": "https://www.drupal.org/files/issues/2020-02-19/include_images.patch"
             },
             "drupal/stage_file_proxy": {
                 "https://www.drupal.org/node/2882986": "https://www.drupal.org/files/issues/stage_file_proxy-basic-auth-2882986-3-D8.patch"
