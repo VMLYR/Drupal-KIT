@@ -21,7 +21,6 @@ uri=`drush9 sa @$drush_alias --format=yaml | sed -n "s/.*uri: \(.*\)/\1/p"`
 # Main
 drush9 @$drush_alias sset system.maintenance_mode 1 --strict=0 --uri=$uri
 drush9 @$drush_alias updatedb -y --strict=0 --uri=$uri
-drush9 @$drush_alias entup -y --strict=0 --uri=$uri
 drush9 @$drush_alias cim sync -y --uri=$uri
 drush9 @$drush_alias cr --uri=$uri
 drush9 @$drush_alias sset system.maintenance_mode 0 --strict=0 --uri=$uri
