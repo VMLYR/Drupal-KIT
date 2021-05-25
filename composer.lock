@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ce950de2ddf167471e37a586532894f",
+    "content-hash": "d1e5c080bef925ef79ca5d4a5d4bb22b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -11412,16 +11412,16 @@
         },
         {
             "name": "vmlyr-drupal/biplane",
-            "version": "8.0.2",
+            "version": "8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VML/Drupal-Profile-Biplane.git",
-                "reference": "2cffa493471dabf32207886b7aa304066fac0e90"
+                "reference": "bf80b16b6588898c94c139807151b1f039348a88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Profile-Biplane/zipball/2cffa493471dabf32207886b7aa304066fac0e90",
-                "reference": "2cffa493471dabf32207886b7aa304066fac0e90",
+                "url": "https://api.github.com/repos/VML/Drupal-Profile-Biplane/zipball/bf80b16b6588898c94c139807151b1f039348a88",
+                "reference": "bf80b16b6588898c94c139807151b1f039348a88",
                 "shasum": ""
             },
             "type": "drupal-profile",
@@ -11437,20 +11437,24 @@
             ],
             "description": "Common configuration to fast-track site setup and development.",
             "homepage": "https://github.com/VML/Drupal-Profile-Biplane",
-            "time": "2019-09-05T21:01:52+00:00"
+            "support": {
+                "issues": "https://github.com/VML/Drupal-Profile-Biplane/issues",
+                "source": "https://github.com/VML/Drupal-Profile-Biplane/tree/8.0.3"
+            },
+            "time": "2021-05-17T16:55:51+00:00"
         },
         {
             "name": "vmlyr-drupal/blackbird",
-            "version": "8.0.4",
+            "version": "8.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VML/Drupal-Profile-Blackbird.git",
-                "reference": "f9a1ea5af685f027699fd1e343d2f0293d9b5703"
+                "reference": "e3ed0d0d284d38dfe8baa0f06c1e2a28e8d606a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Profile-Blackbird/zipball/f9a1ea5af685f027699fd1e343d2f0293d9b5703",
-                "reference": "f9a1ea5af685f027699fd1e343d2f0293d9b5703",
+                "url": "https://api.github.com/repos/VML/Drupal-Profile-Blackbird/zipball/e3ed0d0d284d38dfe8baa0f06c1e2a28e8d606a3",
+                "reference": "e3ed0d0d284d38dfe8baa0f06c1e2a28e8d606a3",
                 "shasum": ""
             },
             "type": "drupal-profile",
@@ -11466,7 +11470,11 @@
             ],
             "description": "An opinionated Drupal profile with helpful components to take care of repeated tasks for new websites.",
             "homepage": "https://github.com/VML/Drupal-Profile-Blackbird",
-            "time": "2021-05-14T21:20:44+00:00"
+            "support": {
+                "issues": "https://github.com/VML/Drupal-Profile-Blackbird/issues",
+                "source": "https://github.com/VML/Drupal-Profile-Blackbird/tree/8.0.5"
+            },
+            "time": "2021-05-17T16:53:46+00:00"
         },
         {
             "name": "vmlyr-drupal/kit-docksal-commands",
@@ -14706,5 +14714,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.4"
-    }
+    },
+    "plugin-api-version": "2.0.0"
 }
