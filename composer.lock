@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1e5c080bef925ef79ca5d4a5d4bb22b",
+    "content-hash": "3a7ac6dd6ff04ea4a4b2a813cf450419",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8369,6 +8369,18 @@
                 "php"
             ],
             "time": "2021-05-03T19:11:20+00:00"
+        },
+        {
+            "name": "npm-asset/jquery-ui-touch-punch",
+            "version": "0.2.3",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/jquery-ui-touch-punch/-/jquery-ui-touch-punch-0.2.3.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "Dual licensed under the MIT or GPL Version 2 licenses."
+            ]
         },
         {
             "name": "oomphinc/composer-installers-extender",
