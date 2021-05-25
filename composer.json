@@ -15,6 +15,10 @@
             "url": "https://packages.drupal.org/8"
         },
         {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "dinbror/blazy",
@@ -106,6 +110,7 @@
         "drupal/viewsreference": "^2.0@alpha",
         "drupal/viewsreference_filter": "^1.0",
         "drush/drush": "^10.3",
+        "npm-asset/jquery-ui-touch-punch": "^0.2.3",
         "topfloor/composer-cleanup-vcs-dirs": "dev-composer-2",
         "vlucas/phpdotenv": "^5.3",
         "vmlyr-drupal/bazo": "^8.0",
