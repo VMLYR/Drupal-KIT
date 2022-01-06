@@ -46,9 +46,11 @@
         "drupal/config_ignore": "^2.0",
         "drupal/config_split": "^1.0",
         "drupal/config_update": "1.7",
+        "drupal/core": "9.3.2",
         "drupal/core-composer-scaffold": "^9.0",
+        "drupal/core-dev": "9.3.2",
         "drupal/core-project-message": "^9.0.0",
-        "drupal/core-recommended": "^9.0",
+        "drupal/core-recommended": "^9.3",
         "drupal/core-vendor-hardening": "^9.0.0",
         "drupal/current_page_crumb": "^1.2",
         "drupal/devel": "^4.1",
@@ -83,7 +85,7 @@
         "drupal/migrate_plus": "^5.1",
         "drupal/migrate_tools": "^5.0",
         "drupal/module_filter": "^3.1",
-        "drupal/paragraphs": "^1.11",
+        "drupal/paragraphs": "^1.12",
         "drupal/paragraphs_ee": "1.x-dev@dev",
         "drupal/pathauto": "^1.6",
         "drupal/permissions_filter": "^1.0",
@@ -97,7 +99,7 @@
         "drupal/stage_file_proxy": "^1.0@alpha",
         "drupal/structure_sync": "^2.0",
         "drupal/svg_image": "^1.8",
-        "drupal/swiftmailer": "^2.0@beta",
+        "drupal/swiftmailer": "2.x-dev",
         "drupal/telephone_formatter": "^1.0@beta",
         "drupal/telephone_validation": "^2.1",
         "drupal/theme_filter": "^1.0",
@@ -106,6 +108,7 @@
         "drupal/viewsreference": "^2.0@alpha",
         "drupal/viewsreference_filter": "^1.0",
         "drush/drush": "^10.3",
+        "egulias/email-validator": "3.1.2",
         "topfloor/composer-cleanup-vcs-dirs": "dev-composer-2",
         "vlucas/phpdotenv": "^5.3",
         "vmlyr-drupal/bazo": "^8.0",
@@ -113,9 +116,6 @@
         "vmlyr-drupal/blackbird": "^8.0",
         "vmlyr-drupal/kit-docksal-commands": "dev-8.x-2.x",
         "webflo/drupal-finder": "^1.2"
-    },
-    "require-dev": {
-        "drupal/core-dev": "^9"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -128,6 +128,15 @@
         "sort-packages": true,
         "platform": {
             "php": "7.4"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "oomphinc/composer-installers-extender": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/core-vendor-hardening": true,
+            "topfloor/composer-cleanup-vcs-dirs": true
         }
     },
     "autoload": {
@@ -226,13 +235,13 @@
                 "https://www.drupal.org/node/2830403": "https://www.drupal.org/files/issues/2021-02-23/choose_and_order-2830403-44.patch"
             },
             "drupal/core": {
-                "https://www.drupal.org/node/1091852": "https://www.drupal.org/files/issues/2021-02-19/1091852-128.patch",
+                "https://www.drupal.org/node/1091852": "https://www.drupal.org/files/issues/2021-11-05/1091852-150.patch",
                 "https://www.drupal.org/node/2429699": "https://www.drupal.org/files/issues/2020-10-25/drupal-views-entity-reference-filter-2429699-369.patch",
                 "https://www.drupal.org/node/2516938": "https://www.drupal.org/files/issues/2020-06-09/core-toolbar-mobile-2516938-73.patch",
-                "https://www.drupal.org/node/2642122": "https://www.drupal.org/files/issues/2020-06-30/2642122-123.patch",
+                "https://www.drupal.org/node/2642122": "https://www.drupal.org/files/issues/2021-07-12/2642122-141.patch",
                 "https://www.drupal.org/node/2827921": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
-                "https://www.drupal.org/node/2998816": "https://www.drupal.org/files/issues/2018-09-11/arraystringconversion-2998816-12768980.patch",
-                "https://www.drupal.org/node/3006729": "https://www.drupal.org/files/issues/2019-05-28/add-context-to-media-iframe-3006729-5.patch",
+                "https://www.drupal.org/project/drupal/issues/2663316": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch",
+                "https://www.drupal.org/node/3006729": "https://www.drupal.org/files/issues/2021-12-20/add-context-to-media-iframe-3006729-16.patch",
                 "https://www.drupal.org/node/3188588": "https://www.drupal.org/files/issues/2020-12-15/3188588-02.patch"
             },
             "drupal/field_group": {
