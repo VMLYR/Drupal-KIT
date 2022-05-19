@@ -1,6 +1,6 @@
 grumphp:
     git_hook_variables:
-         EXEC_GRUMPHP_COMMAND: lando php
+         EXEC_GRUMPHP_COMMAND: fin exec php
          ENV: {}
     ignore_unstaged_changes: true
     tasks:
