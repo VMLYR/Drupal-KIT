@@ -1,0 +1,36 @@
+grumphp:
+    git_hook_variables:
+         EXEC_GRUMPHP_COMMAND: lando php
+         ENV: {}
+    ignore_unstaged_changes: true
+    tasks:
+        composer: []
+        phpcs:
+            standard: 
+              - vendor/drupal/coder/coder_sniffer/Drupal
+              - vendor/drupal/coder/coder_sniffer/DrupalPractice
+            ignore_patterns:
+              - cfg/
+              - libraries/
+              - scripts/s
+              - docroot/autoload.php
+              - docroot/core
+              - docroot/modules/contrib
+              - docroot/sites/default
+              - load.environment.php
+            triggered_by:
+              - php
+              - module
+              - inc
+        phpstan:
+            autoload_file: ~
+            configuration: ~
+            level: null
+            force_patterns: []
+            ignore_patterns: []
+            triggered_by: ['php']
+            memory_limit: "-1"
+            use_grumphp_paths: true
+    parallel:
+        enabled: true
+        max_workers: 32

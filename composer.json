@@ -137,7 +137,10 @@
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
             "topfloor/composer-cleanup-vcs-dirs": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "nascom/grumphp-drupal": true,
+            "phpro/grumphp-shim": true,
+            "phpro/grumphp": true
         }
     },
     "autoload": {
@@ -282,5 +285,8 @@
         "patchLevel": {
             "drupal/core": "-p2"
         }
+    },
+    "require-dev": {
+        "nascom/grumphp-drupal": "^1.0"
     }
 }
