@@ -1,0 +1,23 @@
+name: Drupal-KIT
+recipe: drupal10
+excludes:
+  - drush
+  - node_modules
+  - themesrc/node_modules
+  - docroot/core
+  - docroot/vendor
+  - docroot/modules/contrib
+config:
+  php: '8.1'
+  webroot: docroot
+  composer_version: 2
+services:
+  appserver:
+    xdebug: true
+    build:
+      - composer install
+  database:
+    creds:
+      user: user
+      password: user
+      database: drupal
