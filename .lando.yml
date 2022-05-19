@@ -20,4 +20,4 @@ services:
     creds:
       user: user
       password: user
-      database: drupal
+      database: www
