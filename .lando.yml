@@ -1,12 +1,6 @@
-name: Drupal-KIT
+name: undefined
 recipe: drupal10
-excludes:
-  - drush
-  - node_modules
-  - themesrc/node_modules
-  - docroot/core
-  - docroot/vendor
-  - docroot/modules/contrib
+excludes: null
 config:
   php: '8.1'
   webroot: docroot
@@ -21,3 +15,26 @@ services:
       user: user
       password: user
       database: www
+  node:
+    type: node
+    build:
+      - npm install
+      - npm install -G gulp
+      - cd /app/source && npm install
+      - cd /app/source && npm run gulp
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
+    dir: /app/source
+  gulp:
+    service: node
+    dir: /app/source
+  run_init:
+    cmd:
+      - appserver: composer install
+      - node: npm install
+      - node: npm install -G gulp
+      - node: cd /app/source && npm install
+      - node: cd /app/source && npm run gulp
