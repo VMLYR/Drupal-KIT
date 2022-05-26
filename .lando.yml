@@ -58,11 +58,10 @@ tooling:
     description: Disable xdebug for Apache.
     cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
     user: root
-  kit/theme:
-    description: Create a new theme
-    cmd:
-      - appserver: drush kit:theme
-      - node: cd /app/source && npm install && npm run gulp
+  kit/check-url:
+    service: appserver
+    description: Check response status on a list of URLs
+    cmd: drush kit:check-url
   kit/init:
     cmd:
       - appserver: composer install
@@ -70,6 +69,11 @@ tooling:
       - node: npm install -G gulp
       - node: cd /app/source && npm install
       - node: cd /app/source && npm run gulp
+  kit/theme:
+    description: Create a new theme
+    cmd:
+      - appserver: drush kit:theme
+      - node: cd /app/source && npm install && npm run gulp
   events:
     pre-start:
       - appserver: composer install
