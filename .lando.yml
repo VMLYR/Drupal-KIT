@@ -66,6 +66,11 @@ tooling:
     service: appserver
     description: Import/exprot environment specific configuration for a site
     cmd: drush kit:conf
+  kit/gulp:
+    service: node
+    description: Run gulp tasks in the theme source directory.
+    dir: /app/source
+    cmd: npm run gulp
   kit/init:
     cmd:
       - appserver: composer install
