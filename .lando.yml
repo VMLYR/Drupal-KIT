@@ -1,4 +1,4 @@
-name: Drupal-KIT
+name: livenation-poc
 recipe: drupal10
 exlodes:
   - drush
@@ -24,6 +24,9 @@ services:
         - ${LANDO_HOST_NAME_DEV:-host}:${LANDO_HOST_GATEWAY_DEV:-host-gateway}
     build:
       - composer install
+    extras:
+      - apt-get update -y
+      - apt-get install rename -y
   database:
     creds:
       user: user
@@ -55,7 +58,12 @@ tooling:
     description: Disable xdebug for Apache.
     cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
     user: root
-  run_init:
+  kit/theme:
+    description: Create a new theme
+    cmd:
+      - appserver: drush kit:theme
+      - node: cd /app/source && npm install && npm run gulp
+  kit/init:
     cmd:
       - appserver: composer install
       - node: npm install
