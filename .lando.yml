@@ -62,6 +62,10 @@ tooling:
     service: appserver
     description: Check response status on a list of URLs
     cmd: drush kit:check-url
+  kit/conf:
+    service: appserver
+    description: Import/exprot environment specific configuration for a site
+    cmd: drush kit:conf
   kit/init:
     cmd:
       - appserver: composer install
