@@ -1,5 +1,5 @@
-name: livenation-poc
-recipe: drupal10
+name: Drupal-Kit
+recipe: drupal9
 exlodes:
   - drush
   - node_modules
