@@ -78,6 +78,10 @@ tooling:
       - node: npm install -G gulp
       - node: cd /app/source && npm install
       - node: cd /app/source && npm run gulp
+  kit/sync:
+    service: appserver
+    description: Sync the local environemnt with most recent code, database and configuration.
+    cmd: drush kit:sync
   kit/theme:
     description: Create a new theme
     cmd:
