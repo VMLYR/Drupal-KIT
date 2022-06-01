@@ -231,10 +231,6 @@
             ]
         },
         "patches": {
-            "drupal/blazy": {
-                "https://www.drupal.org/node/3210635": "https://www.drupal.org/files/issues/2021-04-25/3210635-02.patch",
-                "https://www.drupal.org/node/3210636": "https://www.drupal.org/files/issues/2021-04-25/blazy_video_embed_field.patch"
-            },
             "drupal/classy_paragraphs": {
                 "https://www.drupal.org/node/2830403": "https://www.drupal.org/files/issues/2021-02-23/choose_and_order-2830403-44.patch"
             },
@@ -256,14 +252,10 @@
                 "https://www.drupal.org/node/3212229": "https://www.drupal.org/files/issues/2021-05-04/3212229-04.patch"
             },
             "drupal/layout_paragraphs": {
-                "https://www.drupal.org/node/3158244": "https://www.drupal.org/files/issues/2021-03-23/configurable_modal_width_3158244-5.patch",
                 "https://www.drupal.org/node/3199508": "https://www.drupal.org/files/issues/2021-03-11/3199508-2.patch"
             },
             "drupal/linkit": {
                 "https://www.drupal.org/node/2712951": "https://www.drupal.org/files/issues/2020-11-02/linkit-for-link-field-2712951-194.patch"
-            },
-            "drupal/imageapi_optimize_webp": {
-                "https://www.drupal.org/node/3153942": "https://www.drupal.org/files/issues/2020-06-23/3153942-2.patch"
             },
             "drupal/simple_gmap": {
                 "https://www.drupal.org/node/2863979": "https://www.drupal.org/files/issues/2018-11-21/simple_gmap-address-formatter-2863979-36.patch"
@@ -278,7 +270,6 @@
                 "https://www.drupal.org/node/3192468": "https://www.drupal.org/files/issues/2021-01-12/3192468-2.patch"
             },
             "drupal/viewsreference_filter": {
-                "https://www.drupal.org/node/3185791": "https://www.drupal.org/files/issues/2020-12-01/viewsreference_filter-interface.patch",
                 "https://www.drupal.org/node/3192458": "https://www.drupal.org/files/issues/2021-01-12/3192458-2.patch"
             }
         },
