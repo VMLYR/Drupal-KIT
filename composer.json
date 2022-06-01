@@ -256,7 +256,6 @@
                 "https://www.drupal.org/node/3212229": "https://www.drupal.org/files/issues/2021-05-04/3212229-04.patch"
             },
             "drupal/layout_paragraphs": {
-                "https://www.drupal.org/node/3158244": "https://www.drupal.org/files/issues/2021-03-23/configurable_modal_width_3158244-5.patch",
                 "https://www.drupal.org/node/3199508": "https://www.drupal.org/files/issues/2021-03-11/3199508-2.patch"
             },
             "drupal/linkit": {
