@@ -231,10 +231,6 @@
             ]
         },
         "patches": {
-            "drupal/blazy": {
-                "https://www.drupal.org/node/3210635": "https://www.drupal.org/files/issues/2021-04-25/3210635-02.patch",
-                "https://www.drupal.org/node/3210636": "https://www.drupal.org/files/issues/2021-04-25/blazy_video_embed_field.patch"
-            },
             "drupal/classy_paragraphs": {
                 "https://www.drupal.org/node/2830403": "https://www.drupal.org/files/issues/2021-02-23/choose_and_order-2830403-44.patch"
             },
