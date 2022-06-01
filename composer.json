@@ -261,9 +261,6 @@
             "drupal/linkit": {
                 "https://www.drupal.org/node/2712951": "https://www.drupal.org/files/issues/2020-11-02/linkit-for-link-field-2712951-194.patch"
             },
-            "drupal/imageapi_optimize_webp": {
-                "https://www.drupal.org/node/3153942": "https://www.drupal.org/files/issues/2020-06-23/3153942-2.patch"
-            },
             "drupal/simple_gmap": {
                 "https://www.drupal.org/node/2863979": "https://www.drupal.org/files/issues/2018-11-21/simple_gmap-address-formatter-2863979-36.patch"
             },
