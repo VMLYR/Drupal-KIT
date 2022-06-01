@@ -278,7 +278,6 @@
                 "https://www.drupal.org/node/3192468": "https://www.drupal.org/files/issues/2021-01-12/3192468-2.patch"
             },
             "drupal/viewsreference_filter": {
-                "https://www.drupal.org/node/3185791": "https://www.drupal.org/files/issues/2020-12-01/viewsreference_filter-interface.patch",
                 "https://www.drupal.org/node/3192458": "https://www.drupal.org/files/issues/2021-01-12/3192458-2.patch"
             }
         },
