@@ -1,6 +1,6 @@
 name: Drupal-KIT
 recipe: drupal10
-exlodes:
+excludes:
   - drush
   - node_modules
   - themesrc/node_modules
