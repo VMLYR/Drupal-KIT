@@ -72,6 +72,9 @@ node_modules
 # Ignore docksal kit commands
 /.docksal/commands/kit
 
+# Ignore logs directory from Lando
+logs
+
 # FOR TESTING PURPOSES ONLY
 /docroot/themes/custom/biplane/
 /docroot/themes/custom/blackbird/
