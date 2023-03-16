@@ -1,5 +1,5 @@
 name: Drupal-Kit
-recipe: drupal9
+recipe: drupal10
 excludes:
   - drush
   - node_modules
@@ -18,7 +18,7 @@ services:
       php: .lando.php.ini
     overrides:
       environment:
-        XDEBUG_MOPDE:
+        XDEBUG_MODE:
         LANDO_HOST_IP: "172.17.0.1"
       extra_hosts:
         - ${LANDO_HOST_NAME_DEV:-host}:${LANDO_HOST_GATEWAY_DEV:-host-gateway}
@@ -87,7 +87,6 @@ tooling:
     cmd:
       - appserver: drush kit:theme
       - node: cd /app/source && npm install && npm run gulp
-  events:
-    pre-start:
-      - appserver: composer install
-      - nodejs: npm install
+  grumphp:
+    service: appserver
+    cmd: php /app/vendor/bin/grumphp run

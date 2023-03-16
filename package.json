@@ -1,6 +1,9 @@
 {
-  "name": "VML Drupal",
+  "name": "vmldrupal",
   "description": "A base Drupal distribution built and maintained by VML.",
   "license": "GPL-2.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
 }

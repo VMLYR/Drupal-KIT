@@ -1,7 +1,7 @@
-# Drupal 9 KIT
+# Drupal 10 KIT
 
-VMLY&R's Drupal 9 KIT is a distribution which helps build and maintain
-Drupal 9 projects.
+VMLY&R's Drupal 10 KIT is a distribution which helps build and maintain
+Drupal 10 projects.
 
 * [About KIT](#about-kit)
 * [Getting Started](#installation)
@@ -30,7 +30,7 @@ for the following:
 KIT uses composer for handling project dependencies. The distribution
 includes a selection of Modules and libraries by default. The list was
 determined using either the following criteria:
- - *Best-practices* – Drupal 9 Core is a much more viable product
+ - *Best-practices* – Drupal 10 Core is a much more viable product
  out-of-the-box than Drupal 7 was, but there are still certain modules
  and configuration that we need and should be using for every site,
  including support for multiple environments. Examples of these are
