@@ -1,0 +1,93 @@
+name: Enterprise
+type: profile
+description: 'Layout Builder enabled profile for > Drupal 10'
+core_version_requirement: '^10'
+distribution:
+  name: VMLYR Kit - Enterprise
+dependencies:
+  - admin_toolbar:admin_toolbar
+  - admin_toolbar:admin_toolbar_links_access_filter
+  - admin_toolbar:admin_toolbar_tools
+  - drupal:block
+  - drupal:block_content
+  - drupal:breakpoint
+  - drupal:ckeditor5
+  - drupal:color
+  - drupal:config
+  - config_filter:config_filter
+  - config_split:config_split
+  - drupal:contextual
+  - drupal:dynamic_page_cache
+  - drupal:editor
+  - drupal:field
+  - drupal:file
+  - drupal:filter
+  - drupal:image
+  - drupal:layout_builder
+  - drupal:layout_discovery
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:menu_link_content
+  - drupal:menu_ui
+  - drupal:mysql
+  - drupal:node
+  - drupal:page_cache
+  - drupal:path
+  - drupal:path_alias
+  - drupal:rdf
+  - drupal:responsive_image
+  - drupal:search
+  - drupal:syslog
+  - drupal:system
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:toolbar
+  - drupal:update
+  - drupal:user
+  - drupal:views
+install:
+  - admin_toolbar:admin_toolbar
+  - admin_toolbar:admin_toolbar_links_access_filter
+  - admin_toolbar:admin_toolbar_tools
+  - drupal:block
+  - drupal:block_content
+  - drupal:breakpoint
+  - drupal:ckeditor5
+  - drupal:color
+  - drupal:config
+  - config_filter:config_filter
+  - config_split:config_split
+  - drupal:contextual
+  - drupal:dynamic_page_cache
+  - drupal:editor
+  - drupal:field
+  - drupal:file
+  - drupal:filter
+  - drupal:image
+  - drupal:layout_builder
+  - drupal:layout_discovery
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:menu_link_content
+  - drupal:menu_ui
+  - drupal:mysql
+  - drupal:node
+  - drupal:page_cache
+  - drupal:path
+  - drupal:path_alias
+  - drupal:rdf
+  - drupal:responsive_image
+  - drupal:search
+  - drupal:syslog
+  - drupal:system
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:toolbar
+  - drupal:update
+  - drupal:user
+  - drupal:views
+themes:
+  - gin
+  - olivero
