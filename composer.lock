@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84124adae9dfa408f92c9c0088998a6e",
+    "content-hash": "096b1bb567cbe1ac60a6a7aaaa44b290",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2040,66 +2040,6 @@
             }
         },
         {
-            "name": "drupal/bg_image_formatter",
-            "version": "1.16.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/bg_image_formatter.git",
-                "reference": "8.x-1.16"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bg_image_formatter-8.x-1.16.zip",
-                "reference": "8.x-1.16",
-                "shasum": "604619404e3f1ce03d272c2f5750535a35c5ab69"
-            },
-            "require": {
-                "drupal/core": "^9.3 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.16",
-                    "datestamp": "1668029882",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "bburg",
-                    "homepage": "https://www.drupal.org/user/1867900"
-                },
-                {
-                    "name": "DuaelFr",
-                    "homepage": "https://www.drupal.org/user/931394"
-                },
-                {
-                    "name": "garethhallnz",
-                    "homepage": "https://www.drupal.org/user/772766"
-                },
-                {
-                    "name": "phenaproxima",
-                    "homepage": "https://www.drupal.org/user/205645"
-                },
-                {
-                    "name": "Pol",
-                    "homepage": "https://www.drupal.org/user/47194"
-                }
-            ],
-            "description": "Background Images Formatter provides an image formatter to display images in background with CSS.",
-            "homepage": "https://www.drupal.org/project/bg_image_formatter",
-            "support": {
-                "source": "https://git.drupalcode.org/project/bg_image_formatter"
-            }
-        },
-        {
             "name": "drupal/blazy",
             "version": "2.14.0",
             "source": {
@@ -2164,170 +2104,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/blazy",
                 "issues": "https://drupal.org/project/issues/blazy"
-            }
-        },
-        {
-            "name": "drupal/block_class",
-            "version": "2.0.11",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/block_class.git",
-                "reference": "2.0.11"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/block_class-2.0.11.zip",
-                "reference": "2.0.11",
-                "shasum": "bd098ef0071b5baca1248c0deaa9bbedc0ddcaf4"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.11",
-                    "datestamp": "1672065313",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Todd Nienkerk",
-                    "homepage": "https://www.drupal.org/u/todd-nienkerk",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Renato Gonçalves (RenatoG)",
-                    "homepage": "https://www.drupal.org/u/RenatoG",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Neslee Canil Pinto",
-                    "homepage": "https://www.drupal.org/u/neslee-canil-pinto",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Aaron Stanush",
-                    "homepage": "https://www.drupal.org/u/aaron-stanush",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "David Suissa (DYdave)",
-                    "homepage": "https://www.drupal.org/u/DYdave",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Four Kitchens",
-                    "homepage": "https://www.drupal.org/user/358502",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "berenddeboer",
-                    "homepage": "https://www.drupal.org/u/berenddeboer",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "elliotttf",
-                    "homepage": "https://www.drupal.org/u/elliotttf",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Michal Minecki (mirzu)",
-                    "homepage": "https://www.drupal.org/u/mirzu",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Patrick Coffey (pcoffey)",
-                    "homepage": "https://www.drupal.org/u/pcoffey",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Taylor Smith (tsmith512)",
-                    "homepage": "https://www.drupal.org/u/tsmith512",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Allows assigning classes to Blocks.",
-            "homepage": "https://www.drupal.org/project/block_class",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/block_class",
-                "issues": "https://www.drupal.org/project/issues/block_class",
-                "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
-        },
-        {
-            "name": "drupal/block_field",
-            "version": "1.0.0-rc4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/block_field.git",
-                "reference": "8.x-1.0-rc4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/block_field-8.x-1.0-rc4.zip",
-                "reference": "8.x-1.0-rc4",
-                "shasum": "97958ceace8ca80852f40b734ff7197e172d726e"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-rc4",
-                    "datestamp": "1667511464",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "acbramley",
-                    "homepage": "https://www.drupal.org/user/1036766"
-                },
-                {
-                    "name": "Berdir",
-                    "homepage": "https://www.drupal.org/user/214652"
-                },
-                {
-                    "name": "fenstrat",
-                    "homepage": "https://www.drupal.org/user/362649"
-                },
-                {
-                    "name": "jrockowitz",
-                    "homepage": "https://www.drupal.org/user/371407"
-                },
-                {
-                    "name": "michaellander",
-                    "homepage": "https://www.drupal.org/user/636494"
-                },
-                {
-                    "name": "paulocs",
-                    "homepage": "https://www.drupal.org/user/3640109"
-                }
-            ],
-            "description": "Provides a field that allows a content entity to create and configure custom block instances.",
-            "homepage": "https://www.drupal.org/project/block_field",
-            "support": {
-                "source": "https://git.drupalcode.org/project/block_field"
             }
         },
         {
@@ -2412,145 +2188,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/captcha",
                 "issues": "https://www.drupal.org/project/issues/captcha"
-            }
-        },
-        {
-            "name": "drupal/ckeditor",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ckeditor.git",
-                "reference": "1.0.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor-1.0.1.zip",
-                "reference": "1.0.1",
-                "shasum": "d3dd8bfb2301b749599ba48cf76208becdf0eeb3"
-            },
-            "require": {
-                "drupal/core": "^9.4 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.0.1",
-                    "datestamp": "1662977541",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "dczepierga",
-                    "homepage": "https://www.drupal.org/user/911466"
-                },
-                {
-                    "name": "hass",
-                    "homepage": "https://www.drupal.org/user/85918"
-                },
-                {
-                    "name": "jcisio",
-                    "homepage": "https://www.drupal.org/user/210762"
-                },
-                {
-                    "name": "Jorrit",
-                    "homepage": "https://www.drupal.org/user/161217"
-                },
-                {
-                    "name": "lauriii",
-                    "homepage": "https://www.drupal.org/user/1078742"
-                },
-                {
-                    "name": "Magnus",
-                    "homepage": "https://www.drupal.org/user/73919"
-                },
-                {
-                    "name": "mkesicki",
-                    "homepage": "https://www.drupal.org/user/922884"
-                },
-                {
-                    "name": "nod_",
-                    "homepage": "https://www.drupal.org/user/598310"
-                },
-                {
-                    "name": "p.wiaderny",
-                    "homepage": "https://www.drupal.org/user/2956619"
-                },
-                {
-                    "name": "vokiel",
-                    "homepage": "https://www.drupal.org/user/2793801"
-                },
-                {
-                    "name": "Wim Leers",
-                    "homepage": "https://www.drupal.org/user/99777"
-                },
-                {
-                    "name": "wwalc",
-                    "homepage": "https://www.drupal.org/user/184556"
-                },
-                {
-                    "name": "xjm",
-                    "homepage": "https://www.drupal.org/user/65776"
-                }
-            ],
-            "description": "WYSIWYG editing for rich text fields using CKEditor.",
-            "homepage": "https://www.drupal.org/project/ckeditor",
-            "support": {
-                "source": "https://git.drupalcode.org/project/ckeditor"
-            }
-        },
-        {
-            "name": "drupal/classy_paragraphs",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/classy_paragraphs.git",
-                "reference": "56fd46d1966209c1044e6f5cdd203c6105c38aaa"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9 || ^10",
-                "drupal/paragraphs": "~1.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-rc1+1-dev",
-                    "datestamp": "1661973149",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "i-trokhanenko",
-                    "homepage": "https://www.drupal.org/user/3546872"
-                },
-                {
-                    "name": "Ivan Zugec",
-                    "homepage": "https://www.drupal.org/user/86970"
-                }
-            ],
-            "description": "Allows an editor to apply a class to paragraphs.",
-            "homepage": "https://www.drupal.org/project/classy_paragraphs",
-            "support": {
-                "source": "https://git.drupalcode.org/project/classy_paragraphs",
-                "issues": "https://www.drupal.org/project/issues/classy_paragraphs"
             }
         },
         {
@@ -3372,58 +3009,6 @@
             }
         },
         {
-            "name": "drupal/current_page_crumb",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/current_page_crumb.git",
-                "reference": "8.x-1.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "7d0cf5d4ae7a544f208c5dab9c3be43f6538874f"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.4",
-                    "datestamp": "1676494753",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Boggs",
-                    "homepage": "https://www.drupal.org/user/153069"
-                },
-                {
-                    "name": "JayKandari",
-                    "homepage": "https://www.drupal.org/user/2876519"
-                },
-                {
-                    "name": "rakesh.gectcr",
-                    "homepage": "https://www.drupal.org/user/1177822"
-                }
-            ],
-            "description": "Adds the current page title to the breadcrumb.",
-            "homepage": "https://www.drupal.org/project/current_page_crumb",
-            "support": {
-                "source": "https://git.drupalcode.org/project/current_page_crumb"
-            }
-        },
-        {
             "name": "drupal/devel",
             "version": "5.1.1",
             "source": {
@@ -3692,51 +3277,6 @@
             }
         },
         {
-            "name": "drupal/editor_file",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/editor_file.git",
-                "reference": "8.x-1.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/editor_file-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "ec9cf94322dfa0ff0d3c237a34eebacb398ab13b"
-            },
-            "require": {
-                "drupal/ckeditor": "*",
-                "drupal/core": "^9.4 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1671450425",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "DuaelFr",
-                    "homepage": "https://www.drupal.org/user/931394"
-                }
-            ],
-            "description": "Allow users to link uploaded files in the text Editor.",
-            "homepage": "https://www.drupal.org/project/editor_file",
-            "support": {
-                "source": "https://git.drupalcode.org/project/editor_file"
-            }
-        },
-        {
             "name": "drupal/email_registration",
             "version": "1.2.0",
             "source": {
@@ -3916,66 +3456,6 @@
             }
         },
         {
-            "name": "drupal/extlink",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/extlink.git",
-                "reference": "8.x-1.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/extlink-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "38650688b5a58496db59f40b2a7f36c4bedcbfb4"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1665770295",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Nate Lampton",
-                    "homepage": "https://www.drupal.org/u/quicksketch",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Lachlan Ennis",
-                    "homepage": "https://www.drupal.org/u/elachlan",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Neslee Canil Pinto",
-                    "homepage": "https://www.drupal.org/u/neslee-canil-pinto",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Modify behavior and appearance of external links.",
-            "homepage": "https://www.drupal.org/project/extlink",
-            "keywords": [
-                "Drupal",
-                "External Links"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/extlink",
-                "issues": "https://www.drupal.org/project/issues/extlink"
-            }
-        },
-        {
             "name": "drupal/field_group",
             "version": "3.4.0",
             "source": {
@@ -4144,6 +3624,127 @@
             }
         },
         {
+            "name": "drupal/gin",
+            "version": "3.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gin.git",
+                "reference": "8.x-3.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gin-8.x-3.0-rc2.zip",
+                "reference": "8.x-3.0-rc2",
+                "shasum": "0c3c664690680af6c3920c8877af431c29e38e00"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10",
+                "drupal/gin_toolbar": "^1.0@beta"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-3.0-rc2",
+                    "datestamp": "1678733202",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "scripts": {
+                "phpcs": [
+                    "phpcs -s --runtime-set ignore_warnings_on_exit 1 --runtime-set ignore_errors_on_exit 0 'web/modules/custom'"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha Eggenberger (saschaeggi)",
+                    "homepage": "https://www.drupal.org/u/saschaeggi",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "For a better Admin and Content Editor Experience.",
+            "homepage": "https://www.drupal.org/project/gin",
+            "support": {
+                "source": "https://git.drupalcode.org/project/gin",
+                "issues": "https://www.drupal.org/project/issues/gin"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/saschaeggi"
+                },
+                {
+                    "type": "other",
+                    "url": "https://paypal.me/saschaeggi"
+                }
+            ]
+        },
+        {
+            "name": "drupal/gin_toolbar",
+            "version": "1.0.0-rc1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gin_toolbar.git",
+                "reference": "8.x-1.0-rc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.0-rc1.zip",
+                "reference": "8.x-1.0-rc1",
+                "shasum": "90516f6aa22f4f60f1853bdceb757940f411ec7e"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-rc1",
+                    "datestamp": "1669666957",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Sascha Eggenberger (saschaeggi)",
+                    "homepage": "https://www.drupal.org/u/saschaeggi",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Gin Toolbar for Frontend use",
+            "homepage": "https://www.drupal.org/project/gin_toolbar",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/gin_toolbar",
+                "issues": "https://www.drupal.org/project/issues/gin_toolbar"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/saschaeggi"
+                },
+                {
+                    "type": "other",
+                    "url": "https://paypal.me/saschaeggi"
+                }
+            ]
+        },
+        {
             "name": "drupal/google_tag",
             "version": "1.6.0",
             "source": {
@@ -4176,6 +3777,22 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "acquia",
+                    "homepage": "https://www.drupal.org/user/1231722"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "kaynen",
+                    "homepage": "https://www.drupal.org/user/733308"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
                 {
                     "name": "solotandem",
                     "homepage": "https://www.drupal.org/user/240748"
@@ -4971,50 +4588,6 @@
             }
         },
         {
-            "name": "drupal/media_responsive_thumbnail",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/media_responsive_thumbnail.git",
-                "reference": "8.x-1.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_responsive_thumbnail-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "ef96d0c4e4f2759eb19888823e9e733af67f7445"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1678903132",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "yoruvo",
-                    "homepage": "https://www.drupal.org/user/2989799"
-                }
-            ],
-            "description": "Adds a field formatter for Media references which displays a responsive image.",
-            "homepage": "https://www.drupal.org/project/media_responsive_thumbnail",
-            "support": {
-                "source": "https://git.drupalcode.org/project/media_responsive_thumbnail"
-            }
-        },
-        {
             "name": "drupal/memcache",
             "version": "2.5.0",
             "source": {
@@ -5502,205 +5075,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/module_filter",
                 "issues": "https://www.drupal.org/project/issues/module_filter"
-            }
-        },
-        {
-            "name": "drupal/paragraphs",
-            "version": "1.15.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/paragraphs.git",
-                "reference": "8.x-1.15"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.15.zip",
-                "reference": "8.x-1.15",
-                "shasum": "2ed2d3199553010fa1c500181bbebe676e9e60c1"
-            },
-            "require": {
-                "drupal/core": "^9.3 || ^10",
-                "drupal/entity_reference_revisions": "~1.3"
-            },
-            "require-dev": {
-                "drupal/block_field": "1.x-dev",
-                "drupal/diff": "1.x-dev",
-                "drupal/entity_browser": "2.x-dev",
-                "drupal/entity_usage": "2.x-dev",
-                "drupal/field_group": "3.x-dev",
-                "drupal/inline_entity_form": "1.x-dev",
-                "drupal/paragraphs-paragraphs_library": "*",
-                "drupal/replicate": "1.x-dev",
-                "drupal/search_api": "1.x-dev",
-                "drupal/search_api_db": "*"
-            },
-            "suggest": {
-                "drupal/entity_browser": "Recommended for an improved user experience when using the Paragraphs library module"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.15",
-                    "datestamp": "1661440897",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Berdir",
-                    "homepage": "https://www.drupal.org/user/214652"
-                },
-                {
-                    "name": "Frans",
-                    "homepage": "https://www.drupal.org/user/514222"
-                },
-                {
-                    "name": "jeroen.b",
-                    "homepage": "https://www.drupal.org/user/1853532"
-                },
-                {
-                    "name": "jstoller",
-                    "homepage": "https://www.drupal.org/user/99012"
-                },
-                {
-                    "name": "miro_dietiker",
-                    "homepage": "https://www.drupal.org/user/227761"
-                },
-                {
-                    "name": "Primsi",
-                    "homepage": "https://www.drupal.org/user/282629"
-                }
-            ],
-            "description": "Enables the creation of Paragraphs entities.",
-            "homepage": "https://www.drupal.org/project/paragraphs",
-            "support": {
-                "source": "https://git.drupalcode.org/project/paragraphs"
-            }
-        },
-        {
-            "name": "drupal/paragraphs_ee",
-            "version": "2.1.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/paragraphs_ee.git",
-                "reference": "2.1.0-alpha1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs_ee-2.1.0-alpha1.zip",
-                "reference": "2.1.0-alpha1",
-                "shasum": "bab97f82e0782718ab77761cd225611b66d0be58"
-            },
-            "require": {
-                "drupal/core": ">=9.2",
-                "drupal/paragraphs_features": "^2.0@beta"
-            },
-            "require-dev": {
-                "drupal/paragraphs_sets": "*",
-                "phpunit/phpunit": "^9.5",
-                "weitzman/drupal-test-traits": "^1.5"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.0-alpha1",
-                    "datestamp": "1676019272",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Stefan Borchert",
-                    "homepage": "https://www.drupal.org/user/36942",
-                    "email": "stefan.borchert@undpaul.de"
-                }
-            ],
-            "description": "Paragraphs Editor Enhancements for better usability.",
-            "homepage": "https://www.drupal.org/project/paragraphs_ee",
-            "support": {
-                "source": "https://git.drupalcode.org/project/paragraphs_ee"
-            }
-        },
-        {
-            "name": "drupal/paragraphs_features",
-            "version": "2.0.0-beta2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/paragraphs_features.git",
-                "reference": "2.0.0-beta2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs_features-2.0.0-beta2.zip",
-                "reference": "2.0.0-beta2",
-                "shasum": "42c4c2fed1701e14d085850d4fa7ea58b418b85a"
-            },
-            "require": {
-                "drupal/core": "^9.2 || ^10",
-                "drupal/paragraphs": "^1.13"
-            },
-            "require-dev": {
-                "drupal/gin": "^3.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.0-beta2",
-                    "datestamp": "1678349934",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Mladen Todorovic",
-                    "homepage": "https://www.drupal.org/user/2103716",
-                    "email": "mladen.todorovic@burda.com"
-                },
-                {
-                    "name": "Daniel Bosen",
-                    "homepage": "https://www.drupal.org/user/404865",
-                    "email": "daniel.bosen@burda.com"
-                },
-                {
-                    "name": "Christian Fritsch",
-                    "homepage": "https://www.drupal.org/user/3511180",
-                    "email": "christian.fritsch@burda.com"
-                },
-                {
-                    "name": "Volker Killesreiter",
-                    "homepage": "https://www.drupal.org/user/57527",
-                    "email": "volker.killesreiter@burda.com"
-                },
-                {
-                    "name": "Alex Pott",
-                    "email": "alex.a.pott@gmail.com"
-                }
-            ],
-            "description": "Paragraphs features for extending paragraphs widget functionality.",
-            "homepage": "https://www.drupal.org/project/paragraphs_features",
-            "support": {
-                "source": "https://git.drupalcode.org/project/paragraphs_features"
             }
         },
         {
@@ -6803,7 +6177,7 @@
                     "homepage": "https://www.drupal.org/user/2229066"
                 },
                 {
-                    "name": "kent@passingphase.nz",
+                    "name": "NewZeal",
                     "homepage": "https://www.drupal.org/user/93571"
                 },
                 {
@@ -7176,25 +6550,26 @@
         },
         {
             "name": "enshrined/svg-sanitize",
-            "version": "0.15.4",
+            "version": "0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darylldoyle/svg-sanitizer.git",
-                "reference": "e50b83a2f1f296ca61394fe88fbfe3e896a84cf4"
+                "reference": "239e257605e2141265b429e40987b2ee51bba4b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/e50b83a2f1f296ca61394fe88fbfe3e896a84cf4",
-                "reference": "e50b83a2f1f296ca61394fe88fbfe3e896a84cf4",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/239e257605e2141265b429e40987b2ee51bba4b4",
+                "reference": "239e257605e2141265b429e40987b2ee51bba4b4",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
-                "php": "^7.0 || ^8.0"
+                "ezyang/htmlpurifier": "^4.16",
+                "php": "^5.6 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5 || ^8.5"
+                "phpunit/phpunit": "^5.7 || ^6.5 || ^8.5"
             },
             "type": "library",
             "autoload": {
@@ -7215,9 +6590,9 @@
             "description": "An SVG sanitizer for PHP",
             "support": {
                 "issues": "https://github.com/darylldoyle/svg-sanitizer/issues",
-                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.15.4"
+                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.16.0"
             },
-            "time": "2022-02-21T09:13:59+00:00"
+            "time": "2023-03-20T10:51:12+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -8994,16 +8369,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.12",
+            "version": "v0.11.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7"
+                "reference": "722317c9f5627e588788e340f29b923e58f92f54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/722317c9f5627e588788e340f29b923e58f92f54",
+                "reference": "722317c9f5627e588788e340f29b923e58f92f54",
                 "shasum": ""
             },
             "require": {
@@ -9064,9 +8439,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.12"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.13"
             },
-            "time": "2023-01-29T21:24:40+00:00"
+            "time": "2023-03-21T14:22:44+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -12120,105 +11495,6 @@
             "time": "2022-10-16T01:01:54+00:00"
         },
         {
-            "name": "vmlyr-drupal/bazo",
-            "version": "8.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VML/Drupal-Theme-Bazo.git",
-                "reference": "47de227d63d3cb540ea9038e2eb6135faf8cbb8c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VML/Drupal-Theme-Bazo/zipball/47de227d63d3cb540ea9038e2eb6135faf8cbb8c",
-                "reference": "47de227d63d3cb540ea9038e2eb6135faf8cbb8c",
-                "shasum": ""
-            },
-            "type": "drupal-theme",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "A base theme that adds helpful functionality to child-themes.",
-            "homepage": "https://github.com/VML/Drupal-Theme-Bazo",
-            "support": {
-                "issues": "https://github.com/VML/Drupal-Theme-Bazo/issues",
-                "source": "https://github.com/VML/Drupal-Theme-Bazo/tree/8.0.5"
-            },
-            "time": "2020-08-30T07:43:14+00:00"
-        },
-        {
-            "name": "vmlyr-drupal/biplane",
-            "version": "10.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VMLYR/Drupal-Profile-Biplane.git",
-                "reference": "9f93d1c5bb95a3f9c02231e9a411e7f99773e162"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VMLYR/Drupal-Profile-Biplane/zipball/9f93d1c5bb95a3f9c02231e9a411e7f99773e162",
-                "reference": "9f93d1c5bb95a3f9c02231e9a411e7f99773e162",
-                "shasum": ""
-            },
-            "type": "drupal-profile",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "Common configuration to fast-track site setup and development.",
-            "homepage": "https://github.com/VML/Drupal-Profile-Biplane",
-            "support": {
-                "issues": "https://github.com/VMLYR/Drupal-Profile-Biplane/issues",
-                "source": "https://github.com/VMLYR/Drupal-Profile-Biplane/tree/10.0.1"
-            },
-            "time": "2023-03-16T03:36:47+00:00"
-        },
-        {
-            "name": "vmlyr-drupal/blackbird",
-            "version": "10.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VMLYR/Drupal-Profile-Blackbird.git",
-                "reference": "0a5d48321ef3a76ee79e4296996e1bb34bc0e818"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VMLYR/Drupal-Profile-Blackbird/zipball/0a5d48321ef3a76ee79e4296996e1bb34bc0e818",
-                "reference": "0a5d48321ef3a76ee79e4296996e1bb34bc0e818",
-                "shasum": ""
-            },
-            "type": "drupal-profile",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Garrett Rathbone",
-                    "email": "garrett.rathbone@vml.com"
-                }
-            ],
-            "description": "An opinionated Drupal profile with helpful components to take care of repeated tasks for new websites.",
-            "homepage": "https://github.com/VML/Drupal-Profile-Blackbird",
-            "support": {
-                "issues": "https://github.com/VMLYR/Drupal-Profile-Blackbird/issues",
-                "source": "https://github.com/VMLYR/Drupal-Profile-Blackbird/tree/10.0.0"
-            },
-            "time": "2023-03-16T03:55:26+00:00"
-        },
-        {
             "name": "vmlyr-drupal/kit-docksal-commands",
             "version": "8.2.3",
             "source": {
@@ -12343,6 +11619,71 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "ajgl/breakpoint-twig-extension",
+            "version": "0.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ajgarlag/AjglBreakpointTwigExtension.git",
+                "reference": "9875feea0ac4bc3c9f308c62bae4727669d6052a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ajgarlag/AjglBreakpointTwigExtension/zipball/9875feea0ac4bc3c9f308c62bae4727669d6052a",
+                "reference": "9875feea0ac4bc3c9f308c62bae4727669d6052a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "twig/twig": "^1.34|^2.0|^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.18",
+                "symfony/framework-bundle": "^2.7|^3.4|^4.4|^5.2",
+                "symfony/phpunit-bridge": "^4.4|^5.2",
+                "symfony/twig-bundle": "^2.7|^3.4|^4.4|^5.2"
+            },
+            "suggest": {
+                "ext-xdebug": "The Xdebug extension is required for the breakpoint to work",
+                "symfony/framework-bundle": "The framework bundle to integrate the extension into Symfony",
+                "symfony/twig-bundle": "The twig bundle to integrate the extension into Symfony"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ajgl\\Twig\\Extension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio J. García Lagar",
+                    "email": "aj@garcialagar.es",
+                    "homepage": "http://aj.garcialagar.es",
+                    "role": "developer"
+                }
+            ],
+            "description": "Twig extension to set breakpoints",
+            "homepage": "https://github.com/ajgarlag/AjglBreakpointTwigExtension",
+            "keywords": [
+                "Xdebug",
+                "breakpoint",
+                "twig"
+            ],
+            "support": {
+                "issues": "https://github.com/ajgarlag/AjglBreakpointTwigExtension/issues",
+                "source": "https://github.com/ajgarlag/AjglBreakpointTwigExtension/tree/0.3.5"
+            },
+            "time": "2021-02-08T10:48:05+00:00"
+        },
         {
             "name": "amphp/amp",
             "version": "v2.6.2",
@@ -13242,16 +12583,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.5.4",
+            "version": "2.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "6b67eeea4d72051c369ccdbfb2423a56e2ab51a9"
+                "reference": "c7cffaad16a60636a776017eac5bd8cd0095c32f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/6b67eeea4d72051c369ccdbfb2423a56e2ab51a9",
-                "reference": "6b67eeea4d72051c369ccdbfb2423a56e2ab51a9",
+                "url": "https://api.github.com/repos/composer/composer/zipball/c7cffaad16a60636a776017eac5bd8cd0095c32f",
+                "reference": "c7cffaad16a60636a776017eac5bd8cd0095c32f",
                 "shasum": ""
             },
             "require": {
@@ -13335,7 +12676,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.5.4"
+                "source": "https://github.com/composer/composer/tree/2.5.5"
             },
             "funding": [
                 {
@@ -13351,7 +12692,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-15T12:10:06+00:00"
+            "time": "2023-03-21T10:50:05+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -13889,6 +13230,103 @@
                 "source": "https://github.com/drupal/core-dev/tree/10.0.5"
             },
             "time": "2023-02-23T15:40:18+00:00"
+        },
+        {
+            "name": "drupal/twig_vardumper",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/twig_vardumper.git",
+                "reference": "3.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/twig_vardumper-3.1.0.zip",
+                "reference": "3.1.0",
+                "shasum": "f573450d1792967cf2cea831b9a47b49f53a4162"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10",
+                "symfony/var-dumper": "^6|^5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.1.0",
+                    "datestamp": "1663153696",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Egiguren a.k.a keopx",
+                    "homepage": "https://www.drupal.org/user/377362",
+                    "email": "keopx@keopx.net"
+                }
+            ],
+            "description": "Twig vardumper provides a better dump() and vardumper() function that can help you debug Twig variables.",
+            "homepage": "https://www.drupal.org/project/twig_vardumper",
+            "keywords": [
+                "Development",
+                "Drupal",
+                "Twig"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/twig_vardumper",
+                "issues": "https://www.drupal.org/project/issues/twig_vardumper"
+            }
+        },
+        {
+            "name": "drupal/twig_xdebug",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/twig_xdebug.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/twig_xdebug-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "e1bfbd30d4345557fad95c8e4a6cbd725b3e7b31"
+            },
+            "require": {
+                "ajgl/breakpoint-twig-extension": "^0.3.4",
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1678817873",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "charginghawk",
+                    "homepage": "https://www.drupal.org/user/2626341"
+                }
+            ],
+            "description": "Enables Xdebug breakpoints in Twig.",
+            "homepage": "https://www.drupal.org/project/twig_xdebug",
+            "support": {
+                "source": "https://git.drupalcode.org/project/twig_xdebug"
+            }
         },
         {
             "name": "gitonomy/gitlib",
@@ -15195,16 +14633,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.6",
+            "version": "1.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a"
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
                 "shasum": ""
             },
             "require": {
@@ -15233,8 +14671,11 @@
                 "static analysis"
             ],
             "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.10.6"
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
             },
             "funding": [
                 {
@@ -15250,7 +14691,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T16:55:12+00:00"
+            "time": "2023-03-16T15:24:20+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -17777,13 +17218,11 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/advagg": 15,
-        "drupal/block_field": 5,
-        "drupal/classy_paragraphs": 20,
         "drupal/config_update": 15,
         "drupal/focal_point": 15,
+        "drupal/gin": 5,
         "drupal/imageapi_optimize_resmushit": 10,
         "drupal/linkit": 10,
-        "drupal/paragraphs_ee": 15,
         "drupal/viewsreference": 10
     },
     "prefer-stable": true,

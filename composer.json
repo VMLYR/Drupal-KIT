@@ -29,11 +29,7 @@
         "drupal/advagg": "^6.0@alpha",
         "drupal/allowed_formats": "^2.0",
         "drupal/better_exposed_filters": "^6.0",
-        "drupal/bg_image_formatter": "^1.16",
         "drupal/blazy": "^2.14",
-        "drupal/block_class": "^2.0",
-        "drupal/block_field": "^1.0@RC",
-        "drupal/classy_paragraphs": "^1.0@dev",
         "drupal/color": "^1.0",
         "drupal/config_ignore": "^2.4",
         "drupal/config_split": "^1.9",
@@ -42,26 +38,23 @@
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/core-vendor-hardening": "^10.0",
-        "drupal/current_page_crumb": "^1.4",
         "drupal/devel": "^5.1",
         "drupal/devel_entity_updates": "^4.1",
         "drupal/devel_php": "^1.5",
         "drupal/diff": "^1.1",
-        "drupal/editor_file": "^1.7",
         "drupal/email_registration": "^1.2",
         "drupal/entity_reference_revisions": "^1.10",
         "drupal/environment_indicator": "^4.0",
-        "drupal/extlink": "^1.7",
         "drupal/field_group": "^3.4",
         "drupal/field_label": "^1.2",
         "drupal/focal_point": "^2.0@alpha",
+        "drupal/gin": "^3.0@RC",
         "drupal/google_tag": "^1.6",
         "drupal/imageapi_optimize": "^4.0",
         "drupal/imageapi_optimize_resmushit": "^2.0@beta",
         "drupal/limited_field_widgets": "^2.0",
         "drupal/linkit": "^6.0@beta",
         "drupal/login_emailusername": "^2.1",
-        "drupal/media_responsive_thumbnail": "^1.4",
         "drupal/memcache": "^2.5",
         "drupal/menu_link_attributes": "^1.3",
         "drupal/menu_trail_by_path": "^2.0",
@@ -70,8 +63,6 @@
         "drupal/migrate_plus": "^6.0",
         "drupal/migrate_tools": "^6.0",
         "drupal/module_filter": "^4.0",
-        "drupal/paragraphs": "^1.15",
-        "drupal/paragraphs_ee": "^2.1@alpha",
         "drupal/pathauto": "^1.11",
         "drupal/permissions_filter": "^1.3",
         "drupal/rdf": "^2.1",
@@ -93,14 +84,13 @@
         "egulias/email-validator": "^3.2",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1",
         "vlucas/phpdotenv": "^5.5",
-        "vmlyr-drupal/bazo": "^8.0",
-        "vmlyr-drupal/biplane": "^10.0",
-        "vmlyr-drupal/blackbird": "^10.0",
         "vmlyr-drupal/kit-docksal-commands": "^8.2",
         "webflo/drupal-finder": "^1.2"
     },
     "require-dev": {
         "drupal/core-dev": "^10.0",
+        "drupal/twig_vardumper": "^3.1",
+        "drupal/twig_xdebug": "^1.2",
         "nascom/grumphp-drupal": "^1.0"
     },
     "conflict": {
@@ -212,20 +202,11 @@
                 "https://www.drupal.org/project/drupal/issues/2663316": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch",
                 "https://www.drupal.org/node/3006729": "https://www.drupal.org/files/issues/2022-12-23/30067291-23.patch"
             },
-            "drupal/layout_paragraphs": {
-                "https://www.drupal.org/node/3199508": "https://www.drupal.org/files/issues/2021-03-11/3199508-2.patch"
-            },
             "drupal/linkit": {
                 "https://www.drupal.org/project/linkit/issues/2712951": "https://www.drupal.org/files/issues/2023-03-07/2712951_329.6.x.diff"
             },
-            "drupal/simple_gmap": {
-                "https://www.drupal.org/node/2863979": "https://www.drupal.org/files/issues/2018-11-21/simple_gmap-address-formatter-2863979-36.patch"
-            },
             "drupal/viewsreference": {
                 "https://www.drupal.org/node/3192468": "https://www.drupal.org/files/issues/2021-01-12/3192468-2.patch"
-            },
-            "drupal/viewsreference_filter": {
-                "https://www.drupal.org/node/3192458": "https://www.drupal.org/files/issues/2021-01-12/3192458-2.patch"
             }
         },
         "patchLevel": {
