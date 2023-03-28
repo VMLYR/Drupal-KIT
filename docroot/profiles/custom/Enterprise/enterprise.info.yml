@@ -3,7 +3,7 @@ type: profile
 description: 'Layout Builder enabled profile for > Drupal 10'
 core_version_requirement: '^10'
 distribution:
-  name: VMLYR Kit - Enterprise
+  name: Enterprise
 dependencies:
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_links_access_filter
