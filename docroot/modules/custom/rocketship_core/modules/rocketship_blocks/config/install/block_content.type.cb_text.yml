@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_text
+label: Text
+revision: 0
+description: 'Add a block of text with some optional fields, such as title, teaser, …'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_text.svg

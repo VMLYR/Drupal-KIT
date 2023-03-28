@@ -1,0 +1,95 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_usp
+    - field.field.block_content.cb_usp.field_cb_button
+    - field.field.block_content.cb_usp.field_cb_image_wrapper_link
+    - field.field.block_content.cb_usp.field_cb_media
+    - field.field.block_content.cb_usp.field_cb_text
+    - field.field.block_content.cb_usp.field_cb_title
+  module:
+    - field_formatter
+    - field_group
+    - link
+    - rocketship_core
+    - text
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - field_cb_title
+        - field_cb_text
+        - field_cb_button
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: cb-usp-content
+      label: Content
+id: block_content.cb_usp.default
+targetEntityType: block_content
+bundle: cb_usp
+mode: default
+content:
+  field_cb_button:
+    type: link
+    weight: 8
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_cb_media:
+    type: field_formatter_with_inline_settings
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      field_name: field_media_image
+      label: hidden
+      type: drimage
+      settings:
+        image_link: ''
+        image_handling: aspect_ratio
+        aspect_ratio:
+          width: '3'
+          height: '2'
+        background:
+          attachment: scroll
+          position: 'center center'
+          size: cover
+      link_to_entity: false
+    third_party_settings: {  }
+  field_cb_text:
+    type: text_default
+    weight: 7
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_cb_title:
+    type: header_text_field_formatter
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      header: h3
+    third_party_settings: {  }
+hidden:
+  field_cb_image_wrapper_link: true
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_text
+    - field.field.block_content.cb_text.field_cb_button
+    - field.field.block_content.cb_text.field_cb_teaser
+    - field.field.block_content.cb_text.field_cb_text
+    - field.field.block_content.cb_text.field_cb_text_alignment
+    - field.field.block_content.cb_text.field_cb_title
+  module:
+    - link
+    - text
+id: block_content.cb_text.default
+targetEntityType: block_content
+bundle: cb_text
+mode: default
+content:
+  field_cb_button:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_teaser:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_cb_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_cb_text_alignment:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_cb_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  translation: true

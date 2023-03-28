@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.video
+label: Video
+targetEntityType: media
+cache: true

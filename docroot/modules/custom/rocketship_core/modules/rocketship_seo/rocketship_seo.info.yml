@@ -1,0 +1,29 @@
+name: 'Rocketship SEO'
+description: 'Provides SEO features and settings.'
+type: module
+dependencies:
+  - google_tag:google_tag
+  - metatag:metatag
+  - metatag:metatag_facebook
+  - metatag:metatag_hreflang
+  - metatag:metatag_mobile
+  - metatag:metatag_open_graph
+  - metatag:metatag_twitter_cards
+  - metatag:metatag_verification
+  - drupal:rdf
+  - schema_metatag:schema_article
+  - schema_metatag:schema_item_list
+  - schema_metatag:schema_metatag
+  - schema_metatag:schema_web_page
+  - schema_metatag:schema_web_site
+  - simple_sitemap:simple_sitemap (>=3.1)
+  - rocketship_core:rocketship_core
+  - config_rewrite:config_rewrite
+  - metatag_async_widget:metatag_async_widget
+package: Rocketship
+core_version_requirement: '^8.8 || ^9 || ^10'
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

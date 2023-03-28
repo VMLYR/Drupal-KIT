@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.drimage_4_3
+    - field.field.media.image.field_media_image
+    - media.type.image
+  module:
+    - drimage
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: media.image.drimage_4_3
+targetEntityType: media
+bundle: image
+mode: drimage_4_3
+content:
+  field_media_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_link: ''
+      image_handling: aspect_ratio
+      aspect_ratio:
+        width: '4'
+        height: '3'
+      background:
+        attachment: scroll
+        position: 'center center'
+        size: cover
+      image_style: ''
+    third_party_settings: {  }
+    type: drimage
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

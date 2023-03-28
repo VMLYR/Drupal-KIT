@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_xs_wide
+label: '4:3 portrait xs wide [480×640]'
+effects:
+  e6cc1b10-f75a-413f-bb32-4caace924ee4:
+    uuid: e6cc1b10-f75a-413f-bb32-4caace924ee4
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 640
+      crop_type: focal_point

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_md
+label: 'Scale width md [1024]'
+effects:
+  606324a2-cc3a-4c5d-9c4d-0e8e5dd3ccf9:
+    uuid: 606324a2-cc3a-4c5d-9c4d-0e8e5dd3ccf9
+    id: image_scale
+    weight: 1
+    data:
+      width: 1024
+      height: null
+      upscale: false

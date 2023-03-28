@@ -1,0 +1,144 @@
+<?php
+
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_requirements().
+ */
+function rocketship_core_requirements($phase) {
+  $requirements = [];
+
+  if ($phase !== 'runtime') {
+    return $requirements;
+  }
+
+  // Check if project name constant is filled in. But only if the constant
+  // is defined. If people want to not use general.settings.php or our
+  // etc settings files then this requirement makes no sense.
+  if (defined('ROCKETSHIP_PROJECT_NAME')) {
+    $drupal_root_parent = dirname(DRUPAL_ROOT);
+    $requirements['rocketship_project_name'] = [
+      'title' => t('Rocketship: Project Name Constant'),
+      'value' => t('Project Name Constant is filled in.'),
+      'description' => t('The "ROCKETSHIP_PROJECT_NAME" constant has been filled in in :var/etc/drupal/general.settings.php', [':var' => $drupal_root_parent]),
+      'severity' => REQUIREMENT_OK,
+    ];
+    if (!ROCKETSHIP_PROJECT_NAME) {
+      $requirements['rocketship_project_name'] = [
+        'title' => t('Rocketship: Project Name Constant'),
+        'value' => t('Project Name Constant is not filled in.'),
+        'description' => t('The "ROCKETSHIP_PROJECT_NAME" constant has not been filled in in :var/etc/drupal/general.settings.php', [':var' => $drupal_root_parent]),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function rocketship_core_install() {
+  // Try and get the config for blazy, if present
+  // set support for responsive images to true.
+  // If not present, we're presumably in a config import
+  // situation and it's fine.
+  $blazySettings = \Drupal::configFactory()->getEditable('blazy.settings');
+  if (!$blazySettings->isNew()) {
+    $blazySettings->set('responsive_image', TRUE);
+    $blazySettings->save();
+  }
+}
+
+/**
+ * Install new configuration
+ */
+function rocketship_core_update_8001(&$sandbox) {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('rocketship_core.settings');
+  $config->set('allow_header_paragraph_on_homepage', FALSE);
+  $config->save(TRUE);
+}
+
+/**
+ * Remove kint from key_value store, new devel version doesn't use it anymore.
+ */
+function rocketship_core_update_8002() {
+  $modules = [
+    'kint',
+  ];
+  \Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', $modules, 'IN')
+    ->execute();
+}
+
+/**
+ * Remove kint from enabled extensions.
+ */
+function rocketship_core_update_8003() {
+  $configs = [
+    'core.extension',
+    'config_split.config_split.dev',
+    'config_split.config_split.local',
+  ];
+
+  foreach ($configs as $config_name) {
+    $config = \Drupal::configFactory()
+      ->getEditable($config_name);
+    $modules = $config->get('module');
+    if (array_key_exists('kint', $modules)) {
+      unset($modules['kint']);
+      $config->set('module', $modules);
+      $config->save();
+    }
+  }
+}
+
+/**
+ * Update all existing migrates to update deprecated code.
+ */
+function rocketship_core_update_8004() {
+
+  function _update_plugin_iterator_to_sub_process(&$item) {
+    foreach ($item as $key => &$plugin) {
+      if (is_array($plugin)) {
+        _update_plugin_iterator_to_sub_process($plugin);
+      }
+      if ($key === 'plugin' && $plugin === 'iterator') {
+        $plugin = 'sub_process';
+      }
+    }
+  }
+
+  $path = Settings::get('config_sync_directory');
+  $storage = new FileStorage($path);
+  $configFactory = Drupal::configFactory();
+
+  $names = $storage->listAll('migrate_plus.migration');
+
+  $messenger = \Drupal::messenger();
+
+  foreach ($names as $name) {
+    $config = $configFactory->getEditable($name);
+    $item = $config->get();
+
+    $messenger->addStatus("Checking $name");
+    if (isset($item['process'])) {
+      _update_plugin_iterator_to_sub_process($item['process']);
+    }
+    if (isset($item['source']['plugin']) && $item['source']['plugin'] === 'csv') {
+      if (isset($item['source']['header_row_count'])) {
+        $item['source']['header_offset'] = $item['source']['header_row_count'] - 1;
+        unset($item['source']['header_row_count']);
+      }
+      if (isset($item['source']['keys'])) {
+        $item['source']['ids'] = $item['source']['keys'];
+        unset($item['source']['keys']);
+      }
+    }
+    $config->setData($item)->save(TRUE);
+  }
+}

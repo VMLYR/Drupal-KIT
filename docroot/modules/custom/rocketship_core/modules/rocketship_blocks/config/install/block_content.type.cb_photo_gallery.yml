@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_photo_gallery
+label: 'Photo Gallery'
+revision: 0
+description: 'Add images to your page in a clean, mobile-friendly way. Choose between a simple grid or a fancy masonry effect.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_photo_gallery.svg

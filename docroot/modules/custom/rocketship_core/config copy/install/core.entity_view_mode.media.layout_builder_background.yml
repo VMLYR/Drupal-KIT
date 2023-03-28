@@ -1,0 +1,10 @@
+uuid: 1ed1b1ca-8897-48ac-9fcc-e5da0819a6aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.layout_builder_background
+label: 'Layout Builder Background'
+targetEntityType: media
+cache: true

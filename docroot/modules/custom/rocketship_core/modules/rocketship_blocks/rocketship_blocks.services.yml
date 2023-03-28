@@ -1,0 +1,10 @@
+services:
+  rocketship_blocks.route_subscriber:
+    class: Drupal\rocketship_blocks\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  rocketship_blocks.template_migrate_subscriber:
+    class: Drupal\rocketship_blocks\EventSubscriber\RocketshipBlocksSectionLibraryTemplateMigrateSubscriber
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@logger.factory', '@inline_block.usage']
+    tags:
+      - { name: event_subscriber }

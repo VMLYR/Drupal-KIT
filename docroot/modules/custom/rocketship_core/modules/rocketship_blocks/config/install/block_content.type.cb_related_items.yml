@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_related_items
+label: 'Related Items'
+revision: 0
+description: 'Select other pages that are related to this one, and they''ll be shown in a visually interesting list.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_related_items.svg

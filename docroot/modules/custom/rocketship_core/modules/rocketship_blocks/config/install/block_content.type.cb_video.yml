@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_video
+label: Video
+revision: 0
+description: 'Integrate a YouTube or Vimeo video on your page.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_video.svg

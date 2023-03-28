@@ -1,0 +1,50 @@
+id: rocketship_blocks_content_block_content_cb_image
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_block_content_cb_image.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  info:
+    -
+      plugin: get
+      source: info
+  reusable:
+    -
+      plugin: get
+      source: reusable
+  field_cb_image_wrapper_link/title:
+    -
+      plugin: get
+      source: field_cb_image_wrapper_link_title
+  field_cb_image_wrapper_link/uri:
+    -
+      plugin: get
+      source: field_cb_image_wrapper_link_uri
+  field_cb_media:
+    -
+      plugin: migration_lookup
+      migration:
+        - rocketship_blocks_content_media_image
+      source: field_cb_media
+  field_cb_media_layout:
+    -
+      plugin: get
+      source: field_cb_media_layout
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: cb_image
+migration_dependencies:
+  required:
+    - rocketship_blocks_content_media_image
+  optional: {  }

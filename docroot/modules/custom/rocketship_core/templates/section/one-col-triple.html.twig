@@ -1,0 +1,132 @@
+{% set minimal_styling = settings.minimal_styling ?? false %}
+{% set modifier = modifier ?? false %}
+{% if (attributes['data-bem-modifier']|trim is not empty) %}
+  {% set modifier = attributes['data-bem-modifier']|clean_class %}
+{% endif %}
+{% set label = settings.label ?? false %}
+{% if label %}
+  {% set label = settings.label|clean_class %}
+{% endif %}
+{% set template = layout.template ?? false %}
+{% if template %}
+  {% set template = layout.template|clean_class %}
+{% endif %}
+
+{# Variant options #}
+{% set background_stretched = settings.backgrounds_full|default(true) %}
+{% set background_color = false %}
+{% if settings.background_color and settings.background_color != '_none' %}
+  {% set background_color = settings.background_color|split('/')[0] %}
+{% else %}
+  {% set background_color = false %}
+{% endif %}
+{% set background_image = false %}
+{% if content.layout_background_image %}
+  {% set background_image = true %}
+{% endif %}
+{% set section_spacing_top = settings.top_layout_spacing ?? 1 %}
+{% set section_spacing_bottom = settings.bottom_layout_spacing ?? 1 %}
+{% set section_purpose = settings.section_purpose ?? 'content' %}
+
+{# Classes on layout wrapper #}
+
+{% set classes = [
+    'layout',
+    'layout-section',
+    'layout' ~ '--' ~ '1-col',
+    modifier ? 'layout' ~ '--mod-' ~ modifier,
+    label ? 'layout' ~ '--' ~ 'label-' ~ label,
+] %}
+
+{% if minimal_styling %}
+  {% set classes = classes|merge([
+    template ? 'layout' ~ '--' ~ template,
+  ]) %}
+{% else %}
+  {% set classes = classes|merge([
+    'layout' ~ '--' ~ 'content-blocks',
+    'layout--1-col--content-blocks',
+    section_spacing_top ? 'layout' ~ '--' ~ 'v-space-top-'  ~ section_spacing_top,
+    section_spacing_bottom ? 'layout' ~ '--' ~ 'v-space-bottom-' ~ section_spacing_bottom,
+    background_stretched ? 'layout--bg-stretched',
+    background_color or background_image ? 'layout--bg',
+    background_image ? 'layout--bg-image',
+    background_color ? 'layout--bg-color',
+    background_color ? 'layout--bg--' ~ background_color,
+  ]) %}
+{% endif %}
+
+{# Classes on region wrappers #}
+
+{% set region_classes = [
+  'layout-builder__region',
+  'layout__region',
+  'layout__region' ~ '--' ~ '1-col',
+  modifier ? 'layout__region' ~ '--mod-' ~ modifier,
+] %}
+
+{% if layout_reset == false %}
+  {% set region_classes = region_classes|merge([
+    'layout__region'  ~ '--' ~ 'content-blocks',
+    'layout__region'  ~ '--' ~ '1-col' ~ '--content-blocks'
+  ]) %}
+{% endif %}
+
+{% if section_purpose %}
+  {% if section_purpose == 'header' or section_purpose == 'footer' or section_purpose == 'aside' %}
+    {% set region_classes = region_classes|merge([
+      'layout__region'  ~ '--' ~ 'type-' ~ section_purpose,
+      modifier ? 'layout__region'  ~ '--' ~ 'type-' ~ section_purpose ~ '--mod-' ~ modifier
+    ]) %}
+  {% endif %}
+{% endif %}
+
+{# Classes on individual regions #}
+
+{% set topclasses = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--top',
+    modifier ?  'layout__content__row' ~ '--mod-' ~ modifier,
+    modifier ?  'layout__content__row--top' ~ '--mod-' ~ modifier,
+]) %}
+
+{% set mainclasses = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--main',
+    modifier ?  'layout__content__row' ~ '--mod-' ~ modifier,
+    modifier ?  'layout__content__row--main' ~ '--mod-' ~ modifier,
+]) %}
+
+{% set bottomclasses = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--bottom',
+    modifier ?  'layout__content__row' ~ '--mod-' ~ modifier,
+    modifier ?  'layout__content__row--bottom' ~ '--mod-' ~ modifier,
+]) %}
+
+{% if content.center_top or content.center_main or content.center_bottom %}
+    <div{{ attributes.addClass(classes) }}>
+
+      {% if content.center_top %}
+        <div {{ region_attributes.center_top.addClass(topclasses) }}>
+          {{ content.center_top }}
+        </div>
+      {% endif %}
+
+      {% if content.center_main %}
+        <div {{ region_attributes.center_main.addClass(mainclasses) }}>
+          {{ content.center_main }}
+        </div>
+      {% endif %}
+
+      {% if content.center_bottom %}
+        <div {{ region_attributes.center_bottom.addClass(bottomclasses) }}>
+          {{ content.center_bottom }}
+        </div>
+      {% endif %}
+
+      {% if content.layout_background_image %}
+        {{ content.layout_background_image }}
+      {% endif %}
+    </div>
+{% endif %}

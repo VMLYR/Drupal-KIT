@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_focus
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: block_content.cb_focus
+target_entity_type_id: block_content
+target_bundle: cb_focus
+default_langcode: current_interface
+language_alterable: false

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: site_branding
+label: 'Site branding'
+revision: 0
+description: ''

@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * Contains custom hooks for Rocketship Social Widgets module.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * Implements HOOK_theme().
+ */
+
+function rocketship_social_widgets_theme($existing, $type, $theme, $path) {
+  return [
+    'rocketship_social_widget_extra_field' => [
+      'variables' => [
+        'links' => NULL,
+        'attributes' => [],
+      ],
+      'template' => 'rocketship-social-widget-extra-field',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function rocketship_social_widgets_entity_extra_field_info() {
+  $extra = [];
+  foreach (NodeType::loadMultiple() as $bundle) {
+    $extra['node'][$bundle->Id()]['display']['rocketship_social_widgets'] = [
+      'label' => t('Social sharing widgets'),
+      'description' => t('Shows social media sharing links.'),
+      'weight' => 100,
+      'visible' => TRUE,
+    ];
+  }
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function rocketship_social_widgets_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('rocketship_social_widgets')) {
+    $entity_url = $entity->toUrl();
+    $entity_url->setAbsolute();
+    $socialShareLinksManager = Drupal::service('rocketship_social_widgets.manager');
+    $links = $socialShareLinksManager->getSocialShareLinks();
+    $build['rocketship_social_widgets'] = rocketship_social_widgets_build_links($links);
+  }
+}
+
+/**
+ * Helper function to build social media links.
+ */
+function rocketship_social_widgets_build_links($share_links, $enabled_links = []) {
+  // Prepare build, if links is empty return build with a cache tag,
+  // so it will get refreshed after updating module configuration.
+  $build = [
+    '#theme' => 'rocketship_social_widget_extra_field',
+    '#links' => [],
+  ];
+  $link_tags = \Drupal::entityTypeManager()->getStorage('social_share_link')->getEntityType()->getListCacheTags();
+  $build['#cache']['tags'] = $link_tags;
+  if (empty($share_links)) {
+    return $build;
+  }
+
+  // Check if we need to check the enabled links
+  $enabled_links_check = (empty($enabled_links)) ? FALSE : TRUE;
+  $all_links_disabled = TRUE;
+  foreach ($enabled_links as $key => $value) {
+    $all_links_disabled = (!$value) ? $all_links_disabled : FALSE;
+  }
+  $enabled_links_check = (empty($enabled_links) || $all_links_disabled) ? FALSE : TRUE;
+
+  // Loop through configured widgets and prepare social share links.
+  foreach ($share_links as $share_link) {
+    // Check if the link should be rendered
+    if ($enabled_links_check) {
+      if (!isset($enabled_links[$share_link->id()]) || !$enabled_links[$share_link->id()]) {
+        continue;
+      }
+    }
+
+    // Build link using sharer URL and absolute path of current page,
+    // add service-specific classes for easier theming.
+    $full_path = \Drupal::token()->replace($share_link->get('sharer_url'), [], ['clear' => TRUE]);
+    $link = [
+      '#type' => 'html_tag',
+      '#tag' => 'a',
+      '#value' => $share_link->label(),
+      '#attributes' => [
+        'href' => $full_path,
+        'target' => $share_link->get('target'),
+        'class' => [
+          $share_link->id,
+        ],
+      ]
+    ];
+    if (!empty($share_link->get('onclick'))) {
+      $link['#attributes']['onclick'] = $share_link->get('onclick');
+    }
+
+    $build['#links'][$share_link->id()] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'widget',
+          'social-link',
+          $share_link->id(),
+        ],
+      ],
+      '#children' => $link,
+    ];
+  }
+
+  return $build;
+}
+
+/**
+ * Helper function to sort the Social Share Links
+ */
+function _sort_social_share_links($a, $b) {
+  return ($a->weight < $b->weight) ? -1 : (($a->weight > $b->weight) ? 1 : 0);
+}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_usp
+    - field.storage.block_content.field_cb_button
+  module:
+    - link
+id: block_content.cb_usp.field_cb_button
+field_name: field_cb_button
+entity_type: block_content
+bundle: cb_usp
+label: Button
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

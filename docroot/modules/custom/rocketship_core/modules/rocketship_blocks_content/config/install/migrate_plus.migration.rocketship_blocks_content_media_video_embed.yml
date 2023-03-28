@@ -1,0 +1,31 @@
+id: rocketship_blocks_content_media_video_embed
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_media_video_embed.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  name:
+    -
+      plugin: get
+      source: name
+  field_media_video_embed_field:
+    -
+      plugin: get
+      source: field_media_video_embed_field
+destination:
+  plugin: 'entity:media'
+  default_bundle: video_embed
+migration_dependencies:
+  required: {  }
+  optional: {  }

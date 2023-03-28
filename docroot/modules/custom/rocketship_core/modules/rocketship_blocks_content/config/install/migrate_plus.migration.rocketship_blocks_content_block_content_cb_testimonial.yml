@@ -1,0 +1,66 @@
+id: rocketship_blocks_content_block_content_cb_testimonial
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_block_content_cb_testimonial.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  info:
+    -
+      plugin: get
+      source: info
+  reusable:
+    -
+      plugin: get
+      source: reusable
+  field_cb_boxed:
+    -
+      plugin: get
+      source: field_cb_boxed
+  field_cb_extra_rule:
+    -
+      plugin: get
+      source: field_cb_extra_rule
+  field_cb_link/title:
+    -
+      plugin: get
+      source: field_cb_link_title
+  field_cb_link/uri:
+    -
+      plugin: get
+      source: field_cb_link_uri
+  field_cb_media:
+    -
+      plugin: migration_lookup
+      migration:
+        - rocketship_blocks_content_media_image
+      source: field_cb_media
+  field_cb_name:
+    -
+      plugin: get
+      source: field_cb_name
+  field_cb_text/format:
+    -
+      plugin: get
+      source: field_cb_text_format
+  field_cb_text/value:
+    -
+      plugin: get
+      source: field_cb_text_value
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: cb_testimonial
+migration_dependencies:
+  required:
+    - rocketship_blocks_content_media_image
+  optional: {  }

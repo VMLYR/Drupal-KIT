@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: social_small
+label: 'Social Small'
+effects:
+  4395195b-9b72-48b0-8889-293c347dbf17:
+    uuid: 4395195b-9b72-48b0-8889-293c347dbf17
+    id: image_scale
+    weight: 1
+    data:
+      width: 160
+      height: 160
+      upscale: false

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_form
+    - field.field.block_content.cb_form.field_cb_webform
+  module:
+    - webform
+id: block_content.cb_form.default
+targetEntityType: block_content
+bundle: cb_form
+mode: default
+content:
+  field_cb_webform:
+    weight: 1
+    label: hidden
+    settings:
+      source_entity: true
+    third_party_settings: {  }
+    type: webform_entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

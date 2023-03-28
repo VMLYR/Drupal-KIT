@@ -1,0 +1,307 @@
+<?php
+
+/**
+ * @file
+ * Contains menu clickthrough module functionality.
+ */
+
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityForm;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\system\Entity\Menu;
+use Drupal\system\MenuInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function menu_clickthrough_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+  switch ($entity_type->id()) {
+    case 'menu_link_content':
+      $fields['menu_clickthrough_description'] = BaseFieldDefinition::create('text_long')
+        ->setLabel(t('Teaser'))
+        ->setDescription(t('This text is used in menu clickthrough.'))
+        ->setTranslatable(TRUE)
+        ->setDisplayOptions('form', [
+          'type' => 'text_textarea',
+          'weight' => 0,
+        ])
+        ->setDisplayOptions('view', [
+          'label' => 'hidden',
+          'type' => 'text_default',
+          'weight' => 0,
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+      $fields['menu_clickthrough_image'] = BaseFieldDefinition::create('entity_reference')
+        ->setLabel(t('Teaser image'))
+        ->setDescription(t('This image is used in menu clickthrough.'))
+        ->setTranslatable(TRUE)
+        ->setSetting('target_type', 'media')
+        ->setSetting('handler', 'default')
+        ->setSetting('handler_settings', [
+          'target_bundles' => ['image' => 'image'],
+          'sort' => ['field' => '_none'],
+          'auto_create' => TRUE,
+          'auto_create_bundle' => '',
+        ])
+        ->setTranslatable(TRUE)
+        ->setDisplayOptions('form', [
+          'type' => 'media_library_widget',
+          'weight' => 5,
+          'settings' => [
+            'media_types' => ['image'],
+          ],
+        ])
+        ->setDisplayOptions('view', [
+          'label' => 'hidden',
+          'type' => 'blazy_media',
+          'weight' => 0,
+          'region' => 'content',
+          'settings' => [
+            "grid_medium" => 0,
+            "image" => "",
+            "image_style" => "image_style_p005_avatar",
+            "box_style" => "",
+            "skin" => "",
+            "responsive_image_style" => "",
+            "id" => "",
+            "style" => "",
+            "ratio" => "",
+            "title" => "",
+            "optionset" => "default",
+            "cache" => 0,
+            "breakpoints" => [
+              "xs" => [
+                "width" => "",
+                "image_style" => "",
+              ],
+              "md" => [
+                "width" => "",
+                "image_style" => "",
+              ],
+              "sm" => [
+                "width" => "",
+                "image_style" => "",
+              ],
+              "xl" => [
+                "width" => "",
+                "image_style" => "",
+              ],
+              "lg" => [
+                "width" => "",
+                "image_style" => "",
+              ],
+            ],
+            "current_view_mode" => "default",
+            "thumbnail_style" => "",
+            "grid_header" => "",
+            "box_media_style" => "",
+            "media_switch" => "",
+            "box_caption" => "",
+            "view_mode" => "default",
+            "grid" => 0,
+            "background" => FALSE,
+            "layout" => "",
+            "class" => "",
+            "icon" => "",
+            "grid_small" => 0,
+            "sizes" => "",
+            "vanilla" => FALSE,
+            "overlay" => "",
+            "caption" => [
+              "field_media_image" => "0",
+            ],
+            "link" => "",
+            "box_caption_custom" => "",
+          ],
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+      break;
+  }
+  return $fields;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function menu_clickthrough_module_implements_alter(&$implementations, $hook) {
+  if ($hook === 'form_alter' && isset($implementations['menu_clickthrough'])) {
+    $group = $implementations['menu_clickthrough'];
+    unset($implementations['menu_clickthrough']);
+    $implementations['menu_clickthrough'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function menu_clickthrough_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form_object = $form_state->getFormObject();
+  if ($form_object instanceof EntityForm) {
+    // Prevent alternations on delete forms.
+    if (strpos($form_id, '_delete_') !== FALSE) {
+      return;
+    }
+    $entity = $form_object->getEntity();
+    $entity_type = $entity->getEntityTypeId();
+    switch ($entity_type) {
+      case 'menu_link_content':
+        /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+        _menu_clickthrough_hide_menu_link_content_field_form($entity, $form);
+        break;
+
+      case 'menu':
+        /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $entity */
+        _menu_clickthrough_add_menu_field_form($entity, $form);
+        break;
+
+      case 'node':
+        /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+        _menu_clickthrough_add_node_field_form($entity, $form);
+        break;
+    }
+  }
+}
+
+/**
+ * Add stuff to form.
+ *
+ * @param \Drupal\Core\Config\Entity\ConfigEntityInterface $entity
+ *   Entity.
+ * @param array $form
+ *   Form.
+ */
+function _menu_clickthrough_add_menu_field_form(ConfigEntityInterface $entity, array &$form) {
+  $access = \Drupal::currentUser()
+    ->hasPermission('administer menu clickthrough settings');
+
+  // Add third party settings.
+  $form['third_party_settings']['#tree'] = TRUE;
+  $form['third_party_settings']['menu_clickthrough']['clickthrough_enabled'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Clickthrough enabled'),
+    '#description' => t('This will enable menu links in this menu to have a description.'),
+    '#default_value' => $entity->getThirdPartySetting('menu_clickthrough', 'clickthrough_enabled', FALSE),
+    '#access' => $access,
+  ];
+}
+
+/**
+ * Hides menu link content field.
+ *
+ * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+ *   The entity.
+ * @param array $form
+ *   The form.
+ */
+function _menu_clickthrough_hide_menu_link_content_field_form(ContentEntityInterface $entity,
+                                                              array &$form) {
+  /** @var \Drupal\menu_link_content\MenuLinkContentInterface $entity */
+  /** @var \Drupal\menu_clickthrough\Menu\MenuHelperInterface $menu_helper */
+  $menu_helper = \Drupal::service('menu_clickthrough.menu_helper');
+  if ($name = $entity->getMenuName()) {
+    $menu = Menu::load($entity->getMenuName());
+    if (!$menu_helper->isClickthroughEnabled($menu)) {
+      // Hide our fields.
+      unset($form['menu_clickthrough_description']);
+      unset($form['menu_clickthrough_image']);
+    }
+  }
+}
+
+/**
+ * Alter for node add form.
+ *
+ * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+ *   Entity.
+ * @param array $form
+ *   Form.
+ */
+function _menu_clickthrough_add_node_field_form(ContentEntityInterface $entity, array &$form) {
+  /** @var \Drupal\node\NodeInterface $entity */
+  if (isset($form['menu'])) {
+    /** @var \Drupal\menu_clickthrough\Menu\MenuHelperInterface $menu_helper */
+    $menu_helper = \Drupal::service('menu_clickthrough.menu_helper');
+
+    $menu = $menu_helper->getNodeEnabledMenu($entity);
+    if ($menu) {
+      // Only support for description at the moment. Getting an image field
+      // for a separate entity into another entity's edit form has proven to be
+      // ... a goddamn nightmare.
+      $menu_link_content = $menu_helper->getMenuLinkFromNode($entity);
+      $element = $menu_helper->getMenuClickthroughElement($menu, $menu_link_content);
+      $element['#description'] .= ' ' . t('You can also upload an image if you edit this link through the menu itself.');
+      $form['menu']['menu_clickthrough_description'] = $element;
+
+      // Hide clickthrough if the menu item isn't enabled.
+      $form['menu']['menu_clickthrough_description']['#states'] = [
+        'invisible' => [
+          'input[name="menu[enabled]"]' => ['checked' => FALSE],
+        ],
+      ];
+
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'menu_clickthrough_form_node_form_submit';
+        }
+      }
+
+    }
+  }
+}
+
+/**
+ * Form submit callback.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function menu_clickthrough_form_node_form_submit(array $form, FormStateInterface $form_state) {
+  if (!$form_state->isValueEmpty('menu')) {
+    $values = $form_state->getValue('menu');
+    /** @var \Drupal\Core\Entity\EntityForm $form_object */
+    $form_object = $form_state->getFormObject();
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $form_object->getEntity();
+    /** @var \Drupal\menu_clickthrough\Menu\MenuHelperInterface $menu_helper */
+    $menu_helper = \Drupal::service('menu_clickthrough.menu_helper');
+
+    $menu_link_content = $menu_helper->getMenuLinkFromNode($node);
+    // If no menu link content entity is found this means the node has no link
+    // and thus we can skip further execution.
+    if ($menu_link_content) {
+      $menu_link_content->set('menu_clickthrough_description', $values['menu_clickthrough_description']);
+      $menu_link_content->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function menu_clickthrough_theme($existing, $type, $theme, $path) {
+  return [
+    'menu_clickthrough_overview' => [
+      'variables' => [
+        'items' => NULL,
+      ],
+    ],
+    'menu_clickthrough_item' => [
+      'variables' => [
+        'title' => NULL,
+        'description' => NULL,
+        'link' => NULL,
+        'image' => NULL,
+      ],
+    ],
+  ];
+}

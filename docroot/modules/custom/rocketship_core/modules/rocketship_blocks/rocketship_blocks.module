@@ -1,0 +1,382 @@
+<?php
+
+use Drupal\block_content\BlockContentInterface;
+use Drupal\block_content\BlockContentTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * @file
+ * Main module file.
+ */
+
+/**
+ * Implements hook_themes_installed().
+ */
+function rocketship_blocks_themes_installed($theme_list) {
+  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $handler */
+  $handler = Drupal::service('theme_handler');
+
+  foreach ($theme_list as $theme) {
+    $info = $handler->getTheme($theme);
+    if (isset($info->info['package']) && $info->info['package'] == 'Rocketship Theme') {
+      rocketship_blocks_place_default_blocks($info);
+    }
+  }
+}
+
+/**
+ * Place our blocks in the footer region of the provided theme.
+ *
+ * @param \Drupal\Core\Extension\Extension $theme
+ *   Theme name.
+ */
+function rocketship_blocks_place_default_blocks($theme) {
+  $regions = $theme->info['regions'];
+  if (isset($regions['footer'])) {
+    \Rocketship::placeBlock('powered_by_dropsolid', [
+      'region' => 'footer',
+      'theme' => $theme->getName(),
+      'label' => 'Powered by Dropsolid',
+      'label_display' => 0,
+    ]);
+    \Rocketship::placeBlock('rocketship_copyright_block', [
+      'region' => 'footer',
+      'theme' => $theme->getName(),
+      'label' => 'Copyright',
+      'terms_of_use' => NULL,
+      'privacy_policy' => NULL,
+      'company' => \Drupal::config('system.site')->get('name'),
+      'label_display' => 0,
+    ]);
+  }
+}
+
+/**
+ * Implements hook_modules_implements_alter().
+ *
+ * Make sure we go after block_themes_installed.
+ */
+function rocketship_blocks_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'themes_installed') {
+    $group = $implementations['rocketship_blocks'];
+    unset($implementations['rocketship_blocks']);
+    $implementations['rocketship_blocks'] = $group;
+  }
+  if ($hook == 'migration_plugins_alter') {
+    $group = $implementations['rocketship_blocks'];
+    unset($implementations['rocketship_blocks']);
+    $implementations['rocketship_blocks'] = $group;
+  }
+}
+
+/**
+ * Check Block type so we can do stuff like add classes based on certain field
+ * values
+ */
+function rocketship_blocks_preprocess_block(&$variables) {
+
+  if (isset($variables['elements']['content']['#block_content']) && $variables['elements']['content']['#block_content'] instanceof BlockContentInterface) {
+    /** @var \Drupal\block_content\Entity\BlockContent $content_block */
+    $content_block = $variables['elements']['content']['#block_content'];
+    $type = $content_block->bundle();
+
+    // ** General block stuff.
+
+    // Hide block title visually
+    $variables['configuration']['label_display'] = FALSE;
+
+    // resuable functions
+    $variables['#attached']['library'][] = 'rocketship_blocks/cb_helpers';
+
+    // ** Set individual block stuff.
+    switch ($type) {
+      // Text block
+      case 'cb_text':
+        _rocketship_blocks_text_preprocess_block($variables, $content_block);
+        break;
+      case 'cb_video':
+      case 'cb_image':
+        // Add library.
+        $variables['#attached']['library'][] = 'rocketship_blocks/cb_media';
+        $layout = $content_block->get('field_cb_media_layout')->value;
+        if ($layout) {
+          $variables['attributes']['class'][] = 'cb--layout-mode--' . $layout;
+        }
+        break;
+      case 'cb_faq':
+        $variables['#attached']['library'][] = 'rocketship_blocks/cb_faq';
+        break;
+      case 'cb_testimonial':
+        _rocketship_blocks_testimonial_preprocess_block($variables, $content_block);
+        break;
+      case 'cb_focus':
+        $variables['#attached']['library'][] = 'rocketship_blocks/cb_focus';
+        break;
+      case 'cb_photo_gallery':
+        _rocketship_blocks_photo_gallery_preprocess_block($variables, $content_block);
+        break;
+      case 'cb_title':
+        _rocketship_blocks_title_preprocess_block($variables, $content_block);
+        break;
+      case 'cb_usp':
+        _rocketship_blocks_usp_preprocess_block($variables, $content_block);
+        break;
+    }
+
+    // Generic support for image wrapper link.
+    if ($content_block->hasField('field_cb_image_wrapper_link') && $content_block->get('field_cb_image_wrapper_link')->uri) {
+      /** @var \Drupal\link\LinkItemInterface $item */
+      $item = $content_block->get('field_cb_image_wrapper_link')->first();
+      $url = $item->getUrl() ?: Url::fromRoute('<none>');
+      $options = $item->options;
+      $options += $url->getOptions();
+      $url->setOptions($options);
+      $title = $content_block->get('field_cb_image_wrapper_link')->title;
+      $variables['image_wrapper_url'] = $url;
+      $variables['image_wrapper_url_title'] = $title;
+      $variables['image_wrapper_url_target'] = $options['attributes']['target'] ?? '_self';
+    }
+
+  }
+
+}
+
+/**
+ * Helper function for the view alter of the Photo Gallery block.
+ *
+ */
+function _rocketship_blocks_photo_gallery_preprocess_block(array &$variables, $content_block) {
+
+  // Add library.
+  $variables['#attached']['library'][] = 'rocketship_blocks/cb_photo_gallery';
+
+  // 'Load more' option for the images. Field used in the front-end to make a
+  // fake button + class added if true.
+  // @todo: get the limit from a field instead of setting it hardcoded to 6
+  // + set individual classes ('is--hidden') on the field items on load,
+  // instead of globally hiding all of them with CSS by default
+  // and don't forget to change the CSS and JS to handle the classes.
+  $load_more = $content_block->get('field_cb_photo_gallery_load_more')->value;
+
+  if ($load_more) {
+    // Add class to block attributes, if 'load more' is checked.
+    $variables['attributes']['class'][] = 'has--load-more has--visible-items';
+    // Data limit for the JS to use.
+    $variables['attributes']['data-limit'][] = '6';
+  }
+  else {
+    // Unset the load more in the front-end if false.
+    unset($variables['content']['field_cb_photo_gallery_load_more']);
+  }
+
+}
+
+/**
+ * Helper function for the view alter of the Text block.
+ *
+ */
+function _rocketship_blocks_text_preprocess_block(array &$variables, $content_block) {
+
+  $view_mode = $content_block->get('field_cb_text_alignment')->value;
+
+  if ($view_mode) {
+    $variables['attributes']['class'][] = 'cb--view-mode--' . $view_mode;
+    $variables['attributes']['class'][] = 'cb-text--view-mode--' . $view_mode;
+  }
+}
+
+/**
+ * Helper function for the view alter of the FAQ block.
+ *
+ */
+function _rocketship_blocks_testimonial_preprocess_block(array &$variables, $content_block) {
+
+  // Set class if there is a avatar image set.
+  $media = $content_block->get('field_cb_media')->entity;
+  if (!empty($media)) {
+    $variables['attributes']['class'][] = 'has-image';
+  }
+
+  // Check for boxed style.
+  $boxed = $content_block->get('field_cb_boxed')->value;
+
+  if ($boxed) {
+    $variables['attributes']['class'][] = 'cb--boxed';
+    $variables['attributes']['class'][] = 'cb-testimonial--boxed';
+  }
+
+}
+
+/**
+ * Helper function for the view alter of the Title block.
+ *
+ */
+function _rocketship_blocks_title_preprocess_block(array &$variables, $content_block) {
+
+  $subtitleValue = $content_block->get('field_cb_subtitle')->value;
+
+  if ($subtitleValue !== NULL && substr($subtitleValue, 0, 3) !== '***') {
+    $subtitle = TRUE;
+  }
+  else {
+    $subtitle = FALSE;
+  }
+
+  $teaser = $content_block->get('field_cb_teaser')->value;
+  $button = $content_block->get('field_cb_button')->value;
+
+  if ($subtitle || $teaser || $button) {
+    $variables['attributes']['class'][] = 'cb-title--extended';
+  }
+}
+
+/**
+ * Helper function for the view alter of the USP block.
+ *
+ */
+function _rocketship_blocks_usp_preprocess_block(array &$variables, $content_block) {
+
+  // Set class if there is a image set.
+  $media = $content_block->get('field_cb_media')->entity;
+  if (empty($media)) {
+    $variables['attributes']['class'][] = 'no-image';
+  } else {
+    $variables['attributes']['class'][] = 'has-image';
+  }
+}
+
+/**
+ * Implements hook_block_type_form_alter().
+ */
+function rocketship_blocks_block_type_form_alter(array &$form, FormStateInterface &$form_state, string $block_type) {
+  switch ($block_type) {
+    case 'cb_image':
+      $complete_form = $form_state->getCompleteForm();
+      if (isset($complete_form['settings']['view_mode']['#options']['default'])) {
+        $complete_form['settings']['view_mode']['#title'] = t('Image format');
+        $complete_form['settings']['view_mode']['#description'] = t('How the image should be sized. You can choose from a variety of fixed image ratios (recommended) or let it scale the original image.');
+        $complete_form['settings']['view_mode']['#options']['default'] = t('Scale original image');
+        if (!in_array($complete_form['settings']['view_mode']['#default_value'], array_keys($complete_form['settings']['view_mode']['#options']))) {
+          $complete_form['settings']['view_mode']['#default_value'] = key($complete_form['settings']['view_mode']['#options']);
+        }
+        $complete_form['settings']['view_mode']['#type'] = 'radios';
+        $form_state->setCompleteForm($complete_form);
+      }
+      break;
+    case 'cb_photo_gallery':
+      $complete_form = $form_state->getCompleteForm();
+      if (isset($complete_form['settings']['view_mode']['#options']['default'])) {
+        $complete_form['settings']['view_mode']['#title'] = t('Layout');
+        $complete_form['settings']['view_mode']['#description'] = t('How the images should be aligned and sized. <br /><strong>Grid</strong> will crop the images, <strong>Masonry</strong> will only scale the images and attempt to make them fit dynamically into multiple columns.');
+        unset($complete_form['settings']['view_mode']['#options']['default']);
+        if (!in_array($complete_form['settings']['view_mode']['#default_value'], array_keys($complete_form['settings']['view_mode']['#options']))) {
+          $complete_form['settings']['view_mode']['#default_value'] = key($complete_form['settings']['view_mode']['#options']);
+        }
+        $complete_form['settings']['view_mode']['#type'] = 'radios';
+        $form_state->setCompleteForm($complete_form);
+      }
+      break;
+    case 'cb_video':
+      $complete_form = $form_state->getCompleteForm();
+      if (isset($complete_form['settings']['view_mode']['#options']['default'])) {
+        $complete_form['settings']['view_mode']['#title'] = t('Video placement');
+        $complete_form['settings']['view_mode']['#description'] = t('How the video should be displayed. <br /><strong>Embed</strong> means it is played in-place and <strong>Popup</strong> shows the cover image, which will play the video in a popup when clicked.');
+        if (!in_array($complete_form['settings']['view_mode']['#default_value'], array_keys($complete_form['settings']['view_mode']['#options']))) {
+          $complete_form['settings']['view_mode']['#default_value'] = key($complete_form['settings']['view_mode']['#options']);
+        }
+        $complete_form['settings']['view_mode']['#options']['default'] = t('Embed');
+        $complete_form['settings']['view_mode']['#type'] = 'radios';
+        $form_state->setCompleteForm($complete_form);
+      }
+      break;
+  }
+}
+
+function rocketship_blocks_theme($existing, $type, $theme, $path) {
+  // Assuming layout_builder_extra_templates is enabled and patched, these templates
+  // should win out over the very generic block.html.twig, but leaves plenty
+  // of other template suggestions if the theme wants to win again. These
+  // templates basically wrap content in a link, specifically the URL in
+  // field_cb_image_wrapper_link
+  return [
+    'block__cb_usp' => [
+      'template' => 'block--cb-usp',
+      'base hook' => 'block',
+    ],
+    'block__cb_image' => [
+      'template' => 'block--cb-image',
+      'base hook' => 'block',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function rocketship_blocks_migration_plugins_alter(&$definitions) {
+  $path = \Drupal::service('extension.list.module')->getPath('rocketship_blocks');
+  $definitions['rs_blocks_images']['source']['path'] = $path . $definitions['rs_blocks_images']['source']['path'];
+  $definitions['rs_blocks_image_media']['source']['path'] = $path . $definitions['rs_blocks_image_media']['source']['path'];
+  $definitions['rs_blocks_image_blocks']['source']['path'] = $path . $definitions['rs_blocks_image_blocks']['source']['path'];
+  $definitions['rs_blocks_text_blocks']['source']['path'] = $path . $definitions['rs_blocks_text_blocks']['source']['path'];
+  $definitions['rs_blocks_templates']['source']['path'] = $path . $definitions['rs_blocks_templates']['source']['path'];
+  $definitions['rs_blocks_images']['source']['constants']['source_base_path'] = $path . $definitions['rs_blocks_images']['source']['constants']['source_base_path'];
+}
+
+/**
+ * @return string[]
+ */
+function _rocketship_blocks_content_migrates() {
+  return [
+    'rs_blocks_images',
+    'rs_blocks_image_media',
+    'rs_blocks_image_blocks',
+    'rs_blocks_text_blocks',
+    'rs_blocks_templates',
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function rocketship_blocks_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (in_array($form_id, [
+    'block_content_type_edit_form',
+    'block_content_type_add_form',
+  ])) {
+
+    /* @var \Drupal\block_content\BlockContentTypeInterface $block_type */
+    $block_type = $form_state->getFormObject()->getEntity();
+
+    $form['icon_path'] = [
+      '#type' => 'textfield',
+      '#title' => t('Icon path'),
+      '#description' => t('Path to an image file for this block type, relative to drupal root.'),
+      '#weight' => 0,
+      '#default_value' => $block_type->getThirdPartySetting('rocketship_blocks', 'icon_path', NULL),
+      '#element_validate' => ['_rs_blocks_validate_icon_path'],
+    ];
+
+    $form['#entity_builders'][] = 'rocketship_blocks_form_block_type_form_builder';
+  }
+}
+
+/**
+ * Entity builder for the block type form.
+ */
+function rocketship_blocks_form_block_type_form_builder($entity_type, BlockContentTypeInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('rocketship_blocks', 'icon_path', $form_state->getValue('icon_path'));
+}
+
+/**
+ * @param $element
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _rs_blocks_validate_icon_path($element, FormStateInterface $form_state) {
+  $value = $element['#value'] ?? NULL;
+  // Check if a file exists at the given location
+  if (!file_exists(DRUPAL_ROOT . $value)) {
+    $form_state->setError($element, t('No file found at location.'));
+  }
+}

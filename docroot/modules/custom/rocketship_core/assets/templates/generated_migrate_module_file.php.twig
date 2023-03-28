@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function {{ module_name }}_migration_plugins_alter(&$definitions) {
+  $path = drupal_get_path('module', '{{ module_name }}');
+  $migrations = _{{ module_name }}_content_migrates();
+
+  foreach ($migrations as $migration) {
+    if (isset($definitions[$migration]['source']['path'])) {
+      $definitions[$migration]['source']['path'] = $path . $definitions[$migration]['source']['path'];
+    }
+    if (isset($definitions[$migration]['source']['constants']['source_base_path'])) {
+      $definitions[$migration]['source']['constants']['source_base_path'] = $path . $definitions[$migration]['source']['constants']['source_base_path'];
+    }
+  }
+}
+
+/**
+ * @return string[]
+ */
+function _{{ module_name }}_content_migrates() {
+  return [
+  {% for item in migrate_list %}
+  '{{ item }}',
+  {% endfor %}
+];
+}
+
+/**
+ * Implements hook_modules_implements_alter().
+ *
+ * Make sure we go after block_themes_installed.
+ */
+function {{ module_name }}_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'migration_plugins_alter') {
+    $group = $implementations['{{ module_name }}'];
+    unset($implementations['{{ module_name }}']);
+    $implementations['{{ module_name }}'] = $group;
+  }
+}
+
+function _{{ module_name }}_link_uuid_lookup($string) {
+  if (strpos($string, 'uuid:') !== 0) {
+    return $string;
+  }
+  $string = str_replace('uuid:', '', $string);
+  [$entity_type_id, $entity_uuid] = explode('/', $string);
+  $entity = \Drupal::entityTypeManager()->getStorage($entity_type_id)->loadByProperties(['uuid' => $entity_uuid]);
+  if ($entity) {
+    $entity = reset($entity);
+    return 'entity:' . $entity_type_id . '/' . $entity->id();
+  }
+}

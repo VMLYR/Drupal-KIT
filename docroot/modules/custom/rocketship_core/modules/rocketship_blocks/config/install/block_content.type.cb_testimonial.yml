@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_testimonial
+label: Testimonial
+revision: 0
+description: 'Show a quote of a customer with an optional small profile picture, name and function.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_testimonial.svg

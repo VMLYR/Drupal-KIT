@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_landscape_lg
+label: '19:10 landscape lg [1200×632]'
+effects:
+  b3a54eef-fc07-49ad-a9ad-fe8215b5ff6d:
+    uuid: b3a54eef-fc07-49ad-a9ad-fe8215b5ff6d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 632
+      crop_type: focal_point

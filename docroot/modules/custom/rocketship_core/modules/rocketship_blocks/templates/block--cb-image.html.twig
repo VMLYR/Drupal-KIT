@@ -1,0 +1,31 @@
+{% set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+] %}
+
+<div{{ attributes.addClass(classes) }}
+  {% if configuration.label_display|default == false and heading|default %} aria-label="{{heading}}"{% endif %}
+  {% if configuration.label_display|default and heading|default %} aria-labelledby="{{heading_id}}"{% endif %}
+>
+  {{ title_prefix }}
+  {% if label and configuration.label_display|default %}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+
+    {% if image_wrapper_url %}
+      <a class="cb-image__link" target="{{ image_wrapper_url_target }}" href="{{ image_wrapper_url }}"{% if image_wrapper_url_title %} title="{{image_wrapper_url_title}}"{% endif %}>
+    {% endif %}
+
+    <div{{ content_attributes.addClass('content') }}>
+      {{ content }}
+    </div>
+
+    {% if image_wrapper_url %}
+      </a>
+    {% endif %}
+
+  {% endblock %}
+</div>

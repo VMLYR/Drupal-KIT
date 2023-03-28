@@ -1,0 +1,28 @@
+rocketship_core.settings:
+  type: config_object
+  label: 'Rocketship Core settings'
+  mapping:
+    css_colors:
+      type: boolean
+      label: 'Colors CSS'
+    css_structural:
+      type: boolean
+      label: 'Structural CSS'
+    color_variants:
+      type: sequence
+      label: 'Color Variants'
+block.settings.rocketship_copyright_block:
+  type: block_settings
+  label: 'Configurable text for block configuration'
+  mapping:
+    company:
+      type: text
+      label: 'Company name'
+field.formatter.settings.rs_file_download_formatter:
+  type: mapping
+  label: 'RS File Download Formatter Settings'
+  mapping:
+    fallback_title:
+      type: label
+      label: 'Use this text as link text'
+      translation context: 'Use this text as link text'

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_lg_2x
+label: 'Scale width lg [1200] 2x'
+effects:
+  25d90e8e-dac7-459c-a8ad-4ded6b175a3b:
+    uuid: 25d90e8e-dac7-459c-a8ad-4ded6b175a3b
+    id: image_scale
+    weight: 1
+    data:
+      width: 2400
+      height: null
+      upscale: false

@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_related_items
+    - field.storage.block_content.field_cb_related_items
+id: block_content.cb_related_items.field_cb_related_items
+field_name: field_cb_related_items
+entity_type: block_content
+bundle: cb_related_items
+label: 'Related items'
+description: 'Start typing the title of a piece of content to select it.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

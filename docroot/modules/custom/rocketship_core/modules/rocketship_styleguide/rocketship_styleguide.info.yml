@@ -1,0 +1,12 @@
+name: Rocketship Styleguide
+type: module
+description: Extends the Styleguide contrib module with Rocketship-specific elements.
+core_version_requirement: ^8.8 || ^9
+package: Rocketship
+dependencies:
+  - styleguide
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

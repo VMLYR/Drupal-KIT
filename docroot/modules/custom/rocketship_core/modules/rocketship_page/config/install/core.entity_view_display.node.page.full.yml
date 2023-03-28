@@ -1,0 +1,94 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_title
+    - core.entity_view_mode.node.full
+    - field.field.node.page.field_description
+    - field.field.node.page.field_media_canonical_image
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_page_display_canonical
+    - field.field.node.page.layout_builder__layout
+    - field.field.node.page.layout_builder__translation
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - rocketship_core
+    - system
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: rs_one_col
+        layout_settings:
+          label: 'Simple Header'
+          classes: cb-header
+          bem-modifier: ''
+          minimal_styling: 0
+          top_layout_spacing: 1x
+          bottom_layout_spacing: 1x
+          background_image: null
+          background_color: grey
+          backgrounds_full: 1
+          with_subregion: 1
+          with_subregion_02: 0
+          subregion_position: after
+          subregion_02_position: after
+          section_purpose: header
+          context_mapping: {  }
+        components:
+          b775da35-c305-4b13-a17c-35edddbc3cec:
+            uuid: b775da35-c305-4b13-a17c-35edddbc3cec
+            region: subregion
+            configuration:
+              id: system_breadcrumb_block
+              label: Breadcrumbs
+              provider: system
+              label_display: '0'
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+          3b4ab648-457a-4550-b5f8-d86d7a1c6205:
+            uuid: 3b4ab648-457a-4550-b5f8-d86d7a1c6205
+            region: content
+            configuration:
+              id: 'inline_block:cb_title'
+              label: 'Simple Title'
+              provider: layout_builder
+              label_display: ''
+              view_mode: full
+              block_revision_id: ''
+              block_serialized: 'O:40:"Drupal\block_content\Entity\BlockContent":30:{s:5:"theme";N;s:6:"values";a:24:{s:8:"langcode";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";s:2:"en";}}}s:11:"revision_id";a:1:{s:9:"x-default";a:0:{}}s:2:"id";a:1:{s:9:"x-default";a:0:{}}s:4:"uuid";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";s:36:"84931da0-7153-49d4-b672-7d965191f4e9";}}}s:4:"type";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:9:"target_id";s:8:"cb_title";}}}s:16:"revision_created";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";i:1612179853;}}}s:13:"revision_user";a:1:{s:9:"x-default";a:0:{}}s:12:"revision_log";a:1:{s:9:"x-default";a:0:{}}s:6:"status";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";b:1;}}}s:4:"info";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";s:12:"Simple Title";}}}s:7:"changed";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";i:1612179853;}}}s:8:"reusable";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";b:0;}}}s:16:"default_langcode";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";b:1;}}}s:16:"revision_default";a:1:{s:9:"x-default";a:0:{}}s:29:"revision_translation_affected";a:1:{s:9:"x-default";a:0:{}}s:7:"metatag";a:1:{s:9:"x-default";a:0:{}}s:26:"content_translation_source";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";s:3:"und";}}}s:28:"content_translation_outdated";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";b:0;}}}s:23:"content_translation_uid";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:9:"target_id";s:1:"1";}}}s:27:"content_translation_created";a:1:{s:9:"x-default";a:1:{i:0;a:1:{s:5:"value";i:1612179853;}}}s:15:"field_cb_button";a:1:{s:9:"x-default";a:0:{}}s:31:"field_cb_node_title_replacement";a:1:{s:9:"x-default";a:1:{i:0;a:3:{s:7:"replace";i:0;s:5:"value";s:0:"";s:7:"wrapper";s:2:"h1";}}}s:17:"field_cb_subtitle";a:1:{s:9:"x-default";a:1:{i:0;a:2:{s:7:"wrapper";s:2:"h2";s:5:"value";s:5:"***h2";}}}s:15:"field_cb_teaser";a:1:{s:9:"x-default";a:0:{}}}s:6:"fields";a:0:{}s:16:"fieldDefinitions";N;s:9:"languages";N;s:11:"langcodeKey";s:8:"langcode";s:18:"defaultLangcodeKey";s:16:"default_langcode";s:14:"activeLangcode";s:9:"x-default";s:15:"defaultLangcode";s:2:"en";s:12:"translations";a:1:{s:9:"x-default";a:1:{s:6:"status";i:2;}}s:21:"translationInitialize";b:0;s:11:"newRevision";b:1;s:17:"isDefaultRevision";b:1;s:10:"entityKeys";a:2:{s:6:"bundle";s:8:"cb_title";s:8:"revision";N;}s:22:"translatableEntityKeys";a:1:{s:8:"langcode";a:1:{s:9:"x-default";s:2:"en";}}s:9:"validated";b:1;s:18:"validationRequired";b:0;s:16:"loadedRevisionId";N;s:30:"revisionTranslationAffectedKey";s:29:"revision_translation_affected";s:34:"enforceRevisionTranslationAffected";a:0:{}s:12:"entityTypeId";s:13:"block_content";s:12:"enforceIsNew";b:1;s:9:"typedData";N;s:13:"cacheContexts";a:0:{}s:9:"cacheTags";a:0:{}s:11:"cacheMaxAge";i:-1;s:11:"_serviceIds";a:0:{}s:15:"_entityStorages";a:0:{}s:9:"isSyncing";b:0;s:16:"accessDependency";N;}'
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+        third_party_settings:
+          layout_builder_lock:
+            lock:
+              2: 2
+              3: 3
+              4: 4
+              6: 6
+              8: 8
+id: node.page.full
+targetEntityType: node
+bundle: page
+mode: full
+content: {  }
+hidden:
+  created: true
+  field_description: true
+  field_media_canonical_image: true
+  field_meta_tags: true
+  field_page_display_canonical: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  rocketship_social_widgets: true
+  search_api_excerpt: true
+  title: true
+  uid: true

@@ -1,0 +1,22 @@
+rocketship_social_widgets.social_share_link.*:
+  type: config_entity
+  label: 'Social share link'
+  mapping:
+    id:
+      type: string
+      label: 'Machine name for sharing link'
+    label:
+      type: string
+      label: 'Link title'
+    sharer_url:
+      type: string
+      label: 'URL of social media sharing page'
+    onclick:
+      type: string
+      label: 'Onclick attribute of social media sharing link'
+    weight:
+      type: integer
+      label: 'Weight'
+    target:
+      type: string
+      label: 'target attribute of social media sharing link'

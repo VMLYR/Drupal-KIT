@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_lg_2x
+label: '4:3 portrait lg [1200×1600] 2x'
+effects:
+  74916c6d-e8a7-4768-8330-91fee0f5ad15:
+    uuid: 74916c6d-e8a7-4768-8330-91fee0f5ad15
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2400
+      height: 3200
+      crop_type: focal_point

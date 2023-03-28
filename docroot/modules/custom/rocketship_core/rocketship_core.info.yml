@@ -1,0 +1,104 @@
+name: 'Rocketship Core'
+type: module
+description: 'Contains core functionality for Rocketship websites.'
+core_version_requirement: '^9.2 | ^10'
+group: Core
+show_during_install: true
+weight: 20
+upgrades:
+  - 'rocketship_content:Rocketship Content'
+package: Rocketship
+dependencies:
+  - drupal:system (>=9.3)
+  - token:token
+  - drupal:path
+  - pathauto:pathauto
+  - drupal:node
+  - search_api:search_api
+  - field_limiter:field_limiter
+  - search_api:search_api_db
+  - entity_reference_revisions:entity_reference_revisions
+  - drupal:responsive_image
+  - focal_point:focal_point
+  - image_effects:image_effects
+  - drupal:image
+  - drupal:layout_discovery
+  - redirect:redirect
+  - role_delegation:role_delegation
+  - scheduler:scheduler
+  - smart_trim:smart_trim
+  - swiftmailer:swiftmailer
+  - drupal:system
+  - drupal:taxonomy
+  - taxonomy_access_fix:taxonomy_access_fix
+  - drupal:telephone
+  - drupal:text
+  - drupal:toolbar
+  - drupal:user
+  - userprotect:userprotect
+  - video_embed_field:video_embed_field
+  - view_unpublished:view_unpublished
+  - drupal:views
+  - webform:webform
+  - webform:webform_ui
+  - node_title_help_text:node_title_help_text
+  - drupal:options
+  - drupal:menu_link_content
+  - drupal:menu_ui
+  - menu_trail_by_path:menu_trail_by_path
+  - drupal:link
+  - linkit:linkit
+  - drupal:locale
+  - mailsystem:mailsystem
+  - inline_entity_form:inline_entity_form
+  - drupal:language
+  - drupal:field
+  - field_group:field_group
+  - drupal:file
+  - drupal:filter
+  - drupal:dynamic_page_cache
+  - easy_breadcrumb:easy_breadcrumb
+  - drupal:editor
+  - editor_advanced_link:editor_advanced_link
+  - drupal:config
+  - config_ignore:config_ignore
+  - config_rewrite:config_rewrite
+  - config_split:config_split
+  - drupal:config_translation
+  - drupal:content_translation
+  - drupal:contextual
+  - ctools:ctools
+  - drupal:datetime
+  - drupal:ckeditor5
+  - drupal:color
+  - drupal:block
+  - drupal:block_content
+  - block_content_permissions:block_content_permissions
+  - drupal:breakpoint
+  - admin_toolbar:admin_toolbar
+  - admin_toolbar:admin_toolbar_tools
+  - admin_toolbar:admin_toolbar_links_access_filter
+  - advagg:advagg
+  - advagg:advagg_js_minify
+  - drupal:media
+  - video_embed_field:video_embed_media
+  - field_formatter:field_formatter
+  - blazy:blazy
+  - drupal:media_library
+  - manage_display:manage_display
+  - media_library_form_element:media_library_form_element
+  - colorbox:colorbox
+  - section_library:section_library
+  - layout_builder_restrictions:layout_builder_restrictions
+  - layout_builder_restrictions_by_role:layout_builder_restrictions_by_role
+  - layout_builder_modal:layout_builder_modal
+  - layout_builder_operation_link:layout_builder_operation_link
+  - layout_builder_lock:layout_builder_lock
+  - layout_builder_at:layout_builder_at
+  - drupal:syslog
+  - drimage
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

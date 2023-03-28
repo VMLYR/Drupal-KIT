@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_9_portrait_xs
+label: '16:9 portrait xs [320 x 569]'
+effects:
+  da42c7e6-ef7d-4bd9-9a2b-58dc7b925bca:
+    uuid: da42c7e6-ef7d-4bd9-9a2b-58dc7b925bca
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 569
+      crop_type: focal_point

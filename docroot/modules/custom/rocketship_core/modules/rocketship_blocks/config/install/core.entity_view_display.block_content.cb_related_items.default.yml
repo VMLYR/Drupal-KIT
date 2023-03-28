@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_related_items
+    - field.field.block_content.cb_related_items.field_cb_related_items
+    - field.field.block_content.cb_related_items.field_cb_subtitle
+    - field.field.block_content.cb_related_items.field_cb_teaser
+    - field.field.block_content.cb_related_items.field_cb_title
+  module:
+    - rocketship_core
+id: block_content.cb_related_items.default
+targetEntityType: block_content
+bundle: cb_related_items
+mode: default
+content:
+  field_cb_related_items:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: related
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_cb_subtitle:
+    weight: 1
+    label: hidden
+    settings:
+      header: h3
+    third_party_settings: {  }
+    type: header_text_field_formatter
+    region: content
+  field_cb_teaser:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_cb_title:
+    weight: 0
+    label: hidden
+    settings:
+      header: h2
+    third_party_settings: {  }
+    type: header_text_field_formatter
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

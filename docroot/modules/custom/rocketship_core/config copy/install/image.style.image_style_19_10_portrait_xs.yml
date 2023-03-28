@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_portrait_xs
+label: '19:10 portrait xs [320×608]'
+effects:
+  e0dc30d7-1c8d-446b-803a-83cc038e6cbc:
+    uuid: e0dc30d7-1c8d-446b-803a-83cc038e6cbc
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 608
+      crop_type: focal_point

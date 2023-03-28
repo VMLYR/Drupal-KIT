@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_photo_gallery
+    - core.entity_view_mode.block_content.photo_gallery_masonry
+    - core.entity_view_mode.media.drimage_scale
+    - core.entity_view_mode.media.full
+    - field.field.block_content.cb_photo_gallery.field_cb_media_unlimited
+    - field.field.block_content.cb_photo_gallery.field_cb_photo_gallery_load_more
+    - field.field.block_content.cb_photo_gallery.field_cb_subtitle
+    - field.field.block_content.cb_photo_gallery.field_cb_teaser
+    - field.field.block_content.cb_photo_gallery.field_cb_title
+  module:
+    - colorbox
+    - layout_builder
+    - manage_display
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.cb_photo_gallery.photo_gallery_masonry
+targetEntityType: block_content
+bundle: cb_photo_gallery
+mode: photo_gallery_masonry
+content:
+  field_cb_media_unlimited:
+    type: colorbox
+    weight: 3
+    label: hidden
+    settings:
+      colorbox_view_mode: drimage_scale
+      colorbox_modal_view_mode: full
+      colorbox_gallery: post
+      colorbox_gallery_custom: ''
+    third_party_settings: {  }
+    region: content
+  field_cb_photo_gallery_load_more:
+    weight: 4
+    label: hidden
+    settings:
+      format: custom
+      format_custom_true: '<span class="more">Show more</span><span class="less">Show less</span>'
+      format_custom_false: '<span class="more">Show more</span><span class="less">Show less</span>'
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_cb_subtitle:
+    weight: 1
+    label: hidden
+    settings:
+      tag: h3
+      linked: false
+    third_party_settings: {  }
+    type: title
+    region: content
+  field_cb_teaser:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_cb_title:
+    weight: 0
+    label: hidden
+    settings:
+      tag: h2
+      linked: false
+    third_party_settings: {  }
+    type: title
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

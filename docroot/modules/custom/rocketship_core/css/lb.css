@@ -1,0 +1,1804 @@
+/* Modal/Sidebar
+   Various overrides to fix the LayoutBuilder preview clashing with the front-end
+================================================================================ */
+
+/* prevent top from being cut off: also should have an analog in the theme's layoutbuilder css for when this file is not loaded */
+/* .node-layout-builder-form {
+  padding-top: 20px;
+} */
+
+/* hide bit of header that overlaps with Preview */
+/* .user-logged-in.page-node-type-page .block__branding__image--header:before {
+  display: none;
+} */
+
+/* Spacing before getting to LB preview */
+
+.entity-view-display-layout-builder-form {
+  margin-top: 40px;
+}
+
+.form__element--toggle-content-preview {
+  margin-top: 20px;
+}
+
+/* Actions for LB preview page
+======================================================================= */
+
+/* Messages: don't need to know about status */
+.layout-builder__message--overrides .messages--status,
+#edit-layout-builder-message  .messages--status {
+  display: none;
+}
+
+.node-page-layout-builder-form .form__element::after {
+  display: none;
+}
+
+/* .ui-dialog .form__element.form-type--checkbox,
+.ui-dialog .form__element.form-type--radio,
+.layout-builder-form .form__element.form-type--checkbox,
+.layout-builder-form .form__element.form-type--radio {
+  padding-left: 0;
+  margin-bottom: 1.375rem;
+}
+
+.ui-dialog .form__element.form-type--checkbox input[type="checkbox"],
+.ui-dialog .form__element.form-type--checkbox input[type="radio"],
+.ui-dialog .form__element.form-type--radio input[type="checkbox"],
+.ui-dialog .form__element.form-type--radio input[type="radio"],
+.layout-builder-form .form__element.form-type--checkbox input[type="checkbox"],
+.layout-builder-form .form__element.form-type--checkbox input[type="radio"],
+.layout-builder-form .form__element.form-type--radio input[type="checkbox"],
+.layout-builder-form .form__element.form-type--radio input[type="radio"] {
+  position: static;
+} */
+
+
+/* When tray open, don't block it with Edit Actions*/
+.js-off-canvas-dialog-open .layout-builder-form #edit-actions {
+  z-index: 10;
+}
+
+.layout-builder-form #edit-actions [data-drupal-selector="edit-revert"] {
+  display: none;
+}
+
+.layout-builder-form #edit-moderation-state-wrapper {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+/* .layout-builder-form .form__dropdown::after {
+  display: none;
+} */
+
+/* Vertical tabs (eg. with revisions) */
+
+.layout-builder-form .form-type-vertical-tabs,
+.layout-builder-form #edit-moderation-state-wrapper {
+  /* display: none; */
+  width: 100vw;
+  padding: 0 1.25rem .5rem 1.25rem;
+  margin: 0 -1.25rem  1.25rem  -1.25rem;
+  border-bottom: 1px solid rgba(216, 217, 224, 0.8);
+  background-color: #fff;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.layout-builder-form #edit-moderation-state-wrapper {
+  margin-top: -10px;
+  padding-bottom: 10px;
+}
+
+.layout-builder-form .form-type-vertical-tabs .vertical-tabs {
+  margin: .25em .5em .25em 15em;
+}
+
+.layout-builder-form .form-type-vertical-tabs .vertical-tabs,
+.layout-builder-form .form-type-vertical-tabs .vertical-tabs__menu ,
+.layout-builder-form .form-type-vertical-tabs .vertical-tabs__menu-item {
+  border: 0 none;
+}
+
+.layout-builder-form .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-item-title {
+  color: #979797;
+}
+
+.layout-builder-form .form-type-vertical-tabs .vertical-tabs__menu-item-summary {
+  position: absolute;
+  left: -9999px;
+  height: 0;
+  font-size: 0;
+}
+
+.layout-builder-form .form-type-vertical-tabs .details-wrapper {
+  padding: 0.5em 0.6em; /* same spacing as the menu items */
+}
+
+.layout-builder-form .form-type-vertical-tabs .form__element:last-child {
+  margin-bottom: 0;
+}
+
+.layout-builder-form .form-type-vertical-tabs .form__element__description {
+  margin-top: 5px;
+}
+
+/* Moderation */
+
+.layout-builder-form #edit-moderation-state-wrapper .container-inline .form__dropdown,
+.layout-builder-form #edit-moderation-state-wrapper .container-inline select {
+  display: inline-block;
+}
+
+.entity-moderation-form__item {
+  margin-bottom: 0;
+}
+
+.entity-moderation-form__item .button {
+  padding: .75rem 1.25em;
+  margin-bottom: 1em;
+  border: 0 none !important; /* Gin theme override */
+  border-radius: 3px;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-transform: none;
+  color: #fff;
+  background-color: #333;
+}
+
+.entity-moderation-form__item .button:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+
+/* Preview actions */
+
+#edit-preview-toggle label {
+  cursor: pointer;
+}
+
+#edit-preview-toggle select {
+  padding-top: calc(1rem - 1px);
+  padding-bottom: calc(1rem - 1px);
+  height: auto;
+  border: 1px solid #333 !important;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #fff;
+  border-radius: 3px;
+  background-color: #333;
+  background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%);
+}
+
+#edit-preview-toggle .form__dropdown::after {
+  color: #fff;
+}
+
+#edit-preview-toggle .form__dropdown select {
+  background-image: none;
+}
+
+/* Section library links */
+
+/* .layout-builder__link--add-template-to-library,
+.layout-builder__link--add-section-to-library,
+.layout-builder__link--import-from-library {
+  display: none;
+} */
+
+/* Dialog (general)
+================================================================================ */
+
+.ui-dialog {
+  max-width: 300px;
+}
+
+#layout-builder-modal {
+  padding: 1em;
+}
+
+#layout-builder-modal .ui-dialog-titlebar {
+  padding: .5rem 1rem;
+}
+
+#layout-builder-modal .messages--wrapper {
+  position: sticky;
+  top: -16px;
+  left: 0;
+  margin-left: -15px;
+  margin-right: -15px;
+  box-shadow: 0 5px 5px rgba(255, 0, 0, .2);
+}
+
+#layout-builder-modal .messages--wrapper .messages:first-child {
+  margin-top: 0;
+}
+
+/* Primary buttons by default:
+   - the layout builder save
+   - any (submit) button for dialog form
+   -
+*/
+#layout-builder-modal button[type="submit"],
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset button,
+.ui-dialog.media-library-widget-modal button[type="submit"],
+.layout-builder-form #edit-actions button[type="submit"],
+
+#layout-builder-modal .ui-widget-content .inline-block-create-button,
+#layout-builder-modal .inline-block-list + a {
+  padding: 1rem 1.25em;
+  border: 0 none !important; /* Gin theme override */
+  border-radius: 3px;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-transform: none;
+  color: #fff;
+  background-color: #333;
+}
+
+#layout-builder-modal button[type="submit"]:hover,
+#layout-builder-modal button[type="submit"]:active,
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset button:hover,
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset button:active,
+.layout-builder-form #edit-actions button[type="submit"]:hover,
+.layout-builder-form #edit-actions button[type="submit"]:active,
+.ui-dialog.media-library-widget-modal button[type="submit"]:hover,
+.ui-dialog.media-library-widget-modal button[type="submit"]:active,
+
+#layout-builder-modal .ui-widget-content .inline-block-create-button:hover,
+#layout-builder-modal .ui-widget-content .inline-block-create-button:active,
+#layout-builder-modal .inline-block-list + a:hover,
+#layout-builder-modal .inline-block-list + a:active {
+  color: #fff;
+  background-color: #000;
+}
+
+/* other secondary buttons:
+   - layout builder preview: reset actions
+   - media lib buttons
+   - …
+*/
+#layout-builder-modal .form__multiple-value button[type="submit"],
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset .dialog-cancel,
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonpane .ui-dialog-buttonset .dialog-cancel,
+#layout-builder-modal .views-exposed-form button[type="submit"],
+#layout-builder-modal .form-managed-file button[type="submit"],
+#layout-builder-modal button[class*="media-library"],
+.ui-dialog.media-library-widget-modal .views-exposed-form button[type="submit"],
+.ui-dialog.media-library-widget-modal .form-managed-file button[type="submit"],
+.layout-builder-form #edit-actions button[data-drupal-selector*="discard"],
+.layout-builder-form #edit-actions button[data-drupal-selector*="discard"]:visited {
+  padding: 1rem 1.25em !important;
+  border: 0 none !important; /* Gin admin theme override */
+  border-radius: 3px !important;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-transform: none;
+  color: #000 !important;
+  background-color: #fff !important;
+  box-shadow: inset 0 0 0 2px #333 !important;
+}
+
+#layout-builder-modal .form__multiple-value button[type="submit"]:hover,
+#layout-builder-modal .form__multiple-value button[type="submit"]:active,
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset .dialog-cancel:hover,
+[aria-describedby="layout-builder-modal"] .ui-dialog-buttonset .dialog-cancel:active,
+#layout-builder-modal .views-exposed-form button[type="submit"]:hover,
+#layout-builder-modal .form-managed-file button[type="submit"]:active,
+#layout-builder-modal button[class*="media-library"]:hover,
+#layout-builder-modal button[class*="media-library"]:active,
+.ui-dialog.media-library-widget-modal .views-exposed-form button[type="submit"]:hover,
+.ui-dialog.media-library-widget-modal .views-exposed-form button[type="submit"]:active,
+.ui-dialog.media-library-widget-modal .form-managed-file button[type="submit"]:hover,
+.ui-dialog.media-library-widget-modal .form-managed-file button[type="submit"]:active,
+.layout-builder-form #edit-actions button[data-drupal-selector*="discard"]:hover,
+.layout-builder-form #edit-actions button[data-drupal-selector*="discard"]:active {
+  padding: 1rem 1.25em !important;
+  border: 0 none !important; /* Gin admin theme override */
+  border-radius: 3px ip !important;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-transform: none;
+  color: #fff !important;
+  background-color: #000 !important;
+  box-shadow: inset 0 0 0 2px #000 !important;
+}
+
+
+/* hide the filter for blocks in modal for now since it doesn't work right */
+#layout-builder-modal input[placeholder*="Filter"][placeholder*="block"] {
+  display: none;
+}
+
+#layout-builder-modal .layout-selection {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#layout-builder-modal .layout-selection__item {
+  display: block;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#layout-builder-modal .layout-selection__item:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  transition: .25s ease-in-out;
+}
+
+#layout-builder-modal .layout-selection__item a {
+  display: block;
+  text-align: center;
+}
+
+#layout-builder-modal .layout-selection__item img,
+#layout-builder-modal .layout-selection__item svg {
+  display: block;
+  margin: 0 auto;
+}
+
+#layout-builder-modal .layout-selection__item .group {
+  margin-top: .5rem;
+  font-weight: bold;
+}
+
+/* more form stuff */
+
+.ui-dialog .form__multiple-value {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* tables */
+
+.ui-dialog .form-item table {
+  margin: 0 0 1.4375rem 0;
+}
+
+.ui-dialog .field-multiple-table {
+  table-layout: auto;
+}
+
+#layout-builder-modal button.js-media-library-widget-toggle-weight,
+#layout-builder-modal button.js-media-library-widget-toggle-weight,
+#layout-builder-modal .tabledrag-toggle-weight,
+#layout-builder-modal .tabledrag-toggle-weight {
+  padding: .3125rem;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: .875rem;
+  color: #454545;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+#layout-builder-modal button.js-media-library-widget-toggle-weight {
+  margin-bottom: 1rem;
+}
+
+.ui-dialog .field-multiple-table tr {
+  border-bottom: 1px solid #ccc;
+}
+
+.ui-dialog .table__heading-cell h4 {
+  margin: 0;
+}
+
+.ui-dialog td.field-multiple-drag {
+  width: 50px;
+}
+
+.ui-dialog td.delta-order {
+  width: 50px;
+}
+
+.ui-dialog a.tabledrag-handle .handle {
+  width: 30px;
+  height: 30px;
+}
+
+.ui-dialog .delta-order select {
+  min-width: 100px;
+}
+
+/* Layouts stuff */
+
+.ui-dialog .layout-builder-remove-section .form-actions {
+  margin-top: 1rem;
+}
+
+/* Section library stuff */
+
+.ui-dialog .section-library-links {
+  margin: 0;
+  padding: 0;
+}
+
+.ui-dialog .section-library-links li {
+  margin: 0 0 1rem 0;
+}
+
+.ui-dialog .section-library-links li a {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .25s ease-in-out;
+}
+
+.ui-dialog .section-library-links li a:hover {
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.ui-dialog .section-library-link-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* inline blocks */
+
+.ui-dialog .field--name-field-cb-button {
+  display: block;
+}
+
+.ui-dialog .field--name-field-cb-photo-gallery-load-more {
+  display: block;
+}
+
+.ui-widget-content .inline-block-create-button,
+.ui-dialog .inline-block-list + a {
+  display: inline-block;
+  padding: .5rem .625rem;
+  margin-bottom: 1rem;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 1rem;
+  color: #454545;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
+}
+
+.ui-widget-content .inline-block-create-button:hover {
+  color: #2b2b2b;
+  border-color: #ccc;
+  background-color: #ededed;
+}
+
+.ui-dialog .block-categories .links,
+.ui-dialog .inline-block-list {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-dialog .block-categories .links li,
+.ui-dialog .inline-block-list li {
+  display: block;
+  background-color: white;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .25s ease-in-out;
+}
+
+.ui-dialog .block-categories .links li:last-child,
+.ui-dialog .inline-block-list li:last-child {
+  margin-bottom: 1rem;
+}
+
+.ui-dialog .block-categories .links li:hover,
+.ui-dialog .inline-block-list li:hover {
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.ui-dialog .block-categories .links li a,
+.ui-dialog .inline-block-list li a {
+  display: block;
+}
+
+.ui-dialog .block-categories .links li img,
+.ui-dialog .block-categories .links li svg,
+.ui-dialog .inline-block-list img,
+.ui-dialog .inline-block-list svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.ui-dialog .inline-block-list__item__title {
+  margin-top: .5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ui-dialog .inline-block-list__item__descr {
+  margin-top: .5rem;
+  font-size: .875rem;
+  line-height: 1.125rem;
+  font-style: italic;
+}
+
+.ui-dialog .inline-block-list__item__descr p:last-child {
+  margin-bottom: 0;
+}
+
+.ui-dialog .form__multiple-value {
+  margin-bottom: 1.4375rem;
+  padding: 1.4375rem;
+  border: 1px solid #ccc;
+}
+
+/* Block: webform */
+.ui-dialog .field--type-webform.field--widget-webform-entity-reference-select  {
+  margin-bottom: 1.4375rem;
+  padding: 1.4375rem;
+  border: 1px solid #ccc;
+}
+
+/* Block: photogallery */
+.ui-dialog .field--name-field-cb-photo-gallery-load-more,
+.ui-dialog .field--name-field-cb-photo-gallery-load-more:hover,
+.ui-dialog .field--name-field-cb-photo-gallery-load-more:active {
+  cursor: default;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-weight: normal;
+  color: inherit;
+}
+
+/* Media library */
+
+.ui-dialog .view--media-library .views-display-link {
+  display: inline-block;
+  padding: .25rem .625rem;
+  font-weight: bold;
+  color: #454545;
+  border: 1px solid #c5c5c5;
+  border-bottom: 0 none;
+  border-radius: 3px 3px 0 0;
+  background-color: #f6f6f6;
+}
+
+.ui-dialog .view--media-library .views-display-link.is-active,
+.ui-dialog .view--media-library .views-display-link:hover {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.ui-dialog .view--media-library .form--inline {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border: 1px solid #ccc;
+}
+
+.ui-dialog .view--media-library .form--inline .form-item {
+  margin: 0 .5rem 1rem 0;
+}
+
+.ui-dialog .view--media-library .form--inline .form__group {
+  margin: 0 0 1rem 0;
+}
+
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid {
+  position: relative;
+  max-width: none;
+  display: block;
+  margin: 0 0 1rem 0;
+}
+
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid .views-field-rendered-entity {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .25s ease-in-out;
+}
+
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid:hover .views-field-rendered-entity,
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid.checked .views-field-rendered-entity {
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid .views-field-media-library-select-form {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
+
+.ui-dialog .media-library-views-form .media-library-item.media-library-item--grid .media-library-item__attributes {
+  margin-top: .5rem;
+  font-style: italic;
+}
+
+.ui-dialog .media-library-views-form .views-table {
+  margin: 0 .5rem;
+}
+
+.ui-dialog .media-library-views-form .form-checkbox {
+  position: static;
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
+}
+
+.ui-dialog [data-drupal-selector*="media-library-update-widget"] {
+  display: none !important;
+}
+
+/* overview of selected items */
+
+.ui-dialog .media-library-selection {
+  margin: 0 0 1rem 0;
+}
+
+#layout-builder-modal .media-library-selection .media-library-item--grid,
+.ui-dialog .media-library-form-element .media-library-item--grid {
+  background-color: white;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .25s ease-in-out;
+}
+
+#layout-builder-modal .media-library-selection .media-library-item--grid .media-library-item__name,
+.ui-dialog .media-library-form-element .media-library-item--grid .media-library-item__name {
+  margin-top: .5rem;
+  font-style: italic;
+}
+
+#layout-builder-modal .media-library-form-element .media-library-item--grid [name*="media-library-remove-button"],
+#layout-builder-modal .media-library-selection .media-library-item--grid [name*="media-library-remove-button"],
+#layout-builder-modal .media-library-form-element .media-library-item--grid .media-library-item__remove,
+#layout-builder-modal .media-library-selection .media-library-item--grid .media-library-item__remove {
+  margin-bottom: .5rem;
+  padding: .5rem .625rem;
+  font-size: .75rem;
+  font-weight: normal;
+  line-height: .75rem;
+  color: #454545;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  box-shadow: none;
+  transition: all .25s ease;
+}
+
+#layout-builder-modal .media-library-form-element .media-library-item--grid [name*="media-library-remove-button"]:hover,
+#layout-builder-modal .media-library-selection .media-library-item--grid [name*="media-library-remove-button"]:hover,
+#layout-builder-modal .media-library-form-element .media-library-item--grid .media-library-item__remove:hover,
+#layout-builder-modal .media-library-selection .media-library-item--grid .media-library-item__remove:hover {
+  color: #c00;
+  border-color: #c00;
+  background-color: #fff;
+}
+
+#layout-builder-modal .media-library-form-element .media-library-item--grid [name*="media-library-remove-button"]::before,
+#layout-builder-modal .media-library-selection .media-library-item--grid [name*="media-library-remove-button"]::before,
+#layout-builder-modal .media-library-form-element .media-library-item--grid .media-library-item__remove::before,
+#layout-builder-modal .media-library-selection .media-library-item--grid .media-library-item__remove::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-top;
+  background-image: url("/core/assets/vendor/jquery.ui/themes/base/images/ui-icons_777777_256x240.png");
+  background-position: -96px -128px;
+}
+
+#layout-builder-modal .media-library-form-element .media-library-item--grid [name*="media-library-remove-button"]:hover::before,
+#layout-builder-modal .media-library-selection .media-library-item--grid [name*="media-library-remove-button"]:hover::before,
+#layout-builder-modal .media-library-form-element .media-library-item--grid .media-library-item__remove:hover::before,
+#layout-builder-modal .media-library-selection .media-library-item--grid .media-library-item__remove:hover::before {
+  background-image: url("/core/assets/vendor/jquery.ui/themes/base/images/ui-icons_cc0000_256x240.png");
+}
+
+/* just uploaded */
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media {
+  margin: 0 0 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item {
+  background-color: white;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .25s ease-in-out;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item .form__element {
+  margin-bottom: 0;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item .group {
+  margin-bottom: 1rem;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item button {
+  padding: .5rem .625rem;
+  font-size: .75rem;
+  font-weight: normal;
+  line-height: .75rem;
+  color: #454545;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  box-shadow: none;
+  transition: all .25s ease;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item button:hover {
+  color: #c00;
+  border: 1px solid #c00;
+  background-color: #fff;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item button[data-drupal-selector*="remove"]::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-top;
+  background-image: url("/core/assets/vendor/jquery.ui/themes/base/images/ui-icons_777777_256x240.png");
+  background-position: -96px -128px;
+}
+
+.ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item button[data-drupal-selector*="remove"]:hover::before {
+  background-image: url("/core/assets/vendor/jquery.ui/themes/base/images/ui-icons_cc0000_256x240.png");
+}
+
+
+/* sidebar Tray (off-canvas)
+======================================================================= */
+
+/* The off-canvas styling is a mess of overrides and nesting
+   between the off-canvas stylesheet and the theme jquery ui theming (eg. .ui-widget-content)
+*/
+
+#drupal-off-canvas {
+  /*
+  // To fix the bg to match with nested elements, in the off-canvas
+  // we set a bg and reset the border here
+  */
+  border: 0 none;
+  background-color: #444;
+}
+
+/*
+// mismatch of styling on the off-canvas and its nested elements
+// + off-canvas button resets
+// + the off-canvas button styles
+// + our own buttons
+// so need to re-add some styling
+*/
+
+#drupal-off-canvas .form-actions {
+  display: block;
+  text-align: left;
+}
+
+#drupal-off-canvas button,
+#drupal-off-canvas .button {
+  display: inline-block;
+  padding: .5rem .625rem;
+  margin-bottom: 1rem;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 1rem;
+  color: #454545;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
+}
+
+#drupal-off-canvas button:hover,
+#drupal-off-canvas .button:hover {
+  color: #2b2b2b;
+  border-color: #ccc;
+  background-color: #ededed;
+}
+
+#drupal-off-canvas .form__element {
+  display: block;
+}
+
+#drupal-off-canvas .form__element .form-managed-file {
+  display: flex;
+}
+
+#drupal-off-canvas .form__element .form-managed-file .button {
+  margin: 0 0 0 .625rem;
+}
+
+#drupal-off-canvas .form__element .form__element__description {
+  color: white;
+}
+
+#drupal-off-canvas label {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "liberation sans", sans-serif;
+}
+
+#drupal-off-canvas .form__label__required {
+  display: none;
+  border-bottom: none;
+}
+
+#drupal-off-canvas label.form-required .form__label__required {
+  display: inline-block;
+}
+
+#drupal-off-canvas label.form-required .form__label__not-required {
+  display: none;
+}
+
+#drupal-off-canvas .form__element__description {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "liberation sans", sans-serif;
+  font-size: .875rem;
+  line-height: 1rem;
+}
+
+/*
+// has negative margins on all sides, presumably so it is flush against the sides of the off-canvas
+// unfortunatly, this means everything below it will overlay
+// so we reset the bottom margin
+*/
+#drupal-off-canvas table {
+  margin-bottom: 20px;
+}
+
+.ui-widget.ui-widget-content {
+  z-index: 910; /* over the drupal messages and over full bg of paragraphs*/
+}
+
+.ui-widget-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* the dialog close button is mismatched in position & text is showing*/
+/* .ui-dialog.ui-dialog-off-canvas .ui-dialog-titlebar-close {
+  top: 0;
+  font-size: 0;
+} */
+
+.ui-dialog.ui-dialog-off-canvas .ui-dialog-titlebar {
+  position: relative;
+}
+
+.ui-dialog.ui-dialog-off-canvas .ui-resizable-w {
+  position: absolute;
+}
+
+
+/* Preview
+================================================================================ */
+
+.layout-builder {
+  padding: 0 !important;
+  border: 0 none !important;
+  outline: 0 none !important;
+  background-color: transparent !important;
+}
+
+.layout-builder__link--add-template-to-library {
+  display: none;
+}
+
+.layout-builder--edit-preview > .layout-builder__link--add-template-to-library {
+  margin-bottom: 40px;
+}
+
+.layout-builder--edit-preview .layout-builder__link--add-template-to-library {
+  display: block;
+  font-size: 1rem;
+  color: #2f91da;
+}
+
+/* add a new section */
+
+/* .layout-builder--edit-preview .layout-builder__add-section {
+  display: block;
+  width: 100%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding: 1rem;
+  text-align: center;
+  outline: 2px dashed #1177c3;
+  background-color: rgba(47,145,218, .15);
+} */
+
+.layout-builder__add-section {
+  display: none;
+}
+
+.layout-builder--edit-preview .layout-builder__add-section {
+  position: absolute;
+  left: 50%;
+  z-index: 100; /* go over Sections and their actions */
+  transform: translateX(-50%) translateY(-30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0 20px;
+  min-height: 60px;
+  background-color: transparent;
+  outline: 2px solid rgba(255, 255, 255, 0);
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled .layout-builder__add-section {
+  position: relative;
+  transform: translateX(-50%);
+  margin: 20px 0;
+}
+
+
+/* .layout-builder--edit-preview .layout-builder__section + .layout-builder__add-section {
+  transform: translateX(-50%) translateY(-30px);
+  margin: 0;
+} */
+
+.layout-builder--edit-preview .layout-builder__add-section::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #2f91da;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 55px;
+  color: #2f91da;
+  background: #e0eff9 url("../images/plus-blue.svg") center center no-repeat;
+  background-size: 14px auto;
+  transition: opacity .25s ease-in-out;
+}
+
+.layout-builder--edit-preview .layout-builder__add-section > a {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  padding: 12px 0 12px 20px;
+  opacity: 0;
+  transition: none;
+}
+
+.layout-builder--edit-preview .layout-builder__add-section:hover {
+  width: auto;
+  max-width: 100%;
+  outline: 2px solid #1177c3;
+  background-color: #e0eff9;
+  transition: all .25s ease-in-out;
+}
+
+.layout-builder--edit-preview .layout-builder__add-section:hover::before {
+  opacity: 0;
+  width: 100%;
+  border: 2px solid #2f91da;
+  border-radius: 0%;
+  transition: opacity .25s ease-in-out;
+}
+
+.layout-builder--edit-preview .layout-builder__add-section:hover > a {
+  left: 0;
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+}
+
+.layout-builder__add-section .layout-builder__link {
+  font-size: 1rem;
+  color: #2f91da;
+}
+
+.layout-builder__add-section .layout-builder__link:hover,
+.layout-builder__add-section .layout-builder__link:active {
+    color: #1177c3;
+}
+
+/* Add new section */
+
+.layout-builder__link--add,
+.layout-builder__link--add {
+  padding-left: 12px;
+  background:  url("../images/plus-blue.svg") 0 14px no-repeat;
+  background-size: 14px auto;
+}
+
+/* Import from library */
+
+.layout-builder__link--import-from-library,
+.layout-builder__link--import-from-library {
+  padding-left: 12px;
+  background:  url("../images/import-blue.svg") 0 15px no-repeat;
+  background-size: 16px auto;
+}
+
+
+/* Section */
+
+.layout-builder__section {
+  margin-bottom: 0;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview .layout-builder__layout {
+  outline: 2px dashed #2f91da !important;
+}
+
+.layout-builder--content-preview-disabled .layout-builder__layout {
+  position: relative !important;
+  display: block !important;
+  height: auto !important;
+  padding: 0 !important;
+  /* color: #686868 !important; */
+  outline: 2px dashed #2f91da !important;
+  /* overflow: hidden !important; */
+}
+
+/* since the header is sorta a locked element (except for basic editing),
+   best to make it look less like the 'normal' sections
+*/
+.layout-builder--edit-preview .cb-header,
+.layout-builder--edit-preview.layout-builder--content-preview .cb-header,
+.layout-builder--edit-preview .cb-header .layout-builder__region,
+.layout-builder--edit-preview .cb-header .layout-builder__region .layout__subregion,
+.layout-builder--edit-preview.layout-builder--content-preview .cb-header .layout-builder__region {
+  outline: 0 none !important;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled .cb-header .layout-builder__region .layout__subregion {
+  margin: 0 !important;
+}
+
+.layout-builder--edit-preview .cb-header .layout-builder__region,
+.layout-builder--edit-preview .cb-header .layout-builder__region .layout__subregion {
+  /* margin: 0 !important; */
+}
+
+.layout-builder--edit-preview .cb-header .layout-builder-block-locked {
+  padding: inherit;
+}
+
+/* configure section */
+
+.layout-builder--content-preview .layout-builder__section {
+  position: relative;
+}
+
+.layout-builder__section__actions {
+  position: relative;
+  margin-bottom: .5em;
+}
+
+/* .layout-builder--content-preview.layout-builder--edit-preview-disabled .layout-builder__section__actions {
+  display: none;
+} */
+
+.layout-builder--content-preview .layout-builder__section__actions {
+  position: absolute;
+  top: -10px;
+  z-index: 99; /* needs to go over nested absolute elements */
+  width: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: all .25s ease-in-out;
+  background-color: rgba(47,145,218, .65);
+}
+
+.layout-builder--content-preview.layout-builder--edit-preview-disabled .layout-builder__section:hover .layout-builder__section__actions,
+.layout-builder--content-preview.layout-builder--edit-preview .layout-builder__section__actions {
+  top: 0;
+  opacity: 1;
+  background-color: rgba(47,145,218, .65);
+}
+
+/* link: generic */
+
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link,
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link:visited {
+  color: #2f91da;
+}
+
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link:hover,
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link:active {
+  color: #1177c3;
+}
+
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link {
+  display: inline-block;
+  pointer-events: all;
+  padding: .5em .5em .5em 30px;
+  /* font-size: 1rem; */
+  color: #ffffff;
+  background-repeat: no-repeat;
+  transition: all .25s ease-in-out;
+}
+
+
+/* Link: configure */
+
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link--configure {
+  background-image: url("../images/pencil-white.svg");
+  background-position: 8px 10px;
+  background-size: 16px auto;
+}
+
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link--configure {
+  padding-left: 20px;
+  background:  url("../images/pencil-blue.svg") 0 3px no-repeat;
+  background-size: 16px auto;
+}
+
+/* Link: add to lib */
+
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link--add-section-to-library {
+  background-image: url("../images/save-white.svg");
+  background-position: 8px 10px;
+  background-size: 16px auto;
+}
+
+.layout-builder--content-preview-disabled .layout-builder__section__actions .layout-builder__link--add-section-to-library {
+  padding-left: 20px;
+  background:  url("../images/save-blue.svg") 0 2px no-repeat;
+  background-size: 16px auto;
+}
+
+
+/* link: remove */
+
+.layout-builder__section__actions .layout-builder__link--remove ,
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link--remove {
+  position: absolute;
+  top: -3px;
+  right: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: #2f91da url("../images/times-white.svg") center 5px no-repeat;
+  background-size: 12px;
+  opacity: 1;
+}
+
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link--remove {
+  top: 6px;
+  background-color: #fff;
+  background-image: url("../images/times-blue.svg");
+}
+
+.layout-builder--content-preview.layout-builder--edit-preview .layout-builder__section__actions .layout-builder__link--remove {
+  /* top: -26px;
+  right: -2px;
+  border-radius: 3px 3px 0 0; */
+}
+
+/* .layout-builder__section__actions .layout-builder__link--remove:hover,
+.layout-builder--content-preview .layout-builder__section__actions .layout-builder__link--remove:hover {
+  background-color: #1177c3;
+} */
+
+
+/* Region */
+
+.layout-builder__region {
+  outline: none;
+}
+
+.layout-builder--edit-preview .layout-builder__region {
+  margin-top: 0;
+  min-height: 55px; /* so doesn't collapse if no add-link or button in it */
+  /*padding-bottom: 2px;  force margins not to collapse */
+  outline: 1px dashed #2f91da;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled  .layout-builder__region {
+  position: relative;
+}
+
+.layout-builder--edit-preview .layout-builder__region .layout-builder__region {
+  outline: 1px dashed #979797;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled .layout-builder__region .layout-builder__region {
+  display: block !important;
+  margin: 1em !important;
+}
+
+.layout-builder--edit-preview  .layout-builder__region .layout__subregion {
+  outline: 1px dashed #979797 !important;  /* #2f91da !important; */
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled  .layout-builder__region .layout__subregion {
+  display: block !important;
+  position: relative !important;
+  transform: none !important;
+  opacity: 1 !important;
+  margin: 2em 1em !important;
+  /* padding: 1em !important; */
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  color: #686868 !important;
+}
+
+.layout-builder--edit-preview .layout__region--carousel {
+  margin: 1.5em;
+}
+
+/* info on the region: only useful for non-webadmin */
+
+.layout__region-info {
+  display: none;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled .layout--advanced .layout__region-info {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  opacity: 0;
+  padding: .5em;
+  /* margin-bottom: 1.5rem; */
+  text-align: center;
+  color: #ffffff;
+  /* outline: 2px solid #979797; */
+  border-bottom: 0 none;
+  /* border-bottom: 2px dashed #2f91da; */
+  background-color: rgba(47,145,218, .5); /*#f7f7f7;*/
+  transition: all .25s ease-in-out;
+}
+
+.layout-builder--edit-preview.layout-builder--content-preview-disabled .layout--advanced .layout-builder__region:hover > .layout__region-info {
+  top: 0;
+  opacity: 1;
+  z-index: 99; /* needs to go over nested absolute elements */
+}
+
+/* clearly indicate carousel region */
+
+.layout-builder--edit-preview .layout__content__row--carousel > .layout__region-info {
+  display: block;
+  border: 0 none;
+  color: #fff;
+  background-color: #2f91da;
+}
+
+/* Edit block */
+
+.layout-builder .contextual .trigger {
+  border-color: #2f91da;
+  background: #fff url("../images/pencil-blue.svg") 4px 4px no-repeat;
+  background-size: 16px auto;
+}
+
+.layout-builder .layout__region--2-col .contextual .trigger,
+.layout-builder .layout__region--3-col--03 .contextual .trigger,
+.layout-builder .layout__region--4-col--02 .contextual .trigger,
+.layout-builder .layout__region--4-col--04 .contextual .trigger {
+  margin-right: 25px; /* make space in case of overlap with 'add section' plus button */
+}
+
+.layout-builder .contextual-region .contextual .contextual-links {
+  border-color: #2f91da;
+}
+
+.layout-builder--edit-preview .contextual .trigger {
+  clip: auto !important; /* override .visually-hidden so it's always visible */
+}
+
+/* Add block */
+
+.layout-builder .block-layout_builder:not(.layout-builder-block-locked):hover {
+  cursor: move;
+}
+
+.layout-builder--edit-preview .layout--content-blocks .cb--layout-mode--stretched {
+  overflow: visible;
+}
+
+/* Move block */
+
+.ui-dialog .layout-builder-block-move .chosen-container {
+  max-width: 100%;
+}
+
+.ui-dialog .layout-builder-block-move .form__dropdown::after {
+  display: none;
+}
+
+
+/* Add block */
+
+.layout-builder__add-block {
+  display: none;
+  padding: 0;
+}
+
+.layout-builder--edit-preview .layout-builder__add-block {
+  display: block;
+  padding: 0;
+  /*margin-bottom: -2px;  compensate for region bottom padding */
+  text-align: center;
+  background-color: rgba(255, 255, 255, .65); /* #eff6fc; */
+}
+
+.layout-builder--edit-preview .layout-builder-block.cb--layout-mode--stretched + .layout-builder__add-block {
+  display: none;
+}
+
+.layout-builder__add-block .layout-builder__link--add {
+  position: relative;
+  display: inline-block;
+  padding: 1em;
+  font-size: 1rem;
+  color: #2f91da;
+  background-image: none;
+}
+
+.layout-builder__add-block .layout-builder__link--add:hover,
+.layout-builder__add-block .layout-builder__link--add:active {
+  color: #1177c3;
+}
+
+.layout-builder__add-block .layout-builder__link--add::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  color: #2f91da;
+  background: transparent url("../images/plus-blue.svg") center center no-repeat;
+  background-size: 14px auto;
+  transition: opacity .25s ease-in-out;
+}
+
+.layout-builder--edit-preview .layout-builder__section .layout-builder__link--add {
+  margin-bottom: 0;
+}
+
+/* add-link in non-content subregions, as for webadmin: don't show */
+
+.layout-builder--edit-preview .layout--simple .layout__subregion-01,
+.layout-builder--edit-preview .layout--simple .layout__subregion-02,
+.layout-builder--edit-preview .layout--simple .layout__top,
+.layout-builder--edit-preview .layout--simple .layout__bottom,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--top,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--bottom,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--top,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--bottom,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--top,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--bottom,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--top,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--bottom,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--top,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--bottom,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--top,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--bottom {
+  outline: 0 none !important;
+  /* padding: 0 !important; */
+  /* margin: 0 !important; */
+  min-height: 0;
+}
+
+.layout-builder--edit-preview .layout--simple .layout__subregion-01 .layout-builder-block,
+.layout-builder--edit-preview .layout--simple .layout__subregion-02 .layout-builder-block,
+.layout-builder--edit-preview .layout--simple .layout__top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple .layout__bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--bottom .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--top .layout-builder-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--bottom .layout-builder-block {
+  /* border-bottom: 2px dashed #979797 !important; */
+  /* padding: 0 !important; */
+  border-bottom: 0 none !important;
+}
+
+.layout-builder--edit-preview .layout--simple .layout__subregion-01 .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple .layout__subregion-02 .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple .layout__top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple .layout__bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__sidebar__row--bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--2-col  .layout__content__row--bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__sidebar__row--bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--3-col  .layout__content__row--bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__sidebar__row--bottom .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--top .layout-builder__add-block,
+.layout-builder--edit-preview .layout--simple.layout--4-col  .layout__content__row--bottom .layout-builder__add-block {
+  display: none;
+}
+
+/* block */
+
+.layout-builder-block {
+  padding: 0; /* have to reset this because lb css in core sets a value */
+  cursor: default;
+  background-color: transparent;
+}
+
+.layout-builder--content-preview-disabled .layout-builder-block {
+  padding: 1em !important;
+  margin: 0 !important;
+  display: block !important;
+  position: relative !important;
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  opacity: 1 !important;
+  width: auto !important;
+  border-bottom: 1px dashed #979797 !important;
+}
+
+.layout-builder-block-locked {
+  padding: 0;
+}
+
+.layout-builder--edit-preview .layout-builder-block-locked {
+  padding: 1em;
+}
+
+.layout-builder__actions {
+  z-index: 10;
+}
+
+/* forms in blocks */
+
+/* preview forms elements are disabled,
+   but we want them to look like they are not */
+.layout-builder--content-preview.layout-builder input:not([type])[disabled],
+.layout-builder--content-preview.layout-builder input:not([type]):disabled,
+.layout-builder--content-preview.layout-builder input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]):not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="hidden"])[disabled],
+.layout-builder--content-preview.layout-builder input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]):not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="hidden"]):disabled,
+.layout-builder--content-preview.layout-builder textarea[disabled], textarea:disabled {
+  opacity: 1;
+}
+
+.layout-builder--content-preview.layout-builder input[type="radio"]:disabled,
+.layout-builder--content-preview.layout-builder input[type="checkbox"]:disabled {
+  opacity: 1;
+}
+
+/****************************************************************************
+  Breakpoints
+****************************************************************************/
+
+@media only screen and (min-width: 480px) {
+
+  .ui-dialog {
+    padding: .5em;
+    max-width: 95%;
+  }
+
+  /* LB Claro styling we need to override */
+  .ui-dialog.ui-dialog-off-canvas {
+    max-width: none;
+    width: 290px !important;
+  }
+
+  #layout-builder-modal .layout-selection {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+  }
+
+  #layout-builder-modal .layout-selection__item {
+    margin: 0 .5rem 1rem .5rem;
+    flex-basis: calc(50% - 1rem);
+    width: calc(50% - 1rem);
+  }
+
+  /* Section library stuff */
+
+  .ui-dialog .section-library-links {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+  }
+
+  .ui-dialog .section-library-links li {
+    margin: 0 .5rem 1rem .5rem;
+    flex-basis: calc(50% - 1rem);
+    width: calc(50% - 1rem);
+  }
+
+  /* inline blocks */
+
+  .ui-dialog .block-categories .links,
+  .ui-dialog .inline-block-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+  }
+
+  .ui-dialog .block-categories .links li,
+  .ui-dialog .inline-block-list li {
+    margin: 0 .5rem 1rem .5rem;
+    flex-basis: calc(50% - 1rem);
+    width: calc(50% - 1rem);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+  .ui-dialog {
+    max-width: 95%;
+  }
+
+  /* LB Claro styling we need to override */
+  .ui-dialog.ui-dialog-off-canvas {
+    max-width: none;
+    width: 480px !important;
+  }
+
+  /* Edit layout actions */
+
+  #node-page-layout-builder-form,
+  #entity-view-display-layout-builder-form,
+  .node-layout-builder-form {
+    position: fixed;
+    z-index: 908;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 1.25rem;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .layout-builder-form #edit-actions {
+    /* position: fixed;
+    z-index: 908;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 2rem 1.25rem;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; */
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  .layout-builder-form .form__label__not-required {
+    position: absolute;
+    font-size: 0;
+    left: -9999px;
+  }
+
+  .layout-builder-form .form-type-vertical-tabs {
+    margin-top: -.5rem;
+  }
+
+  /* Moderation */
+
+  .layout-builder-form #edit-moderation-state-wrapper > .group {
+    display: flex;
+    align-items: baseline;
+    padding-left: .5em;
+  }
+
+  .layout-builder-form #edit-moderation-state-wrapper > .group > .form-item {
+    width: auto;
+    margin-right: 15px;
+    margin-bottom: 0;
+  }
+
+  .layout-builder-form #edit-moderation-state-wrapper > .group > .form-item:last-child {
+    margin-right: 0;
+  }
+
+  /* Preview actions */
+
+  #edit-preview-toggle {
+    flex-grow: 1;
+    justify-content: flex-end;
+    display: flex;
+    margin-left: 2em;
+  }
+
+  #edit-preview-toggle .form__element {
+    width: auto;
+    margin: 0;
+  }
+
+  #edit-preview-toggle .form-type-checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .layout-builder-form #edit-actions .button {
+    margin: 0 15px 0 0;
+  }
+
+  /* Dialog: layout selection */
+
+  #layout-builder-modal .layout-selection__item {
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+  }
+
+  /* inline blocks */
+
+  .ui-dialog .block-categories .links li,
+  .ui-dialog .inline-block-list li {
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+  }
+
+  /* Section library stuff */
+
+  .ui-dialog .section-library-links li {
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+  }
+
+  /* Media library */
+
+  .ui-dialog .view--media-library .form--inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .ui-dialog .view--media-library .form--inline .form-item {
+    float: none;
+    width: auto;
+  }
+
+  .ui-dialog .media-library-views-form {
+    margin: 0 -.5rem 1rem -.5rem;
+  }
+
+  .ui-dialog .media-library-views-form .form-actions {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .ui-dialog .media-library-views-form .views-table {
+    margin: 0 .5rem;
+  }
+
+  .ui-dialog .media-library-views-form .media-library-item.media-library-item--grid {
+    display: flex;
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+    margin: 0 .5rem 1rem .5rem;
+  }
+
+  .ui-dialog .media-library-views-form .media-library-item.media-library-item--grid .views-field-rendered-entity {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ui-dialog .media-library-views-form .form-actions {
+    width: 100%;
+  }
+
+  /* overview of selected items */
+
+  .ui-dialog .media-library-selection {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -.5rem 1rem -.5rem;
+  }
+
+  #layout-builder-modal .media-library-selection .media-library-item--grid,
+  .ui-dialog .media-library-form-element .media-library-item--grid {
+    /* display: flex; */
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+    margin: 0 .5rem 1rem .5rem;
+  }
+
+  /* .media-library-selection .media-library-item--grid > *,
+  .media-library-form-element .media-library-item--grid > * {
+    width: 100%;
+  } */
+
+  /* just uploaded */
+
+  .ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -.5rem 1rem -.5rem;
+  }
+
+  .ui-dialog .js-media-library-add-form .item-list .js-media-library-add-form-added-media__item {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: calc(33.33% - 1rem);
+    width: calc(33.33% - 1rem);
+    margin: 0 .5rem 1rem .5rem;
+  }
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+  /* LB Claro styling we need to override */
+  /* .ui-dialog.ui-dialog-off-canvas {
+    width: 512px !important;
+  } */
+
+  .ui-dialog {
+    max-width: 984px;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+  /* LB Claro styling we need to override */
+  .ui-dialog.ui-dialog-off-canvas {
+    width: 512px !important;
+  }
+
+}

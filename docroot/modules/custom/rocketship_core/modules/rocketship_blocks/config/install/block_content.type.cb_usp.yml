@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_usp
+label: USP
+revision: 0
+description: 'Add blocks of this type to your section, to construct a list of the strong points of your company, product or service.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_usp.svg

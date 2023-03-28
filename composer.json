@@ -30,58 +30,101 @@
         "drupal/allowed_formats": "^2.0",
         "drupal/better_exposed_filters": "^6.0",
         "drupal/blazy": "^2.14",
+        "drupal/block_content_permissions": "^1.11",
+        "drupal/block_form_alter": "^2.0",
         "drupal/color": "^1.0",
+        "drupal/colorbox": "^2.0",
+        "drupal/components": "^3.0@beta",
         "drupal/config_ignore": "^2.4",
+        "drupal/config_rewrite": "^1.5",
         "drupal/config_split": "^1.9",
         "drupal/config_update": "^2.0@alpha",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/core-vendor-hardening": "^10.0",
+        "drupal/critical_css": "^1.19",
         "drupal/devel": "^5.1",
         "drupal/devel_entity_updates": "^4.1",
         "drupal/devel_php": "^1.5",
         "drupal/diff": "^1.1",
+        "drupal/drimage": "^2.2",
+        "drupal/easy_breadcrumb": "^2.0",
+        "drupal/easy_install": "^10.5",
+        "drupal/editor_advanced_link": "^2.1",
         "drupal/email_registration": "^1.2",
         "drupal/entity_reference_revisions": "^1.10",
         "drupal/environment_indicator": "^4.0",
+        "drupal/field_formatter": "^3.0@RC",
         "drupal/field_group": "^3.4",
         "drupal/field_label": "^1.2",
+        "drupal/field_limiter": "^1.1",
         "drupal/focal_point": "^2.0@alpha",
         "drupal/gin": "^3.0@RC",
+        "drupal/gin_toolbar": "^1.0@RC",
         "drupal/google_tag": "^1.6",
+        "drupal/http_cache_control": "^2.1",
+        "drupal/image_effects": "^3.4",
         "drupal/imageapi_optimize": "^4.0",
         "drupal/imageapi_optimize_resmushit": "^2.0@beta",
+        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/layout_builder_at": "^2.13",
+        "drupal/layout_builder_extra_templates": "^1.0@RC",
+        "drupal/layout_builder_lock": "^1.2",
+        "drupal/layout_builder_modal": "^1.2",
+        "drupal/layout_builder_operation_link": "^2.1",
+        "drupal/layout_builder_restrictions": "^2.17",
+        "drupal/layout_builder_restrictions_by_role": "^1.0@alpha",
         "drupal/limited_field_widgets": "^2.0",
+        "drupal/link_attributes": "^1.13",
         "drupal/linkit": "^6.0@beta",
         "drupal/login_emailusername": "^2.1",
+        "drupal/manage_display": "^3.0@RC",
+        "drupal/maxlength": "^2.1",
+        "drupal/media_library_form_element": "^2.0",
         "drupal/memcache": "^2.5",
         "drupal/menu_link_attributes": "^1.3",
         "drupal/menu_trail_by_path": "^2.0",
         "drupal/metatag": "^1.22",
         "drupal/metatag_async_widget": "^1.1",
         "drupal/migrate_plus": "^6.0",
+        "drupal/migrate_source_csv": "^3.5",
         "drupal/migrate_tools": "^6.0",
         "drupal/module_filter": "^4.0",
+        "drupal/node_keep": "^2.1",
         "drupal/pathauto": "^1.11",
         "drupal/permissions_filter": "^1.3",
+        "drupal/purge": "^3.4",
+        "drupal/rabbit_hole": "^1.0@beta",
         "drupal/rdf": "^2.1",
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8",
         "drupal/robotstxt": "^1.5",
+        "drupal/role_delegation": "^1.2",
+        "drupal/scheduler": "^1.5",
+        "drupal/schema_article": "^2.4",
         "drupal/schema_metatag": "^2.4",
+        "drupal/search_api": "^1.28",
+        "drupal/seckit": "^2.0",
+        "drupal/section_library": "^1.1",
         "drupal/shield": "^1.7",
         "drupal/simple_sitemap": "^4.1",
+        "drupal/slick": "^2.7",
         "drupal/smart_trim": "^2.0",
         "drupal/stage_file_proxy": "^2.0",
         "drupal/structure_sync": "^2.0",
         "drupal/svg_image": "^3.0",
         "drupal/swiftmailer": "^2.4",
+        "drupal/taxonomy_access_fix": "^4.0@beta",
         "drupal/token": "^1.11",
+        "drupal/userprotect": "^1.2",
         "drupal/video_embed_field": "^2.5",
+        "drupal/view_unpublished": "^1.0",
         "drupal/viewsreference": "^2.0@beta",
+        "drupal/webform": "^6.2@beta",
         "drush/drush": "^11.5",
         "egulias/email-validator": "^3.2",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "topfloor/composer-cleanup-vcs-dirs": "^1.1",
         "vlucas/phpdotenv": "^5.5",
         "vmlyr-drupal/kit-docksal-commands": "^8.2",
@@ -110,7 +153,8 @@
             "topfloor/composer-cleanup-vcs-dirs": true,
             "oomphinc/composer-installers-extender": true,
             "phpro/grumphp": true,
-            "nascom/grumphp-drupal": true
+            "nascom/grumphp-drupal": true,
+            "mglaman/composer-drupal-lenient": true
         },
         "discard-changes": true,
         "sort-packages": true
@@ -207,6 +251,21 @@
             },
             "drupal/viewsreference": {
                 "https://www.drupal.org/node/3192468": "https://www.drupal.org/files/issues/2021-01-12/3192468-2.patch"
+            },
+            "drupal/field_limiter": {
+                "https://www.drupal.org/project/field_limiter/issues/3287523: Update to D10": "https://www.drupal.org/files/issues/2022-08-22/field_limiter.1.1.rector.patch"
+            },
+            "drupal/layout_builder_restrictions_by_role": {
+                "https://www.drupal.org/project/layout_builder_restrictions_by_role/issues/3288237: Update to D10": "https://www.drupal.org/files/issues/2022-06-16/layout_builder_restrictions_by_role.1.0.x-dev.rector.patch"
+            },
+            "drupal/view_unpublished": {
+                "https://www.drupal.org/project/view_unpublished/issues/3299433: Update to D10": "https://www.drupal.org/files/issues/2022-12-01/view_unpublished_d10readiness-11.patch"
+            },
+            "drupal/layout_builder_extra_templates": {
+                "https://www.drupal.org/project/layout_builder_extra_templates/issues/3288227 Update to D10": "https://www.drupal.org/files/issues/2022-06-16/layout_builder_extra_templates.1.x-dev.rector.patch"
+            },
+            "drupal/easy_install": {
+                "https://www.drupal.org/project/easy_install/issues/3297022: Update to D10": "https://www.drupal.org/files/issues/2022-11-05/D10-easy_install.patch"
             }
         },
         "patchLevel": {
@@ -214,6 +273,9 @@
         },
         "drupal-core-project-message": {
             "include-keys": ["homepage", "support"]
+        },
+        "drupal-lenient": {
+            "allowed-list": ["drupal/field_limiter", "drupal/layout_builder_extra_templates", "drupal/layout_builder_restrictions_by_role", "drupal/view_unpublished", "drupal/node_title_help_text", "drupal/easy_install"]
         }
     }
 }

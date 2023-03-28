@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_image
+    - field.field.block_content.cb_image.field_cb_image_wrapper_link
+    - field.field.block_content.cb_image.field_cb_media
+    - field.field.block_content.cb_image.field_cb_media_layout
+id: block_content.cb_image.default
+targetEntityType: block_content
+bundle: cb_image
+mode: default
+content:
+  field_cb_media:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: drimage_scale
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_cb_image_wrapper_link: true
+  field_cb_media_layout: true
+  langcode: true
+  search_api_excerpt: true

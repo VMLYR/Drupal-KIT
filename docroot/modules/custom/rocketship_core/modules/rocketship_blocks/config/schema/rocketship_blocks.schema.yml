@@ -1,0 +1,3 @@
+block_content.type.*.third_party.icon_path:
+  type: string
+  label: 'Icon path'

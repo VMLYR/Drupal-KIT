@@ -1,0 +1,12 @@
+{%
+  set classes = [
+    'social-widgets',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <h3 class="social-widgets__title">{{ 'Share' | t }}</h3>
+  <div class="social-widgets__group">
+    {{ links }}
+  </div>
+</div>

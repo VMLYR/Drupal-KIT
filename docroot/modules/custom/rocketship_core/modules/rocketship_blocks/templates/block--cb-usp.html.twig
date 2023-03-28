@@ -1,0 +1,45 @@
+{% set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+] %}
+
+<div{{ attributes.addClass(classes) }}
+  {% if configuration.label_display|default == false and heading|default %} aria-label="{{heading}}"{% endif %}
+  {% if configuration.label_display|default and heading|default %} aria-labelledby="{{heading_id}}"{% endif %}
+>
+  {{ title_prefix }}
+  {% if label and configuration.label_display|default %}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+
+    {# <div{{ content_attributes.addClass('content') }}> #}
+
+      <div class="cb-usp-image">
+        {% if image_wrapper_url and content.field_cb_media %}
+          <a class="cb-usp__link" target="{{ image_wrapper_url_target }}" href="{{ image_wrapper_url }}"{% if image_wrapper_url_title %} title="{{image_wrapper_url_title}}"{% endif %}>
+        {% endif %}
+            {{ content.field_cb_media }}
+        {% if image_wrapper_url and content.field_cb_media %}
+          </a>
+        {% endif %}
+      </div>
+      <div class="cb-usp-content">
+        {% if image_wrapper_url and content.field_cb_title %}
+          <a class="cb-usp__link" target="{{ image_wrapper_url_target }}" href="{{ image_wrapper_url }}"{% if image_wrapper_url_title %} title="{{image_wrapper_url_title}}"{% endif %}>
+        {% endif %}
+          {{ content.field_cb_title }}
+        {% if image_wrapper_url and content.field_cb_title %}
+          </a>
+        {% endif %}
+
+        {{ content|without('field_cb_media')|without('field_cb_title') }}
+      </div>
+
+    {# </div> #}
+
+  {% endblock %}
+</div>

@@ -1,0 +1,1040 @@
+<?php
+
+define('ROCKETSHIP_FEATURES_MENU_LINK', '48a98eba-72c7-4e43-9f99-58af7623ce2d');
+
+use Drupal\block\Entity\Block;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\ContentEntityFormInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Entity\TranslatableInterface;
+use Drupal\Core\Extension\Extension;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\field\FieldStorageConfigInterface;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\menu_link_content\MenuLinkContentInterface;
+use Drupal\path_alias\PathAliasInterface;
+use Drupal\rocketship_core\Event\PathAliasUpdateEvent;
+use Drupal\user\Entity\Role;
+use Symfony\Component\Yaml\Yaml;
+
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Fully computed fields are only half implemented in Drupal, like
+ * most things. Works fine if the field is fully defined in code, not
+ * so much in UI. Workaround is setting the storage config to custom storage
+ * so Field API leaves us alone.
+ *
+ * @see https://www.drupal.org/project/drupal/issues/2932273
+ * @see https://www.drupal.org/project/drupal/issues/2986836
+ *
+ * And their related issues.
+ */
+function rocketship_core_field_storage_config_presave(FieldStorageConfigInterface $entity) {
+  if ($entity->getType() === 'rs_display_field') {
+    $entity->custom_storage = TRUE;
+  }
+}
+
+/**
+ * Implements hook_themes_installed().
+ */
+function rocketship_core_themes_installed($theme_list) {
+  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $handler */
+  $handler = Drupal::service('theme_handler');
+
+  foreach ($theme_list as $theme) {
+    $info = $handler->getTheme($theme);
+    if (isset($info->info['package']) && $info->info['package'] == 'Rocketship Theme') {
+      Rocketship::placeLanguageSwitcherBlockIfMultilingual($info);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Disallow changing the default language. Only madness lies that way.
+ */
+function rocketship_core_form_language_admin_overview_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $configurableLanguages = \Drupal::languageManager()->getLanguages();
+  foreach ($configurableLanguages as $langcode => $configurableLanguage) {
+    $form['languages'][$langcode]['default']['#disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function rocketship_core_token_info() {
+  // Add a token for the alias of the parent menu link.
+  $info['tokens']['menu-link']['parent-alias'] = [
+    'name' => t('Menu parent: alias'),
+    'description' => t('URL alias of the menu parent.'),
+  ];
+  $info['tokens']['current-page']['paged-url'] = [
+    'name' => t('Paged URL'),
+    'description' => t('The URL of the current page including the page query parameter.'),
+    'type' => 'url',
+  ];
+  $info['tokens']['current-page']['theme-path'] = [
+    'name' => t('Theme path'),
+    'description' => t('The path of the theme used on the current page.'),
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function rocketship_core_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  $language_manager = \Drupal::languageManager();
+  $url_options = ['absolute' => TRUE];
+  if (isset($options['langcode'])) {
+    $url_options['language'] = $language_manager->getLanguage($options['langcode']);
+  }
+
+  if ($type == 'menu-link' && !empty($data['menu-link'])) {
+    $link = $data['menu-link'];
+    $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+
+    if ($link instanceof MenuLinkContentInterface) {
+      $link = $menu_link_manager->createInstance($link->getPluginId());
+    }
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'parent-alias':
+          if ($link->getParent() && $parent = $menu_link_manager->createInstance($link->getParent())) {
+            $alias_manager = \Drupal::service('path_alias.manager');
+            $url = $parent->getUrlObject();
+            if (!$url->isExternal()) {
+              $path = '/' . $url->getInternalPath();
+              $replacements[$original] = $alias_manager->getAliasByPath($path);
+            }
+          }
+          break;
+      }
+    }
+  }
+
+  // Current page tokens.
+  if ($type == 'current-page') {
+    $request = \Drupal::request();
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        // Returns the current page url + the page query parameter if present.
+        case 'paged-url':
+          $page = $request->query->get('page', NULL);
+          if ($page) {
+            $url_options['query']['page'] = $page;
+          }
+          $bubbleable_metadata->addCacheContexts(['url']);
+          try {
+            $url = Url::createFromRequest($request)->setOptions($url_options);
+          } catch (\Exception $e) {
+            // Url::createFromRequest() can fail, e.g. on 404 pages.
+            // Fall back and try again with Url::fromUserInput().
+            try {
+              $url = Url::fromUserInput($request->getPathInfo(), $url_options);
+            } catch (\Exception $e) {
+              // Instantiation would fail again on malformed urls.
+            }
+          }
+          if (isset($url)) {
+            $result = $url->toString(TRUE);
+            $bubbleable_metadata->addCacheableDependency($result);
+            $replacements[$original] = $result->getGeneratedUrl();
+          }
+          break;
+        case 'theme-path':
+          $replacements[$original] = \Drupal::theme()
+            ->getActiveTheme()
+            ->getPath();
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for 'path_alias'.
+ */
+function rocketship_core_path_alias_update(PathAliasInterface $path_alias) {
+  /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher */
+  $event_dispatcher = \Drupal::service('event_dispatcher');
+
+  // Dispatch the path alias update event.
+  $event = new PathAliasUpdateEvent($path_alias);
+  $event_dispatcher->dispatch(PathAliasUpdateEvent::PATH_ALIAS_UPDATE, $event);
+}
+
+/**
+ * Implements hook_BASE_FORM_ID_alter().
+ */
+function rocketship_core_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state
+    ->getFormObject()
+    ->getEntity();
+
+  if ($node->isNew()) {
+    $bundle = $node->bundle();
+    $entity_type_id = $node->getEntityTypeId();
+
+    // Check if this bundle allows LB overrides.
+    $displays = \Drupal::entityTypeManager()->getStorage('entity_view_display')->loadByProperties([
+      'third_party_settings.layout_builder.allow_custom' => TRUE,
+      'targetEntityType' => $entity_type_id,
+      'bundle' => $bundle,
+    ]);
+
+    // Check permissions.
+    $permissions = [
+      "configure all $bundle $entity_type_id layout overrides",
+      "configure editable $bundle $entity_type_id layout overrides",
+      "configure any layout",
+    ];
+    $account = \Drupal::currentUser();
+    $access = AccessResult::allowedIfHasPermissions($account, $permissions, 'OR')->isAllowed();
+    $access = AccessResult::allowedIf($access && !empty($displays))->isAllowed();
+  }
+  else {
+    $routeUrl = Url::fromRoute('layout_builder.overrides.node.view', [
+      'node' => $node->id(),
+    ]);
+    $access = $routeUrl->access();
+  }
+
+  $submits = $form['actions']['submit']['#submit'];
+  $submits[] = '_rocketship_core_submit_redirect_to_manage_content';
+  $form['actions']['submit_and_manage'] = [
+    '#type' => 'submit',
+    '#value' => t('Save and manage content'),
+    '#submit' => $submits,
+    '#button_type' => 'primary',
+    '#weight' => $form['actions']['submit']['#weight'] + 1,
+    '#access' => $access,
+  ];
+}
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _rocketship_core_submit_redirect_to_manage_content($form, FormStateInterface $form_state) {
+  // todo: make sure to send them to correct language?
+  $form_state->setRedirect('layout_builder.overrides.node.view', [
+    'node' => $form_state
+      ->getFormObject()
+      ->getEntity()
+      ->id(),
+  ]);
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * We're not using the language selector, instead we're just making it clear
+ * to the user in what language they're working in.
+ */
+function rocketship_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Only on admin pages and for logged in users.
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()
+    || !\Drupal::currentUser()->isAuthenticated()) {
+    return;
+  }
+
+  $object = $form_state->getFormObject();
+  if ($object instanceof ContentEntityFormInterface) {
+    $entity = $object->getEntity();
+    if ($entity && $entity->isTranslatable()) {
+      // Only mention current language for translatable entities.
+      if (!$entity->isTranslatable()) {
+        return;
+      }
+      $language = $entity->language()->getName();
+
+      $text = t('Creating @entity_type in @language', [
+        '@language' => $language,
+        '@entity_type' => $entity->getEntityType()->getLabel(),
+      ]);
+      if (!$entity->isNew()) {
+        $text = t('Editing @language translation', ['@language' => $language]);
+      }
+      if ($entity instanceof TranslatableInterface) {
+        if ($entity->isNewTranslation() && !$entity->isNew()) {
+          $text = t('Adding @language translation', ['@language' => $language]);
+        }
+      }
+
+      $form['rocketship_core_language_info'] = [
+        '#weight' => -9999,
+        '#markup' => "<h4>$text</h4>",
+      ];
+    }
+  }
+}
+
+function _rocketship_core_form_tooltip(&$variables) {
+
+  if (!isset($variables['root_path'])) {
+    $system_path = \Drupal::service('path.current')->getPath();
+    $variables['root_path'] = explode('/', $system_path) [1];
+  }
+
+  // For layout builder preview page
+  if ($variables['root_path'] === 'layout_builder') {
+
+    // If our form element is part of a settings form
+    // specifically for the Layout Section or a Block settings,
+    // we want the description to be shown as a tooltip instead of printed as-is
+
+    $variables['tooltip'] = FALSE;
+
+    // only if descriptions exist
+    if (isset($variables['description']) && isset($variables['description']['content'])) {
+
+      // form fieldsets and some fields have 'name' we can filter by
+      if (isset($variables['name'])) {
+
+        if ((strpos($variables['name'], 'settings[settings][redirect]') !== false
+          || strpos($variables['name'], 'settings[block_form]') !== false
+          || strpos($variables['name'], 'layout_settings') !== false
+          || strpos($variables['name'], 'layout_builder') !== false
+          || strpos($variables['name'], 'settings[webform_id]') !== false) ) {
+
+          // exception for certain fields
+          // because they contain too much info or examples
+          // Eg. for form elements of webform, only show tooltip if it's not the data field
+
+          if (strpos($variables['name'], '[field_cb_webform]') !== false) {
+
+            if (strpos($variables['name'], '[default_data]') === false) {
+              $variables['tooltip'] = TRUE;
+            } else {
+              $variables['tooltip'] = FALSE;
+            }
+
+          } else {
+
+            $variables['tooltip'] = TRUE;
+
+          }
+
+        }
+
+      // mostly form elements: based on id
+      } else if (isset($variables['element']) && isset($variables['element']['#id'])) {
+        if (strpos($variables['element']['#id'], 'settings-block-form') !== false
+          || strpos($variables['element']['#id'], 'layout-builder') !== false) {
+          $variables['description_display'] = 'before';
+          $variables['tooltip'] = TRUE;
+        }
+
+      // mostly form elements: search for names to do with LB settings
+      } else if (isset($variables['element']) && isset($variables['element']['#name'])) {
+        if (strpos($variables['element']['#name'], 'settings[block_form]') !== false
+            || strpos($variables['element']['#name'], 'layout_settings') !== false
+            || strpos($variables['element']['#name'], 'layout_builder') !== false
+            || strpos($variables['element']['#name'], 'settings[view_mode]') !== false ) {
+          $variables['description_display'] = 'before';
+          $variables['tooltip'] = TRUE;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+function rocketship_core_preprocess_form_element(&$variables) {
+  _rocketship_core_form_tooltip($variables);
+}
+
+function rocketship_core_preprocess_field_multiple_value_form(&$variables) {
+  _rocketship_core_form_tooltip($variables);
+}
+
+function rocketship_core_preprocess_fieldset(&$variables) {
+
+  _rocketship_core_form_tooltip($variables);
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rocketship_core_theme() {
+  $return = [
+    'idt_widget' => [
+      'render element' => 'element',
+      'file' => 'rocketship_core.field.inc',
+    ],
+    'label_value_list_item' => [
+      'variables' => ['label' => NULL, 'value' => NULL, 'promoted' => FALSE],
+    ],
+    'title_description_list_item' => [
+      'variables' => [
+        'title' => NULL,
+        'description' => NULL,
+        'wrapper' => NULL,
+      ],
+    ],
+  ];
+
+  return $return;
+}
+
+/**
+ * implements hook_blazy_alter().
+ */
+function rocketship_core_blazy_alter(array &$build, array $settings = []) {
+  // This will trigger when you use the Media Blazy formatter on a media reference field.
+  // So, for example, on the Paragraph or Node level. This will do nothing if
+  // you use the normal Blazy formatter on an Image field on the Media entity
+  // level.
+
+  // Only do something if media_switch set to content and it's a media item.
+  if (!empty($settings['entity_id']) && !empty($settings['media_switch']) && $settings['media_switch'] == 'content' && isset($settings['media_source'])) {
+    // Load the entity
+    $entity = Drupal::entityTypeManager()
+      ->getStorage($settings['entity_type_id'])
+      ->load($settings['entity_id']);
+    if ($entity) {
+      // Get highest parent. Basically, if we loaded a Paragraph it'll
+      // wind up at a non-Paragraph entity. If it's already a non-Paragraph
+      // entity nothing will happen.
+      $entity = Rocketship::getHighestLevelParentEntity($entity);
+      /** @var \Drupal\Core\Entity\EntityRepositoryInterface $repo */
+      $repo = \Drupal::service('entity.repository');
+      $entity = $repo->getTranslationFromContext($entity);
+
+      // if the media item is an image,
+      // we need the entity title to build a descriptive aria-label
+      // to output on the link around the image
+      $entity_title = $entity->label();
+
+      // put that title in a variable the twig template can use
+      $build['#build']['settings']['title'] = $entity_title;
+
+      // Now fill that in as the content_url, Blazy will handle the rest.
+      $build['#build']['settings']['content_url'] = $entity->toUrl();
+    }
+  }
+}
+
+/**
+ * @return string
+ */
+function rocketship_core_get_default_content_default_language() {
+  $key = \Drupal::config('rocketship_core.defaultcontentdefaultlanguage')
+    ->get('default_language');
+  if (empty($key)) {
+    $key = \Drupal::languageManager()->getDefaultLanguage()->getId();
+  }
+  return $key;
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ *
+ */
+function rocketship_core_language_switch_links_alter(array &$links, $type, \Drupal\Core\Url $url) {
+  // if a theme setting exists (and is true) to set an abbreviated language as text, do it
+  $lang_abbr = theme_get_setting('language_abbr');
+
+  if (isset($lang_abbr) && $lang_abbr == 1) {
+    foreach ($links as &$link) {
+      $link['title'] = $link['language']->id();
+    }
+  }
+}
+
+/**
+ * Class Rocketship.
+ *
+ * @package Drupal\rocketship_core
+ */
+class Rocketship {
+
+  public static function generateMigrate($entity_type_id, $ids = [], $bundles = [], $module_name = 'rs_generated_migrate', $default_content_mode = FALSE) {
+    $generator = new \Drupal\rocketship_core\MigrateGenerator($entity_type_id, $bundles, $ids, $module_name, $default_content_mode);
+    return $generator->generateMigrate();
+  }
+
+  /**
+   * @param $nid
+   * @param $langcode
+   *
+   * @return string
+   */
+  public static function fetchNodeLayoutForMigrateCSV($nid, $langcode) {
+    $result = \Drupal::database()->query("
+    select delta, layout_builder__layout_section from node__layout_builder__layout
+    where entity_id = :nid and langcode = :langcode
+    order by delta ASC
+    ", [
+      ':nid' => $nid,
+      ':langcode' => $langcode,
+    ])->fetchAllKeyed();
+    $string = implode('|', $result);
+    return base64_encode($string);
+  }
+
+  /**
+   * @param $nid
+   * @param $langcode
+   *
+   * @return string
+   */
+  public static function fetchSectionLibraryTemplateLayout($id) {
+    $result = \Drupal::database()->query("
+    select layout_section_section from section_library_template__layout_section
+    where entity_id = :id
+    ", [
+      ':id' => $id,
+    ])->fetchCol();
+    $string = implode('|', $result);
+    return base64_encode($string);
+  }
+
+  /**
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public static function ensureFeaturesMenuLinkExists() {
+    $menuLink = \Drupal::entityTypeManager()->getStorage('menu_link_content')
+      ->getQuery()
+      ->condition('uuid', ROCKETSHIP_FEATURES_MENU_LINK)
+      ->execute();
+    if ($menuLink) {
+      // All good
+      return;
+    }
+    // Otherwise we have to make it
+    $menuLink = MenuLinkContent::create([
+      'uuid' => ROCKETSHIP_FEATURES_MENU_LINK,
+      'link' => [
+        'uri' => 'route:<nolink>',
+        'title' => NULL,
+        'options' => [],
+      ],
+      'expanded' => 1,
+      'langcode' => rocketship_core_get_default_content_default_language(),
+      'menu_name' => 'main',
+      'weight' => -50,
+      'title' => 'Features',
+    ]);
+    $menuLink->save();
+  }
+
+  /**
+   * @param \Drupal\Core\Extension\Extension $theme
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public static function placeLanguageSwitcherBlockIfMultilingual(Extension $theme) {
+    $block = Block::load('languageswitcher');
+    if ($block) {
+      return;
+    }
+
+    // Set up the language switcher if multilang.
+    $regions = $theme->info['regions'];
+
+    if (isset($theme->info['language_switcher_region'])) {
+      // Override from theme itself
+      $region = $theme->info['language_switcher_region'];
+    }
+    elseif (empty($regions)) {
+      // No regions, no block.
+      return;
+    }
+    elseif (isset($regions['header_top'])) {
+      $region = 'header_top';
+    }
+    elseif (isset($regions['header'])) {
+      $region = 'header';
+    }
+    else {
+      $regionKeys = array_keys($regions);
+      $region = reset($regionKeys);
+    }
+    if (\Drupal::languageManager()->isMultilingual()) {
+      $values = [
+        'id' => 'languageswitcher',
+        'theme' => $theme->getName(),
+        'region' => $region,
+        'plugin' => 'language_block:language_interface',
+        'weight' => 3,
+        'settings' => [
+          'label' => 'Language switcher',
+          'label_display' => 0,
+        ],
+        'visibility' => [],
+      ];
+
+      $block = Block::create($values);
+      $block->save();
+    }
+
+  }
+
+  public static function getHighestLevelParentEntity(EntityInterface $entity) {
+    if (method_exists($entity, 'getParentEntity')) {
+      $parent = $entity->getParentEntity();
+      if ($parent) {
+        return static::getHighestLevelParentEntity($parent);
+      }
+      // Empty parent, assume this level is fine.
+      return $entity;
+    }
+    // Already highest level as far as we can tell.
+    return $entity;
+  }
+
+  /**
+   * Update roles for a modules for Rocketship.
+   *
+   * If a module has permissions folder with .yml files
+   * named ROLE.yml with a permissions key and then a list
+   * of permissions, this function will update those roles
+   * with those permissions.
+   *
+   * @param string $module
+   *   Module name.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public static function updateRolePermissionsForModule($module) {
+
+    $path = \Drupal::service('module_handler')
+        ->getModule($module)
+        ->getPath() . '/permissions';
+
+    /** @var \Drupal\user\RoleInterface[] $roles */
+    $roles = Role::loadMultiple();
+
+    foreach ($roles as $role) {
+      $file_path = $path . '/' . $role->id() . '.yml';
+      if (is_file($file_path)) {
+        $file_contents = file_get_contents($file_path);
+        $file = (array) Yaml::parse($file_contents);
+
+        foreach ($file['permissions'] as $permission) {
+          $role->grantPermission($permission);
+        }
+        $role->save();
+      }
+    }
+  }
+
+  /**
+   * Get module installer service.
+   *
+   * @return \Drupal\Core\Extension\ModuleInstallerInterface
+   *   Service.
+   */
+  public static function getModuleInstaller() {
+    return \Drupal::service('module_installer');
+  }
+
+  /**
+   * Get UUID Generator service.
+   *
+   * @return \Drupal\Component\Uuid\UuidInterface
+   *   Service.
+   */
+  public static function getUuidGenerator() {
+    return \Drupal::service('uuid');
+  }
+
+  /**
+   * @return bool|\Drupal\Core\Entity\EntityInterface|mixed
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public static function loadMigratedFrontpageNode() {
+    if (\Drupal::moduleHandler()->moduleExists('rocketship_content')) {
+      $nodes = \Drupal::entityTypeManager()->getStorage('node')
+        ->loadByProperties(['uuid' => ROCKETSHIP_MIGRATED_HOMEPAGE_UUID]);
+      return reset($nodes);
+    }
+    return FALSE;
+  }
+
+  /**
+   * Helper function to place blocks in a region.
+   *
+   * @param string $plugin_id
+   *   Block plugin ID.
+   * @param array $settings
+   *   Block settings.
+   *
+   * @return bool|\Drupal\block\BlockInterface
+   *   FALSE on failure or the Block that was just placed.
+   */
+  public static function placeBlock($plugin_id, array $settings = []) {
+    // Set theme fallback.
+    $theme = isset($settings['theme']) ? $settings['theme'] : \Drupal::configFactory()
+      ->get('system.theme')
+      ->get('default');
+
+    // Generate ID.
+    $id = $theme . '_' . str_replace([':', '-'], '_', $plugin_id);
+    if (strlen($id) > 64) {
+      // Fallback if max length exceeded.
+      $id = (new Random())->name(8);
+    }
+
+    // Make sure region is valid.
+    $regions = system_region_list($theme);
+    $region = isset($settings['region']) ? $settings['region'] : system_default_region($theme);
+    if (!isset($regions[$region])) {
+      $region = system_default_region($theme);
+    }
+
+    // Fill in defaults.
+    $settings += [
+      'plugin' => $plugin_id,
+      'region' => $region,
+      'id' => $id,
+      'theme' => $theme,
+      'label' => '',
+      'visibility' => [],
+      'weight' => 0,
+    ];
+    $values = [];
+
+    $keys = [
+      'region',
+      'id',
+      'theme',
+      'plugin',
+      'weight',
+      'visibility',
+    ];
+    foreach ($keys as $key) {
+      $values[$key] = $settings[$key];
+      // Remove extra values that do not belong in the settings array.
+      unset($settings[$key]);
+    }
+    foreach ($values['visibility'] as $id => $visibility) {
+      $values['visibility'][$id]['id'] = $id;
+    }
+    $values['settings'] = $settings;
+    $block = Block::create($values);
+    try {
+      $block->save();
+
+      return $block;
+    } catch (\Exception $e) {
+      \Drupal::messenger()
+        ->addError(t('Error while placing block: ' . $e->getMessage()));
+      \Drupal::logger('Rocketship Place Block')->error($e->getMessage());
+
+      return FALSE;
+    }
+  }
+
+  /**
+   * Render a block.
+   *
+   * @param string $plugin_id
+   *   Plugin ID.
+   * @param array $config
+   *   Config array.
+   *
+   * @return array
+   *   Renderable array.
+   *
+   * @see https://drupal.stackexchange.com/questions/171686/how-can-i-programmatically-display-a-block
+   */
+  public static function renderPluginBlock($plugin_id, array $config = []) {
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $plugin_block = $block_manager->createInstance($plugin_id, $config);
+    // Some blocks might implement access check.
+    $access_result = $plugin_block->access(\Drupal::currentUser());
+    // Return empty render array if user doesn't have access.
+    // $access_result can be boolean or an AccessResult class.
+    if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
+      // You might need to add some cache tags/contexts.
+      return [];
+    }
+    $render = $plugin_block->build();
+    // In some cases, you need to add the cache tags/context depending on
+    // the block implemention. As it's possible to add the cache tags and
+    // contexts in the render method and in ::getCacheTags and
+    // ::getCacheContexts methods.
+    return $render;
+  }
+
+  /**
+   * Hides the breadcrumb and title block on detail pages for the given CT.
+   *
+   * @param string $theme
+   *   Theme name.
+   * @param string $contentType
+   *   Content type name.
+   */
+  public static function hideBreadcrumbAndTitleBlockOnContentType($theme, $contentType) {
+
+    $blocks = [
+      "{$theme}_breadcrumbs",
+      "{$theme}_page_title",
+    ];
+
+    foreach ($blocks as $config_name) {
+      /** @var \Drupal\block\BlockInterface $block */
+      $block = Block::load($config_name);
+      if ($block) {
+        $visibility = $block->getVisibility();
+        $visibility['entity_bundle:node']['bundles'][$contentType] = $contentType;
+        $visibility['entity_bundle:node']['negate'] = TRUE;
+        $visibility['entity_bundle:node']['context_mapping']['node'] = '@node.node_route_context:node';
+        $block->setVisibilityConfig('entity_bundle:node', $visibility['entity_bundle:node']);
+        try {
+          $block->save();
+        } catch (EntityStorageException $e) {
+          \Drupal::messenger()
+            ->addError("Exception caught during hiding of breadcrumbs and titles: " . $e->getMessage());
+        }
+      }
+    }
+  }
+
+}
+
+if (!function_exists("array_key_last")) {
+  function array_key_last($array) {
+    if (!is_array($array) || empty($array)) {
+      return NULL;
+    }
+
+    return array_keys($array)[count($array) - 1];
+  }
+}
+
+/**
+ * Implements hook_theming_page_attachments().
+ */
+function rocketship_core_page_attachments(array &$attachments) {
+
+  // Check the form settings to see if we need to attach certain libs on admin pages.
+  if (\Drupal::service('router.admin_context')->isAdminRoute() == TRUE) {
+
+    // Add some styling and JS for layout pickers
+    $attachments['#attached']['library'][] = 'rocketship_core/admin';
+  }
+}
+
+/**
+ * Implements hook_link_alter().
+ * SEE https://www.drupal.org/project/drupal/issues/3032456
+ */
+function rocketship_core_link_alter(&$variables) {
+  /** @var Drupal\Core\Url $url */
+  $url = $variables['url'];
+  $config = \Drupal::config('layout_builder_modal.settings');
+
+  if (!$url->isRouted()) {
+    return;
+  }
+
+  // we only want to use the dialog for links that concern layout builder actions
+
+  if ($url->getRouteName() !== 'layout_builder.choose_section'
+    && $url->getRouteName() !== 'layout_builder.visibility'
+    && $url->getRouteName() !== 'layout_builder.add_visibility'
+    && $url->getRouteName() !== 'layout_builder.delete_visibility'
+    && $url->getRouteName() !== 'layout_builder.configure_section'
+    && $url->getRouteName() !== 'layout_builder.remove_section'
+    && $url->getRouteName() !== 'layout_builder.remove_block'
+    && $url->getRouteName() !== 'layout_builder.add_section'
+    && $url->getRouteName() !== 'layout_builder.choose_block'
+    && $url->getRouteName() !== 'layout_builder.update_block'
+    && $url->getRouteName() !== 'layout_builder.choose_inline_block'
+    && $url->getRouteName() !== 'layout_builder.move_block_form'
+    && $url->getRouteName() !== 'section_library.add_section_to_library'
+    && $url->getRouteName() !== 'section_library.add_template_to_library'
+    && $url->getRouteName() !== 'section_library.choose_template_from_library'
+    && $url->getRouteName() !== 'section_library.import_section_from_library'
+    && $url->getRouteName() !== 'layout_builder.choose_template') {
+    return;
+  }
+
+  if (!empty($variables['options']['attributes']['class']) && in_array('use-ajax', $variables['options']['attributes']['class'])) {
+
+    // if the layout_builder_modal exists, reuse that config
+    if (isset($config)) {
+
+      $data_dialog_options = Json::encode([
+        'width' => $config->get('modal_width'),
+        'height' => $config->get('modal_height'),
+        'target' => 'layout-builder-modal',
+        'autoResize' => $config->get('modal_autoresize'),
+        'modal' => TRUE,
+      ]);
+
+      // otherwise, hardcode a fallback
+    }
+    else {
+
+      $data_dialog_options = Json::encode([
+        'width' => "1024",
+        'height' => "auto",
+        'target' => 'layout-builder-modal',
+        'autoResize' => TRUE,
+        'modal' => TRUE,
+      ]);
+    }
+
+    $variables['options']['attributes']['data-dialog-options'] = $data_dialog_options;
+    $variables['options']['attributes']['data-dialog-type'] = 'dialog';
+    unset($variables['options']['attributes']['data-dialog-renderer']);
+  }
+}
+
+/**
+ * Implements hook_local_tasks_alter().
+ */
+function rocketship_core_local_tasks_alter(&$local_tasks) {
+
+  if (isset($local_tasks['layout_builder_ui:layout_builder.overrides.node.view'])) {
+    $local_tasks['layout_builder_ui:layout_builder.overrides.node.view']['title'] = t('Manage content');
+    $local_tasks['layout_builder_ui:layout_builder.overrides.node.view']['weight'] = 1;
+  }
+  if (isset($local_tasks['entity.node.edit_form'])) {
+    $local_tasks['entity.node.edit_form']['title'] = t('Structure & Metadata');
+    $local_tasks['entity.node.edit_form']['weight'] = 2;
+  }
+  if (isset($local_tasks['entity.node.canonical'])) {
+    $local_tasks['entity.node.canonical']['weight'] = 0;
+  }
+  if (isset($local_tasks['views_view:view.doffice_contact_submissions.application_page'])) {
+    $local_tasks['views_view:view.doffice_contact_submissions.application_page']['weight'] = 99;
+  }
+
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function rocketship_core_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  $entity_type_id = $entity->getEntityTypeId();
+  if ($entity_type_id !== 'node') {
+    return;
+  }
+  $operations['edit']['title'] = t('Structure & Metadata');
+  if (isset($operations['Layout'])) {
+    $operations['Layout']['title'] = t('Manage content');
+  }
+  if (isset($operations['layout'])) {
+    $operations['layout']['title'] = t('Manage content');
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function rocketship_core_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'link_alter') {
+    $group = $implementations['rocketship_core'];
+    unset($implementations['rocketship_core']);
+    $implementations['rocketship_core'] = $group;
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function rocketship_core_form_node_layout_builder_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#value'] = t('Save content');
+
+  rocketship_core_form_entity_view_display_layout_builder_form_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function rocketship_core_form_entity_view_display_layout_builder_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['actions']['preview_toggle']['toggle_content_preview'] = [
+    '#type' => 'select',
+    '#title' => t('Change content preview'),
+    '#title_display' => 'invisible',
+    '#options' => [
+      'edit_only' => t('Show editability only'),
+      'preview_only' => t('Show preview only'),
+      'preview_edit' => t('Show preview with editability'),
+    ],
+    '#default_value' => 'preview_only',
+    '#attributes' => [
+      'data-content-preview-id' => $form['actions']['preview_toggle']['toggle_content_preview']['#attributes']['data-content-preview-id'],
+    ],
+    '#id' => 'layout-builder-select-preview-level',
+  ];
+
+  $form['#attached']['library'][] = 'rocketship_core/layout_preview';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for layout_builder_update_block.
+ */
+function rocketship_core_form_layout_builder_update_block_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Only alter the block configuration forms for inline or reusable
+  // block_content entity blocks, since they are primarily the ones afflicted
+  // with the conflict described above.
+  $is_reusable_block_content = $form['settings']['provider']['#value'] === 'block_content';
+  $is_inline_block = isset($form['settings']['block_form']['#block']) && $form['settings']['block_form']['#block'] instanceof BlockContent;
+  if (!$is_reusable_block_content && !$is_inline_block) {
+    return;
+  }
+
+  // Hide the label of the block placement and provide a default value if it
+  // is empty.
+  $form['settings']['label']['#type'] = 'value';
+  if (empty($form['settings']['label']['#default_value'])) {
+    $form['settings']['label']['#default_value'] = 'Inline block';
+    if ($form['settings']['block_form']['#block'] instanceof BlockContent) {
+      /** @var \Drupal\block_content\Entity\BlockContent $block */
+      $block = $form['settings']['block_form']['#block'];
+      $form['settings']['label']['#default_value'] = t(
+        'Inline block: @block_bundle',
+        ['@block_bundle' => $block->get('type')->entity->label()]
+      );
+    }
+  }
+
+  // Default to hiding the label of the block.
+  $form['settings']['label_display']['#default_value'] = FALSE;
+  $form['settings']['label_display']['#type'] = 'value';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for layout_builder_add_block.
+ */
+function rocketship_core_form_layout_builder_add_block_alter(&$form, FormStateInterface $form_state, $form_id) {
+  rocketship_core_form_layout_builder_update_block_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * @see https://www.drupal.org/project/rocketship_core/issues/3222425
+ */
+function rocketship_core_form_search_api_fulltext_facet_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form_state->setRequestMethod('POST');
+  $form_state->setCached(TRUE);
+}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.social_media
+    - field.storage.block_content.field_social_link_facebook
+  module:
+    - link
+id: block_content.social_media.field_social_link_facebook
+field_name: field_social_link_facebook
+entity_type: block_content
+bundle: social_media
+label: Facebook
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

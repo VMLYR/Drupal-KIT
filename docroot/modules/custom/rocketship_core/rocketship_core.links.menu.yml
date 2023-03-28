@@ -1,0 +1,21 @@
+rocketship_core.default_content_default_language:
+  title: 'Rocketship Content Default Language'
+  route_name: rocketship_core.default_content_default_language
+  description: 'Set the default language to use for demo and default content'
+  parent: system.admin_config_regional
+  weight: 99
+rocketship_core.rocketship_settings_form:
+  title: 'Rocketship Settings'
+  route_name: rocketship_core.rocketship_settings_form
+  parent: system.admin_config_system
+  weight: 99
+rocketship_core.migrate_generator_form:
+  title: 'Rocketship Migrate Generator'
+  route_name: rocketship_core.migrate_generator_form
+  parent: system.admin_config_system
+  weight: 99
+rocketship_core.user_login_link_generator_form:
+  title: 'Generate Login Link'
+  route_name: rocketship_core.user_login_link_generator_form
+  parent: system.admin_config_system
+  weight: 99

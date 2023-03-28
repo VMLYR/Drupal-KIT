@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.footer
+label: Footer
+targetEntityType: node
+cache: true

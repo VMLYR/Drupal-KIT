@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_md
+label: '4:3 portrait md [1024×1366]'
+effects:
+  cb962adb-1bb5-4877-94d9-b52efa4ddc6d:
+    uuid: cb962adb-1bb5-4877-94d9-b52efa4ddc6d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 1366
+      crop_type: focal_point

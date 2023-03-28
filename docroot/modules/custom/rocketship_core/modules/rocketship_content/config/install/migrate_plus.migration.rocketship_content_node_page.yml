@@ -1,0 +1,57 @@
+id: rocketship_content_node_page
+migration_group: rocketship_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_content_node_page.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  status:
+    -
+      plugin: get
+      source: status
+  title:
+    -
+      plugin: get
+      source: title
+  promote:
+    -
+      plugin: get
+      source: promote
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  field_media_canonical_image/target_id:
+    -
+      plugin: migration_lookup
+      migration:
+        - rocketship_content_media_image
+      source: field_media_canonical_image
+  layout_builder__layout:
+    -
+      plugin: callback
+      source: layout_builder__layout
+      callable: base64_decode
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: callback
+      callable: unserialize
+destination:
+  plugin: 'entity:node'
+  default_bundle: page
+migration_dependencies:
+  required:
+    - rocketship_content_media_image
+  optional: {  }

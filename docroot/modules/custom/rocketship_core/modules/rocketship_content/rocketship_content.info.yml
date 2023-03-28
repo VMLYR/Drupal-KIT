@@ -1,0 +1,21 @@
+name: Rocketship Content
+type: module
+description: 'Contains a migration to set up the homepage, 404 and 403 pages.'
+core_version_requirement: ^8.8 || ^9 || ^10
+package: Rocketship
+prechecked: true
+dependencies:
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - token:token
+  - rocketship_core:rocketship_core
+  - rocketship_core:rocketship_blocks
+  - migrate_source_csv:migrate_source_csv
+  - rocketship_core:rocketship_page
+  - node_keep:node_keep
+  - rocketship_core:rocketship_seo
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

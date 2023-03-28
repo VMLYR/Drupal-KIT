@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Update existing entities with the new target property.
+ */
+function rocketship_social_widgets_update_8001(&$sandbox) {
+
+  $socialShareLinksManager = Drupal::service('rocketship_social_widgets.manager');
+  $links = $socialShareLinksManager->getSocialShareLinks();
+
+  foreach ($links as $link) {
+    $link->target = '_blank';
+    if ($link->getOriginalId() == 'print') {
+      $link->target = '_self';
+    }
+    $link->save();
+  }
+
+}

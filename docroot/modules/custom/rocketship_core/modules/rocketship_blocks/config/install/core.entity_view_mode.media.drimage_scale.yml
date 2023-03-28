@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.drimage_scale
+label: 'original aspect ratio'
+targetEntityType: media
+cache: true

@@ -1,0 +1,28 @@
+{% if content %}
+
+  <div {{ attributes }}>
+
+    {% if sub.content and sub.position == 'before' %}
+      {% set sub_attributes = sub.attributes %}
+      {% include "@rocketship_core/region/region.html.twig" with {'content': sub.content, 'attributes': sub_attributes} only %}
+    {% endif %}
+
+    {% if sub_02.content and sub_02.position == 'before' %}
+      {% set sub_attributes = sub_02.attributes %}
+      {% include "@rocketship_core/region/region.html.twig" with {'content': sub_02.content, 'attributes': sub_attributes} only %}
+    {% endif %}
+
+    {{ content }}
+
+    {% if sub.content and sub.position == 'after' %}
+      {% set sub_attributes = sub.attributes %}
+      {% include "@rocketship_core/region/region.html.twig" with {'content': sub.content, 'attributes': sub_attributes} only %}
+    {% endif %}
+
+    {% if sub_02.content and sub_02.position == 'after' %}
+      {% set sub_attributes = sub_02.attributes %}
+      {% include "@rocketship_core/region/region.html.twig" with {'content': sub_02.content, 'attributes': sub_attributes} only %}
+    {% endif %}
+
+  </div>
+{% endif %}

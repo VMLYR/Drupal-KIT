@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_faq
+    - field.field.block_content.cb_faq.field_cb_button
+    - field.field.block_content.cb_faq.field_cb_faq_item
+    - field.field.block_content.cb_faq.field_cb_subtitle
+    - field.field.block_content.cb_faq.field_cb_teaser
+    - field.field.block_content.cb_faq.field_cb_title
+  module:
+    - rocketship_core
+    - link_attributes
+id: block_content.cb_faq.default
+targetEntityType: block_content
+bundle: cb_faq
+mode: default
+content:
+  field_cb_button:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_faq_item:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+      rows: '5'
+    third_party_settings: {  }
+    type: tabbed_widget
+    region: content
+  field_cb_subtitle:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cb_teaser:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_cb_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  translation: true

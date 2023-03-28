@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an image field widget.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - data: Render elements of the image widget.
+ *
+ * @see template_preprocess_image_widget()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div{{ attributes }} style="display:inline-block">
+    <section>
+        <fieldset>
+            <legend>{{ 'Image'|t }}</legend>
+            {{ data.preview }}
+            {# Render widget data without the image preview that was output already. #}
+            {{ data|without('preview','idttitle', 'idttextarea') }}
+        </fieldset>
+        {% if data.preview %}
+            <fieldset>
+                <legend>{{ 'Text'|t }}</legend>
+                {{ data.idttitle }}
+                {{ data.idttextarea }}
+            </fieldset>
+        {% endif %}
+
+    </section>
+</div>
+
+
+{#<div{{ attributes }}>#}
+    {#{{ kint(data) }}#}
+    {#{% if data.preview %}#}
+        {#<div>#}
+            {#<div>#}
+                {#{{ data.preview }}#}
+                {#{{ data.file_2 }}#}
+                {#{{ data.upload }}#}
+                {#{{ data.upload_button }}#}
+                {#{{ data.remove_button }}#}
+            {#</div>#}
+            {#<div>#}
+                {#{{ data.title }}#}
+                {#{{ data.alt }}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div>#}
+            {#{{ data.idttitle }}#}
+            {#{{ data.idttextarea }}#}
+        {#</div>#}
+
+    {#{% else %}#}
+        {# Render if there is no file uploaded yet#}
+        {#{{ data|without('preview') }}#}
+
+    {#{% endif %}#}
+
+
+    {# Render widget data without the image preview that was output already. #}
+
+{#</div>#}

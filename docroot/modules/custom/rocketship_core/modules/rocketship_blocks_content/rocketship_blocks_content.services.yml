@@ -1,0 +1,6 @@
+services:
+  rocketship_blocks_content.migrate_subscriber:
+    class: Drupal\rocketship_blocks_content\EventSubscriber\MigrateSubscriber
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@logger.factory', '@inline_block.usage']
+    tags:
+      - { name: event_subscriber }

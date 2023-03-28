@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_testimonial
+    - field.storage.block_content.field_cb_media
+    - media.type.image
+id: block_content.cb_testimonial.field_cb_media
+field_name: field_cb_media
+entity_type: block_content
+bundle: cb_testimonial
+label: Image
+description: 'An avatar image to represent the person giving the testimonial.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

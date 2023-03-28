@@ -1,0 +1,72 @@
+uuid: 292435ac-e474-46b0-8b4a-c0336dd23709
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.image_style_1_3_landscape_xl
+    - image.style.image_style_1_3_landscape_xl_2x
+    - image.style.image_style_1_4_landscape_lg
+    - image.style.image_style_1_4_landscape_lg_2x
+    - image.style.image_style_1_4_landscape_md
+    - image.style.image_style_1_4_landscape_md_2x
+    - image.style.image_style_1_4_landscape_sm
+    - image.style.image_style_1_4_landscape_sm_2x
+    - image.style.image_style_1_4_landscape_xs_wide
+    - image.style.image_style_1_4_landscape_xs_wide_2x
+  module:
+    - rocketship_core
+id: layout_builder_background_image
+label: 'Layout Builder Background Image'
+image_style_mappings:
+  -
+    breakpoint_id: rocketship_core.lg
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_3_landscape_xl
+  -
+    breakpoint_id: rocketship_core.lg
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_3_landscape_xl_2x
+  -
+    breakpoint_id: rocketship_core.md
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_lg
+  -
+    breakpoint_id: rocketship_core.md
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_lg_2x
+  -
+    breakpoint_id: rocketship_core.sm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_md
+  -
+    breakpoint_id: rocketship_core.sm
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_md_2x
+  -
+    breakpoint_id: rocketship_core.xs-wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_sm
+  -
+    breakpoint_id: rocketship_core.xs-wide
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_sm_2x
+  -
+    breakpoint_id: rocketship_core.all
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_xs_wide
+  -
+    breakpoint_id: rocketship_core.all
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_4_landscape_xs_wide_2x
+breakpoint_group: rocketship_core
+fallback_image_style: image_style_1_4_landscape_xs_wide

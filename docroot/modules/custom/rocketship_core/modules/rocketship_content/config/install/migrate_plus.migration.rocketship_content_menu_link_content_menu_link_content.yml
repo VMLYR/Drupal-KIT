@@ -1,0 +1,83 @@
+id: rocketship_content_menu_link_content_menu_link_content
+migration_group: rocketship_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_content_menu_link_content_menu_link_content.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  enabled:
+    -
+      plugin: get
+      source: enabled
+  title:
+    -
+      plugin: get
+      source: title
+  description:
+    -
+      plugin: get
+      source: description
+  menu_name:
+    -
+      plugin: get
+      source: menu_name
+  link/title:
+    -
+      plugin: get
+      source: link_title
+  link/uri:
+    -
+      plugin: callback
+      callable: _rocketship_content_link_uuid_lookup
+      source: link_uri
+  external:
+    -
+      plugin: get
+      source: external
+  rediscover:
+    -
+      plugin: get
+      source: rediscover
+  weight:
+    -
+      plugin: get
+      source: weight
+  expanded:
+    -
+      plugin: get
+      source: expanded
+  parent:
+    -
+      plugin: get
+      source: parent
+  menu_clickthrough_description/format:
+    -
+      plugin: get
+      source: menu_clickthrough_description_format
+  menu_clickthrough_description/value:
+    -
+      plugin: get
+      source: menu_clickthrough_description_value
+  menu_clickthrough_image/target_id:
+    -
+      plugin: migration_lookup
+      migration:
+        - rocketship_content_media_image
+      source: menu_clickthrough_image
+destination:
+  plugin: 'entity:menu_link_content'
+  default_bundle: menu_link_content
+migration_dependencies:
+  required:
+    - rocketship_content_media_image
+  optional: {  }

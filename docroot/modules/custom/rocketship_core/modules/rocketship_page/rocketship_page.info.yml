@@ -1,0 +1,23 @@
+name: 'Rocketship Page'
+type: module
+description: 'Contains the Page content type, used for your static content from an "About us" page to a landingspage for a campaign.'
+core_version_requirement: '^8.8 || ^9 || ^10'
+package: Rocketship
+group: Page
+show_during_install: true
+prechecked: true
+weight: 0
+upgrades: {  }
+dependencies:
+  - blazy:blazy
+  - rocketship_core:rocketship_core
+  - node_keep:node_keep
+  - rocketship_core:rocketship_seo
+  - rocketship_core:rocketship_blocks
+  - maxlength:maxlength
+  - drupal:layout_builder
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

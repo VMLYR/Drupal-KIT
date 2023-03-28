@@ -1,0 +1,8 @@
+# Schema for configuration files of the menu clickthrough module.
+system.menu.*.third_party.menu_clickthrough:
+  type: mapping
+  label: 'Clickthrough setting'
+  mapping:
+    clickthough_enabled:
+      type: boolean
+      label: 'Enable clickthrough on a menu.'

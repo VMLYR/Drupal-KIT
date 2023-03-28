@@ -1,0 +1,37 @@
+rocketship_core.default_content_default_language:
+  path: '/admin/config/regional/rocketship-default-language'
+  defaults:
+    _form: '\Drupal\rocketship_core\Form\DefaultContentDefaultLanguage'
+    _title: 'Default Content Default Language'
+  requirements:
+    _permission: 'manage default content default language'
+  options:
+    _admin_route: TRUE
+
+rocketship_core.rocketship_settings_form:
+  path: '/admin/config/system/rocketship-core'
+  defaults:
+    _form: '\Drupal\rocketship_core\Form\RocketshipSettingsForm'
+    _title: 'Rocketship Settings'
+  requirements:
+    _permission: 'administer rocketship core settings'
+  options:
+    _admin_route: TRUE
+
+rocketship_core.migrate_generator_form:
+  path: '/admin/config/system/rocketship-core-migrator'
+  defaults:
+    _form: '\Drupal\rocketship_core\Form\MigrateGeneratorForm'
+    _title: 'Rocketship Generate Migrate'
+  requirements:
+    _permission: 'generate rocketship migrates'
+  options:
+    _admin_route: TRUE
+
+rocketship_core.user_login_link_generator_form:
+  path: '/admin/config/system/login-link-generator'
+  defaults:
+    _form: '\Drupal\rocketship_core\Form\UserLoginLinkGeneratorForm'
+    _title: 'Generate Login Link'
+  requirements:
+    _permission: 'generate login links for other users'

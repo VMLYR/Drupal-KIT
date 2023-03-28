@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_photo_gallery
+    - field.storage.block_content.field_cb_media_unlimited
+    - media.type.image
+id: block_content.cb_photo_gallery.field_cb_media_unlimited
+field_name: field_cb_media_unlimited
+entity_type: block_content
+bundle: cb_photo_gallery
+label: Images
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

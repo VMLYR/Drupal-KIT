@@ -1,0 +1,59 @@
+<?php
+
+use Drupal\migrate\MigrateExecutable;
+
+/**
+ * Implements hook_install().
+ */
+function {{ module_name }}_install() {
+
+  $migrations = _{{ module_name }}_content_migrates();
+
+  $migrationManager = \Drupal::service('plugin.manager.migration');
+  try {
+    foreach ($migrations as $name) {
+      $migration = $migrationManager->createInstance($name);
+      if ($migration) {
+        $executable = new MigrateExecutable($migration);
+        $executable->import();
+      }
+    }
+
+    \Drupal::messenger()
+      ->addMessage(t('Migrated content.'));
+  } catch (\Exception $e) {
+    \Drupal::messenger()
+      ->addError(t('Failed migrating content: ' . $e->getMessage()));
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function {{ module_name }}_uninstall() {
+
+  $migrations = _{{ module_name }}_content_migrates();
+  $migrations = array_reverse($migrations);
+
+  $migrationManager = \Drupal::service('plugin.manager.migration');
+  try {
+    foreach ($migrations as $name) {
+      $migration = $migrationManager->createInstance($name);
+      if ($migration) {
+        $executable = new MigrateExecutable($migration);
+        $executable->rollback();
+      }
+      \Drupal::configFactory()
+        ->getEditable('migrate_plus.migration.' . $name)
+        ->delete();
+    }
+
+    \Drupal::messenger()
+      ->addMessage(t('Rolled back the migrations.'));
+    \Drupal::messenger()
+      ->addMessage(t('Deleted the migrations.'));
+  } catch (\Exception $e) {
+    \Drupal::messenger()
+      ->addError(t('Failed rolling back the migrations: ' . $e->getMessage()));
+  }
+}

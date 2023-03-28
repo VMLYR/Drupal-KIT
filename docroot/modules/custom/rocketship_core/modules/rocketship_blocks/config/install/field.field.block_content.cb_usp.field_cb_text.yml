@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_usp
+    - field.storage.block_content.field_cb_text
+  module:
+    - text
+id: block_content.cb_usp.field_cb_text
+field_name: field_cb_text
+entity_type: block_content
+bundle: cb_usp
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

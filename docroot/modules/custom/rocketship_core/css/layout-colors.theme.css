@@ -1,0 +1,31 @@
+.layout-field-bg-color .grey {
+  background: #e3eaf0;
+  color: #000000;
+}
+
+.layout-field-bg-color .grey a {
+  color: #000000;
+}
+
+.layout-field-bg-color .grey a:hover,
+.layout-field-bg-color .grey a:focus,
+.layout-field-bg-color .grey a:active,
+.layout-field-bg-color .grey a.is-active {
+  color: #000000;
+}
+
+.layout-field-bg-color .white {
+  background: #ebf3f6;
+  color: #000000;
+}
+
+.layout-field-bg-color .white a {
+  color: #000000;
+}
+
+.layout-field-bg-color .white a:hover,
+.layout-field-bg-color .white a:focus,
+.layout-field-bg-color .white a:active,
+.layout-field-bg-color .white a.is-active {
+  color: #000000;
+}

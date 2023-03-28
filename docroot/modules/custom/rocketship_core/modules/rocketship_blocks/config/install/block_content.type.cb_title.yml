@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_title
+label: Title
+revision: 0
+description: 'Add the title of your node, in the heading tag of your choice. Include optional fields such as subtitle and teaser.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_title.svg

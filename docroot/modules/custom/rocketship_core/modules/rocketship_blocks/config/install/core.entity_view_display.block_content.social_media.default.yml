@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.social_media
+    - field.field.block_content.social_media.field_social_link_facebook
+    - field.field.block_content.social_media.field_social_link_instagram
+    - field.field.block_content.social_media.field_social_link_linkedin
+    - field.field.block_content.social_media.field_social_link_twitter
+  module:
+    - rocketship_core
+id: block_content.social_media.default
+targetEntityType: block_content
+bundle: social_media
+mode: default
+content:
+  field_social_link_facebook:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      fallback_link_text: Facebook
+      url_only: false
+      url_plain: false
+      rel: 0
+    third_party_settings: {  }
+    type: static_link
+    region: content
+  field_social_link_instagram:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      fallback_link_text: Instagram
+      url_only: false
+      url_plain: false
+      rel: 0
+    third_party_settings: {  }
+    type: static_link
+    region: content
+  field_social_link_linkedin:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      fallback_link_text: LinkedIn
+      url_only: false
+      url_plain: false
+      rel: 0
+    third_party_settings: {  }
+    type: static_link
+    region: content
+  field_social_link_twitter:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      fallback_link_text: Twitter
+      url_only: false
+      url_plain: false
+      rel: 0
+    third_party_settings: {  }
+    type: static_link
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

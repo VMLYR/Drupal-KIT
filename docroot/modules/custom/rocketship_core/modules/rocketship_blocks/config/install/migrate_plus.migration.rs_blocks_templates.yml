@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - rocketship_blocks
+id: rs_blocks_templates
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: rs_blocks_templating
+label: null
+source:
+  plugin: csv
+  path: /assets/csv/templates.csv
+  header_offset: 0
+  ids:
+    - id
+process:
+  label: label
+  type: type
+  user_id:
+    plugin: default_value
+    default_value: 1
+  entity_type:
+    plugin: default_value
+    default_value: node
+  image/target_id:
+    plugin: migration_lookup
+    migration: rs_blocks_images
+    source: image
+  layout_section:
+    -
+      plugin: callback
+      callable: base64_decode
+      source: layout_section
+    -
+      plugin: explode
+      delimiter: '|'
+    -
+      plugin: callback
+      callable: unserialize
+destination:
+  plugin: 'entity:section_library_template'
+  default_bundle: section_library_template
+migration_dependencies:
+  required:
+    - rs_blocks_images
+    - rs_blocks_image_media
+    - rs_blocks_image_blocks
+    - rs_blocks_text_blocks
+  optional: {  }

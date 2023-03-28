@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_video
+    - core.entity_view_mode.block_content.popup
+    - field.field.block_content.cb_video.field_cb_media
+    - field.field.block_content.cb_video.field_cb_media_layout
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.cb_video.popup
+targetEntityType: block_content
+bundle: cb_video
+mode: popup
+content:
+  field_cb_media:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: video_colorbox_modal
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_cb_media_layout: true
+  langcode: true
+  search_api_excerpt: true

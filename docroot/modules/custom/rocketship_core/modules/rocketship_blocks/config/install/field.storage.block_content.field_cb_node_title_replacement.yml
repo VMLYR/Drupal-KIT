@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - rocketship_core
+id: block_content.field_cb_node_title_replacement
+field_name: field_cb_node_title_replacement
+entity_type: block_content
+type: contentblock_title_replacement
+settings:
+  max_length: '1024'
+  is_ascii: false
+  case_sensitive: false
+module: rocketship_core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

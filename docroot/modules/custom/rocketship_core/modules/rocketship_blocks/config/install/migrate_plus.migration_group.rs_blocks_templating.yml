@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: rs_blocks_templating
+label: 'RS Blocks - Template Migrates'
+description: 'Migrates Section Library templates'
+source_type: ''
+module: null
+shared_configuration: null

@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Install file.
+ */
+
+use Drupal\Core\Extension\Exception\UnknownExtensionException;
+use Drupal\Core\Language\Language;
+use Drupal\redirect\Entity\Redirect;
+
+/**
+ * Implements hook_install().
+ */
+function rocketship_blocks_install() {
+
+  // Update all roles.
+  \Rocketship::updateRolePermissionsForModule('rocketship_blocks');
+
+  try {
+    // Enable our default blocks when this module gets installed and one of our
+    // themes is already active at the time.
+    $config = \Drupal::config('system.theme');
+    $theme = $config->get('default');
+    /** @var \Drupal\Core\Extension\ThemeHandlerInterface $handler */
+    $handler = Drupal::service('theme_handler');
+    if (!$handler->themeExists($theme)) {
+      \Drupal::service('theme_installer')->install([$theme]);
+    }
+    $info = $handler->getTheme($theme);
+    rocketship_blocks_place_default_blocks($info);
+  } catch (UnknownExtensionException $exception) {
+    // Theme is set but not installed yet. Leave it be.
+  }
+
+  $migrations = _rocketship_blocks_content_migrates();
+
+  $migrationManager = \Drupal::service('plugin.manager.migration');
+  try {
+    foreach ($migrations as $name) {
+      $migration = $migrationManager->createInstance($name);
+      if ($migration) {
+        $executable = new \Drupal\migrate\MigrateExecutable($migration);
+        $executable->import();
+      }
+    }
+
+    \Drupal::messenger()
+      ->addMessage(t('Migrated the Rocketship Blocks content migrates.'));
+  } catch (\Exception $e) {
+    \Drupal::messenger()
+      ->addError(t('Failed migrating Rocketship Blocks content migrates: ' . $e->getMessage()));
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function rocketship_blocks_uninstall() {
+
+  $migrations = _rocketship_blocks_content_migrates();
+  $migrations = array_reverse($migrations);
+
+  $migrationManager = \Drupal::service('plugin.manager.migration');
+  try {
+    foreach ($migrations as $name) {
+      $migration = $migrationManager->createInstance($name);
+      if ($migration) {
+        $executable = new \Drupal\migrate\MigrateExecutable($migration);
+        $executable->rollback();
+      }
+      \Drupal::configFactory()
+        ->getEditable('migrate_plus.migration.' . $name)
+        ->delete();
+    }
+
+    \Drupal::messenger()
+      ->addMessage(t('Rolled back the Rocketship Blocks content migrations.'));
+    \Drupal::messenger()
+      ->addMessage(t('Deleted the Rocketship Blocks content migrations.'));
+  } catch (\Exception $e) {
+    \Drupal::messenger()
+      ->addError(t('Failed rolling back Rocketship Blocks content migrations: ' . $e->getMessage()));
+  }
+}

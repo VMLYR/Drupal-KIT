@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_usp
+    - field.field.block_content.cb_usp.field_cb_button
+    - field.field.block_content.cb_usp.field_cb_image_wrapper_link
+    - field.field.block_content.cb_usp.field_cb_media
+    - field.field.block_content.cb_usp.field_cb_text
+    - field.field.block_content.cb_usp.field_cb_title
+  module:
+    - media_library
+    - rocketship_core
+    - text
+    - link_attributes
+id: block_content.cb_usp.default
+targetEntityType: block_content
+bundle: cb_usp
+mode: default
+content:
+  field_cb_button:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_image_wrapper_link:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_media:
+    weight: 5
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
+  field_cb_text:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_cb_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  translation:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

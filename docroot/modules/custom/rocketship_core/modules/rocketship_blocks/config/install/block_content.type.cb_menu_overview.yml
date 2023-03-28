@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_menu_overview
+label: 'Menu Overview'
+revision: 0
+description: 'Select a menu to show it on the page, or select "current page" to show menu items from the main menu that are below this page.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_menu_overview.svg

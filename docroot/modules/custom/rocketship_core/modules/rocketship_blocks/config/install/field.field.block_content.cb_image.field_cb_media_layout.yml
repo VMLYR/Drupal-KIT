@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_image
+    - field.storage.block_content.field_cb_media_layout
+  module:
+    - options
+id: block_content.cb_image.field_cb_media_layout
+field_name: field_cb_media_layout
+entity_type: block_content
+bundle: cb_image
+label: Layout
+description: 'Whether the image stretches across the width of the page or is contained by the edges of the page content.'
+required: true
+translatable: false
+default_value:
+  -
+    value: normal
+default_value_callback: ''
+settings: {  }
+field_type: list_string

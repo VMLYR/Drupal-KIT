@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_9_landscape_lg_2x
+label: '16:9 landscape lg [1200×675] 2x'
+effects:
+  a172f3c5-273a-429a-b80a-09ed544c7dbc:
+    uuid: a172f3c5-273a-429a-b80a-09ed544c7dbc
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2400
+      height: 1350
+      crop_type: focal_point

@@ -1,0 +1,142 @@
+{
+  "name": "drupal/rocketship_core",
+  "description": "Contains core functionality for Dropsolid websites.",
+  "type": "drupal-module",
+  "homepage": "https://drupal.org/project/rocketship_core",
+  "authors": [
+    {
+      "name": "Nick Vanpraet",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "docs": "https://drupal.org/project/rocketship_core"
+  },
+  "require": {
+    "drupal/config_import_locale": "^1.1",
+    "drupal/admin_toolbar": "^2.3",
+    "drupal/config_update": "^1.7",
+    "drupal/ctools": "^3.0",
+    "drupal/easy_breadcrumb": "^2.0",
+    "drupal/field_group": "^3.0",
+    "drupal/inline_entity_form": "^1.0",
+    "drupal/mailsystem": "^4.3",
+    "drupal/menu_trail_by_path": "^1.3",
+    "drupal/search_api": "^1.17",
+    "drupal/swiftmailer": "^2.0",
+    "drupal/token": "^1.7",
+    "drupal/video_embed_field": "^2.4",
+    "drupal/plugin": "^2.7",
+    "drupal/linkit": "^5.0",
+    "drupal/editor_advanced_link": "^1.8",
+    "drupal/advagg": "~4.1",
+    "drupal/webform": "^6.0",
+    "drupal/webform_views": "^5.0",
+    "drupal/smart_trim": "^1.3",
+    "drupal/config_split": "^1.5",
+    "drupal/config_ignore": "^2.2",
+    "drupal/scheduler": "^1.3",
+    "drupal/taxonomy_access_fix": "^3.0",
+    "drupal/google_tag": "^1.4",
+    "drupal/metatag": "^1.13",
+    "drupal/schema_metatag": "^1.6",
+    "drupal/pathauto": "^1.8",
+    "drupal/simple_sitemap": "^3.7",
+    "drupal/migrate_source_csv": "^3.4",
+    "drupal/colorbox": "^1.6",
+    "drupal/slick": "^2.2",
+    "drupal/blazy": "^2.1",
+    "vardot/blazy": "~1.8",
+    "drupal/migrate_plus": "^5.1",
+    "drupal/migrate_tools": "^5.0",
+    "drupal/maxlength": "^1.0",
+    "drupal/components": "^2.0",
+    "drupal/focal_point": "^1.4",
+    "drupal/userprotect": "^1.1",
+    "drupal/role_delegation": "^1.1",
+    "drupal/view_unpublished": "^1.0",
+    "drupal/image_effects": "^3.0",
+    "drupal/file_mdm": "^2.1",
+    "drupal/node_title_help_text": "^1.1",
+    "drupal/menu_admin_per_menu": "^1.1",
+    "drupal/config_filter": "~1.2",
+    "drupal/node_keep": "^2.0",
+    "drupal/config_rewrite": "^1.3",
+    "drupal/field_formatter": "^3.0",
+    "drupal/layout_builder_extra_templates": "^1.0",
+    "drupal/manage_display": "^1.0",
+    "drupal/field_limiter": "^1.0",
+    "drupal/media_library_form_element": "^2.0",
+    "drupal/drimage": "^2.0",
+    "drupal/block_form_alter": "^1.2",
+    "drupal/section_library": "^1.0@beta",
+    "drupal/layout_builder_restrictions": "^2.8",
+    "drupal/layout_builder_restrictions_by_role": "^1.0",
+    "drupal/layout_builder_modal": "^1.1",
+    "drupal/layout_builder_operation_link": "^1.0",
+    "drupal/layout_builder_lock": "^1.1",
+    "drupal/layout_builder_at": "^2.11",
+    "drupal/metatag_async_widget": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "patches": {
+      "drupal/layout_builder_extra_templates": {
+        "https://www.drupal.org/files/issues/2021-01-27/extralayoutthemesuggestions.patch": "https://www.drupal.org/files/issues/2021-01-27/extralayoutthemesuggestions.patch"
+      },
+      "drupal/core": {
+        "Support priority for needs_destruction service tag": "https://www.drupal.org/files/issues/2021-06-18/3038040-21.patch",
+        "Exposed term filter is not updated when terms are added, deleted, or rearranged  https://www.drupal.org/project/drupal/issues/2900248": "https://www.drupal.org/files/issues/2019-05-07/2900248-16.patch",
+        "Allow states to check and uncheck checkboxes and radio buttons": "https://www.drupal.org/files/issues/drupal-994360-74-states-checkboxes-checked.patch",
+        "Allow Views pages to be marked as admin page": "https://www.drupal.org/files/issues/2018-09-01/2719797-69.patch",
+        "Fix datetime widget descriptions": "https://www.drupal.org/files/issues/2021-12-14/2791693-58.patch",
+        "PECL YAML errors at valid YAML file which only contains comments": "https://www.drupal.org/files/issues/2018-09-30/pecl_yaml_only_comments_error-3003300-4.patch",
+        "Incorrect translation status for duplicated entities. -- https://www.drupal.org/project/drupal/issues/3009016#comment-12828375": "https://www.drupal.org/files/issues/2018-10-25/3009016-6.patch",
+        "Media entities should not have path alias by default - https://www.drupal.org/project/drupal/issues/3067944": "https://www.drupal.org/files/issues/2019-07-15/drupal.3067944.2.patch",
+        "Upload via Media Library field widget does not take all upload validators in account": "https://www.drupal.org/files/issues/2019-12-11/media_library---file---upload_form_not_getting_populated_with_image_size_validators-3008292-8.7.x.patch",
+        "Use title block when show title is selected for field blocks": "https://www.drupal.org/files/issues/2020-04-17/allow-field-blocks-to-display-label-in-layout-builder-3039185-22.patch",
+        "Allow empty selection to allow all bundles in reference field": "https://www.drupal.org/files/issues/2019-02-08/drupal-entity_reference_target_bundles-3031637-1.patch",
+        "Allow synced Layout override Translations: translating labels and inline blocks": "https://www.drupal.org/files/issues/2022-04-17/2946333-9.3.x-271.patch",
+        "Allow synced Layout default Translations: translating labels and inline blocks (depends on override patch above)": "https://www.drupal.org/files/issues/2022-03-04/allow-synced-default-lb-translations.3044993.66.patch",
+        "Export block UUID with custom Layout Builder blocks (https://www.drupal.org/project/drupal/issues/3180702)": "https://www.drupal.org/files/issues/2021-08-17/3180702-layout_builder-uuid-copy-export-only.13.patch",
+        "Cannot save translated nodes after upgrading to 8.8 due to invalid path (https://www.drupal.org/project/drupal/issues/3101344)": "https://www.drupal.org/files/issues/2021-03-01/3101344-drupal-core-fix-permissions-checking-while-node-translating-64.patch",
+        "#states not affecting visibility/requirement of managed_file (https://www.drupal.org/project/drupal/issues/2847425)": "https://www.drupal.org/files/issues/2021-07-28/2847425-49.patch",
+        "CKEditor table properties not clickable due to interaction with jQuery UI dialogs - 3065095": "https://www.drupal.org/files/issues/2022-02-28/3065095-40.ckeditor-table-prop.patch"
+      },
+      "drupal/linkit": {
+        "Add support for multilanguage - https://www.drupal.org/project/linkit/issues/2886455": "https://www.drupal.org/files/issues/2019-05-03/linkit-multilanguage_matching-2886455-19.patch"
+      },
+      "drupal/config_ignore": {
+        "Ignore configuration storage collections?": "https://www.drupal.org/files/issues/2018-09-27/2973431.8.patch"
+      },
+      "drupal/colorbox": {
+        "Allow media entity reference fields to be displayed as a gallery in a colorbox - https://www.drupal.org/project/colorbox/issues/2957030": "https://www.drupal.org/files/issues/2021-03-17/entity_reference_formatter-2957030-32.patch"
+      },
+      "drupal/search_api": {
+        "Rendered HTML Output doesnt respect activeLanguage completely": "https://www.drupal.org/files/issues/2020-05-14/3035977-29--rendered_item_language.patch"
+      },
+      "drupal/focal_point": {
+        "Integrate focal point with media_library": "https://www.drupal.org/files/issues/2020-01-09/3094478-10.patch"
+      },
+      "drupal/video_embed_field": {
+        "https://www.drupal.org/files/issues/2020-03-16/vef-3039873-media-library-add-17.patch": "https://www.drupal.org/files/issues/2020-03-16/vef-3039873-media-library-add-17.patch"
+      },
+      "drupal/simple_sitemap": {
+        "https://www.drupal.org/files/issues/2020-04-02/simple_sitemap.3124526.3.5.patch": "https://www.drupal.org/files/issues/2020-04-02/simple_sitemap.3124526.3.5.patch"
+      },
+      "drupal/section_library": {
+        "Adding stuff to library doesn't close dialog if dialog opens in popup (https://www.drupal.org/project/section_library/issues/3217647)": "https://www.drupal.org/files/issues/2021-06-07/section_library.3217647.close-dialog.2.patch"
+      },
+      "drupal/field_group": {
+        "HTML5 Validation Prevents Submission in Tabs": "https://www.drupal.org/files/issues/2020-08-31/field_group-HTML5_validation_prevents_submission_in_tabs-2969051-19.patch"
+      },
+      "drupal/layout_builder_at": {
+        "https://www.drupal.org/files/issues/2021-03-19/3204485-2.patch": "https://www.drupal.org/files/issues/2021-03-19/3204485-2.patch",
+        "https://www.drupal.org/files/issues/2021-04-29/layout_builder_at.support_block_uuid.patch": "https://www.drupal.org/files/issues/2021-04-29/layout_builder_at.support_block_uuid.patch"
+      },
+      "drupal/layout_builder_modal": {
+        "incompatibility with layout_builder_st, contextual links broken (https://www.drupal.org/project/layout_builder_modal/issues/3133695#comment-13878470)": "https://www.drupal.org/files/issues/2020-10-21/3133695-7.patch"
+      }
+    }
+  }
+}

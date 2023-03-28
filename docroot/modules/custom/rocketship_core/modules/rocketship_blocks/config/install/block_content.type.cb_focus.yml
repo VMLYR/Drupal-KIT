@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_focus
+label: Focus
+revision: 0
+description: 'Add a block with a striking look-and-feel, with a clear call-to-action to boot. Ideal for content you want to emphasize.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_focus.svg

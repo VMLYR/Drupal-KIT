@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_focus
+    - field.field.block_content.cb_focus.field_cb_button
+    - field.field.block_content.cb_focus.field_cb_subtitle
+    - field.field.block_content.cb_focus.field_cb_teaser
+    - field.field.block_content.cb_focus.field_cb_title
+  module:
+    - rocketship_core
+    - link_attributes
+id: block_content.cb_focus.default
+targetEntityType: block_content
+bundle: cb_focus
+mode: default
+content:
+  field_cb_button:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_subtitle:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cb_teaser:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: 600
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+        maxlength_js_truncate_html: false
+    type: string_textarea
+    region: content
+  field_cb_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  translation: true

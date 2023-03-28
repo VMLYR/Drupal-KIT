@@ -1,0 +1,81 @@
+tabbed-item:
+  version: 'VERSION'
+  js:
+    js/tabbed-item.js: { }
+  dependencies:
+    - core/drupal
+
+posted_days_ago:
+  version: 1.x
+  js:
+    //momentjs.com/downloads/moment.min.js: { type: external, minified: true }
+    js/posted-days-ago.js: {}
+  dependencies:
+    - core/drupal
+
+lb:
+  version: 1.x
+  css:
+    theme:
+      css/lb.css: {}
+
+# carousel library
+layout_carousel:
+  version: 1.x
+  js:
+    js/layout-carousel.js: { minified: false }
+  dependencies:
+    - slick/slick
+    - rocketship_core/lb
+
+# layout builder preview
+layout_preview:
+  version: 1.x
+  css:
+    theme:
+      css/layout-preview.css: {}
+  js:
+    js/layout-preview.js: {}
+  dependencies:
+    - core/sortable
+    - core/drupal.dialog.off_canvas
+    - core/drupal.announce
+    - core/drupal.debounce
+    - core/jquery
+    - core/jquery.once
+    - rocketship_core/scroll
+
+scroll:
+  version: 1.x
+  js:
+    https://unpkg.com/scroll-out/dist/scroll-out.min.js: { type: external, minified: true }
+
+# general styling and functions of the colorpicker preview
+admin:
+  version: 1.x
+  js:
+    js/layout-colors.admin.js: {}
+    js/layout-columns.admin.js: {}
+    js/block-layouts.admin.js: {}
+    js/layout-alignment.admin.js: {}
+  css:
+    base:
+      css/layout-colors.admin.css: {}
+      css/layout-columns.admin.css: {}
+      css/block-layouts.admin.css: {}
+      css/layout-alignment.admin.css: {}
+
+# structural CSS
+structural:
+  version: 1.x
+  css:
+    theme:
+      css/style.content-blocks.structural.min.css: {minified: true, weight: 50}
+
+# generated colors
+layout_colors:
+  version: 1.x
+  css:
+    theme:
+      public://css/style.content-blocks.colors-new.min.css: {minified: true, weight: 51}
+

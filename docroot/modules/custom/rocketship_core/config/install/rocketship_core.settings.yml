@@ -1,0 +1,21 @@
+css_colors: 0
+css_structural: 0
+color_variants:
+  -
+    name: grey
+    foreground: '#303030'
+    background: '#e5e5e5'
+    link: '#de0055'
+    hover: '#10BFFF'
+  -
+    name: spot-1
+    foreground: '#ffffff'
+    background: '#14427d'
+    link: '#ffffff'
+    hover: '#ffffff'
+  -
+    name: spot-2
+    foreground: '#ffffff'
+    background: '#62bdc2'
+    link: '#ffffff'
+    hover: '#ffffff'

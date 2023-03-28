@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_portrait_sm
+label: '19:10 portrait sm [768×1460]'
+effects:
+  28e6f2bd-c14a-4223-94c1-aefbc5e34168:
+    uuid: 28e6f2bd-c14a-4223-94c1-aefbc5e34168
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 1460
+      crop_type: focal_point

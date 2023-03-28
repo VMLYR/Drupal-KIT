@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: page_alias_pattern
+label: 'Page alias pattern'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parent-alias]/[node:title]'
+selection_criteria:
+  94e8f649-b52a-4c51-999f-a4cdfd651204:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 94e8f649-b52a-4c51-999f-a4cdfd651204
+selection_logic: and
+weight: -5
+relationships: {  }

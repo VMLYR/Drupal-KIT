@@ -1,0 +1,11 @@
+diff --git a/node_title_help_text.info.yml b/node_title_help_text.info.yml
+index 3be92d7..207a8b6 100644
+--- a/node_title_help_text.info.yml
++++ b/node_title_help_text.info.yml
+@@ -1,5 +1,4 @@
+ name: Node Title Help Text
+ description: Allows you to add help text to node title.
+ type: module
+-core: 8.x
+-core_version_requirement: ^8 || ^9
++core_version_requirement: ^8 || ^9 || ^10

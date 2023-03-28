@@ -1,0 +1,8 @@
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access in-place editing'
+  - 'access toolbar'
+  - 'create url aliases'
+  - 'view the administration theme'

@@ -1,0 +1,20 @@
+services:
+  rocketship_core.config.installer:
+    class: Drupal\rocketship_core\RocketshipConfigInstaller
+    decorates: config.installer
+    decoration_priority: 10
+    arguments: ['@rocketship_core.config.installer.inner', '@extension.list.module']
+  rocketship_core.path_alias.subscriber:
+    class: Drupal\rocketship_core\EventSubscriber\PathAliasUpdateSubscriber
+    arguments: ['@entity_type.manager', '@config.factory', '@redirect.repository']
+    tags:
+      - { name: event_subscriber }
+  rocketship_core.autocomplete_matcher:
+    class: Drupal\rocketship_core\Matcher\EntityAutocompleteMatcher
+    arguments: ['@entity.autocomplete_matcher', '@plugin.manager.entity_reference_selection']
+  rocketship_core.autocomplete_matcher_decorator:
+    class: Drupal\rocketship_core\Matcher\EntityAutocompleteMatcherDecorator
+    decorates: entity.autocomplete_matcher
+    decoration_priority: 90
+    public: true
+    arguments: ['@rocketship_core.autocomplete_matcher_decorator.inner','@plugin.manager.entity_reference_selection']

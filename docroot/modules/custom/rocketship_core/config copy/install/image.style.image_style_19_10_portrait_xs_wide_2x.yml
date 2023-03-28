@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_portrait_xs_wide_2x
+label: '19:10 portrait xs wide [480×912] 2x'
+effects:
+  84441041-7382-4098-9cc7-3e28742684c2:
+    uuid: 84441041-7382-4098-9cc7-3e28742684c2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 960
+      height: 1824
+      crop_type: focal_point

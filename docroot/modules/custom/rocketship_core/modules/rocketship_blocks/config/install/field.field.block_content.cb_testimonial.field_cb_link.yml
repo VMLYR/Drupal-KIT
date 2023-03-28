@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_testimonial
+    - field.storage.block_content.field_cb_link
+  module:
+    - link
+id: block_content.cb_testimonial.field_cb_link
+field_name: field_cb_link
+entity_type: block_content
+bundle: cb_testimonial
+label: Link
+description: 'Add a link relevant to the person giving the testimonial. This could be their personal or company website for example.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

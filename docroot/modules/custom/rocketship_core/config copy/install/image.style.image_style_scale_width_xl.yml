@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xl
+label: 'Scale width xl [1920]'
+effects:
+  db47c61b-7a09-4c47-8452-5baf8d7c110b:
+    uuid: db47c61b-7a09-4c47-8452-5baf8d7c110b
+    id: image_scale
+    weight: 1
+    data:
+      width: 1920
+      height: null
+      upscale: false

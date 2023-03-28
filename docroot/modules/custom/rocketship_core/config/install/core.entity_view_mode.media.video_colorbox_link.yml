@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.video_colorbox_link
+label: 'Video (Colorbox Link)'
+targetEntityType: media
+cache: true

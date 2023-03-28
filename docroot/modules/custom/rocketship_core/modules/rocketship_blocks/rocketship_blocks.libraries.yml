@@ -1,0 +1,30 @@
+cb_helpers:
+  version: 1.0
+  js:
+    js/cb_helpers.js: { minified: false }
+
+cb_faq:
+  version: 1.0
+  js:
+    js/cb_faq.js: { minified: false }
+
+cb_focus:
+  version: 1.0
+  js:
+    js/cb_focus.js: { minified: false }
+
+cb_media:
+  version: 1.0
+  js:
+    js/cb_media.js: { minified: false }
+
+cb_photo_gallery:
+  version: 1.0
+  js:
+    js/magic-grid.min.js: { minified: true }
+    js/cb_photo_gallery.js: { minified: false }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_title
+    - field.storage.block_content.field_cb_node_title_replacement
+  module:
+    - rocketship_core
+id: block_content.cb_title.field_cb_node_title_replacement
+field_name: field_cb_node_title_replacement
+entity_type: block_content
+bundle: cb_title
+label: Title
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    replace: 0
+    value: ''
+    wrapper: h1
+default_value_callback: ''
+settings: {  }
+field_type: contentblock_title_replacement

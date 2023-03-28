@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies: {  }
+id: rs_blocks_image_blocks
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: rs_blocks_templating
+label: null
+source:
+  plugin: csv
+  path: /assets/csv/imageblocks.csv
+  header_offset: 0
+  ids:
+    - id
+process:
+  field_cb_media:
+    plugin: migration_lookup
+    migration: rs_blocks_image_media
+    source: field_cb_media
+  field_cb_media_layout: field_cb_media_layout
+  field_cb_image_wrapper_link/uri: field_cb_image_wrapper_link_uri
+  field_cb_image_wrapper_link/title: field_cb_image_wrapper_link_title
+  uuid: uuid
+  reusable:
+    plugin: default_value
+    default_value: false
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: cb_image
+migration_dependencies:
+  required:
+    - rs_blocks_image_media
+  optional: {  }

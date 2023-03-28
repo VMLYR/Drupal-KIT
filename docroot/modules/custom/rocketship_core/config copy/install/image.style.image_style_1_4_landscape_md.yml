@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_4_landscape_md
+label: '1:4 landscape md [1024×256]'
+effects:
+  38a29ede-83ce-491f-a00c-79fe83a30e9a:
+    uuid: 38a29ede-83ce-491f-a00c-79fe83a30e9a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 256
+      crop_type: focal_point

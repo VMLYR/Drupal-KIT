@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_image
+    - field.field.block_content.cb_image.field_cb_image_wrapper_link
+    - field.field.block_content.cb_image.field_cb_media
+    - field.field.block_content.cb_image.field_cb_media_layout
+  module:
+    - media_library
+    - rocketship_core
+    - link_attributes
+id: block_content.cb_image.default
+targetEntityType: block_content
+bundle: cb_image
+mode: default
+content:
+  field_cb_image_wrapper_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_cb_media:
+    weight: 1
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    type: media_library_widget
+    region: content
+  field_cb_media_layout:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  translation: true

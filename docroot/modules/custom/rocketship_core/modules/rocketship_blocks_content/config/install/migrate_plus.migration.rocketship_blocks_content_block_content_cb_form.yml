@@ -1,0 +1,51 @@
+id: rocketship_blocks_content_block_content_cb_form
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_block_content_cb_form.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: get
+      source: langcode
+  info:
+    -
+      plugin: get
+      source: info
+  reusable:
+    -
+      plugin: get
+      source: reusable
+  field_cb_webform/close:
+    -
+      plugin: get
+      source: field_cb_webform_close
+  field_cb_webform/default_data:
+    -
+      plugin: get
+      source: field_cb_webform_default_data
+  field_cb_webform/open:
+    -
+      plugin: get
+      source: field_cb_webform_open
+  field_cb_webform/status:
+    -
+      plugin: get
+      source: field_cb_webform_status
+  field_cb_webform/target_id:
+    -
+      plugin: get
+      source: field_cb_webform_target_id
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: cb_form
+migration_dependencies:
+  required: {  }
+  optional: {  }

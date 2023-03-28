@@ -1,0 +1,304 @@
+.layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow {
+  background: #e5e5e5;
+  opacity: .75;
+}
+
+.layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow.slick-prev, .layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow.slick-next {
+  background: #fff;
+}
+
+.layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow.slick-prev::before {
+  border-right: 7px solid replace_foreground_color;
+}
+
+.layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow.slick-next::before {
+  border-left: 7px solid replace_foreground_color;
+}
+
+.layout--bg--replace_variant_name .layout__content__row--carousel .slick-arrow:hover {
+  opacity: 1;
+  background: white;
+}
+
+/* stylelint-disable */
+.layout--content-blocks .layout--bg--replace_variant_name {
+  position: relative;
+  z-index: 5;
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  height: 100%;
+  background-color: replace_background_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name a,
+.layout--content-blocks .layout--bg--replace_variant_name a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name a:active {
+  color: replace_link_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name h1,
+.layout--content-blocks .layout--bg--replace_variant_name h2,
+.layout--content-blocks .layout--bg--replace_variant_name h3,
+.layout--content-blocks .layout--bg--replace_variant_name h4 {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name h1 a,
+.layout--content-blocks .layout--bg--replace_variant_name h1 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name h1 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name h1 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name h2 a,
+.layout--content-blocks .layout--bg--replace_variant_name h2 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name h2 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name h2 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name h3 a,
+.layout--content-blocks .layout--bg--replace_variant_name h3 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name h3 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name h3 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name h4 a,
+.layout--content-blocks .layout--bg--replace_variant_name h4 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name h4 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name h4 a:active {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .filter-type ul:not(.inline) > li::before,
+.layout--content-blocks .layout--bg--replace_variant_name .text-long ul:not(.inline) > li::before {
+  color: replace_foreground_color;
+  background-color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .filter-type ol:not(.inline) > li::before,
+.layout--content-blocks .layout--bg--replace_variant_name .text-long ol:not(.inline) > li::before {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary), .layout--content-blocks .layout--bg--replace_variant_name .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary):visited {
+  color: replace_link_color;
+  border-bottom: 1px solid transparent;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary):hover, .layout--content-blocks .layout--bg--replace_variant_name .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary):active {
+  color: replace_hover_color;
+  border-bottom: 1px solid replace_hover_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name hr {
+  border-top-color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name blockquote {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .breadcrumb {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__item::before {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__element {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__link, .layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__link:visited {
+  color: replace_link_color;
+  border-bottom: 1px solid transparent;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__link:hover, .layout--content-blocks .layout--bg--replace_variant_name .breadcrumb__link:active {
+  color: replace_hover_color;
+  border-bottom: 1px solid replace_hover_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-blog-tags,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-title,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-link,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-link {
+  color: replace_link_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-blog-tags a, .layout--content-blocks .layout--bg--replace_variant_name .field--name-field-blog-tags a:visited, .layout--content-blocks .layout--bg--replace_variant_name .field--name-field-blog-tags a:hover, .layout--content-blocks .layout--bg--replace_variant_name .field--name-field-blog-tags a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-title a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-title a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-title a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-title a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-link a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-link a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-link a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-node-link a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-link a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-link a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-link a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-link a:active {
+  color: replace_link_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h2,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h3,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h4,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h2,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h3,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h4 {
+  color: replace_foreground_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h2 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h2 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h2 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h2 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h3 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h3 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h3 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h3 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h4 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h4 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h4 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-title h4 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h2 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h2 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h2 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h2 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h3 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h3 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h3 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h3 a:active,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h4 a,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h4 a:visited,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h4 a:hover,
+.layout--content-blocks .layout--bg--replace_variant_name .field--name-field-cb-subtitle h4 a:active {
+  color: replace_link_color;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2) {
+  cursor: pointer;
+  display: inline-block;
+  border: 0 none;
+  border-radius: 6px;
+  padding: 0.875rem 1.5625rem 0.75rem 1.5625rem;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  background-repeat: no-repeat;
+  outline: none;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: inset 0 0 0 2px #62bdc2;
+  padding: 0.875rem 1.5625rem 0.75rem 1.5625rem;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+}
+
+.font-text-01-loaded .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2) {
+  font-family: "Montserrat", "Arial", sans-serif;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2), .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):visited {
+  color: #fff;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):hover, .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):active {
+  border: 0 none;
+  color: #fff;
+  background: #68cfd5;
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(98, 189, 194, 0);
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):focus, .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):focus:hover {
+  outline: 0;
+}
+
+.layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2).disabled, .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2):disabled, .layout--content-blocks .layout--bg--replace_variant_name .button:nth-child(n+2)[disabled] {
+  pointer-events: none;
+  cursor: default;
+  opacity: .5;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item {
+  border-top: 1px solid replace_foreground_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item .tab-item__title {
+  color: replace_foreground_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item .tab-item__title a,
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item .tab-item__title a:visited {
+  color: replace_foreground_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item .tab-item__title::before {
+  border-top: 5px solid replace_foreground_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item:hover .tab-item__title, .block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item.js-open .tab-item__title {
+  color: replace_link_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item:hover .tab-item__title a,
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item:hover .tab-item__title a:visited, .block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item.js-open .tab-item__title a,
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item.js-open .tab-item__title a:visited {
+  color: replace_link_color;
+}
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item:hover .tab-item__title a:hover,
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item:hover .tab-item__title a:active, .block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item.js-open .tab-item__title a:hover,
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item.js-open .tab-item__title a:active {
+  color: replace_hover_color;
+}
+
+.block--type-cb-photo-gallery.layout--bg--replace_variant_name .field--name-field-cb-media-unlimited .field__item::after {
+  color: replace_link_color;
+  background: replace_foreground_color;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name a:not(button), .layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name a:not(button):visited,
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(button),
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(button):visited {
+  color: #303030;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name a:not(button):hover, .layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name a:not(button):active,
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(button):hover,
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(button):active {
+  color: #303030;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item {
+  color: #303030;
+  background-color: #e5e5e5;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title {
+  color: #303030;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(.button), .layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(.button):visited {
+  color: #303030;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(.button):hover, .layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__title a:not(.button):active {
+  color: #303030;
+}
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name .field-cb-menu-overview__item__content {
+  color: #303030;
+}
+
+/* stylelint-enable */

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: twitter
+label: Twitter
+sharer_url: 'https://twitter.com/intent/tweet?text=[current-page:url:absolute]'
+onclick: ''
+weight: -8
+target: _blank

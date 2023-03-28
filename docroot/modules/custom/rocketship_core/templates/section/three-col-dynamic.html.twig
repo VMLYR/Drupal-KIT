@@ -1,0 +1,203 @@
+{% set first_col_has_content = null %}
+{% set has_content = null %}
+{% set content_regions = [content.first_top|render|striptags|trim, content.first_main|render|striptags|trim, content.first_bottom|render|striptags|trim] %}
+
+{# loop the column regions #}
+{% for content_region in content_regions %}
+  {# if we find content in a region, and hasn't been found before, mark the column as having content #}
+  {% if content_region and (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% set has_content = content_region %}
+  {# if we don't find content in a region, and hasn't been found before, check for block fields #}
+  {% elseif (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% for block_key, region_block in content_region %}
+      {% if block_key starts with '#'%}
+      {% else %}
+        {# {% set has_content = true %} #}
+        {% for field_key, field in region_block.content %}
+          {# found a block field, check for content #}
+          {% if field_key starts with 'field_' and field[0] and field[0]['#context'] and field[0]['#context']['value'] %}
+            {% set stripped_field = field|render|striptags|trim|length %}
+            {# found field content #}
+            {% if stripped_field|length > 0 %}
+              {% set has_content = stripped_field %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% set first_col_has_content = has_content %}
+
+{% set center_col_has_content = null %}
+{% set has_content = null %}
+{% set content_regions = [content.center_top|render|striptags|trim, content.center_main|render|striptags|trim, content.center_bottom|render|striptags|trim] %}
+
+{# loop the column regions #}
+{% for content_region in content_regions %}
+  {# if we find content in a region, and hasn't been found before, mark the column as having content #}
+  {% if content_region and (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% set has_content = content_region %}
+  {# if we don't find content in a region, and hasn't been found before, check for block fields #}
+  {% elseif (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% for block_key, region_block in content_region %}
+      {% if block_key starts with '#'%}
+      {% else %}
+        {# {% set has_content = true %} #}
+        {% for field_key, field in region_block.content %}
+          {# found a block field, check for content #}
+          {% if field_key starts with 'field_' and field[0] and field[0]['#context'] and field[0]['#context']['value'] %}
+            {% set stripped_field = field|render|striptags|trim|length %}
+            {# found field content #}
+            {% if stripped_field|length > 0 %}
+              {% set has_content = stripped_field %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% set center_col_has_content = has_content %}
+
+{% set second_col_has_content = null %}
+{% set has_content = null %}
+{% set content_regions = [content.second_top|render|striptags|trim, content.second_main|render|striptags|trim, content.second_bottom|render|striptags|trim] %}
+
+{# loop the column regions #}
+{% for content_region in content_regions %}
+  {# if we find content in a region, and hasn't been found before, mark the column as having content #}
+  {% if content_region and (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% set has_content = content_region %}
+  {# if we don't find content in a region, and hasn't been found before, check for block fields #}
+  {% elseif (has_content is null or has_content is empty or has_content|length < 1) %}
+    {% for block_key, region_block in content_region %}
+      {% if block_key starts with '#'%}
+      {% else %}
+        {# {% set has_content = true %} #}
+        {% for field_key, field in region_block.content %}
+          {# found a block field, check for content #}
+          {% if field_key starts with 'field_' and field[0] and field[0]['#context'] and field[0]['#context']['value'] %}
+            {% set stripped_field = field|render|striptags|trim|length %}
+            {# found field content #}
+            {% if stripped_field|length > 0 %}
+              {% set has_content = stripped_field %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% set second_col_has_content = has_content %}
+
+{% if (first_col_has_content and second_col_has_content) %}
+
+  {# If left and right sidebar content (with or without content column) #}
+
+  {% if (center_col_has_content) %}
+    {# all 3 columns #}
+    {% include "@rocketship_core/section/three-col.html.twig" %}
+  {% else %}
+    {# If left and right sidebar content only #}
+    {% include "@rocketship_core/section/two-col.html.twig" %}
+  {% endif %}
+
+{% elseif (center_col_has_content) %}
+  {# If a combination of center with a left or right #}
+
+  {% if (first_col_has_content and center_col_has_content) %}
+    {# If left sidebar content: move center content into second region #}
+    {% set content = content|merge({'second_top': content.center_top}) %}
+    {% set content = content|merge({'second_main': content.center_main}) %}
+    {% set content = content|merge({'second_bottom': content.center_bottom}) %}
+
+    {% set region_attributes = region_attributes|merge({'second_top': region_attributes.second_top}) %}
+    {% set region_attributes = region_attributes|merge({'second_main': region_attributes.second_main}) %}
+    {% set region_attributes = region_attributes|merge({'second_bottom': region_attributes.second_bottom}) %}
+    {% include "@rocketship_core/section/two-col.html.twig" %}
+
+  {% else %}
+
+    {# If right sidebar content: content flip layout + move first content into second region, move center content into first region #}
+    {% set content = content|merge({'first_top': content.second_top}) %}
+    {% set content = content|merge({'first_main': content.second_main}) %}
+    {% set content = content|merge({'first_bottom': content.second_bottom}) %}
+
+    {% set content = content|merge({'second_top': content.center_top}) %}
+    {% set content = content|merge({'second_main': content.center_main}) %}
+    {% set content = content|merge({'second_bottom': content.center_bottom}) %}
+
+    {% set region_attributes = region_attributes|merge({'first_top': region_attributes.second_top}) %}
+    {% set region_attributes = region_attributes|merge({'first_main': region_attributes.second_main}) %}
+    {% set region_attributes = region_attributes|merge({'first_bottom': region_attributes.second_bottom}) %}
+
+    {% set region_attributes = region_attributes|merge({'second_top': region_attributes.center_top}) %}
+    {% set region_attributes = region_attributes|merge({'second_main': region_attributes.center_main}) %}
+    {% set region_attributes = region_attributes|merge({'second_bottom': region_attributes.center_bottom}) %}
+
+    {% set settings = settings|merge({'layout_reversed': true}) %}
+    {% include "@rocketship_core/section/two-col.html.twig" %}
+  {% endif %}
+
+{% else %}
+
+  {% if first_col_has_content %}
+
+    {% set merged_content = [] %}
+    {% set merged_content = merged_content|merge(content.first_top|default([])) %}
+    {% set merged_content = merged_content|merge(content.first_main|default([])) %}
+    {% set merged_content = merged_content|merge(content.first_bottom|default([])) %}
+
+    {% set content = content|merge({'content': merged_content}) %}
+
+    {% set merged_region_attributes = [] %}
+
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.first_top|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.first_main|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.first_bottom|default([])}) %}
+
+    {% set region_attributes = region_attributes|merge({'content': merged_region_attributes}) %}
+
+  {% elseif center_col_has_content %}
+    {% set merged_content = [] %}
+    {% set merged_content = merged_content|merge(content.center_top|default([])) %}
+    {% set merged_content = merged_content|merge(content.center_main|default([])) %}
+    {% set merged_content = merged_content|merge(content.center_bottom|default([])) %}
+
+    {% set content = content|merge({'content': merged_content}) %}
+
+    {% set merged_region_attributes = [] %}
+
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.center_top|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.center_main|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.center_bottom|default([])}) %}
+
+    {% set region_attributes = region_attributes|merge({'content': merged_region_attributes}) %}
+
+  {% else %}
+
+    {% set merged_content = [] %}
+    {% set merged_content = merged_content|merge(content.second_top|default([])) %}
+    {% set merged_content = merged_content|merge(content.second_main|default([])) %}
+    {% set merged_content = merged_content|merge(content.second_bottom|default([])) %}
+
+    {% set content = content|merge({'content': merged_content}) %}
+
+    {% set merged_region_attributes = [] %}
+
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.second_top|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.second_main|default([])}) %}
+    {% set merged_region_attributes = merged_region_attributes|merge({'content': region_attributes.second_bottom|default([])}) %}
+
+    {% set region_attributes = region_attributes|merge({'content': merged_region_attributes}) %}
+
+  {% endif %}
+
+  {# No sidebars at all #}
+  {% include "@rocketship_core/section/one-col-with-optional-subsection.html.twig" %}
+
+{% endif %}

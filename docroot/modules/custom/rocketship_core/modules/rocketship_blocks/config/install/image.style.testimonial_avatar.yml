@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: testimonial_avatar
+label: 'Testimonial Avatar'
+effects:
+  7bbdc95d-2e95-4b25-b596-32c545d14247:
+    uuid: 7bbdc95d-2e95-4b25-b596-32c545d14247
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      crop_type: focal_point
+pipeline: ''

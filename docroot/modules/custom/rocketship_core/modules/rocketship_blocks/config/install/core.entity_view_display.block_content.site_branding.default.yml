@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.site_branding
+    - field.field.block_content.site_branding.body
+    - field.field.block_content.site_branding.field_media_info_image
+    - image.style.image_style_scale_width_xs
+  module:
+    - blazy
+    - text
+id: block_content.site_branding.default
+targetEntityType: block_content
+bundle: site_branding
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_media_info_image:
+    type: blazy_media
+    weight: 0
+    label: hidden
+    settings:
+      image_style: image_style_scale_width_xs
+      responsive_image_style: ''
+      media_switch: ''
+      box_style: ''
+      thumbnail_style: ''
+      box_media_style: ''
+      ratio: ''
+      box_caption: ''
+      view_mode: default
+      box_caption_custom: ''
+      current_view_mode: default
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

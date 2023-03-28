@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_xs
+label: '1:1 square xs [320x320]'
+effects:
+  ee8f984e-4675-48ba-802e-9a29a906afc1:
+    uuid: ee8f984e-4675-48ba-802e-9a29a906afc1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 320
+      crop_type: focal_point

@@ -1,0 +1,30 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - block_content.type.cb_usp
+    - core.entity_view_mode.block_content.full
+    - field.field.block_content.cb_usp.field_cb_button
+    - field.field.block_content.cb_usp.field_cb_image_wrapper_link
+    - field.field.block_content.cb_usp.field_cb_media
+    - field.field.block_content.cb_usp.field_cb_text
+    - field.field.block_content.cb_usp.field_cb_title
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.cb_usp.full
+targetEntityType: block_content
+bundle: cb_usp
+mode: full
+content: {  }
+hidden:
+  field_cb_button: true
+  field_cb_image_wrapper_link: true
+  field_cb_media: true
+  field_cb_text: true
+  field_cb_title: true
+  langcode: true
+  search_api_excerpt: true

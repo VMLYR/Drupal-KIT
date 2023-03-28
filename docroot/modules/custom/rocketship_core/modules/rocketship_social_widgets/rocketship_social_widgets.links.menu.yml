@@ -1,0 +1,6 @@
+entity.social_share_link.overview:
+  title: 'Social Share links'
+  route_name: entity.social_share_link.overview
+  description: 'Configure social sharing links.'
+  parent: system.admin_config_services
+  weight: 100

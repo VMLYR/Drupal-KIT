@@ -1,0 +1,3 @@
+configure rocketship social widgets settings:
+  title: 'Configure rocketship social widgets module'
+  description: 'Allows access to the social widgets configuration form'

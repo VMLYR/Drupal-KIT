@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: social_media
+label: 'Social media'
+revision: 0
+description: 'Links to social media profiles.'

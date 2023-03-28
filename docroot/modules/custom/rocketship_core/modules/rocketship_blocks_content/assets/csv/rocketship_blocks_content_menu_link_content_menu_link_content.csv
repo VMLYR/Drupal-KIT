@@ -1,0 +1,8 @@
+uuid,enabled,title,description,menu_name,link_title,link_uri,external,rediscover,weight,expanded,parent,menu_clickthrough_description_format,menu_clickthrough_description_value,menu_clickthrough_image
+adac0f65-f548-44cc-b5c9-94a6b3577c3d,1,Examples,,main,,route:<nolink>,0,0,-49,1,,,,
+432c99de-2f7c-4c74-814e-40f4bab2fcfd,1,"Related Items Example Page 1",,main,,uuid:node/fa7cc542-beb7-4c37-af47-d67c692ac73e,0,0,-49,0,menu_link_content:adac0f65-f548-44cc-b5c9-94a6b3577c3d,,,7f884b49-0dde-4fad-b68a-6dc124286c32
+0703a35e-a11f-4b0f-999e-5478352da992,1,"Related Items Example Page 2",,main,,uuid:node/7086ddbe-7aea-436c-95c1-2653e39fd1b5,0,0,-48,0,menu_link_content:adac0f65-f548-44cc-b5c9-94a6b3577c3d,,,c0a9babe-9990-4679-a3d8-105ec05a9469
+4081bd8a-6bc5-4b4e-9895-f0c0f58de13b,1,"Related Items Example Page 3",,main,,uuid:node/f2763de2-a178-4c98-ab24-bc1b4457d3ba,0,0,-47,0,menu_link_content:adac0f65-f548-44cc-b5c9-94a6b3577c3d,,,feaab3ca-56ec-4261-91cc-88ee95332fdb
+0b0bea4f-27c6-4c2f-9d7b-8d5ebed392e8,1,"Related Items Example Page 4",,main,,uuid:node/e46bb670-6ea6-47b4-bae8-893ba566d0d3,0,0,-46,0,menu_link_content:adac0f65-f548-44cc-b5c9-94a6b3577c3d,,,96f32355-cbb0-408e-b563-6c7dc2f68d09
+ef41c5f9-39ba-4cd0-a72e-53978c517c2c,1,"Content blocks",,main,,uuid:node/078ec4fe-ebfe-4a66-b5d0-dbe39d809607,0,0,-50,0,menu_link_content:adac0f65-f548-44cc-b5c9-94a6b3577c3d,full_html,"<p>This is the menu clickthrough teaser text.</p>
+",1a167f0f-7f40-4395-9ef7-e0331dcf96d2

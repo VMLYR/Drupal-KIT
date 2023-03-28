@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.drimage_2_3
+label: '2:3 aspect ratio'
+targetEntityType: media
+cache: true

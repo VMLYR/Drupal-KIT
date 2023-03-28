@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.video_colorbox_link
+    - field.field.media.video_embed.field_media_video_embed_field
+    - media.type.video_embed
+  module:
+    - rocketship_core
+id: media.video_embed.video_colorbox_link
+targetEntityType: media
+bundle: video_embed
+mode: video_colorbox_link
+content:
+  field_media_video_embed_field:
+    type: link_vef_colorbox
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      responsive: '1'
+      width: '854'
+      height: '480'
+      modal_max_width: '854'
+      link_text_field: name
+      link_text: Video
+      autoplay: 0
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

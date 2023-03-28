@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.image_style_1_1_square_xs
+    - image.style.image_style_1_1_square_xs_2x
+  module:
+    - rocketship_core
+id: menu_clickthrough
+label: 'Menu Clickthrough'
+image_style_mappings:
+  -
+    breakpoint_id: rocketship_core.all
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_1_square_xs
+  -
+    breakpoint_id: rocketship_core.all
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: image_style_1_1_square_xs_2x
+breakpoint_group: rocketship_core
+fallback_image_style: image_style_1_1_square_xs

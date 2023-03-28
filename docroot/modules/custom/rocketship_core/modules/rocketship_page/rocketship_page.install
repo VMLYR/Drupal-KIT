@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Install file.
+ */
+
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage;
+use Drupal\search_api\Entity\Index;
+
+/**
+ * Implements hook_install().
+ */
+function rocketship_page_install() {
+
+  // Update all roles.
+  try {
+    \Rocketship::updateRolePermissionsForModule('rocketship_page');
+  } catch (\Exception $e) {
+    \Drupal::messenger()
+      ->addError("Could not add permissions to existing roles. Please double-check your roles to make sure they have all needed permissions.");
+  }
+
+  // Disable some blocks when this module gets installed and one of our themes
+  // is already active at the time.
+  $config = \Drupal::config('system.theme');
+  $theme = $config->get('default');
+  \Rocketship::hideBreadcrumbAndTitleBlockOnContentType($theme, 'page');
+
+  // Load and resave the rewritten search index so it triggers
+  // database updates and what not.
+  $index = Index::load('content_index');
+  if ($index) {
+    $index->save();
+  }
+}
+
+/**
+ * Ensure the layout_builder__translation field exists for page content type.
+ */
+function rocketship_page_update_8001(&$sandbox) {
+  $class = OverridesSectionStorage::class;
+  if (!defined("$class::TRANSLATED_CONFIGURATION_FIELD_NAME")) {
+    \Drupal::messenger()
+      ->addWarning('Patch from Issue #3044993 does not seem to be applied. Skipping this update.');
+    return;
+  }
+
+  $entity_type_id = 'node';
+  $bundle = 'page';
+  $field_name = OverridesSectionStorage::TRANSLATED_CONFIGURATION_FIELD_NAME;
+  $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+  if (!$field) {
+    $field_storage = FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    if (!$field_storage) {
+      $field_storage = FieldStorageConfig::create([
+        'entity_type' => $entity_type_id,
+        'field_name' => $field_name,
+        'type' => 'layout_translation',
+        'locked' => TRUE,
+      ]);
+      $field_storage->setTranslatable(TRUE);
+      $field_storage->save();
+    }
+
+    $field = FieldConfig::create([
+      'field_storage' => $field_storage,
+      'bundle' => $bundle,
+      'label' => t('Layout Labels'),
+    ]);
+    $field->save();
+  }
+}

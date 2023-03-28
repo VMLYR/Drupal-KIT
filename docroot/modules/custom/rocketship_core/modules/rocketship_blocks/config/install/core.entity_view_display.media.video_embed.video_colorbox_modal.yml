@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.video_colorbox_modal
+    - field.field.media.video_embed.field_media_video_embed_field
+    - image.style.image_style_scale_width_lg
+    - media.type.video_embed
+  module:
+    - video_embed_field
+id: media.video_embed.video_colorbox_modal
+targetEntityType: media
+bundle: video_embed
+mode: video_colorbox_modal
+content:
+  field_media_video_embed_field:
+    type: video_embed_field_colorbox
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: image_style_scale_width_lg
+      link_image_to: ''
+      responsive: true
+      width: 854
+      height: 480
+      modal_max_width: 854
+      autoplay: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

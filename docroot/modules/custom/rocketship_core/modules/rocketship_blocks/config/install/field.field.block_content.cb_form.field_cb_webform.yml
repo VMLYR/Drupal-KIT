@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_form
+    - field.storage.block_content.field_cb_webform
+  module:
+    - webform
+id: block_content.cb_form.field_cb_webform
+field_name: field_cb_webform
+entity_type: block_content
+bundle: cb_form
+label: Webform
+description: "You can easily add a form by selecting any pre-made ones from the dropdown. <br>Use the <strong>Scheduled</strong> status if you would like to make a form available in the future or <strong>Closed</strong> to prevent new submissions. <br />Both options will display a message to the visitor. <br>You can use the <strong>default submission data</strong> field to prefill any of the form fields if you are familiar with using YAML and Drupal tokens (follow the example)."
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: webform

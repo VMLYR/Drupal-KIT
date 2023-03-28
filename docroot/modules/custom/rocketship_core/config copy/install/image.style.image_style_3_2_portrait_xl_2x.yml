@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_portrait_xl_2x
+label: '3:2 portrait xl [1920×2880] 2x'
+effects:
+  b191825c-b2c6-47d3-ac7d-f0b41c2ec23a:
+    uuid: b191825c-b2c6-47d3-ac7d-f0b41c2ec23a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3840
+      height: 5760
+      crop_type: focal_point

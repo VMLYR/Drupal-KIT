@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: e_mail
+label: E-mail
+sharer_url: 'mailto:?&subject=[current-page:title]&body=[current-page:url:absolute]'
+onclick: ''
+weight: -6
+target: _blank

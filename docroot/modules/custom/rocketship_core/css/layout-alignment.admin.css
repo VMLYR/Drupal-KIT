@@ -1,0 +1,87 @@
+.layout-field-vertical-alignment .form__group--radios,
+.layout-field-vertical-alignment .form-radios {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
+  margin: -10px -10px 0 -10px !important;
+}
+
+[dir=rtl] .layout-field-vertical-alignment .form__group--radios,
+[dir=rtl] .layout-field-vertical-alignment .form-radios {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+  -ms-flex-direction: row-reverse !important;
+  flex-direction: row-reverse !important;
+}
+
+.layout-field-vertical-alignment .form-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+.layout-field-vertical-alignment .js-form-type-radio,
+tr .layout-field-vertical-alignment .js-form-type-radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 10px 10px 0 10px !important;
+}
+
+.layout-field-vertical-alignment .js-form-type-radio input {
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+.layout-field-vertical-alignment .js-form-type-radio input:checked + label {
+  border: #000000 2px solid !important;
+}
+.layout-field-vertical-alignment .js-form-type-radio label {
+  box-sizing: border-box;
+  cursor: pointer !important;
+  font-size: 0.00001px !important;
+  position: relative !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  width: 78px !important;
+  height: 58px !important;
+  padding: calc(100% / 3 * 2) 0 0 0 !important;
+  white-space: nowrap !important;
+  border: #999999 1px solid !important;
+  background-color: transparent !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+.layout-field-vertical-alignment .js-form-type-radio .text {
+  text-align: center !important;
+  padding-top: 5px !important;
+  font-size: 0.8125rem;
+  line-height: 1rem;
+}
+
+.layout-field-vertical-alignment .js-form-type-radio .text .form__label__required,
+.layout-field-vertical-alignment .js-form-type-radio .text .form__label__not-required {
+  display: none;
+}
+
+.field--name-field-vertical-alignment .js-form-type-radio label.alignment-top,
+[data-drupal-selector="edit-layout-settings-alignments-wrapper-vertical-alignment"] .js-form-type-radio label.alignment-top {
+ background-image: url('../images/alignment-top.svg') !important;
+}
+
+.field--name-field-vertical-alignment .js-form-type-radio label.alignment-middle,
+[data-drupal-selector="edit-layout-settings-alignments-wrapper-vertical-alignment"] .js-form-type-radio label.alignment-middle {
+  background-image: url('../images/alignment-middle.svg') !important;
+}
+
+.field--name-field-vertical-alignment .js-form-type-radio label.alignment-bottom,
+[data-drupal-selector="edit-layout-settings-alignments-wrapper-vertical-alignment"] .js-form-type-radio label.alignment-bottom {
+  background-image: url('../images/alignment-bottom.svg') !important;
+}

@@ -1,0 +1,55 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_title
+    - field.field.block_content.cb_title.field_cb_button
+    - field.field.block_content.cb_title.field_cb_node_title_replacement
+    - field.field.block_content.cb_title.field_cb_subtitle
+    - field.field.block_content.cb_title.field_cb_teaser
+  module:
+    - link
+    - rocketship_core
+id: block_content.cb_title.default
+targetEntityType: block_content
+bundle: cb_title
+mode: default
+content:
+  field_cb_button:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_cb_node_title_replacement:
+    weight: 0
+    label: hidden
+    settings:
+      wrapper_override: nothing
+    third_party_settings: {  }
+    type: contentblock_title_replacement_formatter
+    region: content
+  field_cb_subtitle:
+    type: tag_selection_textfield_formatter
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      wrapper_override: nothing
+    third_party_settings: {  }
+  field_cb_teaser:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

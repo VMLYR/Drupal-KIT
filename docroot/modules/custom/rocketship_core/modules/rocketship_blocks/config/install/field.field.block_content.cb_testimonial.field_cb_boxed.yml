@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_testimonial
+    - field.storage.block_content.field_cb_boxed
+id: block_content.cb_testimonial.field_cb_boxed
+field_name: field_cb_boxed
+entity_type: block_content
+bundle: cb_testimonial
+label: 'Boxed text'
+description: 'If checked, this option will display the testimonial text and info in a box.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

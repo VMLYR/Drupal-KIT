@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function rocketship_blocks_content_migration_plugins_alter(&$definitions) {
+  $path = drupal_get_path('module', 'rocketship_blocks_content');
+  $migrations = _rocketship_blocks_content_content_migrates();
+
+  foreach ($migrations as $migration) {
+    if (isset($definitions[$migration]['source']['path'])) {
+      $definitions[$migration]['source']['path'] = $path . $definitions[$migration]['source']['path'];
+    }
+    if (isset($definitions[$migration]['source']['constants']['source_base_path'])) {
+      $definitions[$migration]['source']['constants']['source_base_path'] = $path . $definitions[$migration]['source']['constants']['source_base_path'];
+    }
+  }
+}
+
+/**
+ * @return string[]
+ */
+function _rocketship_blocks_content_content_migrates() {
+  return [
+    'rocketship_blocks_content_file_migrate',
+    'rocketship_blocks_content_media_image',
+    'rocketship_blocks_content_block_content_cb_title',
+    'rocketship_blocks_content_block_content_cb_text',
+    'rocketship_blocks_content_block_content_cb_image',
+    'rocketship_blocks_content_media_video_embed',
+    'rocketship_blocks_content_block_content_cb_video',
+    'rocketship_blocks_content_block_content_cb_faq',
+    'rocketship_blocks_content_block_content_cb_testimonial',
+    'rocketship_blocks_content_block_content_cb_usp',
+    'rocketship_blocks_content_block_content_cb_focus',
+    'rocketship_blocks_content_block_content_cb_photo_gallery',
+    'rocketship_blocks_content_block_content_cb_menu_overview',
+    'rocketship_blocks_content_node_page',
+    'rocketship_blocks_content_block_content_cb_related_items',
+    'rocketship_blocks_content_menu_link_content_menu_link_content',
+  ];
+}
+
+/**
+ * Implements hook_modules_implements_alter().
+ *
+ * Make sure we go after block_themes_installed.
+ */
+function rocketship_blocks_content_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'migration_plugins_alter') {
+    $group = $implementations['rocketship_blocks_content'];
+    unset($implementations['rocketship_blocks_content']);
+    $implementations['rocketship_blocks_content'] = $group;
+  }
+}
+
+function _rocketship_blocks_content_link_uuid_lookup($string) {
+  if (strpos($string, 'uuid:') !== 0) {
+    return $string;
+  }
+  $string = str_replace('uuid:', '', $string);
+  [$entity_type_id, $entity_uuid] = explode('/', $string);
+  $entity = \Drupal::entityTypeManager()->getStorage($entity_type_id)->loadByProperties(['uuid' => $entity_uuid]);
+  if ($entity) {
+    $entity = reset($entity);
+    return 'entity:' . $entity_type_id . '/' . $entity->id();
+  }
+}

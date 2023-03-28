@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: facebook
+label: Facebook
+sharer_url: 'https://www.facebook.com/sharer/sharer.php?u=[current-page:url:absolute]'
+onclick: ''
+weight: -9
+target: _blank

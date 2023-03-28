@@ -1,0 +1,15 @@
+uuid,info,reusable,field_cb_button,field_cb_teaser,field_cb_text_format,field_cb_text_value,field_cb_text_alignment,field_cb_title
+682c8432-f3de-4e76-8797-197ddcd17203,"404 text",0,,,full_html,"<div class=""text-align-center"">
+<div class=""text-align-center"">
+<h2>The requested page could not be found.</h2>
+
+<p><a class=""cke-button"" href=""/"" rel=""home"" title=""Home"">Back to the frontpage</a> <span class=""actions__divider""> or </span> <a class=""cke-button"" href=""/user/login"" title=""Login"">Login</a></p>
+</div>
+</div>
+",centered,
+a6e38556-aab2-40da-873f-2669427cbfd3,"403 text",0,,,full_html,"<div class=""text-align-center"">
+<h2>You are not authorized to access this page.</h2>
+
+<p><a class=""cke-button"" href=""/"" rel=""home"" title=""Home"">Back to the frontpage</a> <span class=""actions__divider""> or </span> <a class=""cke-button"" href=""/user/login"" title=""Login"">Login</a></p>
+</div>
+",centered,

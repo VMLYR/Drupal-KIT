@@ -1,0 +1,18 @@
+promote label_value item:
+  title: 'Promote label:value item'
+  description: 'Allow promotion to teaser for label:value field items.'
+manage default content default language:
+  title: 'Manage default content default language'
+  description: 'Allow setting the default language to use for demo and default content'
+administer rocketship feature settings:
+  title: 'Administer Rocketship Feature settings'
+  description: 'Grants access to the Feature settings forms, including Paragraphs'
+administer rocketship core settings:
+  title: 'Administer Rocketship Core settings'
+  description: 'Grants access to the Rocketship Core settings form'
+administer minimal styling on rocketship layouts:
+  title: Administer minimal styling option on Rocketship layouts
+generate rocketship migrates:
+  title: Generate rocketship migrates
+generate login links for other users:
+  title: Generate login links for other users

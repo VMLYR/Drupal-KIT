@@ -1,0 +1,7 @@
+services:
+  menu_clickthrough.path_helper:
+    class: Drupal\menu_clickthrough\Path\CurrentPathHelper
+    arguments: ['@current_route_match', '@router.request_context']
+  menu_clickthrough.menu_helper:
+    class: Drupal\menu_clickthrough\Menu\MenuTreeStorageMenuHelper
+    arguments: ['@plugin.manager.menu.link', '@menu.link_tree']

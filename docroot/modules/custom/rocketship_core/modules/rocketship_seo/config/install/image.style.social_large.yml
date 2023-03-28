@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: social_large
+label: 'Social Large'
+effects:
+  7ad6b2fb-fbee-4a99-a3ea-50eee3d79ad1:
+    uuid: 7ad6b2fb-fbee-4a99-a3ea-50eee3d79ad1
+    id: image_scale
+    weight: 1
+    data:
+      width: 460
+      height: 460
+      upscale: false

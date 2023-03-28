@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_title_help_text
+    - rocketship_seo
+    - scheduler
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: true
+    publish_past_date: publish
+    publish_required: false
+    publish_revision: true
+    publish_touch: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: true
+    publish_past_date_created: false
+    show_message_after_update: true
+  node_title_help_text:
+    title_help: "This field is used as the title for this page in your browser tab, in overviews and for SEO and sharing purposes. It is also shown on the detail page for this page.\r\nYou can change what is used for SEO and sharing purposes in the metatag tab on the right hand side of this form. You can also change what is shown on the detail page by selecting and changing the Title block in the next step."
+  rocketship_seo:
+    seo_fields: {  }
+    seo_title: Overview
+    seo_description: 'Content here is displayed on overview pages. Additionally, it is used for search engine and social media snippets. You can further finetune what exactly is used for each snippet in the "Metatags" tab.'
+name: Page
+type: page
+description: 'Use <em>pages</em> for your static content, from an "About us" page to a landingspage for a campaign'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

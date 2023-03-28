@@ -1,0 +1,166 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_testimonial
+    - field.field.block_content.cb_testimonial.field_cb_boxed
+    - field.field.block_content.cb_testimonial.field_cb_extra_rule
+    - field.field.block_content.cb_testimonial.field_cb_link
+    - field.field.block_content.cb_testimonial.field_cb_media
+    - field.field.block_content.cb_testimonial.field_cb_name
+    - field.field.block_content.cb_testimonial.field_cb_text
+    - image.style.testimonial_avatar
+  module:
+    - blazy
+    - field_group
+    - link
+    - smart_trim
+    - text
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - field_cb_media
+        - field_cb_text
+        - group_info
+        - field_cb_link
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: 'cb-content cb-testimonial-content'
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Content
+    group_info:
+      children:
+        - field_cb_name
+        - field_cb_extra_rule
+      parent_name: group_content
+      weight: 3
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: 'cb-info cb-testimonial-info'
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Info
+id: block_content.cb_testimonial.default
+targetEntityType: block_content
+bundle: cb_testimonial
+mode: default
+content:
+  field_cb_extra_rule:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 600
+      trim_type: chars
+      trim_suffix: ''
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      wrap_output: false
+      more_link: false
+      trim_options:
+        text: false
+        trim_zero: false
+      summary_handler: full
+    third_party_settings: {  }
+    type: smart_trim
+    region: content
+  field_cb_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_cb_media:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: testimonial_avatar
+      responsive_image_style: ''
+      media_switch: ''
+      box_style: ''
+      thumbnail_style: ''
+      box_media_style: ''
+      ratio: ''
+      box_caption: ''
+      view_mode: default
+      box_caption_custom: ''
+      current_view_mode: default
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings: {  }
+    type: blazy_media
+    region: content
+  field_cb_name:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 600
+      trim_type: chars
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options: {  }
+    third_party_settings: {  }
+    type: smart_trim
+    region: content
+  field_cb_text:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  field_cb_boxed: true
+  langcode: true
+  search_api_excerpt: true

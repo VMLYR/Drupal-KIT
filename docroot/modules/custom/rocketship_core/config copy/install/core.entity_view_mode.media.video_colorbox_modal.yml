@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.video_colorbox_modal
+label: 'Video (Colorbox Modal)'
+targetEntityType: media
+cache: true

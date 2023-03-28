@@ -1,0 +1,126 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related
+    - field.field.node.page.field_description
+    - field.field.node.page.field_media_canonical_image
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_page_display_canonical
+    - field.field.node.page.layout_builder__layout
+    - field.field.node.page.layout_builder__translation
+    - node.type.page
+    - responsive_image.styles.page_teaser
+  module:
+    - blazy
+    - layout_builder
+    - manage_display
+    - rocketship_core
+    - smart_trim
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+id: node.page.related
+targetEntityType: node
+bundle: page
+mode: related
+content:
+  field_description:
+    type: smart_trim
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 150
+      trim_type: chars
+      trim_suffix: …
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      wrap_output: false
+      more_link: false
+      trim_options:
+        text: false
+        trim_zero: false
+      summary_handler: full
+    third_party_settings: {  }
+  field_media_canonical_image:
+    type: blazy_media
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      responsive_image_style: page_teaser
+      media_switch: content
+      box_style: ''
+      thumbnail_style: ''
+      box_media_style: ''
+      ratio: ''
+      box_caption: ''
+      view_mode: default
+      box_caption_custom: ''
+      current_view_mode: related
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      cache: 0
+      skin: ''
+      fx: ''
+      style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings: {  }
+  field_page_display_canonical:
+    type: rs_canonical_link
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      'link text': 'Read more'
+      'link class': ''
+      wrapper: div
+      class: ''
+      link: 1
+    third_party_settings: {  }
+  title:
+    label: hidden
+    type: title
+    weight: 1
+    region: content
+    settings:
+      tag: h3
+      linked: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_meta_tags: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  rocketship_social_widgets: true
+  search_api_excerpt: true
+  uid: true

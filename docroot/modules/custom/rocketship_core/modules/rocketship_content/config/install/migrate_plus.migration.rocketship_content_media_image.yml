@@ -1,0 +1,33 @@
+id: rocketship_content_media_image
+migration_group: rocketship_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_content_media_image.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: callback
+      callable: rocketship_core_get_default_content_default_language
+  name:
+    -
+      plugin: get
+      source: name
+  field_media_image/target_id:
+    -
+      plugin: migration_lookup
+      migration: rocketship_content_file_migrate
+      source: field_media_image
+destination:
+  plugin: 'entity:media'
+  default_bundle: image
+migration_dependencies:
+  required:
+    - rocketship_content_file_migrate
+  optional: {  }

@@ -1,0 +1,69 @@
+uuid,info,reusable,field_cb_button,field_cb_teaser,field_cb_text_format,field_cb_text_value,field_cb_text_alignment,field_cb_title
+035899af-7903-4614-a41f-995ccd9a3ee6,"Content Block Text",0,"First button***internal:/|Second button***internal:/","Ut necesse sit omnium rerum, quae natura vigeant, similem esse finem, non eundem.",full_html,"<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <i>Non laboro, inquit, de nomine.</i> Nihil enim hoc differt.</h3>
+
+<ul>
+	<li>Ne amores quidem sanctos a sapiente alienos esse arbitrantur.</li>
+	<li>Etenim nec iustitia nec amicitia esse omnino poterunt, nisi ipsae per se expetuntur.</li>
+	<li>Quae diligentissime contra Aristonem dicuntur a Chryippo.</li>
+	<li>Ut in voluptate sit, qui epuletur, in dolore, qui torqueatur.</li>
+	<li>Etsi qui potest intellegi aut cogitari esse aliquod animal, quod se oderit?</li>
+	<li>Aeque enim contingit omnibus fidibus, ut incontentae sint.</li>
+</ul>
+
+<blockquote cite=""http://loripsum.net"">Nam aut privatim aliquid gerere malunt aut, qui attore animo sunt, capessunt rem publicam honoribus imperiisque adipiscendis aut totos se ad studia doctrinae conferunt.</blockquote>
+
+<pre>
+Nam haec ipsa mihi erunt in promptu, quae modo audivi, nec ante aggrediar, quam te ab istis, quos dicis, instructum videro. Hoc positum in Phaedro a Platone probavit Epicurus sensitque in omni disputatione id fieri oportere. </pre>
+
+<h3>Si longus, levis dictata sunt.</h3>
+
+<p><a href=""http://loripsum.net/"" target=""_blank"">Duo Reges: constructio interrete.</a> An haec ab eo non dicuntur? Certe, nisi voluptatem tanti aestimaretis. Iam in altera philosophiae parte.</p>
+
+<ol>
+	<li>Qualem igitur hominem natura inchoavit?</li>
+	<li>Quasi ego id curem, quid ille aiat aut neget.</li>
+	<li>Quid vero?</li>
+	<li>Id enim volumus, id contendimus, ut officii fructus sit ipsum officium.</li>
+</ol>
+
+<p><a href=""http://loripsum.net/"" target=""_blank"">Ita prorsus, inquam;</a> Qua tu etiam inprudens utebare non numquam. Haec dicuntur inconstantissime. An eiusdem modi? <b>Poterat autem inpune;</b></p>
+
+<dl>
+	<dt><dfn>Recte, inquit, intellegis.</dfn></dt>
+	<dd>Ut necesse sit omnium rerum, quae natura vigeant, similem esse finem, non eundem.</dd>
+	<dt><dfn>Quis enim redargueret?</dfn></dt>
+	<dd>Neque enim civitas in seditione beata esse potest nec in discordia dominorum domus;</dd>
+	<dt><dfn>Ergo, inquit, tibi Q.</dfn></dt>
+	<dd>Comprehensum, quod cognitum non habet?</dd>
+	<dt><dfn>Pollicetur certe.</dfn></dt>
+	<dd>Sic enim censent, oportunitatis esse beate vivere.</dd>
+	<dt><dfn>Numquam facies.</dfn></dt>
+	<dd>Octavio fuit, cum illam severitatem in eo filio adhibuit, quem in adoptionem D.</dd>
+</dl>
+
+<h3>Ergo hoc quidem apparet, nos ad agendum esse natos.</h3>
+
+<p>Iubet igitur nos Pythius Apollo noscere nosmet ipsos. An haec ab eo non dicuntur? Quae quo sunt excelsiores, eo dant clariora indicia naturae. <a href=""http://loripsum.net/"" target=""_blank"">Sed quid sentiat, non videtis.</a> <a href=""http://loripsum.net/"" target=""_blank"">Cyrenaici quidem non recusant;</a> Iam in altera philosophiae parte.</p>
+
+<h4>Nonne videmus quanta perturbatio rerum omnium consequatur, quanta confusio?</h4>
+
+<p>Quod ea non occurrentia fingunt, vincunt Aristonem; Hoc Hieronymus summum bonum esse dixit. Videsne quam sit magna dissensio? Sed plane dicit quod intellegit. Tecum optime, deinde etiam cum mediocri amico. <b>De illis, cum volemus.</b></p>
+",left,"Egone quaeris, inquit, quid sentiam?"
+a1b7a01f-b020-45f6-874b-33bcda921d0e,"Story text block",0,Button***internal:/,"Ut necesse sit omnium rerum, quae natura vigeant, similem esse finem, non eundem.
+",full_html,"<p>Nonne videmus quanta perturbatio rerum omnium consequatur, quanta confusio?<br />
+Quod ea non occurrentia fingunt, vincunt Aristonem; Hoc Hieronymus summum bonum esse dixit. Videsne quam sit magna dissensio? Sed plane dicit quod intellegit. Tecum optime, deinde etiam cum mediocri amico. De illis, cum volemus.</p>
+",left,"Egone quaeris, inquit, quid sentiam?"
+4bff91cb-8798-4486-84e8-6455d88e8c55,"Text Block",0,"Button***internal:/|Another button***internal:/",,full_html,"<p>Cursus euismod quis viverra nibh cras pulvinar mattis. Urna duis convallis convallis tellus id. Non quam lacus suspendisse faucibus. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Ultrices eros in cursus turpis massa. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor.</p>
+
+<p>Consectetur purus ut faucibus pulvinar elementum. Diam in arcu cursus euismod quis viverra nibh. Nisi vitae suscipit tellus mauris a diam. Est lorem ipsum dolor sit amet consectetur adipiscing elit. Aliquam id diam maecenas ultricies. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin.</p>
+",,
+555a0ca6-dd5a-4bde-a835-6245b2b4156f,"Text content block 3",0,,,full_html,"<p>Sem fringilla ut morbi tincidunt augue interdum velit euismod. Nisi vitae suscipit tellus mauris a diam maecenas sed. Turpis egestas pretium aenean pharetra magna. Nisl vel pretium lectus quam id leo in vitae. Placerat vestibulum lectus mauris ultrices.</p>
+",left,"Nunc scelerisque viverra mauris in aliquam."
+d9a22a25-25cb-4b62-b5ae-1f9a82cb8af3,"Text before USP",0,,,full_html,"<div>
+<p>Cursus euismod quis viverra nibh cras pulvinar mattis. Urna duis convallis convallis tellus id. Non quam lacus suspendisse faucibus. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Ultrices eros in cursus turpis massa. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor.</p>
+</div>
+",centered,"Text block before USPs"
+043e2863-99fc-410e-b558-00028db337e3,"Carousel Intro Text",0,,,full_html,"<div class=""text-align-center"">
+<p>Sextilio Rufo, cum is rem ad amicos ita deferret, se esse heredem Q. Qui autem esse poteris, nisi te amor ipse ceperit? Si quidem, inquit, tollerem, sed relinquo.&nbsp;<b>Occultum facinus esse potuerit, gaudebit;</b></p>
+</div>
+",centered,"Carousel with logos"

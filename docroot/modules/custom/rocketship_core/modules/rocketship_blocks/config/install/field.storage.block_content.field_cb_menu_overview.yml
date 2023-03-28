@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - menu_clickthrough
+id: block_content.field_cb_menu_overview
+field_name: field_cb_menu_overview
+entity_type: block_content
+type: clickthrough_field_type
+settings: {  }
+module: menu_clickthrough
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_themes_installed().
+ *
+ * Disable some blocks when one of our themes gets installed and this module
+ * is already active at the time.
+ */
+function rocketship_page_themes_installed($theme_list) {
+  /** @var \Drupal\Core\Extension\ThemeHandlerInterface $handler */
+  $handler = Drupal::service('theme_handler');
+
+  foreach ($theme_list as $theme) {
+    $info = $handler->getTheme($theme);
+    if (isset($info->info['package']) && $info->info['package'] == 'Rocketship Theme') {
+      \Rocketship::hideBreadcrumbAndTitleBlockOnContentType($theme, 'page');
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Make sure we go after block_themes_installed.
+ */
+function rocketship_page_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'themes_installed') {
+    $group = $implementations['rocketship_page'];
+    unset($implementations['rocketship_page']);
+    $implementations['rocketship_page'] = $group;
+  }
+}

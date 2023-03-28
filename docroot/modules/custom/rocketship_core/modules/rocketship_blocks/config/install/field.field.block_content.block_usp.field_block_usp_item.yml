@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.block_usp
+    - field.storage.block_content.field_block_usp_item
+  module:
+    - rocketship_core
+id: block_content.block_usp.field_block_usp_item
+field_name: field_block_usp_item
+entity_type: block_content
+bundle: block_usp
+label: 'USP Item'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: title_description_field

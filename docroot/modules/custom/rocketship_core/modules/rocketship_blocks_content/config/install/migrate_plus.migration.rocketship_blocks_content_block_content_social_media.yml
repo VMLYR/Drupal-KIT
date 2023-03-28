@@ -1,0 +1,63 @@
+id: rocketship_blocks_content_block_content_social_media
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_block_content_social_media.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: get
+      source: langcode
+  info:
+    -
+      plugin: get
+      source: info
+  reusable:
+    -
+      plugin: get
+      source: reusable
+  field_social_link_facebook/title:
+    -
+      plugin: get
+      source: field_social_link_facebook_title
+  field_social_link_facebook/uri:
+    -
+      plugin: get
+      source: field_social_link_facebook_uri
+  field_social_link_instagram/title:
+    -
+      plugin: get
+      source: field_social_link_instagram_title
+  field_social_link_instagram/uri:
+    -
+      plugin: get
+      source: field_social_link_instagram_uri
+  field_social_link_linkedin/title:
+    -
+      plugin: get
+      source: field_social_link_linkedin_title
+  field_social_link_linkedin/uri:
+    -
+      plugin: get
+      source: field_social_link_linkedin_uri
+  field_social_link_twitter/title:
+    -
+      plugin: get
+      source: field_social_link_twitter_title
+  field_social_link_twitter/uri:
+    -
+      plugin: get
+      source: field_social_link_twitter_uri
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: social_media
+migration_dependencies:
+  required: {  }
+  optional: {  }

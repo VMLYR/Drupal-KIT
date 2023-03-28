@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_menu_overview
+    - field.storage.block_content.field_cb_menu_overview
+  module:
+    - menu_clickthrough
+id: block_content.cb_menu_overview.field_cb_menu_overview
+field_name: field_cb_menu_overview
+entity_type: block_content
+bundle: cb_menu_overview
+label: 'Menu overview'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: clickthrough_field_type

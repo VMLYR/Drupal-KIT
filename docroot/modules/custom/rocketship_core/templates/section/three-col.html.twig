@@ -1,0 +1,362 @@
+{% set minimal_styling = settings.minimal_styling ?? false %}
+{% set modifier = modifier ?? false %}
+{% if (attributes['data-bem-modifier']|trim is not empty) %}
+  {% set modifier = attributes['data-bem-modifier']|clean_class %}
+{% endif %}
+{% set label = settings.label ?? false %}
+{% if label %}
+  {% set label = settings.label|clean_class %}
+{% endif %}
+{% set template = layout.template ?? false %}
+{% if template %}
+  {% set template = layout.template|clean_class %}
+{% endif %}
+
+{# Variant options #}
+{% set background_stretched = settings.backgrounds_full|default(true) %}
+{% set background_color = false %}
+{% if settings.background_color and settings.background_color != '_none' %}
+  {% set background_color = settings.background_color|split('/')[0] %}
+{% else %}
+  {% set background_color = false %}
+{% endif %}
+{% set background_image = false %}
+{% if content.layout_background_image %}
+  {% set background_image = true %}
+{% endif %}
+{% set section_spacing_top = settings.top_layout_spacing ?? 1 %}
+{% set section_spacing_bottom = settings.bottom_layout_spacing ?? 1 %}
+{# change padding on all the cols #}
+{% set col_spacing = settings.col_spacing|default('1x') %}
+{# change padding on a specific col #}
+{% set col_spacing_override = settings.col_spacing_override|default('1x') %}
+{# the specific col to override #}
+{% set col_spacing_override_column = settings.col_spacing_override_column|default(NULL) %}
+{# column sizing #}
+{% set left_col_size_suffix = settings.left_col_size_suffix|default(false) %}
+{% set right_col_size_suffix = settings.right_col_size_suffix|default(false) %}
+{# vertical alignment of cols #}
+{% set valign = settings.vertical_alignment|default('top')|clean_class %}
+
+{% set classMain = 'center' %}
+{% set classAsideLeft = 'left' %}
+{% set classAsideRight = 'right' %}
+
+{# Classes on layout wrapper #}
+
+{% set classes = [
+    'layout',
+    'layout-section',
+    'layout--3-col',
+    label ? 'layout' ~ '--label-' ~ label|clean_class,
+    modifier ? 'layout' ~ '--' ~ modifier,
+] %}
+
+{% if minimal_styling %}
+  {% set classes = classes|merge([
+    template ? 'layout' ~ '--' ~ template,
+  ]) %}
+{% else %}
+  {% set classes = classes|merge([
+    'layout' ~ '--' ~ 'content-blocks',
+    'layout--3-col--content-blocks',
+    section_spacing_top ? 'layout' ~ '--' ~ 'v-space-top-'  ~ section_spacing_top,
+    section_spacing_bottom ? 'layout' ~ '--' ~ 'v-space-bottom-' ~ section_spacing_bottom,
+    background_stretched ? 'layout--bg-stretched',
+    background_color or background_image ? 'layout--bg',
+    background_image ? 'layout--bg-image',
+    background_color ? 'layout--bg-color',
+    background_color ? 'layout--bg--' ~ background_color,
+  ]) %}
+{% endif %}
+
+{# Classes on cols wrapper #}
+
+{% set colclasses = [
+    'layout__cols',
+    'layout__cols--3-col',
+    modifier ? 'layout__cols' ~ '--mod-' ~ modifier,
+] %}
+
+{% if minimal_styling == false %}
+  {% set colclasses = colclasses|merge([
+    'layout__cols' ~ '--content-blocks',
+    'layout__cols' ~ '--3-col' ~ '--content-blocks',
+    valign ? 'layout__cols' ~ '--v-align-'  ~ valign,
+    col_spacing ? 'layout__cols--col-spacing' ~ '-' ~ col_spacing,
+    valign ? 'layout__cols' ~ '--v-align-'  ~ valign,
+  ]) %}
+{% endif %}
+
+{# Classes on region wrappers (cols) #}
+
+{% set regionclasses = [
+    'layout-builder__region',
+    'layout__region',
+    'layout__region' ~ '--3-col',
+    modifier ? 'layout__region' ~ '--mod-' ~ modifier,
+] %}
+
+{% set sidebarclasses = [
+    'layout-builder__region',
+    'layout__region',
+    'layout__sidebar',
+    'layout__region' ~ '--3-col',
+    'layout__sidebar' ~ '--3-col',
+    'layout__col',
+    'layout__col' ~ '--3-col',
+    modifier ? 'layout__region' ~ '--mod-' ~ modifier,
+    modifier ? 'layout__sidebar' ~ '--mod-' ~ modifier,
+] %}
+
+{% if minimal_styling == false %}
+  {% set sidebarclasses = sidebarclasses|merge([
+    'layout__region' ~ '--content-blocks',
+    'layout__region' ~ '--3-col' ~ '--content-blocks',
+    'layout__col' ~ '--content-blocks',
+    'layout__col' ~ '--3-col' ~ '--content-blocks',
+    'layout__sidebar' ~ '--3-col' ~ '--content-blocks',
+    'layout__sidebar' ~ '--3-col' ~ '--content-blocks' ~ '--' ~ classAside,
+  ]) %}
+{% endif %}
+
+{% set firstclasses = sidebarclasses|merge([
+    'layout__sidebar' ~ '--3-col' ~ '--' ~ classAsideLeft,
+    modifier ? 'layout__sidebar' ~ '--3-col' ~ '--' ~ classAsideLeft ~ '--mod-' ~ modifier,
+]) %}
+{% set secondclasses = sidebarclasses|merge([
+    'layout__sidebar' ~ '--3-col' ~ '--' ~ classAsideRight,
+    modifier ? 'layout__sidebar' ~ '--3-col' ~ '--' ~ classAsideRight ~ '--mod-' ~ modifier,
+]) %}
+
+{% if minimal_styling == false %}
+  {% set firstclasses = firstclasses|merge(['layout__sidebar' ~ '--3-col' ~ '--content-blocks' ~ '--' ~ classAsideLeft]) %}
+  {% set secondclasses = secondclasses|merge(['layout__sidebar' ~ '--3-col' ~ '--content-blocks' ~ '--' ~ classAsideRight]) %}
+
+  {# extra col spacing (or reset) on first or last #}
+  {% if col_spacing %}
+    {# for all #}
+    {% set firstclasses = firstclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing]) %}
+    {% set secondclasses = secondclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing]) %}
+  {% endif %}
+  {# for individual col #}
+  {% if col_spacing_override and col_spacing_override_column %}
+    {% if col_spacing_override_column == '1' %}
+      {% set firstclasses = firstclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing]) %}
+    {% endif %}
+    {% if col_spacing_override_column == '3' %}
+      {% set secondclasses = secondclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing]) %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% set firstclasses = firstclasses|merge(sidebarclasses) %}
+{% set secondclasses = secondclasses|merge(sidebarclasses) %}
+
+{# center #}
+
+{% set centerclasses = [
+    'layout-builder__region',
+    'layout__region',
+    'layout__content',
+    'layout__region' ~ '--3-col',
+    'layout__content' ~ '--3-col',
+    'layout__content' ~ '--3-col' ~ '--' ~ classMain,
+    'layout__col',
+    'layout__col' ~ '--3-col',
+    modifier ? 'layout__region' ~ '--mod-' ~ modifier,
+    modifier ? 'layout__content' ~ '--mod-' ~ modifier,
+] %}
+
+{% if minimal_styling == false %}
+  {% set centerclasses = centerclasses|merge([
+    'layout__region' ~ '--content-blocks',
+    'layout__region' ~ '--3-col' ~ '--content-blocks',
+    'layout__col' ~ '--content-blocks',
+    'layout__col' ~ '--3-col' ~ '--content-blocks',
+    'layout__content' ~ '--3-col' ~ '--content-blocks',
+    'layout__content' ~ '--3-col' ~ '--content-blocks' ~ '--' ~ classMain
+  ]) %}
+
+  {# extra col spacing (or reset) on center #}
+  {% if col_spacing %}
+    {# for all #}
+    {% set centerclasses = centerclasses|merge(['layout__region' ~ '--col-spacing-center-'  ~ col_spacing]) %}
+  {% endif %}
+  {# for individual col #}
+  {% if col_spacing_override and col_spacing_override_column %}
+    {% if col_spacing_override_column == 2 %}
+      {% set centerclasses = centerclasses|merge(['layout__region' ~ '--col-spacing-center-'  ~ col_spacing_override]) %}
+    {% endif %}
+  {% endif %}
+
+{% endif %}
+
+{% set cols_attributes = create_attribute() %}
+{% set first_attributes = create_attribute() %}
+{% set center_attributes = create_attribute() %}
+{% set second_attributes = create_attribute() %}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {% set top_classes = [
+    'layout__top',
+    'layout__top' ~ '--3-col',
+    modifier ?  'layout__top' ~ '--mod-' ~ modifier,
+  ] %}
+  {% set top_classes = top_classes|merge(regionclasses) %}
+  {% if content.top %}
+    <div {{ region_attributes.top.addClass(top_classes) }}>
+      {{ content.top }}
+    </div>
+  {% endif %}
+
+  <div{{ cols_attributes.addClass(colclasses) }}>
+
+    <div {{ first_attributes.addClass(firstclasses) }}>
+        {% if content.first_top %}
+          {% set top_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--top',
+              'layout__sidebar__row--top--primary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--top' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.first_top.addClass(top_classes) }}>
+            {{ content.first_top }}
+          </div>
+        {% endif %}
+        {% if content.first_main %}
+          {% set main_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--main',
+              'layout__sidebar__row--main--primary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--main' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.first_main.addClass(main_classes) }}>
+            {{ content.first_main }}
+          </div>
+        {% endif %}
+        {% if content.first_bottom %}
+          {% set bottom_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--bottom',
+              'layout__sidebar__row--bottom--primary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--bottom' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.first_bottom.addClass(bottom_classes) }}>
+            {{ content.first_bottom }}
+          </div>
+        {% endif %}
+    </div>
+
+    <div {{ center_attributes.addClass(centerclasses) }}>
+        {% if content.center_top %}
+          {% set top_classes = [
+              'layout__content__row',
+              'layout__content__row--top',
+              modifier ? 'layout__content__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__content__row--top' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.center_top.addClass(top_classes) }}>
+            {{ content.center_top }}
+          </div>
+        {% endif %}
+        {% if content.center_main %}
+          {% set main_classes = [
+              'layout__content__row',
+              'layout__content__row--main',
+              modifier ? 'layout__content__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__content__row--main' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.center_main.addClass(main_classes) }}>
+            {{ content.center_main }}
+          </div>
+        {% endif %}
+        {% if content.center_bottom %}
+          {% set bottom_classes = [
+              'layout__content__row',
+              'layout__content__row--bottom',
+              modifier ? 'layout__content__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__content__row--bottom' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.center_bottom.addClass(bottom_classes) }}>
+            {{ content.center_bottom }}
+          </div>
+        {% endif %}
+    </div>
+
+    <div {{ second_attributes.addClass(secondclasses) }}>
+        {% if content.second_top %}
+          {% set top_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--top',
+              'layout__sidebar__row--secondary',
+              'layout__sidebar__row--top--secondary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--top' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.second_top.addClass(top_classes) }}>
+            {{ content.second_top }}
+          </div>
+        {% endif %}
+        {% if content.second_main %}
+          {% set main_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--secondary',
+              'layout__sidebar__row--main',
+              'layout__sidebar__row--main--secondary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--main' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.second_main.addClass(main_classes) }}>
+            {{ content.second_main }}
+          </div>
+        {% endif %}
+        {% if content.second_bottom %}
+          {% set bottom_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--secondary',
+              'layout__sidebar__row--bottom',
+              'layout__sidebar__row--bottom--secondary',
+              modifier ? 'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              modifier ? 'layout__sidebar__row--bottom' ~ '--mod-' ~ modifier,
+            ]
+          %}
+          <div {{ region_attributes.second_bottom.addClass(bottom_classes) }}>
+            {{ content.second_bottom }}
+          </div>
+        {% endif %}
+    </div>
+
+  </div>
+
+  {% set bottom_classes = [
+    'layout__bottom',
+    'layout__bottom' ~ '--3-col',
+    modifier ?  'layout__bottom' ~ '--mod-' ~ modifier,
+  ] %}
+  {% set bottom_classes = bottom_classes|merge(regionclasses) %}
+  {% if content.bottom %}
+    <div {{ region_attributes.bottom.addClass(bottom_classes) }}>
+      {{ content.bottom }}
+    </div>
+  {% endif %}
+
+  {% if content.layout_background_image %}
+    {{ content.layout_background_image }}
+  {% endif %}
+</div>

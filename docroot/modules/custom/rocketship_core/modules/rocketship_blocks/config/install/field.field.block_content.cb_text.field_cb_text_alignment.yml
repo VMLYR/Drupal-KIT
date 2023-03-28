@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_text
+    - field.storage.block_content.field_cb_text_alignment
+  module:
+    - options
+id: block_content.cb_text.field_cb_text_alignment
+field_name: field_cb_text_alignment
+entity_type: block_content
+bundle: cb_text
+label: 'Text alignment'
+description: 'By default, all fields in this block are aligned to the left. You can change this using this option. <br />Alignment can be overridden for individual pieces of text in the "Text" field by using the text-alignment buttons in that editor, if those buttons are available.'
+required: false
+translatable: true
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

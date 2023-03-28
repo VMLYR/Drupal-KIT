@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.3_4_aspect_ratio
+label: '3:4 aspect ratio'
+targetEntityType: block_content
+cache: true

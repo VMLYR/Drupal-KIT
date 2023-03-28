@@ -1,0 +1,38 @@
+# If you need more breakpoints,
+# refer to the base theme breakpoints yml file
+# for the right names & sizes
+rocketship_core.all:
+  label: all
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+rocketship_core.xs-wide:
+  label: xs-wide
+  mediaQuery: 'all and (min-width: 480px)'
+  weight: 1
+  multipliers:
+    - 1x
+    - 2x
+rocketship_core.sm:
+  label: sm
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+rocketship_core.md:
+  label: md
+  mediaQuery: 'all and (min-width: 940px)'
+  weight: 3
+  multipliers:
+    - 1x
+    - 2x
+rocketship_core.lg:
+  label: lg
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 4
+  multipliers:
+    - 1x
+    - 2x

@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_video
+    - field.field.block_content.cb_video.field_cb_media
+    - field.field.block_content.cb_video.field_cb_media_layout
+id: block_content.cb_video.default
+targetEntityType: block_content
+bundle: cb_video
+mode: default
+content:
+  field_cb_media:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: video
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_cb_media_layout: true
+  langcode: true
+  search_api_excerpt: true

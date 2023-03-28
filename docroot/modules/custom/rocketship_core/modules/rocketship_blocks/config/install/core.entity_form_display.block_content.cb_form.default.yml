@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_form
+    - field.field.block_content.cb_form.field_cb_webform
+  module:
+    - webform
+id: block_content.cb_form.default
+targetEntityType: block_content
+bundle: cb_form
+mode: default
+content:
+  field_cb_webform:
+    weight: 1
+    settings:
+      default_data: true
+      webforms: {  }
+    third_party_settings: {  }
+    type: webform_entity_reference_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  translation: true

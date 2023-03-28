@@ -1,0 +1,31 @@
+entity.social_share_link.overview:
+  path: '/admin/config/services/social-share'
+  defaults:
+    _entity_list: 'social_share_link'
+    _title: 'Social Share links'
+  requirements:
+    _permission: 'configure rocketship social widgets settings'
+
+entity.social_share_link.add_form:
+  path: '/admin/config/services/social-share/add'
+  defaults:
+    _entity_form: 'social_share_link.add'
+    _title: 'Add Social Share link'
+  requirements:
+    _permission: 'configure rocketship social widgets settings'
+
+entity.social_share_link.edit_form:
+  path: '/admin/config/services/social-share/{social_share_link}'
+  defaults:
+    _entity_form: 'social_share_link.edit'
+    _title: 'Edit Social Share link'
+  requirements:
+    _permission: 'configure rocketship social widgets settings'
+
+entity.social_share_link.delete_form:
+  path: '/admin/config/services/social-share/{social_share_link}/delete'
+  defaults:
+    _entity_form: 'social_share_link.delete'
+    _title: 'Delete Social Share link'
+  requirements:
+    _permission: 'configure rocketship social widgets settings'

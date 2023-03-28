@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_xs_wide
+label: '1:1 square xs wide [480×480]'
+effects:
+  e82e2e75-b784-4946-948a-ef9ba30ccc07:
+    uuid: e82e2e75-b784-4946-948a-ef9ba30ccc07
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 480
+      crop_type: focal_point

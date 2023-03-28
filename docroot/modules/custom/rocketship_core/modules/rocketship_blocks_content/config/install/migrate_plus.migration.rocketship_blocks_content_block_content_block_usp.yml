@@ -1,0 +1,44 @@
+id: rocketship_blocks_content_block_content_block_usp
+migration_group: rocketship_blocks_content_group
+source:
+  plugin: csv
+  path: /assets/csv/rocketship_blocks_content_block_content_block_usp.csv
+  header_offset: 0
+  ids:
+    - uuid
+process:
+  uuid:
+    -
+      plugin: get
+      source: uuid
+  langcode:
+    -
+      plugin: get
+      source: langcode
+  info:
+    -
+      plugin: get
+      source: info
+  reusable:
+    -
+      plugin: get
+      source: reusable
+  field_block_usp_item:
+    -
+      plugin: explode
+      source: field_block_usp_item
+      delimiter: '|'
+    -
+      plugin: explode
+      delimiter: '***'
+    -
+      plugin: sub_process
+      process:
+        description: '0'
+        title: '1'
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: block_usp
+migration_dependencies:
+  required: {  }
+  optional: {  }

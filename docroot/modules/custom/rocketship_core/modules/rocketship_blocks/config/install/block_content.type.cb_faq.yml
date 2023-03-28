@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cb_faq
+label: FAQ
+revision: 0
+description: 'Create a list of frequently asked questions and answers on a specific page, with a classic FAQ-styling.'
+third_party_settings:
+  rocketship_blocks:
+    icon_path: /modules/contrib/rocketship_core/modules/rocketship_blocks/assets/images/cb_faq.svg

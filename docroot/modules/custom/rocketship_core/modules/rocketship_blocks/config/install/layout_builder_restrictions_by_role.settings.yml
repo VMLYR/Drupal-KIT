@@ -1,0 +1,139 @@
+__blocks:
+  administrator: {  }
+  webadmin:
+    'Chaos Tools':
+      restriction_type: whitelisted
+    'Content fields':
+      restriction_type: whitelisted
+    'Custom block types':
+      restriction_type: whitelisted
+      restrictions:
+        cb_faq: '1'
+        cb_focus: '1'
+        cb_form: '1'
+        cb_image: '1'
+        cb_menu_overview: '1'
+        cb_photo_gallery: '1'
+        cb_related_items: '1'
+        cb_testimonial: '1'
+        cb_text: '1'
+        cb_usp: '1'
+        cb_video: '1'
+    Devel:
+      restriction_type: whitelisted
+    'Devel PHP':
+      restriction_type: whitelisted
+    Forms:
+      restriction_type: whitelisted
+    'Inline blocks':
+      restriction_type: whitelisted
+      restrictions:
+        'inline_block:cb_usp': '1'
+        'inline_block:cb_faq': '1'
+        'inline_block:cb_focus': '1'
+        'inline_block:cb_form': '1'
+        'inline_block:cb_image': '1'
+        'inline_block:cb_menu_overview': '1'
+        'inline_block:cb_photo_gallery': '1'
+        'inline_block:cb_related_items': '1'
+        'inline_block:cb_testimonial': '1'
+        'inline_block:cb_text': '1'
+        'inline_block:cb_video': '1'
+    'Lists (Views)':
+      restriction_type: whitelisted
+    Menus:
+      restriction_type: whitelisted
+    'Rocketship Blocks':
+      restriction_type: whitelisted
+    'Rocketship Filters':
+      restriction_type: whitelisted
+    'Rocketship paragraphs':
+      restriction_type: whitelisted
+    System:
+      restriction_type: whitelisted
+    User:
+      restriction_type: whitelisted
+    Webform:
+      restriction_type: whitelisted
+    core:
+      restriction_type: whitelisted
+layout_restriction: restricted
+allowed_layouts:
+  layout_onecol:
+    administrator: administrator
+    webadmin: '0'
+  layout_twocol_section:
+    administrator: administrator
+    webadmin: '0'
+  layout_threecol_section:
+    administrator: administrator
+    webadmin: '0'
+  layout_fourcol_section:
+    administrator: administrator
+    webadmin: '0'
+  rs_one_col:
+    webadmin: webadmin
+    administrator: administrator
+  rs_two_col:
+    webadmin: webadmin
+    administrator: administrator
+  rs_three_col:
+    webadmin: webadmin
+    administrator: administrator
+  rs_three_col_dynamic:
+    webadmin: '0'
+    administrator: administrator
+  rs_four_col:
+    webadmin: webadmin
+    administrator: administrator
+  rs_carousel:
+    webadmin: webadmin
+    administrator: administrator
+  rocketship_layout_example:
+    webadmin: '0'
+    administrator: '0'
+__layouts:
+  layout_onecol:
+    administrator: {  }
+  rs_one_col:
+    administrator: {  }
+  rs_three_col:
+    webadmin:
+      'Custom block types':
+        restriction_type: whitelisted
+        restrictions:
+          cb_usp: '1'
+      'Inline blocks':
+        restriction_type: whitelisted
+        restrictions:
+          'inline_block:cb_usp': '1'
+  rs_four_col:
+    webadmin:
+      'Custom block types':
+        restriction_type: whitelisted
+        restrictions:
+          cb_usp: '1'
+      'Inline blocks':
+        restriction_type: whitelisted
+        restrictions:
+          'inline_block:cb_usp': '1'
+  rs_three_col_dynamic:
+    webadmin:
+      'Custom block types':
+        restriction_type: whitelisted
+        restrictions:
+          cb_usp: '1'
+      'Inline blocks':
+        restriction_type: whitelisted
+        restrictions:
+          'inline_block:cb_usp': '1'
+  rs_carousel:
+    webadmin:
+      'Custom block types':
+        restriction_type: whitelisted
+        restrictions:
+          cb_image: '1'
+      'Inline blocks':
+        restriction_type: whitelisted
+        restrictions:
+          'inline_block:cb_image': '1'

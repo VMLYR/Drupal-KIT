@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.field_description
+    - field.field.node.page.field_media_canonical_image
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_page_display_canonical
+    - field.field.node.page.layout_builder__layout
+    - field.field.node.page.layout_builder__translation
+    - node.type.page
+  module:
+    - manage_display
+    - rocketship_core
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  field_page_display_canonical:
+    weight: 1
+    label: above
+    settings:
+      link: ''
+      link_text: 'Back to overview'
+      link_class: ''
+      query_string: ''
+    third_party_settings: {  }
+    type: rs_configurable_link
+    region: content
+  title:
+    label: hidden
+    type: title
+    weight: -50
+    region: content
+    settings:
+      tag: h2
+      linked: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_description: true
+  field_media_canonical_image: true
+  field_meta_tags: true
+  langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
+  links: true
+  rocketship_social_widgets: true
+  search_api_excerpt: true
+  uid: true

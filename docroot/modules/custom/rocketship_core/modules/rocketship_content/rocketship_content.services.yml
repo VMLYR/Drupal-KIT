@@ -1,0 +1,6 @@
+services:
+  rocketship_content.subscriber:
+    class: Drupal\rocketship_content\EventSubscriber\RocketshipCoreDemoContentSubscriber
+    arguments: ['@config.factory']
+    tags:
+      - { name: event_subscriber }

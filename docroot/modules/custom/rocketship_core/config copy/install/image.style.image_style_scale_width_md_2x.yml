@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_md_2x
+label: 'Scale width md [1024] 2x'
+effects:
+  240c4367-a7f2-457a-9479-3dff634cadc9:
+    uuid: 240c4367-a7f2-457a-9479-3dff634cadc9
+    id: image_scale
+    weight: 1
+    data:
+      width: 2048
+      height: null
+      upscale: false

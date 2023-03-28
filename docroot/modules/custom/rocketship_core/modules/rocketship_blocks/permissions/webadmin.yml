@@ -1,0 +1,4 @@
+permissions:
+  - 'update any content block content'
+  - 'view section library templates'
+  - 'import template from section library'

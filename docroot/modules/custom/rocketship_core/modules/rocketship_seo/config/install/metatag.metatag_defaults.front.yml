@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: front
+label: 'Front page'
+tags:
+  shortlink: '[site:url]'
+  title: '[site:name]'
+  canonical_url: '[site:url]'
+  og_url: '[site:url]'
+  og_title: '[site:name]'
+  twitter_cards_page_url: '[site:url]'
+  twitter_cards_title: '[site:name]'

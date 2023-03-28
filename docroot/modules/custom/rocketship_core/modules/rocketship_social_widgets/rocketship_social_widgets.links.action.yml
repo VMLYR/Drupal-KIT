@@ -1,0 +1,5 @@
+entity.social_share_link.add_form:
+  route_name: entity.social_share_link.add_form
+  title: 'Add a new Social sharing link'
+  appears_on:
+    - entity.social_share_link.overview

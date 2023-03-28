@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_photo_gallery
+    - field.storage.block_content.field_cb_teaser
+id: block_content.cb_photo_gallery.field_cb_teaser
+field_name: field_cb_teaser
+entity_type: block_content
+bundle: cb_photo_gallery
+label: Teaser
+description: 'Display a short descriptive text, as an intro.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

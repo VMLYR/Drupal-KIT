@@ -1,0 +1,937 @@
+<?php
+
+/**
+ * @file
+ * Main module file.
+ */
+
+use Drupal\Core\Link;
+// Use Drupal\Core\Url;.
+use Drupal\Core\Form\FormState;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
+
+/**
+ * Build a link.
+ *
+ * @param string $text
+ *   Text displayed in the link.
+ * @param string $uri
+ *   Url used in the link.
+ *
+ * @return string
+ *   The renderable array.
+ */
+function rocketship_styleguide_build_link($text, $uri) {
+  $url = Url::fromUserInput($uri);
+  $link = Link::fromTextAndUrl($text, $url);
+  return $link->toRenderable();
+}
+
+/**
+ * Display a standard link and a word with emphasis. Theme an image.
+ */
+function rocketship_styleguide_styleguide_alter(&$items) {
+
+  $generator = \Drupal::service('styleguide.generator');
+  $requestStack = \Drupal::service('request_stack');
+  $linkTree = \Drupal::service('menu.link_tree');
+  $formBuilder = \Drupal::service('form_builder');
+  $breadcrumbManager = \Drupal::service('breadcrumb');
+  $currentRouteMatch = \Drupal::service('current_route_match');
+  $blockManager = \Drupal::service('plugin.manager.block');
+  $themeManager = \Drupal::service('styleguide.generator');
+  $moduleHandler = \Drupal::service('module_handler');
+
+  // ** Rebuild the styleguide page sections & sections order.
+  $items = [];
+
+  $current_url = $requestStack->getCurrentRequest()->getRequestUri();
+
+  $items['b'] = [
+    'title' => t('Bold'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <b>{{ bold }}</b> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'bold' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['del'] = [
+    'title' => t('Delete'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <del>{{ del }}</del> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'del' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['em'] = [
+    'title' => t('Emphasis'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <em>{{ em }}</em> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'em' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+
+  $items['hr'] = [
+    'title' => t('Horizontal rule'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '<p>{{ pre }}</p> <hr>{{ hr }}</hr> <p>{{ post }}.</p>',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'hr' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['i'] = [
+    'title' => t('Italic'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <i>{{ i }}</i> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'i' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['q'] = [
+    'title' => t('Quote'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <q>{{ q }}</q> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'q' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+
+  $items['blockquote'] = [
+    'title' => t('Blockquote'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }}<blockquote>{{ blockquote }}</blockquote>{{ post }}',
+      '#context' => [
+        'pre' => $generator->paragraphs(1),
+        'blockquote' => $generator->paragraphs(1),
+        'post' => $generator->paragraphs(1),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+
+  $items['s'] = [
+    'title' => t('Strikethrough'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <s>{{ s }}</s> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        's' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['small'] = [
+    'title' => t('Small'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <small>{{ small }}</small> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'small' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['strong'] = [
+    'title' => t('Strong'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <strong>{{ strong }}</strong> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'strong' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['sub'] = [
+    'title' => t('Subscript'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <sub>{{ sub }}</sub> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'sub' => $generator->words(1),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['sup'] = [
+    'title' => t('Superscript'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <sup>{{ sup }}</sup> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'sup' => $generator->words(1),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+  $items['u'] = [
+    'title' => t('Underline'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} <u>{{ u }}</u> {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'u' => $generator->words(3),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('00 Common'),
+  ];
+
+  $items['Text link'] = [
+    'title' => t('Link, in text'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }} {{ link }} {{ post }}.',
+      '#context' => [
+        'pre' => $generator->words(3, 'ucfirst'),
+        'link' => rocketship_styleguide_build_link($generator->words(3), '/node'),
+        'post' => $generator->words(4),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('02 Link'),
+  ];
+
+  $items['mark_new'] = [
+    'title' => t('Mark, new'),
+    'content' => [
+      [rocketship_styleguide_build_link($generator->sentence(), $current_url)],
+      [
+        '#theme' => 'mark',
+        '#type' => MARK_NEW,
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('02 Link'),
+  ];
+  $items['mark_updated'] = [
+    'title' => t('Mark, updated'),
+    'content' => [
+      [rocketship_styleguide_build_link($generator->sentence(), $current_url)],
+      [
+        '#theme' => 'mark',
+        '#type' => MARK_UPDATED,
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('02 Link'),
+  ];
+  $items['more_link'] = [
+    'title' => t('More link'),
+    'content' => [
+      [$generator->paragraphs(1)],
+      [
+        '#type' => 'more_link',
+        '#url' => Url::fromUserInput($current_url),
+      ],
+    ],
+    'group' => t('02 Link'),
+  ];
+
+  $items['more_link_big'] = [
+    'title' => t('More link big'),
+    'content' => [
+      [
+        '#type' => 'inline_template',
+        '#template' => '{{ more }}',
+        '#context' => [
+          'more' => [
+            '#type' => 'link',
+            '#title' => t('View all'),
+            '#attributes' => [
+              'class' => ['link--more-big'],
+            ],
+            '#url' => Url::fromUserInput($current_url),
+          ],
+        ],
+        '#prefix' => '<div class="">',
+        '#suffix' => '</div>',
+      ],
+    ],
+    'group' => t('02 Link'),
+  ];
+
+  $items['buttons'] = [
+    'title' => t('Buttons'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '<div class="actions">{{ button_01 }}{{ button_02 }}{{ button_03 }}{{ button_04 }}</div><div class="actions" style="padding: 20px;background-color:black">{{ button_05 }}{{ button_06 }}{{ button_07 }}{{ button_08 }}</div>',
+      '#context' => [
+        'pre' => $generator->paragraphs(1),
+        'button_01' => [
+          '#type' => 'link',
+          '#title' => t('Primary button'),
+          '#attributes' => [
+            'class' => ['button', 'button--primary'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_02' => [
+          '#type' => 'link',
+          '#title' => t('Secondary button'),
+          '#attributes' => [
+            'class' => ['button', 'button--secondary'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_03' => [
+          '#type' => 'link',
+          '#title' => t('Prim disabled button'),
+          '#attributes' => [
+            'class' => ['button', 'button--primary', 'disabled'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_04' => [
+          '#type' => 'link',
+          '#title' => t('Sec disabled button'),
+          '#attributes' => [
+            'class' => ['button', 'button--secondary', 'disabled'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_05' => [
+          '#type' => 'link',
+          '#title' => t('Negative button'),
+          '#attributes' => [
+            'class' => ['button', 'button--negative'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_06' => [
+          '#type' => 'link',
+          '#title' => t('Negative sec button'),
+          '#attributes' => [
+            'class' => ['button', 'button--negative-secondary'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_07' => [
+          '#type' => 'link',
+          '#title' => t('Negative disabled button'),
+          '#attributes' => [
+            'class' => ['button', 'button--negative', 'disabled'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_08' => [
+          '#type' => 'link',
+          '#title' => t('Negative sec disabled button'),
+          '#attributes' => [
+            'class' => ['button', 'button--negative-secondary', 'disabled'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+      ],
+      '#prefix' => '<div>',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('03 Buttons'),
+  ];
+
+  $items['buttons-cke'] = [
+    'title' => t('Buttons in CKE'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }}<p>{{ button_01 }}{{ button_02 }}</p>',
+      '#context' => [
+        'pre' => $generator->paragraphs(1),
+        'button_01' => [
+          '#type' => 'link',
+          '#title' => t('CKE button'),
+          '#attributes' => [
+            'class' => ['cke-button'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ],
+        'button_02' => [
+          '#type' => 'link',
+          '#title' => t('CKE button secondary'),
+          '#attributes' => [
+            'class' => ['cke-button--secondary'],
+          ],
+          '#url' => Url::fromUserInput($current_url),
+        ]
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('03 Buttons'),
+  ];
+
+  $items['text'] = [
+    'title' => t('Text block'),
+    'content' => [
+      [$generator->paragraphs(3)],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('01 Text'),
+  ];
+
+  $items['monospace'] = [
+    'title' => t('Monospace'),
+    'content' => $generator->lorem(1, 0, 'mixed', FALSE),
+    'group' => t('01 Text'),
+    'tag' => 'code',
+  ];
+
+  $content = [];
+  for ($i = 1; $i <= 6; $i++) {
+    $content[] = [
+      '#type' => 'inline_template',
+      '#template' => '<h{{ i }}>h{{ i }}: {{ wordList }}</h{{ i }}>',
+      '#context' => [
+        'i' => $i,
+        'wordList' => implode(' ', $generator->wordList()),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ];
+  }
+  $items['headings'] = [
+    'title' => "Headings",
+    'content' => $content,
+    'group' => t('01 Text'),
+  ];
+
+  $content = [];
+  for ($i = 1; $i <= 6; $i++) {
+    $content[] = [
+      '#type' => 'inline_template',
+      '#template' => '<h{{ i }}>h{{ i }}: {{ wordList }}</h{{ i }}>{{ paragraph }}{{ paragraph }}',
+      '#context' => [
+        'i' => $i,
+        'wordList' => implode(' ', $generator->wordList()),
+        'paragraph' => $generator->paragraphs(1),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div><p></p>',
+    ];
+  }
+  $items['headings_text'] = [
+    'title' => "Headings with text",
+    'content' => $content,
+    'group' => t('01 Text'),
+  ];
+
+  $items['table_01a'] = [
+    'title' => t('Table: no th - scroll on mobile'),
+    'content' => [
+      '#theme' => 'table',
+      '#caption' => $generator->words(3),
+      '#rows' => $generator->tableRows(),
+      '#attributes' => ['class' => ['table--scroll']],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('06 Tables'),
+  ];
+
+
+  $items['table_01b'] = [
+    'title' => t('Table: th in thead - scroll on mobile'),
+    'content' => [
+      '#theme' => 'table',
+      '#caption' => $generator->words(3),
+      '#header' => $generator->tableHeader(),
+      '#rows' => $generator->tableRows(),
+      '#attributes' => ['class' => ['table--scroll']],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('06 Tables'),
+  ];
+
+  $items['table_01c'] = [
+    'title' => t('Table: th in tbody - scroll on mobile'),
+    'content' => [
+      '#theme' => 'table',
+      '#caption' => $generator->words(3),
+      '#rows' => array(
+        // Row 1
+        array(
+          'fruit' => array(
+            'header' => TRUE,
+            'data'  => t('Apple'),
+          ),
+          'a' =>  '98 IU',
+          'b1' => '0.031 mg',
+          'b2' => '0.047 mg',
+          'c' => '1000 mg',
+        ),
+        // Row 2
+        array(
+          'fruit' => array(
+              'header' => TRUE,
+              'data'  => t('Banana'),
+          ),
+          'a'     => '76 IU',
+          'b1'    => '0.037 mg',
+          'b2'    => '0.086 mg',
+          'c' => '1000 mg',
+        ),
+        // Row 3
+        array(
+          'fruit' => array(
+              'header' => TRUE,
+              'data'  =>  t('Orange'),
+          ),
+          'a'     => '295 IU',
+          'b1'    => '0.114 mg',
+          'b2'    => '0.052 mg',
+          'c' => '1000 mg',
+        ),
+      ),
+      '#attributes' => ['class' => ['table--scroll']],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('06 Tables'),
+  ];
+
+  $items['table_01d'] = [
+    'title' => t('Table: th in thead + tbody - scroll on mobile'),
+    'content' => [
+      '#theme' => 'table',
+      '#caption' => $generator->words(3),
+      '#header' => array(
+        'fruit' => t('Fruit'),
+        'a'     => t('Vitamin A'),
+        'b1'    => t('Vitamin B1'),
+        'b2'    => t('Vitamin B2'),
+        'c'    => t('Vitamin C'),
+      ),
+      '#rows' => array(
+        // Row 1
+        array(
+          'fruit' => array(
+              'header' => TRUE,
+              'data'  => t('Apple'),
+          ),
+          'a' =>  '98 IU',
+          'b1' => '0.031 mg',
+          'b2' => '0.047 mg',
+          'c' => '1000 mg',
+        ),
+        // Row 2
+        array(
+          'fruit' => array(
+              'header' => TRUE,
+              'data'  => t('Banana'),
+          ),
+          'a'     => '76 IU',
+          'b1'    => '0.037 mg',
+          'b2'    => '0.086 mg',
+          'c' => '1000 mg',
+        ),
+        // Row 3
+        array(
+          'fruit' => array(
+              'header' => TRUE,
+              'data'  =>  t('Orange'),
+          ),
+          'a'     => '295 IU',
+          'b1'    => '0.114 mg',
+          'b2'    => '0.052 mg',
+          'c' => '1000 mg',
+        ),
+      ),
+      '#attributes' => ['class' => ['table--scroll']],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('06 Tables'),
+  ];
+
+//  $items['table_02'] = [
+//    'title' => t('Table: reformatted on mobile'),
+//    'content' => [
+//      '#theme' => 'table',
+//      '#caption' => $generator->words(3),
+//      '#header' => $generator->tableHeader(),
+//      '#rows' => $generator->tableRows(),
+//      '#attributes' => ['class' => ['table--reformatted']],
+//      '#prefix' => '<div class="text-long">',
+//      '#suffix' => '</div>',
+//    ],
+//    'group' => t('06 Tables'),
+//  ];
+
+  // Use alternative item name to avoid conflict with main breadcrumb.
+  $breadcrumb = $breadcrumbManager->build($currentRouteMatch);
+  $items['styleguide_breadcrumb'] = [
+    'title' => t('Breadcrumb'),
+    'content' => $breadcrumb->toRenderable(),
+    'group' => t('04 User interface'),
+  ];
+  $items['pager'] = [
+    'title' => t('Pager'),
+    'content' => $generator->pager(),
+    'group' => t('04 User interface'),
+  ];
+  $items['ul'] = [
+    'title' => t('Unordered list'),
+    'content' => [
+      '#theme' => 'item_list',
+      '#items' => $generator->wordList(),
+      '#list_type' => 'ul',
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('05 Lists'),
+  ];
+
+  $items['ol'] = [
+    'title' => t('Ordered list'),
+    'content' => [
+      '#theme' => 'item_list',
+      '#items' => $generator->wordList(),
+      '#list_type' => 'ol',
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('05 Lists'),
+  ];
+  $items['ul_long'] = [
+    'title' => t('Unordered list with wrapped list items'),
+    'content' => [
+      '#theme' => 'item_list',
+      '#items' => $generator->wordList(3, 120),
+      '#list_type' => 'ul',
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('05 Lists'),
+  ];
+  $items['ol_long'] = [
+    'title' => t('Ordered list with wrapped list items'),
+    'content' => [
+      '#theme' => 'item_list',
+      '#items' => $generator->wordList(3, 120),
+      '#list_type' => 'ol',
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('05 Lists'),
+  ];
+  $items['ul_links'] = [
+    'title' => t('Unordered list of links'),
+    'content' => [
+      '#theme' => 'links',
+      '#links' => $generator->ulLinks(),
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('05 Lists'),
+  ];
+  $items['ul_links_inline'] = [
+    'title' => t('Unordered inline list of links'),
+    'content' => [
+      '#theme' => 'links',
+      '#links' => $generator->ulLinks(),
+      '#attributes' => ['class' => ['inline']],
+    ],
+    'group' => t('05 Lists'),
+  ];
+  $items['image-horizontal'] = [
+    'title' => t('Image, horizontal'),
+    'content' => [
+      '#theme' => 'image',
+      '#uri' => $generator->image('horizontal'),
+      '#alt' => t('My image'),
+      '#title' => t('My image'),
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('07 Media'),
+  ];
+  $items['image-vertical'] = [
+    'title' => t('Image, vertical'),
+    'content' => [
+      '#theme' => 'image',
+      '#uri' => $generator->image('vertical'),
+      '#alt' => t('My image'),
+      '#title' => t('My image'),
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('07 Media'),
+  ];
+
+  $items['image-figure'] = [
+    'title' => t('Figure, within text'),
+    'content' => [
+      '#type' => 'inline_template',
+      '#template' => '{{ pre }}<figure class="align-center">{{ figure_center }}<figcaption>{{ figcaption }}</figcaption></figure>{{ p_01 }}<figure class="align-left">{{ figure_left }}<figcaption>{{ figcaption }}</figcaption></figure>{{ p_02 }}<figure class="align-right">{{ figure_right }}<figcaption>{{ figcaption }}</figcaption></figure>{{ post }}',
+      '#context' => [
+        'pre' => $generator->paragraphs(1),
+        'figure_left' => [
+          '#theme' => 'image',
+          '#uri' => $generator->image('horizontal'),
+          '#alt' => t('My image'),
+          '#title' => t('My image'),
+        ],
+        'p_01' => $generator->paragraphs(3),
+        'figure_center' => [
+          '#theme' => 'image',
+          '#uri' => $generator->image('horizontal'),
+          '#alt' => t('My image'),
+          '#title' => t('My image'),
+        ],
+        'p_02' => $generator->paragraphs(3),
+        'figure_right' => [
+          '#theme' => 'image',
+          '#uri' => $generator->image('horizontal'),
+          '#alt' => t('My image'),
+          '#title' => t('My image'),
+        ],
+        'post' => $generator->paragraphs(2),
+        'figcaption' => $generator->words(3),
+      ],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('07 Media'),
+  ];
+
+  $items['image-inset'] = [
+    'title' => t('Images, within text'),
+    'content' => [
+      [$generator->paragraphs(1)],
+      [
+        '#theme' => 'image',
+        '#attributes' => [
+          'class' => 'align-center',
+        ],
+        '#uri' => $generator->image('horizontal'),
+        '#alt' => t('My image'),
+        '#title' => t('My image'),
+      ],
+      [$generator->paragraphs(2)],
+      [
+        '#theme' => 'image',
+        '#uri' => $generator->image('horizontal'),
+        '#attributes' => [
+          'class' => 'align-left',
+
+        ],
+        '#width' => '500',
+        '#alt' => t('My image'),
+        '#title' => t('My image'),
+      ],
+      [$generator->paragraphs(2)],
+      [
+        '#theme' => 'image',
+        '#attributes' => [
+          'class' => 'align-right',
+        ],
+        '#uri' => $generator->image('vertical'),
+        '#alt' => t('My image'),
+        '#title' => t('My image'),
+      ],
+      [$generator->paragraphs(2)],
+      '#prefix' => '<div class="text-long">',
+      '#suffix' => '</div>',
+    ],
+    'group' => t('07 Media'),
+  ];
+
+  // Store all of the current messages, do not display them here.
+  $message_queue =  \Drupal::messenger()->all();
+  $messages = ['status', 'warning', 'error'];
+  foreach ($messages as $message) {
+    // Set a new message with a link.
+    \Drupal::messenger()
+      ->addMessage($generator->sentence('http://www.example.com'), $message);
+    $items[$message . '-message'] = [
+      'title' => ucwords($message) . ' message',
+      'content' => [
+        '#theme' => 'status_messages',
+        '#message_list' => \Drupal::messenger()->messagesByType($message),
+      ],
+      'group' => t('00 Messages'),
+    ];
+  }
+  // Loop through the original messages, resetting them.
+  foreach ($message_queue as $message_type => $messages) {
+    foreach ($messages as $message) {
+      \Drupal::messenger()->addMessage($message, $message_type);
+    }
+  }
+
+  // Form elements.
+  $form_state = new FormState();
+  $elements = $formBuilder->buildForm('Drupal\styleguide\Form\StyleguideForm', $form_state);
+  $basic = [];
+  $details = [];
+  $tabs = [];
+  $markup = [];
+  foreach (Element::children($elements) as $key) {
+    if ($key == 'vertical_tabs' && !in_array($key, $tabs)) {
+      $tabs[] = $key;
+    }
+    elseif (!isset($elements[$key]['#type']) || $elements[$key]['#type'] == 'item') {
+      $markup[] = $key;
+    }
+    elseif ($elements[$key]['#type'] == 'details') {
+      $details[] = $key;
+    }
+    // We skip these.
+    elseif (in_array($elements[$key]['#type'], [
+      'button',
+      'submit',
+      'image_button',
+    ])) {
+      $buttons[] = $key;
+    }
+    else {
+      $basic[] = $key;
+    }
+  }
+  $items['form'] = [
+    'title' => t('Forms, basic'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', $basic),
+    'group' => t('Forms'),
+  ];
+  $items['form-submit'] = [
+    'title' => t('Forms, submit'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', ['submit']),
+    'group' => t('Forms'),
+  ];
+  $items['form-button'] = [
+    'title' => t('Forms, button'),
+    'content' => [
+      $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', ['button']),
+    ],
+    'group' => t('Forms'),
+  ];
+  $items['form-button'] = [
+    'title' => t('Forms, confirm'),
+    'content' => [
+      $formBuilder->getForm('Drupal\styleguide\Form\StyleguideConfirmForm'),
+    ],
+    'group' => t('Forms'),
+  ];
+  $items['form-image-button'] = [
+    'title' => t('Forms, image button'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', ['image_button']),
+    'group' => t('Forms'),
+  ];
+  $items['form-markup'] = [
+    'title' => t('Forms, markup'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', $markup),
+    'group' => t('Forms'),
+  ];
+  $items['form-details'] = [
+    'title' => t('Forms, details'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', $details),
+    'group' => t('Forms'),
+  ];
+  $items['form-fieldset'] = [
+    'title' => t('Forms, fieldset'),
+    'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', ['fieldset']),
+    'group' => t('Forms'),
+  ];
+  // if ($moduleHandler->moduleExists('filter')) {
+    // $items['text_format'] = [
+    //   'title' => t('Text format'),
+    //   'content' => $formBuilder->getForm('Drupal\styleguide\Form\StyleguideForm', ['text_format']),
+    //   'group' => t('System'),
+    // ];
+    // $items['filter_tips'] = [
+    //   'title' => t('Filter tips, short'),
+    //   'content' => [
+    //     '#theme' => 'filter_tips',
+    //     '#tips' => _filter_tips(-1, FALSE),
+    //     '#long' => FALSE,
+    //   ],
+    //   'group' => t('System'),
+    // ];
+    // $items['filter_tips_long'] = [
+    //   'title' => t('Filter tips, long'),
+    //   'content' => [
+    //     '#theme' => 'filter_tips',
+    //     '#tips' => _filter_tips(-1, TRUE),
+    //     '#long' => TRUE,
+    //   ],
+    //   'group' => t('System'),
+    // ];
+  // }
+
+  return $items;
+
+}

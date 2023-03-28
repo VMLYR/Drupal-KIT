@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_3_landscape_xs
+label: '1:3 landscape xs [320×107]'
+effects:
+  1e46d61d-0c3a-4c44-9797-29ce2839a10f:
+    uuid: 1e46d61d-0c3a-4c44-9797-29ce2839a10f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 107
+      crop_type: focal_point

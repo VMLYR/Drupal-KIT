@@ -1,0 +1,169 @@
+#
+# Layout Builder
+################################################################################
+
+rs_one_col:
+  label: Rocketship 1-Col
+  class: '\Drupal\rocketship_core\Plugin\Layout\OneColumnWithOptionalSubregionLayout'
+  library: rocketship_core/lb
+  template: templates/section/one-col-with-optional-subsection
+  category: Rocketship Layouts
+  default_region: content
+  icon: 'images/layout-rs-1-col.svg'
+  # icon_map:
+  #   - [content]
+  regions:
+    content:
+      label: Content
+
+rs_two_col:
+  label: Rocketship 2-Col
+  class: '\Drupal\rocketship_core\Plugin\Layout\TwoColumnLayout'
+  library: rocketship_core/lb
+  template: templates/section/two-col
+  category: Rocketship Layouts
+  default_region: second_main
+  icon: 'images/layout-rs-2-col.svg'
+  # icon_map:
+  #   - [first_top, second_top]
+  regions:
+    top:
+      label: Top
+    first_top:
+      label: First Top
+    first_main:
+      label: First Main
+    first_bottom:
+      label: First Bottom
+    second_top:
+      label: Second Top
+    second_main:
+      label: Second Main
+    second_bottom:
+      label: Second Bottom
+    bottom:
+      label: Bottom
+
+rs_three_col:
+  label: Rocketship 3-Col
+  class: '\Drupal\rocketship_core\Plugin\Layout\ThreeColumnLayout'
+  library: rocketship_core/lb
+  template: templates/section/three-col
+  category: Rocketship Layouts
+  default_region: center_main
+  icon: 'images/layout-rs-3-col.svg'
+  # icon_map:
+  #   - [first_top, center_top, second_top]
+  regions:
+    top:
+      label: Top
+    first_top:
+      label: First Top
+    first_main:
+      label: First Main
+    first_bottom:
+      label: First Bottom
+    second_top:
+      label: Second Top
+    second_main:
+      label: Second Main
+    second_bottom:
+      label: Second Bottom
+    center_top:
+      label: Center Top
+    center_main:
+      label: Center Main
+    center_bottom:
+      label: Center Bottom
+    bottom:
+      label: Bottom
+
+rs_three_col_dynamic:
+  label: Rocketship 3-Col Dynamic
+  class: '\Drupal\rocketship_core\Plugin\Layout\ThreeColumnDynamicLayout'
+  library: rocketship_core/lb
+  template: templates/section/three-col-dynamic
+  category: Rocketship Layouts
+  default_region: center_main
+  icon: 'images/layout-rs-3-col.svg'
+  # icon_map:
+  #   - [first_top, center_top, second_top]
+  regions:
+    top:
+      label: Top
+    first_top:
+      label: First Top
+    first_main:
+      label: First Main
+    first_bottom:
+      label: First Bottom
+    second_top:
+      label: Second Top
+    second_main:
+      label: Second Main
+    second_bottom:
+      label: Second Bottom
+    center_top:
+      label: Center Top
+    center_main:
+      label: Center Main
+    center_bottom:
+      label: Center Bottom
+    bottom:
+      label: Bottom
+
+rs_four_col:
+  label: Rocketship 4-Col
+  class: '\Drupal\rocketship_core\Plugin\Layout\FourColumnLayout'
+  library: rocketship_core/lb
+  template: templates/section/four-col
+  category: Rocketship Layouts
+  default_region: center_main
+  icon: 'images/layout-rs-4-col.svg'
+  # icon_map:
+  #   - [first_top, second_top, third_top, fourth_top]
+  regions:
+    top:
+      label: Top
+    first_top:
+      label: First Top
+    first_main:
+      label: First Main
+    first_bottom:
+      label: First Bottom
+    second_top:
+      label: Second Top
+    second_main:
+      label: Second Main
+    second_bottom:
+      label: Second Bottom
+    third_top:
+      label: Third Top
+    third_main:
+      label: Third Main
+    third_bottom:
+      label: Third Bottom
+    fourth_top:
+      label: Fourth Top
+    fourth_main:
+      label: Fourth Main
+    fourth_bottom:
+      label: Fourth Bottom
+    bottom:
+      label: Bottom
+
+rs_carousel:
+  label: Rocketship Carousel
+  class: '\Drupal\rocketship_core\Plugin\Layout\CarouselLayout'
+  library: rocketship_core/layout_carousel
+  template: templates/section/carousel
+  category: Rocketship Layouts
+  default_region: carousel
+  icon: 'images/layout-rs-carousel.svg'
+  # icon_map:
+  #   - [carousel]
+  regions:
+    top:
+      label: Top
+    carousel:
+      label: Carousel

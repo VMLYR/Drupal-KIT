@@ -1,0 +1,17 @@
+name: rocketship_blocks_content
+type: module
+core_version_requirement: '^8.8 || ^9 || ^10'
+description: 'Contains demo pages that showcase all types of blocks inside Layout Builder'
+package: Rocketship
+dependencies:
+  - migrate_source_csv:migrate_source_csv
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - rocketship_core:rocketship_core
+  - rocketship_core:rocketship_blocks
+  - rocketship_core:rocketship_page
+
+# Information added by Drupal.org packaging script on 2022-05-04
+version: '6.0.0-alpha38'
+project: 'rocketship_core'
+datestamp: 1651680269

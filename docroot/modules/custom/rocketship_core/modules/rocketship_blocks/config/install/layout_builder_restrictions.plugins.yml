@@ -1,0 +1,7 @@
+plugin_config:
+  entity_view_mode_restriction:
+    weight: 1
+    enabled: false
+  restriction_by_role:
+    weight: 1
+    enabled: true

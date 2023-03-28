@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_menu_overview
+    - field.storage.block_content.field_cb_subtitle
+id: block_content.cb_menu_overview.field_cb_subtitle
+field_name: field_cb_subtitle
+entity_type: block_content
+bundle: cb_menu_overview
+label: Subtitle
+description: 'Display a subtitle for the Block.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

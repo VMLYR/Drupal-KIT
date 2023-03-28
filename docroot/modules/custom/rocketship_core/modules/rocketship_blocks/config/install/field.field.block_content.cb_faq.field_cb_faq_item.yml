@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cb_faq
+    - field.storage.block_content.field_cb_faq_item
+  module:
+    - rocketship_core
+id: block_content.cb_faq.field_cb_faq_item
+field_name: field_cb_faq_item
+entity_type: block_content
+bundle: cb_faq
+label: 'FAQ Item'
+description: 'Add one or more questions. Use the item Title field as the question and the Body field for the answer.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: tabbed_item

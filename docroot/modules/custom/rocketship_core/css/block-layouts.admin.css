@@ -1,0 +1,200 @@
+.cb-field-layouts .form__group--radios,
+.cb-field-layouts .form-radios {
+    display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
+  margin: -10px -10px 0 -10px !important;
+}
+
+[dir=rtl] .cb-field-layouts .form__group--radios,
+[dir=rtl] .cb-field-layouts .form-radios {
+    -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+  -ms-flex-direction: row-reverse !important;
+  flex-direction: row-reverse !important;
+}
+
+.cb-field-layouts .form-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+[data-drupal-selector="edit-settings-block-form-field-cb-text-alignment"] .form-item:first-child,
+#edit-field-cb-text-alignment--wrapper .fieldset-wrapper .form-item:first-child {
+  display: none;
+}
+
+.cb-field-layouts .js-form-type-radio,
+tr .cb-field-layouts .js-form-type-radio {
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+  margin: 10px 10px 0 10px !important;
+  font-size: .75rem;
+}
+
+.cb-field-layouts .js-form-type-radio input {
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+.cb-field-layouts .js-form-type-radio input:checked + label {
+  border: #000000 2px solid !important;
+}
+.cb-field-layouts .js-form-type-radio label {
+  box-sizing: border-box;
+  cursor: pointer !important;
+  font-size: 0.00001px !important;
+  position: relative !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  width: 78px !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  border: #999999 1px solid !important;
+  background-color: transparent !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+
+.cb-field-layouts .js-form-type-radio .text {
+  text-align: center !important;
+  padding-top: 2px !important;
+}
+
+.cb-field-layouts .js-form-type-radio .text .form__label__not-required,
+.cb-field-layouts .js-form-type-radio .text .form__label__required {
+  display: none;
+}
+
+/*
+.cb-field-layouts .js-form-type-radio .text .form__label__required {
+  display: inline-block;
+  text-decoration: none;
+  border: 0 none !important;
+}*/
+
+/* for text block */
+.field--name-field-cb-text-alignment .js-form-type-radio label.layout-left,
+[data-drupal-selector="edit-settings-block-form-field-cb-text-alignment"] .js-form-type-radio label.layout-left {
+  height: 50px !important;
+  background-image: url('../images/layout-text-left.svg') !important;
+}
+.field--name-field-cb-text-alignment .js-form-type-radio label.layout-centered,
+[data-drupal-selector="edit-settings-block-form-field-cb-text-alignment"] .js-form-type-radio label.layout-centered {
+  height: 50px !important;
+  background-image: url('../images/layout-text-centered.svg') !important;
+}
+
+/* for image block */
+[data-drupal-selector="edit-settings-block-form-field-cb-media-layout"] .js-form-type-radio label.layout-normal {
+  height: 78px !important;
+  background-image: url('../images/layout-image-normal.svg') !important;
+ }
+ [data-drupal-selector="edit-settings-block-form-field-cb-media-layout"] .js-form-type-radio label.layout-stretched {
+  height: 78px !important;
+   background-image: url('../images/layout-image-stretched.svg') !important;
+ }
+
+/* Generic view-mode switch: */
+
+/* for photo gallery block */
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-grid {
+  width: 80px !important;
+  height: 60px !important;
+  background-image: url('../images/layout-image-grid.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-masonry {
+  width: 80px !important;
+  height: 60px !important;
+  background-image: url('../images/layout-image-masonry.svg') !important;
+}
+/* video*/
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-embed {
+  height: 78px !important;
+  background-image: url('../images/view-mode-embed.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-popup {
+  height: 78px !important;
+  background-image: url('../images/view-mode-popup.svg') !important;
+}
+/* image ratios*/
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-default{
+  height: 78px !important;
+  background-image: url('../images/view-mode-original-scale.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-1-1_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-1-1.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-1-2_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-1-2.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-2-1_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-2-1.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-1-3_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-1-3.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-3-1_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-3-1.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-1-4_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-1-4.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-4-1_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-4-1.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-2-3_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-2-3.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-3-2_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-3-2.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-3-4_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-3-4.svg') !important;
+}
+[data-drupal-selector="edit-settings-view-mode"] .js-form-type-radio label.view-mode-4-3_aspect_ratio {
+  height: 78px !important;
+  background-image: url('../images/view-mode-4-3.svg') !important;
+}
+
+/* in some case, we need to hide some of CKE's text alignment options
+  eg: when a layout option needs to override those options, like in Text Main Paragraph when fields are Centered */
+.override-cke-text-alignment a.cke_button__justifyleft {
+  display: none !important;
+}
+
+/* Autocomplete styling */
+
+.ui-menu-item-wrapper {
+  display: flex;
+}
+
+.ui-menu-item-wrapper__title {
+  flex-grow: 1;
+}
+
+.ui-menu-item-wrapper__type {
+  padding-left: 15px;
+}

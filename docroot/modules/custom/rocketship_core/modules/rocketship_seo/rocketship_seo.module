@@ -1,0 +1,281 @@
+<?php
+
+/**
+ * @file
+ * Main module file.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\NodeType;
+use Drupal\node\NodeInterface;
+use Drupal\node\NodeTypeInterface;
+
+/**
+ * Implements hook_preprocess().
+ */
+function rocketship_seo_preprocess(&$variables, $hook) {
+  // @see https://www.drupal.org/project/search_api/issues/3045793
+  if (strpos($hook, 'pager') !== 0
+    &&
+    strpos($hook, 'views_mini_pager') !== 0) {
+    return;
+  }
+
+  if (!isset($hooks)) {
+    $hooks = theme_get_registry();
+  }
+
+  // Determine the primary theme function argument.
+  if (isset($hooks[$hook]['variables'])) {
+    $keys = array_keys($hooks[$hook]['variables']);
+    $key = $keys[0];
+  }
+  else {
+    $key = $hooks[$hook]['render element'];
+  }
+
+  if (!isset($variables[$key])) {
+    return;
+  }
+
+  $pager = $variables[$key];
+
+  global $pager_page_array, $pager_total;
+
+  if (empty($pager_page_array)) {
+    return;
+  }
+
+  $element = $pager['#element'];
+  $parameters = $pager['#parameters'] ?? [];
+
+  $current = $pager_page_array[$element];
+  $max = max(0, $pager_total[$element] - 1);
+
+  $route_name = \Drupal::service('path.matcher')->isFrontPage() ? '<front>' : '<current>';
+
+  /* @var $pager_manager \Drupal\Core\Pager\PagerManagerInterface */
+  $pager_manager = \Drupal::service('pager.manager');
+
+  // Add the next, prev, last and first urls as links to the header area.
+  if ($current > 0) {
+    $item = [
+      [
+        '#tag' => 'link',
+        '#attributes' => [
+          'rel' => 'prev',
+          'href' => Url::fromRoute($route_name, [], [
+            'absolute' => TRUE,
+            'query' => $pager_manager->getUpdatedParameters($parameters, $element, $current - 1),
+          ])
+            ->toString(),
+        ],
+      ],
+      'prev',
+    ];
+    $variables['#attached']['html_head'][] = $item;
+  }
+  if ($current < $max) {
+    $item = [
+      [
+        '#tag' => 'link',
+        '#attributes' => [
+          'rel' => 'next',
+          'href' => Url::fromRoute($route_name, [], [
+            'absolute' => TRUE,
+            'query' => $pager_manager->getUpdatedParameters($parameters, $element, $current + 1),
+          ])
+            ->toString(),
+        ],
+      ],
+      'next',
+    ];
+    $variables['#attached']['html_head'][] = $item;
+  }
+
+  $item = [
+    [
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel' => 'first',
+        'href' => Url::fromRoute($route_name, [], [
+          'absolute' => TRUE,
+          'query' => $pager_manager->getUpdatedParameters($parameters, $element, 0),
+        ])
+          ->toString(),
+      ],
+    ],
+    'first',
+  ];
+  $variables['#attached']['html_head'][] = $item;
+
+  $item = [
+    [
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel' => 'last',
+        'href' => Url::fromRoute($route_name, [], [
+          'absolute' => TRUE,
+          'query' => $pager_manager->getUpdatedParameters($parameters, $element, $max),
+        ])
+          ->toString(),
+      ],
+    ],
+    'last',
+  ];
+
+  // Attach these to $variables, not the render array.
+  $variables['#attached']['html_head'][] = $item;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * If present, place the description and canonical image fields in the advanced
+ * tab on the right hand side of nodes.
+ *
+ * If you create a CT and don't want this, don't add these fields
+ */
+function rocketship_seo_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  $node_type = NodeType::load($node->bundle());
+
+  $fields = $node_type->getThirdPartySetting('rocketship_seo', 'seo_fields', []);
+
+  foreach ($fields as $field) {
+    if (isset($form[$field])) {
+      if (!isset($form['description_wrapper'])) {
+        $title = $node_type
+          ->getThirdPartySetting('rocketship_seo', 'seo_title', 'Overview');
+        $description = $node_type
+          ->getThirdPartySetting(
+            'rocketship_seo',
+            'seo_description',
+            'Content here is displayed on overview pages. Additionally, it is used for search engine and social media snippets. You can further finetune what exactly is used for each snippet in the "Metatags" tab.'
+          );
+        $form['description_wrapper'] = [
+          '#type' => 'details',
+          '#title' => t($title),
+          '#description' => t($description),
+          '#group' => 'advanced',
+          '#weight' => -10,
+          '#open' => TRUE,
+        ];
+      }
+      $form['description_wrapper'][$field] = $form[$field];
+      unset($form[$field]);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for \Drupal\node\NodeTypeForm.
+ *
+ * Adds textarea for title field help text to the node type form.
+ *
+ * @see NodeTypeForm::form()
+ * @see rocketship_seo_node_type_form_submit()
+ */
+function rocketship_seo_form_node_type_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Set default value of the help text form element on node type form.
+  /** @var \Drupal\node\NodeTypeInterface $node_type */
+  $node_type = $form_state->getFormObject()->getEntity();
+
+  $options = [];
+
+  if ($node_type->id()) {
+    $entity_type_id = 'node';
+    $bundle = $node_type->id();
+    $field_definitions = \Drupal::service('entity_field.manager')
+      ->getFieldDefinitions($entity_type_id, $bundle);
+
+    foreach ($field_definitions as $field_name => $field_definition) {
+      if (!empty($field_definition->getTargetBundle())) {
+        $options[$field_name] = $field_definition->getLabel();
+      }
+    }
+  }
+
+  $default_fields = [];
+  $default_title = t('Overview');
+  $default_description = t('Content here is displayed on overview pages. Additionally, it is used for search engine and social media snippets. You can further finetune what exactly is used for each snippet in the "Metatags" tab.');
+
+  $form['rocketship_seo'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Rocketship SEO'),
+    '#weight' => 0,
+  ];
+  $form['rocketship_seo']['seo_fields'] = [
+    '#title' => t('SEO fields'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#multiple' => TRUE,
+    '#default_value' => $node_type ? $node_type->getThirdPartySetting('rocketship_seo', 'seo_fields', $default_fields): $default_fields,
+    '#description' => t('Which fields you wish to place in a special section in the sidebar on node edit forms.'),
+    '#weight' => 0,
+  ];
+  $form['rocketship_seo']['seo_title'] = [
+    '#title' => t('Details title'),
+    '#type' => 'textfield',
+    '#default_value' => $node_type ? $node_type->getThirdPartySetting('rocketship_seo', 'seo_title', $default_title): $default_title,
+    '#description' => t('The title of the special section in the sidebar.'),
+    '#weight' => 0,
+  ];
+  $form['rocketship_seo']['seo_description'] = [
+    '#title' => t('Details description'),
+    '#type' => 'textarea',
+    '#default_value' => $node_type ? $node_type->getThirdPartySetting('rocketship_seo', 'seo_description', $default_description) : $default_description,
+    '#description' => t('The description for the special section in the sidebar.'),
+    '#weight' => 0,
+  ];
+
+  $form['#entity_builders'][] = 'rocketship_seo_form_node_type_form_builder';
+}
+
+/**
+ * Entity builder for the node type form.
+ *
+ * @see rocketship_seo_form_node_type_form_alter()
+ */
+function rocketship_seo_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('rocketship_seo', 'seo_fields', $form_state->getValue('seo_fields'));
+  $type->setThirdPartySetting('rocketship_seo', 'seo_title', $form_state->getValue('seo_title'));
+  $type->setThirdPartySetting('rocketship_seo', 'seo_description', $form_state->getValue('seo_description'));
+}
+
+/**
+ * @param array $links
+ * @param $sitemap_variant
+ */
+function rocketship_seo_simple_sitemap_links_alter(array &$links, $sitemap_variant) {
+  $default_language = \Drupal::languageManager()->getDefaultLanguage()->getId();
+  try {
+    /** @var \Drupal\disable_language\DisableLanguageManager $disabledLanguageManager */
+    $disabledLanguageManager = \Drupal::service('disable_language.disable_language_manager');
+    if (in_array($default_language, $disabledLanguageManager->getDisabledLanguages())) {
+      $default_language = $disabledLanguageManager->getFirstEnabledLanguage()
+        ->getId();
+    }
+  }
+  catch (\Exception $e) {
+    // Do nothing. Service doesn't exist.
+  }
+  foreach ($links as $key => &$link) {
+    if (!empty($link['alternate_urls'])) {
+      if (isset($link['alternate_urls'][$default_language])) {
+        // Add x-default for default language
+        $link['alternate_urls']['x-default'] = $link['alternate_urls'][$default_language];
+      }
+      else {
+        // Grab whatever is in there, one of 'em anyway. Means it hasn't been
+        // translated into the default language. I think. I'm not 100%
+        // about any of this.
+        $link['alternate_urls']['x-default'] = reset($link['alternate_urls']);
+      }
+    }
+
+  }
+}
