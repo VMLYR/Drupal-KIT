@@ -1,0 +1,96 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor5
+format: full_html
+editor: ckeditor5
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: History
+          items:
+            - Undo
+            - '-'
+            - Redo
+        -
+          name: Copy-paste
+          items:
+            - Cut
+            - Copy
+            - Paste
+            - PasteFromWord
+        -
+          name: Media
+          items:
+            - DrupalMediaLibrary
+            - Table
+            - HorizontalRule
+            - SpecialChar
+        -
+          name: Linking
+          items:
+            - DrupalLink
+            - DrupalUnlink
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+            - '-'
+            - Subscript
+            - Superscript
+            - '-'
+            - Blockquote
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+            - Indent
+            - Outdent
+        -
+          name: Alignment
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - '-'
+            - JustifyBlock
+        -
+          name: 'Block Formatting'
+          items:
+            - Format
+            - '-'
+            - Styles
+        -
+          name: Advanced
+          items:
+            - RemoveFormat
+            - '-'
+            - ShowBlocks
+            - Maximize
+            - '-'
+            - Source
+  plugins:
+    stylescombo:
+      styles: "a.cke-button|button primary\r\na.cke-button--secondary|button secondary\r\ntable.is-reformatted|Table: responsive headings\r\ntable.no-margin|Table: no margin\r\np.intro|Intro text\r\np.no-margin|Paragraph: no margin\r\nspan.highlight|Highlight"
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
+    language:
+      language_list: un
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_portrait_md_2x
+label: '3:2 portrait md [1024×1536] 2x'
+effects:
+  42279243-6046-467c-8e2e-c65eb4833836:
+    uuid: 42279243-6046-467c-8e2e-c65eb4833836
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2048
+      height: 3072
+      crop_type: focal_point

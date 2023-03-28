@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_sm_2x
+label: '4:3 portrait sm [768×1024] 2x'
+effects:
+  997e644a-ce4b-4aef-8b7c-8558bf618446:
+    uuid: 997e644a-ce4b-4aef-8b7c-8558bf618446
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1536
+      height: 2048
+      crop_type: focal_point

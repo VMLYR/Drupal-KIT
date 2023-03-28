@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_landscape_xl
+label: '3:2 landscape xl [1920×1250]'
+effects:
+  83b116eb-d4e3-4c00-af8f-1963fe19d523:
+    uuid: 83b116eb-d4e3-4c00-af8f-1963fe19d523
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 1250
+      crop_type: focal_point

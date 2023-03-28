@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xs_wide_2x
+label: 'Scale width xs wide [480] 2x'
+effects:
+  0be7956b-a90f-4fa2-8086-55598c9afb46:
+    uuid: 0be7956b-a90f-4fa2-8086-55598c9afb46
+    id: image_scale
+    weight: 1
+    data:
+      width: 960
+      height: null
+      upscale: false

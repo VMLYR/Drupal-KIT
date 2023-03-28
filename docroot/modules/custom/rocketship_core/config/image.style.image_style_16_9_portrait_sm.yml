@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_9_portrait_sm
+label: '16:9 portrait sm [768×1366]'
+effects:
+  97a161e1-f877-471b-9e37-7a9f288c3d1b:
+    uuid: 97a161e1-f877-471b-9e37-7a9f288c3d1b
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 1366
+      crop_type: focal_point

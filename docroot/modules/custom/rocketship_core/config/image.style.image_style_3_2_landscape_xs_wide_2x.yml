@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_landscape_xs_wide_2x
+label: '3:2 landscape xs wide [480×320] 2x'
+effects:
+  ca302f1d-93fe-4bd2-8dc4-426c270449c4:
+    uuid: ca302f1d-93fe-4bd2-8dc4-426c270449c4
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 960
+      height: 640
+      crop_type: focal_point

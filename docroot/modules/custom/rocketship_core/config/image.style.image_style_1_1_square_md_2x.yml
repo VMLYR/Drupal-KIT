@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_md_2x
+label: '1:1 square md [1024×1024] 2x'
+effects:
+  d24eb50e-aee6-4dda-ad6b-8206f498f255:
+    uuid: d24eb50e-aee6-4dda-ad6b-8206f498f255
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2048
+      height: 2048
+      crop_type: focal_point

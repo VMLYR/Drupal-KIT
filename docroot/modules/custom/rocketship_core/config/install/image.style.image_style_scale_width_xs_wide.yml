@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xs_wide
+label: 'Scale width xs wide [480]'
+effects:
+  ac6959ce-0031-4c88-bb9b-e34414700b62:
+    uuid: ac6959ce-0031-4c88-bb9b-e34414700b62
+    id: image_scale
+    weight: 1
+    data:
+      width: 480
+      height: null
+      upscale: false

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_lg
+label: '1:1 square lg [1200×1200]'
+effects:
+  064c6bf2-1da2-4669-bbe7-953c710d8bf0:
+    uuid: 064c6bf2-1da2-4669-bbe7-953c710d8bf0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 1200
+      crop_type: focal_point

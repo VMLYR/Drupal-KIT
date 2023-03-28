@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_portrait_sm
+label: '3:2 portrait sm [768×1152]'
+effects:
+  5a605211-a063-4969-939b-3f469c2a6f23:
+    uuid: 5a605211-a063-4969-939b-3f469c2a6f23
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 1152
+      crop_type: focal_point

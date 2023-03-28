@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_9_landscape_md
+label: '16:9 landscape md [1024×576]'
+effects:
+  7e58c629-6520-47d0-a937-2eac4479b99d:
+    uuid: 7e58c629-6520-47d0-a937-2eac4479b99d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 576
+      crop_type: focal_point

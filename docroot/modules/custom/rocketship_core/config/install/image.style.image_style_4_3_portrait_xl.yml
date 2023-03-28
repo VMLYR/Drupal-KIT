@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_xl
+label: '4:3 portrait xl [1920×2560]'
+effects:
+  63dd684c-9a0a-49a2-a329-16fcd7953417:
+    uuid: 63dd684c-9a0a-49a2-a329-16fcd7953417
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 2560
+      crop_type: focal_point

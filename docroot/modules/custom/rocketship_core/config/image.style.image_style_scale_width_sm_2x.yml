@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_sm_2x
+label: 'Scale width sm [768] 2x'
+effects:
+  215ffa62-6554-47ce-a607-d45eb9aa42c0:
+    uuid: 215ffa62-6554-47ce-a607-d45eb9aa42c0
+    id: image_scale
+    weight: 1
+    data:
+      width: 1536
+      height: null
+      upscale: false

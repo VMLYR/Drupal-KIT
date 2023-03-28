@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xl_2x
+label: 'Scale width xl [1920] 2x'
+effects:
+  6363cf56-ca37-487e-9a42-e37b171e058b:
+    uuid: 6363cf56-ca37-487e-9a42-e37b171e058b
+    id: image_scale
+    weight: 1
+    data:
+      width: 3840
+      height: null
+      upscale: false

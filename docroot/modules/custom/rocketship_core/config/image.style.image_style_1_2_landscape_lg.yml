@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_2_landscape_lg
+label: '1:2 landscape lg [1200x600]'
+effects:
+  4cb1c5a7-f5ba-4295-b48e-fa0970633051:
+    uuid: 4cb1c5a7-f5ba-4295-b48e-fa0970633051
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 600
+      crop_type: focal_point

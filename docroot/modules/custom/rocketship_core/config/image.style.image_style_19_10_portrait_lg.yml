@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_portrait_lg
+label: '19:10 portrait lg [1200×2280]'
+effects:
+  8d3e45cb-10e9-4495-ab84-4f10088aad08:
+    uuid: 8d3e45cb-10e9-4495-ab84-4f10088aad08
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 2280
+      crop_type: focal_point

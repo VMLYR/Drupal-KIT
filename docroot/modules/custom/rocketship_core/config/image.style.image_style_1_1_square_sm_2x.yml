@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_sm_2x
+label: '1:1 square sm [768×768] 2x'
+effects:
+  50bb0d4b-5e9a-4692-8a2d-05c170f606a1:
+    uuid: 50bb0d4b-5e9a-4692-8a2d-05c170f606a1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1536
+      height: 1536
+      crop_type: focal_point

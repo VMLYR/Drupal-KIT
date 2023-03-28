@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_xl
+label: '1:1 square xl [1920×1920]'
+effects:
+  20a125c4-48df-4982-9326-1ee1d5f1335e:
+    uuid: 20a125c4-48df-4982-9326-1ee1d5f1335e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 1920
+      crop_type: focal_point

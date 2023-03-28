@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xs
+label: 'Scale width xs [320]'
+effects:
+  f7591186-2e1f-46c3-87b9-2dc6fd717592:
+    uuid: f7591186-2e1f-46c3-87b9-2dc6fd717592
+    id: image_scale
+    weight: 1
+    data:
+      width: 320
+      height: null
+      upscale: false

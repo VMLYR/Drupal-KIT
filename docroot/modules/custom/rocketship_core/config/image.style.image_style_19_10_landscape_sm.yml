@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_19_10_landscape_sm
+label: '19:10 landscape sm [768×405]'
+effects:
+  803074a1-b2f1-4b69-8e99-d8aa114199c2:
+    uuid: 803074a1-b2f1-4b69-8e99-d8aa114199c2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 405
+      crop_type: focal_point

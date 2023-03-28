@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_10_portrait_sm_2x
+label: '16:10 portrait sm [768×1229] 2x'
+effects:
+  17fea5e8-ff33-4c7e-9e8e-909b97a398aa:
+    uuid: 17fea5e8-ff33-4c7e-9e8e-909b97a398aa
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1538
+      height: 2458
+      crop_type: focal_point

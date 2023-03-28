@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_3_2_landscape_md_2x
+label: '3:2 landscape md [1024×683] 2x'
+effects:
+  3742cb29-0112-473d-ae8a-791b13041976:
+    uuid: 3742cb29-0112-473d-ae8a-791b13041976
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2048
+      height: 1266
+      crop_type: focal_point

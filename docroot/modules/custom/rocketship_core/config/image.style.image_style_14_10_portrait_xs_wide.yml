@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_14_10_portrait_xs_wide
+label: '14:10 portrait xs wide [480×672]'
+effects:
+  0e44105c-134c-499f-aea1-8ca6cd036e6f:
+    uuid: 0e44105c-134c-499f-aea1-8ca6cd036e6f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 672
+      crop_type: focal_point

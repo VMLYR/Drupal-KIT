@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_landscape_lg
+label: '4:3 landscape lg [1200×900]'
+effects:
+  cbf249e4-46aa-4b06-839d-da98db87df7f:
+    uuid: cbf249e4-46aa-4b06-839d-da98db87df7f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 900
+      crop_type: focal_point

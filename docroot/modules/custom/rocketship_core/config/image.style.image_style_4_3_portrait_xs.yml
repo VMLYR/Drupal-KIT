@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_portrait_xs
+label: '4:3 portrait xs [320×427]'
+effects:
+  4586f1d2-8a3d-4749-8e1f-fbc665494121:
+    uuid: 4586f1d2-8a3d-4749-8e1f-fbc665494121
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 427
+      crop_type: focal_point

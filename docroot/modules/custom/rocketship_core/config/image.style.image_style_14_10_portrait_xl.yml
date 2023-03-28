@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_14_10_portrait_xl
+label: '14:10 portrait xl [1920×2688]'
+effects:
+  5e59b0ab-f6d5-4c95-888e-2cae9e675686:
+    uuid: 5e59b0ab-f6d5-4c95-888e-2cae9e675686
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 2688
+      crop_type: focal_point

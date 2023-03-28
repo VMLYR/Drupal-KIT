@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_14_10_landscape_xs
+label: '14:10 landscape xs [320×229]'
+effects:
+  30a9dd39-eed1-4e6b-9359-0b09863b59eb:
+    uuid: 30a9dd39-eed1-4e6b-9359-0b09863b59eb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 229
+      crop_type: focal_point

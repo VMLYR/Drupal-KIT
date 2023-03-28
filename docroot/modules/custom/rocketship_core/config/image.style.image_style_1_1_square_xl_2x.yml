@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_1_1_square_xl_2x
+label: '1:1 square xl [1920×1920] 2x'
+effects:
+  bacd1db2-b203-4994-9fbd-b0892531d29f:
+    uuid: bacd1db2-b203-4994-9fbd-b0892531d29f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3840
+      height: 3840
+      crop_type: focal_point

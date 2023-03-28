@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_9_landscape_xs
+label: '16:9 landscape xs [320×180]'
+effects:
+  fe897fcc-35b9-497f-aee1-c182e2db8f3a:
+    uuid: fe897fcc-35b9-497f-aee1-c182e2db8f3a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 180
+      crop_type: focal_point

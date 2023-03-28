@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_sm
+label: 'Scale width sm [768]'
+effects:
+  4ae1eba3-1a20-44f9-a875-f15b63550be4:
+    uuid: 4ae1eba3-1a20-44f9-a875-f15b63550be4
+    id: image_scale
+    weight: 1
+    data:
+      width: 768
+      height: null
+      upscale: false

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_14_10_landscape_md_2x
+label: '14:10 landscape md [1024×732] 2x'
+effects:
+  6ab50437-f663-407a-b8ca-f3e1577cca21:
+    uuid: 6ab50437-f663-407a-b8ca-f3e1577cca21
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2048
+      height: 1464
+      crop_type: focal_point

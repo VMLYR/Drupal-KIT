@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_landscape_lg_2x
+label: '4:3 landscape lg [1200×900] 2x'
+effects:
+  10b1ec57-adf8-4d5c-9a53-9111f4768713:
+    uuid: 10b1ec57-adf8-4d5c-9a53-9111f4768713
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2400
+      height: 1800
+      crop_type: focal_point

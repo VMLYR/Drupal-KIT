@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_landscape_xs
+label: '4:3 landscape xs [320x240]'
+effects:
+  f5df758a-0297-483a-ac5f-52b028a69681:
+    uuid: f5df758a-0297-483a-ac5f-52b028a69681
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 240
+      crop_type: focal_point

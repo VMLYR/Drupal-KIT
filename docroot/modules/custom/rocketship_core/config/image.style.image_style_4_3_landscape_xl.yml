@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_4_3_landscape_xl
+label: '4:3 landscape xl [1920×1440]'
+effects:
+  ab6cb2cf-ca6d-4f9a-a78a-7249bb3ca93a:
+    uuid: ab6cb2cf-ca6d-4f9a-a78a-7249bb3ca93a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 1440
+      crop_type: focal_point

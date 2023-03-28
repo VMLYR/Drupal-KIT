@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: image_style_scale_width_xs_2x
+label: 'Scale width xs [320] 2x'
+effects:
+  dcb7881d-168e-4251-a676-a35328c335d5:
+    uuid: dcb7881d-168e-4251-a676-a35328c335d5
+    id: image_scale
+    weight: 1
+    data:
+      width: 640
+      height: null
+      upscale: false

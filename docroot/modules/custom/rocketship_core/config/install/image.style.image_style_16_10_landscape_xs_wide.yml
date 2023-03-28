@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_16_10_landscape_xs_wide
+label: '16:10 landscape xs wide [480×300]'
+effects:
+  e385a24b-b184-4e99-9214-3928f342c81e:
+    uuid: e385a24b-b184-4e99-9214-3928f342c81e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 300
+      crop_type: focal_point

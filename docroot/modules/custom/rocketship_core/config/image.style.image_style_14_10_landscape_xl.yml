@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: image_style_14_10_landscape_xl
+label: '14:10 landscape xl [1920×1372]'
+effects:
+  d6581f87-b5a1-4bf8-b994-98822a4d21da:
+    uuid: d6581f87-b5a1-4bf8-b994-98822a4d21da
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 1372
+      crop_type: focal_point
