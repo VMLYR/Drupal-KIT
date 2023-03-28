@@ -3,7 +3,6 @@ excludes:
   - drush
   - node_modules
   - themesrc/node_modules
-  - docroot/core
   - docroot/vendor
   - docroot/modules/contrib
 config:
@@ -19,13 +18,35 @@ services:
       environment:
         XDEBUG_MODE:
         LANDO_HOST_IP: "172.17.0.1"
+        DRUPAL_TEST_DB_URL: mysql://user:user@database/user
+        DRUPAL_TEST_WEBDRIVER_HOSTNAME: selenium
+        DRUPAL_TEST_WEBDRIVER_PORT: 4444
+        DRUPAL_TEST_CHROMEDRIVER_AUTOSTART: 'false'
+        DRUPAL_TEST_WEBDRIVER_CHROME_ARGS:  '--no-sandbox --disable-dev-shm-usage --headless'
+        DRUPAL_NIGHTWATCH_OUTPUT: ../sites/nightwatch
+        DRUPAL_NIGHTWATCH_IGNORE_DIRECTORIES: node_modules,vendor,.*,sites/*/files,sites/*/private,sites/simpletest
+        # PhpUnit vars.
+        #SIMPLETEST_BASE_URL: https://d10lb-testing.lndo.site
+        SIMPLETEST_BASE_URL: https://www.google.com
+        SIMPLETEST_DB: mysql://user:user@database/www
+        BROWSERTEST_OUTPUT_DIRECTORY: /app/sites/simpletest/browser_output
+        MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium:4444"]'
       extra_hosts:
         - ${LANDO_HOST_NAME_DEV:-host}:${LANDO_HOST_GATEWAY_DEV:-host-gateway}
-    build:
-      #- composer install
     extras:
       #- apt-get update -y
       #- apt-get install rename -y
+    build_as_root:
+      - rm -rf /etc/apt/sources.list.d/nodesource.list && rm -rf /usr/local/bin/node* && rm -rf /usr/local/bin/npm*
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - cat /etc/apt/sources.list.d/nodesource.list
+      - apt --fix-broken install
+      - apt update && apt install -y nodejs
+      - npm install --global yarn
+    build:
+      #- composer install
+      - mkdir -p ${LANDO_WEBROOT}/sites/simpletest/browser_output
+      - cd ${LANDO_WEBROOT}/core && yarn install
   database:
     creds:
       user: user
@@ -38,7 +59,21 @@ services:
       #- npm install -G gulp
       #- cd /app/source && npm install
       #- cd /app/source && npm run gulp
+  selenium:
+    type: compose
+    app_mount: false
+    services:
+      image: seleniarm/standalone-chromium:latest
+      shm_size: 2gb
+      command: /opt/bin/start-selenium-standalone.sh
 tooling:
+  nightwatch:
+    service: appserver
+    dir: /app/docroot/core
+    cmd: yarn test:nightwatch
+  yarn:
+    service: appserver
+    cmd: yarn
   node:
     service: node
   npm:
