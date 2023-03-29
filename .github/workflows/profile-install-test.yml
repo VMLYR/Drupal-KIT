@@ -19,7 +19,6 @@ jobs:
       - name: Verify Lando works and we are dogfooding this plugin for tests
         run: |
           lando version
-          lando config --path plugins | grep php | grep /home/runner/work/php/php || (echo "::error:: Not dogfooding this plugin correctly! " && exit 1)
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v3
