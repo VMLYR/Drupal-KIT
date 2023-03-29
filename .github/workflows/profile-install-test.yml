@@ -18,8 +18,6 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: | 
               ${{ runner.os }}-php-
-      - name: Make Lando Directory
-        run: mkdir ~/.lando
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Copy Lando Yml
