@@ -5,9 +5,6 @@ env:
   LANDO_VERSION: v3.6.5
 jobs:
   Install-Lando-And-Test:
-    strategy:
-      matrix:
-        version: [10, 12, 14]
     runs-on: ubuntu-latest
     steps:
       - name: Install Lando
