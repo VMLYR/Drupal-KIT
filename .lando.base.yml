@@ -44,7 +44,7 @@ services:
       - apt update && apt install -y nodejs
       - npm install --global yarn
     build:
-      #- composer install
+      - composer install
       - mkdir -p ${LANDO_WEBROOT}/sites/simpletest/browser_output
       - cd ${LANDO_WEBROOT}/core && yarn install
   database:
