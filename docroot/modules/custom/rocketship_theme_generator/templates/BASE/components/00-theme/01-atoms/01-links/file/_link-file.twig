@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Theme override for a link to a file.
+ *
+ * Available variables:
+ * - attributes: The HTML attributes for the containing element.
+ * - link_content: A link to the file.
+ *
+ * @see template_preprocess_file_link()
+ */
+#}
+
+{# {% set modifiers = [] %} #}
+{# {% set span_classes = 'file' %} #}
+{# {% set classes = 'icon icon--file' %} #}
+
+{% if link_content is not defined  %}
+  {% set link_content = link %}
+{% endif %}
+
+{% set link_bem_block = link_bem_block|default(false) %}
+{% set link_bem_element = link_bem_element|default('file') %}
+
+{% if link_bem_modifiers is not defined  %}
+  {% set link_bem_modifiers = [] %}
+{% endif %}
+
+{% set link_bem_extra = link_bem_extra|default([]) %}
+
+{% if attributes and attributes.class %}
+  {% for  value in attributes.class %}
+    {% if value != "file" %}
+      {% set class_val = value|replace({'file--':''}) %}
+      {% set link_bem_modifiers = link_bem_modifiers|merge([class_val]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% set link_bem_extra = link_bem_extra|merge([attributes.class]) %}
+{% endif %}
+
+{% set icon_bem_block = icon_bem_block|default(false) %}
+{% set icon_bem_element = icon_bem_element|default('icon') %}
+{% set icon_bem_modifiers = icon_bem_modifiers|default([]) %}
+{% set icon_bem_modifiers = icon_bem_modifiers|merge(link_bem_modifiers) %}
+{% set icon_bem_modifiers = icon_bem_modifiers|merge(['file']) %}
+{% set icon_bem_extra = icon_bem_extra|default([]) %}
+
+<span {{bem(link_bem_block, link_bem_element, link_bem_modifiers, link_bem_extra)}}>
+  <i {{bem(icon_bem_block, icon_bem_element, icon_bem_modifiers, icon_bem_extra)}}></i>
+  {% block content %}
+    {{ link_content }}
+  {% endblock %}
+</span>
+

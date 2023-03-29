@@ -1,0 +1,58 @@
+{% set picture_bem_block = picture_bem_block ?? false %}
+{% set picture_bem_element = picture_bem_element|default('picture') %}
+{% set picture_bem_modifiers = picture_bem_modifiers|default([]) %}
+
+{% set picture_bem_extra = [] %}
+{% set image_loading = image_loading|default(attributes.loading) %}
+{% set lazy_loading_fallback = lazy_loading_fallback|default(attributes.lazy_loading_fallback) %}
+
+{% set aspect = aspect|default(attributes.aspect) %}
+{% set extra_style = extra_style|default('') %}
+
+{# if lazy loading, need helper classes #}
+{# remove lazy loading attr from picture element, only need it on the img for now #}
+{% if attributes.loading %}
+{% set picture_bem_extra = picture_bem_extra|merge(['lazy-wrapper']) %}
+  {% set attributes = attributes.removeAttribute('loading') %}
+{% endif %}
+
+{# remove lazy_loading_fallback attr from picture element, only need it on the img for now #}
+{% if attributes.lazy_loading_fallback %}
+  {% set attributes = attributes.removeAttribute('lazy_loading_fallback') %}
+{% endif %}
+
+{% if aspect %}
+  {% set inline_style = inline_style ~ "padding-bottom: " ~ aspect ~ ";"  %}
+  {% set picture_bem_extra = picture_bem_extra|merge(['img-layout-shift'])%}
+    {% if attributes.aspect %}
+    {% set attributes = attributes.removeAttribute('aspect') %}
+  {% endif %}
+{% endif %}
+
+<picture
+  {{ bem(picture_bem_block, picture_bem_element, picture_bem_modifiers, picture_bem_extra) }}
+  {% if inline_style %} style="{{ inline_style }}"{% endif %}
+>
+  {% if sources %}
+    {#
+    Internet Explorer 9 doesn't recognise source elements that are wrapped in
+    picture tags. See http://scottjehl.github.io/picturefill/#ie9
+    #}
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    {% for source_attributes in sources %}
+      {# 'source_attributes' function doesn't work as-is in Storybook styleguide,
+         so using straightup image instead for the styleguide #}
+      <source{{ source_attributes }}/>
+    {% endfor %}
+    <!--[if IE 9]></video><![endif]-->
+  {% endif %}
+  {# The controlling image, with the fallback image in srcset. #}
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+    image_bem_block: picture_image_bem_block|default(picture_bem_block),
+    image_loading: image_loading,
+    lazy_loading_fallback: lazy_loading_fallback,
+    is_picture: true,
+  } %}
+</picture>
+
+

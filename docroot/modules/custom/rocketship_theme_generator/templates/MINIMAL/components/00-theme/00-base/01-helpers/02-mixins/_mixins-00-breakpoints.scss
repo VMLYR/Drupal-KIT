@@ -1,0 +1,122 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Config: Breakpoints
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Breakpoints mixins
+// =============================================================================
+
+// ** The default breakpoints are for ALL screens, this is so we have some styling
+//    in place for Print
+//    There is a separate breakpoint for print only as well
+//
+// 2 kinds of queries:
+// - per breakpoint, where you can also choose a media type (defaults to 'all')
+// - print (a shortcut for @media only print)
+//
+// Usage:
+// - inside a selector (hard to manage)
+// - grouping various selectors (better)
+//
+// Examples:
+//
+// body {
+//   @include bp-md {
+//     background: red;
+//   }
+// }
+//
+// @include bp-md {
+//   body {
+//     background: red;
+//   }
+// }
+
+
+// -- phone size only (from 0 to tablet-1px )
+
+@mixin bp-xs-only {
+  @media (max-width: $bp-xs-max) {
+    @content;
+  }
+}
+
+// -- Wide phone and bigger
+
+@mixin bp-xs-wide {
+  @media (min-width: $bp-xs-wide) {
+    @content;
+  }
+}
+
+// -- landscape phone only: 480 up to tablet-1px
+
+@mixin bp-xs-wide-only {
+  @media (min-width: $bp-xs-wide) and (max-width: $bp-xs-wide-max) {
+    @content;
+  }
+}
+
+// -- Tablet portrait and bigger
+
+@mixin bp-sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+
+// -- Tablet portrait size only
+
+@mixin bp-sm-only {
+  @media (min-width: $bp-sm) and (max-width: $bp-sm-max) {
+    @content;
+  }
+}
+
+// -- Phone + tablet
+
+@mixin bp-sm-max {
+  @media (max-width: $bp-sm-max) {
+    @content;
+  }
+}
+
+// -- Desktop (or tablet landscape) and bigger
+
+@mixin bp-md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+// -- Desktop only
+
+@mixin bp-md-only {
+  @media (min-width: $bp-md) and (max-width: $bp-md-max) {
+    @content;
+  }
+}
+
+// -- Bigger than desktop but smaller than
+
+@mixin bp-lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+@mixin bp-xl {
+  @media (min-width: $bp-xl) {
+    @content;
+  }
+}
+
+// -- Print css only
+
+@mixin print {
+  @media only print {
+    @content;
+  }
+}

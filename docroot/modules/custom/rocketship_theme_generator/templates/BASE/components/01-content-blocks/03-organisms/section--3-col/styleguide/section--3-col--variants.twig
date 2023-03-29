@@ -1,0 +1,90 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+
+{% for variant in variants %}
+
+  {% include "@%theme_prefix%-cb-organisms/section--3-col/styleguide/section--3-col.twig" with {
+    block_type: block_type,
+    description: variant.description,
+    label: variant.label,
+    template: variant.template,
+    minimal_styling: variant.minimal_styling,
+    region_type: variant.region_type,
+    modifier: variant.modifier,
+    bem_section_extra: variant.bem_section_extra,
+    extra_classes: variant.extra_classes,
+    settings: variant.settings,
+    content: variant.content,
+    blocks: variant.blocks,
+    layout_background_image: variant.layout_background_image,
+    background_stretched: variant.background_stretched,
+    background_color: variant.background_color,
+    col_spacing: variant.col_spacing,
+    col_spacing_override: variant.col_spacing_override,
+    col_spacing_override_column: variant.col_spacing_override_column,
+    valign: variant.valign,
+    section_spacing_top: variant.section_spacing_top,
+    section_spacing_bottom: variant.section_spacing_bottom,
+  } %}
+
+  {# <hr class="storybook__divider--hor" /> #}
+
+  {% include "@%theme_prefix%-cb-organisms/section--3-col/styleguide/section--3-col--center.twig" with {
+    block_type: block_type,
+    description: variant.description,
+    label: variant.label,
+    template: variant.template,
+    minimal_styling: variant.minimal_styling,
+    region_type: variant.region_type,
+    modifier: variant.modifier,
+    bem_section_extra: variant.bem_section_extra,
+    extra_classes: variant.extra_classes,
+    settings: variant.settings,
+    content: variant.content,
+    blocks: variant.blocks,
+    layout_background_image: variant.layout_background_image,
+    background_stretched: variant.background_stretched,
+    background_color: variant.background_color,
+    col_spacing: variant.col_spacing,
+    col_spacing_override: variant.col_spacing_override,
+    col_spacing_override_column: variant.col_spacing_override_column,
+    valign: variant.valign,
+    section_spacing_top: variant.section_spacing_top,
+    section_spacing_bottom: variant.section_spacing_bottom,
+  } %}
+
+  {# <hr class="storybook__divider--hor" /> #}
+
+  {% include "@%theme_prefix%-cb-organisms/section--3-col/styleguide/section--3-col--last.twig" with {
+    block_type: block_type,
+    description: variant.description,
+    label: variant.label,
+    template: variant.template,
+    minimal_styling: variant.minimal_styling,
+    region_type: variant.region_type,
+    modifier: variant.modifier,
+    bem_section_extra: variant.bem_section_extra,
+    extra_classes: variant.extra_classes,
+    settings: variant.settings,
+    content: variant.content,
+    blocks: variant.blocks,
+    background_image: variant.background_image,
+    layout_background_image: variant.layout_background_image,
+    background_stretched: variant.background_stretched,
+    background_color: variant.background_color,
+    col_spacing: variant.col_spacing,
+    col_spacing_override: variant.col_spacing_override,
+    col_spacing_override_column: variant.col_spacing_override_column,
+    valign: variant.valign,
+    section_spacing_top: variant.section_spacing_top,
+    section_spacing_bottom: variant.section_spacing_bottom,
+  } %}
+
+  {# <hr class="storybook__divider--hor" /> #}
+
+{% endfor %}

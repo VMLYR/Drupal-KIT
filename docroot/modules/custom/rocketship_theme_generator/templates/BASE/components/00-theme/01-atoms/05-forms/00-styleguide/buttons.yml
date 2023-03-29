@@ -1,0 +1,45 @@
+styleguide: true
+wrapper: true
+buttons:
+  - attributes:
+      class:
+        - 'js-form-submit'
+        - 'form-submit'
+      name: 'submit'
+      type: 'submit'
+      id: 'submit--1'
+      value: 'Submit'
+  - attributes:
+      class:
+        - 'js-form-submit'
+        - 'form-submit'
+      name: 'confirm'
+      type: 'submit'
+      id: 'submit--2'
+      value: 'Confirm'
+    button_bem_modifiers:
+      - 'primary'
+  - attributes:
+      class:
+        - 'image-button'
+        - 'js-form-submit'
+        - 'form-submit'
+      name: 'Image button'
+      type: 'image'
+      id: 'edit-image-button'
+      value: 'Confirm'
+      'data-drupal-selector': 'edit-image-button'
+      src: 'logo.svg'
+    button_bem_modifiers:
+      - 'primary'
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+<header role="banner" class="wrapper--headers">
+  {% block pageHeaderTop %}
+    {% if page.header_top or page.header_top_nav %}
+      {% include "@%theme_prefix%-organisms/header/header--top/_header--top.twig" %}
+    {% endif %}
+  {% endblock %}
+
+  {% block pageHeaderPrimary %}
+    {% include "@%theme_prefix%-organisms/header/header--primary/_header--primary.twig" %}
+  {% endblock %}
+</header>

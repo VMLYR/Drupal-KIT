@@ -1,0 +1,52 @@
+import { Story } from '@storybook/addon-docs';
+
+# Menus
+
+Many of the menu components generated here, will not be styled very well out of the box,<br />
+this is because they are usually styled in context of the region (or wrapper) they are in.<br />
+Probably not very component-minded, but it is often the most practical way to style a menu without having to do a lot of overrides.
+
+## Menus blocks
+
+2 parameters are absolutely needed:
+- 'menu': the name of the menu you to display (eg. 'main', 'secondary' or 'account'), this is used to build the BEM classes
+- 'region': context for where the menu is rendered (so in what Organism it shows up). Also used to render the correct twig in the Styleguide components.
+
+Depending on the region where it is rendered (header, one of the doormat regions, footer primary, …), a different twig template is used for a menu block.
+By default, navigation will use the `menus/menu/_menu-block.twig` template, which outputs a `<nav>` tag.
+However, menus rendered in the doormat or primary footer, will render using an altered block template from `molecules/footer/doormat` and `molecules/footer/primary`.
+It is the same as the default block template, except the headings are H4 instead of H2. These are wrapped in `<div>` tags.
+
+In the Styleguide components, for the menu blocks, you will see the different templates are loaded based on a dummy variable in the yml files called `regions`.
+This is not a Drupal variable, it's simply to 'fake' the region choice from block layout in the Storybook components.
+
+### Footer and doormat menus
+
+Menu blocks that show up here, don't have a `nav`-tag but are divs instead. <br />
+It's a consequence of some Drupal template overrides and is why the `menu.twig` template has an if/else by region
+
+## Menus
+
+Not all menus yml files are currently in use to show menu components, they fall in 2 categories:
+- menus that don't make sense (or are not styled) out of their context (eg. sitemap, only works in doormat), so you will find them in the relevant Organisms but not in the molecules
+- menus that are not currently in use but can serve as examples. Eg. secondary menu, the yml file exists and the twig code is present in the nav.twig file, but commented out.
+
+## Language
+
+The language menu comes in 2 flavors: a dropdown list, or inline elements.<br />
+By default, it is a dropdown.
+
+The way to switch this in Drupal, is to go to your theme's theme settings page and (un)check the 'dropdown' checkbox.
+By default your language menu in Drupal will be a dropdown
+
+The way to switch it in the Storybook component, is to change the `drupalSettings` 'dropdown' value in the menu--language.yml file to false
+
+In Rocketship, you'll probably see the language navigation is rendered twice: once in the 'nav' wrappers, and once in the 'top header'.<br />
+This is to give you the option of showing it one place on mobile and another place on wider screens<br />
+You just have to show/hide the correct one based on css breakpoints.<br />
+You can find the css to do this in `components/00-theme/02-molecules/menus/menu--language/_menu--language.scss`<br />
+Just look for `&.js-active {`
+
+## Tabs
+
+...

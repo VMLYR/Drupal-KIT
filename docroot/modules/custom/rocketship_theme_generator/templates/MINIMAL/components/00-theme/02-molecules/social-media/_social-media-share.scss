@@ -1,0 +1,89 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Social media sharing inside meta info of a node
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.social-widgets {
+  //
+}
+
+.social-widgets__group {
+  //
+}
+
+.social-widgets__title {
+  //
+}
+
+.social-link {
+
+  a {
+
+    @include font-awesome((
+      icon: $fa-var-share-square,
+      size: 32,
+      type: "regular",
+      color: hsl(var(--clr-base))
+    ));
+
+    &:hover {
+      &::before {
+        color: hsl(var(--clr-link));
+      }
+    }
+  }
+
+  .facebook {
+    @include font-awesome((
+      icon: $fa-var-facebook-f,
+      size: 22,
+      type: "brand"
+    ));
+  }
+
+  .twitter {
+    @include font-awesome((
+      icon: $fa-var-twitter,
+      size: 26,
+      type: "brand"
+    ));
+  }
+
+  .pinterest {
+    @include font-awesome((
+      icon: $fa-var-pinterest,
+      size: 28,
+      type: "brand"
+    ));
+  }
+
+  .linkedin {
+    @include font-awesome((
+      icon: $fa-var-linkedin,
+      size: 28,
+      type: "brand"
+    ));
+  }
+
+  .print {
+    @include font-awesome((
+      icon: $fa-var-print,
+      size: 22,
+      type: "solid"
+    ));
+  }
+
+  .e_mail {
+    @include font-awesome((
+      icon: $fa-var-envelope,
+      size: 28,
+      type: "solid"
+    ));
+  }
+}
+

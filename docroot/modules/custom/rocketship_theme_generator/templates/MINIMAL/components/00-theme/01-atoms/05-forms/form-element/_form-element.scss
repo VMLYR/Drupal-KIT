@@ -1,0 +1,205 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Styling
+// =============================================================================
+
+// Types of input:
+// email, number, password, search, tel, text, url, color, date, datetime,
+// datatime-local, month, time, week
+
+.form__element {
+  position: relative; // so tooltip can be positioned, if there is one
+  margin-bottom: var(--gap-md);
+  width: 100%;
+
+  // because we still run into floating elements instead of flexbox sometimes
+  @include clearfix;
+
+  .field-suffix,
+  .admin-link {
+    display: block;
+  }
+
+  .admin-link {
+    margin-top: rem(10);
+  }
+}
+
+.form__element--prefix,
+.form__element--suffix {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .form__element__description {
+    width: 100%; // make it go under the field
+  }
+}
+
+.form__element__prefix {
+  margin-right: rem(10);
+}
+
+.form__element__suffix {
+  margin-left: rem(10);
+}
+
+// ** inline rendering of items in a form__element
+
+.form__element .container-inline {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .label {
+    margin-right: rem(10);
+    @include font-size($font-size-base, $line-height-base);
+  }
+
+  div {
+    flex: 1; // shrink & basis 0, grow 1
+    padding-left: rem(10);
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  // Descriptions and help text can be made full size
+  .description {
+    flex: 1 0 100%;
+    padding-left: 0;
+  }
+
+  // Tooltips should shrink, only need space for icon
+  [data-drupal-field-elements="date-time"] + .description {
+    flex: 0 1 0; // grow & basis 0, shrink 1
+    padding-left: rem(10);
+  }
+}
+
+// ** Tooltip rendering
+
+.form__element__tooltip,
+.ui-widget .form__element__tooltip {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.form__element__tooltip__button,
+.ui-widget .form__element__tooltip__button {
+  display: block;
+  cursor: pointer;
+  width: rem(20);
+  height: rem(20);
+  padding: 0;
+  margin: 0;
+  border: 0 none;
+  border-radius: rem(10);
+  font-size: rem(15);
+  font-weight: bold;
+  line-height: rem(21);
+  text-align: center;
+  color: hsl(var(--clr-white));
+  background-color: hsl(var(--clr-link));
+}
+
+.form__element__tooltip__message,
+.ui-widget .form__element__tooltip__message {
+  pointer-events: none;
+  position: absolute;
+  right: -12px;
+  top: 25px;
+  z-index: 1;
+  width: rem(250);
+  visibility: hidden;
+  padding: rem(10);
+  @include font-size($font-size-sm, $line-height-sm);
+  text-transform: none;
+  border: 2px solid hsl(var(--clr-link));
+  border-radius: 5px;
+  color: hsl(var(--clr-base));
+  background-color: hsl(var(--clr-white));
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    right: rem(10);
+    display: block;
+  }
+
+  &::before {
+    top: -20px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid hsl(var(--clr-link));
+    border-left: 10px solid transparent;
+  }
+
+  &::after {
+    top: -17px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid hsl(var(--clr-white));
+    border-left: 10px solid transparent;
+  }
+
+  &.is-visible {
+    visibility: visible;
+  }
+}
+
+
+// * Errors
+// =============================================================================
+
+// these styles are set in _form-label.scss, _input.scss
+// and the various other form elements css files
+
+
+// * Hints & description
+// =============================================================================
+
+form small,
+form .description,
+.form__element__description,
+.password-suggestions,
+.webform-component--mandatory-fields p,
+.form__element ~ p {
+  display: block;
+  margin-top: var(--gap-sm);
+  color: hsl(var(--clr-form-inactive));
+  @include font-size($font-size-xs, $line-height-xs);
+
+  ul {
+    @include list((
+      type: "unsorted"
+    ));
+    overflow: hidden; // fix overlap bullets with floating elements
+    padding-left: 0;
+
+    > li {
+      margin-top: rem(6);
+      padding-left: rem(12);
+
+      &::before {
+        top: rem(8);
+        font-size: 4px;
+      }
+    }
+  }
+}
+
+// * Captcha badge
+// =============================================================================
+
+.grecaptcha-badge {
+  @include z-index(mobile-nav); // display over mobile menu
+}

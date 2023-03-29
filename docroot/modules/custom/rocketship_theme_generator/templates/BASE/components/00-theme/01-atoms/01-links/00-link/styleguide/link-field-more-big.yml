@@ -1,0 +1,6 @@
+link_content: Link text
+link_url: '#atoms-links-link--link-field'
+field_name: field_link_test
+field_type: link
+bem_field_extra:
+  - 'more-link--big'

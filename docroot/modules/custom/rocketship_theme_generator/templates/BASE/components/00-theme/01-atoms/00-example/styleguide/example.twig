@@ -1,0 +1,22 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+/**
+ * Available variables:
+ *
+ * 'example_content': the content of the component (typically text),
+ *
+ * Available blocks:
+ * - example_content - used to replace the content of the component with something other than text
+ *   for example: to insert an icon
+ */
+#}
+
+{% include "@%theme_prefix%-atoms/00-example/twig/example--master.twig" with {
+    'example_content': example_content,
+  }
+%}
+
+

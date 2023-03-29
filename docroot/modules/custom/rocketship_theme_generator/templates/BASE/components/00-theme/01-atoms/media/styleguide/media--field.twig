@@ -1,0 +1,72 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+  field_name: field_name,
+  field_type: field_type,
+  bem_field_modifiers: bem_field_modifiers,
+  bem_field_extra: bem_field_extra,
+  attributes: field_attributes,
+  label_display: label_display,
+  multiple: multiple,
+  items: items,
+} %}
+
+  {# somehow need to get into the multiple items of the media field, instead of a single one #}
+  {% if (multiple and items|length > 1) %}
+
+    {% block field_content_items %}
+
+      {% for item in items %}
+
+        {% embed "@%theme_prefix%-atoms/00-field/_field-item.twig" with {} %}
+
+          {% block fielditem_content %}
+
+            {% if type == 'image' %}
+              {% include "@%theme_prefix%-atoms/media/styleguide/media--image.twig" with {
+                  reference: item.reference,
+                }
+              %}
+            {% elseif type == 'video' %}
+              {% include "@%theme_prefix%-atoms/media/styleguide/media--video.twig" with {
+                  reference: item.reference,
+                }
+              %}
+            {% else %}
+              <p>Incorrect media type passed to media--field.twig in Media styleguide component (Atom)</p>
+            {% endif %}
+
+          {% endblock %}
+        {% endembed %}
+      {% endfor %}
+
+    {% endblock %}
+
+
+  {% else %}
+
+    {% block field_content %}
+
+      {% if type == 'image' %}
+        {% include "@%theme_prefix%-atoms/media/styleguide/media--image.twig" with {
+            reference: reference,
+          }
+        %}
+      {% elseif type == 'video' %}
+        {% include "@%theme_prefix%-atoms/media/styleguide/media--video.twig" with {
+            reference: reference,
+          }
+        %}
+      {% else %}
+        <p>Incorrect media type passed to media--field.twig in Media styleguide component (Atom)</p>
+      {% endif %}
+    {% endblock %}
+
+  {% endif %}
+
+{% endembed %}

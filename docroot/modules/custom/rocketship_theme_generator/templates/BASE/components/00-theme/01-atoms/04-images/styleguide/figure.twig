@@ -1,0 +1,46 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% set image_figure_bem_block = image_figure_bem_block|default(false) %}
+{% set image_figure_bem_element = image_figure_bem_element|default('figure') %}
+{% set image_figure_bem_modifiers = image_figure_bem_modifiers|default([]) %}
+{% set image_figure_bem_extra = image_figure_bem_extra|default([]) %}
+
+{% set image_link_bem_block = image_link_bem_block|default(image_figure_bem_element) %}
+{% set image_link_bem_element = image_link_bem_element|default('link') %}
+{% set image_link_bem_modifiers = image_link_bem_modifiers|default([]) %}
+{% set image_link_bem_extra = image_link_bem_extra|default([]) %}
+
+{% set image_bem_block = image_bem_block|default(image_figure_bem_element) %}
+{% set image_bem_element = image_bem_element|default('image') %}
+
+<figure
+  {{ bem(image_figure_bem_block, image_figure_bem_element, image_figure_bem_modifiers, image_figure_bem_extra) }}
+>
+  {% if image_url %}
+    <a {{ bem(image_link_bem_block, image_link_bem_element, image_link_bem_modifiers) }} href="{{ image_url }}">
+  {% endif %}
+    {% block figure_content %}
+      {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+        image_src: image_src,
+        image_url: image_url,
+        image_alt: image_alt,
+        image_bem_block: image_bem_block,
+      } %}
+      {# {% include "@%theme_prefix%-atoms/04-images/00-image/_image--responsive.twig" with {
+        responsive_image_bem_block: responsive_image_bem_block|default(image_figure_bem_element),
+      } %} #}
+    {% endblock %}
+  {% if image_url %}
+    </a>
+  {% endif %}
+
+  {% if image_caption %}
+    <figcaption {{ bem(figcaption_bem_block|default(image_figure_bem_element), 'caption', figcaption_modifiers) }}>
+      {{ image_caption }}
+    </figcaption>
+  {% endif %}
+</figure>

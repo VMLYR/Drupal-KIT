@@ -1,0 +1,5 @@
+label_hidden: true
+field_name: field_video
+field_type: entity_reference
+bem_field_modifiers:
+  - 'label-hidden'

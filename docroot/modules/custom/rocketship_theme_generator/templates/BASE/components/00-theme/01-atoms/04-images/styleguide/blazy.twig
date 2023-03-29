@@ -1,0 +1,43 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+  field_name: field_name,
+  field_type: field_type,
+  bem_field_modifiers: bem_field_modifiers,
+  bem_field_extra: bem_field_extra,
+  attributes: field_attributes,
+  multiple: multiple,
+  items: items,
+} %}
+
+  {% block field_content %}
+
+    {% embed "@%theme_prefix%-atoms/04-images/blazy/_blazy.twig" with {
+      blazy_bem_block: blazy_bem_block,
+      blazy_bem_modifiers: blazy_bem_modifiers,
+      settings: settings,
+      attributes: blazy_attributes,
+      url: url,
+    } %}
+
+      {% block blazy_image %}
+        {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+          image_src: image_src,
+          image_alt: image_alt,
+          image_bem_extra: image_bem_extra,
+          image_bem_modifiers: image_bem_modifiers,
+          attributes: image_attributes,
+        } %}
+      {% endblock %}
+
+    {% endembed %}
+
+  {% endblock %}
+
+{% endembed %}
+

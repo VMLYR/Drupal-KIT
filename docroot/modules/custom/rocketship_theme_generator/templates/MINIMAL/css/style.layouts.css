@@ -1,0 +1,52 @@
+/**
+ * Square mixin
+ *
+ * @param [Number] $dimensions = the height and width of the element
+ */
+/* stylelint-disable */
+/* stylelint-enable */
+body::after {
+  content: "bp-xs";
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: block;
+  padding: 0.625rem;
+  background: red;
+  visibility: hidden;
+  opacity: 0;
+}
+
+body.theme-debug-mode::after {
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  body::after {
+    content: "bp-sm";
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #ffce00;
+  }
+}
+@media (min-width: 940px) {
+  body::after {
+    content: "bp-md";
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: yellow;
+  }
+}
+@media (min-width: 1200px) {
+  body::after {
+    content: "bp-lg";
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: green;
+  }
+}
+/* stylelint-disable */
+/* stylelint-enable */

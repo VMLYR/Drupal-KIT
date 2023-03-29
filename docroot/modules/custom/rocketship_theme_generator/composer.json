@@ -1,0 +1,16 @@
+{
+  "name": "drupal/rocketship_theme_generator",
+  "description": "A module to generate component-based themes for use with Dropsolid Rocketship ecosystem",
+  "type": "drupal-module",
+  "homepage": "https://drupal.org/project/rocketship_theme_generator",
+  "authors": [
+    {
+      "name": "Rembrand Le Compte",
+      "homepage": "https://www.drupal.org/u/rembrandx",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "docs": "https://drupal.org/project/rocketship_theme_generator"
+  }
+}

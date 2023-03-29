@@ -1,0 +1,20 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    bem_block_modifiers: bem_block_modifiers,
+  } %}
+
+  {% block block_content %}
+
+    Powered by <a href="https://dropsolid.com" target="_blank">Dropsolid</a>
+
+  {% endblock %}
+
+{% endembed %}

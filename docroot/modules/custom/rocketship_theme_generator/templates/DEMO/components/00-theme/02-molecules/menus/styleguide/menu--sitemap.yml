@@ -1,0 +1,32 @@
+region: doormat
+menu: main
+label: 'Sitemap'
+configuration:
+  label_display: false
+heading_level: 4
+heading_id: block-sitemap-menu-xyz
+menu_block_bem_modifiers:
+  - system-menu-block
+  - region-doormat
+menu_block_bem_extra:
+  - 'block--menu'
+  - 'block-system'
+items:
+  - title: 'Home'
+    url: '#'
+  - title: 'Collection'
+    url: '#'
+  - title: 'Subscriptions'
+    url: '#'
+    # no_link: true
+  - title: 'Find a dealer'
+    url: '#'
+  - title: 'Blog'
+    url: '#'
+  - title: 'About us'
+    url: '#'
+  # - title: Contact
+  #   url: '#'
+  #   link_attributes:
+  #       class:
+  #         - 'menu__item--button'

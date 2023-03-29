@@ -1,0 +1,37 @@
+{#
+/**
+ * Available variables:
+ * - ol_base_class - the base classname
+ * - ol_modifiers - array of modifiers to add to the base classname
+ * - ol_blockname - blockname prepended to the base classname
+ *
+ * - listItems - TBD
+ */
+#}
+{% set bem_ol_block = bem_ol_block|default('ol') %}
+{% set bem_ol_element = bem_ol_element|default(false) %}
+{% if bem_ol_modifiers is not defined %}
+  {% set bem_ol_modifiers = [] %}
+{% endif %}
+
+{% if cke %}
+<div class="text-long">
+{% endif %}
+
+<ol {{ bem(bem_ol_block, bem_ol_element, bem_ol_modifiers) }}>
+  {% block list_content %}
+    {% for ol_item in ol_items %}
+      {% include "@%theme_prefix%-atoms/03-lists/list--ul/_list-item.twig" with {
+        "list_item_label": ol_item.label,
+        "list_item_content": ol_item.content,
+        "bem_li_block": ol_item.bem_li_block,
+        "bem_li_element": ol_item.bem_li_element,
+        "bem_li_modifiers": ol_item.bem_li_modifiers,
+      } %}
+    {% endfor %}
+  {% endblock %}
+</ol>
+
+{% if cke %}
+</div>
+{% endif %}

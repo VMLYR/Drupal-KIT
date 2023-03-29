@@ -1,0 +1,24 @@
+label: 'CB Text'
+configuration:
+  label_display: false
+block_type: cb_text
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+  - cb--view-mode--left
+  - cb-text--view-mode--left
+fields:
+  buttons:
+    field_name: 'field_cb_button'
+    field_type: 'link'
+    label_hidden: true
+    items:
+      - content:
+          '#title': 'First field item'
+          '#type': "link"
+      - content:
+          '#type': 'link'
+          '#url': '#'
+          '#title': 'Second field item'

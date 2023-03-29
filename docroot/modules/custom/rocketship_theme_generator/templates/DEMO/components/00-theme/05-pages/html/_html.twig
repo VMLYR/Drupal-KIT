@@ -1,0 +1,49 @@
+{#
+  Load webfonts using critical css, in parent theme's @pages/html/_html.twig
+  See more info in the README.
+
+  Variables:
+  * tile_color: background for tile in Microsoft behind logo/favicon
+  * safari_tab_color: for tab color in safari when pinning site
+
+  * webfont_config_typekit_css: (string or false); typekit font url
+  * webfont_config_google_css: (string or false); google font url,
+  * webfont_config_text_fonts: (array or false); self-hosted font families names for text,
+  * webfont_config_icon_fonts: (array or false); self-hosted font families names for icons,
+  * webfont_config_font_files: (array); path of all the self-hosted font files, relative to the 'fonts' folder of the theme
+  * webfont_config_font_types: (array); the different file types that need to be preloaded
+  * webfont_config_fonts_css: (array); name of any locally hosted fonts files (default: style.fonts.scss)
+
+  * Examples:
+  * webfont_config_typekit_css: 'https://use.typekit.net/xdb1sgv.css'
+  * webfont_config_google_css: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap'
+#}
+{% include '@%theme_prefix%-pages/html/_html--master.twig' with {
+
+    body_classes: [
+      logged_in ? 'user-logged-in',
+      not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+      node_type ? 'page-node-type-' ~ node_type|clean_class,
+      db_offline ? 'db-offline',
+    ],
+
+    safari_tab_color: '#62bdc2',
+    tile_color: '#FFFFFF',
+
+    webfont_config_typekit_css: false,
+    webfont_config_google_css: false,
+    webfont_config_fonts_css: ['style.fonts.css'],
+    webfont_config_font_families: {
+      'text-01': 'Poppins',
+      'heading-01': 'AbrilFatface',
+      'icons-01': 'Font Awesome 5 Free',
+      'icons-02': 'Font Awesome 5 Brands',
+    },
+    webfont_config_font_files: [
+      'Poppins/Poppins-Regular', 'Poppins/Poppins-Light', 'Poppins/Poppins-Medium', 'Poppins/Poppins-SemiBold', 'Poppins/Poppins-Bold',
+      'AbrilFatface/AbrilFatface-Regular',
+      'FontAwesome/fa-brands-400', 'FontAwesome/fa-regular-400', 'FontAwesome/fa-solid-900',
+    ],
+    webfont_config_font_types: ['woff2'],
+  }
+%}

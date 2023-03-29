@@ -1,0 +1,33 @@
+reference:
+  media_bundle: image
+  media_published: true
+  view_mode: layout_builder_background
+  field:
+    label_hidden: true
+    field_name: field_media_image
+    field_type: image
+    bem_field_extra:
+      - 'blazy'
+      - 'blazy--field'
+      - 'blazy--field-media-image'
+    field_attributes:
+      'data-blazy': ''
+    settings:
+      lazy: true
+      use_loading: true
+    blazy_bem_modifiers:
+      - 'bundle--image'
+      - blazy
+      - image
+      - loading
+    image_src: 'https://placeimg.com/320/60/arch'
+    image_alt: 'A 1 by 4 image'
+    image_srcset: 'https://placeimg.com/320/60/arch 320w, https://placeimg.com/480/120/arch 480w, https://placeimg.com/640/160/arch 640w, https://placeimg.com/800/200/arch 800w, https://placeimg.com/960/235/arch 960w, https://placeimg.com/1120/280/arch 1120w, https://placeimg.com/1280/320/arch 1280w, https://placeimg.com/1440/360/arch 1440w, https://placeimg.com/1600/400/arch 1600w'
+    image_sizes: '100vw'
+    image_bem_extra:
+      - 'media__image'
+      - 'media__element'
+      - 'b-lazy'
+    image_loading: "lazy"
+    output_image_tag: true
+

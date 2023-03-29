@@ -1,0 +1,148 @@
+import { Story } from '@storybook/addon-docs';
+
+# Content sections
+
+Layout templates, specifically made for Rocketship, can be applied on Sections to create rows that have or don't have columns, as well as other special options. <br />
+By adding Content Blocks to the regions inside those Sections (in columns or not), we effectively create Content Sections. <br />
+Working this way, the combinations of Blocks and Sections are equivalent to working with the Paragraph types in Rocketship before the switch to Layout Builder.
+In these following components, we explore the various combinations of the Content Blocks and different column structures the Sections offer, as well as various other variants created by extra options.
+
+## Layouts
+
+So far, we have these:
+- 1-col: just 1 column, has a main region and 2 subregions you can enable to group fields together above or below the main region
+- 2-col: 2 colums, each column has 1 regions (but the Webadmin only has 1 region per column available)
+- 3-col: 3 colums, only for use with USP block type
+- 4-col: 4 columns, only for use with USP block type
+- carousel: has 1 main section that uses Slick to create a carousel from all the blocks inside of it. We only allow Image blocks to be used, by the webadmin. Equivalent to the Logo Bar Paragraph type.
+
+## Section options
+
+The various sections have options that can be used to differentiate them from each other, depending on what Layout was chosen. <br />
+Some options are hidden from content editors (eg. Webadmin) and only for developers (superadmin).<br />
+Here is an overview of the most common options.
+
+### Minimal styling
+
+Only for developers.
+
+If turned off, many classes and styles will be reset. This is so you can still use Rocketship layouts on Sections to build custom rows with custom block types.<br />
+This needs to be turned on if used in combination with Content Blocks.
+
+How it's used in the data of the Storybook components:
+
+```
+minimal_styling: false
+```
+
+### Extra classes and BEM
+
+Developers have the option to add strings that will be converted to extra classes on the Section. This can be used to customize a Section or Blocks inside those sections and create variants.
+
+```
+modifier: my-modifier
+extra_classes: 'test01 test02 test03' # use spaces to separate multiple class names
+```
+
+### Padding
+
+Top and bottom padding can be modified. <br />
+This is handy if you have 2 sections with the same background-color following each other. <br />
+By resetting the bottom space of the first Section, you can prevent it from looking like there is too much space between the Sections.<br />
+
+Data:
+```
+section_spacing_top: 1x
+section_spacing_bottom: 0x
+```
+
+Outputs as classes:
+```
+layout--v-space-top-1x layout--v-space-bottom-0x
+```
+
+### Background-color and background-image
+
+All Rocketship Layouts have this option.<br />
+Outputs a preview of the colors defined in: /admin/config/system/rocketship-core
+
+This option allows you to pick a background-color (coming from configuration), which is output as multiple classes.<br />
+
+The data you use in a Storybook component, is simplified somewhat in order to make it easier:
+
+```
+background_color: spot_1 # the machine name for the color
+background_image: true # if true, outputs a random image from a generator
+```
+
+The output as classes on the layout html:
+
+```
+layout--bg-color: generic, when a bg color is active
+layout--bg--spot-1: for the specific color
+layout--bg-image: if a bg image is active
+```
+
+### Other
+
+We won't reitterate all the available options, as they can be seen and tested in the section components themselves, but here is an overview of most of the others:<br />
+
+- column sizes (2-col only)
+- column spacing
+  - can choose which one to override + the size of the spacing
+- vertial alignment of the columns (multi-column layouts only)
+- subregions (1-col only, available for developers)
+  - subregion 1 (displays above the main region)
+  - subregion 2 (displays below the main region)
+- autoplay (carousel layout only)
+
+
+## Structure
+
+The html is coming from a combination of the generic Layout Builder html, with html coming from the specific layout templates. <br />
+For use in components, we've faked the layouts in `00-theme/04-templates/styleguide`. These are copies of what is made available by the Rocketship Core module.
+
+## Data structure
+
+Besides the options being separate keys in the data, that result in classes on the html, there are some other typical bits of data:
+
+The label as well as the name of the template (which is also output as a class)
+```
+label: 'Content'
+template: 'rs-two-col'
+```
+
+The regions inside of the Section need to be enabled in the data of components.<br />
+The name depends on which Layout Template is in use:
+
+Example for Rocketship 1 col:
+```
+content:
+  content: true
+  before01: false
+  before02: false
+  after01: false
+  after02: false
+````
+
+Example for Rocketship 2 col:
+
+```
+content:
+  first_main: true
+  second_main: true
+```
+
+## Structural CSS and colors
+
+As mentioned, when Rocketship Core module is enabled, you have access to a configuration screen to add your background colors.<br />
+However, there are a few more options to note:
+
+- **Enable structural CSS:** if you are not using a Rocketship theme, enabling this option loads some css to at least get some basic styling. <br />
+   For reference, the file used, is `style.content-blocks.colors.min.css` in RS Core module. This CSS is created by taking a Starter theme, and then compiling the Sass. <br />
+   The resulting CSS can be found in `css/style.content-blocks.colors.css`.<br />
+   You do need to remove some styling at the very start of the file, before it can be used. Namely the `.icon--…` and `body::after` stuff.
+- **Enable Colors CSS:** enabling this option loads extra CSS for extra color variants, if you don't use a Rocketship theme. <br />
+   For reference, a CSS-template `style.content-blocks.layout.min.css` is used to generate exact CSS. It is created by a Starter theme when compiling the Sass to CSS.<br />
+   The resulting CSS can be found in `css/style.content-blocks.structural.css`.<br />
+   You do need to remove some styling at the very start of the file, before it can be used. Namely the `.icon--…` and `body::after` stuff.

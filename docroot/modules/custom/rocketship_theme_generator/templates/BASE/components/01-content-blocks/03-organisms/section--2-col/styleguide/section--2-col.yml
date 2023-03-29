@@ -1,0 +1,10 @@
+label: 'Content'
+template: 'rs-two-col'
+minimal_styling: false
+modifier: null
+extra_classes:
+reversed: false
+content:
+  first_main: true
+  second_main: true
+description: default

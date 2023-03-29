@@ -1,0 +1,72 @@
+import { Story } from '@storybook/addon-docs';
+
+# Tables
+
+## Scroll vs reformatted
+
+The responsive Drupal tables have 2 main types of styling: scroll and reformatted:<br />
+- scroll, is that the table gets a wrapper with a horizontal scrollbar on mobile<br />
+- reformatted, is that the `th` and `td` elements will become blocks on mobile and thus form 1 column.
+
+This is set by printing a 'table-responsive' wrapper around every table <br />
++ a class that decides what type it is (this is set in _tables.twig).
+
+This happens by passing different strings to the table's `attributes.class` property.
+- `table--scroll`: makes sure `has-scroll` is printed
+- `table--reformatted`: makes sure `is-reformatted` is printed
+
+**By default (so if no string is passed), `has-scroll` is printed, <br />
+which is why the table components in Storybook are all scrolling tables on mobile.<br />
+You can change this in the Storybook component by uncommenting the class in the `table.yml`data file<br />
+but you still have to make changes for Drupal in the either the table twig files or via a theme function.**
+
+So, the **first option** (the default) is tables that scroll vertically, <br />
+which can be set by passing `table--scroll` to `attributes.class` (ideally by using a theme function) <br />
+or by leaving the default as-is.
+
+A **second option**, is to make the cells collapse on small screens, so every cell becomes a column.<br />
+If you want to do this for a specific table, you will need to add the `table--reformatted` class <br />
+to the table's `attributes.class` parameter.
+
+A **third option**, is to turn off responsiveness for specific tables, this is also done via the theme function.<br />
+You can find an example of this in the .theme file in the `_preprocess_office_hours_table` hook.<br />
+which sets this: `$variables['table']['#responsive'] = FALSE;`
+
+Or follow the theme suggestions to override the table's twig template and override the data or the classes directly.
+
+## Zebra striping
+
+Tables output by Drupal can have odd and even row styling (usually a background-color), by printing 'odd' and 'even' classes on the rows. <br />
+There is 1 example table in the Storybook components that has this.<br />
+_Depending on the theme you are using, you may have to enable or add the styling yourself to the correct table elements in `_tables.scss`._
+
+For tables output in CKEditor, zebra styling can be made to work by having a 'Style' that prints an `is-striped` class on the table tag itself.<br />
+_Depending on the theme you are using, you may have to enable or add the styling yourself to the correct table elements in `_tables.scss`._
+
+## Javascript
+
+In order to properly make fixed columns, some js is used (in tables.js)
+
+## CKE
+
+Because tables in CKE are not constructed using the Drupal twig templates, <br />
+the `tables.js` JS file (from the `theme/component_tables`) makes sure the correct wrapper and classes are printed<br />
+around any table that is added via CKE.
+As mentioned, by default they are scrollable. <br />
+So the JS will wrap your table and set the `has-scroll` class automatically. <br />
+If you want to change this default behavior, you will need to look for and replace that class in tables.js (rule 121)
+
+However, please try to avoid changing this default. <br />
+You can easily override the behavior on individual CKE tables by using the `Styles` dropdown and picking the `reformatted` style.
+
+The JS will also do this for non-CKE tables, if they don't use the normal Drupal Twig file.
+
+## Behavior
+- **Table without Th:**
+  will scroll horizontally
+- **Table with Th in head:**
+  the row of th's will become a fixed column on the left side, and the body will scroll vertically
+- **Table with Th in body:**
+  the row of th's will become a fixed column on the left side, and the body will scroll vertically
+- **Table with Th in head and body:**
+  the row of th's from the head will become a fixed column on the left side, and the body will scroll vertically

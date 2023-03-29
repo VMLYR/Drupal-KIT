@@ -1,0 +1,65 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Form: Input
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Every input type that is not a radio or checkbox or some special looking field:
+// email, number, password, search, tel, text, url, color, date, datetime,
+// datatime-local, month, time, week
+#{$text-inputs-list},
+textarea {
+  appearance: none; // remove Safari mobile styling (box-shadow & corners)
+  padding: rem(9) rem(10);
+  width: 100%;
+  border: 1px solid hsl(var(--clr-form-border));
+  border-radius: 6px;
+  color: hsl(var(--clr-form));
+  background: hsl(var(--clr-white));
+  outline: none;
+  transition: all $duration $easing;
+
+  &::placeholder {
+    color: hsl(var(--clr-placeholder));
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus:hover {
+    border-color: hsl(var(--clr-form-active-border));
+    outline: 0;
+  }
+
+  &[disabled],
+  &:disabled {
+    opacity: .5;
+    border-color: hsl(var(--clr-form-disabled-border));
+    color: hsl(var(--clr-form-disabled));
+    background: hsl(var(--clr-form-disabled-bg));
+  }
+
+  &.error {
+    border-color: hsl(var(--clr-error));
+    color: hsl(var(--clr-error));
+  }
+}
+
+
+// * Errors & warnings and stuff
+// =============================================================================
+
+// Add error color on ALL inputs
+input.error {
+  color: hsl(var(--clr-error));
+}
+
+
+// * Admin
+// =============================================================================
+
+input.admin-menu-search {
+  height: auto;
+}
+

@@ -1,0 +1,59 @@
+label: 'Info home'
+configuration:
+  label_display: false
+block_type: cb_text
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+  - cb--view-mode--left
+  - cb-text--view-mode--left
+fields:
+  title:
+    heading_display: true
+    heading_level: 2
+    heading: "100% nature in mind"
+    field_name: field_cb_title
+    field_type: string
+  # subtitle:
+  #   heading_display: true
+  #   heading_level: 3
+  #   heading: Block subtitle
+  #   field_name: field_cb_subtitle
+  #   field_type: string
+  # teaser:
+  #   label_hidden: true
+  #   field_name: field_cb_teaser
+  #   field_type: string_long
+  #   bem_field_modifiers:
+  #     - 'label-hidden'
+  #   content: "Our latest collection is all about the natural phenomena we see daily. We drew inspiration from the colours and shapes to make perfection."
+  text:
+    label_hidden: true
+    field_name: field_cb_text
+    field_type: text_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'text-long'
+    content: |
+      <p>At Florista we know that sending flowers conveys a truly heartfelt message to someone special. It could be an expression of love, affection, health, happiness and a lot more.</p>
+      <p>For over 40 years we supply flowers and plants to families and businesses in Belgium and across Europe.</p>
+  buttons:
+    field_name: 'field_cb_button'
+    field_type: 'link'
+    label_hidden: true
+    items:
+      - content:
+          '#title': 'To the shop'
+          '#type': "link"
+          '#url': '#'
+      - content:
+          '#title': 'Workshops'
+          '#type': "link"
+          '#url': '#'
+      - content:
+          '#title': 'Flowers and plants for your office'
+          '#type': "link"
+          '#url': '#'

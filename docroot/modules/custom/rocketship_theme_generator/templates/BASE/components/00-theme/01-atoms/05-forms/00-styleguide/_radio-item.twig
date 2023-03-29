@@ -1,0 +1,11 @@
+<div class="form__element form-item js-form-item js-form-type-radio form-type-radio js-form-item-radios form-item-radios form-type--radio form__element--radios">
+  <input id="{{label_attributes.for}}" name="radio" type="radio" class="radio"{% if disabled %} disabled="disabled"{% endif %}{% if checked %} checked="{{ checked }}"{% endif %}{% if required %} required="required"{% endif %}> {{ radio_item }}
+
+  {% include "@%theme_prefix%-atoms/05-forms/form-label/_form-label.twig" with {
+    title: title,
+    attributes: label_attributes,
+    required: required,
+    title_display: title_display,
+    styleguide: styleguide,
+  } %}
+</div>

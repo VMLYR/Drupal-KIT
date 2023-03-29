@@ -1,0 +1,65 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+<div class="storybook__content__label storybook__content__label--layout">
+  {{description}}
+</div>
+
+{% embed "@%theme_prefix%-templates/styleguide/section/one-col.twig" with {
+  description: description,
+  label: label,
+  template: template,
+  minimal_styling: minimal_styling,
+  region_type: region_type,
+  modifier: modifier,
+  bem_section_extra: bem_section_extra,
+  extra_classes: extra_classes,
+  settings: settings,
+  content: content,
+  background_stretched: background_stretched,
+  background_color: background_color,
+  background_image:background_image,
+  layout_background_image: layout_background_image,
+  section_spacing_top: section_spacing_top,
+  section_spacing_bottom: section_spacing_bottom,
+} %}
+
+  {% block section_content %}
+
+    {# Title #}
+    {% include "@%theme_prefix%-cb-molecules/011-title/styleguide/title.twig" with {
+      label: blocks.cb_title.label,
+      configuration: blocks.cb_title.configuration,
+      block_type: blocks.cb_title.block_type,
+      bem_block_modifiers: blocks.cb_title.bem_block_modifiers,
+      bem_block_extra: blocks.cb_title.bem_block_extra,
+      fields: blocks.cb_title.fields,
+    } %}
+  {% endblock %}
+
+  {% block section_after01 %}
+
+    {% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+      label: breadcrumbs.label,
+      configuration: breadcrumbs.configuration,
+      bem_block_modifiers: breadcrumbs.bem_block_modifiers,
+      bem_block_extra: breadcrumbs.bem_block_extra,
+    } %}
+
+    {% block block_content %}
+
+      {% include "@%theme_prefix%-molecules/menus/breadcrumbs/_breadcrumbs.twig" with {
+        breadcrumb: breadcrumbs.breadcrumbs.breadcrumb,
+      } %}
+
+    {% endblock %}
+
+  {% endembed %}
+
+  {% endblock %}
+
+{% endembed %}

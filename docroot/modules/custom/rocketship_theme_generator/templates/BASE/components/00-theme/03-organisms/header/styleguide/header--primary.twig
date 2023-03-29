@@ -1,0 +1,40 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-organisms/header/header--primary/_header--primary.twig" with {
+    page: page,
+  } %}
+
+  {% block header_section_primary_content %}
+
+    {# add branding #}
+    {% include "@%theme_prefix%-molecules/branding/styleguide/branding-site.twig" with {
+      name: branding.name,
+      slogan: branding.slogan,
+      link_href: branding.link_href,
+      img_src: branding.img_src,
+      bem_logo_modifiers: branding.bem_logo_modifiers,
+    } %}
+  {% endblock %}
+
+
+  {% block header_section_secondary_content %}
+
+    {% include "@%theme_prefix%-organisms/header/styleguide/nav.twig" with {
+      nav_primary: nav.nav_primary,
+      nav_secondary: nav.nav_secondary,
+      header_top_nav: nav.header_top_nav,
+      menu_main: nav.menu_main,
+      menu_secondary: nav.menu_secondary,
+      menu_language: nav.menu_language,
+      menu_top: nav.menu_top,
+      menu_account: nav.menu_account,
+    } %}
+  {% endblock %}
+
+
+{% endembed %}

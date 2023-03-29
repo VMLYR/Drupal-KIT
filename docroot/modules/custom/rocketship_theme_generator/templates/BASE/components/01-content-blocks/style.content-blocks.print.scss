@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Print css: Content Blocks
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@import "../00-theme/00-base/_libs.scss";
+@import "../00-theme/00-base/00-config/**/*.scss";
+@import "../00-theme/00-base/01-helpers/**/*.scss";
+
+// we need our theme's atoms helpers
+@import "../00-theme/01-atoms/**/*helpers.scss";
+
+@import "00-base/**/*.scss";
+
+@media print {
+
+  // Story
+  // =============================================================================
+
+  .block--type-cb-text {
+
+    page-break-inside: avoid;
+    overflow: hidden; // keep floating stuff together
+
+    // ** image and text next to each other
+
+    .field--name-field-cb-title,
+    .field--name-field-cb-subtitle,
+    .text-long,
+    .field--buttons {
+      float: right;
+      margin-left: 0;
+      width: 56%;
+    }
+
+    .field--type-video-embed-field,
+    .field--image {
+      float: left;
+      margin-right: 0;
+      width: 40%;
+    }
+
+    .field--buttons {
+      float: right;
+    }
+
+    // ** STORY RIGHT
+
+    &.cb-text--view-mode--right,
+    &.cb-text--view-mode--image_right {
+
+      .field--name-field-cb-title,
+      .field--name-field-cb-subtitle,
+      .text-long,
+      .field--buttons {
+        float: left;
+      }
+
+      .field--type-video-embed-field,
+      .field--image {
+        float: right;
+      }
+
+      .field--buttons {
+        float: left;
+      }
+    }
+  }
+
+  // USP
+  // =============================================================================
+
+  .cb-usp--view-mode--4-column,
+  .cb-usp--view-mode--four-column {
+
+    page-break-inside: avoid;
+    overflow: hidden; // keep floating stuff together
+
+    // every item is a column
+
+    .field--name-field-cb-007-children {
+
+      .field__items {
+
+        margin-left: -2%;
+
+        & > .field__item {
+          float: left;
+          width: 23%;
+          margin-left: 2%;
+        }
+      }
+    }
+  }
+
+  // 2 columns
+
+  .cb-usp--view-mode--2-column,
+  .cb-usp--view-mode--two-column {
+
+    page-break-inside: avoid;
+    overflow: hidden; // keep floating stuff together
+
+    // every item is a column
+
+    .field--name-field-cb-007-children {
+
+      margin-left: -2%;
+
+      .field__items {
+
+        & > .field__item {
+          float: left;
+          width: 48%;
+          margin-left: 2%;
+        }
+      }
+    }
+  }
+
+  // Logobar
+  // =============================================================================
+
+  .block--type-cb-logo {
+    page-break-inside: avoid;
+    overflow: hidden; // keep floating stuff together
+  }
+}

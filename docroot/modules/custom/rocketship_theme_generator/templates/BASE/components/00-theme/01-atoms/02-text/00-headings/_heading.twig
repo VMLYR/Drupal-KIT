@@ -1,0 +1,71 @@
+{#
+/**
+ * Available variables:
+ * - heading_display - whether the title is visible or not
+ * - heading_level - the header level 1-6 (produces h1, h2, etc.)
+ * - heading_id - and id for the heading (pass a string)
+ *
+ * - heading_blockname - blockname prepended to the base classname
+ * - heading_element - the base class
+ * - heading_modifiers - array of modifiers to add to the base classname
+ *
+ * - heading - the content of the heading (typically text)
+ *
+ * - heading_url - (optional) the url the heading should poing to
+ * - heading_link_attributes - key/value attributes to pass to link
+ * - heading_link_block - override the link block name (defaults to heading_block)
+ * - heading_link_element - override the link base class
+ * - heading_link_modifiers - override the link modifiers
+ */
+#}
+{% set heading_display = heading_display ?? true %}
+{% set heading_level = heading_level|default('2') %}
+{% set heading_id = heading_id ?? false %}
+
+{% set bem_heading_block = bem_heading_block|default('h') %}
+{% set bem_heading_element = bem_heading_element ?? false %}
+{% set bem_heading_modifiers = bem_heading_modifiers|default([]) %}
+{% set bem_heading_extra = bem_heading_extra|default(['h' ~ heading_level]) %}
+
+{% set bem_heading_link_modifiers = bem_heading_link_modifiers|default(bem_heading_modifiers) %}
+{% set bem_heading_link_extra = bem_heading_link_extra|default(['h' ~ heading_level ~ '__link']) %}
+
+{# if heading is nested, we need to make the link classes reflect that #}
+{% if bem_heading_element != false %}
+
+  {% set bem_heading_extra = bem_heading_extra|merge(['h']) %}
+
+  {% set bem_heading_link_block = bem_heading_block ~ '__' ~ bem_heading_element %}
+  {% set bem_heading_link_element = 'link' %}
+  {% set bem_heading_link_extra = bem_heading_link_extra|merge([
+      'h' ~ '__link',
+    ])
+  %}
+{% endif %}
+
+{% set bem_heading_link_block = bem_heading_link_block|default(bem_heading_block) %}
+{% set bem_heading_link_element = bem_heading_link_element|default('link') %}
+
+{% if heading|default %}
+
+  {% if heading_display|default(false) == false %}
+    {% set bem_heading_extra = bem_heading_extra|merge(['visually-hidden']) %}
+  {% endif %}
+
+  <h{{ heading_level }} {% if bem_heading_block or bem_heading_element %}{{ bem(bem_heading_block, bem_heading_element, bem_heading_modifiers, bem_heading_extra) }}{% endif %}{% if heading_id %} id="{{ heading_id }}"{% endif %}>
+    {% if heading_url %}
+      {% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+        "link_content": heading,
+        "link_url": heading_url,
+        "link_attributes": bem_heading_link_attributes,
+        "bem_link_block": bem_heading_link_block|default(bem_heading_block),
+        "bem_link_element": bem_heading_link_element,
+        "bem_link_modifiers": bem_heading_link_modifiers,
+        "bem_link_extra": bem_heading_link_extra,
+      } %}
+    {% else %}
+      {{ heading }}
+    {% endif %}
+  </h{{ heading_level }}>
+
+{% endif %}

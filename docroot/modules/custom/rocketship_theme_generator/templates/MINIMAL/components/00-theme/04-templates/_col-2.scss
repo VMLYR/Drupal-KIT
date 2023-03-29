@@ -1,0 +1,84 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 2 column layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// .layout--2-col {
+//
+// }
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // columns wrapper
+  .layout__cols {
+    //
+  }
+
+  // reverse columns direction so sidebar is always first
+  .layout__cols--reversed {
+    //
+  }
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    //
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    //
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    //
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    //
+  }
+
+}

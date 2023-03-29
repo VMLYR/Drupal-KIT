@@ -1,0 +1,30 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+<form>
+  {% if not attributes %}
+  <div class="form__element form-item js-form-item js-form-type-select form-type-select js-form-item-my-select form-item-weight form-type--select form__element--my-select">
+    {% include "@%theme_prefix%-atoms/05-forms/form-label/_form-label.twig" with {
+        title: 'Select dropdown',
+        attributes: {'for': 'my-select'},
+        styleguide: true,
+    } %}
+    <div class="form__dropdown">
+      <select class="form-select form__select" id="my-select">
+        <optgroup label="Whatever">
+  {% endif %}
+          {% for selection in select %}
+            {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/_select-item.twig" with {
+              select_item: selection.title
+            } %}
+          {% endfor %}
+  {% if not attributes %}
+        </optgroup>
+      </select>
+    </div>
+  </div>
+  {% endif %}
+<form>

@@ -1,0 +1,29 @@
+label: 'B002 Image'
+labelled: false
+configuration:
+  label_display: false
+block_type: cb_image
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  media:
+    field:
+      label_hidden: true
+      field_name: field_cb_image
+      field_type: entity_reference
+      image_src: 'https://placeimg.com/320/213/arch'
+      image_alt: 'A 3:2 image'
+      image_srcset: 'https://placeimg.com/768/216/arch 480w, https://placeimg.com/940/627/arch 768w, https://placeimg.com/1200/800/arch 940w'
+      image_sizes: '100vw'
+      image_loading: 'lazy'
+  link:
+    image_wrapper_url_target: "_blank"
+    image_wrapper_url: "#"
+    image_wrapper_title: "link to some site"
+  #   link_content: Link text
+  #   link_url: '#'
+  #   field_name: field_cb_link
+  #   field_type: field_link

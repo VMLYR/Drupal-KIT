@@ -1,0 +1,29 @@
+<div class="header header--primary">
+  <div class="container">
+
+    {# logo with sitename & slogan goes here #}
+    {% block header_section_primary %}
+      {% if page.header %}
+      <div class="header__section--primary">
+        {% block header_section_primary_content %}
+          {{ page.header }}
+        {% endblock %}
+      </div>
+      {% endif %}
+    {% endblock %}
+
+    {% block header_section_secondary %}
+    <div class="header__section--secondary">
+      {% block header_section_secondary_content %}
+        {# Menus that you also want to be in mobile navigation
+          get passed to the header/nav component #}
+        {% include "@%theme_prefix%-organisms/header/nav/_nav.twig" with {
+          'nav_primary': page.nav_primary,
+          'nav_secondary': page.nav_secondary,
+        } %}
+      {% endblock %}
+    </div>
+    {% endblock %}
+
+  </div>
+</div>

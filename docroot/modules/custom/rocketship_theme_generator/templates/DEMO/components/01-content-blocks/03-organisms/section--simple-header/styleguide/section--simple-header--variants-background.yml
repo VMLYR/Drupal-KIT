@@ -1,0 +1,17 @@
+variants:
+  - description: 'default, no bg'
+  - description: 'grey bg'
+    background_color: grey
+  - description: 'black bg'
+    background_color: black
+  - description: 'spot 1 bg'
+    background_color: spot_1
+  - description: 'spot 2 bg'
+    background_color: spot_2
+  - description: 'spot 3 bg'
+    background_color: spot_3
+  - description: 'bg image'
+    background_image: true
+  - description: 'bg image + bg color'
+    background_color: black
+    background_image: true

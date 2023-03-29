@@ -1,0 +1,113 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Links
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Links
+// =============================================================================
+
+// ** This is NOT the link style used in the Editor or Styleguide,
+//    look further down the page for that.
+//    This is just a default, standard link style
+//    loaded by default in places OUTSIDE the editor
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  text-decoration-skip-ink: auto;
+  transition: color $duration $easing, background-color $duration $easing;
+
+  &,
+  &:visited {
+    color: hsl(var(--clr-link));
+  }
+
+  &:hover {
+    color: hsl(var(--clr-link-hover));
+  }
+
+  &:active,
+  &:focus {
+    color: hsl(var(--clr-link-active));
+  }
+
+  &::after,
+  &::before {
+    transition: all $duration $easing;
+  }
+
+  /**
+  * Remove the outline on focused links when they are also active or hovered
+  * in all browsers (opinionated).
+  */
+  &:hover,
+  &:active {
+    outline-width: 0;
+  }
+}
+
+
+// ** More (eg. in teasers)
+
+.more-link a,
+.link--more {
+  //
+  border: 5px solid red;
+}
+
+
+// ** Bigger "more" link (eg. for views on homepage)
+
+.more-link--big a,
+.link--more-big {
+  //
+  border: 5px solid red;
+}
+
+
+// ** Back
+
+.back-link a,
+.link--back {
+  //
+  border: 5px solid red;
+}
+
+
+// ** links in CKE & styleguide
+
+// a couple of ":not" selectors to exclude styleguide elements
+ul.inline a,
+.cke_editable a,
+.text-long a,
+.text-long .links li a {
+  // style the links specifically as used in CKE (if different than the 'default' link tag styles)
+  // eg. use the link-underline mixin
+}
+
+// ** normalize a bunch of browser shit
+
+a:not([href]):not([tabindex]) {
+  text-decoration: none;
+  // color: inherit; // don't use because it messes up color on disabled links without href
+}
+
+a:not([href]):not([tabindex]):focus,
+a:not([href]):not([tabindex]):hover {
+  text-decoration: none;
+  // color: inherit; // don't use because it messes up color on disabled links without href
+}
+
+a:not([href]):not([tabindex]):focus {
+  outline: 0;
+}
+
+// ** curser Pointer for Custom view-mode Wrappers
+//    which link to a location onclick
+[onclick^="location.href="],
+[onclick^="window.open"] {
+  cursor: pointer;
+}

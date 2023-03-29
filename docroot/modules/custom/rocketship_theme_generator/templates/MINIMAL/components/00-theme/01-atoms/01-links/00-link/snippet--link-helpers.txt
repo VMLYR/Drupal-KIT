@@ -1,0 +1,74 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Links: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** More Link
+// -- Used on teasers
+@mixin link-more {
+  display: inline-block;
+  text-decoration: none;
+  @include font-awesome((icon: $fa-var-angle-right, size: 14, type: "light", element: "after", margin: 0 0 0 rem(5)));
+  @include text-nobreak;
+
+  // remove in case styled by another element
+  &::before {
+    display: none;
+  }
+
+  &::after {
+    transition: none; // prevent lagging on transition from link tag itself
+  }
+}
+
+// ** More Link Big
+// -- Used with Views on homepage
+@mixin link-more-big {
+
+  @include font-size(22, 50);
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+
+  @include font-awesome((icon: $fa-var-long-arrow-right, size: 21, type: "regular", element: "after", margin: 0 0 0 rem(15)));
+  @include text-nobreak;
+
+  // remove in case styled by another element
+  &::before {
+    display: none;
+  }
+
+  &::after {
+    position: relative;
+    top: rem(-2);
+    transition: none;
+  }
+
+  &,
+  &:visited {
+    color: hsl(var(--clr-spot-1));
+  }
+
+  &:hover,
+  &:active {
+    color: hsl(var(--clr-spot-2));
+  }
+}
+
+// ** Back Link
+// --
+@mixin link-back {
+  display: inline-block;
+  text-decoration: none;
+  @include font-awesome((icon: $fa-var-angle-left, size: 14, type: "light", element: "before", margin: 0 rem(5) 0 0));
+  @include text-nobreak;
+
+  &::before {
+    transition: none; // prevent lagging on transition from link tag itself
+  }
+
+  &::after {
+    display: none;
+  }
+}

@@ -1,0 +1,111 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Header: primary
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * General
+// =============================================================================
+
+.wrapper--headers {
+  box-shadow: 5px 0px 10px 0px hsla(var(--clr-black), .2);
+}
+
+.header--primary {
+  position: relative;
+  padding: rem(15) 0;
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: sm
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .header--primary {
+    z-index: 6; // go over the secondary headers
+
+    > .container {
+      display: flex;
+    }
+  }
+
+  .header__section--secondary {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .wrapper--navigation,
+  .wrapper--navigation__content,
+  .nav-section--primary,
+  .nav--main {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .wrapper--navigation__content {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: rem(20);
+  }
+
+  // ** primary navigation (main menu)
+
+  .nav-section--primary {
+    //
+  }
+
+  // ** secondary navigation (language menu)
+
+  .nav-section--secondary {
+    //
+  }
+
+  .nav--main {
+    justify-content: flex-end;
+  }
+
+  // ** language
+  .nav--language-block {
+    margin-top: rem(5);
+    margin-left: rem(20);
+    padding-left: rem(20);
+
+    border-left: 1px solid hsl(var(--clr-border));
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: md
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .header--primary {
+    padding: rem(25) 0;
+  }
+
+
+  // ** language
+  .nav--language-block {
+    // margin-top: rem(10);
+    // margin-left: rem(20);
+    // padding-left: rem(20);
+  }
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: lg
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+  // ** language
+  .nav--language-block {
+    // margin-top: rem(14);
+    // margin-left: rem(54);
+    //padding-left: rem(54);
+  }
+}

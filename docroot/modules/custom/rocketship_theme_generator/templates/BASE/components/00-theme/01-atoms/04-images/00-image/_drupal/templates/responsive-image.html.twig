@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override of a responsive image.
+ *
+ * Available variables:
+ * - sources: The attributes of the <source> tags for this <picture> tag.
+ * - img_element: The controlling image, with the fallback image in srcset.
+ * - output_image_tag: Whether or not to output an <img> tag instead of a
+ *   <picture> tag.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_responsive_image()
+ */
+#}
+{% include "@%theme_prefix%-atoms/04-images/00-image/_image--responsive.twig" %}

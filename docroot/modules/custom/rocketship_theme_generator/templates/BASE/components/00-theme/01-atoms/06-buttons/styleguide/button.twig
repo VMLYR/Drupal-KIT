@@ -1,0 +1,46 @@
+{#
+/**
+ * Available variables for the component:
+ *
+ * all the twig variables from the master Twig file (as is also used by Drupal)
+ *  + some extras specific for the Styleguide
+ *
+ * Default:
+ * - 'button_type': indicates the tag used: 'link' for a-tag or 'button' for button,
+ * - 'button_url': url to pass, if it's a link,
+ * - 'button_content': the content of the button (typically text),
+ * The BEM parts:
+ *   - 'button_bem_block': best to leave empty here,
+ *   - 'button_bem_element': defaults to 'button', seems safest to leave as-is,
+ *   - 'button_bem_modifiers': set variants of the button (eg. secondary button),
+ *   - 'button_bem_extra': extra classes to append, if needed
+ *
+ * Specific for Styleguide
+ * - button_negative: if the button is on a dark background or not, boolean (or leave empty for false)
+ *
+ * Available blocks:
+ * - button_content - used to replace the content of the button with something other than text
+ *   for example: to insert an icon
+ */
+#}
+
+{% if button_negative %}
+<div style="display: inline-block; padding: 20px;background:black">
+{% endif %}
+{% if button_cke %}
+<div class="text-long">
+{% endif %}
+
+{% include "@%theme_prefix%-atoms/06-buttons/_button--master.twig" with {
+    'button_type': button_type,
+    'button_content': button_content,
+    'button_bem_modifiers': button_bem_modifiers
+  }
+%}
+
+{% if button_cke %}
+</div>
+{% endif %}
+{% if button_negative %}
+</div>
+{% endif %}

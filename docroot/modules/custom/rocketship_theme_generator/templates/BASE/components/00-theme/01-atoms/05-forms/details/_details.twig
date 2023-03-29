@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Theme override for a details element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the details element.
+ * - errors: (optional) Any errors for this details element, may not be set.
+ * - title: (optional) The title of the element, may not be set.
+ * - summary_attributes: A list of HTML attributes for the summary element.
+ * - description: (optional) The description of the element, may not be set.
+ * - children: (optional) The children of the element, may not be set.
+ * - value: (optional) The value of the element, may not be set.
+ *
+ * @see template_preprocess_details()
+ */
+#}
+{%
+  set classes = [
+  'js-form-wrapper',
+  'form-wrapper',
+]
+%}
+<details{{ attributes.addClass(classes) }}>
+  {%- if title -%}
+    {%
+      set summary_classes = summary_classes|default([])
+    %}
+    {% if required %}
+      {% set summary_classes = summary_classes|merge([
+          'js-form-required',
+          'form-required',
+        ])
+      %}
+    {% endif %}
+    <summary{{ summary_attributes.addClass(summary_classes) }}>{{ title }}</summary>
+  {%- endif -%}
+  <div class="details-wrapper">
+    {% if errors %}
+      <div class="form-item--error-message">
+        <strong>{{ errors }}</strong>
+      </div>
+    {% endif %}
+    {% block details_description %}
+    {%- if description -%}
+      <div class="details-description">{{ description }}</div>
+    {%- endif -%}
+    {% endblock %}
+    {% block details_children %}
+    {%- if children -%}
+      {{ children }}
+    {%- endif -%}
+    {% endblock %}
+    {% block details_value %}
+    {%- if value -%}
+      {{ value }}
+    {%- endif -%}
+    {% endblock %}
+  </div>
+</details>

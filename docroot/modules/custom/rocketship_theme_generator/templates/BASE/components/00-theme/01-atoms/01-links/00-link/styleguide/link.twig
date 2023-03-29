@@ -1,0 +1,39 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+/**
+ * Available variables:
+ * - link_content - the content of the link (typically text)
+ * - link_url - the url this link should point to
+ * - link_attributes - array of attribute,value pairs
+ * - bem_link_element - the base class name
+ * - bem_link_modifiers - array of modifiers to add to the base classname
+ * - bem_link_block - blockname prepended to the base classname
+ * - no_link - if there is no link provided, fall back to span instead of a-tag
+ *
+ * Available blocks:
+ * - link_content - used to replace the content of the link
+ *     Example: to insert the image component
+ */
+#}
+
+{% if cke %}
+<div class="text-long">
+{% endif %}
+
+{% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+    'link_content': link_content,
+    'link_url': link_url,
+    'link_attributes': link_attributes,
+    'bem_link_block': bem_link_block,
+    'bem_link_element': bem_link_element,
+    'bem_link_modifiers': bem_link_modifiers,
+    'no_link': no_link,
+  }
+%}
+
+{% if cke %}
+</div>
+{% endif %}

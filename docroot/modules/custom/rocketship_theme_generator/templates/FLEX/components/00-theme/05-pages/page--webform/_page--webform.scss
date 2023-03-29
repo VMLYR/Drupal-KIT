@@ -1,0 +1,36 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Webform confirmation (and other related pages)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * General
+// =============================================================================
+
+.webform-confirmation,
+.webform-submission {
+  padding-top: var(--gap-vert);
+  padding-bottom: var(--gap-vert);
+}
+
+.webform-confirmation__message {
+  @include h2;
+}
+
+.webform-confirmation__back {
+  @include link-back;
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .webform-confirmation,
+  .webform-submission {
+    --gap-vert: var(--gap-vert-lg-2);
+  }
+}

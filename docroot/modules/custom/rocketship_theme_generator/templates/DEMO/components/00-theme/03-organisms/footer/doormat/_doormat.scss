@@ -1,0 +1,227 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Doormat
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.doormat {
+  padding: rem(30) 0;
+  text-align: center;
+  color: hsl(var(--clr-doormat));
+  background: hsl(var(--clr-doormat-bg));
+
+  .container {
+    // compensate for vertical space between blocks
+    // replace with the bottom space of the
+    margin-bottom: rem(-30);
+  }
+}
+
+// * Blocks
+// =============================================================================
+
+.doormat .view,
+.doormat .nav,
+[class*="block--region-doormat"] {
+  margin-bottom: rem(30); // vertical space between blocks
+  color: hsl(var(--clr-doormat));
+
+  // ** Titles
+  h2,
+  h3,
+  h4 {
+    @include hide;
+  }
+
+  h5,
+  h6 {
+    margin-bottom: rem(10);
+  }
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .item-list {
+    ul {
+      @include list-reset;
+    }
+
+    li {
+      @include list-reset;
+      margin-bottom: rem(3);
+    }
+
+    a {
+      text-transform: uppercase;
+
+      &,
+      &:visited {
+        color: hsl(var(--clr-doormat));
+      }
+      &:hover {
+        color: hsl(var(--clr-spot-1));
+      }
+    }
+  }
+
+  .menu {
+
+    @include list-reset;
+
+    li {
+      @include list-reset;
+      margin-bottom: rem(3);
+    }
+
+    a {
+      text-transform: uppercase;
+
+      &,
+      &:visited {
+        color: hsl(var(--clr-doormat));
+      }
+      &:hover {
+        color: hsl(var(--clr-spot-1));
+      }
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .doormat {
+    padding: rem(35) 0 rem(25) 0;
+    text-align: left;
+  }
+
+  // * Structure
+  // ===========================================================================
+
+  .row--doormat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .col--doormat--02 {
+    order: 1; // display as last item
+    width: 100%;
+    text-align: center;
+  }
+
+  // * General styling
+  // =============================================================================
+
+  .doormat .view,
+  .doormat .nav,
+  [class*="block--region-doormat"] {
+
+    .item-list {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      li {
+        margin: 0 rem(10);
+
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      li {
+        margin: 0 rem(10);
+
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .doormat {
+    padding: var(--gap-vert-md) 0;
+
+    .container {
+      margin-bottom: rem(-20); // compensate for vertical space between blocks
+    }
+  }
+
+  // * Structure
+  // ===========================================================================
+
+  .row--doormat {
+    align-items: center;
+  }
+  .col--doormat--02 {
+    order: 0; // display on normal position
+    width: auto;
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .doormat {
+    padding: rem(65) 0 rem(50);
+  }
+
+  // * General styling
+  // =============================================================================
+
+  .doormat .view,
+  .doormat .nav,
+  [class*="block--region-doormat"] {
+
+    .item-list {
+      li {
+        margin: 0 rem(20);
+      }
+    }
+
+    .menu {
+      li {
+        margin: 0 rem(20);
+      }
+    }
+  }
+}

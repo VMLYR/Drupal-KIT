@@ -1,0 +1,50 @@
+
+.block__branding__image--header {
+  position: relative;
+  display: block;
+
+  img {
+    transition: all $duration $easing;
+  }
+}
+
+.block__branding__name--header,
+.block__branding__slogan--header {
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: sm
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block__branding__image--header {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: md
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block__branding__image--header {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: md
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block__branding__image--header {
+    //
+  }
+}

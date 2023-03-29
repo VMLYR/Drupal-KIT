@@ -1,0 +1,9 @@
+{% embed '@%theme_prefix%-pages/page/_page--master.twig' %}
+
+{# all non-Panel pages use the same layout for the main content #}
+
+  {% block pageContent %}
+    {{ page.content }}
+  {% endblock %}
+
+{% endembed %}

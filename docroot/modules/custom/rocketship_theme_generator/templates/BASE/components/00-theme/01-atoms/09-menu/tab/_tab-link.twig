@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override for a single local action link.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper element.
+ * - link: A rendered link element.
+ *
+ * @see template_preprocess_menu_local_action()
+ */
+#}
+{% include "@%theme_prefix%-atoms/03-lists/list--ul/_list-item.twig" with {
+  "list_item_content": link
+} %}

@@ -1,0 +1,206 @@
+label: 'Blog'
+configuration:
+  label_display: false
+block_type: cb_related_items
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  title:
+    heading_display: true
+    heading_level: 2
+    heading: Blog
+    field_name: field_cb_title
+    field_type: string
+  # subtitle:
+  #   heading_display: true
+  #   heading_level: 3
+  #   heading: Block subtitle
+  #   field_name: field_cb_subtitle
+  #   field_type: string
+  # teaser:
+  #   label_hidden: true
+  #   field_name: field_cb_teaser
+  #   field_type: string_long
+  #   bem_field_modifiers:
+  #     - 'label-hidden'
+  #   content: "Risus nec feugiat in fermentum posuere urna. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula."
+  related:
+    label_hidden: true
+    field_name: field_cb_related_items
+    field_type: entity_reference
+    multiple: true
+    items:
+      - view_mode: related
+        isPromoted: false
+        isSticky: false
+        bundle: page
+        fields:
+          image:
+            label_hidden: true
+            field_name: field_media_canonical_image
+            field_type: entity_reference
+            bem_field_extra:
+              - 'blazy'
+              - 'blazy--field'
+              - 'blazy--field-media-info-image'
+            field_attributes:
+              'data-blazy': ''
+            settings:
+              lazy: true
+              use_loading: true
+            blazy_bem_modifiers:
+              - 'bundle--image'
+              - blazy
+              - image
+              - loading
+            image_src: 'https://placeimg.com/320/213/arch'
+            image_alt: 'A square image'
+            image_srcset: 'https://placeimg.com/768/768/arch 480w, https://placeimg.com/940/940/arch 768w, https://placeimg.com/1200/1200/arch 940w'
+            image_sizes: '100vw'
+            image_bem_extra:
+              - 'media__image'
+              - 'media__element'
+              - 'b-lazy'
+            image_loading: "lazy"
+            output_image_tag: true
+          title:
+            heading_display: true
+            heading_level: 3
+            heading: "Atelier: Purple rain"
+            field_name: title
+            field_type: string
+            heading_url: '#'
+          description:
+            label_hidden: true
+            field_name: field_description
+            field_type: string_long
+            bem_field_modifiers:
+              - 'label-hidden'
+            content: "<p>You feel it in the air - a new era is dawning. We leave the tropical days behind and bring warm tones into our houses.</p>"
+          more:
+            label_hidden: true
+            field_name: field_page_display_canonical
+            field_type: rs_display_field
+            bem_field_modifiers:
+              - 'label-hidden'
+            bem_field_extra:
+              - 'field-page-display-canonical'
+            href: '#'
+            title: 'Read more'
+      - view_mode: related
+        isPromoted: false
+        isSticky: false
+        bundle: page
+        fields:
+          image:
+            label_hidden: true
+            field_name: field_media_canonical_image
+            field_type: entity_reference
+            bem_field_extra:
+              - 'blazy'
+              - 'blazy--field'
+              - 'blazy--field-media-info-image'
+            field_attributes:
+              'data-blazy': ''
+            settings:
+              lazy: true
+              use_loading: true
+            blazy_bem_modifiers:
+              - 'bundle--image'
+              - blazy
+              - image
+              - loading
+            image_src: 'https://placeimg.com/320/213/arch'
+            image_alt: 'A square image'
+            image_srcset: 'https://placeimg.com/768/768/arch 480w, https://placeimg.com/940/940/arch 768w, https://placeimg.com/1200/1200/arch 940w'
+            image_sizes: '100vw'
+            image_bem_extra:
+              - 'media__image'
+              - 'media__element'
+              - 'b-lazy'
+            image_loading: "lazy"
+            output_image_tag: true
+          title:
+            heading_display: true
+            heading_level: 3
+            heading: November - New dealerships
+            field_name: title
+            field_type: string
+            heading_url: '#'
+          description:
+            label_hidden: true
+            field_name: field_description
+            field_type: string_long
+            bem_field_modifiers:
+              - 'label-hidden'
+            content: "<p>With 3 more dealerships in Europe, our network is expanding like never before.</p>"
+          more:
+            label_hidden: true
+            field_name: field_page_display_canonical
+            field_type: rs_display_field
+            bem_field_modifiers:
+              - 'label-hidden'
+            bem_field_extra:
+              - 'field-page-display-canonical'
+            href: '#'
+            title: 'Read more'
+      - view_mode: related
+        isPromoted: false
+        isSticky: false
+        bundle: page
+        fields:
+          image:
+            label_hidden: true
+            field_name: field_media_canonical_image
+            field_type: entity_reference
+            bem_field_extra:
+              - 'blazy'
+              - 'blazy--field'
+              - 'blazy--field-media-info-image'
+            field_attributes:
+              'data-blazy': ''
+            settings:
+              lazy: true
+              use_loading: true
+            blazy_bem_modifiers:
+              - 'bundle--image'
+              - blazy
+              - image
+              - loading
+            image_src: 'https://placeimg.com/320/213/arch'
+            image_alt: 'A square image'
+            image_srcset: 'https://placeimg.com/768/768/arch 480w, https://placeimg.com/940/940/arch 768w, https://placeimg.com/1200/1200/arch 940w'
+            image_sizes: '100vw'
+            image_bem_extra:
+              - 'media__image'
+              - 'media__element'
+              - 'b-lazy'
+            image_loading: "lazy"
+            output_image_tag: true
+          title:
+            heading_display: true
+            heading_level: 3
+            heading: "It’s time to start shearing!"
+            field_name: title
+            field_type: string
+            heading_url: '#'
+          description:
+            label_hidden: true
+            field_name: field_description
+            field_type: string_long
+            bem_field_modifiers:
+              - 'label-hidden'
+            content: "<p>Get those scissors out and start shearing. Many of our seasonal flowers are to get ready for the upcoming temperatures.</p>"
+          more:
+            label_hidden: true
+            field_name: field_page_display_canonical
+            field_type: rs_display_field
+            bem_field_modifiers:
+              - 'label-hidden'
+            bem_field_extra:
+              - 'field-page-display-canonical'
+            href: '#'
+            title: 'Read more'

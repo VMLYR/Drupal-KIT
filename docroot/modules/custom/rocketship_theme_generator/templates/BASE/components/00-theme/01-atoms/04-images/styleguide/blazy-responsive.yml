@@ -1,0 +1,26 @@
+label_hidden: true
+field_name: media_info_image
+field_type: entity_reference
+bem_field_extra:
+  - 'blazy'
+  - 'blazy--field'
+  - 'blazy--field-media-info-image'
+field_attributes:
+  'data-blazy': ''
+settings:
+  lazy: true
+  use_loading: true
+blazy_bem_modifiers:
+  - 'bundle--image'
+  - blazy
+  - image
+  - loading
+image_src: 'https://placeimg.com/320/180/arch'
+image_alt: 'A 16 by 9 image'
+image_srcset: 'https://placeimg.com/320/180/arch 320w, https://placeimg.com/480/270/arch 480w, https://placeimg.com/640/360/arch 640w, https://placeimg.com/800/450/arch 800w, https://placeimg.com/960/540/arch 960w, https://placeimg.com/1120/630/arch 1120w, https://placeimg.com/1280/720/arch 1280w, https://placeimg.com/1440/810/arch 1440w, https://placeimg.com/1600/900/arch 1600w, https://placeimg.com/1760/990/arch 1760w, https://placeimg.com/1920/1080/arch 1920w, https://placeimg.com/2080/1170/arch 2080w, https://placeimg.com/2240/1260/arch 2240w'
+image_sizes: '100vw'
+image_bem_extra:
+  - 'media__image'
+  - 'media__element'
+  - 'b-lazy'
+output_image_tag: true

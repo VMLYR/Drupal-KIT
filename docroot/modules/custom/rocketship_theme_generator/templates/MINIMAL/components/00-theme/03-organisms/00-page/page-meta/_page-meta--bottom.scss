@@ -1,0 +1,62 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Page meta info
+// *
+// * row that collects info on the node: author, date, social links, …
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.node__meta--bottom > .layout__region {
+
+  // ** placing of social share
+
+  .block--extra-field-blocknodenewsdropsolid-social-widgets {
+    //
+  }
+
+  // ** filters (tags)
+  //    add all kinds of fields with lists of links here
+  .my-tags {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .node__meta--bottom > .layout__region {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+  .node__meta--bottom > .layout__region {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+  .node__meta--bottom > .layout__region {
+    //
+  }
+}

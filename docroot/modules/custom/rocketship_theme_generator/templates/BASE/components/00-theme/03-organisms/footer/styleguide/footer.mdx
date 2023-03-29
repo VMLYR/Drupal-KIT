@@ -1,0 +1,20 @@
+import { Story } from '@storybook/addon-docs';
+
+## Doormat
+
+The doormat structure can be customized to have as many columns as you want (by default, the Flex theme has 4, the Minimal and Starter begin with 1). <br />
+Add more (or remove some) as needed by the design, you can add individual column classes to control the individual width<br />
+(so they don't HAVE to all be the same width if not designed that way)
+
+Usually those columns will contain some menus (eg. new sitemap menu or reuse main menu 1st level), <br />
+a branding block, social media block and contact info block.
+
+A contact block used to be provided by the Office Feature <br />
+(and lives as an example Molecule component under `components/00-examples/02-features/f006-office/02-molecules/f006-office-contact`) <br />
+You could make a custom block type under the normal Molecules to mimic this.
+
+## Primary footer
+
+Usually only has 2 blocks: the copyright and the 'powered by' blocks.<br />
+An example is included (see footer--primary.twig and the story file) for adding an extra menu.<br />
+As explained in the copyright component doc, you may need the extra menu if you have more links to add than simpoy the T&C + Privacy Policy.

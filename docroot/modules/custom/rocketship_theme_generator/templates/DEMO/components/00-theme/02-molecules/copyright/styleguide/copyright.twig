@@ -1,0 +1,21 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    bem_block_modifiers: bem_block_modifiers,
+  } %}
+
+  {% block block_content %}
+    © Florista 2021 -
+    <a href="#" hreflang="en">Terms of use</a>
+    -
+    <a href="#" hreflang="en">Privacy policy</a>
+  {% endblock %}
+
+{% endembed %}

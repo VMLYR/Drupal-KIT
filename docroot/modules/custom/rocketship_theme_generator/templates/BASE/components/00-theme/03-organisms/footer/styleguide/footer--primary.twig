@@ -1,0 +1,49 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% embed "@%theme_prefix%-organisms/footer/footer--primary/_footer--primary.twig" %}
+
+  {% block footer %}
+    {# add copyright #}
+    {% include "@%theme_prefix%-molecules/copyright/styleguide/copyright.twig" with {
+      label: copyright.label,
+      heading_id: copyright.heading_id,
+      heading_level: copyright.heading_level,
+      configuration: copyright.configuration,
+      bem_block_modifiers: copyright.bem_block_modifiers,
+      bem_block_extra: copyright.bem_block_extra,
+      fields: copyright.fields,
+    } %}
+
+    {# Example: add a menu (if we need more than the 2 menu items provided by the copyright block) #}
+    {# {% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      region: menu_footer_primary.region,
+      menu: menu_footer_primary.menu,
+      label: menu_footer_primary.label,
+      heading_id: menu_footer_primary.heading_id,
+      heading_level: menu_footer_primary.heading_level,
+      configuration: menu_footer_primary.configuration,
+      attributes: menu_footer_primary.attributes,
+      menu_block_bem_modifiers: menu_footer_primary.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_footer_primary.menu_block_bem_extra,
+      items: menu_footer_primary.items,
+      links: menu_footer_primary.links,
+    } %} #}
+
+    {# add powered-by block #}
+    {% include "@%theme_prefix%-molecules/powered/styleguide/powered.twig" with {
+      label: powered.label,
+      heading_id: powered.heading_id,
+      heading_level: powered.heading_level,
+      configuration: powered.configuration,
+      bem_block_modifiers: powered.bem_block_modifiers,
+      bem_block_extra: powered.bem_block_extra,
+      fields: powered.fields,
+    } %}
+  {% endblock %}
+
+{% endembed %}
+

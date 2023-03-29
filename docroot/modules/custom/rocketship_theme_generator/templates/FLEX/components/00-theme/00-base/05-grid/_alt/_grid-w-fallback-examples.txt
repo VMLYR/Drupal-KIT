@@ -1,0 +1,168 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Grid: CSS-grid examples
+// *
+// * Usage similarly to the flex grid examples
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+$grid-w-fallback-examples: false;
+
+@if ($grid-w-fallback-examples) {
+
+  .example__section {
+    margin-bottom: 20px;
+  }
+
+  // ** wrapper for 12 column system
+  // =============================================================================
+
+  //   --   --   --   --   --   --   --   --   --   --   --   --
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   --   --   --   --   --   --   --   --   --   --   --   --
+  .my-simple-grid {
+    @include simple-grid;
+  }
+
+  // ** column that is 6 cols wide
+  // =============================================================================
+
+  //   ---------------------------   --   --   --   --   --   --
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //   ---------------------------   --   --   --   --   --   --
+
+  .my-simple-grid__col {
+    background-color: cyan;
+  }
+
+  .my-simple-grid__col-6 {
+    @include simple-grid-col(6);
+  }
+
+
+  // ** column that changes width per breakpoint
+  // =============================================================================
+
+  //    xs-small: 12
+  //    xs-wide: 12
+  //    sm: 6
+  //    md & lg: 4
+
+  //   ---------------------------------------------------------
+  //  |                                                         |
+  //  |                                                         |
+  //   ---------------------------------------------------------
+  //   ---------------------------   --   --   --   --   --   --
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //   ---------------------------   --   --   --   --   --   --
+  //   -----------------   --   --   --   --   --   --   --   --
+  //  |                 | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |                 | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   -----------------   --   --   --   --   --   --   --   --
+  .my-simple-grid__col-resp {
+    @include simple-grid-col-responsive(12, 12, 6, 4);
+    background-color: cyan;
+  }
+
+
+  // ** 5 column system with gap of 20px
+  // =============================================================================
+
+  //   --   --   --   --   --   --   --   --   --   --
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   --   --   --   --   --   --   --   --   --   --
+  .my-simple-grid--5 {
+    @include simple-grid(5, 20);
+  }
+
+  // example cols
+
+  .my-simple-grid__col--5--1 {
+    @include simple-grid-col(1, 5, 20);
+    background-color: cyan;
+  }
+
+  .my-simple-grid__col--5--2 {
+    @include simple-grid-col(2, 5, 20);
+    background-color: cyan;
+  }
+
+  .my-simple-grid__col--5--3 {
+    @include simple-grid-col(3, 5, 20);
+    background-color: cyan;
+  }
+
+  .my-simple-grid__col--5--4 {
+    @include simple-grid-col(4, 5, 20);
+    background-color: cyan;
+  }
+
+  .my-simple-grid__col--5--5 {
+    @include simple-grid-col(5, 5, 20);
+    background-color: cyan;
+  }
+
+  // ** cells stretching over multiple rows
+  // =============================================================================
+  //
+  //   -----------   -----------   -----------
+  //  |           | |     2     | |           |
+  //  |     1     | |           | |     3     |
+  //  |           |  -----------  |           |
+  //  |           |  -----------  |           |
+  //  |           | |     4     | |           |
+  //  |           | |           | |           |
+  //   -----------   -----------   -----------
+
+  .my-row-w-fallback {
+
+    @include simple-grid;
+    // you could replace the fixed height
+    // with 100%, if you have a container
+    // that it can fit in
+    // eg. by combining position absolute for the row
+    //     with padding-top on the container
+    //     you can make a responsive height
+    @include simple-grid-rows(500px, 2);
+  }
+
+  .my-cell-w-fallback {
+    background: cyan;
+  }
+
+  // sizing the cells
+
+  .my-cell-w-fallback--normal,
+  .my-cell-w-fallback--tall {
+    @include simple-grid-col(4);
+  }
+
+  .my-cell-w-fallback--normal {
+    @include simple-grid-row(1, 2);
+  }
+
+  .my-cell-w-fallback--tall {
+    @include simple-grid-row(2, 2);
+  }
+
+  // bringing order
+
+  .my-cell-w-fallback--01 {
+    .no-cssgrid & {
+      order: 0;
+    }
+  }
+
+  .my-cell-w-fallback--03 {
+    .no-cssgrid & {
+      order: 1;
+    }
+  }
+}
+
+

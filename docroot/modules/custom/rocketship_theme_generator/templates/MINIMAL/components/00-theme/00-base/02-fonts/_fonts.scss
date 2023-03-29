@@ -1,0 +1,338 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Config: Fonts
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// -- Use the font loading in @pages/html/_html.twig
+//    All info in the README, this is the short overview:
+//
+//    - if Google font: add the link url + family name(s) in the variables in _html.twig
+//    - if Typekit font: add the link url + family name(s) in the variables in _html.twig
+//
+//    - If a custom font or locally hosted one:
+//      -- put your @font-face declaration in this file
+//      -- save the fonts in theme/fonts folder (woff and woff2 at the least)
+//      -- add the family name in the variables in _html.twig
+//
+//    - How loading fonts works:
+//      - uses preload to load the files
+//      - uses critical css to load the font css (when possible)
+//      - uses JS to determine when the fonts are loaded so you can set your styling accordingly
+//      or uses localStorage (see cooldrops D7 theme for an implementation example)
+//    - If using web font loader: check the documentation implementation info
+//    - If using localStorage: reference the correct font sources (remote or local path)
+//    - If we also produce Critical CSS with fonts in them: please don't
+//      if you really do: USE ABSOLUTE PATHS for the font sources !!!
+
+// -- Use self-hosted font files when you can
+//    Especially if you have issues with IE:
+//    http://casualhex.com/google-fonts-and-internet-explorer/
+//    - generate the font files you need (via fontsquirrel generator),
+//      put them in "fonts" folder of this theme
+//      and add @font-face here
+
+// ** LOCAL IMPORT: don't use it!!!
+// -- 1) @import is bad for browser performance
+//    2) AdvAgg can't properly handle @import css, nor remote hosted fonts
+//    2) we want all fonts to be non-renderblocking
+// -- That's why we use a special webfont loading strategy
+
+// ** WEBTYPE or other externally hosted font solutions:
+// -- Check if they provide a <link>-tag with a url to a css file. Then you can use it the same way we use Typekit
+// -- Otherwise, read their instructions and maybe check with R&D if we can come to a solution that integrates the font in our strategy
+
+// ** FONTAWESOME
+// -- Is already imported in via the 00-config/04-vendors folder + webfontloader
+
+
+// ** Iconfont
+
+@if ($custom-icons == true and $custom-icons-type == "font") {
+
+  @include font-face((
+    font-family: "Iconfont",
+    file-path: "../fonts/iconfont/iconfont",
+    font-display: block
+  ));
+
+  // This will output:
+  //
+  //@include font-face((
+  //  font-family: "Iconfont";
+  //  font-style: "normal"
+  //  font-weight: "normal"
+  //  font-display: "swap",
+  //  src: url("../fonts/iconfont/iconfont.eot");
+  //  src: url("../fonts/iconfont/iconfont.eot?#cache_busting_variable") format("eot"),
+  //    url("../fonts/iconfont/iconfont.woff") format("woff"),
+  //    url("../fonts/iconfont/iconfont.ttf") format("truetype"),
+  //    url("../fonts/iconfont/iconfont.svg#iconfont") format("svg");
+  //}
+}
+
+
+// ** FontAwesome ("free" or "pro" version)
+
+@if ($custom-icons == false) {
+
+  @if ($fontawesome-version == "free") {
+
+    @include font-face((
+      font-family: "Font Awesome 5 Free",
+      font-weight: 400,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-regular-400"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Free",
+      font-weight: 900,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-solid-900"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Brands",
+      font-weight: 400,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-brands-400"
+    ));
+
+  } @else {
+
+    // If you want to use the Pro version of Fontawesome,
+    // please change the variable in THEMENAME/components/00-theme/00-config/_vars-icons.scss
+    // please download and add your "Pro" font-files to "THEMENAME/fonts/fontawesome" (if you haven't already)
+    // and don't forget to compare & change the file names here below if needed!
+
+    @include font-face((
+      font-family: "Font Awesome 5 Pro",
+      font-weight: 300,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-light-300"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Pro",
+      font-weight: 400,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-regular-400"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Pro",
+      font-weight: 900,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-solid-900"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Brands",
+      font-weight: 400,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-brands-400"
+    ));
+
+    @include font-face((
+      font-family: "Font Awesome 5 Duotone",
+      font-weight: 900,
+      font-display: block,
+      file-path: "../fonts/FontAwesome/fa-duotone-900"
+    ));
+  }
+}
+
+// ** custom webfont
+
+// See snippet for examples
+
+/* cyrillic-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+));
+/* cyrillic */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+));
+/* greek-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+1F00-1FFF",
+));
+/* greek */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0370-03FF",
+));
+/* vietnamese */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+));
+/* latin-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+));
+/* latin */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: italic,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-italic-webfont",
+  unicode-range: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+));
+/* cyrillic-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+));
+/* cyrillic */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+));
+/* greek-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+1F00-1FFF",
+));
+/* greek */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0370-03FF",
+));
+/* vietnamese */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+));
+/* latin-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+));
+/* latin */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 400,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-regular-webfont",
+  unicode-range: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+));
+/* cyrillic-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F",
+));
+/* cyrillic */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116",
+));
+/* greek-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+1F00-1FFF",
+));
+/* greek */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0370-03FF",
+));
+/* vietnamese */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB",
+));
+/* latin-ext */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF",
+));
+/* latin */
+@include font-face((
+  font-family: "Open Sans",
+  font-style: normal,
+  font-weight: 700,
+  font-display: swap,
+  file-path: "../fonts/OpenSans/opensans-bold-webfont",
+  unicode-range: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+));

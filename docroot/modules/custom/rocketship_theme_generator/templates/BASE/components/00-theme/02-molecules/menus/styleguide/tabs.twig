@@ -1,0 +1,54 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% if primary %}
+
+  {% embed "@%theme_prefix%-molecules/menus/menu/_menu-block.twig" with {
+      menu_block_bem_block: menu_block_bem_block,
+      menu_block_bem_element: menu_block_bem_element,
+      menu_block_bem_modifiers: menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_block_bem_extra,
+    } %}
+
+    {% block menu_block_content %}
+
+      <h2 class='visually-hidden'>{{ 'Primary tabs' }}</h2>
+      {% embed "@%theme_prefix%-molecules/menus/tabs/_tabs__content.twig" with {
+          primary: primary,
+        }
+      %}
+
+        {% block primary %}
+          {% for key, item in items %}
+            <li>
+            {% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+              "link_content": item.link_content,
+              "link_url": item.link_url,
+              "bem_link_block": item.bem_link_block,
+              "bem_link_element": item.bem_link_element,
+              "bem_link_modifiers": item.bem_link_modifiers,
+              "bem_link_extra": item.bem_link_extra,
+              "no_link": item.no_link,
+              "has_link_title": item.has_link_title,
+              link_attributes: item.link_attributes,
+            } %}
+            </li>
+          {% endfor %}
+        {% endblock %}
+
+      {% endembed %}
+
+    {% endblock %}
+
+  {% endembed %}
+
+{% endif %}
+{# {% if secondary %}
+  <h2 class='visually-hidden'>{{ 'Secondary tabs' }}</h2>
+  <ul>
+    {{ secondary }}
+  </ul>
+{% endif %} #}

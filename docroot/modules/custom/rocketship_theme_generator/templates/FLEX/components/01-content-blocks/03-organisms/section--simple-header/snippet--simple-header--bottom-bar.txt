@@ -1,0 +1,71 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Section: simple header with breadcrumbs in a bar with a bg
+// *
+// * Spacing is reset on the bottom of the layout, and the subregion styled
+// *  to form a bar that is aligned at the bottom
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.cb-header {
+
+  padding-bottom: 0;
+
+  // ** header content
+
+  .block--type-cb-title {
+    margin-bottom: 0
+  }
+
+  .layout__subregion-01 {
+    margin-top: var(--gap-layout-vert-bottom);
+    padding: rem(20);
+    @include full-bg(rgba(hsl(var(--clr-black)), .4));
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .cb-header {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .cb-header {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // ** need smaller spacing on headers
+
+  .cb-header {
+    padding-top: var(--gap-layout-vert-top-small);
+  }
+
+}

@@ -1,0 +1,59 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Variables: typography
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** Fonts
+// =============================================================================
+
+// if fonts take too long to load,
+// and the user sees unstyled text
+// we can set a preloader
+$font-preloader: false;
+
+// make sure this font matches with the font set in html.twig!!!
+$font-base: "Open Sans", "Arial", sans-serif !default;
+$font-heading: $font-base !default;
+$font-fallback: "Arial", sans-serif;
+
+// size
+$font-size-base: 16 !default;
+$font-size-sm: 13 !default;
+$font-size-xs: 11 !default;
+
+// line-height
+$line-height-base: 24 !default;
+$line-height-sm: 20 !default;
+$line-height-xs: 15 !default;
+
+// weight
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+
+// base html font size, used for calculating px to rem
+// if you want px and rem to be the same value,
+// set this to 10 instead
+$rem-base: 16;
+
+
+// * Headings
+// =============================================================================
+// -- Set your h1, h2, ... size (don't use px!) and color
+
+$h1-size: 32;
+$h1-line: 40;
+$h1-color: hsl(var(--clr-heading));
+
+$h2-size: 28;
+$h2-line: 35;
+$h2-color: hsl(var(--clr-heading));
+
+$h3-size: 24;
+$h3-line: 30;
+$h3-color: hsl(var(--clr-heading));
+
+$h4-size: 16;
+$h4-line: 20;
+$h4-color: hsl(var(--clr-heading));

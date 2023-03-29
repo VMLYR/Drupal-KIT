@@ -1,0 +1,243 @@
+import { Story } from '@storybook/addon-docs';
+
+# Fonts
+
+## Setup
+
+Our fonts are included using 3 files:
+- `00-base/02-fonts/_fonts.scss`: make @fontface declarations for self-hosted files, so we can use those font names in Sass
+- `00-base/05-pages/html/_html.twig`: set variables needed to load external fonts as well as our self-hosted ones
+- `00-base/05-pages/html/_html--master.twig`: generic code to load fonts in a progressive way
+
+Our self-hosted font-files are located in the theme's `fonts` folder
+
+One font that is already included, is FontAwesome 5. It is used as an iconfont.<br />
+We have the free version, if you installed this theme from Drupal.org.
+
+But if you have bought the `Pro` version, you can easily switch that by:
+- adding the Pro font-files to your generated theme's `fonts/FontAwesome`-folder
+- changing the `$fontawesome-version` value to `pro` (instead of the default `free`) in `00-theme/00-base/00-config/00-variables/_vars-icons.scss`
+  - this will make the CSS pick the Pro font files, using a condition set in `00-theme/00-base/02-fonts/_fonts.scss`
+  - do check that the file paths are correct
+- In `00-base/05-pages/html/_html.twig`, replace the icon font with `Font Awesome 5 Pro`, `Font Awesome 5 Brands` and `Font Awesome 5 Duotone`
+- You can now use the `light`, `regular` and `duotone` variants, as well as the `solid`
+
+Example of the html changes:
+```
+ webfont_config_font_families: {
+  'text-01': 'whatever_my_text_font_is_called',
+  'text-02': 'whatever_my_heading_font_is_called',
+  'icons-01': 'Font Awesome 5 Pro',
+  'icons-02': 'Font Awesome 5 Brands',
+  'icons-03': 'Font Awesome 5 Duotone'
+},
+```
+
+If you want to use a custom icon font, info can be found in Atoms/Images
+
+## Font loading
+
+We use a combination of 'FOUT WITH A CLASS', critical CSS and preload strategies (see sources further down) and fontfaceobserver.
+
+But with a couple of changes to make it more generic for Sass and Twig to handle it automatically.<br />
+For example, there is no automatic subsetting of your font(s)<br />
+That said, you can tweak and change at your own convenience where needed, if you read up on what is going on (info and sources below).
+
+## How to use
+
+Just fill in the variables that are in `components/00-theme/05-pages/html/_html.twig`:<br />
+- If you have a Google font or Typekit (or any other externally hosted font service), use the google or typekit variables as you see in the examples.
+
+You can reuse those variables for any kind of service if it provides you with a css-file url.<br />
+- For any kind of font, always add the font-family name to the `webfont_config_font_families` array variable. This prints classes on the html-tag when the fonts are loaded.<br />
+- For self-hosted fonts only: if you want to preload them, add the font-files to `webfont_config_font_files` (path relative to the fonts folder of your theme)<br />
+- The `webfont_config_font_types` variable is used to determine what file types to preload. Normally it is only `woff2`, so you don't need to change this.
+
+Some things to keep in mind:
+- use self-served fonts when possible. This means: download Google fonts and convert them to woff and woff2 (eg. using font-squirrel)<br />
+- if no choice but to use an external service, if they provide a css file that loads the fonts, that's the url you need to put in the google or typekit variables.
+
+**Exceptions:**
+To add an external font to your CKEditor CSS, you will need to use an @import rule into style.editor.scss.<br />
+The reason is that we don't want to start overriding the back-end theme in order to load fonts.<br />
+Eg: `@import url("https://use.typekit.net/your_typekit_id.css");`
+
+## How it works
+
+First off, If there are  **self-hosted fonts** (font-files in /fonts), preloading them will shave of some time to try and have the files ready by the time the CSS tries to use them.<br />
+This is done in `components/00-theme/05-pages/html/_html--master.twig` using a link-tag and 'preload' settings by default, so the font will not render-block the page.<br />
+Anything in the variable `webfont_config_font_files` is used to preload.
+
+**Note:** Do not use with very large fonts or a large amount of fonts.<br />
+Because if the preload is too big, it can slow down the initial render of the page. <br />
+For example, if you have a main text font, a title font and icon fonts, you're stretching the limits. <br />
+If you see the initial rendering being slow, try removing 1 or 2 fonts from `webfont_config_font_files` and see if it improves.
+
+**Example output:**
+```
+<link as="font" rel="preload" href="/themes/custom/dropsolid-theme-demo-8/fonts/Montserrat/montserrat-italic-webfont.woff2" type="font/woff2" crossorigin="anonymous" />
+```
+---
+For **externally loaded** fonts, we don't try to load those font-files. Usually there are access restrictions on those and even if there are not, an externally loaded font will not load the same way a self-hosted font will.<br />
+Usually you get some code-example that is basically a link-tag  or an @import. We try to turn that into a link-tag which loads the external fonts css-file, using a preload method + asynchronously so it is not render-blocking.<br />
+The `webfont_config_google_css` and `webfont_config_typekit_css` variables are used to hold the url to the external css file.
+
+**Note**: No font-files should be loaded with this method. So don't add those font families to `webfont_config_font_files`
+
+**Example code:**
+```
+<link  as="style"  rel="stylesheet preload prefetch"  href="{{webfont_config_google_css}}"  type="text/css"  crossorigin="anonymous"  onload="this.rel='stylesheet'" />
+```
+---
+If we choose to use **our own fonts css file** (style.fonts.css, which loads our self-hosted fonts like FontAwesome), it is loaded as inline CSS (critical css). This means it is read alongside the html doc being read so it speeds things up quite a bit.<br />
+In twig, we replace the paths relative to the fonts folder using a twig filter. That way you can still use the fonts Sass in an intuitive way and it remains workable if you don't put it inline.<br />
+Please note the `|raw` filter needing to be used as well, otherwise the quotes in our css file get converted and we don't want that.
+
+**Example code:**
+```
+<style>{{ source( base_path ~ directory ~ '/css/' ~ value)|replace({'../fonts': base_path ~ directory ~ '/fonts'})|raw }}</style>
+```
+
+If for some reason you don't want to go that route, there is an example to load it as a link-tag and still be asynchronous. It is commented out in the master twig file as well:
+````
+<link rel="preload" href="{{base_path ~ directory ~ '/css/' ~ value}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{base_path ~ directory ~ '/css/' ~ value}}"></noscript>
+<script>
+/* You should probably put a polyfill here, like loadCSS, if you care about browsers that don't support preload */
+</script>
+````
+---
+We also have a bit of JS (fontfaceobserver) to **detect when our font-families have finished loading** and set classes on the html.<br />
+The real strength of this, is that we can make sure our CSS only uses the webfonts when they are really ready to be used, and it can build up the font rendering gradually. So you don't get full FOUT.<br />
+So, it is most useful if you have a big, heavy main font you can subset (=use @font-face to only use certain styles/weights, or a limited set of characters).
+
+**Example font-face**
+```
+@include  font-face((
+  font-family: "LatoSubset",
+  font-style: normal,
+  font-weight: normal,
+  file-path: "../fonts/Lato/lato-regular-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF" // Latin extended
+));
+
+@include  font-face((
+  font-family: "Lato",
+  font-style: normal,
+  font-weight: normal,
+  file-path: "../fonts/Lato/lato-regular-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF" // Latin extended
+));
+
+@include  font-face((
+  font-family: "LatoBold",
+  font-style: normal,
+  font-weight: bold,
+  file-path: "../fonts/Lato/lato-bold-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF" // Latin extended
+));
+
+@include  font-face((
+  font-family: "LatoItalic",
+  font-style: italic,
+  font-weight: normal,
+  file-path: "../fonts/Lato/lato-italic-webfont",
+  unicode-range: "U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF" // Latin extended
+));
+```
+**Example font-families use**
+```
+body {
+  font-family: "LatoSubset", sans-serif;
+}
+
+.font-text01-loaded body {
+  font-family: "Lato", sans-serif;
+}
+
+strong {
+  font-family: "LatoSubset", sans-serif;
+  font-weight: bold;
+}
+
+.font-text01-loaded strong {
+  font-family: "LatoBold", sans-serif;
+  font-weight: 700;
+}
+```
+
+**Example JS (in Twig)**
+```
+var font-latosubset = new FontFaceObserver('LatoSubset');
+
+Promise.all([font-latosubset.load(null, 10000)]).then(function () {
+
+  document.documentElement.className += " font-latosubset-loaded";
+
+  // step 2: load the full fonts
+  var fontA = new FontFaceObserver('Lato');
+  var fontB = new FontFaceObserver('LatoBold', {
+      weight: 700
+    });
+  var fontC = new FontFaceObserver('LatoItalic', {
+      style: 'italic'
+    });
+  Promise.all([
+    fontA.load(null, 10000),
+    fontB.load(null, 10000),
+    fontC.load(null, 10000)
+  ]).then(function () {
+    document.documentElement.className += " fonts-loaded";
+    // Optimization for Repeat Views
+    sessionStorage.fontsLoadedCriticalFoftPolyfill = true;
+  });
+
+});
+```
+
+## Loading fonts in storybook
+
+You might have noticed that we don't use the real JS loader in Storybook. Just a bit of JS in `.storybook/preview-head.html` to fake the loading classes.<br />
+That `preview-head.html` file basically fills in your Storybook components' `<HEAD>` tag. So it doesn't use the variables from `_html.twig`.<br />
+Fonts that are self-hosted should work automatically when added to _fonts.scss<br />
+For Google (or other external font services), you will need to add your font inside that `preview-head` file, the way that Google (or other services) suggest.<br />
+Usually, that means adding a `link` tag.
+
+---
+**Final notes**:
+
+- If you have a lot of fonts or they are very heavy, you may not want to preload the font files.
+  - Remove whatever files you don't want to preload, from the `webfont_config_font_files` variable array (if this variable is empty, you can set it to false)
+  - Use a subset of your font if possible (read the info about critical FOFT and 2 stage loading + there is an example snippet in `05-pages/html`)
+  - Make use of the classes that JS sets on your html: only use your full font-family in CSS, when that class is there. Use the subset font ($fallback-font) by default. if you look for `$fallback-font` in the components Sass, you will see simple examples of its use.
+- If you can't/don't want to use the inline css method (critical fonts css) for some reason, there is an example of using an async, preloaded `link`-tag instead. It is located right below the `style`-tag
+  - One case could be that your critical css is so big it delays the loading of the doc but that would be exceptional
+  - It may be useful in a loading strategy for big font files. You'll have to test the effects yourself.
+
+## Subdomains
+
+In the rare case you need to load fonts accross (sub)domains, you might need to set the access control headers for the (sub)domain where you are using the fonts.
+
+```
+# Fix for fonts on subdomains
+ <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|svg)$">
+
+   <IfModule mod_headers.c>
+
+     Header set Access-Control-Allow-Origin "my-main-domain.com"
+
+  </IfModule>
+</FilesMatch>
+```
+
+## Sources:
+
+- https://slides.com/munter/high-performance-web-fonts-3
+- https://www.zachleat.com/web/comprehensive-webfonts/#fout-with-a-class
+- https://www.zachleat.com/web/comprehensive-webfonts/#foft%2C-or-fout-with-two-stage-render
+- https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft
+- https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload
+- https://www.zachleat.com/web-fonts/demos/critical-foft-polyfill.html
+- https://www.zachleat.com/web/critical-webfonts/
+- https://github.com/bramstein/fontfaceobserver/tree/v2.1.0
+

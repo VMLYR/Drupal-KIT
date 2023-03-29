@@ -1,0 +1,35 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% for variant in variants %}
+
+  {% include "@%theme_prefix%-cb-organisms/section--carousel/styleguide/section--carousel.twig" with {
+    intro: intro,
+    blocks: variant.blocks,
+    description: variant.description,
+    label: variant.label,
+    template: variant.template,
+    minimal_styling: variant.minimal_styling,
+    region_type: variant.region_type,
+    modifier: variant.modifier,
+    bem_section_extra: variant.bem_section_extra,
+    extra_classes: variant.extra_classes,
+    settings: variant.settings,
+    content: variant.content,
+    blocks: variant.blocks,
+    background_stretched: variant.background_stretched,
+    background_color: variant.background_color,
+    background_image: variant.background_image,
+    layout_background_image: variant.layout_background_image,
+    section_spacing_top: variant.section_spacing_top,
+    section_spacing_bottom: variant.section_spacing_bottom,
+    valign: variant.valign,
+  } %}
+
+  {# <hr class="storybook__divider--hor" /> #}
+
+{% endfor %}

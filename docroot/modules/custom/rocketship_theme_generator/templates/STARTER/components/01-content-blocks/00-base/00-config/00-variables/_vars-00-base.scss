@@ -1,0 +1,49 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content block variables
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+:root {
+
+  // ** Colors
+  // ===========================================================================
+  --clr-cb: var(--clr-base);
+  --clr-cb-heading: var(--clr-heading);
+  --clr-cb-spot-1: var(--clr-spot-1);
+  --clr-cb-spot-2: var(--clr-spot-2);
+  --clr-cb-link: var(--clr-link);
+  --clr-cb-link-hover: var(--clr-link-hover);
+  --clr-cb-text-link: var(--clr-text-link);
+  --clr-cb-text-link-hover: var(--clr-text-link-hover);
+  --clr-layout-bg: var(--clr-base-bg);
+
+  // ** Layout
+  // ===========================================================================
+
+  // -- Horizontal spacing:
+
+  // spacing on the sides or between elements in a row
+  --gap-layout-hor: var(--gap-hor);
+
+  // -- Vertical spacing:
+
+  --gap-layout-vert: var(--gap-md);
+  --gap-layout-vert-sm: var(--gap-sm);
+
+  // space above and below certain elements: eg. blocks with a bg
+  // that change depending on breakpoint
+  --gap-layout-vert-top: initial;
+  --gap-layout-vert-bottom: initial;
+  --gap-layout-vert-top-small: initial;
+  --gap-layout-vert-bottom-small: initial;
+
+  // Overrides for Vertical spacing on layouts
+  //   This one is the same space we have between blocks in the same region === space between p-tags
+  --gap-layout-vert-minimal: var(--gap-layout-vert);
+  //   This one is the same space as for the gap between teaser & next fields
+  --gap-layout-vert-medium: calc(var(--gap-layout-vert) * 1.5);
+  
+}

@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - %machine_name%
+id: %machine_name%_search
+theme: %machine_name%
+region: header_top
+weight: -1
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: visible
+visibility: {  }

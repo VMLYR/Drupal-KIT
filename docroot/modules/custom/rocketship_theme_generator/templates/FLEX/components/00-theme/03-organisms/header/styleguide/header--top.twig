@@ -1,0 +1,50 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% embed "@%theme_prefix%-organisms/header/header--top/_header--top.twig" %}
+
+  {% block top %}
+    {# language menu: visible on mobile only, the one for desktop is located in nav.twig (the secondary navigation region in Block layout) #}
+    {% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      menu_block_bem_modifiers: menu_language.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_language.menu_block_bem_extra,
+      menu: menu_language.menu,
+      label: menu_language.label,
+      configuration: menu_language.configuration,
+      items: menu_language.items,
+      drupalSettings: menu_language.drupalSettings,
+      attributes: menu_language.attributes,
+      links: menu_language.links,
+    } %}
+    {# end language menu #}
+
+    {# example block: could make this visible on desktop only #}
+    {# {% include "@%theme_prefix%-molecules/social-media/styleguide/social-media-links.twig" with {
+      label: social.label,
+      configuration: social.configuration,
+      bem_block_modifiers: social.bem_block_modifiers,
+      fields: social.fields,
+    } %} #}
+    {# end example block: #}
+  {% endblock %}
+
+  {% block top_nav %}
+
+    {# example: account menu #}
+    {# {% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      menu: menu_account.menu,
+      menu_block_bem_modifiers: menu_account.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_account.menu_block_bem_extra,
+      menu: menu_account.menu,
+      label: menu_account.label,
+      configuration: menu_account.configuration,
+      items: menu_account.items,
+    } %} #}
+    {# end example menu #}
+
+  {% endblock %}
+
+{% endembed %}

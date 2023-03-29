@@ -1,0 +1,44 @@
+
+{% set bem_block = bem_block|default('group--paragraphs') %}
+
+{% set bem_element = bem_element|default(false) %}
+
+{# {% if bem_modifiers is not defined %}
+  {% set bem_modifiers = [] %}
+{% endif %} #}
+
+{% if label_hidden %}
+  {% if multiple %}
+    <div {{bem(bem_block, bem_element)}}>
+      {% for item in items %}
+        {# {% if item.content|render|striptags|length %} #}
+        <div {{bem(bem_block, 'item')}}>
+          {{ item.content }}
+        </div>
+        {# {% endif %} #}
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      {# {% if item.content|render|striptags|length %} #}
+      <div {{bem(bem_block, 'item')}}>
+        {{ item.content }}
+      </div>
+      {# {% endif %} #}
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <section {{bem(bem_block, bem_element)}}>
+    {% include "@%theme_prefix%-atoms/02-text/00-headings/_heading.twig" with {
+      "heading_level": 2,
+      "heading": label,
+    } %}
+    {% for item in items %}
+      {# {% if item.content|render|striptags|length %} #}
+      <div {{bem(bem_block, 'item')}}>
+        {{ item.content }}
+      </div>
+      {# {% endif %} #}
+    {% endfor %}
+  </section>
+{% endif %}

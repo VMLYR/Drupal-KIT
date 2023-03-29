@@ -1,0 +1,31 @@
+# Add some custom theme settings
+%machine_name%.settings:
+  type: theme_settings
+  label: '%theme_name% theme settings'
+  mapping:
+{% if flex or demo %}
+    header_fixed:
+      type: boolean
+      label: 'Fixed header'
+{% fi flex or demo %}
+    language_dropdown:
+      type: boolean
+      label: 'Language dropdown'
+    language_abbr:
+      type: boolean
+      label: 'Language abbreviations'
+    scroll_to:
+      type: boolean
+      label: 'Animated anchor scrolling'
+    scroll_to_exceptions:
+      type: textfield
+      label: 'Exceptions'
+    lazy_loading:
+      type: boolean
+      label: 'Enforce native lazy loading for all images'
+    lazy_loading_fallback:
+      type: boolean
+      label: 'Make lazy loading work on browsers with non-native support (will NOT work if native lazy loading is disabled)'
+    prevent_layout_shift:
+      type: boolean
+      label: 'Prevent elements on the page from jumping once images are fully loaded, by automagically filling the image space.'

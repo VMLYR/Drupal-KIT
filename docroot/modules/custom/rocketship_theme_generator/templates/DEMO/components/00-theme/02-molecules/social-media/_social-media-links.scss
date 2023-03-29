@@ -1,0 +1,109 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Social media profiles links
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block-socialmedialinks,
+.block--type-social-media {
+
+  &.block--region-doormat {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    > h4 {
+      @include hide;
+    }
+
+    .field {
+      margin: 0 rem(10);
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;
+        @include square(rem(24));
+      }
+    }
+    .field--name-field-social-link-linkedin a {
+      @include font-awesome((
+        icon: $fa-var-linkedin-in,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+    .field--name-field-social-link-facebook a {
+      @include font-awesome((
+        icon: $fa-var-facebook,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+    .field--name-field-social-link-twitter a {
+      @include font-awesome((
+        icon: $fa-var-twitter,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+    .field--name-field-social-link-pinterest a {
+      @include font-awesome((
+        icon: $fa-var-pinterest,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+    .field--name-field-social-link-instagram a {
+      @include font-awesome((
+        icon: $fa-var-instagram,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+    .field--name-field-social-link-youtube a {
+      @include font-awesome((
+        icon: $fa-var-youtube,
+        size: 24,
+        type: "brand",
+        color: hsl(var(--clr-spot-1))
+      ));
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-only {
+
+  .block-socialmedialinks,
+  .block--type-social-media {
+
+    &.block--region-doormat {
+
+      justify-content: flex-start;
+
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{#
+   This template is not used in Rocketship by default
+   We just use a basic page
+ #}
+{% embed '@%theme_prefix%-pages/page/_page--master.twig' %}
+
+  {# all non-Panel pages use the same layout for the main content #}
+
+  {% block pageContent %}
+    {{ page.content }}
+
+    <div class="actions actions--404">
+      <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home" class="button">{{ 'Back to the frontpage'|t }}</a>
+    </div>
+  {% endblock %}
+
+{% endembed %}

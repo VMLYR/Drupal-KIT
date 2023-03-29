@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override to display cookie popup
+ */
+#}
+
+<aside id="cookie-consent-popup" class="cookie-policy" aria-label="{{ 'Cookie policy' | t }}">
+  <div class="container">
+    <div class="cookie-policy__message">
+      <span class="cookie-policy__message--first">{{ template_first_line }}</span>
+      <span class="cookie-policy__message--last">{{ template_second_line }}</span>
+    </div>
+    <div class="cookie-policy__dismiss">
+      <a class="dismiss" href="#">{{ dismiss_text }}</a>
+    </div>
+  </div>
+</aside>

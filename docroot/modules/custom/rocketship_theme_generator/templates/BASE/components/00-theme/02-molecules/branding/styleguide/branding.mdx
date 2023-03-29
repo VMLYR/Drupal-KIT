@@ -1,0 +1,52 @@
+import { Story } from '@storybook/addon-docs';
+
+# Branding
+
+You will see 2 kinds of branding Molecules here:
+- a default Drupal block type (set by the system) which produces the logo (and slogan) that goes in the header
+- a custom block type that can be used to print the logo and some text any other place in the site (usually next to the doormat navigation)
+
+## Site logo
+
+Will be referred to in this styleguide as 'site branding' or 'system branding'
+Prints a logo, with the site name and (optionally) the slogan
+
+## Branding block
+
+A custom block.
+
+### The yml data:
+
+#### For the block
+
+the entity's title (even if we'll hide it):
+```
+label: 'About us'
+```
+
+hide the title visually
+```
+configuration:
+  label_hidden: true
+````
+
+The important modifiers (for BEM class construction) are:
+- the block type, so we can do some generic theming
+- the region, so we can theme it in context of the doormat if needed
+
+```
+bem_block_modifiers:
+  - type-site-branding
+  - region-doormat
+```
+
+#### For the fields
+
+Some useful extra classes, for the image field, because we use Blazy:
+
+```
+- bem_field_extra:
+  - 'blazy'
+  - 'blazy--field'
+  - 'blazy--field-media-info-image'
+```

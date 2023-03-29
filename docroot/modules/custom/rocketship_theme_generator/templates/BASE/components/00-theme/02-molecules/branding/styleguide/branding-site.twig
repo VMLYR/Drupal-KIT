@@ -1,0 +1,15 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% include "@%theme_prefix%-molecules/branding/site/_branding--site.twig" with {
+    name: name,
+    slogan: slogan,
+    link_href: link_href,
+    img_src: img_src,
+    bem_logo_modifiers: bem_logo_modifiers,
+  }
+%}

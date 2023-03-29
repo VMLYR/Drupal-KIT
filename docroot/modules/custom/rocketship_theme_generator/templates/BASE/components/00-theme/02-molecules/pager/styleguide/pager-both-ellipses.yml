@@ -1,0 +1,24 @@
+pager__uid: 1
+ellipses:
+  previous: true
+  next: true
+items:
+  previous:
+    href: '#'
+    attributes: ''
+    text: 'Previous'
+  next:
+    href: '#'
+    attributes: ''
+    text: 'Next'
+  pages:
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''

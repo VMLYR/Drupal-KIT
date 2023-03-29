@@ -1,0 +1,33 @@
+label: 'CB Photo Gallery'
+configuration:
+  label_display: false
+attributes:
+  data-limit: 6
+block_type: cb_photo_gallery
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+  - block--view-mode-photo-gallery-grid
+fields:
+  title:
+    heading_display: true
+    heading_level: 2
+    heading: CB Photo Gallery
+    field_name: field_cb_title
+    field_type: string
+  subtitle:
+    heading_display: true
+    heading_level: 3
+    heading: Block subtitle
+    field_name: field_cb_subtitle
+    field_type: string
+  teaser:
+    label_hidden: true
+    field_name: field_cb_teaser
+    field_type: string_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: "Risus nec feugiat in fermentum posuere urna. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula."
+  media:

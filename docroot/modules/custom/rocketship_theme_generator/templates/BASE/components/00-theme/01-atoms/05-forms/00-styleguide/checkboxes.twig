@@ -1,0 +1,33 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+<form>
+
+{% if not attributes %}
+<fieldset class="fieldgroup form-fieldset js-form-item form-item js-form-wrapper form-wrapper">
+  <legend class="h2">Checkboxes</legend>
+  <div class="fieldgroup form__group--checkboxes" aria-describedby="edit-checkboxes--wrapper--description">
+{% endif %}
+  {% for key, checkbox in checkboxes %}
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/_checkbox-item.twig" with {
+      title: checkbox.title,
+      checked: checkbox.checked,
+      label_attributes: checkbox.label_attributes,
+      required: checkbox.required,
+      disabled: checkbox.disabled,
+      title_display: checkbox.title_display,
+    } %}
+  {% endfor %}
+{% if not attributes %}
+  </div>
+
+  <div id="edit-checkboxes--wrapper--description" class="description">Aliquip amet pneum si.</div>
+
+</fieldset>
+{% endif %}
+
+</form>

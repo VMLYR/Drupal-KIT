@@ -1,0 +1,77 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+<div class="storybook__content__label storybook__content__label--layout">
+  {{description}}
+</div>
+
+{% embed "@%theme_prefix%-templates/styleguide/section/three-col.twig" with {
+  description: description,
+  label: label,
+  template: template,
+  minimal_styling: minimal_styling,
+  region_type: region_type,
+  modifier: modifier,
+  bem_section_extra: bem_section_extra,
+  extra_classes: extra_classes,
+  settings: settings,
+  content: content,
+  background_stretched: background_stretched,
+  layout_background_image: layout_background_image,
+  background_image: background_image,
+  background_color: background_color,
+  col_spacing: col_spacing,
+  col_spacing_override: col_spacing_override,
+  col_spacing_override_column: col_spacing_override_column,
+  valign: valign,
+  section_spacing_top: section_spacing_top,
+  section_spacing_bottom: section_spacing_bottom,
+} %}
+
+  {% block first_main %}
+
+    <div class="storybook__content-section storybook__content-section--layout-builder">
+      <div class="text">Placeholder</div>
+    </div>
+
+  {% endblock %}
+
+  {% block center_main %}
+
+    {% if block_type == 'cb_text'%}
+      {% include "@%theme_prefix%-cb-molecules/001-text/styleguide/text.twig" with {
+        label: blocks.cb_text.label,
+        configuration: blocks.cb_text.configuration,
+        block_type: blocks.cb_text.block_type,
+        bem_block_modifiers: blocks.cb_text.bem_block_modifiers,
+        bem_block_extra: blocks.cb_text.bem_block_extra,
+        fields: blocks.cb_text.fields,
+      } %}
+
+    {% elseif block_type == 'cb_usp'%}
+      {# USP #}
+      {% include "@%theme_prefix%-cb-molecules/005-usp/styleguide/usp.twig" with {
+        label: blocks.cb_usp.label,
+        configuration: blocks.cb_usp.configuration,
+        block_type: blocks.cb_usp.block_type,
+        bem_block_modifiers: blocks.cb_usp.bem_block_modifiers,
+        bem_block_extra: blocks.cb_usp.bem_block_extra,
+        fields: blocks.cb_usp.fields,
+      } %}
+    {% endif %}
+
+  {% endblock %}
+
+  {% block second_main %}
+
+    <div class="storybook__content-section storybook__content-section--layout-builder">
+      <div class="text">Placeholder</div>
+    </div>
+
+  {% endblock %}
+
+{% endembed %}

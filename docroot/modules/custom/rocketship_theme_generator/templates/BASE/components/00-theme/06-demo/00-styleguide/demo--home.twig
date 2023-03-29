@@ -1,0 +1,203 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-pages/page/_page--master.twig" with {} %}
+
+  {% block pageTabs %}
+    {% include "@%theme_prefix%-molecules/menus/styleguide/tabs.twig" with {
+      menu_block_bem_block: tabs.menu_block_bem_block,
+      menu_block_bem_element: tabs.menu_block_bem_element,
+      menu_block_bem_modifiers: tabs.menu_block_bem_modifiers,
+      menu_block_bem_extra: tabs.menu_block_bem_extra,
+      primary: tabs.primary,
+      items: tabs.items,
+      has_link_title: tabs.has_link_title,
+      label: tabs.label,
+      configuration: tabs.configuration,
+    } %}
+  {% endblock %}
+
+  {% block header %}
+    {% include "@%theme_prefix%-organisms/header/styleguide/header.twig" %}
+  {% endblock %}
+
+  {% block pageContent %}
+    <!-- System Block: holding the page node -->
+    <div class="block block--provider-system block--system-main-block block--region-content block-system" aria-label="Main page content">
+
+       <!-- Page node -->
+      {% embed "@%theme_prefix%-organisms/00-node/_node.twig" with {
+        view_mode: page.view_mode,
+        isPromoted: page.isPromoted,
+        isSticky: page.isSticky,
+        bundle: page.bundle,
+      } %}
+        {% block node_content %}
+
+          <!-- Layout templates (for Layout Builder):
+                in our Drupal front-end, the templates are loaded from the Rocketship Core module, but we can use custom ones as well
+                for this Storybook example, I'm loading custom ones that are (almost) identical to the Core ones
+                because it's easier than building a path to the modules
+          -->
+
+          {# Section: header #}
+          {% embed "@%theme_prefix%-templates/styleguide/section/one-col.twig" with {
+            label: page.content.layouts.header.label,
+            template: page.content.layouts.header.template,
+            minimal_styling: page.content.layouts.header.minimal_styling,
+            region_type: page.content.layouts.header.region_type,
+            modifier: page.content.layouts.header.modifier,
+            extra_classes: page.content.layouts.header.extra_classes,
+            settings: page.content.layouts.header.settings,
+            content: page.content.layouts.header.content,
+          } %}
+
+            {% block section_content %}
+
+              {# Visual #}
+              {# {% include "@%theme_prefix%-molecules/visual/styleguide/visual.twig" with {
+                label: page.content.blocks.visual.label,
+                configuration: page.content.blocks.visual.configuration,
+                bem_block_modifiers: page.content.blocks.visual.bem_block_modifiers,
+                fields: page.content.blocks.visual.fields,
+              } %} #}
+
+            {% endblock %}
+
+          {% endembed %}
+
+
+          {# Section: usp and info #}
+          {% embed "@%theme_prefix%-templates/styleguide/section/two-col.twig" with {
+            label: page.content.layouts.usp_info.label,
+            template: page.content.layouts.usp_info.template,
+            minimal_styling: page.content.layouts.usp_info.minimal_styling,
+            region_type: page.content.layouts.usp_info.region_type,
+            modifier: page.content.layouts.usp_info.modifier,
+            extra_classes: page.content.layouts.usp_info.extra_classes,
+            settings: page.content.layouts.usp_info.settings,
+            content: page.content.layouts.usp_info.content,
+          } %}
+
+            {% block first_main %}
+
+              {# {% include "@%theme_prefix%-molecules/usp/styleguide/usp.twig" with {
+                label: page.content.blocks.usp.label,
+                configuration: page.content.blocks.usp.configuration,
+                bem_block_modifiers: page.content.blocks.usp.bem_block_modifiers,
+                fields: page.content.blocks.usp.fields,
+              } %} #}
+
+            {% endblock %}
+
+            {% block second_main %}
+              {# TO DO: replace with Text CB or custom block
+              #}
+              {# {% include "@%theme_prefix%-molecules/content/styleguide/content.twig" with {
+                label: page.content.blocks.content.label,
+                configuration: page.content.blocks.content.configuration,
+                bem_block_modifiers: page.content.blocks.content.bem_block_modifiers,
+                paragraph: page.content.blocks.content.paragraph,
+              } %} #}
+
+            {% endblock %}
+
+          {% endembed %}
+
+
+          {# Section: blog and events #}
+          {% embed "@%theme_prefix%-templates/styleguide/section/two-col.twig" with {
+            label: page.content.layouts.blog_event.label,
+            template: page.content.layouts.blog_event.template,
+            minimal_styling: page.content.layouts.blog_event.minimal_styling,
+            region_type: page.content.layouts.blog_event.region_type,
+            modifier: page.content.layouts.blog_event.modifier,
+            extra_classes: page.content.layouts.blog_event.extra_classes,
+            settings: page.content.layouts.blog_event.settings,
+            content: page.content.layouts.blog_event.content,
+          } %}
+
+            {% block first_main %}
+
+              {# {% include "@%theme_prefix%-blog-organisms/styleguide/blog-overview.twig" with {
+                label: page.content.blocks.blog.overview.label,
+                configuration: page.content.blocks.blog.overview.configuration,
+                bem_block_modifiers: page.content.blocks.blog.overview.bem_block_modifiers,
+                paragraph: page.content.blocks.blog.overview.paragraph,
+                fields: page.content.blocks.blog.overview.fields,
+                view: page.content.blocks.blog.overview.view,
+                teasers: page.content.blocks.blog.overview.teasers,
+              } %} #}
+
+            {% endblock %}
+
+            {% block second_main %}
+
+              {# {% include "@%theme_prefix%-event-organisms/styleguide/event-overview.twig" with {
+                label: page.content.blocks.event.overview.label,
+                configuration: page.content.blocks.event.overview.configuration,
+                bem_block_modifiers: page.content.blocks.event.overview.bem_block_modifiers,
+                paragraph: page.content.blocks.event.overview.paragraph,
+                fields: page.content.blocks.event.overview.fields,
+                view: page.content.blocks.event.overview.view,
+                teasers: page.content.blocks.event.overview.teasers,
+              } %} #}
+
+            {% endblock %}
+
+          {% endembed %}
+
+
+          {% embed "@%theme_prefix%-templates/styleguide/section/one-col.twig" with {
+            label: page.content.layouts.contents.label,
+            template: page.content.layouts.contents.template,
+            minimal_styling: page.content.layouts.contents.minimal_styling,
+            region_type: page.content.layouts.contents.region_type,
+            modifier: page.content.layouts.contents.modifier,
+            extra_classes: page.content.layouts.contents.extra_classes,
+            settings: page.content.layouts.contents.settings,
+            content: page.content.layouts.contents.content,
+          } %}
+
+            {% block section_content %}
+
+              <div class="storybook__content-section storybook__content-section--layout-builder">
+                <div class="text">Content Blocks</div>
+              </div>
+
+            {% endblock %}
+
+          {% endembed %}
+
+        {% endblock %}
+
+      {% endembed %}<!-- // End Page node -->
+    </div><!-- // End System Block: holding the page node -->
+  {% endblock %}
+
+  {% block pageDoormat %}
+    {% include "@%theme_prefix%-organisms/footer/styleguide/doormat.twig" with {
+      page: doormatData.page,
+      branding: doormatData.branding,
+      menu_sitemap: doormatData.menu_sitemap,
+      social: doormatData.social,
+      contact: doormatData.contact,
+    } %}
+  {% endblock %}
+
+  {% block pageFooter %}
+    {% include "@%theme_prefix%-organisms/footer/styleguide/footer--primary.twig" with {
+      page: footerPrimaryData.page,
+      copyright: footerPrimaryData.copyright,
+      powered: footerPrimaryData.powered,
+      menu_footer_primary: footerPrimaryData.menu_footer_primary,
+    } %}
+  {% endblock %}
+
+{% endembed %}
+
+

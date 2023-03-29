@@ -1,0 +1,126 @@
+@media print {
+  body {
+    margin: 1cm;
+    font-size: 10pt;
+    line-height: 140%;
+  }
+  h1 {
+    margin: 0 0 1.5em !important;
+    font-size: 21pt !important;
+  }
+  h2 {
+    margin: 0 0 0.5em !important;
+    font-size: 16pt !important;
+  }
+  h3 {
+    margin: 0 0 0.5em !important;
+    font-size: 14pt !important;
+  }
+  h4 {
+    margin: 0 0 0.5em !important;
+    font-size: 12pt !important;
+  }
+  pre {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th {
+    font-weight: bold;
+  }
+  td,
+  td img {
+    vertical-align: top;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  a:link,
+  a:visited {
+    color: gray;
+  }
+  abbr::after {
+    content: " (" attr(title) ")";
+  }
+  .ir a::after {
+    content: "";
+  }
+  .latest-news article a,
+  .latest-news article a:visited,
+  h2 a,
+  h2 a:visited,
+  h3 a,
+  h3 a:visited {
+    text-decoration: none;
+  }
+  #toolbar-administration,
+  #toolbar-bar,
+  nav.tabs,
+  .visually-hidden,
+  .doormat,
+  footer.footer--primary,
+  .header__section--secondary,
+  .wrapper--navigation,
+  .header-top,
+  .nav--system,
+  [role=navigation],
+  .block--provider-webform,
+  .js-webform-details-toggle,
+  .main form.search-form,
+  .pager,
+  .social-widgets,
+  .node__meta--full {
+    display: none !important;
+  }
+  .block__branding__image img {
+    width: 2cm;
+    height: auto;
+  }
+  .text-long img, .text-long img.align-left, .text-long img.align-right, .text-long img.align-center,
+  .text-long figure,
+  .text-long figure.align-left,
+  .text-long figure.align-right,
+  .text-long figure.align-center {
+    display: block;
+    float: none;
+    margin: 0 0 0.4cm;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+  .text-long figure.align-center img {
+    margin: 0 auto;
+  }
+  .text-long figure img {
+    float: none;
+    padding: 0;
+  }
+  .frame .stretch {
+    padding-bottom: 0 !important;
+  }
+  #cboxOverlay,
+  #colorbox,
+  .slick-slide,
+  .slick--optionset--thumbnail-navigation {
+    display: none;
+  }
+  .slick-current {
+    display: block;
+  }
+}

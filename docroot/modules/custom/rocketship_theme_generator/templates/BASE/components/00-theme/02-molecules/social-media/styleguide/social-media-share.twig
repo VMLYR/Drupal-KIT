@@ -1,0 +1,37 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    bem_block_modifiers: bem_block_modifiers,
+  } %}
+
+   {% block block_content %}
+    <div class="social-widgets">
+      <div class="social-widgets__title">
+        <h3>Share</h3>
+      </div>
+
+      <div class="social-social-widgets__group">
+        {% for group in groups %}
+          <div class="group widget social-link {{group.name}}">
+            {% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+                'link_content': group.link_content,
+                'link_url': group.link_url,
+                'link_attributes': group.link_attributes,
+                'bem_link_element': group.bem_link_element,
+              }
+            %}
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  {% endblock %}
+
+{% endembed %}

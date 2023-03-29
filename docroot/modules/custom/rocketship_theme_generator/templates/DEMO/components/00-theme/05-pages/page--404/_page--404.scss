@@ -1,0 +1,97 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 404 page styling
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * General
+// =============================================================================
+
+.page--404 {
+
+  // Set a background
+
+  .main__content {
+
+    position: relative;
+    text-align: center;
+    padding-top: 39%; // create space for text to be readable & overlap with bg a bit
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      width: 100%;
+      max-width: rem(800);
+      height: 100%;
+      background: url("../images/generated/page--404.svg") no-repeat;
+      background-size: 100% auto;
+      transform: translateX(-50%) translateY(-50%);
+      opacity: .1;
+    }
+
+    // // hide header (if any)
+    // .cb-header {
+    //   display: none;
+    // }
+
+    // // Style the text
+
+    // .block--type-cb-text {
+    //   text-align: center;
+    //   padding-top: 21%; // create space for text to be readable & overlap with bg a bit
+
+    //   .field {
+    //     position: relative;
+    //     z-index: 1;
+    //   }
+
+    //   h1,
+    //   h2 {
+    //     margin-bottom: 5%;
+    //     @include font-size(32, 44, true);
+    //     text-transform: uppercase;
+    //     color: hsl(var(--clr-spot-1));
+    //   }
+
+    // }
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: small desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .page--404 {
+
+    .main__content {
+
+      padding-top: 35%;
+
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: lg and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .page--404 {
+    .main__content {
+      padding-top: rem(320); // create space for text to be readable & overlap with bg a bit
+    }
+
+  }
+
+}
+

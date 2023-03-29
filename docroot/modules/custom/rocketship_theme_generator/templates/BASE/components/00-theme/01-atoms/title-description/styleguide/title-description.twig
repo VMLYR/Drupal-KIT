@@ -1,0 +1,50 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{# title_description field #}
+{% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+  label: label,
+  label_hidden: label_hidden,
+  field_name: field_name,
+  field_type: field_type,
+  bem_field_modifiers: bem_field_modifiers,
+  bem_field_extra: bem_field_extra,
+  attributes: attributes,
+  field_name: field_name,
+  items: items,
+  multiple: multiple,
+} %}
+
+  {# Since Drupal outputs the fields as bundles of html + data, and we don't want to do html in out yml data,
+      we have to inject the html directly using a nested block
+      Luckily, for fields we can straight-up call the field twig template and get the exact html we need #}
+  {% block field_content_items %}
+
+    {% for item in items %}
+
+      {# title_description fielditem #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field-item.twig" with {} %}
+
+        {# Since Drupal outputs the fields as bundles of html + data, and we don't want to do html in out yml data,
+          we have to inject the html directly using a nested block
+          Unfortunately, the twig template for fieldset item for 'title_desctiption' comes from a module
+          so we can't directly reuse the template but have to either copy the plain html directly, or the complete twig file #}
+        {% block fielditem_content %}
+
+          {# copied from modules/contrib/rocketship_core/templates/title-description-list-item.html.twig #}
+          <div class="title-description-item">
+            <h2 class="title-description-item-title">{{item.title}}</h2>
+            <span class="title-description-item-description">{{item.description}}</span>
+          </div>
+
+        {% endblock %}
+      {% endembed %}
+    {% endfor %}
+
+  {% endblock %}
+
+{% endembed %}
+{# /End title_description field #}

@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * General Variables
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** Icons
+// =============================================================================
+
+// if we use our own icons instead of FontAwesome
+// See the README in the theme's 'icons' folder for more info on how to do this
+$custom-icons: false !default;
+
+// Use the custom icons as a font or sprite
+$custom-icons-type: "font" !default; // sprite or font
+
+// Used to generate the structural CSS used by Rocketship Paragraphs and other
+// A preset that can be used to generate CSS with only basic styling,
+// So it skips typography and certain mixins (eg. buttons, fontawesome, …)
+// Can be useful
+$structuralOnly: false !default;

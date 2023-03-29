@@ -1,0 +1,154 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 403 page styling
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * General
+// =============================================================================
+
+.page--403 {
+
+  // Set a background
+
+  .main__content {
+
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      width: 100%;
+      max-width: rem(800);
+      height: 100%;
+      background: url("../images/generated/page--403.svg") no-repeat;
+      background-size: 100% auto;
+      transform: translateX(-50%) translateY(-50%);
+      opacity: .1;
+    }
+
+    // hide header (if any)
+    .cb-header {
+      display: none;
+    }
+
+    // Style the text
+
+    .block--type-cb-text {
+      padding-top: 21%; // create space for text to be readable & overlap with bg a bit
+      text-align: center;
+
+      .field {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1,
+      h2 {
+        margin-bottom: 5%;
+        @include font-size(32, 44, true);
+        text-transform: uppercase;
+        color: hsl(var(--clr-spot-1));
+      }
+
+    }
+  }
+
+  // hide header
+
+  .paragraph--type-simple-header {
+    display: none;
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: phone xs & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide {
+
+  .page--403 {
+
+    .main__content .block--type-cb-text {
+
+      padding-top: 24%;
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .page--403 {
+
+    .main__content .block--type-cb-text {
+
+      padding-top: 24%;
+
+      h1,
+      h2 {
+        margin-bottom: 12%;
+      }
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .page--403 {
+
+    .main__content .block--type-cb-text {
+
+      padding-top: rem(210);
+
+      h1,
+      h2 {
+        margin-bottom: rem(80);
+      }
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: lg and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .page--403 {
+
+    .block--type-cb-text {
+
+      & > * {
+        max-width: none;
+      }
+
+      //h1,
+      //h2 {
+      //  margin-bottom: rem(80);
+      //}
+    }
+
+  }
+
+}
+

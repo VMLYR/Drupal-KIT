@@ -1,0 +1,80 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-organisms/header/nav/_nav.twig" with {
+    nav_primary: nav_primary,
+    nav_secondary: nav_secondary,
+  } %}
+
+  {# primary nav part: contains main menu #}
+  {% block nav_primary %}
+
+    {# primary menu #}
+    {% embed "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      menu_block_bem_modifiers: menu_main.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_main.menu_block_bem_extra,
+      menu: menu_main.menu,
+      label: menu_main.label,
+      configuration: menu_main.configuration,
+      items: menu_main.items,
+    } %}
+
+      {% block menu_content %}
+        {% include "@%theme_prefix%-molecules/menus/menu--main/_menu--main.twig"  %}
+      {% endblock %}
+
+    {% endembed %}
+    {# end primary menu #}
+
+  {% endblock %}
+  {# end primary nav #}
+
+  {# secondary nav part: can contain secondary nav (if any) #}
+  {% block nav_secondary %}
+
+    {# secondary menu #}
+    {#% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      menu_block_bem_modifiers: menu_secondary.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_secondary.menu_block_bem_extra,
+      menu: menu_secondary.menu,
+      label: menu_secondary.label,
+      configuration: menu_secondary.configuration,
+      items: menu_secondary.items,
+    } %#}
+    {# end secondary menu #}
+
+    {# language menu: visible on desktop only, the one for mobile is located directly in header--top.twig (the top header section in Block layout) #}
+    {% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      menu_block_bem_modifiers: menu_language.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_language.menu_block_bem_extra,
+      menu: menu_language.menu,
+      label: menu_language.label,
+      configuration: menu_language.configuration,
+      items: menu_language.items,
+      drupalSettings: menu_language.drupalSettings,
+      attributes: menu_language.attributes,
+      links: menu_language.links,
+    } %}
+    {# end language menu #}
+
+    {# you could also add blocks, specifically for mobile navigation.
+      so add your code here + data in nav.yml and header-primary.yml
+      and don't forget to set'nav_secondary' to true #}
+
+    {# example block: could make this visible on mobile only #}
+    {# {% include "@%theme_prefix%-molecules/social-media/styleguide/social-media-links.twig" with {
+      label: social.label,
+      configuration: social.configuration,
+      bem_block_modifiers: social.bem_block_modifiers,
+      fields: social.fields,
+    } %} #}
+    {# end example block #}
+
+  {% endblock %}
+  {# end secondary nav #}
+
+{% endembed %}

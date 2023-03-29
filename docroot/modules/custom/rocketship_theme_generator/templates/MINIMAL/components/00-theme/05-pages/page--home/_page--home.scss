@@ -1,0 +1,88 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Homepage styling
+// *
+// * Style the Sections and Regions specific for your homepage
+// *
+// * Tip: add classes to your sections, based on what is in it:
+// *      eg. 'home__section--usp-info' would be a section with an usp and an info block
+// * Tip: Lock the possibility for webadmins to add or delete sections in certain parts of the homepage, 
+// *      so they don't break the layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// ** a section
+
+.home__section--fubar {
+
+  // a block
+  .block--fubar {
+    //
+  }
+
+}
+
+// ** Example of targetting first or last layout section of the frontpage
+//    to manipulate spacing, for example
+//    Ideally, you would set a class to that last layout and target that
+//    but content editors might still add a section below it,
+//    unless you lock that option
+
+.path-frontpage .node__content--page--full {
+  
+  & > .layout:first-child:not(.has-bg):not(.has-bg-image) {
+    //
+  }
+
+  & > .layout:last-child:not(.has-bg):not(.has-bg-image) {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide phone only
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide-only {
+
+  //
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  //
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  //
+
+}

@@ -1,0 +1,57 @@
+view_mode: related
+isPromoted: false
+isSticky: false
+bundle: page
+fields:
+  image:
+    label_hidden: true
+    field_name: field_media_canonical_image
+    field_type: entity_reference
+    bem_field_extra:
+      - 'blazy'
+      - 'blazy--field'
+      - 'blazy--field-media-info-image'
+    field_attributes:
+      'data-blazy': ''
+    settings:
+      lazy: true
+      use_loading: true
+    blazy_bem_modifiers:
+      - 'bundle--image'
+      - blazy
+      - image
+      - loading
+    image_src: 'https://placeimg.com/320/213/arch'
+    image_alt: 'A 3:2 image'
+    image_srcset: 'https://placeimg.com/768/216/arch 480w, https://placeimg.com/940/627/arch 768w, https://placeimg.com/1200/800/arch 940w'
+    image_sizes: '100vw'
+    image_bem_extra:
+      - 'media__image'
+      - 'media__element'
+      - 'b-lazy'
+    image_loading: "lazy"
+    output_image_tag: true
+  title:
+    heading_display: true
+    heading_level: 3
+    heading: Euismod lacinia at quis risus
+    field_name: title
+    field_type: string
+    heading_url: '#'
+  description:
+    label_hidden: true
+    field_name: field_description
+    field_type: string_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: "<p>Nibh sit amet commodo nulla facilisi nullam. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque. Nec ullamcorper sit amet risus nullam eget felis eget. Vitae elementum curabitur vitae nunc sed velit.</p>"
+  more:
+    label_hidden: true
+    field_name: field_page_display_canonical
+    field_type: rs_display_field
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'field-page-display-canonical'
+    href: '#'
+    title: 'Read more'

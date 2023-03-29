@@ -1,0 +1,148 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Search block (eg in header)
+// *
+// * Load all the styling + the structural CSS
+// * for the search block in the right order and breakpoints
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: only on mobile phone
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-only {
+
+  .block--region-header_top.block--search {
+
+    // -- Trigger: icon
+
+    h2 {
+      cursor: pointer;
+      position: relative;
+      display: block;
+      margin: 0;
+      // to align and size the text
+      padding-top: rem(34);
+      height: var(--menubar-height);
+      width: var(--menubar-height);
+
+      @include font-size(11, 15);
+      font-weight: normal;
+      text-align: center;
+
+      transition: all $duration $easing;
+
+      @include font-awesome((icon: $fa-var-search, size: 24, element: before));
+      @include font-awesome((icon: $fa-var-times, size: 24, element: after));
+
+      // open and close icons
+      &::before,
+      &::after {
+        position: absolute;
+        left: 50%;
+        top: 0;
+
+        display: block;
+
+        padding-top: rem(10);
+
+        transform: translateX(-50%);
+        transition: opacity $duration $easing;
+      }
+
+      // normal
+      &::before {
+        opacity: 1;
+      }
+
+      // open
+      &::after {
+        opacity: 0;
+      }
+
+      &:hover {
+        color: hsl(var(--clr-spot-1));
+      }
+    }
+
+    &.js-open h2 {
+
+      // normal
+      &::before {
+        opacity: 0;
+      }
+
+      // open
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // -- Target: the search form
+
+    form {
+      position: fixed;
+      left: 0;
+      bottom: var(--menubar-height);
+
+      display: flex;
+      // center the content vertically
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+
+      width: 100vw;
+      height: 0;
+
+      transition: all $duration $easing;
+    }
+
+    // search field
+    .form-type--search {
+      padding: rem(30) rem(30) 0 rem(30);
+
+      input {
+        border: 0 none;
+      }
+    }
+
+    // search button
+    .form-actions {
+      padding: 0 rem(30) rem(30) rem(30);
+      text-align: center;
+
+      button {
+        @include button-negative;
+      }
+    }
+
+    &.js-open form {
+      height: calc(100vh - var(--menubar-height)); // offset with menubar height
+      background-color: hsl(var(--clr-mobile-nav-open-bg));
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--region-header_top.block--search {
+
+    h2 {
+      @include hide;
+    }
+
+    // -- inline form
+
+    form {
+      display: flex;
+      max-width: rem(250);
+    }
+  }
+}

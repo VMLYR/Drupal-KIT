@@ -1,0 +1,61 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{# navigation blocks use different templates based on regions #}
+
+{% if region is not defined or ('footer' not in region and 'doormat' not in region) %}
+
+  {% embed "@%theme_prefix%-molecules/menus/menu/_menu-block.twig" with {
+      menu_block_bem_modifiers: menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_block_bem_extra,
+    } %}
+
+    {% block menu_block_content %}
+
+      {# language is a special menu, rest is 'normal' #}
+      {% if menu == 'language' %}
+        {% include "@%theme_prefix%-molecules/menus/menu--language/_links--language.twig" with {
+          menu_block_bem_modifiers: menu_language.menu_block_bem_modifiers,
+          menu_block_bem_extra: menu_language.menu_block_bem_extra,
+          menu: menu_language.menu,
+          label: menu_language.label,
+          configuration: menu_language.configuration,
+          items: menu_language.items,
+        } %}
+      {% else %}
+        {% include "@%theme_prefix%-molecules/menus/menu/_menu.twig" with {
+          bem_menu_block: 'menu',
+          bem_menu_modifiers: [menu],
+          items ? items: items,
+        } %}
+      {% endif %}
+
+    {% endblock %}
+
+  {% endembed %}
+
+{# doormat & footer nav blocks use slightly altered block template (diff heading) #}
+{% else %}
+
+  {% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+      heading_level: 4,
+      heading_id: heading_id,
+      bem_block_modifiers: menu_block_bem_modifiers,
+      bem_block_extra: menu_block_bem_extra,
+    } %}
+
+    {% block block_content %}
+      {% include "@%theme_prefix%-molecules/menus/menu/_menu.twig" with {
+        label: label,
+        bem_menu_modifiers: menu,
+        configuration: configuration,
+        items: items,
+      } %}
+    {% endblock %}
+
+  {% endembed %}
+{% endif %}

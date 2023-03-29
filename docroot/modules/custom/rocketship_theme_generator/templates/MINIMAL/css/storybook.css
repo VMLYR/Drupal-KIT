@@ -1,0 +1,86 @@
+:root {
+  --c-text: hsl(var(--clr-base));
+  --c-background: hsl(var(--clr-white));
+  --c-primary: hsl(var(--clr-spot-1));
+  --c-secondary: hsl(var(--clr-spot-2));
+  --c-off-white: hsl(var(--clr-off-white));
+  --c-disabled: hsl(var(--clr-form-disabled));
+  --c-gray-light-1: hsl(var(--clr-gray-light-1));
+  --c-gray-light-2: hsl(var(--clr-gray-light-2));
+  --c-gray-light-3: hsl(var(--clr-gray-light-3));
+  --c-gray-medium: hsl(var(--clr-gray));
+  --c-success: hsl(var(--clr-status));
+  --c-warning: hsl(var(--clr-warning));
+  --c-error: hsl(var(--clr-error));
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-text: hsl(var(--clr-base));
+    --c-background: hsl(var(--clr-white));
+  }
+}
+:root [data-theme=default] {
+  --c-text: hsl(var(--clr-base));
+  --c-background: hsl(var(--clr-white));
+  --c-primary: hsl(var(--clr-spot-1));
+  --c-secondary: hsl(var(--clr-spot-2));
+  --c-off-white: hsl(var(--clr-off-white));
+  --c-disabled: hsl(var(--clr-form-disabled));
+  --c-gray-light-1: hsl(var(--clr-gray-light-1));
+  --c-gray-light-2: hsl(var(--clr-gray-light-2));
+  --c-gray-light-3: hsl(var(--clr-gray-light-3));
+  --c-gray-medium: hsl(var(--clr-gray));
+  --c-success: hsl(var(--clr-status));
+  --c-warning: hsl(var(--clr-warning));
+  --c-error: hsl(var(--clr-error));
+}
+:root [data-theme=dark] {
+  --c-text: hsl(var(--clr-base));
+  --c-background: hsl(var(--clr-white));
+}
+
+.cl-colors {
+  padding: 1rem;
+}
+
+.cl-colors__list {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.cl-colors__item {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex: 1 1 20%;
+  flex: 1 1 20%;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 150px;
+  margin: 0.25rem;
+  list-style: none;
+  transition: all 0.4s;
+}
+
+.cl-colors__swatch {
+  min-height: 150px;
+  width: 100%;
+}
+
+.cl-colors__title {
+  width: 100%;
+  padding: 0.2rem 2rem 0.5rem 2rem;
+  text-align: center;
+  color: hsl(var(--clr-base));
+}
+
+[data-theme=dark] .cl-colors__title {
+  color: hsl(var(--clr-white));
+}

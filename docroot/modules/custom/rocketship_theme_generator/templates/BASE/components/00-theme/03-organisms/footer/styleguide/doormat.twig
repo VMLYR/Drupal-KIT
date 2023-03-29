@@ -1,0 +1,66 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% embed "@%theme_prefix%-organisms/footer/doormat/_doormat.twig" %}
+
+  {% block doormat %}
+    {# add branding #}
+    {% include "@%theme_prefix%-molecules/branding/styleguide/branding-block.twig" with {
+      label: branding.label,
+      heading_id: branding.heading_id,
+      heading_level: branding.heading_level,
+      configuration: branding.configuration,
+      heading_level: branding.heading_level,
+      bem_block_modifiers: branding.bem_block_modifiers,
+      fields: branding.fields,
+    } %}
+  {% endblock %}
+
+  {# sitemap menu: reuses data from main menu #}
+  {# {% block doormat_02 %}
+    {% include "@%theme_prefix%-molecules/menus/styleguide/menu.twig" with {
+      region: menu_sitemap.region,
+      menu: menu_sitemap.menu,
+      label: menu_sitemap.label,
+      heading_id: menu_sitemap.heading_id,
+      heading_level: menu_sitemap.heading_level,
+      configuration: menu_sitemap.configuration,
+      menu_block_bem_modifiers: menu_sitemap.menu_block_bem_modifiers,
+      menu_block_bem_extra: menu_sitemap.menu_block_bem_extra,
+      bem_menu_modifiers: bem_menu_modifiers,
+      attributes: menu_sitemap.attributes,
+      links: menu_sitemap.links,
+      items: menu_sitemap.items,
+    } %}
+  {% endblock %} #}
+
+  {# add social #}
+  {# {% block doormat_03 %}
+    {% include "@%theme_prefix%-molecules/social-media/styleguide/social-media-links.twig" with {
+      label: social.label,
+      heading_id: social.heading_id,
+      heading_level: social.heading_level,
+      configuration: social.configuration,
+      bem_block_modifiers: social.bem_block_modifiers,
+      fields: social.fields,
+    } %}
+  {% endblock %} #}
+
+  {# add contact #}
+  {# {% block doormat_04 %}
+    {% include "@%theme_prefix%-office-molecules/f006-office-contact/styleguide/contact.twig" with {
+      label: contact.label,
+      heading_id: contact.heading_id,
+      heading_level: contact.heading_level,
+      configuration: contact.configuration,
+      bem_block_modifiers: contact.bem_block_modifiers,
+      bem_block_extra: contact.bem_block_extra,
+      fields: contact.fields,
+    } %}
+  {% endblock %} #}
+
+{% endembed %}
+

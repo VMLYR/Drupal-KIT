@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Theme override to display a formatted image field.
+ *
+ * Available variables:
+ * - image: A collection of image data.
+ * - image_style: An optional image style.
+ * - path: An optional array containing the link 'path' and link 'options'.
+ * - url: An optional URL the image can be linked to.
+ *
+ * @see template_preprocess_image_formatter()
+ */
+#}
+{% if url %}
+  {#
+    Want to add html alongside or around the image? Use the 'raw' filter:
+
+    {% set extended_image %}
+      <span class="some-element">{{ 'Some text' | t }}</span>
+      {{ image|raw }}
+    {% endset %}
+  #}
+  {#
+    Need to add attributes? Add object as a third parameter to the link function:
+
+    {{ link(image, url, { 'aria-label': 'some label' }) }}
+  #}
+  {{ link(image, url) }}
+{% else %}
+  {{ image }}
+{% endif %}

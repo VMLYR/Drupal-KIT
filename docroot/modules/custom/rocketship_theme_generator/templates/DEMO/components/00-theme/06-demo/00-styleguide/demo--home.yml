@@ -1,0 +1,72 @@
+page:
+  content:
+    blocks:
+      visual:
+      info:
+      image:
+      content:
+      related_items:
+    layouts:
+      header:
+        minimal_styling: false
+        label: 'Header'
+        template: 'rs-header'
+        region_type: 'header'
+        modifier: null
+        extra_classes: 'florista--homepage-header'
+        background_color: spot_1
+        background_image: true
+        layout_background_image: true
+        section_spacing_top: 1x
+        section_spacing_bottom: 1x
+        content:
+          content: true
+          before01: false
+          before02: false
+          after01: false
+          after02: false
+      usp_info:
+        minimal_styling: false
+        label: 'Rocketship 2-col'
+        template: 'rs-two-col'
+        extra_classes: 'florista--homepage-usp-section'
+        reversed: false
+        left_col_size: '2-3'
+        right_col_size: '1-3'
+        content:
+          first_main: true
+          second_main: true
+      blog:
+        minimal_styling: false
+        label: 'Rocketship 1-col'
+        template: 'rs-one-col'
+        modifier: null
+        extra_classes: 'florista--blog-section'
+        section_spacing_top: 0x
+        content:
+          content: true
+          before01: false
+          before02: false
+          after01: false
+          after02: false
+      cta:
+        minimal_styling: false
+        label: 'CTA section'
+        template: 'rs-content'
+        modifier: null
+        extra_classes: 'florista--footer-cta'
+        background_color: grey
+        section_spacing_top: 1x
+        section_spacing_bottom: 1x
+        content:
+          content: true
+          before01: false
+          before02: false
+          after01: false
+          after02: false
+      contents:
+        label: 'Body'
+        template: 'rs-content'
+        content:
+          content: true
+

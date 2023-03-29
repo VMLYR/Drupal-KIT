@@ -1,0 +1,200 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{# {%
+  set classes = [
+    'field',
+    field_name ? 'field--name-' ~ field_name|clean_class,
+    field_type ? 'field--type-' ~ field_type|clean_class,
+    label_display ? 'field--label-' ~ label_display,
+  ]
+%} #}
+
+{# {%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%} #}
+
+{# {% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'field__items') }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+    {% if multiple %}
+      <div class="field__items">
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %} #}
+
+{% set label_hidden = label_hidden ?? true %}
+
+{% set bem_field_block = bem_field_block|default('field') %}
+{% set bem_field_element = bem_field_element ?? false %}
+
+{% if not bem_field_modifiers %}
+  {% set bem_field_modifiers = [] %}
+{% endif %}
+
+{% if field_name %} {% set bem_field_modifiers = bem_field_modifiers|merge(['name-' ~ field_name|clean_class]) %}{% endif %}
+{% if field_type %} {% set bem_field_modifiers = bem_field_modifiers|merge(['type-' ~ field_type|clean_class]) %}{% endif %}
+{% if label_display %} {% set bem_field_modifiers = bem_field_modifiers|merge(['label-' ~ label_display]) %}{% endif %}
+
+{% set bem_field_extra = bem_field_extra|default([]) %}
+
+{% if field_name %}
+  {% set bem_field_extra = bem_field_extra|merge([
+      field_name|clean_class|replace({'_': '-'})
+    ])
+  %}
+{% endif %}
+
+{# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+<div {{ bem(bem_field_block, bem_field_element, bem_field_modifiers, bem_field_extra, attributes) }}>
+
+  {% if label_hidden %}
+    {# nothing #}
+  {% else %}
+    {% if label %}
+
+      {%
+        set title_classes = [
+          'field__label'
+        ]
+      %}
+
+      {% set label_id = false  %}
+      {% set heading_display = true %}
+      {% set field_heading_level = field_heading_level|default(3) %}
+
+      {% if label_display == 'visually_hidden' %}
+        {% set title_classes = title_classes|merge(['visually-hidden']) %}
+        {% set heading_display = false %}
+        {# if label exists and is visually hidden, need an id for aria-labelledby #}
+        {% if heading_id is defined and heading_id %}
+          {% set label_id = heading_id ~ '_label'  %}
+        {% else %}
+         {% set label_id = field_name|clean_class ~ '_label'  %}
+        {% endif %}
+      {% endif %}
+
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/_heading.twig" with {
+        "heading_level": field_heading_level,
+        "heading": label,
+        "heading_bem_extra": title_classes,
+        "heading_id": label_id,
+        "heading_display": heading_display,
+      } %}
+
+    {% endif %}
+  {% endif %}
+
+  {# just always render the items wrapper, it's easier for theming #}
+  {% block field_content %}
+
+    {% if multiple and items|length > 0 %}
+
+      <div class="field__items field__items--name-{{field_name|clean_class}}">
+        {% set bem_fielditem_block = bem_field_block %}
+        {% set bem_fielditem_element = bem_fielditem_element|default('item') %}
+        {% set bem_fielditem_modifiers = bem_field_modifiers %}
+
+        {% block field_content_items %}
+
+          {% for item in items %}
+
+            {# if an inline template is used (eg. by the title field's heading formatter), we need to check for content
+            otherwise that template's html will be rendered even if there is no actual content in it #}
+            {% if item.content['#template'] and item.content['#type'] and item.content['#type'] == 'inline_template' %}
+              {% if item.content|render|striptags|length %}
+                {% include "@%theme_prefix%-atoms/00-field/_field-item.twig" with {
+                  bem_fielditem_block: bem_field_block,
+                  bem_fielditem_element: bem_fielditem_element|default('item'),
+                  bem_fielditem_modifiers: bem_field_modifiers,
+                  content: item.content
+                } %}
+              {% endif %}
+            {# for normal fields, just render as usual #}
+            {% else %}
+              {% include "@%theme_prefix%-atoms/00-field/_field-item.twig" with {
+                bem_fielditem_block: bem_field_block,
+                bem_fielditem_element: bem_fielditem_element|default('item'),
+                bem_fielditem_modifiers: bem_field_modifiers,
+                content: item.content
+              } %}
+            {% endif %}
+
+          {% endfor %}
+        {% endblock %}
+      </div>
+    {% else %}
+      {% for item in items %}
+        {# if an inline template is used (eg. by the title field's heading formatter), we need to check for content
+            otherwise that template's html will be rendered even if there is no actual content in it #}
+        {% if item.content['#template'] and item.content['#type'] and item.content['#type'] == 'inline_template' %}
+          {% if item.content|render|striptags|length %}
+            {{ item.content }}
+          {% endif %}
+        {# for normal fields, just render as usual #}
+        {% else %}
+          {{ item.content }}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+  {% endblock %}
+
+</div>

@@ -1,0 +1,11 @@
+{% if flex or demo %}
+header_fixed: FALSE
+{% fi flex or demo %}
+
+language_dropdown: TRUE
+language_abbr: TRUE
+scroll_to: TRUE
+scroll_to_exceptions: ''
+lazy_loading: FALSE
+lazy_loading_fallback: FALSE
+prevent_layout_shift: FALSE

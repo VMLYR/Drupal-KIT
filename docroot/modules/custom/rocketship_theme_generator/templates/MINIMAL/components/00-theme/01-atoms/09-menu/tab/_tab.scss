@@ -1,0 +1,57 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Tab
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+
+.tabs__link {
+  display: block;
+  padding: rem(10) calc(var(--gap-hor) / 2);
+  border-top: 1px solid hsla(var(--clr-white), .4);
+  @include font-size(14, 18);
+  background-color: hsl(var(--clr-tab-bg));
+
+  &,
+  &:visited {
+    color: hsl(var(--clr-tab-text));
+    background-color: hsl(var(--clr-tab-bg));
+  }
+
+  &:hover {
+    color: hsl(var(--clr-tab-text));
+    background-color: hsl(var(--clr-tab-bg-hover));
+  }
+
+  &.is-active {
+    color: hsl(var(--clr-tab-text));
+    background-color: hsl(var(--clr-tab-bg-active));
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .tabs li {
+    display: inline-block;
+  }
+
+  .tabs__link {
+    display: inline-block;
+    border-top: 0 none;
+
+    &.is-active {
+      color: hsl(var(--clr-tab-bg-hover));
+      background-color: hsl(var(--clr-tab-bg-active-2));
+    }
+  }
+}

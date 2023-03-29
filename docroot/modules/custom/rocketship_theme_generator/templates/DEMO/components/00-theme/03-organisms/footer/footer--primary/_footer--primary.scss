@@ -1,0 +1,104 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Footer
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.footer--primary {
+
+  padding: 0 0 rem(30) 0;
+  text-align: center;
+  color: hsl(var(--clr-footer));
+  background: hsl(var(--clr-footer-bg));
+
+  // .container {
+  //   margin-top: rem(-15);
+  // }
+
+  p {
+    margin: 0;
+  }
+}
+
+.block--region-footer-primary {
+  margin-top: rem(15);
+
+  .menu {
+    @include list-reset;
+
+    li {
+      @include list-reset;
+    }
+  }
+
+  a {
+
+    @include link-underline((
+      color: var(--clr-footer),
+      color-hover: var(--clr-footer),
+      inverse: true
+    ));
+  }
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+@include bp-sm {
+
+  .footer--primary {
+    padding-bottom: rem(35);
+
+    .container {
+      display: flex;
+      justify-content: center;
+
+      div:not(.contextual) {
+        display: inline-block;
+      }
+    }
+
+  }
+
+  .block--powered-by-dropsolid {
+    &::before {
+      content: "-";
+      padding-left: rem(4);
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+@include bp-md {
+
+  .footer--primary {
+    padding-bottom: rem(45);
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large screens
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+@include bp-lg {
+
+  .footer--primary {
+    padding-bottom: rem(65);
+  }
+
+}

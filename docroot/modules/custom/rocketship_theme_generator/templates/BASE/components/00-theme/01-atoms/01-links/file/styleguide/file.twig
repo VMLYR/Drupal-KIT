@@ -1,0 +1,37 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+/**
+ * Available variables:
+ *
+ * Available variables:
+ * - attributes: The HTML attributes for the containing element.
+ * - link_content: A link to the file.
+ *
+ * Available blocks:
+ * - content - used to replace link_content (which should be a link-tag) of the component
+ */
+#}
+
+{% extends "@%theme_prefix%-atoms/01-links/file/_link-file.twig" %}
+
+{# we COULD simply pass a link-tag as raw html to the link_content variable,
+   but since links are built up out of twig templates, it's better to just pass it directly
+   that way, if we change the link template somewhere down the line, those changes are also reflected in here #}
+{% block content %}
+  {% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+    link_content ? 'link_content': link_content,
+    link_url ? 'link_url': link_url,
+    link_attributes ? 'link_attributes': link_attributes,
+    bem_link_block ? 'bem_link_block': bem_link_block,
+    bem_link_element ? 'bem_link_element': bem_link_element,
+    bem_link_modifiers ? 'bem_link_modifiers': bem_link_modifiers,
+    icon_bem_modifiers ? 'icon_bem_modifiers': icon_bem_modifiers,
+    icon_bem_extra: icon_bem_extra,
+    no_link ? 'no_link': no_link,
+  }
+%}
+{% endblock %}
+

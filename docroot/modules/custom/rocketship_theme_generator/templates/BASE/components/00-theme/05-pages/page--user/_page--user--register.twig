@@ -1,0 +1,28 @@
+{% embed '@%theme_prefix%-pages/page/_page--master.twig' %}
+
+  {% block pageTabs %}
+  {% endblock %}
+
+  {% block pageContent %}
+  <div class="user-box user-box--register">
+
+    <div class="user-box__middle user-box__middle--register">
+      <h2 class="page-title hide">{{ title }}</h2>
+      {{ page.content }}
+
+      <ul class="user-box__links">
+        <li><a class="link--login" href="{{ path('user.login') }}">{{ 'Login'|t }}</a></li>
+
+        <li><a class="link--password" href="{{ path('user.pass') }}">{{ 'Forgot your password?'|t }}</a></li>
+      </ul>
+    </div>
+
+    <div class="user-box__bottom user-box__bottom--register">
+      <a class="link--back" href="{{ url('<front>') }}">
+        {{ 'Back'|t }} {# {{ site_name }} #}
+      </a>
+    </div>
+  </div>
+  {% endblock %}
+
+{% endembed %}

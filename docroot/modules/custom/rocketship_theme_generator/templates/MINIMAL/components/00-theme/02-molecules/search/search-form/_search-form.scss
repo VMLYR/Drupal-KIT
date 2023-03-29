@@ -1,0 +1,125 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Search form
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+.main form.search-form {
+
+  position: relative;
+
+  // * Search simple
+  // ===========================================================================
+
+  & > .form__group {
+
+    .form-type--search {
+      //
+    }
+
+    input[type="text"],
+    input[type="search"] {
+      //
+    }
+
+    [type="submit"] {
+      //
+    }
+  }
+
+  // * Help
+  // ===========================================================================
+
+  .search-help-link {
+    //
+  }
+
+  // * Advanced
+  // ===========================================================================
+
+  .search-advanced {
+
+    fieldset {
+      //
+    }
+
+    legend {
+      //
+    }
+
+    .criterion legend {
+      //
+    }
+
+    .form-radiobuttons,
+    .form-checkboxes {
+      label {
+        //
+      }
+    }
+  }
+
+  .details-wrapper {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .main form.search-form {
+
+    // * Advanced
+    // =========================================================================
+
+    .search-advanced {
+
+      .details-wrapper {
+
+        //
+
+        & > fieldset {
+          //
+
+          &:first-child {
+            //
+          }
+        }
+
+        .action {
+          //
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .main form.search-form {
+
+    & > .form__group {
+      //
+    }
+
+    .search-help-link {
+      //
+    }
+  }
+
+}

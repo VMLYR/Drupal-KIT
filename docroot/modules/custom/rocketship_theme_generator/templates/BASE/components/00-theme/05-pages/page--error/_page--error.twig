@@ -1,0 +1,11 @@
+{% embed '@%theme_prefix%-pages/page/_page--master.twig' %}
+
+  {% block pageContent %}
+    {{ page.content }}
+
+    <div class="actions actions--error">
+      <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home" class="button">{{ 'Back to the frontpage'|t }}</a>
+    </div>
+  {% endblock %}
+
+{% endembed %}

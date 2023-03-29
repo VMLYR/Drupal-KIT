@@ -1,0 +1,71 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Cookie policy
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.cookie-policy {
+  position: fixed;
+  bottom: rem(-200);
+  left: 0;
+  right: 0;
+  @include z-index(cookie);
+  padding: rem(15) 0;
+  transition: all $duration $easing;
+
+  .cookiePolicy-is-visible & {
+    bottom: 0;
+  }
+
+  // Storybook styling override
+  .sb-show-main & {
+    bottom: auto;
+    top: 0;
+  }
+}
+
+.cookie-policy__message {
+  span {
+    display: block;
+  }
+  a {
+    position: relative;
+  }
+}
+
+.cookie-policy__message--first {
+  //
+}
+.cookie-policy__dismiss {
+  //
+
+  a {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .cookie-policy {
+
+    .container {
+      display: flex;
+    }
+  }
+  .cookie-policy__message {
+    flex-grow: 1;
+  }
+  .cookie-policy__dismiss {
+    //
+  }
+
+}

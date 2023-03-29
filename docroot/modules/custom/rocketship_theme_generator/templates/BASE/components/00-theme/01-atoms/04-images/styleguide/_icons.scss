@@ -1,0 +1,41 @@
+// Storybook styling
+.icons-demo {
+  display: flex;
+  flex-wrap: wrap;
+
+  // .rs-icon {
+  //   height: 100px;
+  //   padding: rem(10);
+  //   width: 100px;
+
+  //   // @media (prefers-color-scheme: dark) {
+  //   //   fill: clr(accent-high);
+  //   // }
+  // }
+
+  pre {
+    margin: 0;
+    padding: 0 4px;
+    font-size: 0.8rem;
+    text-align: center;
+    background-color: clr(off-white);
+  }
+}
+
+.icons-demo--link {
+  display: block;
+}
+
+.icons-demo__item-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icons-demo__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: rem(10);
+  border: 1px solid clr(off-white);
+  text-align: center;
+}

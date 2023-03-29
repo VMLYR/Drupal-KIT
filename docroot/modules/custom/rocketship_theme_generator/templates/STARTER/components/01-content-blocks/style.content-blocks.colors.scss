@@ -1,0 +1,496 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Paragraphs colors only
+// *
+// * Not used in the theme
+// * we use this to generate a CSS-template
+// * which is used by the Rocketship Paragraphs module for generating the colors
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** our active theme's Sass
+//    which is symlinked on npm install in active theme
+
+@import "../00-theme/00-base/00-config/**/*.scss";
+@import "../00-theme/00-base/01-helpers/**/*.scss";
+
+// we need our theme's atoms helpers
+@import "../00-theme/01-atoms/**/*helpers.scss";
+
+// we need our theme's atoms helpers
+@import "../00-theme/01-atoms/01-links/00-link/_link-helpers.scss";
+
+// no Dropsolid-specific stuff
+$structuralOnly: true;
+
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content section: carousel
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Slick slider
+// =============================================================================
+
+.layout--bg--replace_variant_name .layout__content__row--carousel {
+
+  // ** navigation
+
+  .slick-arrow {
+    background: #e5e5e5;
+    opacity: .75;
+
+    &.slick-prev,
+    &.slick-next {
+      background: #fff;
+    }
+
+    &.slick-prev {
+
+      @if ($structuralOnly == false) {
+
+        color: replace_foreground_color;
+
+      } @else {
+
+        &::before {
+          border-right: 7px solid replace_foreground_color;
+        }
+      }
+    }
+
+    &.slick-next {
+
+      @if ($structuralOnly == false) {
+
+        color: replace_foreground_color;
+
+      } @else {
+
+        &::before {
+          border-left: 7px solid replace_foreground_color;
+        }
+      }
+    }
+
+    &:hover {
+
+      opacity: 1;
+
+      @if ($structuralOnly == false) {
+
+        &.slick-prev,
+        &.slick-next {
+          background: replace_link_color;
+        }
+
+        &::before {
+          color: replace_foreground_color;
+        }
+
+      } @else {
+
+        background: rgba(#fff, 1);
+
+      }
+    }
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * The individual content blocks
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+/* stylelint-disable */
+
+// *
+// =============================================================================
+
+.layout--content-blocks {
+
+  // ***************************************************************************
+  // Add your layout specific backgrounds here.
+  // See example below.
+  // ***************************************************************************
+
+  .layout--bg--replace_variant_name {
+    @include full-bg (replace_background_color, "before", false);
+
+    color: replace_foreground_color;
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: replace_link_color;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: replace_foreground_color;
+
+      a,
+      a:visited,
+      a:hover,
+      a:active {
+        color: replace_foreground_color;
+      }
+    }
+
+    // CKE lists
+
+    .filter-type ul:not(.inline),
+    .text-long ul:not(.inline) {
+
+      & > li::before {
+        color: replace_foreground_color;
+        background-color: replace_foreground_color;
+      }
+
+    }
+
+    .filter-type ol:not(.inline),
+    .text-long ol:not(.inline) {
+
+      & > li::before {
+        color: replace_foreground_color;
+      }
+
+    }
+
+    // CKE links
+    .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary) {
+      &,
+      &:visited {
+        border-bottom: 1px solid transparent;
+        color: replace_link_color;
+      }
+
+      &:hover,
+      &:active {
+        border-bottom: 1px solid replace_hover_color;
+        color: replace_hover_color;
+      }
+    }
+
+    hr {
+      border-top-color: replace_foreground_color;
+    }
+
+    // quotes
+
+    blockquote {
+      color: replace_foreground_color;
+    }
+
+    // breadcrumb
+
+    .breadcrumb {
+      color: replace_foreground_color;
+    }
+
+    .breadcrumb__item {
+      &::before {
+        color: replace_foreground_color;
+      }
+    }
+
+    .breadcrumb__element {
+      color: replace_foreground_color;
+    }
+
+    .breadcrumb__link {
+      &,
+      &:visited {
+        border-bottom: 1px solid transparent;
+        color: replace_link_color;
+      }
+
+      &:hover,
+      &:active {
+        border-bottom: 1px solid replace_hover_color;
+        color: replace_hover_color;
+      }
+    }
+
+    // other types of links
+    .field--name-field-blog-tags,
+    .field--name-node-title,
+    .field--name-node-link,
+    .field--name-field-cb-link {
+      color: replace_link_color;
+
+      a {
+        &,
+        &:visited,
+        &:hover,
+        &:active {
+          color: replace_link_color;
+        }
+      }
+    }
+
+    // titles & subtitles
+    .field--name-field-cb-title,
+    .field--name-field-cb-subtitle {
+
+      h2,
+      h3,
+      h4 {
+        color: replace_foreground_color;
+
+        a,
+        a:visited,
+        a:hover,
+        a:active {
+          color: replace_link_color;
+        }
+      }
+    }
+
+    .button {
+
+      // -- make the other buttons look different
+
+      &:nth-child(n+2) {
+        @include button-negative-secondary;
+      }
+    }
+  }
+
+}
+
+// ***************************************************************************
+// Add your content block specific backgrounds here for the content
+// See example below.
+// ***************************************************************************
+
+.cb--boxed > .cb-content,
+.content-bg--replace_variant_name > .cb-content,
+.layout--bg--replace_variant_name .cb--boxed > .cb-content,
+.layout--bg--replace_variant_name .content-bg--grey > .cb-content {
+
+  @if ($structuralOnly == false) {
+
+    color: replace_foreground_color; // override stuff set by the general bg-color class
+    background-color: #e5e5e5;
+
+    a {
+      &,
+      &:visited {
+        border-bottom: 1px solid transparent;
+        color: replace_link_color;
+      }
+
+      &:hover,
+      &:active {
+        border-bottom: 1px solid replace_link_color;
+        color: replace_link_color;
+      }
+    }
+
+    .field--type-text-long,
+    .text-long {
+      &::before {
+        color: replace_foreground_color;
+      }
+    }
+
+    // CKE links
+    .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary) {
+
+      &,
+      &:visited {
+        border-bottom: 1px solid transparent;
+        color: replace_link_color;
+      }
+
+      &:hover,
+      &:active {
+        border-bottom: 1px solid replace_hover_color;
+        color: replace_hover_color;
+      }
+    }
+
+    .field--name-field-blog-tags,
+    .field--name-node-title,
+    .field--name-node-link,
+    .field--name-field-cb-link {
+      color: replace_foreground_color;
+
+      a {
+        &,
+        &:visited,
+        &:hover,
+        &:active {
+          color: replace_link_color;
+        }
+      }
+    }
+
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content block: FAQ
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block--type-cb-faq.layout--bg--replace_variant_name .field__item--type-tabbed-item {
+
+  border-top: 1px solid replace_foreground_color;
+
+  .tab-item__title {
+
+    // color
+    color: replace_foreground_color;
+
+    a,
+    a:visited {
+      color: replace_foreground_color;
+    }
+
+    @if ($structuralOnly == false) {
+
+      // -- Icon
+
+      &::before {
+        color: replace_foreground_color;
+      }
+
+    } @else {
+
+      &::before {
+        border-top: 5px solid replace_foreground_color;
+      }
+    }
+  }
+
+  // ** states
+
+  &:hover,
+  &.js-open {
+
+    .tab-item__title {
+
+      // color
+      color: replace_link_color;
+
+      a,
+      a:visited {
+        color: replace_link_color;
+      }
+
+      a:hover,
+      a:active {
+        color: replace_hover_color;
+      }
+
+    }
+  }
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content block: photo gallery
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block--type-cb-photo-gallery.layout--bg--replace_variant_name {
+
+  .field--name-field-cb-media-unlimited {
+
+    .field__item {
+
+      &::after {
+        color: replace_link_color;
+        background: replace_foreground_color;
+      }
+    }
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content block: menu overview item
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// ** Our items ALWAYS have the same bg color
+//    so we need to make sure the text color can not be overwritten by the default block colors
+//    when a background is set on the whole block
+
+.layout--content-blocks .block--type-cb-menu-overview.layout--bg--replace_variant_name {
+
+  $menuBg: #e5e5e5;
+  $menuColor: #303030;
+  $menuLinkColor: #303030;
+  $menuHoverColor: #303030;
+
+  a:not(button),
+  .field-cb-menu-overview__item__title a:not(button) {
+    &,
+    &:visited {
+      color: $menuLinkColor;
+    }
+
+    &:hover,
+    &:active {
+      color: $menuHoverColor;
+    }
+  }
+
+  // ** item
+
+  .field-cb-menu-overview__item {
+    color: $menuColor;
+    background-color: $menuBg;
+  }
+
+  // -- title
+  .field-cb-menu-overview__item__title {
+    color: $menuColor;
+
+    a:not(.button) {
+      &,
+      &:visited {
+        color: $menuLinkColor;
+      }
+
+      &:hover,
+      &:active {
+        color: $menuHoverColor;
+      }
+    }
+  }
+
+  // -- content
+
+  .field-cb-menu-overview__item__content {
+    color: $menuColor;
+  }
+}
+
+/* stylelint-enable */

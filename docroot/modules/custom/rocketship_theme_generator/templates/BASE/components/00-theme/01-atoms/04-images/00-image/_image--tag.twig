@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Theme override of an image.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the img tag.
+ * - style_name: (optional) The name of the image style applied.
+ *
+ * @see template_preprocess_image()
+ */
+#}
+{%
+set classes = [
+  style_name ? 'image-style-' ~ style_name|clean_class,
+]
+%}
+
+{# if there is no alt property filled in, it won't render as an attribute
+   but we need it for accessibility, so we force it to render an empty prop instead
+   Or we could set another attribute instead: role="presentation", on decorative images, that would also be a good fix
+#}
+{% set alternativeAlt = attributes.alt %}
+{% if attributes.alt is null or attributes.alt is not defined or attributes.alt is empty %}
+{% set alternativeAlt = '' %}
+{% endif %}
+
+{# <img{{ attributes.addClass(classes).setAttribute('alt', alternativeAlt) }} /> #}
+
+{% set imgSource = attributes['data-src']|default(attributes['src']) %}
+
+{% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+  image_bem_block: image_bem_block,
+  image_bem_element: image_bem_element,
+  image_bem_modifiers: image_bem_modifiers,
+  image_bem_extra: image_bem_extra|default(classes),
+  image_srcset: image_srcset|default(attributes.srcset),
+  image_sizes: image_sizes|default(attributes.sizes),
+  image_src: image_src|default(imgSource),
+  image_alt: image_alt|default(alternativeAlt),
+  image_title: image_title|default(attributes.title),
+  attributes: attributes,
+} %}

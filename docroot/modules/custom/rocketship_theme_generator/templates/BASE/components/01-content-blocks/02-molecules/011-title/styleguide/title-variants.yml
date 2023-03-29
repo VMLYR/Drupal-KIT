@@ -1,0 +1,35 @@
+variants:
+  - base:
+    label: 'CB Title'
+  - extended:
+    label: 'CB Title with more fields'
+    bem_block_extra:
+      - 'cb-title--extended'
+    fields:
+      title:
+        heading: 'CB Title <em>with</em> <strong>more fields</strong>'
+      subtitle:
+        heading_display: true
+        heading_level: 2
+        heading: Block subtitle
+        field_name: field_cb_subtitle
+        field_type: string
+      teaser:
+        label_hidden: true
+        field_name: field_cb_teaser
+        field_type: string_long
+        bem_field_modifiers:
+          - 'label-hidden'
+        content: "Risus nec feugiat in fermentum posuere urna. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula."
+      buttons:
+        field_name: 'field_cb_button'
+        field_type: 'link'
+        label_hidden: true
+        items:
+          - content:
+              '#title': 'First button'
+              '#type': "link"
+          - content:
+              '#type': 'link'
+              '#url': '#'
+              '#title': 'Second button'

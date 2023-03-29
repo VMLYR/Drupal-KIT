@@ -1,0 +1,33 @@
+{# Buttons for cke #}
+{% if button_cke %}
+<div class="text-long">
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+  <p>
+  {% for key, value in buttons %}
+    {% include "@%theme_prefix%-atoms/06-buttons/_button--master.twig" with {
+        'button_type': value.button_type,
+        'button_content': value.button_content,
+        'button_bem_block': value.button_bem_block,
+        'button_bem_modifiers': value.button_bem_modifiers
+      }
+    %}
+  {% endfor %}
+  </p>
+</div>
+
+{# Buttons via a link field #}
+{% else %}
+
+  {% include "@%theme_prefix%-atoms/06-buttons/_button--field.twig" with {
+      'field_name': field_name,
+      'field_type': field_type,
+      'label_hidden': label_hidden,
+      'items': items,
+    }
+  %}
+
+{% endif %}

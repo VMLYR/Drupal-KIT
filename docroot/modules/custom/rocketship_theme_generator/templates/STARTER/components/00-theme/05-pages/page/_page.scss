@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Page: resets or defaults for the main content
+// *       (eg. the main block when there is no CT node in it)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// page with info about using html in textarea
+.block--system-main-block > .compose-tips {
+  padding: var(--gap-vert) 0;
+
+  .filter-type {
+    margin-bottom: var(--gap-md);
+  }
+}

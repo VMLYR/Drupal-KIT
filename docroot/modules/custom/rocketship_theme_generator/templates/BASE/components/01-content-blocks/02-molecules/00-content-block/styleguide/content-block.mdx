@@ -1,0 +1,62 @@
+import { Story } from '@storybook/addon-docs';
+
+# Content Blocks
+
+Listed in this category, are the Content Blocks. These is simply a category of Block types, namely those that can be made available for use by a content editor and can be used to make landing pages or add content to other content types.<br />
+These block types work in tandem with the Rocketship Layout templates to build up Sections.<br />
+Working this way, the combinations of Blocks and Sections are equivalent to working with the Paragraph types in Rocketship before the switch to Layout Builder.<br />
+You can see how the blocks and sections combine, if you check the 'Content Sections' category in this Styleguide.
+
+## Options
+
+Depending on the Content Block type, there may or may not be extra options available. These are shown as variant components where applicable.<br />
+For example, the 001-Text block, has its 'base' component (just the default) but also a 'centered' variant which shows us the same Block but when the Alignment option is used and set to 'centered'.<br />
+Some other variants are:
+- Image: normal and stretched image
+- Testimonial: with or without an image, with or without a box around the text
+- Photogallery: Masonry or grid
+
+## Structure
+
+The Content Blocks use the same templates and structure as any other Block type in drupal, they just share some things to make them more uniform:<br />
+
+- machine names start with the same prefix `cb_`
+- same base class: `content-block` (output if the `cb_` prefix exists)
+- reuse of fields: title, teaser, … are all fields that are shared by (most of) the content blocks
+  - they too have machine names that share a prefix: `field_cb_`
+  - which gives them classes that are built like this: `field-cb-…`
+
+## Data structure
+
+Same data structure as for other block types (see the Docs in the Molecules). <br />
+The main key that is used to output a unique class (with prefix) is `block_type`.<br />
+Besides that, it is also important to use `bem_block_extra` to pass along `content-block`, as well as indicate that the block is coming from Layout Builder, when making components in Storybook:
+
+```
+block_type: cb_text
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+```
+
+Some Blocks use different view-modes when certain options are selected. Eg. the Text block uses it for its alignment options, Image uses it for sizing the image, … <br />
+This view-mode gets output as a class and is needed to apply the correct option using the CSS (or even JS)
+
+```
+bem_block_extra:
+  - has-view-mode--left
+  - cb--view-mode--left
+  - cb-text--view-mode--left
+```
+
+For fields, need to print the correctly prefixed field name (unless it's unique field) to get a correct class:
+
+```
+fields:
+  teaser:
+    label_hidden: true
+    field_name: field_cb_teaser
+```
+
+For more info on the data structure of the fields, see the theme Atoms and the Docs for the example Molecule.
+

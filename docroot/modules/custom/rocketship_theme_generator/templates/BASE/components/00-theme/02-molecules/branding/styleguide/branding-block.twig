@@ -1,0 +1,78 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    bem_block_modifiers: bem_block_modifiers,
+  } %}
+
+  {% block block_content %}
+
+    {# Image field #}
+    {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+      label: fields.image.label,
+      label_hidden: fields.image.label_hidden,
+      field_name: fields.image.field_name,
+      field_type: fields.image.field_type,
+      bem_field_modifiers: fields.image.bem_field_modifiers,
+      bem_field_extra: fields.image.bem_field_extra,
+      attributes: fields.image.attributes,
+    } %}
+
+      {% block field_content %}
+
+        {% include "@%theme_prefix%-atoms/04-images/styleguide/blazy-responsive.twig" with {
+          label_display: fields.image.label_display,
+          field_name: fields.image.field_name,
+          field_type: fields.image.field_type,
+          field_attributes: fields.image.field_attributes,
+          settings: fields.image.settings,
+          bem_field_modifiers: fields.image.bem_field_modifiers,
+          bem_field_extra: fields.image.bem_field_extra,
+          blazy_bem_block: fields.image.blazy_bem_block,
+          blazy_bem_modifiers: fields.image.blazy_bem_modifiers,
+          blazy_attributes: fields.image.blazy_attributes,
+          image_src: fields.image.image_src,
+          image_alt: fields.image.image_alt,
+          image_srcset: fields.image.image_srcset,
+          image_loading: fields.image.image_loading,
+          image_sizes: fields.image.image_sizes,
+          image_bem_modifiers: fields.image.image_bem_modifiers,
+          image_bem_extra: fields.image.image_bem_extra,
+          attributes: fields.image.image_attributes,
+        } %}
+
+      {% endblock %}
+
+    {% endembed %}
+    {# /End Image field #}
+
+    {# body field #}
+    {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+      label: fields.body.label,
+      label_hidden: fields.body.label_hidden,
+      field_name: fields.body.field_name,
+      field_type: fields.body.field_type,
+      bem_field_modifiers: fields.body.bem_field_modifiers,
+      bem_field_extra: fields.body.bem_field_extra,
+      attributes: fields.body.attributes,
+    } %}
+
+      {% block field_content %}
+
+        {{ fields.body.content | raw }}
+
+      {% endblock %}
+
+    {% endembed %}
+    {# /End body field #}
+
+
+  {% endblock %}
+
+{% endembed %}

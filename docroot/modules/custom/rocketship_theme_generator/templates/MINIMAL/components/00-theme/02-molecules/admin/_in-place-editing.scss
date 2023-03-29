@@ -1,0 +1,30 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Editing in the front-facing theme
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Place Block
+// =============================================================================
+
+body .block-place-region {
+  padding: 0;
+  margin: rem(5);
+
+  a.button {
+    display: block;
+    padding: rem(20);
+    width: auto;
+    // border: 1px solid #cccccc;
+    // border-radius: 50%;
+    border: 0 none;
+    background-color: hsl(var(--clr-white));
+
+    &:hover {
+      background-color: hsla(var(--clr-black), .2);
+    }
+  }
+}
+

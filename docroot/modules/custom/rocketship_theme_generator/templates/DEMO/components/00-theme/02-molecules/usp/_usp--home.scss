@@ -1,0 +1,80 @@
+
+
+.florista--homepage-usp-section .block--type-block-usp {
+
+  padding: 0;
+
+  @include full-bg(hsl(var(--clr-off-white)));
+
+  &::before {
+    left: auto;
+  }
+
+  .title-description-item-title {
+    @include h3;
+  }
+
+  .title-description-item-description {
+    // @include font-size(16, 23);
+    // color: hsl(var(--clr-white));
+  }
+}
+
+.florista--homepage-usp-section .field--name-field-block-usp-item {
+  //
+}
+
+.florista--homepage-usp-section .field__item--name-field-block-usp-item {
+  position: relative;
+  margin-bottom: rem(34);
+  padding-left: rem(70);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: rem(60);
+    height: rem(60);
+    background: url("../images/generated/flower.png") 0 0 no-repeat;
+    background-size: 50px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+  .florista--homepage-usp-section .block--type-block-usp {
+    padding: rem(40) rem(30);
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+  .florista--homepage-usp-section .block--type-block-usp {
+    padding: rem(60) rem(50);
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+  .florista--homepage-usp-section .block--type-block-usp {
+    padding: rem(80) rem(50);
+  }
+}

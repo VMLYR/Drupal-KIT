@@ -1,0 +1,32 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+    {# media field #}
+    {% include "@%theme_prefix%-atoms/media/styleguide/media--field.twig" with {
+      type: fields.media.type,
+      label_hidden: fields.media.label_hidden,
+      field_name: fields.media.field_name,
+      field_type: fields.media.field_type,
+      bem_field_modifiers: fields.media.bem_field_modifiers,
+      bem_field_extra: fields.media.bem_field_extra,
+      attributes: fields.media.attributes,
+      reference: fields.media.reference,
+    } %}
+    {# End media field #}
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

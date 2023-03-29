@@ -1,0 +1,125 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ *
+ * @see template_preprocess_field()
+ */
+#}
+
+{% set label_hidden = label_hidden|default(true) %}
+
+{% if buttonfield_bem_modifiers is not defined %}
+  {% set buttonfield_bem_modifiers = [] %}
+{% endif %}
+{% set buttonfield_bem_modifiers = buttonfield_bem_modifiers|merge([
+    'buttons',
+    'name-' ~ field_name|clean_class,
+    'type-' ~ field_type|clean_class,
+    'label-' ~ label_display,
+  ])
+%}
+{% if buttonfield_bem_extra is not defined %}
+  {% set buttonfield_bem_extra = [] %}
+{% endif %}
+
+<div {{ bem('field', false, buttonfield_bem_modifiers, buttonfield_bem_extra) }}>
+
+  {% set button_bem_block = button_bem_block|default('button') %}
+
+  {% set button_bem_element = button_bem_element|default(false) %}
+
+  {% set button_bem_modifiers = buttonfield_bem_modifiers %}
+
+  {% if button_bem_modifiers is not defined  %}
+    {% set button_bem_modifiers = ['primary'] %}
+  {% endif %}
+
+  {% if button_bem_extra is not defined  %}
+    {% set button_bem_extra = [] %}
+  {% endif %}
+
+  {% if label_hidden %}
+    {# nothing #}
+  {% else %}
+    {% if label %}
+
+      {%
+        set title_classes = [
+          'field__label'
+        ]
+      %}
+
+      {% set label_id = false  %}
+      {% set heading_display = true %}
+      {% set field_heading_level = field_heading_level|default(3) %}
+
+      {% if label_display == 'visually_hidden' %}
+        {% set title_classes = title_classes|merge(['visually-hidden']) %}
+        {% set heading_display = false %}
+        {# if label exists and is visually hidden, need an id for aria-labelledby #}
+        {% if heading_id is defined and heading_id %}
+          {% set label_id = heading_id ~ '_label' %}
+        {% else %}
+         {% set label_id = field_name|clean_class ~ '_label' %}
+        {% endif %}
+      {% endif %}
+
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/_heading.twig" with {
+        "heading_level": field_heading_level,
+        "heading": label,
+        "heading_bem_extra": title_classes,
+        "heading_id": label_id,
+        "heading_display": heading_display,
+      } %}
+
+    {% endif %}
+  {% endif %}
+
+  {% for item in items %}
+
+    {% include "@%theme_prefix%-atoms/06-buttons/_button--master.twig" with {
+        'button_type': item.content['#type'],
+        'button_attributes': item.content['#options'].attributes,
+        'button_url': item.content['#url'],
+        'button_content': item.content['#title'],
+        'button_bem_block': button_bem_block,
+        'button_bem_element': button_bem_element,
+        'button_bem_modifiers': button_bem_modifiers,
+        'button_bem_extra': button_bem_extra,
+      }
+    %}
+  {% endfor %}
+
+</div>

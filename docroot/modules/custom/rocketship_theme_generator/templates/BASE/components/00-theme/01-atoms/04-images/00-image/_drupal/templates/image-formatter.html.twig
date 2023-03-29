@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override to display a formatted image field.
+ *
+ * Available variables:
+ * - image: A collection of image data.
+ * - image_style: An optional image style.
+ * - path: An optional array containing the link 'path' and link 'options'.
+ * - url: An optional URL the image can be linked to.
+ *
+ * @see template_preprocess_image_formatter()
+ */
+#}
+{% include "@%theme_prefix%-atoms/04-images/00-image/_image--formatter.twig" %}

@@ -1,0 +1,9 @@
+label: 'Carousel'
+template: 'rs-carousel'
+minimal_styling: false
+modifier: null
+extra_classes:
+content:
+  top: true
+  carousel: true
+  bottom: false

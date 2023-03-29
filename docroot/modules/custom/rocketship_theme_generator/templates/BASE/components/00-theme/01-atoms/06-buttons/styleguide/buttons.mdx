@@ -1,0 +1,77 @@
+import { Story } from '@storybook/addon-docs';
+
+# Buttons
+
+Buttons exist mainly as special variations of link fields. <br />
+Which is why you will see that reusing the 'button' field that is used in several block types or Rocketship content types, <br />
+outputs the resulting link tag as a primary button.<br />
+The same happens with the 'button' fields inside the Rocketship Paragraphs, but please only reuse that field in other Paragraphs.<br />
+NOT in content types or blocks. This is because it can have other Paragraph-related logic attached to it.
+
+
+## Styling
+
+But you can apply the button styling to any element, <br />
+using the mixins in `_buttons-helpers.scss` on the classes in `_buttons.scss`<br />
+
+The mixins allow you to set up the various button variants needed:
+- primary
+- secondary
+- primary negative (for on darker backgrounds)
+- secondary negative
+- disabled states
+- …
+
+The main button mixin looks complex, but that is because there are a lot of options you can set. <br />
+If there is a subset of options you don't need for your theme, you can remove it from the mixin if that makes it easier.<br />
+You can also modify the mixin in any way you want.<br />
+For example: don't need a border-radius? Remove all references to border-radius in the mixins
+
+But keep in mind that these options are here to help you set a style or effect using only 1 mixin parameter.<br />
+
+**For example**:<br />
+Need to set a gradient background on the primary button?
+- make on via a generator, like this one: https://www.colorzilla.com/gradient-editor/
+- Copy and past the gradient (without prefixes) to the `background` parameter<br />
+```
+@mixin button-primary($size:"md") {
+  $settings-button-primary: (
+    background: linear-gradient(to bottom, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%),
+```
+**For example:**<br />
+Need to change the border? <br />
+You need to pass the border weight + border color for the normal and hover/active states<br />
+The mixin uses shadow-box for this so it can be animated<br />
+```
+@mixin button-primary($size:"md") {
+  $settings-button-primary: (
+    border: red,
+    hover-border: green,
+    $border-width: 2px,
+```
+
+## Variant backgrounds
+
+Button styles become a bit more complex when they need to be styled based on the background they are on.<br />
+At the basic level, there are 'negative' mixins, which make variants of the primary and negative buttons.<br />
+Those mixins should be applied to buttons that you know will only show up on a dark background.
+
+For use with Layouts have different background options, or Custom Blocks, you will most likely need to make extra mixins.<br />
+
+**Example:**<br />
+If your button has a green primary button, and it shows up on a block with a green background-color, the button should be blue.<br />
+So you would first add a mixin `button-bg-02-primary`, to `_buttons-helpers.scss`, which has the new background-color<br />
+And then in your Block styling Sass file, you apply it to your button like this:
+```
+.block-my-special-block {
+
+  .button {
+    @include button-bg-02-primary;
+  }
+
+}
+```
+
+In the case of Rocketship Layouts used with Content Blocks, you will find that a lot of the background classes are already present,<br />
+so you can easily add your button mixins (or other variant styling) per background <br />
+Eg. look for `.layout--bg--spot-1` and other classes inside of `components/01-content-blocks` Organisms Sass files. Most importantly, `_00-section.scss`.

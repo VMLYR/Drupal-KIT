@@ -1,0 +1,22 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% for variant in variants %}
+
+  {% include "@%theme_prefix%-cb-molecules/004-testimonial/styleguide/testimonial.twig" with {
+      label: variant.label,
+      configuration: variant.configuration,
+      block_type: variant.block_type,
+      bem_block_modifiers: variant.bem_block_modifiers,
+      bem_block_extra: variant.bem_block_extra,
+      fields: variant.fields,
+    }
+  %}
+
+  <hr class="storybook__divider--hor" />
+
+{% endfor %}

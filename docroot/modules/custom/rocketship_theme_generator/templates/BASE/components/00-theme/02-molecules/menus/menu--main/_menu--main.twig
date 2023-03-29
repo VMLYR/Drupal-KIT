@@ -1,0 +1,10 @@
+{# extra classes for this nav:
+   Note: link titles are hidden by default, for accessibility reasons
+   It can be enabled by adding:
+   has_link_title: true
+#}
+{% include "@%theme_prefix%-molecules/menus/menu/_menu.twig" with {
+  bem_menu_block: 'menu',
+  bem_menu_modifiers: ['main']
+} %}
+

@@ -1,0 +1,80 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Header: sticky
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// only on bp-sm
+// works with the JS library: header-sticky
+// and theme setting in /admin/appearance/settings/my_theme
+
+.sticky-spacer {
+  display: none;
+}
+
+@include bp-sm {
+  .sticky-spacer {
+    display: block;
+    height: 0;
+  }
+
+  .wrapper--page-top {
+    position: relative;
+    top: 0;
+
+    &.is-fixed {
+      @include z-index(header-fixed);
+      position: fixed;
+      left: 0;
+      width: 100%;
+      background-color: hsl(var(--clr-white));
+      box-shadow: none;
+      transition: background-color $duration $easing, box-shadow $duration $easing, margin-top $duration $easing;
+    }
+  }
+
+  // the elements which will need a transition effect
+  // list them here
+  .header-top,
+  .header__block,
+  .header--primary,
+  .header--primary > .container,
+  .nav--region-nav-primary,
+  .nav--region-nav-secondary,
+  .header__section--primary,
+  .header__section--secondary,
+  .wrapper--navigation__content,
+  .nav-section-primary,
+  .nav-section-secondary,
+  .block__branding--header,
+  .block__branding__image--header {
+    transition: left $duration $easing, top $duration $easing, right $duration $easing, bottom $duration $easing, margin $duration $easing, padding $duration $easing, width $duration $easing, max-width $duration $easing, height $duration $easing;
+  }
+
+  // make more compact when scrolling
+  .js-scrolling {
+
+    .wrapper--page-top.is-fixed {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, .12);
+    }
+
+    // change header padding
+    // change logo scaling + alignment
+
+  }
+
+  // -- add easing when we're further down to page, to prevent jump
+  /* stylelint-disable */
+  .js-scrolling {
+    .sticky-top {
+      &.is-fixed.not-top {
+        transition: margin-top .35s ease;
+      }
+    }
+  }
+  /* stylelint-enable */
+}

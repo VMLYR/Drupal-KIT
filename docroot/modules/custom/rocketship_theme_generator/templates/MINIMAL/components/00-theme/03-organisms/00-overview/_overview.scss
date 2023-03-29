@@ -1,0 +1,88 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Overviews
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * paragraph containing view on a page, eg. blog view
+// =============================================================================
+
+.paragraph--type-overview {
+
+  // -- View itself
+  .field--type-overview-field {
+    //
+  }
+
+  // -- 'more' link
+
+  .more-link--overview {
+    //
+  }
+
+}
+
+// -- overview sidebar column
+.layout__sidebar--paragraph--overview--default--left {
+  //
+}
+
+// -- overview content column
+.layout__content--paragraph--overview--default--right {
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // -- overview sidebar column
+  .layout__sidebar--paragraph--overview--default--left {
+    //
+  }
+
+  // -- overview content column
+  .layout__content--paragraph--overview--default--right {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // -- overview sidebar column
+  .layout__sidebar--paragraph--overview--default--left {
+    //
+  }
+
+  // -- overview content column
+  .layout__content--paragraph--overview--default--right {
+    //
+  }
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // -- overview sidebar column
+  .layout__sidebar--paragraph--overview--default--left {
+    //
+  }
+
+  // -- overview content column
+  .layout__content--paragraph--overview--default--right {
+    //
+  }
+}

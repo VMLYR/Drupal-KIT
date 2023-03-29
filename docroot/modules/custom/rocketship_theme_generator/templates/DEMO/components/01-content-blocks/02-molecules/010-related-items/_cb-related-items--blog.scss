@@ -1,0 +1,50 @@
+
+.florista--blog-overview-section .block--type-cb-related-items {
+
+  .field--name-title {
+    &::after {
+      content: "30 November 2020";
+      display: block;
+      margin-top: rem(-5);
+      margin-bottom: var(--gap-layout-vert);
+      font-weight: $font-weight-medium;
+      color: #1e1e1f;
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .florista--blog-overview-section .block--type-cb-related-items {
+
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: small desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .florista--blog-overview-section .block--type-cb-related-items {
+
+    //
+  }
+}

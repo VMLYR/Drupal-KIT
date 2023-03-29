@@ -1,0 +1,20 @@
+{#
+/**
+ * Available variables:
+ * - paragraph_bem_block_class - the base classname
+ * - paragraph_bem_element - blockname prepended to the base classname
+ * - paragraph_bem_modifiers - array of modifiers to add to the base classname
+ * - paragraph_content - the content of the paragraph (typically text)
+ *
+ * Available blocks:
+ * - paragraph_content - used to replace the content of the paragraph with something other than plain text
+ *   for example: A formatted text field in Drupal
+ */
+#}
+{% set paragraph_bem_block = paragraph_bem_block|default('paragraph') %}
+
+<p {{ bem(paragraph_bem_block, paragraph_bem_element, paragraph_bem_modifiers) }}>
+  {% block paragraph_content %}
+    {{ paragraph_content }}
+  {% endblock %}
+</p>

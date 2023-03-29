@@ -1,0 +1,77 @@
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Sprite classes
+// *
+// * !!! This will be overwritten if you run gulp:sprite !!!
+// *     So remember to copy any changes over to the gulp template in:
+// *     YOUR_THEME/gulp/templates/_sprite-classes.scss
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@if ($custom-icons == true and $custom-icons-type == "sprite") {
+
+  // * Icons as background-image (always with 'rs-icon' as prefix and '-b' as suffix)
+  // =============================================================================
+
+  // ** these classes invoke the named svg icon as a background-image
+  .rs-icon--test--b {
+    @include sprite((icon: "rs-icon--test", size: 25));
+  }
+
+
+  // * Icons as inline SVG (always with 'rs-icon' as prefix)
+  // =============================================================================
+
+  /**
+  Example of use:
+    In Twig:
+      <a href="#!" class="rs-icon-link">
+        
+        A sample link with icon
+      </a>
+    This will display the 'usp' svg icon in this spot
+    - 1st param: the (file) name of the original SVG icon (so it picks the correct one to display using the generated SVG sprite)
+    - 2nd param: a string uses as the title-attribute in the generated html (setting to false, will use the capitalized file name)
+    - 3rd param: (optional) an array of strings, will be printed as classes in the html, to add extra styling
+                eg. ['i-icon--xl', 'whatever']
+  */
+
+  // ** Ensure clean positioning of icons in links
+
+  .rs-icon-link {
+    @include i-link;
+  }
+
+  // ** Default icon styles
+
+  .rs-icon {
+    @include i-icon;
+  }
+
+  // ** Modifiers
+
+  // -- default sizing presets
+
+  .rs-icon--xs {
+    @include i-icon--size(12);
+  }
+
+  .rs-icon--sm {
+    @include i-icon--size(14);
+  }
+
+  .rs-icon--lg {
+    @include i-icon--size(21);
+  }
+
+  // -- incremental icon sizing: .i-icon--2x through to .i-icon--10x
+
+  @for $i from 1 through 10 {
+    .rs-icon--#{$i}x {
+      width: #{$i}rem;
+      height: #{$i}rem;
+    }
+  }
+
+}

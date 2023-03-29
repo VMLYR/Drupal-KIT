@@ -1,0 +1,40 @@
+{#
+/**
+ * Available variables:
+ * - heading_display - whether the title is visible or not
+ * - heading_level - the header level 1-6 (produces h1, h2, etc.)
+ * - heading_id - and id for the heading (pass a string)
+ *
+ * - heading_blockname - blockname prepended to the base classname
+ * - heading_element - the base class
+ * - heading_modifiers - array of modifiers to add to the base classname
+ *
+ * - heading - the content of the heading (typically text)
+ *
+ * - heading_url - (optional) the url the heading should poing to
+ * - heading_link_attributes - key/value attributes to pass to link
+ * - heading_link_block - override the link block name (defaults to heading_block)
+ * - heading_link_element - override the link base class
+ * - heading_link_modifiers - override the link modifiers
+ */
+#}
+{% if cke %}
+<div class="text-long">
+{% endif %}
+
+{% include "@%theme_prefix%-atoms/02-text/00-headings/_heading.twig" with {
+    heading_display ? 'heading_display': heading_display,
+    heading_level ? 'heading_level': heading_level,
+    heading ? 'heading': heading,
+    heading_id: false,
+    heading_url ? 'heading_url': heading_url,
+    bem_heading_block ? 'bem_heading_block' : heading_block,
+    bem_heading_element ? 'bem_heading_element' : heading_element,
+  }
+%}
+
+{{ text | raw }}
+
+{% if cke %}
+</div>
+{% endif %}

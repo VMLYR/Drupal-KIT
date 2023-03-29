@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\rocketship_theme_generator\ThemeExtentionGenerator;
+/**
+ * @file
+ * Contains module functionality.
+ */
+function rocketship_theme_generator_generate_theme_extention($module_name) {
+
+  // doesn't matter which module, we just need to know where our modules are installed
+  $module_path = \Drupal::service('extension.list.module')->getPath('rocketship_theme_generator');
+  // determine how many levels deep our modules are installed vs. the drupal root
+  // all our modules should be the same number of levels deep into the 'modules' folder
+  // if it's a Rocketship install (doesn't matter if they are in 'contrib' or 'custom')
+  $folder_path = explode("/", $module_path);
+  $folder_levels = sizeof($folder_path);
+
+  // envoke our script
+
+  $generator = new ThemeExtentionGenerator($module_name, $folder_levels);
+  return $generator->generateThemeExtention();
+}

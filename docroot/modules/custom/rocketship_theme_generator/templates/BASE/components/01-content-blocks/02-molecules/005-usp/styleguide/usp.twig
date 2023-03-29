@@ -1,0 +1,103 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-cb-molecules/005-usp/_cb-usp.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+
+    <div class="cb-usp-image">
+      {# custom template is wrapping the image in a link field #}
+      {% if fields.link.image_wrapper_url and fields.media.type %}
+        <a class="cb-image__link" target="{{ fields.link.image_wrapper_url_target }}" href="{{ fields.link.image_wrapper_url }}" title="{{fields.link.image_wrapper_title}}">
+      {% endif %}
+        {# media field #}
+        {% include "@%theme_prefix%-atoms/media/styleguide/media--field.twig" with {
+          type: fields.media.type,
+          label_hidden: fields.media.label_hidden,
+          field_name: fields.media.field_name,
+          field_type: fields.media.field_type,
+          bem_field_modifiers: fields.media.bem_field_modifiers,
+          bem_field_extra: fields.media.bem_field_extra,
+          attributes: fields.media.attributes,
+          reference: fields.media.reference,
+        } %}
+        {# End media field #}
+      {% if fields.link.image_wrapper_url and fields.media.type %}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="cb-usp-content">
+      {# custom template is wrapping the image in a link field #}
+      {% if fields.link.image_wrapper_url and fields.title.heading %}
+        <a class="cb-title__link" target="{{ fields.link.image_wrapper_url_target }}" href="{{ fields.link.image_wrapper_url }}" title="{{fields.link.image_wrapper_title}}">
+      {% endif %}
+        {# title field #}
+        {% include "@%theme_prefix%-atoms/02-text/00-headings/styleguide/heading-field.twig" with {
+            label: fields.title.label,
+            label_hidden: fields.title.label_hidden,
+            field_name: fields.title.field_name,
+            field_type: fields.title.field_type,
+            bem_field_modifiers: fields.title.bem_field_modifiers,
+            bem_field_extra: fields.title.bem_field_extra,
+            attributes: fields.title.attributes,
+            heading_display: fields.title.heading_display,
+            heading_level: fields.title.heading_level,
+            heading: fields.title.heading,
+            heading_id: fields.title.heading_id,
+            heading_url: fields.title.heading_url,
+            bem_heading_block : fields.title.heading_block,
+            bem_heading_element : fields.title.heading_element,
+          }
+        %}
+        {# /End title field #}
+      {% if fields.link.image_wrapper_url and fields.title.heading %}
+        </a>
+      {% endif %}
+
+      {# text field (CKE) #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.text.label,
+        label_hidden: fields.text.label_hidden,
+        field_name: fields.text.field_name,
+        field_type: fields.text.field_type,
+        bem_field_modifiers: fields.text.bem_field_modifiers,
+        bem_field_extra: fields.text.bem_field_extra,
+        attributes: fields.text.attributes,
+      } %}
+
+        {% block field_content %}
+          {{ fields.text.content }}
+        {% endblock %}
+
+      {% endembed %}
+      {# /End text field #}
+
+      {# button field #}
+      {% include "@%theme_prefix%-atoms/06-buttons/styleguide/buttons.twig" with {
+          label: fields.buttons.label,
+          field_name: fields.buttons.field_name,
+          field_type: fields.buttons.field_type,
+          bem_field_modifiers: fields.buttons.bem_field_modifiers,
+          bem_field_extra: fields.buttons.bem_field_extra,
+          attributes: fields.buttons.attributes,
+          items: fields.buttons.items
+        }
+      %}
+      {# /End button field #}
+    </div>
+
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

@@ -1,0 +1,40 @@
+{#
+/**
+ * Available variables:
+ * - dl_element - the base classname
+ * - dl_modifiers - array of modifiers to add to the base classname
+ * - dl_block - blockname prepended to the base classname
+ *
+ * - listItems - TBD
+ */
+#}
+{% set bem_dl_block = bem_dl_block|default('dl') %}
+{% set bem_dl_element = bem_dl_element|default(false) %}
+{% if bem_dl_modifiers is not defined %}
+  {% set bem_dl_modifiers = [] %}
+{% endif %}
+
+{% if cke %}
+<div class="text-long">
+{% endif %}
+
+<dl {{ bem(bem_dl_block, bem_dl_element, bem_dl_modifiers) }}>
+  {% block list_content %}
+    {% for dl_item in dl_items %}
+      {% include "@%theme_prefix%-atoms/03-lists/list--dl/_list-item-definition.twig" with {
+        "dl_term": dl_item.dl_term,
+        "dl_def": dl_item.dl_def,
+        "bem_dl_term_block": dl_item.bem_dl_term_block,
+        "bem_dl_def_block": dl_item.bem_dl_def_block,
+        "bem_dl_term_element": dl_item.bem_dl_term_element,
+        "bem_dl_def_element": dl_item.bem_dl_def_element,
+        "bem_dl_term_modifiers": dl_item.bem_dl_term_modifiers,
+        "bem_dl_def_modifiers": dl_item.bem_dl_def_modifiers,
+      } %}
+    {% endfor %}
+  {% endblock %}
+</dl>
+
+{% if cke %}
+</div>
+{% endif %}

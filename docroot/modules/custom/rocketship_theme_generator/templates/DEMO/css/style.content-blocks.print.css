@@ -1,0 +1,102 @@
+/**
+ * Square mixin
+ *
+ * @param [Number] $dimensions = the height and width of the element
+ */
+/* stylelint-disable */
+/* stylelint-enable */
+:root {
+  --clr-cb: var(--clr-base);
+  --clr-cb-heading: var(--clr-heading);
+  --clr-cb-spot-1: var(--clr-spot-1);
+  --clr-cb-spot-2: var(--clr-spot-2);
+  --clr-cb-link: var(--clr-link);
+  --clr-cb-link-hover: var(--clr-link-hover);
+  --clr-cb-text-link: var(--clr-text-link);
+  --clr-cb-text-link-hover: var(--clr-text-link-hover);
+  --clr-layout-bg: var(--clr-base-bg);
+  --gap-layout-hor: var(--gap-hor);
+  --gap-layout-vert: var(--gap-md);
+  --gap-layout-vert-sm: var(--gap-sm);
+  --gap-layout-vert-top: initial;
+  --gap-layout-vert-bottom: initial;
+  --gap-layout-vert-top-small: initial;
+  --gap-layout-vert-bottom-small: initial;
+  --gap-layout-vert-minimal: var(--gap-layout-vert);
+  --gap-layout-vert-medium: calc(var(--gap-layout-vert) * 1.5);
+}
+
+@media print {
+  .block--type-cb-text {
+    page-break-inside: avoid;
+    overflow: hidden;
+  }
+  .block--type-cb-text .field--name-field-cb-title,
+  .block--type-cb-text .field--name-field-cb-subtitle,
+  .block--type-cb-text .text-long,
+  .block--type-cb-text .field--buttons {
+    float: right;
+    margin-left: 0;
+    width: 56%;
+  }
+  .block--type-cb-text .field--type-video-embed-field,
+  .block--type-cb-text .field--image {
+    float: left;
+    margin-right: 0;
+    width: 40%;
+  }
+  .block--type-cb-text .field--buttons {
+    float: right;
+  }
+  .block--type-cb-text.cb-text--view-mode--right .field--name-field-cb-title,
+  .block--type-cb-text.cb-text--view-mode--right .field--name-field-cb-subtitle,
+  .block--type-cb-text.cb-text--view-mode--right .text-long,
+  .block--type-cb-text.cb-text--view-mode--right .field--buttons, .block--type-cb-text.cb-text--view-mode--image_right .field--name-field-cb-title,
+  .block--type-cb-text.cb-text--view-mode--image_right .field--name-field-cb-subtitle,
+  .block--type-cb-text.cb-text--view-mode--image_right .text-long,
+  .block--type-cb-text.cb-text--view-mode--image_right .field--buttons {
+    float: left;
+  }
+  .block--type-cb-text.cb-text--view-mode--right .field--type-video-embed-field,
+  .block--type-cb-text.cb-text--view-mode--right .field--image, .block--type-cb-text.cb-text--view-mode--image_right .field--type-video-embed-field,
+  .block--type-cb-text.cb-text--view-mode--image_right .field--image {
+    float: right;
+  }
+  .block--type-cb-text.cb-text--view-mode--right .field--buttons, .block--type-cb-text.cb-text--view-mode--image_right .field--buttons {
+    float: left;
+  }
+  .cb-usp--view-mode--4-column,
+  .cb-usp--view-mode--four-column {
+    page-break-inside: avoid;
+    overflow: hidden;
+  }
+  .cb-usp--view-mode--4-column .field--name-field-cb-007-children .field__items,
+  .cb-usp--view-mode--four-column .field--name-field-cb-007-children .field__items {
+    margin-left: -2%;
+  }
+  .cb-usp--view-mode--4-column .field--name-field-cb-007-children .field__items > .field__item,
+  .cb-usp--view-mode--four-column .field--name-field-cb-007-children .field__items > .field__item {
+    float: left;
+    width: 23%;
+    margin-left: 2%;
+  }
+  .cb-usp--view-mode--2-column,
+  .cb-usp--view-mode--two-column {
+    page-break-inside: avoid;
+    overflow: hidden;
+  }
+  .cb-usp--view-mode--2-column .field--name-field-cb-007-children,
+  .cb-usp--view-mode--two-column .field--name-field-cb-007-children {
+    margin-left: -2%;
+  }
+  .cb-usp--view-mode--2-column .field--name-field-cb-007-children .field__items > .field__item,
+  .cb-usp--view-mode--two-column .field--name-field-cb-007-children .field__items > .field__item {
+    float: left;
+    width: 48%;
+    margin-left: 2%;
+  }
+  .block--type-cb-logo {
+    page-break-inside: avoid;
+    overflow: hidden;
+  }
+}

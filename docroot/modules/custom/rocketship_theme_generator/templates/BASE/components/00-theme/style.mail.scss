@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * E-mail styling to be used with Mime Mail CSS Compressor
+// * This module will scan the CSS-file and convert everyting to inlie CSS
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@import "00-base/00-config/**/*.scss";
+@import "00-base/01-helpers/02-mixins/_mixins-00-breakpoints.scss";
+
+// * Client-specific Resets
+// =============================================================================
+
+#outlook a {
+  padding: 0;
+}
+/* Force Outlook to provide a "view in browser" button. */
+
+.ReadMsgBody {
+  width: 100%;
+}
+
+.ExternalClass {
+  width: 100%;
+  line-height: 100%;
+}
+/* Forces Outlook.com to display emails at full width */
+/* Forces Outlook.com to display normal line spacing, here is more on that:
+http://www.emailonacid.com/forum/viewthread/43/
+*/
+
+.ExternalClass h1,
+.ExternalClass h2,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+}
+/* Forces Outlook.com to display normal line spacing, here is more on that:
+http://www.emailonacid.com/forum/viewthread/43/
+*/
+
+body {
+  margin: 0; /* Resets all body margins and padding to 0 for good measure */
+  padding: 0;
+  width: 100% !important;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
+/* Prevents Webkit and Windows Mobile
+platforms from changing default font sizes. */
+
+img {
+  height: auto;
+  border: 0;
+  text-decoration: none;
+  line-height: 100%;
+  outline: none;
+}
+
+table td {
+  border-collapse: collapse;
+}
+/* This resolves the Outlook 07, 10, and Gmail td padding issue.  Here's more info:
+  http://www.ianhoar.com/2008/04/29/outlook-2007-borders-and-1px-padding-on-table-cells
+  http://www.campaignmonitor.com/blog/post/3392/1px-borders-padding-on-table-cells-in-outlook-07
+  */
+
+// * Main styling
+// =============================================================================
+
+#mimemail-body,
+#mimemail-body-bg {
+  margin: 0;
+  padding: 0;
+  height: 100% !important;
+  width: 100% !important;
+  background-color: #efefef;
+}
+
+#mail-content {
+  background: #fff;
+}
+
+td,
+th {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #5f5f5f;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0;
+  padding-bottom: 10px;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  line-height: 1.2;
+  font-weight: bold;
+  color: #1e1e1f;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4 {
+  font-size: 13px;
+}
+
+a {
+  text-decoration: underline;
+  color: #ca2751;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0 none;
+  mso-table-lspace: 0pt;
+  mso-table-rspace: 0pt;
+
+  th,
+  td {
+    padding: 0;
+    border-collapse: collapse;
+    mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-align: left;
+  }
+}
+
+// margins between rows
+
+.ds-cart,
+.ds-total,
+.ds-billing,
+.ds-shipping {
+  // already done inline in the template using td's & padding
+}
+
+// * Order table
+// =============================================================================
+
+.field-name-commerce-line-items {
+
+  table {
+    th,
+    td {
+      &.views-field-commerce-unit-price,
+      &.views-field-quantity,
+      &.views-field-commerce-total,
+      &.component-total {
+        width: 100px;
+        text-align: right;
+      }
+    }
+
+    // header
+    th {
+      padding: 5px 10px;
+      border: 1px solid #fff;
+      font-size: 14px;
+      color: #fff;
+      background-color: #ef6967;
+    }
+
+    td {
+      padding: 5px 10px;
+      border: 1px solid #fff;
+      background-color: #d1d1d1;
+    }
+
+    tr.odd td {
+      border-color: #fff;
+      background-color: #d1d1d1;
+    }
+  }
+}
+
+// * Order total
+// =============================================================================
+
+// shipping & subtotals & total
+
+.commerce-price-formatted-components {
+
+  th,
+  td {
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #a2a2a2;
+  }
+
+  .component-type-commerce-price-formatted-amount {
+    td {
+      border: 1px solid #fff;
+      background-color: #a2a2a2;
+    }
+  }
+
+  .component-total {
+    width: 100px;
+    text-align: right;
+  }
+
+  // seperate subtotal & shipping from products
+  td.component-title {
+    //
+  }
+}
+
+// * Shipping & Billing
+// =============================================================================
+
+.field-label {
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #1e1e1f;
+}
+

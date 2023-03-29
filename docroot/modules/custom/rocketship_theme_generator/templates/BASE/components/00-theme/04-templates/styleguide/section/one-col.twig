@@ -1,0 +1,179 @@
+{% set minimal_styling = minimal_styling ?? false %}
+{% if layout.template %}
+  {% set template = layout.template|clean_class %}
+{% elseif template %}
+  {% set template = template|clean_class %}
+{% endif %}
+{% set bem_section_block = bem_section_block|default(['layout'])%}
+{% set bem_section_element = bem_section_element|default(false)%}
+{% set bem_section_modifier = bem_section_modifier|default([]) %}
+{% set bem_section_extra = bem_section_extra|default([]) %}
+
+{% set modifier = modifier ?? false %}
+{% if (modifier|trim is not empty) %}
+  {% set modifier = modifier|clean_class %}
+{% endif %}
+
+{# Variant options #}
+{% set background_stretched = background_color|default(true) %}
+{% set background_color = background_color|default(false) %}
+{% set background_image = background_image|default(false) %}
+
+{% set section_spacing_top = section_spacing_top ?? 1 %}
+{% set section_spacing_bottom = section_spacing_bottom ?? 1 %}
+
+{% if modifier %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['mod-' ~ modifier]) %}
+{% endif %}
+{% if label %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['label-' ~ label|clean_class]) %}
+{% endif %}
+
+{% if minimal_styling %}
+  {% if template %}
+    {% set bem_section_modifier = bem_section_modifier|merge([template|clean_class]) %}
+  {% endif %}
+{% endif %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['content-blocks']) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-top-'  ~ section_spacing_top]) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-bottom-'  ~ section_spacing_bottom]) %}
+{% endif %}
+
+{% set bem_section_extra = bem_section_extra|merge([
+  'layout-section',
+  'layout' ~ '--' ~ '1-col',
+]) %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_extra = bem_section_extra|merge(['layout--1-col--content-blocks']) %}
+
+  {% if background_stretched %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-stretched']) %}
+  {% endif %}
+  {% if background_color and background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg']) %}
+  {% endif %}
+  {% if background_color %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-color']) %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg--' ~ background_color|clean_class ]) %}
+  {% endif %}
+  {% if background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-image']) %}
+  {% endif %}
+{% endif %}
+
+{% if extra_classes %}
+  {% set extraArray = extra_classes|split(' ') %}
+  {% set bem_section_extra = bem_section_extra|merge(extraArray) %}
+{% endif %}
+
+{% set bem_region_block = bem_region_block|default(['layout'])%}
+{% set bem_region_element = bem_region_element|default(['region'])%}
+{% set bem_region_modifier = bem_region_modifier|default([]) %}
+{% set bem_region_extra = bem_region_extra|default([]) %}
+
+{% set bem_region_extra = bem_region_extra|merge([
+  'layout-builder__region',
+  'layout__region',
+  'layout__region' ~ '--' ~ '1-col',
+]) %}
+
+{% if modifier %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['mod-' ~ modifier]) %}
+{% endif %}
+{% if minimal_styling == false %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['content-blocks']) %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['1-col' ~ '--content-blocks']) %}
+{% endif %}
+
+{% if region_type %}
+  {% if region_type == 'header' or region_type == 'footer' or region_type == 'aside' %}
+    {% set bem_region_modifier = bem_region_modifier|merge(['type-' ~ region_type]) %}
+
+    {% if modifier %}
+      {% set bem_region_modifier = bem_region_modifier|merge(['type-' ~ region_type ~ '--mod-' ~ modifier]) %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+
+{% set subregion_classes_01 = [
+  'layout__subregion',
+  'layout__subregion-01',
+] %}
+{% if modifier %}
+  {% set subregion_classes_01 = subregion_classes_01|merge([
+    'layout__subregion' ~ '--1-col' ~  '--mod-' ~ modifier,
+    'layout__subregion-01' ~ '--1-col' ~ '--mod-' ~ modifier,
+  ]) %}
+{% endif %}
+
+{% set subregion_classes_02 = [
+  'layout__subregion',
+  'layout__subregion-02',
+] %}
+{% if modifier %}
+  {% set subregion_classes_02 = subregion_classes_02|merge([
+    'layout__subregion' ~ '--1-col' ~  '--mod-' ~ modifier,
+    'layout__subregion-02' ~ '--1-col' ~ '--mod-' ~ modifier,
+  ]) %}
+{% endif %}
+
+
+{% if content %}
+
+<div {{bem(bem_section_block, bem_section_element, bem_section_modifier, bem_section_extra)}}>
+
+  <div {{bem(bem_region_block, bem_region_element, bem_region_modifier, bem_region_extra)}}>
+
+    {% if content.before01 %}
+      <div class="{{subregion_classes_01|join(' ')}}">
+      {% block section_before01 %}
+      {{content.before01}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if content.before02 %}
+      <div class="{{subregion_classes_02|join(' ')}}">
+      {% block section_before02 %}
+      {{content.before02}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if content.content %}
+      {% block section_content %}
+      {{ content.content }}
+      {% endblock %}
+    {% endif %}
+
+    {% if content.after01 %}
+      <div class="{{subregion_classes_01|join(' ')}}">
+      {% block section_after01 %}
+      {{content.after01}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if content.after02 %}
+      <div class="{{subregion_classes_02|join(' ')}}">
+      {% block section_after02 %}
+      {{content.after02}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  {% if layout_background_image %}
+    {% include "@%theme_prefix%-atoms/media/styleguide/media--image.twig" with {
+        reference: layout_background_image.reference
+      }
+    %}
+  {% endif %}
+
+</div>
+{% endif %}

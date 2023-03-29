@@ -1,0 +1,122 @@
+{#
+/**
+ * @file
+ * Theme override to display a pager.
+ *
+ * Available variables:
+ * - items: List of pager items.
+ *   The list is keyed by the following elements:
+ *   - first: Item for the first page; not present on the first page of results.
+ *   - previous: Item for the previous page; not present on the first page
+ *     of results.
+ *   - next: Item for the next page; not present on the last page of results.
+ *   - last: Item for the last page; not present on the last page of results.
+ *   - pages: List of pages, keyed by page number.
+ *   Sub-sub elements:
+ *   items.first, items.previous, items.next, items.last, and each item inside
+ *   items.pages contain the following elements:
+ *   - href: URL with appropriate query parameters for the item.
+ *   - attributes: A keyed list of HTML attributes for the item.
+ *   - text: The visible text used for the item link, such as "‹ Previous"
+ *     or "Next ›".
+ * - current: The page number of the current page.
+ * - ellipses: If there are more pages than the quantity allows, then an
+ *   ellipsis before or after the listed pages may be present.
+ *   - previous: Present if the currently visible list of pages does not start
+ *     at the first page.
+ *   - next: Present if the visible list of pages ends before the last page.
+ *
+ * @see template_preprocess_pager()
+ */
+#}
+
+{% if items %}
+  {% set pager__uid = pager__uid|default('')%}
+  <nav class="pager pager--full" role="navigation" aria-labelledby="pagination-heading{{ pager__uid }}">
+    <h4 id="pagination-heading{{ pager__uid }}" class="visually-hidden">{{ 'Pagination'|t }}</h4>
+    <ul class="pager__items pager__items--full js-pager__items">
+
+      {% if items.first %}
+        <li class="pager__item pager__item--full pager__item--prev pager__item--prev--full">
+          <a class="pager__link pager__link--full pager__link--prev pager__link--prev--full"  href="{{ items.first.href }}" title="{{ 'Go to first page'|t }}" rel="prev"{{ items.first.attributes|without('href', 'title', 'rel') }}>
+            <span class="visually-hidden">{{ 'First page'|t }}</span>
+
+            <i aria-hidden="true" class="page__link__icon--prev page__link__icon--prev--full page__link__icon page__link__icon--full page__link__icon--double-arrow-left page__link__icon--double-arrow-left--full"></i>
+            {% if items.first.text %}
+              {{ items.first.text|default('First'|t)|replace({'«': "", '‹': ""}) }}
+            {% endif %}
+
+          </a>
+        </li>
+      {% endif %}
+
+      {# Print previous item if we are not on the first page. #}
+      {% if items.previous %}
+        <li class="pager__item pager__item--full pager__item--previous pager__item--previous--full">
+          <a class="pager__link pager__link--full pager__link--prev pager__link--prev--full"  href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
+            <span class="visually-hidden">{{ 'Previous page'|t }}</span>
+
+            <i aria-hidden="true" class="page__link__icon--prev page__link__icon--prev--full page__link__icon page__link__icon--full page__link__icon--arrow-left page__link__icon--arrow-left--full"></i>
+            {% if items.previous.text %}
+              {{ items.previous.text|default('Previous'|t)|replace({'«': "", '‹': ""}) }}
+            {% endif %}
+
+          </a>
+        </li>
+      {% endif %}
+      {# Add an ellipsis if there are further previous pages. #}
+      {% if ellipses.previous %}
+        <li class="pager__item pager__item--full pager__item--ellipsis pager__item--ellipsis--full" role="presentation">&hellip;</li>
+      {% endif %}
+      {# Now generate the actual pager piece. #}
+      {% for key, item in items.pages %}
+        <li class="pager__item{{ current == key ? ' is-active' : '' }} pager__item--full">
+          {% if current == key %}
+            {% set title = 'Current page'|t %}
+          {% else %}
+            {% set title = 'Go to page @key'|t({'@key': key}) %}
+          {% endif %}
+          <a class="pager__link{{ current == key ? ' is-active' : '' }} pager__link--full" href="{{ item.href }}" title="{{ title }}"{{ item.attributes|without('href', 'title') }}>
+            <span class="visually-hidden">
+              {{ current == key ? 'Current page'|t : 'Page'|t }}
+            </span>
+            {{- key -}}
+          </a>
+        </li>
+      {% endfor %}
+      {# Add an ellipsis if there are further next pages. #}
+      {% if ellipses.next %}
+        <li class="pager__item pager__item--full pager__item--ellipsis pager__item--ellipsis--full" role="presentation">&hellip;</li>
+      {% endif %}
+      {# Print next item if we are not on the last page. #}
+      {% if items.next %}
+        <li class="pager__item pager__item--full pager__item--next pager__item--next--full">
+          <a class="pager__link pager__link--full pager__link--next pager__link--next--full" href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
+            <span class="visually-hidden">{{ 'Next page'|t }}</span>
+
+            {% if items.next.text %}
+              {{ items.next.text|default('Next'|t)|replace({'»': "", '›': ""}) }}
+            {% endif %}
+            <i aria-hidden="true" class="page__link__icon--next page__link__icon--next--full page__link__icon  page__link__icon--full page__link__icon--arrow-right page__link__icon--arrow-right--full"></i>
+
+          </a>
+        </li>
+      {% endif %}
+
+      {# Print last item. #}
+      {% if items.last %}
+        <li class="pager__item pager__item--full pager__item--last pager__item--last--full">
+          <a class="pager__link pager__link--full pager__link--last  pager__link--last--full" href="{{ items.last.href }}" title="{{ 'Go to last page'|t }}" rel="last"{{ items.last.attributes|without('href', 'title', 'rel') }}>
+            <span class="visually-hidden">{{ 'Last page'|t }}</span>
+
+            {% if items.last.text %}
+              {{ items.last.text|default('Last'|t)|replace({'»': "", '›': ""}) }}
+            {% endif %}
+            <i aria-hidden="true" class="page__link__icon--last page__link__icon--last --full page__link__icon page__link__icon--full page__link__icon--double-arrow-right page__link__icon--double-arrow-right--full"></i>
+
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

@@ -1,0 +1,293 @@
+label: 'CB Form'
+configuration:
+  label_display: false
+block_type: cb_form
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  webform:
+    label_hidden: true
+    field_name: field_cb_webform
+    field_type: webform
+    bem_field_modifiers:
+      - 'label-hidden'
+    content:
+      fields:
+        name:
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'textfield'
+            name: 'Full name'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            description_display: 'after'
+            description:
+              attributes:
+                id: edit-full-name--description
+              content: Eu mi bibendum neque egestas congue quisque.
+          label:
+            required: 'required'
+            title: 'Name'
+            attributes:
+              for: 'edit-name'
+          input:
+            attributes:
+              required: 'required'
+              value: ''
+              class:
+                - 'form-text'
+              size: 60
+              'max-length': 128
+              name: full_name
+              type: text
+              id: 'edit-name'
+              'aria-describedby': 'edit-full-name--description'
+        email:
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'email'
+            name: 'Email address'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            description_display: 'after'
+            # description:
+            #   attributes:
+            #   content: Eu mi bibendum neque egestas congue quisque.
+          label:
+            required: 'required'
+            title: 'Email address'
+            attributes:
+              for: 'edit-email-address'
+          input:
+            attributes:
+              required: 'required'
+              value: ''
+              class:
+                - 'form-email'
+              size: 60
+              'max-length': 128
+              name: email_address
+              type: email
+              id: 'edit-email-address'
+              # 'aria-describedby': 'edit-textfield--description'
+        subject:
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'textfield'
+            name: 'Subject'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            description_display: 'after'
+            description:
+              # attributes:
+              #   id: edit-subject--description
+              # content: Eu mi bibendum neque egestas congue quisque.
+          label:
+            title: 'Subject'
+            attributes:
+              for: 'edit-subject'
+          input:
+            attributes:
+              value: ''
+              class:
+                - 'form-text'
+              size: 60
+              'max-length': 128
+              name: subject
+              type: text
+              id: 'edit-subject'
+              # 'aria-describedby': 'edit-subject--description'
+        textarea:
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'textarea'
+            name: 'A message'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            description_display: 'after'
+            # description:
+            #   attributes:
+            #     id: edit-message--description
+            #   content: Normal message
+          label:
+            title: 'A message'
+            attributes:
+              for: 'edit-message'
+          textarea:
+            attributes:
+              value: ''
+              class:
+                - 'form-item__textfield'
+                - 'form-item__textarea'
+              rows: 8
+              cols: 48
+              name: 'message'
+              type: 'textarea'
+              id: 'edit-message'
+              required: "required"
+              # 'aria-describedby': 'edit-message--description'
+        managed_file:
+          count: 1
+          managed: true
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'managed_file'
+            name: 'File upload'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            description_display: 'after'
+            description:
+              attributes:
+                id: edit-managed-file-upload--description
+              content: |
+                One file only.<br />
+                64 MB limit.<br />
+                Allowed types: gif, jpg, jpeg, png, bmp, eps, tif, pict, psd, txt, rtf, html, odf, pdf, doc, docx, ppt, pptx, xls, xlsx, xml, avi, mov, mp3, mp4, ogg, wav, bz2, dmg, gz, jar, rar, sit, svg, tar, zip.
+          label:
+            title: 'Managed file upload'
+            attributes:
+              for: 'edit-managed-file-upload'
+          upload:
+            attributes:
+              value: ''
+              class:
+                - 'js-form-file'
+                - 'form-file'
+                - 'form__file'
+              size: 22
+              name: 'files[managed_file]'
+              type: file
+              id: 'edit-managed-file-upload'
+              'aria-describedby': 'edit-managed-file-upload--description'
+          input:
+            attributes:
+              value: 'Upload'
+              class:
+                - 'js-hide'
+                - 'js-form-submit'
+                - 'form-submit'
+              name: managed_file_upload_button
+              type: submit
+              id: 'edit-managed-file-upload-button--ImU455IaMVg'
+              'data-drupal-selector': 'edit-managed-file-upload-button'
+        checkbox:
+          title: 'Do you agree with the <a href="#">Terms and conditions?</a>'
+          checked: 'checked'
+          required: false
+          title_display: 'after'
+          label_attributes:
+            for: 'checkbox_terms'
+        radios:
+          radios:
+            - styleguide: true
+              title: 'Option 1'
+              checked: 'checked'
+              title_display: 'after'
+              label_attributes:
+                for: 'option0'
+            - styleguide: true
+              title: 'Option 2'
+              title_display: 'after'
+              label_attributes:
+                for: 'option1'
+            - styleguide: true
+              title: 'Option 3'
+              title_display: 'after'
+              label_attributes:
+                for: 'option2'
+            - styleguide: true
+              title: 'Option 4'
+              title_display: 'after'
+              label_attributes:
+                for: 'option3'
+        checkboxes:
+          checkboxes:
+            - styleguide: true
+              title: 'Option 1'
+              checked: 'checked'
+              required: false
+              title_display: 'after'
+              label_attributes:
+                for: 'checkbox0'
+            - styleguide: true
+              title: 'Option 2'
+              checked: 'checked'
+              required: false
+              title_display: 'after'
+              label_attributes:
+                for: 'checkbox1'
+            - styleguide: true
+              title: 'Option 3'
+              checked: 'checked'
+              required: false
+              title_display: 'after'
+              label_attributes:
+                for: 'checkbox2'
+            - styleguide: true
+              title: 'Option 4'
+              checked: 'checked'
+              required: false
+              title_display: 'after'
+              label_attributes:
+                for: 'checkbox3'
+        date:
+          form_element:
+            label_display: 'before'
+            title_display: 'before'
+            type: 'date'
+            name: 'Date field'
+            disabled: ''
+            errors:
+            prefix: ''
+            suffix: ''
+            # description_display: 'after'
+            # description:
+            #   attributes:
+            #     id: edit-date-field--description
+            #   content: A date field.
+          label:
+            title: 'Date field'
+            attributes:
+              for: 'edit-date-field'
+          input:
+            attributes:
+              value: ''
+              class:
+                - 'form-date'
+              size: 60
+              'max-length': 128
+              name: date_field
+              type: date
+              id: 'edit-date-field'
+              'data-drupal-date-format': 'Y-m-d'
+              # 'aria-describedby': 'edit-date-field--description'
+        buttons:
+          buttons:
+            - attributes:
+                class:
+                  - 'js-form-submit'
+                  - 'form-submit'
+                name: 'confirm'
+                type: 'submit'
+                id: 'submit--2'
+                value: 'Confirm'
+              button_bem_modifiers:
+                - 'primary'

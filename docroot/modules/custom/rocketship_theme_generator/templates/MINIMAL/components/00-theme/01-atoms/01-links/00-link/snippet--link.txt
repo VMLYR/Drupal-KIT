@@ -1,0 +1,28 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Links
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** More Big
+
+.link--more-big {
+  @include link-more-big;
+}
+
+// ** links in CKE & styleguide
+
+// a couple of ":not" selectors to exclude styleguide elements
+ul.inline a,
+.text-long .links li a,
+.text-long a:not(.button):not(.button--primary):not(.button--secondary):not(.button--negative):not(.button--negative-secondary) {
+
+  // ** you can change the underline here for the CKE links specifically
+
+  @include link-underline((
+    color: var(--clr-text-link),
+    color-hover: var(--clr-text-link-hover),
+    color-active: var(--clr-text-link-active)
+  ));
+}

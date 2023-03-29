@@ -1,0 +1,43 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content Bloc: Focus
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block--type-cb-focus {
+  // text-align: center;
+
+  // .field--buttons {
+  //   justify-content: center;
+  // }
+
+  // if an extra image is added, style it here
+
+  // .field--name-field-cb-image,
+  // .field--name-field-cb-media-image {
+  //   margin-bottom: rem(10);
+
+  //   img {
+  //     margin: 0 auto;
+  //   }
+  // }
+
+  .field--name-field-cb-title {
+    // @include h3;
+    // margin-bottom: rem(10);
+  }
+
+  .field--name-field-cb-subtitle {
+    // @include h4;
+    // margin-bottom: rem(10);
+  }
+
+  .field--name-field-cb-teaser {
+    //
+  }
+
+}

@@ -1,0 +1,232 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Block: Related items
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+.block--type-cb-related-items {
+
+  --gap-cb-related-item: var(--gap-layout-vert);
+
+  // ---------------------------------------------------------------------------
+
+  .field__item--name-field-cb-related-items {
+    margin-bottom: var(--gap-layout-vert);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // ** image
+
+    .field--image,
+    .field--name-field-media-canonical-image {
+      margin-bottom: var(--gap-layout-vert-sm);
+    }
+
+    // ** item title
+
+    h2,
+    h3,
+    h4 {
+      @include h4;
+      margin-bottom: var(--gap-layout-vert-sm);
+
+      a {
+        &,
+        &:visited {
+          color: hsl(var(--clr-heading));
+        }
+
+        &:hover,
+        &:active {
+          color: hsl(var(--clr-link));
+        }
+      }
+    }
+
+    // ** item description
+
+    .field--name-field-description {
+
+      margin-bottom: var(--gap-layout-vert-sm);
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    // ** if there is a readmore link
+
+    .rs-canonical-link-formatter,
+    .field--name-node-link {
+      margin-top: var(--gap-layout-vert-sm);
+      a {
+        @include link-more;
+      }
+    }
+
+  }
+
+  @if ($structuralOnly == false) {
+
+    // ** keep same colors when on colored bg's
+    //    because the items are wrapped in colored blocks
+    .layout--bg--spot-1 &,
+    .layout--bg--spot-2 &,
+    .layout--bg--spot-3 & {
+
+      .field__item--name-field-cb-related-items {
+
+        h2,
+        h3,
+        h4 {
+
+          color: hsl(var(--clr-white));
+
+          a {
+            &,
+            &:visited {
+              color: hsl(var(--clr-white));
+            }
+
+            &:hover,
+            &:active {
+              color: hsl(var(--clr-white));
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide phone & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide {
+
+  .block--type-cb-related-items {
+
+    .field--name-field-cb-related-items {
+
+      & > .field__items {
+        @include flex-grid(12, var(--gap-cb-related-item));
+      }
+    }
+
+    .field__item--name-field-cb-related-items {
+      @include flex-col(6, 12, var(--gap-cb-related-item));
+      display: flex;
+      margin-bottom: 0;
+
+      // ** push readmore link to the end
+
+      .node,
+      .node__content {
+        display: flex;
+        width: 100%;
+      }
+
+      .node__content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .field--name-field-page-display-canonical:last-child {
+        display: flex;
+        flex-grow: 1;
+        align-items: flex-end;
+      }
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-cb-related-items {
+
+    .field__item--name-field-cb-related-items {
+      flex-basis: calc((100% / 3) - var(--gap-cb-related-item));
+      width: calc((100% / 3) - var(--gap-cb-related-item));
+    }
+
+    // ** 2 col layout override
+
+    .layout--2-col & {
+
+      .field__item--name-field-cb-related-items {
+        flex-basis: calc(100% - var(--gap-cb-related-item));
+        width: calc(100% - var(--gap-cb-related-item));
+
+      }
+
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block--type-cb-related-items {
+    //
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large screen
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block--type-cb-related-items {
+
+    .field__item--name-field-cb-related-items {
+      flex-basis: calc((100% / 4) - var(--gap-cb-related-item));
+      width: calc((100% / 4) - var(--gap-cb-related-item));
+    }
+
+    .layout--2-col & {
+
+      .field__item--name-field-cb-related-items {
+        flex-basis: calc((100% / 2) - var(--gap-cb-related-item));
+        width: calc((100% / 2) - var(--gap-cb-related-item));
+      }
+    }
+
+    // ** small cols layout override
+
+    .layout__region--size-1-3 &,
+    .layout__region--size-1-4 & {
+
+      .field-cb-menu-overview__item {
+        flex-basis: calc(100% - var(--gap-cb-related-item));
+        width: calc(100% - var(--gap-cb-related-item));
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,34 @@
+################################################################################
+# Layouts
+################################################################################
+
+# !WARNING! make sure your machine name is the same as the template file name
+#           otherwise theme suggestions break and Drupal might not find your template
+#
+rocketship_layout_example:
+  label: Rocketship %theme_name% custom layout example
+  class: '\Drupal\rocketship_core\Plugin\Layout\CustomLayouts' # makes it possible to add classes via the UI
+  category: Rocketship Custom Layouts
+  template: components/00-theme/04-templates/rocketship-layout-custom-example
+  additional:
+    region_type: region
+  default_region: content
+  regions:
+    first_top:
+      label: 'First Top'
+    first_main:
+      label: 'First Main'
+    first_bottom:
+      label: 'First Bottom'
+    center_top:
+      label: 'Content Top'
+    center_main:
+      label: 'Content Main'
+    center_bottom:
+      label: 'Content Bottom'
+    second_top:
+      label: 'Second Left'
+    second_main:
+      label: 'Second Main'
+    second_bottom:
+      label: 'Second Bottom'

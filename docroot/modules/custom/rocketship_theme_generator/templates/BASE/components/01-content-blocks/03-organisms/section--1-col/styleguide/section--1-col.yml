@@ -1,0 +1,11 @@
+label: 'Content'
+template: 'rs-content'
+minimal_styling: false
+modifier: null
+extra_classes:
+content:
+  content: true
+  before01: false
+  before02: false
+  after01: false
+  after02: false

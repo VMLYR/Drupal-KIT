@@ -1,0 +1,84 @@
+
+// ** Text under header
+
+.florista--homepage-usp-section .block--type-cb-text {
+
+  padding-bottom: rem(40);
+
+  .field--name-field-cb-button {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button {
+    margin: rem(25) 0 0 0;
+    @include button-primary;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+// ** Text above blog section
+.florista--blog-section .block--type-cb-text {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  .field {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .field--name-field-cb-title {
+    flex: 0 1 auto;
+    width: auto;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .field--buttons {
+    flex: 1 0 auto;
+    justify-content: flex-end;
+    width: auto;
+    margin: 0;
+  }
+
+  .button {
+    @include link-more-big;
+    margin: 0;
+  }
+}
+
+// ** CTA
+
+.florista--footer-cta .block--type-cb-text {
+
+  h2,
+  .cta-big-title {
+    @include h2;
+
+    @include bp-lg {
+      @include font-size(72, 80);
+    }
+  }
+
+  h3,
+  .cta-tiny-title {
+    @include font-size(16, 26);
+    text-transform: uppercase;
+    font-weight: $font-weight-normal;
+    color: hsl(var(--clr-base));
+  }
+
+  .font-text-01-loaded & {
+    h3,
+    .cta-tiny-title {
+      font-family: $font-base;
+    }
+  }
+
+}

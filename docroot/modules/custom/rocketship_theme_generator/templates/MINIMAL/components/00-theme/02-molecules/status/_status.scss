@@ -1,0 +1,154 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Status messages
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+.messages--wrapper {
+  position: relative;
+  clear: both;
+
+  // **  Do this not to annoy back-end devs ;)
+
+  body.toolbar-fixed & {
+    position: relative;
+    @include z-index(status); // over the reset of the header, under admin bar
+  }
+}
+
+.messages {
+  position: relative;
+  clear: both;
+  margin-top: var(--gap-md);
+  padding: rem(15) rem(30) rem(15) rem(60);
+  border-radius: rem(3);
+  color: hsl(var(--clr-white));
+  transform: translate(0, 0);
+  transition: transform .5s $easing;
+  opacity: 1;
+
+  &::before {
+    position: absolute;
+    top: rem(12);
+    bottom: 0;
+    left: rem(15);
+    @include square(rem(30));
+    text-align: center;
+    line-height: 1;
+  }
+
+  &:first-child {
+    margin-top: var(--gap-md);
+  }
+  &:last-child {
+    margin-bottom: var(--gap-md);
+  }
+
+  &.js-closing {
+    opacity: 0;
+    transform: translate(-100%, 0);
+    transition: all .5s $easing;
+
+    @include bp-md {
+      transform: translate(0, -100%);
+    }
+  }
+
+  &.js-closed {
+    display: none;
+  }
+}
+
+$messages-icons-size: 30;
+$messages-icons-weight: 900;
+
+.messages--status {
+  border: 1px solid hsl(var(--clr-status-dark));
+  background-color: hsl(var(--clr-status));
+  $msg-icon-status: (icon: $fa-var-check-circle, color: hsl(var(--clr-white)), size: $messages-icons-size);
+  @include font-awesome($msg-icon-status);
+
+  a {
+    color: hsl(var(--clr-status-dark));
+    filter: brightness(0.95); // darken
+
+    &:hover {
+      color: hsl(var(--clr-status-dark));
+      filter: brightness(1); // reset
+    }
+  }
+}
+
+.messages--warning {
+  border: 1px solid hsl(var(--clr-warning-dark));
+  background-color: hsl(var(--clr-warning));
+
+  $msg-icon-warning: (icon: $fa-var-exclamation-triangle, color: hsl(var(--clr-white)), size: $messages-icons-size);
+  @include font-awesome($msg-icon-warning);
+
+  a {
+    color: hsl(var(--clr-warning-dark));
+    filter: brightness(0.95); // darken
+
+    &:hover {
+      color: hsl(var(--clr-warning-dark));
+      filter: brightness(1); // reset
+    }
+  }
+}
+
+.messages--error {
+  border: 1px solid hsl(var(--clr-error-dark));
+  background-color: hsl(var(--clr-error));
+
+  $msg-icon-error: (icon: $fa-var-exclamation-circle, color: hsl(var(--clr-white)), size: $messages-icons-size);
+  @include font-awesome($msg-icon-error);
+
+  a {
+    color: hsl(var(--clr-error-dark));
+    filter: brightness(0.95); // darken
+
+    &:hover {
+      color: hsl(var(--clr-error-dark));
+      filter: brightness(1); // reset
+    }
+  }
+}
+
+.message__close {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  color: hsl(var(--clr-white));
+  outline: none;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  .icon {
+    display: block;
+    width: rem(40);
+    height: rem(40);
+    padding-top: rem(7);
+    text-align: center;
+    @include font-awesome((icon: $fa-var-times, color: hsl(var(--clr-white))));
+  }
+
+  span {
+    @include hide;
+  }
+}
+
+.messages__list {
+  @include list-reset;
+}
+
+.messages__item {
+  + .messages__item {
+    margin-top: rem(10);
+  }
+}

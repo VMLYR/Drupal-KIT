@@ -1,0 +1,60 @@
+
+.layout.florista--homepage-header {
+
+  padding-top: var(--gap-layout-vert-top);
+  padding-bottom: var(--gap-layout-vert-bottom);
+
+  .field--name-field-cb-teaser {
+    max-width: rem(770);
+    margin: 0 auto;
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .layout.florista--homepage-header {
+
+    padding-top: rem(50);
+    padding-bottom: rem(50);
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .layout.florista--homepage-header {
+
+    padding-top: rem(100);
+    padding-bottom: rem(100);
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .layout.florista--homepage-header {
+
+    padding-top: rem(160);
+    padding-bottom: rem(160);
+
+  }
+
+}

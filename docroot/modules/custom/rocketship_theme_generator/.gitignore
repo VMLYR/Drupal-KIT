@@ -1,0 +1,6 @@
+# Ignore compiled files.
+dist
+dist-*
+dist_*
+templates/**/css/*.map
+templates/**/js/*.map

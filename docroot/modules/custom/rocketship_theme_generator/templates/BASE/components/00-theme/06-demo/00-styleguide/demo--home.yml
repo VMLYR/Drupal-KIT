@@ -1,0 +1,46 @@
+page:
+  content:
+    blocks:
+      # visual:
+      # info:
+      # blog:
+      # event:
+    layouts:
+      header:
+        minimal_styling: true
+        label: 'Header'
+        template: 'rs-header'
+        region_type: 'header'
+        modifier: null
+        extra_classes: 'home__section home__section--visual'
+        content:
+          content: true
+          before01: false
+          before02: false
+          after01: false
+          after02: false
+      usp_info:
+        minimal_styling: true
+        label: 'Rocketship 2-col'
+        template: 'rs-two-col'
+        extra_classes: 'home__section home__section--usp-info'
+        reversed: false
+        content:
+          first_main: true
+          second_main: true
+      blog_event:
+        minimal_styling: true
+        label: 'Rocketship 2-col'
+        template: 'rs-two-col'
+        modifier: null
+        extra_classes: 'home__section home__section--blog-events'
+        reversed: false
+        content:
+          first_main: true
+          second_main: true
+      contents:
+        label: 'Body'
+        template: 'rs-content'
+        content:
+          content: true
+

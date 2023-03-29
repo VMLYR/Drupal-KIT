@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Theme override of a responsive image.
+ *
+ * Available variables:
+ * - sources: The attributes of the <source> tags for this <picture> tag.
+ * - img_element: The controlling image, with the fallback image in srcset.
+ * - output_image_tag: Whether or not to output an <img> tag instead of a
+ *   <picture> tag.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_responsive_image()
+ */
+#}
+
+{# {% if output_image_tag %}
+  {{ img_element }}
+{% else %}
+  <picture>
+    {% if sources %}
+      <!--[if IE 9]><video style="display: none;"><![endif]-->
+      {% for source_attributes in sources %}
+        <source{{ source_attributes }}/>
+      {% endfor %}
+      <!--[if IE 9]></video><![endif]-->
+    {% endif %}
+    {{ img_element }}
+  </picture>
+{% endif %} #}
+
+{% set imgSource = img_element['#attributes']['data-src']|default(img_element['#uri']) %}
+
+{% if output_image_tag %}
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+    image_bem_block: responsive_image_bem_block,
+    image_bem_element: responsive_image_bem_element,
+    image_bem_modifiers: responsive_image_bem_modifiers,
+    image_srcset: image_srcset|default(img_element['#attributes'].srcset),
+    image_sizes: image_sizes|default(img_element['#attributes'].sizes),
+    image_src: image_src|default(imgSource),
+    image_alt: image_alt|default(img_element['#alt']),
+    image_title: image_title|default(img_element['#title']),
+    image_loading: image_loading|default(img_element['#attributes'].loading),
+    lazy_loading_fallback: lazy_loading_fallback|default(img_element['#attributes'].lazy_loading_fallback),
+    aspect: aspect|default(img_element['#attributes'].aspect),
+  } %}
+{% else %}
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_picture.twig" with {
+    picture_bem_block: responsive_image_bem_block,
+    picture_bem_element: responsive_image_bem_element,
+    picture_bem_modifiers: responsive_image_bem_modifiers,
+    image_srcset: image_srcset|default(img_element['#attributes'].srcset),
+    image_sizes: image_sizes|default(img_element['#attributes'].sizes),
+    image_src: image_src|default(imgSource),
+    image_alt: image_alt|default(img_element['#alt']),
+    image_title: image_title|default(img_element['#title']),
+    image_loading: image_loading|default(img_element['#attributes'].loading),
+    lazy_loading_fallback: lazy_loading_fallback|default(img_element['#attributes'].lazy_loading_fallback),
+    aspect: aspect|default(img_element['#attributes'].aspect),
+  } %}
+{% endif %}
+
+

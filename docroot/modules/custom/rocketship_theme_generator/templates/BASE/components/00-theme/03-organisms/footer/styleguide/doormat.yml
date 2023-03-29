@@ -1,0 +1,30 @@
+page:
+  doormat: true
+  # doormat_02: true
+  # doormat_03: true
+  # doormat_04: true
+branding:
+  configuration:
+    label_display: false
+  heading_id: "nav-branding-xyz"
+  bem_block_modifiers:
+    - region-doormat
+# menu_sitemap:
+#   region: doormat
+#   configuration:
+#     label_display: true
+#   heading_id: "nav-sitemap-doormat-menu-xyz"
+#   menu_block_bem_modifiers:
+#     - region-doormat
+# social:
+#   configuration:
+#     label_display: true
+#   heading_id: "nav-social-xyz"
+#   bem_block_modifiers:
+#     - region-doormat
+# contact:
+#   configuration:
+#     label_display: true
+#   heading_id: "nav-contact-xyz"
+#   bem_block_modifiers:
+#     - region-doormat

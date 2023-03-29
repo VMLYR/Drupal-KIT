@@ -1,0 +1,157 @@
+name: %theme_name%
+type: theme
+description: %description%
+package: Rocketship Theme
+core_version_requirement: ^8.8 || ^9
+base theme: classy
+
+{% if demo %}
+language_switcher_region: nav_secondary
+{% fi demo %}
+
+requirements:
+  - responsive_image
+  - components
+  - unified_twig_ext
+  - search
+
+regions:
+  tabs: 'Tabs'
+  header_top: 'Header top'
+{% if flex or demo %}
+  header_top_nav: 'Top navigation (eg. social links)'
+  header: 'Primary header'
+  nav_primary: 'Primary navigation (main menu & CTA)'
+  nav_secondary: 'Secondary navigation (eg. corporate menu)'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted' # use for messages and such
+  sidebar_first: 'Left sidebar'
+  content: 'Content'
+  sidebar_second: 'Right sidebar'
+  doormat: 'Doormat col 01' # menus and blocks for the bottom of the page
+  doormat_02: 'Doormat col 02' # menus and blocks for the bottom of the page
+  doormat_03: 'Doormat col 03' # menus and blocks for the bottom of the page
+  doormat_04: 'Doormat col 04' # menus and blocks for the bottom of the page
+  footer: 'Footer' # for copyright stuff and maybe a few links
+  hidden: 'Hidden (blocks you do not want to be visible)'
+{% fi flex or demo %}
+{% if !flex and !demo %}
+  header: 'Primary header'
+  nav_primary: 'Primary navigation (main menu & CTA)'
+  nav_secondary: 'Secondary navigation (eg. corporate menu)'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted' # use for messages and such
+  sidebar_first: 'Left sidebar'
+  content: 'Content'
+  sidebar_second: 'Right sidebar'
+  doormat: 'Doormat' # menus and blocks for the bottom of the page
+  footer: 'Footer' # for copyright stuff and maybe a few links
+  hidden: 'Hidden (blocks you do not want to be visible)'
+{% fi !flex and !demo %}
+
+# CKEditor stylesheet loads in wysiwyg to give content editors a better experience
+ckeditor_stylesheets:
+  - css/style.editor.css
+
+# our css and js files on all pages & components
+libraries:
+  - %machine_name%/global
+  - %machine_name%/rocketship_content_blocks
+  - %machine_name%/component_forms
+  - %machine_name%/component_tables
+  - %machine_name%/component_menu
+  - %machine_name%/component_search
+  - %machine_name%/component_images
+
+libraries-override:
+  core/modernizr: %machine_name%/modernizr-custom # override from core because we want to be able to update
+  core/normalize:
+    css:
+      base:
+        assets/vendor/normalize-css/normalize.css: false
+  system/base:
+    css:
+      component:
+        css/components/ajax-progress.module.css: false
+        css/components/align.module.css: false
+        css/components/fieldgroup.module.css: false
+        css/components/container-inline.module.css: false
+        css/components/clearfix.module.css: false
+        css/components/details.module.css: false
+        css/components/hidden.module.css: false
+        css/components/item-list.module.css: false
+        css/components/js.module.css: false
+        css/components/nowrap.module.css: false
+        css/components/position-container.module.css: false
+        css/components/progress.module.css: false
+        css/components/reset-appearance.module.css: false
+        css/components/resize.module.css: false
+        css/components/sticky-header.module.css: false
+        css/components/tabledrag.module.css: false
+        css/components/tablesort.module.css: false
+        css/components/tree-child.module.css: false
+  classy/progress:
+    css:
+      component:
+        css/components/progress.css: false
+  classy/dialog:
+    css:
+      component:
+        css/components/dialog.css: false
+  classy/node:
+    css:
+      component:
+        css/components/node.css: false
+  classy/messages:
+    css:
+      component:
+        css/components/messages.css: false
+  classy/user:
+    css:
+      component:
+        css/components/user.css: false
+  classy/base: false
+
+# MUST install `components` module via Composer + enable it (drush en components -y)
+components:
+  namespaces:
+    %theme_prefix%-base:
+      - components/00-theme/00-base
+    %theme_prefix%-atoms:
+      - components/00-theme/01-atoms
+    %theme_prefix%-molecules:
+      - components/00-theme/02-molecules
+    %theme_prefix%-organisms:
+      - components/00-theme/03-organisms
+    %theme_prefix%-cb:
+      - components/01-content-blocks
+    %theme_prefix%-cb-molecules:
+      - components/01-content-blocks/02-molecules
+    %theme_prefix%-cb-organisms:
+      - components/01-content-blocks/03-organisms
+    %theme_prefix%-templates:
+      - components/00-theme/04-templates
+    %theme_prefix%-pages:
+      - components/00-theme/05-pages
+    %theme_prefix%-demo:
+      - components/00-theme/06-demo
+    %theme_prefix%-features:
+      - components/02-features
+    # %theme_prefix%-news-molecules:
+    #   - components/02-features/f001-news/02-molecules
+    # %theme_prefix%-blog-molecules:
+    #   - components/02-features/f002-blog/02-molecules
+    # %theme_prefix%-office-atoms:
+    #   - components/02-features/f006-office/01-atoms
+    # %theme_prefix%-office-molecules:
+    #   - components/02-features/f006-office/02-molecules
+    # %theme_prefix%-realisation-molecules:
+    #   - components/02-features/f007-realisation/02-molecules
+    # %theme_prefix%-service-molecules:
+    #   - components/02-features/f008-service/02-molecules
+    # %theme_prefix%-product-molecules:
+    #   - components/02-features/f009-product/02-molecules
+    # %theme_prefix%-job-molecules:
+    #   - components/02-features/f012-job/02-molecules
+    # %theme_prefix%-event-molecules:
+    #   - components/02-features/f014-event/02-molecules

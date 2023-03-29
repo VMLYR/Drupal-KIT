@@ -1,0 +1,22 @@
+{#
+/**
+ * Example of a molecule, using embed
+ *
+ * Embed combines functionality of include & extends
+ * so you can pass variables + override content
+ * https://twig.symfony.com/doc/2.x/tags/embed.html
+ *
+ * Available variables:
+ * - some_variable: some string to output
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/example/_example--master.twig" with {
+    "some_variable": 'some_output',
+} %}
+
+  {% block content %}
+    bla bla bla
+  {% endblock %}
+
+{% endembed %}

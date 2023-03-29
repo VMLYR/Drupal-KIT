@@ -1,0 +1,41 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+<div class="icons-demo icons-demo--{{type}}">
+  {% for item in items %}
+      {% if type == 'default' %}
+      <div class="icons-demo__item icons-demo__item--{{item.name}}">
+        {% include "@%theme_prefix%-atoms/04-images/icons/_icon.twig" with {
+          icon_name: item.name,
+          icon_title: item.title,
+          icon_classes: item.classes,
+        } %}
+        <pre>{{ item.name }}</pre>
+      </div>
+      {% elseif type == 'sizes' %}
+        <div class="icons-demo__item-group icons-demo__item-group--{{item.name}}">
+        {% for size in sizes %}
+          <div class="icons-demo__item icons-demo__item--{{item.name}}">
+            {% include "@%theme_prefix%-atoms/04-images/icons/_icon.twig" with {
+              icon_name: item.name,
+              icon_title: item.title,
+              icon_classes: [size],
+            } %}
+            <pre>{{ item.name }}: <i>{{size}}</i></pre>
+          </div>
+        {% endfor %}
+        </div>
+      {% elseif type == 'link' %}
+      <p class="icons-demo__link icons-demo__link--{{item.name}}">
+        {% include "@%theme_prefix%-atoms/04-images/icons/_icon-link.twig" with {
+          icon_name: item.name,
+          icon_title: item.title,
+          icon_classes: item.classes,
+        } %}
+      </p>
+      {% endif %}
+  {% endfor %}
+</div>

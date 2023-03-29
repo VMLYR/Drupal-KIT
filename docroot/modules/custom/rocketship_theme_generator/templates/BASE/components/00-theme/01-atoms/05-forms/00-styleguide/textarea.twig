@@ -1,0 +1,38 @@
+{% embed "@%theme_prefix%-atoms/05-forms/form-element/_form-element.twig" with {
+  name: form_element.name,
+  type: form_element.type,
+  label_display: form_element.label_display,
+  title_display: form_element.title_display,
+  type: form_element.type,
+  name: form_element.name,
+  disabled: form_element.disabled,
+  errors: form_element.errors,
+  prefix: form_element.prefix,
+  suffix: form_element.suffix,
+  description_display: form_element.description_display,
+  description: form_element.description,
+} %}
+
+  {% block form_element_label_before %}
+    {% include "@%theme_prefix%-atoms/05-forms/form-label/_form-label.twig" with {
+      title: label.title,
+      attributes: label.attributes,
+      required: label.required,
+    } %}
+  {% endblock %}
+
+  {% block form_element_content %}
+    {% include "@%theme_prefix%-atoms/05-forms/textarea/_textarea.twig" with {
+      attributes: textarea.attributes,
+    } %}
+  {% endblock %}
+
+  {% block form_element_label_after %}
+    {% include "@%theme_prefix%-atoms/05-forms/form-label/_form-label.twig" with {
+      title: label.title,
+      attributes: label.attributes,
+      required: label.required,
+    } %}
+  {% endblock %}
+
+{% endembed %}

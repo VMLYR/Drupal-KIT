@@ -1,0 +1,140 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Mini pager
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** wrappers
+// =============================================================================
+
+.pager--full {
+  //
+}
+
+.pager__items--full {
+  //
+}
+
+// ** pager item
+// =============================================================================
+
+.pager__item--full {
+  //
+
+  &.is-active {
+    //
+  }
+}
+
+.pager__item--ellipsis {
+  //
+}
+
+// ** Pager link
+// =============================================================================
+
+.pager__link--full {
+  //
+
+  &,
+  &:visited {
+    //
+  }
+
+  &:hover {
+
+    // icon effects on hover
+    .page__link__icon {
+      &,
+      &::before {
+        //
+      }
+    }
+
+    .page__link__icon--first,
+    .page__link__icon--prev {
+      //
+    }
+
+    .page__link__icon--next,
+    .page__link__icon--last {
+      //
+    }
+  }
+
+  &.is-active,
+  &:hover {
+    //
+  }
+
+  &.is-disabled {
+    //
+    .page__link__icon {
+      //
+    }
+  }
+
+  // ** prev/next
+
+  &.pager__link--prev,
+  &.pager__link--next {
+    //
+  }
+
+  // ** first/last
+
+  &.pager__link--first,
+  &.pager__link--last {
+    //
+  }
+
+  // ** Icons
+
+  .page__link__icon {
+    //
+
+    &::before {
+      //
+    }
+
+    .is-disabled & {
+      //
+    }
+  }
+
+  .page__link__icon--arrow-left {
+    //
+  }
+
+  .page__link__icon--arrow-right {
+    //
+  }
+
+  .page__link__icon--double-arrow-left {
+    //
+  }
+
+  .page__link__icon--double-arrow-right {
+    //
+  }
+
+}
+
+@include bp-sm {
+
+  .pager__link--full {
+    &.page__link__icon--first,
+    &.page__link__icon--prev,
+    &.page__link__icon--next,
+    &.page__link__icon--last {
+
+      a {
+        //
+        &::after {
+          //
+        }
+      }
+    }
+  }
+}

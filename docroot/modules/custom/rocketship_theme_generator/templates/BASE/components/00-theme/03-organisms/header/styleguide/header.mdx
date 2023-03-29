@@ -1,0 +1,76 @@
+import { Story } from '@storybook/addon-docs';
+
+# Header
+
+The header is a very complex Organism, with several nested Organsism, menu's and blocks. <br />
+Especially because the mobile navigation can include different elements than<br />
+the bigger menu and certain blocks need to be displayed in different places<br />
+depending on the breakpoint.
+
+**Add your blocks and menu's to the right regions:**
+
+- **header_top**: blocks and stuff that goes in a bar above the primary header & logo.<br />
+Eg. language switcher, contact info or social media icons<br />
+- **top navigation**: menu's that are in the header top (so above the primaryheader)
+- **primary header**: usually only the logo (branding block) is in here. <br />
+Unless you need some blocks besides whatever is in the navigation.
+- **nav primary and nav secondary**: these 2 regions are used to build the 2
+possible navigations that go next to or under the logo in the header. <br />
+Those 2 are grouped into the 'nav' (twig files) and 'mobile navigation' (concept).<br />
+So anything in those regions is visible in the open mobile menu. <br />
+Eg. the primary and main menu's + any CTA blocks next to it. <br />
+Also social media icons that are visible on mobile but not desktop.
+
+As you can read, we have some specialized groupings in place for building the<br />
+elements of the header and navigation. Of course these all need to be styled<br />
+in the right place as well.
+
+**Be careful to add your styling to the right files:**
+
+- styling the search block: molecules/search/search-block
+- styling the other blocks: molecules/whateverblock
+- styling the menu's that go inside the navigation: molecules/menus/menu
+- styling the header logo: molecules/branding
+- positioning the elements of the navigation (menu's + blocks):
+organisms/header/nav
+- positioning the elements in the header (logo + several wrappers):
+organisms/header/header--primary
+
+As mentioned in the `breakpoints` documentation, the navigation uses breakpoints<br />
+in order to make a mobile navigation and a bigger navigation.
+We also use several block layout regions to group elements from the header <br />
+and navigations in a way that works for mobile as well as wider screens
+
+
+## data
+
+You will see in the yml files, that we have imported yml files of molecules in order to recycle data.<br />
+This is done by importing from a relative path + merging data from molecules into data from organisms.<br />
+Information about 'deep merging' can be found in the Molecules Example documentation as well.
+
+## navigation
+
+### navigation sections
+
+By default, the navigation shows 2 nav sections (primary nav + secondary nav) containing the 'main menu'<br />
+ + 'language menu' (visible on desktop only).<br />
+But if you have extra navigations (or blocks), to render on mobile or desktop (or both),<br />
+simply add your menus/blocks to the correct section (most likely the secondary nav) via:
+- block layout in Drupal
+- and in the styleguide/nav.twig file.
+
+All you then need, is a twig embed + yml data for those elements.
+
+As examples, in the styleguide/nav twig file, there is already code and data included for:
+- a secondary menu, in the secondary nav
+
+The reason the secondary menu does not display in Storybook, <br />
+is because it is commented out, so turn it on if you need it or replace with another twig.
+
+### language menu
+
+This menu is special because it is added in the header twice, in order to show it in 2 different places depending on the your screen size.<br />
+This is achieved by showing/hiding the correct menu in CSS:
+- nav.twig: visible on desktop (it is rendered in the secondary navigation region)
+- header--top.twig: visible on mobile (it is rendered in the top header)
+

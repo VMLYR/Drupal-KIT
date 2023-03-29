@@ -1,0 +1,10 @@
+# import data in the stories file
+# here you can add overrides for the nested data
+social:
+  configuration:
+    label_display: false
+  bem_block_modifiers:
+    - region-header-top
+menu_language:
+  menu_block_bem_modifiers:
+  - region-header-top

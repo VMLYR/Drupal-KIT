@@ -1,0 +1,17 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+<div class="form__element form-item js-form-item js-form-type-checkbox form-type-checkbox form-type--checkbox">
+  <input id="{{label_attributes.for}}" class="form-checkbox form__input--checkbox" name="checkbox" type="checkbox"{% if disabled %} disabled="disabled"{% endif %}{% if checked %} checked="{{ checked }}"{% endif %}{% if required %} required="required"{% endif %}>
+
+  {% include "@%theme_prefix%-atoms/05-forms/form-label/_form-label.twig" with {
+    title: title,
+    attributes: label_attributes,
+    required: required,
+    title_display: title_display,
+    styleguide: styleguide,
+  } %}
+</div>

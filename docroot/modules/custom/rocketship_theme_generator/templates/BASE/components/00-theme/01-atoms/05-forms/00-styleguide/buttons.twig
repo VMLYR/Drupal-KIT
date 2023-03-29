@@ -1,0 +1,24 @@
+{% for key, button in buttons %}
+  {% if wrapper %}
+  <form>
+  {% endif %}
+    {% if button.attributes.name == 'confirm'%}
+    <div class="form__group js-form-wrapper form-wrapper form-actions">
+    {% endif %}
+      {% include "@%theme_prefix%-atoms/05-forms/input/_input.twig" with {
+        attributes: button.attributes,
+        styleguide: styleguide,
+      } %}
+
+      {% if button.attributes.name == 'confirm'%}
+      <a href="#" class="button" data-drupal-selector="edit-cancel" id="edit-cancel--2">Cancel</a>
+      {% endif %}
+    {% if button.attributes.name == 'confirm'%}
+    </div>
+    {% endif %}
+  {% if wrapper %}
+  </form>
+
+  <p></p>
+  {% endif %}
+{% endfor %}

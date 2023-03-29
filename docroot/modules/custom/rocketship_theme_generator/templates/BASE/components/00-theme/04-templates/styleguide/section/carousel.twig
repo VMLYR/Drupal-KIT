@@ -1,0 +1,185 @@
+{% set minimal_styling = minimal_styling ?? false %}
+{% if layout.template %}
+  {% set template = layout.template|clean_class %}
+{% elseif template %}
+  {% set template = template|clean_class %}
+{% endif %}
+{% set bem_section_block = bem_section_block|default(['layout'])%}
+{% set bem_section_element = bem_section_element|default(false)%}
+{% set bem_section_modifier = bem_section_modifier|default([]) %}
+{% set bem_section_extra = bem_section_extra|default([]) %}
+
+{% set modifier = modifier ?? false %}
+{% if (modifier|trim is not empty) %}
+  {% set modifier = modifier|clean_class %}
+{% endif %}
+
+{# Variant options #}
+{% set background_stretched = background_color|default(true) %}
+{% set background_color = background_color|default(false) %}
+{% set background_image = background_image|default(false) %}
+
+{% set section_spacing_top = section_spacing_top ?? '1x' %}
+{% set section_spacing_bottom = section_spacing_bottom ?? '1x' %}
+
+{% set valign = valign|default('top') %}
+
+{% if modifier %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['mod-' ~ modifier]) %}
+{% endif %}
+{% if label %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['label-' ~ label|clean_class]) %}
+{% endif %}
+
+{% if minimal_styling %}
+  {% if template %}
+    {% set bem_section_modifier = bem_section_modifier|merge([template|clean_class]) %}
+  {% endif %}
+{% endif %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['content-blocks']) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-top-'  ~ section_spacing_top]) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-bottom-'  ~ section_spacing_bottom]) %}
+{% endif %}
+
+{% set bem_section_extra = bem_section_extra|merge([
+  'layout-section',
+  'layout' ~ '--' ~ 'carousel',
+]) %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_extra = bem_section_extra|merge(['layout--carousel--content-blocks']) %}
+
+  {% if background_stretched %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-stretched']) %}
+  {% endif %}
+  {% if background_color and background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg']) %}
+  {% endif %}
+  {% if background_color %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-color']) %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg--' ~ background_color|clean_class ]) %}
+  {% endif %}
+  {% if background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-image']) %}
+  {% endif %}
+{% endif %}
+
+{% if extra_classes %}
+  {% set extraArray = extra_classes|split(' ') %}
+  {% set bem_section_extra = bem_section_extra|merge(extraArray) %}
+{% endif %}
+
+{% set bem_region_block = bem_region_block|default(['layout'])%}
+{% set bem_region_element = bem_region_element|default(['region'])%}
+{% set bem_region_modifier = bem_region_modifier|default([]) %}
+{% set bem_region_extra = bem_region_extra|default([]) %}
+
+{% set bem_region_extra = bem_region_extra|merge([
+  'layout-builder__region',
+  'layout__region',
+  'layout__region' ~ '--' ~ 'carousel',
+]) %}
+
+{% if modifier %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['mod-' ~ modifier]) %}
+{% endif %}
+{% if minimal_styling == false %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['content-blocks']) %}
+  {% set bem_region_modifier = bem_region_modifier|merge(['carousel' ~ '--content-blocks']) %}
+{% endif %}
+
+
+{# Classes on region wrappers #}
+
+{% set region_classes = [
+  'layout-builder__region',
+  'layout__region',
+  'layout__region' ~ '--' ~ 'carousel',
+] %}
+{% if modifier %}
+  {% set region_classes = region_classes|merge(['mod-' ~ modifier]) %}
+{% endif %}
+
+{% set region_classes = region_classes|merge([
+  'layout__region'  ~ '--' ~ 'content-blocks',
+  'layout__region'  ~ '--' ~ 'carousel' ~ '--content-blocks'
+]) %}
+
+{# Classes on individual regions #}
+
+{% set top_classes = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--top',
+]) %}
+{% if modifier %}
+  {% set top_classes = top_classes|merge(['layout__content__row' ~ '--mod-' ~ modifier]) %}
+  {% set top_classes = top_classes|merge(['layout__content__row--top' ~ '--mod-' ~ modifier]) %}
+{% endif %}
+
+{% set carousel_classes = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--carousel',
+]) %}
+{% if modifier %}
+  {% set carousel_classes = carousel_classes|merge(['layout__content__row' ~ '--mod-' ~ modifier]) %}
+  {% set carousel_classes = carousel_classes|merge(['layout__content__row--top' ~ '--mod-' ~ modifier]) %}
+{% endif %}
+
+{% if valign %}
+  {% set carousel_classes = carousel_classes|merge([
+    'layout__region' ~ '--v-align-'  ~ valign,
+  ]) %}
+{% endif %}
+
+{% set bottom_classes = region_classes|merge([
+    'layout__content__row',
+    'layout__content__row--bottom',
+]) %}
+{% if modifier %}
+  {% set carousel_classes = carousel_classes|merge(['layout__content__row' ~ '--mod-' ~ modifier]) %}
+  {% set carousel_classes = carousel_classes|merge(['layout__content__row--bottom' ~ '--mod-' ~ modifier]) %}
+{% endif %}
+
+{% if content %}
+
+<div {{bem(bem_section_block, bem_section_element, bem_section_modifier, bem_section_extra)}}>
+
+  <div {{bem(bem_region_block, bem_region_element, bem_region_modifier, bem_region_extra)}}>
+
+    {% if content.top %}
+      <div class="{{top_classes|join(' ')}}">
+      {% block section_top %}
+      {{content.top}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if content.carousel %}
+      <div class="{{carousel_classes|join(' ')}}">
+      {% block section_carousel %}
+      {{content.carousel}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+    {% if content.bottom %}
+      <div class="{{bottom_classes|join(' ')}}">
+      {% block section_bottom %}
+      {{content.bottom}}
+      {% endblock %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  {% if layout_background_image %}
+    {% include "@%theme_prefix%-atoms/media/styleguide/media--image.twig" with {
+        reference: layout_background_image.reference
+      }
+    %}
+  {% endif %}
+
+</div>
+{% endif %}

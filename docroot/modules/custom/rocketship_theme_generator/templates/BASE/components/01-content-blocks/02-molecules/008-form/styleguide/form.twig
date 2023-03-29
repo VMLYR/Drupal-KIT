@@ -1,0 +1,149 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+
+    {# webform field #}
+    {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+      label: fields.webform.label,
+      label_hidden: fields.webform.label_hidden,
+      field_name: fields.webform.field_name,
+      field_type: fields.webform.field_type,
+      bem_field_modifiers: fields.webform.bem_field_modifiers,
+      bem_field_extra: fields.webform.bem_field_extra,
+      attributes: fields.webform.attributes,
+    } %}
+
+      {% block field_content %}
+
+        <form class="webform-submission-form webform-submission-add-form js-webform-details-toggle webform-details-toggle">
+
+          <div class="group js-form-wrapper form-wrapper webform-flexbox js-webform-flexbox">
+            <div class="webform-flex webform-flex--1">
+              <div class="webform-flex--container">
+                {# Textfield #}
+                {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+                  form_element: fields.webform.content.fields.name.form_element,
+                  label: fields.webform.content.fields.name.label,
+                  input: fields.webform.content.fields.name.input,
+                } %}
+                {# /End Textfield #}
+              </div>
+            </div>
+            <div class="webform-flex webform-flex--1">
+              <div class="webform-flex--container">
+                {# Textfield #}
+                {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+                  form_element: fields.webform.content.fields.email.form_element,
+                  label: fields.webform.content.fields.email.label,
+                  input: fields.webform.content.fields.email.input,
+                } %}
+                {# /End Textfield #}
+              </div>
+            </div>
+          </div>
+
+          {# Managed file field #}
+          <div id="ajax-wrapper--1">
+            {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/upload-file.twig" with {
+              managed: fields.webform.content.fields.managed_file.managed,
+              form_element: fields.webform.content.fields.managed_file.form_element,
+              label: fields.webform.content.fields.managed_file.label,
+              upload: fields.webform.content.fields.managed_file.upload,
+              input: fields.webform.content.fields.managed_file.input,
+            } %}
+          </div>
+          {# /End Managed filefield #}
+
+          <details class="js-form-wrapper form-wrapper" open>
+            <summary class="js-form-required form-required" role="button" aria-controls="edit-details-example" aria-expanded="false" aria-pressed="false">
+              Subject and message
+            </summary>
+
+            <div class="details-wrapper">
+
+              <div class="details__error-message form-item--error-message">
+                <strong>This is a Details error message</strong>
+              </div>
+
+              {# Textfield: subject #}
+              {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+                form_element: fields.webform.content.fields.subject.form_element,
+                label: fields.webform.content.fields.subject.label,
+                input: fields.webform.content.fields.subject.input,
+              } %}
+              {# /End Textfield #}
+
+              {# textarea #}
+              {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textarea.twig" with {
+                form_element: fields.webform.content.fields.textarea.form_element,
+                label: fields.webform.content.fields.textarea.label,
+                textarea: fields.webform.content.fields.textarea.textarea,
+              } %}
+              {# /End textarea #}
+            </div>
+          </details>
+
+          {# checkboxes #}
+          {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/checkboxes.twig" with {
+            checkboxes: fields.webform.content.fields.checkboxes.checkboxes,
+            attributes: fields.webform.content.fields.checkboxes.attributes,
+          } %}
+          {# /End radios #}
+
+          {# radios #}
+          {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/radios.twig" with {
+            radios: fields.webform.content.fields.radios.radios,
+            attributes: fields.webform.content.fields.radios.attributes,
+          } %}
+          {# /End radios #}
+
+          {# Date field #}
+          {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+            form_element: fields.webform.content.fields.date.form_element,
+            label: fields.webform.content.fields.date.label,
+            input: fields.webform.content.fields.date.input,
+          } %}
+          {# /End Textfield #}
+
+          {# checkbox #}
+          {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/_checkbox-item.twig" with {
+            title: fields.webform.content.fields.checkbox.title,
+            checkbox_item_checked: fields.webform.content.fields.checkbox.checked,
+            label_attributes: fields.webform.content.fields.checkbox.label_attributes,
+            required: fields.webform.content.fields.checkbox.required,
+            title_display: fields.webform.content.fields.checkbox.title_display,
+          } %}
+          {# /End checkbox #}
+
+          {# buttons #}
+          {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/buttons.twig" with {
+            buttons: fields.webform.content.fields.buttons.buttons,
+          } %}
+          {# /End buttons #}
+
+        </form>
+
+      {% endblock %}
+      {# /End webform field content #}
+
+    {% endembed %}
+    {# /End webform field #}
+
+
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

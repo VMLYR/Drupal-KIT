@@ -1,0 +1,130 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+
+    <div class="cb-focus__content">
+      {# title field #}
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/styleguide/heading-field.twig" with {
+          label: fields.title.label,
+          label_hidden: fields.title.label_hidden,
+          field_name: fields.title.field_name,
+          field_type: fields.title.field_type,
+          bem_field_modifiers: fields.title.bem_field_modifiers,
+          bem_field_extra: fields.title.bem_field_extra,
+          attributes: fields.title.attributes,
+          heading_display: fields.title.heading_display,
+          heading_level: fields.title.heading_level,
+          heading: fields.title.heading,
+          heading_id: fields.title.heading_id,
+          heading_url: fields.title.heading_url,
+          bem_heading_block : fields.title.heading_block,
+          bem_heading_element : fields.title.heading_element,
+        }
+      %}
+      {# /End title field #}
+
+      {# subtitle field #}
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/styleguide/heading-field.twig" with {
+          label: fields.subtitle.label,
+          label_hidden: fields.subtitle.label_hidden,
+          field_name: fields.subtitle.field_name,
+          field_type: fields.subtitle.field_type,
+          bem_field_modifiers: fields.subtitle.bem_field_modifiers,
+          bem_field_extra: fields.subtitle.bem_field_extra,
+          attributes: fields.subtitle.attributes,
+          heading_display: fields.subtitle.heading_display,
+          heading_level: fields.subtitle.heading_level,
+          heading: fields.subtitle.heading,
+          heading_id: fields.subtitle.heading_id,
+          heading_url: fields.subtitle.heading_url,
+          bem_heading_block : fields.subtitle.heading_block,
+          bem_heading_element : fields.subtitle.heading_element,
+        }
+      %}
+      {# /End subtitle field #}
+
+      {# teaser field #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.teaser.label,
+        label_hidden: fields.teaser.label_hidden,
+        field_name: fields.teaser.field_name,
+        field_type: fields.teaser.field_type,
+        bem_field_modifiers: fields.teaser.bem_field_modifiers,
+        bem_field_extra: fields.teaser.bem_field_extra,
+        attributes: fields.teaser.attributes,
+      } %}
+
+        {% block field_content %}
+          {{ fields.teaser.content }}
+        {% endblock %}
+
+      {% endembed %}
+      {# /End teaser field #}
+
+      {# related items field #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.related.label,
+        label_hidden: fields.related.label_hidden,
+        field_name: fields.related.field_name,
+        field_type: fields.related.field_type,
+        bem_field_modifiers: fields.related.bem_field_modifiers,
+        bem_field_extra: fields.related.bem_field_extra,
+        attributes: fields.related.attributes,
+        items: fields.related.items,
+        multiple: fields.related.multiple,
+      } %}
+
+        {# Since Drupal outputs the fields as bundles of html + data, and we don't want to do html in out yml data,
+            we have to inject the html directly using a nested block
+            Luckily, for fields we can straight-up call the field twig template and get the exact html we need #}
+        {% block field_content_items %}
+
+          {% for item in items %}
+
+            {# fielditem #}
+            {% embed "@%theme_prefix%-atoms/00-field/_field-item.twig" with {} %}
+
+              {# Since Drupal outputs the fields as bundles of html + data, and we don't want to do html in out yml data,
+                we have to inject the html directly using a nested block
+                Unfortunately, the twig template for fieldset item for 'title_desctiption' comes from a module
+                so we can't directly reuse the template but have to either copy the plain html directly, or the complete twig file #}
+              {% block fielditem_content %}
+
+                {% include "@%theme_prefix%-organisms/00-page/page-related/styleguide/page-related.twig" with {
+                  view_mode: item.view_mode,
+                  isPromoted: item.isPromoted,
+                  isSticky: item.isSticky,
+                  bundle: item.bundle,
+                  fields: item.fields,
+                } %}
+
+              {% endblock %}
+            {% endembed %}
+          {% endfor %}
+
+        {% endblock %}
+
+      {% endembed %}
+      {# /End teaser field #}
+
+    </div>
+
+
+
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

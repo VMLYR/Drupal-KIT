@@ -1,0 +1,154 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Mixins
+// =============================================================================
+
+// ** make floating labels
+// -- Want them to look like material design? Compare with this:
+//    https://material.google.com/components/text-fields.html#text-fields-labels
+
+
+// ** make a group of elements floating labels
+
+@mixin floating-labels-group() {
+  // on all form items, except radios and checkboxes and uploads
+  // if you want more exeptions, add another :not with a class name
+  .form__element:not(.form-type--range):not(.form-type--radio):not(.form-type--checkbox):not(.form-type--item):not(.form-type--password-confirm):not(.form-type-managed-file):not(.form-type-file) {
+    @include floating-labels-item-label;
+    @include floating-labels-item-field;
+  }
+}
+
+// ** or make an individual item floating
+
+@mixin floating-labels-item-label($indicatorStyle: "default") {
+
+  position: relative;
+
+  .form__element__root {
+    position: relative;
+  }
+
+  @if ($indicatorStyle == "fixed") {
+
+    // -- styling for "optional" field markers, if needed
+    @if ($fields-required == false) {
+      .form__label__not-required {
+        pointer-events: none;
+        position: absolute;
+        right: 9px;
+        top: 9px;
+        margin: 0; // reset margins
+        transition: opacity $duration $easing;
+        opacity: 1;
+      }
+    }
+  }
+
+  > label,
+  .form__element__root > label {
+    // put it over the input field
+    // Make it look like input text
+    position: absolute;
+    left: rem(20);
+    top: rem(11); // overlap with input field
+    z-index: 1; // has to go over select
+    @include font-size(14, 18);
+    font-weight: normal;
+    color: hsl(var(--clr-form-inactive));
+
+    &.is-active,
+    &.has-value {
+
+      left: rem(20);
+      top: rem(5);
+      @include font-size(11, 15);
+
+      @if ($indicatorStyle == "fixed") {
+
+        // -- styling for "optional" field markers, if needed
+        @if ($fields-required == false) {
+          .form__label__not-required {
+            opacity: 0;
+          }
+        }
+      }
+
+    }
+
+    &.is-active {
+      color: hsl(var(--clr-form-active));
+    }
+  }
+
+  // ** Scrolling textarea moves the label away
+
+  &.js-scrolling > label {
+    pointer-events: none;
+    opacity: 0;
+    top: rem(-24);
+    transition: all $duration $easing;
+  }
+
+  // ** certain labels are always styled as "has-value"
+  //    because the matching form-element always has content in it
+  //    eg. html date, select, …
+
+  &.form-type--webform-document-file,
+  &.form-type--file,
+  &.form-type--managed-file,
+  &.form-type--date,
+  &.form-type--select {
+
+    > label,
+    .form__element__root > label {
+      top: rem(5);
+      left: rem(20);
+      @include font-size(11, 15);
+      color: hsl(var(--clr-form-active));
+    }
+  }
+}
+
+@mixin floating-labels-item-field() {
+
+  #{$text-inputs-list},
+  textarea {
+    padding: rem(23) rem(20) rem(6);
+
+    &::placeholder {
+      color: transparent;
+      @include font-size(14, 19);
+    }
+
+    @include font-size(14, 19);
+
+    &.is-active,
+    &.has-value {
+      //
+    }
+
+    &.is-active {
+      //
+    }
+  }
+
+  // same styling as text input fields
+  select {
+    padding: rem(23) rem(40) rem(6) rem(20);
+    height: rem(50);
+    @include font-size(14, 19);
+  }
+
+  .form__dropdown {
+    &::after {
+      right: rem(20);
+    }
+  }
+
+}

@@ -1,0 +1,60 @@
+label: 'Example block'
+configuration:
+  label_display: true
+heading_id: "block-example-xyz"
+bem_block_modifiers:
+  - type-example-block
+bem_block_extra:
+ - block-layout_builder
+fields:
+  title:
+    label_hidden: true
+    field_name: block_example_title
+    field_type: string
+    bem_field_modifiers:
+      - 'label-hidden'
+    heading_display: true
+    heading_level: 3
+    heading: 'Subtitle'
+  teaser:
+    label: teaser field
+    label_hidden: false
+    field_name: block_example_teaser
+    field_type: string_long
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis varius eros. Nulla vel vestibulum tortor, nec iaculis urna. Donec at cursus felis"
+  image:
+    # field_name: block_example_image
+    # image_src: 'https://placeimg.com/320/142/arch'
+    # image_alt: 'An image'
+    # image_srcset: 'https://placeimg.com/768/325/arch 480w, https://placeimg.com/940/399/arch 768w, https://placeimg.com/1200/360/arch 940w'
+    # image_sizes: '100vw'
+  body:
+    label_hidden: true
+    field_name: block_example_body
+    field_type: text_with_summary
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'text-long'
+    content: |
+      <p>Donec tellus mauris, blandit eu felis et, cursus tincidunt leo. Fusce quis finibus libero. Aliquam luctus libero vulputate, convallis sem vitae, vulputate massa. Nunc id rutrum dolor, at consequat velit. Etiam pharetra blandit elit in sollicitudin. Vivamus eget tempus justo, ut varius tortor. Curabitur vitae magna ac mi feugiat iaculis imperdiet sit amet mauris. Proin et hendrerit tellus, a mattis metus. Cras consectetur consectetur dictum. Fusce aliquet elit nisi, nec tincidunt est vulputate eget. Ut vitae justo in nisl commodo mollis et eget ipsum.</p>
+      <p>Aliquam ultricies odio vel velit ornare, id porttitor lectus finibus. Vestibulum ac gravida sapien, sit amet condimentum metus. Pellentesque posuere lectus vitae varius congue. Cras pharetra felis id risus aliquam consequat. Ut ac viverra lectus, a egestas felis. Maecenas urna nisi, lacinia quis pellentesque in, posuere ut urna. Aenean rhoncus augue tortor, vel consequat ante tempus non. Fusce maximus neque vitae dolor lacinia consectetur. Maecenas fermentum pellentesque risus a lobortis. Integer non lectus eu purus ullamcorper vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sagittis finibus suscipit.</p>
+  link:
+    link_content: Link text
+    link_url: '#atoms-links-link--link-field'
+    field_name: field_link_test
+    field_type: link
+  title_description:
+  buttons:
+    field_name: field_info_block_example_button
+    field_type: link
+    label_hidden: true
+    items:
+      - content:
+          '#title': 'First field item'
+          '#type': "link"
+      - content:
+          '#type': 'link'
+          '#url': '#'
+          '#title': 'Second field item'
+

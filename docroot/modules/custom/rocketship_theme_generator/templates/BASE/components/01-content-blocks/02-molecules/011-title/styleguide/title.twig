@@ -1,0 +1,97 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+
+    {# title field #}
+    {% if fields.title.field_name %}
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/styleguide/heading-field.twig" with {
+          label: fields.title.label,
+          label_hidden: fields.title.label_hidden,
+          field_name: fields.title.field_name,
+          field_type: fields.title.field_type,
+          bem_field_modifiers: fields.title.bem_field_modifiers,
+          bem_field_extra: fields.title.bem_field_extra,
+          attributes: fields.title.attributes,
+          heading_display: fields.title.heading_display,
+          heading_level: fields.title.heading_level,
+          heading: fields.title.heading,
+          heading_id: fields.title.heading_id,
+          heading_url: fields.title.heading_url,
+          bem_heading_block : fields.title.heading_block,
+          bem_heading_element : fields.title.heading_element,
+        }
+      %}
+    {% endif %}
+    {# /End title field #}
+
+    {# subtitle field #}
+    {% if fields.subtitle.field_name %}
+      {% include "@%theme_prefix%-atoms/02-text/00-headings/styleguide/heading-field.twig" with {
+          label: fields.subtitle.label,
+          label_hidden: fields.subtitle.label_hidden,
+          field_name: fields.subtitle.field_name,
+          field_type: fields.subtitle.field_type,
+          bem_field_modifiers: fields.subtitle.bem_field_modifiers,
+          bem_field_extra: fields.subtitle.bem_field_extra,
+          attributes: fields.subtitle.attributes,
+          heading_display: fields.subtitle.heading_display,
+          heading_level: fields.subtitle.heading_level,
+          heading: fields.subtitle.heading,
+          heading_id: fields.subtitle.heading_id,
+          heading_url: fields.subtitle.heading_url,
+          bem_heading_block : fields.subtitle.heading_block,
+          bem_heading_element : fields.subtitle.heading_element,
+        }
+      %}
+    {% endif %}
+    {# /End subtitle field #}
+
+    {# teaser field #}
+    {% if fields.teaser.field_name %}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.teaser.label,
+        label_hidden: fields.teaser.label_hidden,
+        field_name: fields.teaser.field_name,
+        field_type: fields.teaser.field_type,
+        bem_field_modifiers: fields.teaser.bem_field_modifiers,
+        bem_field_extra: fields.teaser.bem_field_extra,
+        attributes: fields.teaser.attributes,
+      } %}
+
+        {% block field_content %}
+          {{ fields.teaser.content }}
+        {% endblock %}
+
+      {% endembed %}
+    {% endif %}
+    {# /End teaser field #}
+
+    {# button field #}
+    {% if fields.buttons.field_name%}
+      {% include "@%theme_prefix%-atoms/06-buttons/styleguide/buttons.twig" with {
+          field_name: fields.buttons.field_name,
+          field_type: fields.buttons.field_type,
+          label_hidden: fields.buttons.label_hidden,
+          items: fields.buttons.items
+        }
+      %}
+    {% endif %}
+    {# /End button field #}
+
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

@@ -1,0 +1,69 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+<form class="is--floating">
+
+  {# Fieldset: email and url #}
+
+  <fieldset class="fieldgroup form-fieldset js-form-item form-item js-form-wrapper form-wrapper">
+    <legend class="h2">Web and Email Address (fieldset example)</legend>
+
+    <div class="fieldset__error-message form-item--error-message">
+      <strong>This is a fieldgroup error message</strong>
+    </div>
+
+    {# Textfield: normal, no value,not required #}
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+      form_element: no_text_not_required.form_element,
+      label: no_text_not_required.label,
+      input: no_text_not_required.input,
+    } %}
+    {# /End Textfield #}
+
+    {# Email #}
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+      form_element: email.form_element,
+      label: email.label,
+      input: email.input,
+    } %}
+    {# /End Email #}
+  </fieldset>
+
+  {# Details: email and url #}
+
+  <details class="js-form-wrapper form-wrapper" open>
+    <summary class="js-form-required form-required" role="button" aria-controls="edit-details-example" aria-expanded="false" aria-pressed="false">
+      Web and Email Address (details example)
+    </summary>
+
+    <div class="details-wrapper">
+
+      <div class="details__error-message form-item--error-message">
+        <strong>This is a Details error message</strong>
+      </div>
+
+      <div class="details-description">Some descriptive text goes here.</div>
+
+      {# Textfield: normal, no value,not required #}
+      {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+        form_element: no_text_not_required.form_element,
+        label: no_text_not_required.label,
+        input: no_text_not_required.input,
+      } %}
+      {# /End Textfield #}
+
+      {# Email #}
+      {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+        form_element: email.form_element,
+        label: email.label,
+        input: email.input,
+      } %}
+      {# /End Email #}
+
+    </div>
+  </details>
+
+</form>

@@ -1,0 +1,123 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    block_type: block_type,
+    bem_block_modifiers: bem_block_modifiers,
+    bem_block_extra: bem_block_extra,
+  } %}
+
+  {% block block_content %}
+
+    <div class="cb-content cb-testimonial-content">
+
+      {# image field #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        type: fields.image.type,
+        label_hidden: fields.image.label_hidden,
+        field_name: fields.image.field_name,
+        field_type: fields.image.field_type,
+        bem_field_modifiers: fields.image.bem_field_modifiers,
+        bem_field_extra: fields.image.bem_field_extra,
+        attributes: fields.image.attributes,
+        reference: fields.image.reference,
+      } %}
+
+        {% block field_content %}
+          {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+            image_bem_extra: fields.image.image_bem_extra,
+            image_src: fields.image.image_src,
+            image_alt: fields.image.image_alt,
+          } %}
+        {% endblock %}
+
+      {% endembed %}
+      {# End image field #}
+
+      {# text field (CKE) #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.text.label,
+        label_hidden: fields.text.label_hidden,
+        field_name: fields.text.field_name,
+        field_type: fields.text.field_type,
+        bem_field_modifiers: fields.text.bem_field_modifiers,
+        bem_field_extra: fields.text.bem_field_extra,
+        attributes: fields.text.attributes,
+      } %}
+
+        {% block field_content %}
+          {{ fields.text.content }}
+        {% endblock %}
+
+      {% endembed %}
+      {# /End text field #}
+
+      <div class="cb-info cb-testimonial-info">
+
+        {# name field #}
+        {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+          label: fields.name.label,
+          label_hidden: fields.name.label_hidden,
+          field_name: fields.name.field_name,
+          field_type: fields.name.field_type,
+          bem_field_modifiers: fields.name.bem_field_modifiers,
+          bem_field_extra: fields.name.bem_field_extra,
+          attributes: fields.name.attributes,
+        } %}
+
+          {% block field_content %}
+            {{ fields.name.content |raw }}
+          {% endblock %}
+
+        {% endembed %}
+        {# /End name field #}
+
+        {# extra_rule field #}
+        {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+          label: fields.extra_rule.label,
+          label_hidden: fields.extra_rule.label_hidden,
+          field_name: fields.extra_rule.field_name,
+          field_type: fields.extra_rule.field_type,
+          bem_field_modifiers: fields.extra_rule.bem_field_modifiers,
+          bem_field_extra: fields.extra_rule.bem_field_extra,
+          attributes: fields.extra_rule.attributes,
+        } %}
+
+          {% block field_content %}
+            {{ fields.extra_rule.content }}
+          {% endblock %}
+
+        {% endembed %}
+        {# /End extra_rule field #}
+
+      </div>
+
+      {# link field #}
+      {% embed "@%theme_prefix%-atoms/00-field/_field.twig" with {
+        label: fields.link.label,
+        label_hidden: fields.link.label_hidden,
+        field_name: fields.link.field_name,
+        field_type: fields.link.field_type,
+        bem_field_modifiers: fields.link.bem_field_modifiers,
+        bem_field_extra: fields.link.bem_field_extra,
+        attributes: fields.link.attributes,
+      } %}
+
+        {% block field_content %}
+          {{ fields.link.content | raw }}
+        {% endblock %}
+
+      {% endembed %}
+      {# /End link field #}
+    </div>
+
+  {% endblock %}{# /End block_content #}
+
+{% endembed %}{# /End embed block #}
+

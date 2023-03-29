@@ -1,0 +1,56 @@
+label: 'Visual home'
+configuration:
+  label_display: false
+block_type: cb_text
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+  - cb--view-mode--centered
+  - cb-text--view-mode--centered
+fields:
+  title:
+    heading_display: true
+    heading_level: 2
+    heading: "Climate inspired"
+    field_name: field_cb_title
+    field_type: string
+  # subtitle:
+  #   heading_display: true
+  #   heading_level: 3
+  #   heading: Block subtitle
+  #   field_name: field_cb_subtitle
+  #   field_type: string
+  teaser:
+    label_hidden: true
+    field_name: field_cb_teaser
+    field_type: string_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: "Our latest collection is all about the natural phenomena we see daily. We drew inspiration from the colours and shapes to make perfection."
+  # text:
+  #   label_hidden: true
+  #   field_name: field_cb_text
+  #   field_type: text_long
+  #   bem_field_modifiers:
+  #     - 'label-hidden'
+  #   bem_field_extra:
+  #     - 'text-long'
+  #   content: |
+  #     <p>Lorem ipsum dolor sit amet, <a href=\"#\" title=\"test link\">consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+  #     <ul><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ul>
+  #     <ol><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ol>
+  #     <p>Nulla at volutpat diam ut venenatis tellus. Vitae congue eu consequat ac felis donec et odio pellentesque.</p>
+  buttons:
+    field_name: 'field_cb_button'
+    field_type: 'link'
+    label_hidden: true
+    items:
+      - content:
+          '#title': 'Discover our collection'
+          '#type': "link"
+      # - content:
+      #     '#type': 'link'
+      #     '#url': '#'
+      #     '#title': 'Second field item'

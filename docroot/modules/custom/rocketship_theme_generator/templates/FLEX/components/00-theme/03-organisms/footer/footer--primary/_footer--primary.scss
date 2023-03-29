@@ -1,0 +1,73 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Footer
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.footer--primary {
+
+  padding: rem(20) 0;
+  text-align: center;
+  color: hsl(var(--clr-footer));
+  background: hsl(var(--clr-footer-bg));
+  @include clearfix;
+
+  .container {
+    margin-top: rem(-15);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.block--region-footer-primary {
+  margin-top: rem(15);
+
+  .menu {
+    @include list-reset;
+
+    li {
+      @include list-reset;
+    }
+  }
+
+  a {
+    &,
+    &:visited {
+      color: hsl(var(--clr-footer));
+    }
+
+    &:hover,
+    &:active {
+      color: hsl(var(--clr-footer));
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+@include bp-sm {
+
+  .footer--primary {
+    text-align: left;
+
+    .container {
+      display: flex;
+    }
+
+  }
+
+  .block--powered-by-dropsolid {
+    flex-grow: 1;
+    text-align: right;
+  }
+}

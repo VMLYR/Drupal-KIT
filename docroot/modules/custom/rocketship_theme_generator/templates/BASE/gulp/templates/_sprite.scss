@@ -1,0 +1,135 @@
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Sprite mixins
+// *
+// * !!! This will be overwritten if you run gulp:sprite !!!
+// *     So remember to copy any changes over to the gulp template in:
+// *     YOUR_THEME/gulp/templates/_sprite.scss
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+$iconsGroup: (
+  sprite: (width: {{spriteWidth}}px, height: {{spriteHeight}}px, svgpath: "../images/generated/sprite-css.svg"),
+{{#shapes}}
+  {{base}}: (width: {{width.inner}}px, height: {{height.inner}}px, backgroundx: {{position.absolute.x}}px, backgroundy: {{position.absolute.y}}px),
+{{/shapes}});
+
+$sprite: map-get($iconsGroup, sprite) !default;
+
+
+// * Icons as background-image
+// =============================================================================
+
+// ** Use a sprite image on a pseudo-element
+// -- src: https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
+//
+// -- Examples
+//
+// You can either use an icon class or
+//  use the sprite directly on an element, using the 'sprite' mixin
+//
+// .icon--test {
+//   // automagically displays icon in a pseudo-element
+// }
+//
+// .nav-sitemap {
+//   @include sprite((icon: test)); // when you can't simply add the class, use the mixin
+// }
+//
+//
+// .breadcrumb__element {
+//   @include sprite((icon: test, size: 25, position: after)); // fine-tune the icon parameters
+// }
+
+/* stylelint-disable */
+// *
+// * Sprite mixin: put sprite as bg-image in a pseudo-element
+//
+// * Settings via an object, containing:
+// *   $position: 'before' - name of pseudo-element (string),
+// *   $icon: '' - name of the svg icon (string, case-sensitive),
+// *   $size: the pixel value for your icon width - defaults to the size in the sprite, translates this into font-size to scale the sprite, based on the body font size (16px by default)
+@mixin sprite($settings) {
+
+  $position: map-get($settings, position);
+  $icon: map-get($settings, icon);
+  $size: map-get($settings, size);
+  $width: map-get($settings, width);
+
+  // ** Initial font-size set to base (to set sprite to full size)
+  $font-size: $rem-base;
+  $ratio: 1;
+
+  // ** get the sprite and filter out the specific icon we need (string name)
+  $iconMap: icon-attr($icon);
+
+  // ** what icon gets picked,
+  //    this is the name (string) of the svg icon that gets compiled into the sprite
+  @if($icon == null) {
+    $icon: "";
+  }
+  // ** What pseudo-element to use
+  @if($position == null) {
+    $position: "before";
+  }
+
+  // ** Override width of the icon using font-size
+  //    this accepts px values and converts it to flexible units
+
+  $spriteWidth: map-get($sprite, width);
+  $spriteHeight: map-get($sprite, height);
+  $iconWidth: map-get($iconMap, width);
+  $iconHeight: map-get($iconMap, height);
+
+  // -- using font-size only (16px is the base and translates to 100% the svg icon size)
+  @if($size != null) {
+    $font-size: (strip-unit($size) * math.div(strip-unit($rem-base), strip-unit($iconWidth))); // eg. $size * 16 / $iconWidthGet
+    $ratio: math.div(strip-unit($iconWidth), strip-unit($size));
+  }
+
+  &:#{$position} {
+    display: inline-block;
+    height: em($iconHeight + (1 * $ratio));
+    width: em($iconWidth + (1 * $ratio));
+    font-size: rem($font-size);
+    background-image: url(map-get($sprite, svgpath));
+    background-position: em(map-get($iconMap, x)) em(map-get($iconMap, y));
+    background-size: em($spriteWidth) em($spriteHeight);
+    content: "";
+  }
+}
+
+// * Icons as inline SVG
+// =============================================================================
+
+// ** Ensure clean positioning of icons in links
+
+@mixin i-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+// ** Default icon styles
+
+@mixin i-icon {
+  position: relative;
+  bottom: .15ex; // prevent bottom cut-off
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+  stroke-width: 0;
+  stroke: transparent; // only use fill, no strokes
+  fill: currentColor; // inherit the parent color
+}
+
+// ** Size
+
+@mixin i-icon--size($size) {
+  width: rem($size);
+  height: rem($size);
+}
+/* stylelint-enable */

@@ -1,0 +1,120 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Menu links: language
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// * Inline list
+// ===========================================================================
+
+.nav__item--language {
+  display: inline;
+}
+
+// * Dropdown
+// ===========================================================================
+
+// hide title visually
+
+.nav--language--dropdown {
+  text-align: right;
+
+  & > h2 {
+    @include hide;
+  }
+
+  // hide language nav, because we show it elsewhere on mobile
+  // .nav-section & {
+  //   display: none;
+  // }
+}
+
+// active language
+
+.nav__active--language--dropdown {
+  cursor: pointer;
+  position: relative;
+  padding: rem(5) rem(16) rem(5) 0;
+
+  // set an icon
+  @include font-awesome((
+    icon: $fa-var-chevron-down,
+    size: 10,
+    position: absolute,
+    right: 0,
+    top: 50%
+  ));
+
+  &::before {
+    transform: translateY(-50%);
+  }
+}
+
+// list
+
+.nav__items--language--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: hsl(var(--clr-white));
+  transition: all $duration $easing;
+
+  .js-open > & {
+    box-shadow: 0 0 rem(15) hsla(var(--clr-black), .2);
+  }
+}
+
+// list item
+
+.nav__item--language--dropdown {
+  display: block;
+  overflow: hidden;
+  max-height: 0;
+  transition: all $duration $easing;
+
+  .js-open > ul > & {
+    max-height: rem(100);
+  }
+
+  a {
+    display: block;
+    padding: rem(5) rem(10);
+    border-bottom: 1px solid hsl(var(--clr-border));
+
+    // no underline
+    &::after {
+      display: none;
+      content: "";
+    }
+  }
+
+  &:last-child > a {
+    border-bottom: 0 none;
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .nav--language--dropdown {
+    position: relative;
+    z-index: 6; // higher than logo, in case of overlap
+
+    // // hide if in top header
+    // .header-top & {
+    //   display: none;
+    // }
+
+    // // show if in nav
+    // .nav-section & {
+    //   display: block;
+    // }
+  }
+
+
+}

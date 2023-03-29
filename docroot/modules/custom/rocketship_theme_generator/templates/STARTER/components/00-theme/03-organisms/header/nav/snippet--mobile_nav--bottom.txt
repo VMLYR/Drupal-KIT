@@ -1,0 +1,178 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Snippet: mobile navigation with icon and menu bar on bottom of screen
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+@include bp-xs-only {
+
+  // * Building the mobile bar and placing mobile menu on it
+  // ===========================================================================
+
+  // -- a lot of styling to get the whole to behave right on mobile screen
+  //    styling of the menus and items happens in molecules & atoms
+
+  .page-wrapper {
+    padding-bottom: calc(var(--menubar-height) - 1); // space for mobile menu
+  }
+
+  // piece of header as a fixed bar that is always present
+  // menu items will go over it:
+  // - top header
+  // - main navigation
+  .header__section--secondary {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    @include z-index(mobile-nav); // over all other content and header
+
+    width: 100%;
+    height: var(--menubar-height);
+
+    color: hsl(var(--clr-mobile-nav));
+
+    background-color: hsl(var(--clr-mobile-nav-bg));
+    box-shadow: 0 0 rem(30) hsl(var(--clr-black), .4);
+  }
+
+
+  // ** Trigger
+
+  .navigation__toggle-expand {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: block;
+
+    padding-top: rem(30); // space for icon
+    width: var(--menubar-height);
+    height: var(--menubar-height);
+    text-align: center;
+
+    &,
+    &:visited {
+      color: hsl(var(--clr-base));
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: hsl(var(--clr-spot-1));
+    }
+  }
+
+  // -- Trigger: icon
+
+  .navigation__toggle-expand__icon {
+    position: absolute;
+    left: 50%;
+    top: 0;
+
+    display: block;
+
+    padding-top: rem(8);
+
+    transform: translateX(-50%);
+    transition: opacity $duration $easing;
+  }
+
+  .navigation__toggle-expand__icon--open {
+    @include font-awesome((icon: $fa-var-bars, size: 24));
+    opacity: 1;
+
+    .js-open & {
+      opacity: 0;
+    }
+  }
+
+  .navigation__toggle-expand__icon--closed {
+    @include font-awesome((icon: $fa-var-times, size: 24));
+    opacity: 0;
+
+    .js-open & {
+      opacity: 1;
+    }
+  }
+
+  // -- Trigger: text
+
+  .navigation__toggle-expand__text {
+    @include font-size(11, 15);
+  }
+
+  .navigation__toggle-expand__text--open {
+    display: inline-block;
+
+    .js-open & {
+      display: none;
+    }
+  }
+
+  .navigation__toggle-expand__text--closed {
+    display: none;
+
+    .js-open & {
+      display: inline-block;
+    }
+  }
+
+  // -- grouping the menus
+
+  .wrapper--navigation__content {
+    position: fixed;
+    left: 0;
+    bottom: var(--menubar-height);
+
+    display: flex;
+    flex-direction: column;
+    // center the content vertically
+    justify-content: center;
+
+    overflow: hidden;
+    // make sure we can scroll when there isn't enough room for all the navigations
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; // momentum in iOS
+
+    width: 100vw;
+    height: 0;
+
+    transition: all $duration $easing;
+
+    .js-open > & {
+      height: calc(100vh - var(--menubar-height)); // offset with menubar height
+      background-color: hsl(var(--clr-mobile-nav-open-bg));
+      box-shadow: 0 rem(-30) rem(30) rem(-30) inset rgba(hsl(var(--clr-black)), .4);
+    }
+  }
+
+
+  // * Adding the elements of header top to the right places
+  // ===========================================================================
+
+  .wrapper--headers {
+    position: relative; // in order to position header and header top elements in context
+  }
+
+  // ** Language menu is an exception, this stays fixed on top next to logo
+
+  .nav--language-interface {
+    position: absolute;
+    top: 0;
+    right: var(--gap-hor);
+    z-index: 6; // higher than logo, in case of overlap
+  }
+
+  // ** contact and search go over the menu bar
+
+  .block--region-header_top.block--search {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    @include z-index(header-top); // higher than mobile nav
+  }
+
+}

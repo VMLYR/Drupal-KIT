@@ -1,0 +1,82 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% if cke %}
+<div class="text-long">
+{% endif %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+    image_bem_extra: images[0].image_bem_extra,
+    image_src: images[0].image_src,
+    image_alt: images[0].image_alt,
+  } %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+    image_bem_extra: images[1].image_bem_extra,
+    image_src: images[1].image_src,
+    image_alt: images[1].image_alt,
+  } %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/04-images/00-image/_image.twig" with {
+    image_bem_extra: images[2].image_bem_extra,
+    image_src: images[2].image_src,
+    image_alt: images[2].image_alt,
+  } %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+  {% include "@%theme_prefix%-atoms/02-text/text/_paragraph.twig" with {
+      paragraph_content: paragraph_content
+    }
+  %}
+
+{% if cke %}
+</div>
+{% endif %}
+

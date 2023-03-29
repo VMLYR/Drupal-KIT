@@ -1,0 +1,115 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Page meta info
+// *
+// * row that collects info on the node: author, date, social links, …
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.node__meta--bottom > .layout__region {
+  margin-top: var(--gap-vert-sm);
+  margin-bottom: var(--gap-vert-sm);
+
+  & > * {
+    margin-bottom: rem(5);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // reset
+  .layout__region--content-blocks {
+    margin-top: 0;
+  }
+
+  // ** placing of social share
+
+  .block--extra-field-blocknodenewsdropsolid-social-widgets {
+    h3 {
+      @include h4;
+    }
+  }
+
+  // ** filters (tags)
+  //    add all kinds of fields with lists of links here
+  .field-news-tags,
+  .field-news-categories,
+  .field-blog-tags,
+  .field-blog-categories {
+
+    // h3 {
+    //   @include h4;
+    //   margin-bottom: rem(10);
+    //   width: 100%;
+    // }
+
+    // .field__items {
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   align-items: flex-end;
+    // }
+
+    // .field__item {
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   align-items: flex-end;
+
+    //   &::after {
+    //     content: ",";
+    //     margin-right: rem(4);
+    //   }
+
+    //   &:last-child::after {
+    //     content: "";
+    //     margin-right: 0;
+    //   }
+    // }
+
+    // a {
+    //   display: inline-block;
+    //   @include link-underline((color: var(--clr-link), color-hover: var(--clr-link-hover)));
+    // }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .node__meta--bottom > .layout__region {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-left: rem(25);
+    padding-right: 0;
+
+    & > * {
+      margin-right: rem(25);
+      margin-bottom: 0;
+    }
+
+    // ** placing of social share
+
+    .block--extra-field-blocknodenewsdropsolid-social-widgets {
+      display: flex;
+
+      h3 {
+        margin-right: rem(10);
+        margin-bottom: 0;
+        padding-top: 1px; // align with other text
+      }
+    }
+  }
+
+}

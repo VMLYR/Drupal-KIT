@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a formatted blazy image/media field.
+ *
+ * The Blazy supports core image, responsive image and media entity.
+ * If iframe switcher is enabled, audio/video iframe will be hidden below image
+ * overlay, and only visible when toggled. Otherwise iframe only, and image is
+ * emptied.
+ *
+ * Available variables:
+ *   - captions: An optional renderable array of inline or lightbox captions.
+ *   - image: A collection of image data.
+ *   - attributes: An array of attributes applied to .media container.
+ *   - iframe: A renderable array of iframe with its attributes and SRC.
+ *   - settings: An array containing the given settings.
+ *   - url: An optional URL the image can be linked to, can be any of
+ *       audio/video, or entity URLs, when using Colorbox/Photobox, or Link to
+ *       content options.
+ *   - url_attributes: An array of URL attributes, lightbox or content links.
+ *   - noscript: The fallback image for non-js users.
+ *   - postscript: Any extra content to put into blazy goes here. Use keyed or
+ *       indexed array to not conflict with or nullify other providers, e.g.:
+ *       postscript.cta, or postscript.widget. Avoid postscript = cta.
+ *   - content: Various Media entities like Facebook, Instagram, local Video,
+ *       etc. Basically content is the replacement for (Responsive) image
+ *       and oEmbed video. This makes it possible to have a mix of Media
+ *       entities, image and videos on a Blazy Grid, Slick, GridStack, etc.
+ *       Regular Blazy features are still disabled by default at
+ *       \Drupal\blazy\BlazyDefault::richSettings() to avoid complication.
+ *       However you can override them accordingly as needed, such as lightbox
+ *       for local Video with/o a pre-configured poster image. The #settings
+ *       are provided under content variables for more work. Originally
+ *       content is a theme_field() output, trimmed down to bare minimum.
+ *
+ * @see template_preprocess_blazy()
+ *
+ * @ingroup themeable
+ */
+#}
+{% include "@%theme_prefix%-atoms/04-images/blazy/_blazy.twig" %}

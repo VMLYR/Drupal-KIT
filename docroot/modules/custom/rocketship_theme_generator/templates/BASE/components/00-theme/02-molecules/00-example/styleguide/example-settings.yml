@@ -1,0 +1,3 @@
+drupalSettings:
+  theme_settings:
+    exampleExists: true

@@ -1,0 +1,34 @@
+menu: language
+drupalSettings:
+  theme_settings:
+    language_dropdown: true
+menu_block_bem_modifiers:
+  - 'language-interface'
+  - 'language-block'
+  - 'provider-language'
+menu_block_bem_extra:
+ - 'block--menu'
+ - 'block-language'
+ - 'language-switcher-language-url'
+label: 'Language menu'
+configuration:
+  label_display: false
+attributes:
+  class:
+    - links
+links:
+  - link: '<a href="#" class="language-link" hreflang="nl" data-drupal-link-system-path="#">nl</a>'
+    attributes:
+      data-drupal-link-system-path: '#'
+      class:
+        - 'nl'
+  - link: '<a href="#" class="language-link is-active" hreflang="en" data-drupal-link-system-path="#">en</a>'
+    attributes:
+      data-drupal-link-system-path: '#'
+      class:
+        - 'en'
+  - link: '<a href="#" class="language-link" hreflang="fr" data-drupal-link-system-path="#">fr</a>'
+    attributes:
+      data-drupal-link-system-path: '#'
+      class:
+        - 'fr'

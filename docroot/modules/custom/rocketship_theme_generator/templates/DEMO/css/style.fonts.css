@@ -1,0 +1,70 @@
+/**
+ * Square mixin
+ *
+ * @param [Number] $dimensions = the height and width of the element
+ */
+/* stylelint-disable */
+/* stylelint-enable */
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/FontAwesome/fa-regular-400.woff2") format("woff2"), url("../fonts/FontAwesome/fa-regular-400.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/FontAwesome/fa-solid-900.woff2") format("woff2"), url("../fonts/FontAwesome/fa-solid-900.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/FontAwesome/fa-brands-400.woff2") format("woff2"), url("../fonts/FontAwesome/fa-brands-400.woff") format("woff");
+  font-display: block;
+}
+@font-face {
+  font-family: "AbrilFatface";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/AbrilFatface/AbrilFatface-Regular.woff2") format("woff2"), url("../fonts/AbrilFatface/AbrilFatface-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Poppins/Poppins-Light.woff2") format("woff2"), url("../fonts/Poppins/Poppins-Light.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Poppins/Poppins-Regular.woff2") format("woff2"), url("../fonts/Poppins/Poppins-Regular.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/Poppins/Poppins-Medium.woff2") format("woff2"), url("../fonts/Poppins/Poppins-Medium.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/Poppins/Poppins-SemiBold.woff2") format("woff2"), url("../fonts/Poppins/Poppins-SemiBold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Poppins/Poppins-Bold.woff2") format("woff2"), url("../fonts/Poppins/Poppins-Bold.woff") format("woff");
+  font-display: swap;
+}

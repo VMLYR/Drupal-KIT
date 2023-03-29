@@ -1,0 +1,103 @@
+%machine_name%.all:
+  label: all
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+
+# %machine_name%.xs-only:
+#   label: xs-small
+#   mediaQuery: 'all and (max-width: 767px)'
+#   weight: 1
+#   multipliers:
+#     - 1x
+#     - 2x
+
+# %machine_name%.xs-small-only:
+#   label: xs-small
+#   mediaQuery: 'all and (max-width: 479px)'
+#   weight: 1
+#   multipliers:
+#     - 1x
+#     - 2x
+
+%machine_name%.xs-wide:
+  label: xs-wide
+  mediaQuery: 'all and (min-width: 480px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+
+# %machine_name%.xs-wide-only:
+#   label: xs-wide-only
+#   mediaQuery: 'all and (min-width: 480px) and (max-width: 767px)'
+#   weight: 2
+#   multipliers:
+#     - 1x
+    - 2x
+
+# %machine_name%.xs-max:
+#   label: xs-max
+#   mediaQuery: 'all and (max-width: 767px)'
+#   weight: 3
+#   multipliers:
+#     - 1x
+#     - 2x
+
+%machine_name%.sm:
+  label: sm
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 4
+  multipliers:
+    - 1x
+    - 2x
+
+# %machine_name%.sm-max:
+#   label: sm-max
+#   mediaQuery: 'all and (max-width: 939px)'
+#   weight: 5
+#   multipliers:
+#     - 1x
+#     - 2x
+
+# %machine_name%.sm-only:
+#   label: sm-only
+#   mediaQuery: 'all and (min-width: 768px) and (max-width: 939px)'
+#   weight: 6
+#   multipliers:
+#     - 1x
+#     - 2x
+
+%machine_name%.md:
+  label: md
+  mediaQuery: 'all and (min-width: 940px)'
+  weight: 7
+  multipliers:
+    - 1x
+    - 2x
+
+# %machine_name%.md-only:
+#   label: md-only
+#   mediaQuery: 'all and (min-width: 940px) and (max-width: 1199px)'
+#   weight: 8
+#   multipliers:
+#     - 1x
+#     - 2x
+
+%machine_name%.lg:
+  label: lg
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 9
+  multipliers:
+    - 1x
+    - 2x
+
+# %machine_name%.xl:
+#   label: lg-only
+#   mediaQuery: 'all and (min-width: 1440px)'
+#   weight: 10
+#   multipliers:
+#     - 1x
+#     - 2x

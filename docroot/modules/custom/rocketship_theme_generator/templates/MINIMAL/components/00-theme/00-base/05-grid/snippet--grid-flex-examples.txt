@@ -1,0 +1,163 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Grid: Flex examples
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** You can give it a '.scss' extention + load the file in the html-file
+//    to see the examples in your browser
+
+
+// ** wrapper for 12 column system
+// =============================================================================
+
+//   --   --   --   --   --   --   --   --   --   --   --   --
+//  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+//  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+//   --   --   --   --   --   --   --   --   --   --   --   --
+.my-flex-grid {
+  @include flex-grid;
+}
+
+// ** generate width classes: by column size on the grid
+// ** generate push classes: by column position
+// ** generate pull classes: by column size
+
+@for $i from 1 through $grid-columns {
+
+  .my-flex-grid__col--#{$i} {
+    @include flex-col($i);
+  }
+
+  .my-flex-grid__col--pull--#{$i} {
+    @include flex-col-pull($i);
+  }
+
+  .my-flex-grid__col--push--#{$i} {
+    @include flex-col-push($i);
+  }
+}
+
+// ** column that is 6 cols wide
+// =============================================================================
+
+//   ---------------------------   --   --   --   --   --   --
+//  |                           | |  | |  | |  | |  | |  | |  |
+//  |                           | |  | |  | |  | |  | |  | |  |
+//   ---------------------------   --   --   --   --   --   --
+.my-flex-grid__col {
+  background-color: cyan;
+}
+
+.my-flex-grid__col-6 {
+  @include flex-col(6);
+}
+
+
+// ** 5 column system with gap of 20px
+// =============================================================================
+
+//   --   --   --   --   --   --   --   --   --   --
+//  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+//  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+//   --   --   --   --   --   --   --   --   --   --
+.flex-grid--5 {
+  @include flex-grid(5, 20);
+}
+
+// example cols
+
+.my-flex-grid__col--5--1 {
+  @include flex-col(1, 5, 20);
+  background-color: cyan;
+}
+
+.my-flex-grid__col--5--2 {
+  @include flex-col(2, 5, 20);
+  background-color: cyan;
+}
+
+.my-flex-grid__col--5--3 {
+  @include flex-col(3, 5, 20);
+  background-color: cyan;
+}
+
+.my-flex-grid__col--5--4 {
+  @include flex-col(4, 5, 20);
+  background-color: cyan;
+}
+
+.my-flex-grid__col--5--5 {
+  @include flex-col(5, 5, 20);
+  background-color: cyan;
+}
+
+
+// ** cells stretching over multiple rows
+// =============================================================================
+
+//   Source: https://stackoverflow.com/questions/22895011/rowspan-behavior-with-flexbox
+//
+//   Uses a combination of:
+//   flex-direction: column so you can stretch in height
+//   flex for settin heights
+//   width for settin widths
+//   order for positioning the tall cells !!!very important!!!
+//
+//   -----------   -----------   -----------
+//  |           | |     2     | |           |
+//  |     1     | |           | |     3     |
+//  |           |  -----------  |           |
+//  |           |  -----------  |           |
+//  |           | |     4     | |           |
+//  |           | |           | |           |
+//   -----------   -----------   -----------
+
+// <div class="my-row">
+//   <div class="my-cell my-cell--tall my-cell--01">Item 1</div>
+//   <div class="my-cell my-cell--normal my-cell--02">Item 2</div>
+//   <div class="my-cell my-cell--tall my-cell--03">Item 3</div>
+//   <div class="my-cell my-cell--normal my-cell--04">Item 4</div>
+// </div>
+
+.my-row {
+  // you could replace the fixed height
+  // with 100%, if you have a container
+  // that it can fit in
+  // eg. by combining position absolute for the row
+  //     with padding-top on the container
+  //     you can make a responsive height
+  @include flex-rows(500px);
+}
+
+.my-cell {
+  background: cyan;
+}
+
+// sizing the cells
+
+.my-cell--normal,
+.my-cell--tall {
+  @include flex-col(4);
+}
+
+.my-cell--normal {
+  @include flex-row(1, 2);
+}
+
+.my-cell--tall {
+  @include flex-row(2, 2);
+}
+
+// bringing order
+
+.my-cell--01 {
+  // order: 0;
+}
+
+.my-cell--03 {
+  // order: 1;
+}
+

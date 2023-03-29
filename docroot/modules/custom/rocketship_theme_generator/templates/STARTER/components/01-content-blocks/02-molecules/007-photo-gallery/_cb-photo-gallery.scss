@@ -1,0 +1,277 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content Block: photo focus
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+.block--type-cb-photo-gallery {
+
+  --gap-gallery: #{rem(10)};
+
+  // ---------------------------------------------------------------------------
+
+  // padding: rem(25) rem(20);
+  text-align: center;
+
+  .field--name-field-cb-teaser {
+    //
+  }
+
+  .field--buttons {
+    text-align: center;
+
+    a {
+      margin-left: rem(5);
+      margin-right: rem(5);
+    }
+  }
+
+  // ** Images
+
+  .field--name-field-cb-media-unlimited {
+
+    a {
+      position: relative; // becomes a reference point for the icon
+      display: block;
+
+      @if ($structuralOnly == false) {
+
+        @include font-awesome((icon: $fa-var-search, color: hsl(var(--clr-spot-1)), size: 16, type: "light", element: "after"));
+
+      } @else {
+        &::after {
+          content: "+";
+        }
+      }
+
+      // some extra sizing and positioning of the icon
+      &::after {
+        pointer-events: none;
+        position: absolute;
+        right: rem(10);
+        bottom: rem(10);
+        @include square(rem(30));
+        @include font-size(16, 30);
+        border-radius: rem(2);
+        background: hsl(var(--clr-white));
+        opacity: .75;
+      }
+    }
+
+    .field__items {
+      margin-bottom: var(--gap-gallery);
+    }
+
+    .field__item {
+      position: relative;
+      margin-bottom: var(--gap-gallery);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+  }
+
+  // ** Grid layout
+
+  &.block--view-mode-photo-gallery-grid {
+
+    .field--name-field-cb-media-unlimited {
+
+      //
+    }
+
+  }
+
+  // ** Masonry layout
+
+  &.block--view-mode-photo-gallery-masonry {
+
+    .field--name-field-cb-media-unlimited {
+
+      //
+
+      .field__item {
+        width: 100%;
+      }
+    }
+  }
+
+  @if ($structuralOnly == false) {
+
+    //
+
+  } @else {
+    .node & .field--name-field-cb-media-unlimited {
+      float: none;
+      margin: 0;
+    }
+  }
+
+}
+
+// ** show/hide images with load more button
+
+.has--load-more {
+
+  // images
+  > .field--name-field-cb-media-unlimited {
+
+    // hide if index higher than limit of 6
+    .field__item:nth-child(n+7) {
+      display: none;
+    }
+
+    // show if they have a visible class
+    .field__item.is--visible {
+      display: block;
+    }
+  }
+}
+
+.field--name-field-cb-photo-gallery-load-more {
+  margin: var(--gap-layout-vert) auto 0 auto;
+
+  @if ($structuralOnly == false) {
+    @include button-primary;
+  }
+
+  // ** items are visible, so show the other text on the button ('show less')
+
+  .more {
+    display: none;
+  }
+
+  .less {
+    display: block;
+  }
+
+  // ** items are hidden, so show the original text on the button ('show more')
+
+  .has--visible-items & {
+    .more {
+      display: block;
+    }
+
+    .less {
+      display: none;
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide phone only
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide-only {
+
+  .block--type-cb-photo-gallery {
+
+    // ** Grid layout
+
+    &.block--view-mode-photo-gallery-grid {
+
+      .field--name-field-cb-media-unlimited {
+
+        .field__items {
+          @include flex-grid(12, var(--gap-gallery));
+          margin-top: 0;
+          justify-content: center;
+        }
+
+        .field__item {
+          @include flex-col(6, 12, var(--gap-gallery));
+          margin-top: 0;
+        }
+      }
+
+    }
+
+    // ** Masonry layout
+
+    &.block--view-mode-photo-gallery-masonry {
+
+      .field--name-field-cb-media-unlimited {
+
+        .field__items {
+          margin: rem(0) calc(var(--gap-gallery) / -2);
+        }
+
+        .field__item {
+          left: 0; // overridden by JS but need a starting point
+          top: 0;
+          width: calc(100% / 3);
+          padding: rem(0) calc(var(--gap-gallery) / 2) var(--gap-gallery) calc(var(--gap-gallery) / 2);
+        }
+
+      }
+    }
+
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-cb-photo-gallery {
+
+    // ** Grid layout
+
+    &.block--view-mode-photo-gallery-grid {
+
+      .field--name-field-cb-media-unlimited {
+
+        .field__items {
+          @include flex-grid(12, var(--gap-gallery));
+          margin-top: 0;
+          justify-content: center;
+        }
+
+        .field__item {
+          left: 0; // overridden by JS but need a starting point
+          top: 0;
+          @include flex-col(4, 12, var(--gap-gallery));
+          margin-top: 0;
+        }
+      }
+
+    }
+
+    // ** Masonry layout
+
+    &.block--view-mode-photo-gallery-masonry {
+
+      .field--name-field-cb-media-unlimited {
+
+        .field__items {
+          margin: rem(0) calc(var(--gap-gallery) / -2);
+        }
+
+        .field__item {
+          width: calc(100% / 3);
+          padding: rem(0) calc(var(--gap-gallery) / 2) var(--gap-gallery) calc(var(--gap-gallery) / 2);
+        }
+      }
+    }
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  //
+
+}

@@ -1,0 +1,368 @@
+{% set minimal_styling = minimal_styling ?? false %}
+{% set settings = settings ?? false %}
+{% if layout.template %}
+  {% set template = layout.template|clean_class %}
+{% elseif template %}
+  {% set template = template|clean_class %}
+{% endif %}
+{% set bem_section_block = bem_section_block|default(['layout'])%}
+{% set bem_section_element = bem_section_element|default(false)%}
+{% set bem_section_modifier = bem_section_modifier|default([]) %}
+{% set bem_section_extra = bem_section_extra|default([]) %}
+
+{% set modifier = modifier ?? false %}
+{% if (modifier|trim is not empty) %}
+  {% set modifier = modifier|clean_class %}
+{% endif %}
+
+{% if reversed %}
+  {% set classAside = 'right' %}
+  {% set classMain = 'left' %}
+{% else %}
+  {% set classAside = 'left' %}
+  {% set classMain = 'right' %}
+{% endif %}
+
+{# Variant options #}
+{% set background_stretched = background_color|default(true) %}
+{% set background_color = background_color|default(false) %}
+{% set background_image = background_image|default(false) %}
+
+{% set section_spacing_top = section_spacing_top ?? '1x' %}
+{% set section_spacing_bottom = section_spacing_bottom ?? '1x' %}
+
+{# change padding on all the cols #}
+{% set col_spacing = col_spacing|default('1x') %}
+{# change padding on a specific col #}
+{% set col_spacing_override = col_spacing_override|default('1x') %}
+{# the specific col to override #}
+{% set col_spacing_override_column = col_spacing_override_column|default(NULL) %}
+{% if col_spacing_override_column == NULL or col_spacing_override_column == '' %}
+  {% set col_spacing_override_column = false %}
+{% endif %}
+
+{% set col_sizing = col_sizing|default(false) %}
+
+{% if left_col_size and right_col_size %}
+  {% set col_sizing = true %}
+  {% set left_col_size_suffix = '--size-' ~ left_col_size %}
+  {% set right_col_size_suffix = '--size-' ~ right_col_size %}
+{% endif %}
+
+{% set valign = valign|default('top') %}
+
+{% if modifier %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['mod-' ~ modifier]) %}
+{% endif %}
+{% if label %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['label-' ~ label|clean_class]) %}
+{% endif %}
+
+{% if minimal_styling %}
+  {% if template %}
+    {% set bem_section_modifier = bem_section_modifier|merge([template|clean_class]) %}
+  {% endif %}
+{% endif %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['content-blocks']) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-top-'  ~ section_spacing_top]) %}
+  {% set bem_section_modifier = bem_section_modifier|merge(['v-space-bottom-'  ~ section_spacing_bottom]) %}
+{% endif %}
+
+{% set bem_section_extra = bem_section_extra|merge([
+  'layout-section',
+  'layout' ~ '--2-col',
+]) %}
+
+{% if minimal_styling == false %}
+  {% set bem_section_extra = bem_section_extra|merge(['layout--2-col--content-blocks']) %}
+
+  {% if background_stretched %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-stretched']) %}
+  {% endif %}
+  {% if background_color and background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg']) %}
+  {% endif %}
+  {% if background_color %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-color']) %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg--' ~ background_color|clean_class ]) %}
+  {% endif %}
+  {% if background_image %}
+    {% set bem_section_extra = bem_section_extra|merge(['layout--bg-image']) %}
+  {% endif %}
+{% endif %}
+
+{% if extra_classes %}
+  {% set extraArray = extra_classes|split(' ') %}
+  {% set bem_section_extra = bem_section_extra|merge(extraArray) %}
+{% endif %}
+
+{# cols wrapper #}
+
+{% set colclasses = [
+    'layout__cols',
+    'layout__cols' ~ '--2-col',
+] %}
+
+{% if reversed %}
+  {% set colclasses = colclasses|merge(['layout__cols' ~ '--' ~ 'reversed']) %}
+{% endif %}
+
+{% if modifier %}
+  {% set colclasses = colclasses|merge(['layout__cols' ~ '--mod-' ~ modifier]) %}
+{% endif %}
+
+{% if minimal_styling == false %}
+  {% set colclasses = colclasses|merge(['layout__cols' ~ '--content-blocks']) %}
+  {% set colclasses = colclasses|merge(['layout__cols' ~ '--2-col' ~ '--content-blocks']) %}
+  {% if col_spacing %}
+    {% set colclasses = colclasses|merge(['layout__cols--col-spacing' ~ '-' ~ col_spacing]) %}
+  {% endif %}
+  {% if valign %}
+    {% set colclasses = colclasses|merge(['layout__cols' ~ '--v-align-'  ~ valign]) %}
+  {% endif %}
+{% endif %}
+
+{# asides #}
+
+{% set sidebarclasses = [
+    'layout-builder__region',
+    'layout__region',
+    'layout__sidebar',
+    'layout__region' ~ '--2-col',
+    'layout__sidebar' ~ '--2-col',
+    'layout__sidebar' ~ '--2-col' ~ '--' ~ classAside,
+] %}
+
+{% if reversed %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__sidebar' ~ '--' ~ 'reversed']) %}
+{% endif %}
+
+{% if modifier %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--mod-'  ~ modifier]) %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__sidebar' ~ '--mod-' ~  modifier]) %}
+{% endif %}
+{% if minimal_styling == false %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--content-blocks']) %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--2-col' ~ '--content-blocks']) %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__sidebar' ~ '--2-col' ~ '--content-blocks']) %}
+  {% set sidebarclasses = sidebarclasses|merge(['layout__sidebar' ~ '--2-col' ~ '--content-blocks' ~ '--' ~ classAside]) %}
+
+  {% if col_sizing %}
+    {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ left_col_size_suffix]) %}
+  {% endif %}
+
+  {# extra col spacing (or reset) on sidebar #}
+  {% if col_spacing %}
+    {# for all #}
+    {% if reversed %}
+      {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing]) %}
+    {% else %}
+      {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing]) %}
+    {% endif %}
+  {% endif %}
+  {# for individual col #}
+  {% if col_spacing_override and col_spacing_override_column %}
+    {% if col_spacing_override_column == 1 %}
+      {% if reversed %}
+        {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing_override]) %}
+      {% else %}
+        {% set sidebarclasses = sidebarclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing_override]) %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+{% endif %}
+
+{# main #}
+
+{% set mainclasses = [
+    'layout-builder__region',
+    'layout__region',
+    'layout__content',
+    'layout__region' ~ '--2-col',
+    'layout__content' ~ '--2-col',
+    'layout__content' ~ '--2-col' ~ '--' ~ classMain,
+] %}
+
+ {% if reversed %}
+  {% set mainclasses = mainclasses|merge(['layout__content' ~ '--reversed']) %}
+{% endif %}
+
+{% if modifier %}
+  {% set mainclasses = mainclasses|merge(['layout__region' ~ '--mod-'  ~ modifier]) %}
+  {% set mainclasses = mainclasses|merge(['layout__content' ~ '--mod-' ~  modifier]) %}
+{% endif %}
+{% if minimal_styling == false %}
+  {% set mainclasses = mainclasses|merge(['layout__region' ~ '--content-blocks']) %}
+  {% set mainclasses = mainclasses|merge(['layout__content' ~ '--content-blocks']) %}
+  {% set mainclasses = mainclasses|merge(['layout__region' ~ '--2-col' ~ '--content-blocks']) %}
+  {% set mainclasses = mainclasses|merge(['layout__content' ~ '--2-col' ~ '--content-blocks']) %}
+  {% set mainclasses = mainclasses|merge(['layout__content' ~ '--2-col' ~ '--content-blocks' ~ '--' ~ classMain]) %}
+
+  {% if col_sizing %}
+    {% set mainclasses = mainclasses|merge(['layout__region' ~ right_col_size_suffix]) %}
+  {% endif %}
+
+  {# extra col spacing (or reset) on sidebar #}
+  {% if col_spacing %}
+    {# for all #}
+    {% if reversed %}
+      {% set mainclasses = mainclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing]) %}
+    {% else %}
+      {% set mainclasses = mainclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing]) %}
+    {% endif %}
+  {% endif %}
+  {# for individual col #}
+  {% if col_spacing_override and col_spacing_override_column %}
+    {% if col_spacing_override_column == 2 %}
+      {% if reversed %}
+        {% set mainclasses = mainclasses|merge(['layout__region' ~ '--col-spacing-first-'  ~ col_spacing_override]) %}
+      {% else %}
+        {% set mainclasses = mainclasses|merge(['layout__region' ~ '--col-spacing-last-'  ~ col_spacing_override]) %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+{% endif %}
+
+{# nested divs #}
+
+{% if content %}
+
+  <div {{bem(bem_section_block, bem_section_element, bem_section_modifier, bem_section_extra)}}>
+    <div class="{{colclasses|join(' ')}}">
+
+      <div class="{{sidebarclasses|join(' ')}}">
+        {% if content.first_top %}
+          {% set top_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--top',
+              'layout__sidebar__row--top--primary',
+            ]
+          %}
+          {% if modifier %}
+            {% set top_classes = top_classes|merge([
+              'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              'layout__sidebar__row--top' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{top_classes|join(' ')}}">
+            {% block first_top %}
+            {{content.first_top}}
+            {% endblock %}
+          </div>
+        {% endif %}
+        {% if content.first_main %}
+          {% set main_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--main',
+              'layout__sidebar__row--main--primary',
+            ]
+          %}
+          {% if modifier %}
+            {% set main_classes = main_classes|merge([
+              'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              'layout__sidebar__row--main' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{main_classes|join(' ')}}">
+            {% block first_main %}
+            {{content.first_main}}
+            {% endblock %}
+          </div>
+        {% endif %}
+        {% if content.first_bottom %}
+          {% set bottom_classes = [
+              'layout__sidebar__row',
+              'layout__sidebar__row--primary',
+              'layout__sidebar__row--bottom',
+              'layout__sidebar__row--bottom--primary',
+            ]
+          %}
+          {% if modifier %}
+            {% set bottom_classes = bottom_classes|merge([
+              'layout__sidebar__row' ~ '--mod-' ~ modifier,
+              'layout__sidebar__row--bottom' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{bottom_classes|join(' ')}}">
+            {% block first_bottom %}
+            {{content.first_bottom}}
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="{{mainclasses|join(' ')}}">
+        {% if content.second_top %}
+          {% set top_classes = [
+              'layout__content__row',
+              'layout__content__row--top',
+            ]
+          %}
+          {% if modifier %}
+            {% set top_classes = top_classes|merge([
+              'layout__content__row' ~ '--mod-' ~ modifier,
+              'layout__content__row--top' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{top_classes|join(' ')}}">
+            {% block second_top %}
+            {{content.second_top}}
+            {% endblock %}
+          </div>
+        {% endif %}
+        {% if content.second_main %}
+          {% set main_classes = [
+              'layout__content__row',
+              'layout__content__row--main',
+            ]
+          %}
+          {% if modifier %}
+            {% set main_classes = main_classes|merge([
+              'layout__content__row' ~ '--mod-' ~ modifier,
+              'layout__content__row--main' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{main_classes|join(' ')}}">
+            {% block second_main %}
+            {{content.second_main}}
+            {% endblock %}
+          </div>
+        {% endif %}
+        {% if content.second_bottom %}
+          {% set bottom_classes = [
+              'layout__content__row',
+              'layout__content__row--bottom',
+            ]
+          %}
+          {% if modifier %}
+            {% set bottom_classes = bottom_classes|merge([
+              'layout__content__row' ~ '--mod-' ~ modifier,
+              'layout__content__row--bottom' ~ '--mod-' ~ modifier,
+            ]) %}
+          {% endif %}
+          <div class="{{bottom_classes|join(' ')}}">
+            {% block second_bottom %}
+            {{content.second_bottom}}
+            {% endblock %}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    {% if layout_background_image %}
+      {% include "@%theme_prefix%-atoms/media/styleguide/media--image.twig" with {
+          reference: layout_background_image.reference
+        }
+      %}
+    {% endif %}
+
+  </div>
+
+{% endif %}

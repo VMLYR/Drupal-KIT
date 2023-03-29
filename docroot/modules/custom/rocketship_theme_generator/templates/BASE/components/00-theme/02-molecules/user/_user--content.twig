@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ * - url: Direct URL of the current user.
+ *
+ * @see template_preprocess_user()
+ */
+#}
+{# {%
+set classes = [
+'user',
+'user--type-' ~ elements['#entity_type']|clean_class,
+'user--view-mode-' ~ elements['#view_mode']|clean_class,
+]
+%} #}
+{% set bem_user_block = bem_user_element|default('user') %}
+
+{% set bem_user_element = bem_user_element|default(false) %}
+
+{% if bem_user_modifiers is not defined %}
+  {% set bem_user_modifiers = [] %}
+{% endif %}
+{% set bem_user_modifiers = bem_user_modifiers|merge([
+    elements['#entity_type'] ? 'type-' ~ elements['#entity_type']|clean_class,
+    elements['#view_mode'] ? 'view-mode-' ~ elements['#view_mode']|clean_class
+  ])
+%}
+
+{% if bem_user_extra is not defined %}
+  {% set bem_user_extra = [] %}
+{% endif %}
+
+<article{{bem(bem_user_block, bem_user_element, bem_user_modifiers, bem_user_extra) }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</article>

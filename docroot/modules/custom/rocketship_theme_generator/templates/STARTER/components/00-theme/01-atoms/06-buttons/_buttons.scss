@@ -1,0 +1,146 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Buttons (in forms and text)
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Preset classes
+// =============================================================================
+
+// primary button styling is added to the '.button' class
+// and various versions of form submits and form buttons
+// you are responsible for making sure 'submit' buttons get the correct styling
+// you can modify the $buttons-list variable with extra elements
+// or add more classes here
+
+.button,
+#{$buttons-list} {
+  @include button-primary();
+}
+
+.button--secondary {
+  @include button-secondary();
+}
+
+.button--negative {
+  @include button-negative();
+}
+
+.button--negative-secondary {
+  @include button-negative-secondary();
+}
+
+[id*="edit-cancel"],
+[id*="edit-delete"] {
+  @include button-secondary();
+}
+
+.button--sm {
+  @include button-size("sm");
+}
+
+.button--md {
+  @include button-size("md");
+}
+
+.button--lg {
+  @include button-size("lg");
+}
+
+
+// * Grouping of buttons
+// =============================================================================
+
+// eg. on 403 page
+
+.actions {
+
+  margin-top: rem(10);
+
+  .actions__divider,
+  .button {
+    display: block;
+    margin-top: rem(10);
+  }
+
+  .actions__divider {
+    text-align: center;
+  }
+
+  @include bp-sm {
+
+    margin-top: rem(10);
+    margin-left: rem(-10);
+
+    .actions__divider {
+      text-align: left;
+    }
+
+    .actions__divider,
+    .button {
+      display: inline-block;
+      margin-left: rem(10);
+    }
+  }
+}
+
+
+// * Buttons in CKE
+// =============================================================================
+
+.text-long,
+.cke_editable {
+
+  .cke-button {
+    @include button-primary();
+  }
+
+  .cke-button--secondary {
+    @include button-secondary();
+  }
+
+  // grouping
+  p {
+
+    .actions__divider {
+      margin-right: rem(10);
+    }
+
+    .cke-button {
+      margin-top: rem(10);
+      margin-right: rem(10);
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      // don't forget to override any styling that might be inherited
+      // by the link stylin in atoms/links
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      border-bottom: 0 none;
+    }
+
+    .cke-button--secondary {
+      margin-top: rem(10);
+      margin-right: rem(10);
+      &:last-child {
+        margin-right: 0;
+      }
+
+      // don't forget to override any styling that might be inherited
+      // by the link stylin in atoms/links
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      border-bottom: 0 none;
+    }
+  }
+}

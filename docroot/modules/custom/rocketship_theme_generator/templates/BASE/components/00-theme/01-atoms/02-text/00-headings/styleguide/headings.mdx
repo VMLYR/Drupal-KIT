@@ -1,0 +1,22 @@
+import { Story } from '@storybook/addon-docs';
+
+# Headings
+
+There are helpers in the `_headings-helpers.scss` file to help you style headings.
+
+The styling is applied in `_headings.scss`<br />
+You will see you can style default heading tags, as well as headings in CKEditor and classes that emulate a heading style (eg. .h2)
+
+Pay special attention to the `text-long` styling because that is what comes out of CKEditor.
+
+## tag vs Field
+
+The heading atom is not used by Drupal directly, but is included inside other components, replacing Drupal's normal rendering of titles<br />
+eg. a block heading, field label, … <br />
+
+In Drupal sitebuilding, there is also a field formatter that turns a normal text field into a heading tag. <br />
+Fields set up by those formatters render their content using this heading atom.
+
+If you want to render a heading field, that looks like what Drupal produces, inside a Storybook Molecule, <br />
+you can include `heading-field.twig`. This wraps the hx-tag inside the correct field wrappers and classes as output by Drupal.<br />
+Examples of this can be found in the 'example' Molecule.

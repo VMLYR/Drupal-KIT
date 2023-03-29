@@ -1,0 +1,50 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+{% embed "@%theme_prefix%-molecules/00-block/_block.twig" with {
+    label: label,
+    configuration: configuration,
+    bem_block_modifiers: bem_block_modifiers,
+    fields: fields,
+    paragraph: paragraph,
+  } %}
+
+  {% block block_content %}
+
+    {# Option 1:
+      An alternative for this block COULD be to use the 'Image' Content Block,
+      but they you are bound to the Block's image style and might need to override some default styling you have no time for.
+
+      In that case, you are sometimes better off:
+      - making a new custom block with the feelds you need (like this)
+      - and turning on 'Minimal styling' on the Layout
+    #}
+
+    {% include "@%theme_prefix%-atoms/04-images/styleguide/blazy-responsive.twig" with {
+      label_display: fields.image.label_display,
+      field_name: fields.image.field_name,
+      field_type: fields.image.field_type,
+      field_attributes: fields.image.field_attributes,
+      settings: fields.image.settings,
+      bem_field_modifiers: fields.image.bem_field_modifiers,
+      bem_field_extra: fields.image.bem_field_extra,
+      blazy_bem_block: fields.image.blazy_bem_block,
+      blazy_bem_modifiers: fields.image.blazy_bem_modifiers,
+      blazy_attributes: fields.image.blazy_attributes,
+      image_src: fields.image.image_src,
+      image_alt: fields.image.image_alt,
+      image_srcset: fields.image.image_srcset,
+      image_loading: fields.image.image_loading,
+      image_sizes: fields.image.image_sizes,
+      image_bem_modifiers: fields.image.image_bem_modifiers,
+      image_bem_extra: fields.image.image_bem_extra,
+      attributes: fields.image.image_attributes,
+    } %}
+
+  {% endblock %}
+
+{% endembed %}

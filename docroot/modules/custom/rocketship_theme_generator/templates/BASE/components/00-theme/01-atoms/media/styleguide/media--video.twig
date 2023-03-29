@@ -1,0 +1,28 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+{% embed "@%theme_prefix%-atoms/media/_media.twig" with {
+  media_bundle: reference.media_bundle,
+  media_published: reference.media_published,
+  view_mode: reference.view_mode,
+} %}
+
+  {% block media_content %}
+
+    {# field outputting a video #}
+    {% include "@%theme_prefix%-atoms/08-video/styleguide/video--field.twig" with {
+        field_name: reference.field.field_name,
+        field_type: reference.field.field_type,
+        bem_field_modifiers: reference.field.bem_field_modifiers,
+        bem_field_extra: reference.field.bem_field_extra,
+        attributes: reference.field.field_attributes,
+        label_display: reference.field.label_display,
+        video_content: reference.field.video_content
+      } %}
+
+  {% endblock %}
+
+{% endembed %}

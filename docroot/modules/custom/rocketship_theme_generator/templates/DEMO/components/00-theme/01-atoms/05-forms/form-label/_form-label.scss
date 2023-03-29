@@ -1,0 +1,71 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Form: Label
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+.form__label {
+  display: block;
+  @include font-size(14, 18);
+  font-weight: $font-weight-bold;
+  transition: all $duration $easing;
+
+  &.is-active {
+    color: hsl(var(--clr-form-active));
+  }
+}
+
+// ** Do we want required or optional fields to be marked?
+
+// -- show "required" markers
+
+@if($fields-required) {
+
+  .form__label__required {
+    display: none;
+
+    // hide marker on required fields
+    .js-form-required & {
+      display: inline-block;
+      text-decoration: none;
+      color: hsl(var(--clr-link));
+    }
+  }
+
+  // hide the other type of marker by default
+  .form__label__not-required {
+    display: none;
+  }
+
+  // -- show "optional" markers
+} @else {
+
+  // hide the other type of marker by default
+  .form__label__required {
+    display: none;
+  }
+
+  .form__label__not-required {
+    // show by default
+    display: inline-block;
+    padding: rem(5);
+
+    // hide marker on required fields
+    .js-form-required & {
+      display: none;
+    }
+  }
+}
+
+
+// * Errors & warnings and stuff
+// =============================================================================
+
+.form__element--error {
+
+  .form__label {
+    color: hsl(var(--clr-error));
+  }
+}

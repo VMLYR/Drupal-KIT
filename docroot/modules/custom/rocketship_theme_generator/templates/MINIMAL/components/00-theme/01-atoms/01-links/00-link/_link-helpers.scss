@@ -1,0 +1,78 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Links: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Mixins
+// =============================================================================
+
+// ** underlined link: using pseudo element so we can animate it
+//
+// -- Usage normal: starts with an underline and disappears on hover
+//      @include link-underline((color: red, color-hover: blue));
+// -- Usage inversed: an underline only appears when hovered
+//    @include link-underline(inverse: true);
+
+@mixin link-underline($settings) {
+
+  $color: map-get($settings, color);
+  $color-hover: map-get($settings, color-hover);
+  $color-active: map-get($settings, color-active);
+  $inverse: map-get($settings, inverse);
+
+  @if ($color == null) {
+    $color: hsl(var(--clr-base));
+  }
+  @if ($color-hover == null) {
+    $color-hover: $color;
+  }
+  @if ($color-active == null) {
+    $color-active: $color-hover;
+  }
+  @if ($inverse == null) {
+    $inverse: false;
+  }
+
+  position: relative;
+  display: inline; // otherwise wrapping of the border bottom doesn't work
+  transition: color $duration $easing,
+    background-color $duration $easing,
+    border $duration $easing;
+
+  &,
+  &:visited {
+    color: hsl($color);
+
+    @if ($inverse == true) {
+      border-bottom: 1px solid hsla($color-hover,  0);
+    } @else {
+      border-bottom: 1px solid hsla($color,  1);
+    }
+  }
+
+  &:hover {
+
+    color: hsl($color-hover);
+
+    @if ($inverse == true) {
+      border-bottom: 1px solid hsla($color-hover,  1);
+    } @else {
+      border-bottom: 1px solid hsla($color,  0);
+    }
+
+  }
+
+  &:active {
+
+    color: hsl($color-active);
+
+    @if ($inverse == true) {
+      border-bottom: 1px solid hsla($color-hover,  1);
+    } @else {
+      border-bottom: 1px solid hsla($color,  0);
+    }
+
+  }
+}

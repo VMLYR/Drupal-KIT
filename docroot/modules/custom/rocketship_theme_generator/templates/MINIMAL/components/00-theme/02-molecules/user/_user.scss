@@ -1,0 +1,99 @@
+///////////////////////////////////////////////////////////////////////
+// *
+// * User
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Better login forms
+// =============================================================================
+
+.user-box {
+  //
+}
+
+.user-box__middle {
+
+  //
+
+  h1 {
+    //
+  }
+
+
+  .form__element {
+    //
+  }
+
+  // -- buttons
+
+  input[type="submit"],
+  button[type="submit"] {
+    //
+  }
+
+  // -- secondary header
+
+  .paragraph--type-simple-header::before {
+    display: none !important;
+  }
+}
+
+.user-box__links {
+  //
+
+  li {
+    //
+  }
+}
+
+.user-box__bottom {
+  //
+}
+
+
+// ** registration page
+
+.user-box__middle--register {
+  //
+}
+
+
+// * User create / edit page
+// =============================================================================
+
+.password-strength__meter {
+  margin-top: rem(10);
+  background: hsl(var(--clr-off-white));
+}
+.password-strength__indicator {
+  background-color: hsl(var(--clr-off-white));
+  transition: width $duration $easing;
+
+  &.is-weak {
+    background-color: hsl(var(--clr-error));
+  }
+  &.is-fair {
+    background-color: hsl(var(--clr-warning));
+  }
+  &.is-good {
+    background-color: hsl(var(--clr-neutral));
+  }
+  &.is-strong {
+    background-color: hsl(var(--clr-status));
+  }
+}
+
+.confirm-parent {
+
+  .password-confirm {
+    .ok {
+      color: hsl(var(--clr-status));
+    }
+    .error {
+      color: hsl(var(--clr-error));
+    }
+  }
+}
+

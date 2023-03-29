@@ -1,0 +1,43 @@
+menu: main
+label: 'Main menu'
+menu_block_bem_modifiers:
+  - 'main'
+  - system-menu-block
+menu_block_bem_extra:
+  - 'block--menu'
+  - 'block-system'
+configuration:
+  label_display: false
+items:
+  - title: 'Home'
+    url: '#'
+  - title: 'Collection'
+    url: '#'
+  - title: 'Subscriptions'
+    url: '#'
+    # no_link: true
+  - title: 'Find a dealer'
+    url: '#'
+  - title: 'Blog'
+    url: '#'
+  - title: 'About us'
+    url: '#'
+  # - title: 'First item'
+  #   url: '#'
+  # - title: 'Second item'
+  #   url: '#'
+  #   below:
+  #     - title: 'A first submenu item'
+  #       url: '#'
+  #     - title: 'A second submenu item'
+  #       url: '#'
+  #     - title: 'A second submenu item'
+  #       url: '#'
+  # - title: 'Third item (no link)'
+  #   url: '#'
+  #   no_link: true
+  # - title: Contact
+  #   url: '#'
+  #   link_attributes:
+  #       class:
+  #         - 'menu__item--button'

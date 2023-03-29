@@ -1,0 +1,264 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Tables: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Mixins
+// =============================================================================
+
+// ** Responsive tables
+// -- option to reformat or to use a scrollbar: "reformatted" or "scroll"
+
+@mixin table-responsive($type) {
+
+  @include bp-xs-only {
+
+    // -- https://css-tricks.com/responsive-data-tables/
+    @if ($type == "reformatted") {
+
+      caption {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid hsl(var(--clr-border));
+      }
+
+      /* Force table to not be like tables anymore */
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        border: 0 none;
+        background: transparent;
+
+        tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+      }
+
+      tr {
+        border: 0 none; // we'll set borders in the td's
+
+        &.odd {
+          td {
+            border-bottom: 1px solid hsl(var(--clr-white));
+          }
+        }
+      }
+
+      td {
+        /* Behave  like a "row" */
+        position: relative;
+        // padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid hsl(var(--clr-border));
+
+        &::before {
+          // include the row title
+          content: attr(data-title)": ";
+          /* Now like a table header */
+          // position: absolute;
+          /* Top/left values mimic padding */
+          // top: 10px;
+          // left: 10px;
+          // width: 45%;
+          display: block;
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: bold;
+        }
+      }
+
+      // no need for the extra padding and ":" when no th's
+      table.no-th {
+
+        td {
+          position: static;
+          width: auto;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+
+      // -- Scrolling
+    } @else {
+
+      position: relative;
+      margin-bottom: var(--gap-lg);
+      border: 1px solid hsl(var(--clr-border));
+
+      table {
+        table-layout: auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        empty-cells: show;
+        margin-bottom: 0;
+        border: 0 none;
+      }
+
+      // if no th rows or columns, do regular vertical scroll
+
+      &.js-table--no-th {
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100%;
+        min-height: .01%;
+      }
+
+      // if ths only in thead or tfoot,
+      // turn it into a column + vertical scrolling of table
+      &.js-table--th-row {
+
+        overflow: hidden;
+
+        table {
+          position: relative;
+          width: 100%;
+          padding: 0;
+        }
+
+        thead {
+          position: absolute;
+          top: 0;
+          display: block;
+          height: 100%;
+          width: rem(120);
+
+          tr {
+            display: flex;
+            flex-direction: column;
+
+            &:last-child {
+              border-bottom: 0 none;
+            }
+          }
+
+          th,
+          td {
+            display: block;
+            overflow: hidden;
+            min-height: rem(100); // actual height will be set by JS based on highest cell
+            text-overflow: ellipsis;
+            word-wrap: normal;
+            border-left: 1px solid hsl(var(--clr-spot-1));
+            border-right: 1px solid hsl(var(--clr-spot-1));
+            border-bottom: 1px solid white;
+          }
+        }
+
+        tbody {
+          display: flex;
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+          overflow-x: auto;
+          overflow-y: hidden;
+          width: calc(100vw - 120px - 40px); // subtract cell width and extra for paddings&borders
+
+          tr {
+            display: flex;
+            flex-direction: column;
+          }
+
+          th,
+          td {
+            display: block;
+            min-height: rem(100); // actual height will be set by JS based on highest cell
+          }
+        }
+      }
+
+      &.js-table--th-top {
+        thead {
+          left: 0;
+        }
+
+        tbody {
+          margin-left: rem(120); // cell width
+        }
+      }
+
+      &.js-table--th-bottom {
+        thead {
+          right: 0;
+        }
+
+        tbody {
+          margin-right: rem(120); // cell width
+        }
+      }
+
+      // if ths in left or right column
+      // add vertical scrolling
+      &.js-table--th-col {
+
+        table {
+          display: block;
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding: 0;
+          width: 100%;
+        }
+
+        tbody {
+          position: static;
+        }
+
+        tr {
+          position: static;
+
+          &:last-child {
+            .th__content {
+              border-bottom: 0 none;
+            }
+          }
+        }
+
+        th {
+          padding: 0;
+          width: 0;
+          border: 0;
+          background: transparent none;
+        }
+
+        .th__content {
+          position: absolute;
+          width: rem(120);
+          padding: rem(10);
+          border-bottom: 1px solid hsl(var(--clr-white));
+          background: hsl(var(--clr-spot-1));
+        }
+      }
+
+      &.js-table--th-left {
+
+        padding-left: rem(120);
+
+        .th__content {
+          left: 0;
+        }
+      }
+
+      &.js-table--th-right {
+
+        padding-right: rem(120);
+
+        .th__content {
+          right: 0;
+        }
+      }
+    }
+  }
+}
+

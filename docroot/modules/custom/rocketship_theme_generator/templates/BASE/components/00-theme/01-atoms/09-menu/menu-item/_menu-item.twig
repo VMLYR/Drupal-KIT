@@ -1,0 +1,95 @@
+{# do we want the link title to show up (eg. NOT in most navigations, for accessibility reasons but yes in other links)#}
+{% set has_link_title = has_link_title ?? true %}
+{# if a menu item has no link to pass (see _menu-item.twig), set further down below by checking url #}
+{% set no_link = false %}
+
+{% set bem_item_block = bem_item_block|default('menu') %}
+{% set bem_item_element = bem_item_element|default('item') %}
+
+{% set bem_link_block = bem_link_block|default(bem_item_block) %}
+{% set bem_link_element = bem_link_element|default('link') %}
+
+{% if not bem_item_modifiers %}
+  {% set bem_item_modifiers = [] %}
+{% endif %}
+
+{% set bem_item_extra = bem_item_extra|default([]) %}
+
+{% if not link_attribute_class %}
+  {% set link_attribute_class = [] %}
+{% endif %}
+{% if item.in_active_trail == TRUE %}
+  {% set bem_item_modifiers = bem_item_modifiers|merge(['active']) %}
+{% endif %}
+{% if menu_level > 0 %}
+  {% set bem_item_modifiers = bem_item_modifiers|merge(['sub', 'sub-' ~ menu_level]) %}
+{% endif %}
+{% if item.below %}
+  {% set bem_item_modifiers = bem_item_modifiers|merge(['with-sub']) %}
+  {% set bem_item_extra = bem_item_extra|merge(['has-sub']) %}
+{% endif %}
+{# below could maybe be done without a loop? #}
+{% for modifier in item.modifiers %}
+  {% set bem_item_modifiers = bem_item_modifiers|merge([modifier]) %}
+{% endfor %}
+
+{% set link_attributes = link_attributes|default([]) %}
+
+{% if item.link_attributes %}
+  {% set link_attributes = link_attributes|merge(item.link_attributes) %}
+{% endif %}
+
+{% if item.url and item.url.options and item.url.options.attributes %}
+  {% set link_attributes = link_attributes|merge(item.url.options.attributes) %}
+{% endif %}
+
+{% if link_attributes.class %}
+
+  {# if its an array, #}
+  {% if link_attributes.class is iterable %}
+    {% set link_attribute_class = link_attributes.class %}
+    {# else just save the string #}
+  {% else %}
+    {% set link_attribute_class = [link_attributes.class] %}
+  {% endif %}
+
+  {# add custom classes for menu link to the list-item because that's cleaner for styling #}
+  {% set bem_item_extra = bem_item_extra|merge(link_attribute_class) %}
+
+{% endif %}
+
+{% set list_item_label = list_item_label|default(null) %}
+{% set list_item_content = list_item_content|default(null)%}
+
+{% embed "@%theme_prefix%-atoms/03-lists/list--ul/_list-item.twig" with {
+  "list_item_label": list_item_label,
+  "list_item_content": list_item_content,
+  "bem_li_block": bem_item_block,
+  "bem_li_element": bem_item_element,
+  "bem_li_modifiers": bem_item_modifiers,
+  "bem_li_extra": bem_item_extra,
+} %}
+  {% block list_item_content %}
+
+    {% if item.url.isRouted() == true and item.url.getRouteName() == '<nolink>' %}
+      {% set no_link = true %}
+    {% endif %}
+
+    {% include "@%theme_prefix%-atoms/01-links/00-link/_link.twig" with {
+      "link_content": item.title,
+      "link_url": item.url,
+      "no_link": no_link,
+      "bem_link_block": bem_item_block,
+      "bem_link_element": bem_link_element,
+      "bem_link_modifiers": bem_item_modifiers,
+      "has_link_title": has_link_title,
+      "link_attribute_class": link_attribute_class,
+      "link_attributes": link_attributes,
+    } %}
+    {% if item.below %}
+      <i class="expand-sub"></i>
+      {% import "@%theme_prefix%-molecules/menus/menu/_menu--macros.twig" as menus %}
+      {{ menus.menu_links(item.below, attributes, has_link_title, menu_level + 1, bem_menu_block, bem_menu_element, bem_menu_modifiers, bem_item_block,  bem_item_element, bem_item_modifiers) }}
+    {% endif %}
+  {% endblock %}
+{% endembed %}

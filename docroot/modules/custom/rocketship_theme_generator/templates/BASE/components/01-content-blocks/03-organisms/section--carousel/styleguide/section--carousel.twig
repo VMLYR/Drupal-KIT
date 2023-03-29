@@ -1,0 +1,139 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+<div class="storybook__content__label storybook__content__label--layout">
+  {{description}}
+</div>
+
+{% embed "@%theme_prefix%-templates/styleguide/section/carousel.twig" with {
+  description: description,
+  label: label,
+  template: template,
+  minimal_styling: minimal_styling,
+  region_type: region_type,
+  modifier: modifier,
+  bem_section_extra: bem_section_extra,
+  extra_classes: extra_classes,
+  settings: settings,
+  content: content,
+  background_stretched: background_stretched,
+  background_color: background_color,
+  background_image:background_image,
+  layout_background_image: layout_background_image,
+  section_spacing_top: section_spacing_top,
+  section_spacing_bottom: section_spacing_bottom,
+  valign: valign,
+} %}
+
+  {% block section_top %}
+
+    {# Text #}
+    {% include "@%theme_prefix%-cb-molecules/001-text/styleguide/text.twig" with {
+      label: intro.label,
+      configuration: intro.configuration,
+      block_type: intro.block_type,
+      bem_block_modifiers: intro.bem_block_modifiers,
+      bem_block_extra: intro.bem_block_extra,
+      fields: intro.fields,
+    } %}
+  {% endblock %}
+
+  {% block section_carousel %}
+
+    {# loop number of blocks #}
+    {% for block in blocks %}
+
+      {% if block.block_type == 'cb_text'%}
+
+        {# Text #}
+        {% include "@%theme_prefix%-cb-molecules/001-text/styleguide/text.twig" with {
+          label: block.label,
+          configuration: block.configuration,
+          block_type: block.block_type,
+          bem_block_modifiers: block.bem_block_modifiers,
+          bem_block_extra: block.bem_block_extra,
+          fields: block.fields,
+        } %}
+
+      {% elseif block.block_type == 'cb_image'%}
+        {# Image #}
+        {% include "@%theme_prefix%-cb-molecules/002a-image/styleguide/image.twig" with {
+          label: block.label,
+          configuration: block.configuration,
+          block_type: block.block_type,
+          bem_block_modifiers: block.bem_block_modifiers,
+          bem_block_extra: block.bem_block_extra,
+          fields: block.fields,
+        } %}
+      {% elseif block.block_type == 'cb_video'%}
+
+        {# loop a few times to create a bunch #}
+        {% for video in range(1, 6)%}
+          {# Video #}
+          {% include "@%theme_prefix%-cb-molecules/002b-video/styleguide/video.twig" with {
+            label:block.label,
+            configuration:block.configuration,
+            block_type:block.block_type,
+            bem_block_modifiers:block.bem_block_modifiers,
+            bem_block_extra:block.bem_block_extra,
+            fields:block.fields,
+          } %}
+        {% endfor %}
+
+      {% elseif block.block_type == 'cb_faq'%}
+        {# loop a few times to create a bunch #}
+        {% for video in range(1, 6)%}
+          {# FAQ #}
+          {% include "@%theme_prefix%-cb-molecules/003-faq/styleguide/faq.twig" with {
+            label: block.label,
+            configuration: block.configuration,
+            block_type: block.block_type,
+            bem_block_modifiers: block.bem_block_modifiers,
+            bem_block_extra: block.bem_block_extra,
+            fields: block.fields,
+          } %}
+        {% endfor %}
+
+      {% elseif block.block_type == 'cb_testimonial'%}
+        {# loop a few times to create a bunch #}
+          {% for video in range(1, 2)%}
+          {# Testimonial #}
+          {% include "@%theme_prefix%-cb-molecules/004-testimonial/styleguide/testimonial.twig" with {
+            label: block.label,
+            configuration: block.configuration,
+            block_type: block.block_type,
+            bem_block_modifiers: block.bem_block_modifiers,
+            bem_block_extra: block.bem_block_extra,
+            fields: block.fields,
+          } %}
+        {% endfor %}
+
+      {% elseif block.block_type == 'cb_usp'%}
+        {# loop a few times to create a bunch #}
+        {% for video in range(1, 6)%}
+          {# USP #}
+          {% include "@%theme_prefix%-cb-molecules/005-usp/styleguide/usp.twig" with {
+            label: block.label,
+            configuration: block.configuration,
+            block_type: block.block_type,
+            bem_block_modifiers: block.bem_block_modifiers,
+            bem_block_extra: block.bem_block_extra,
+            fields: block.fields,
+          } %}
+        {% endfor %}
+
+      {% endif %}
+
+      {% endfor %}
+
+  {% endblock %}
+
+  {% block section_bottom %}
+
+  {% endblock %}
+
+{% endembed %}

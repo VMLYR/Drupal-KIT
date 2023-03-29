@@ -1,0 +1,77 @@
+
+.florista--blog-section .block--type-cb-related-items {
+
+  .field__item--name-field-cb-related-items {
+    //
+  }
+
+  .field--name-field-media-canonical-image picture {
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      display: block;
+      padding: rem(7) rem(16) rem(6) rem(11);
+      font-weight: $font-weight-medium;
+      color: hsl(var(--clr-white));
+      background-color: hsl(var(--clr-spot-1));
+      content: "30-11";
+      @include font-size(20, 24);
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .florista--blog-section .block--type-cb-related-items {
+
+    .field__item--name-field-cb-related-items {
+      @include flex-col(6, 12, var(--gap-cb-related-item));
+
+      .node {
+        position: relative;
+        padding-left: calc(#{rem(170)} + #{rem(30)});
+      }
+
+      .field--name-field-media-canonical-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: rem(170);
+        min-width: 0;
+      }
+
+
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: small desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large desktop
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .florista--blog-section .block--type-cb-related-items {
+
+    .field__item--name-field-cb-related-items {
+      @include flex-col(4, 12, var(--gap-cb-related-item));
+    }
+  }
+}

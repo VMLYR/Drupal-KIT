@@ -1,0 +1,31 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Variables: icons
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Fontawesome
+// =============================================================================
+
+// ** If you have access to the Pro version of Fontawesome,
+//    please download and add the font-files to "THEMENAME/fonts/FontAwesome" so they can be picked up
+//    Also change the file names in "THEMENAME/components/00-theme/00-base/02-fonts/_fonts.scss"
+
+$fontawesome-version: "free"; // "pro" or "free"
+
+// ** When using Fontawesome icons,
+//    we reuse the variables found in: "THEME/components/00-theme/00-base/04-vendors/fontawesome/_variables"
+//    In 90% of the cases, you can use the icon name to guess the variable
+//    eg. The warning triangle is called "exclamation-triangle",
+//        this translates to the variable $fa-var-exclamation-triangle (content: "\f071")
+
+// ** Find all the icons at: https://fontawesome.com/icons
+
+
+// * Iconfont or Icon sprite
+// =============================================================================
+
+// ** You don't need to add variables for the generated sprite as well as the custom icon font
+//    these have their own variables files and mixin files
+//    See Storybook Atoms: Images - Custom icons, for more info

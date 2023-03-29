@@ -1,0 +1,164 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+
+<div class="storybook__content__label storybook__content__label--layout">
+  {{description}}
+</div>
+
+{% embed "@%theme_prefix%-templates/styleguide/section/two-col.twig" with {
+  description: description,
+  label: label,
+  template: template,
+  minimal_styling: minimal_styling,
+  region_type: region_type,
+  modifier: modifier,
+  bem_section_extra: bem_section_extra,
+  extra_classes: extra_classes,
+  settings: settings,
+  content: content,
+  layout_background_image: layout_background_image,
+  background_image: background_image,
+  background_stretched: background_stretched,
+  background_color: background_color,
+  left_col_size: left_col_size,
+  right_col_size: right_col_size,
+  col_spacing: col_spacing,
+  col_spacing_override: col_spacing_override,
+  col_spacing_override_column: col_spacing_override_column,
+  valign: valign,
+  section_spacing_top: section_spacing_top,
+  section_spacing_bottom: section_spacing_bottom,
+} %}
+
+  {% block first_main %}
+
+    <div class="storybook__content-section storybook__content-section--layout-builder">
+      <div class="text">Placeholder</div>
+    </div>
+
+  {% endblock %}
+
+  {% block second_main %}
+
+    {% if block_type == 'cb_text'%}
+      {# Text #}
+      {% include "@%theme_prefix%-cb-molecules/001-text/styleguide/text.twig" with {
+        label: blocks.cb_text.label,
+        configuration: blocks.cb_text.configuration,
+        block_type: blocks.cb_text.block_type,
+        bem_block_modifiers: blocks.cb_text.bem_block_modifiers,
+        bem_block_extra: blocks.cb_text.bem_block_extra,
+        fields: blocks.cb_text.fields,
+      } %}
+
+    {% elseif block_type == 'cb_image'%}
+      {# Image #}
+      {% include "@%theme_prefix%-cb-molecules/002a-image/styleguide/image.twig" with {
+        label: blocks.cb_image.label,
+        configuration: blocks.cb_image.configuration,
+        block_type: blocks.cb_image.block_type,
+        bem_block_modifiers: blocks.cb_image.bem_block_modifiers,
+        bem_block_extra: blocks.cb_image.bem_block_extra,
+        fields: blocks.cb_image.fields,
+      } %}
+
+    {% elseif block_type == 'cb_video'%}
+      {# Media - Video #}
+      {% include "@%theme_prefix%-cb-molecules/002b-video/styleguide/video.twig" with {
+        label: blocks.cb_video.label,
+        configuration: blocks.cb_video.configuration,
+        block_type: blocks.cb_video.block_type,
+        bem_block_modifiers: blocks.cb_video.bem_block_modifiers,
+        bem_block_extra: blocks.cb_video.bem_block_extra,
+        fields: blocks.cb_video.fields,
+      } %}
+    {% elseif block_type == 'cb_faq'%}
+       {# FAQ #}
+      {% include "@%theme_prefix%-cb-molecules/003-faq/styleguide/faq.twig" with {
+        label: blocks.cb_faq.label,
+        configuration: blocks.cb_faq.configuration,
+        block_type: blocks.cb_faq.block_type,
+        bem_block_modifiers: blocks.cb_faq.bem_block_modifiers,
+        bem_block_extra: blocks.cb_faq.bem_block_extra,
+        fields: blocks.cb_faq.fields,
+      } %}
+    {% elseif block_type == 'cb_testimonial'%}
+      {# Testimonial #}
+      {% include "@%theme_prefix%-cb-molecules/004-testimonial/styleguide/testimonial.twig" with {
+        label: blocks.cb_testimonial.label,
+        configuration: blocks.cb_testimonial.configuration,
+        block_type: blocks.cb_testimonial.block_type,
+        bem_block_modifiers: blocks.cb_testimonial.bem_block_modifiers,
+        bem_block_extra: blocks.cb_testimonial.bem_block_extra,
+        fields: blocks.cb_testimonial.fields,
+      } %}
+    {% elseif block_type == 'cb_usp'%}
+      {# USP #}
+      {% include "@%theme_prefix%-cb-molecules/005-usp/styleguide/usp.twig" with {
+        label: blocks.cb_usp.label,
+        configuration: blocks.cb_usp.configuration,
+        block_type: blocks.cb_usp.block_type,
+        bem_block_modifiers: blocks.cb_usp.bem_block_modifiers,
+        bem_block_extra: blocks.cb_usp.bem_block_extra,
+        fields: blocks.cb_usp.fields,
+      } %}
+    {% elseif block_type == 'cb_focus'%}
+      {# Focus #}
+      {% include "@%theme_prefix%-cb-molecules/006-focus/styleguide/focus.twig" with {
+        label: blocks.cb_focus.label,
+        configuration: blocks.cb_focus.configuration,
+        block_type: blocks.cb_focus.block_type,
+        bem_block_modifiers: blocks.cb_focus.bem_block_modifiers,
+        bem_block_extra: blocks.cb_focus.bem_block_extra,
+        fields: blocks.cb_focus.fields,
+      } %}
+     {% elseif block_type == 'cb_form'%}
+      {# Form #}
+      {% include "@%theme_prefix%-cb-molecules/008-form/styleguide/form.twig" with {
+        label: blocks.cb_form.label,
+        configuration: blocks.cb_form.configuration,
+        block_type: blocks.cb_form.block_type,
+        bem_block_modifiers: blocks.cb_form.bem_block_modifiers,
+        bem_block_extra: blocks.cb_form.bem_block_extra,
+        fields: blocks.cb_form.fields,
+      } %}
+    {% elseif block_type == 'cb_photo_gallery'%}
+      {# Photo Gallery #}
+      {% include "@%theme_prefix%-cb-molecules/007-photo-gallery/styleguide/photo-gallery.twig" with {
+        label: blocks.cb_photo_gallery.label,
+        configuration: blocks.cb_photo_gallery.configuration,
+        block_type: blocks.cb_photo_gallery.block_type,
+        bem_block_modifiers: blocks.cb_photo_gallery.bem_block_modifiers,
+        bem_block_extra: blocks.cb_photo_gallery.bem_block_extra,
+        fields: blocks.cb_photo_gallery.fields,
+        attributes: blocks.cb_photo_gallery.attributes,
+      } %}
+    {% elseif block_type == 'cb_menu_overview'%}
+      {# Menu Overview #}
+      {% include "@%theme_prefix%-cb-molecules/009-menu-overview/styleguide/menu-overview.twig" with {
+        label: blocks.cb_menu_overview.label,
+        configuration: blocks.cb_menu_overview.configuration,
+        block_type: blocks.cb_menu_overview.block_type,
+        bem_block_modifiers: blocks.cb_menu_overview.bem_block_modifiers,
+        bem_block_extra: blocks.cb_menu_overview.bem_block_extra,
+        fields: blocks.cb_menu_overview.fields,
+      } %}
+    {% elseif block_type == 'cb_related_items'%}
+      {# Related Items #}
+      {% include "@%theme_prefix%-cb-molecules/010-related-items/styleguide/related-items.twig" with {
+        label: blocks.cb_related_items.label,
+        configuration: blocks.cb_related_items.configuration,
+        block_type: blocks.cb_related_items.block_type,
+        bem_block_modifiers: blocks.cb_related_items.bem_block_modifiers,
+        bem_block_extra: blocks.cb_related_items.bem_block_extra,
+        fields: blocks.cb_related_items.fields,
+      } %}
+    {% endif %}
+
+  {% endblock %}
+
+{% endembed %}

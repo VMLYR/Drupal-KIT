@@ -1,0 +1,15 @@
+{% extends "@%theme_prefix%-molecules/00-block/_block.twig" %}
+
+{% block block_content %}
+  {% if image_wrapper_url %}
+    <a class="cb-image__link" target="{{ image_wrapper_url_target }}" href="{{ image_wrapper_url }}"{% if image_wrapper_url_title %} title="{{image_wrapper_url_title}}"{% endif %}>
+  {% endif %}
+
+    <div{{ content_attributes.addClass('content') }}>
+      {{ content }}
+    </div>
+
+  {% if image_wrapper_url %}
+    </a>
+  {% endif %}
+{% endblock %}

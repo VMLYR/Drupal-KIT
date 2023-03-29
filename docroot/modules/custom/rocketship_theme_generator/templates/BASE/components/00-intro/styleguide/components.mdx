@@ -1,0 +1,76 @@
+import { Story } from '@storybook/addon-docs';
+
+# Components
+
+The theme is built using a component-based (or Atomic) method.
+Before going further, it is recommended you get familiar with the idea and
+practice behind this. To do so, here are some resources:
+
+- http://bradfrost.com/blog/post/atomic-web-design/
+  - More in depth: http://atomicdesign.bradfrost.com/chapter-2/
+- Implementation example: https://patternlab.io/
+  - Demo: http://demo.patternlab.io/
+
+Our method is slightly different (eg. in order to try and avoid naming
+confusion with D8)
+
+First, a distinction about what the components are used for:
+
+- 00-theme
+- 01-content-blocks
+- 02-features
+
+Inside that is the atomic structure:
+
+- **base**: config and vars
+- **atoms**: simplest elements, eg. fields
+- **molecules**: groups of atoms, eg. most blocks
+- **organisms**: groups of molecules, eg. paragraphs or site regions
+- **pages**: Drupal pages + our html frame. This is also where we add the font,
+because it works with JS in the HEAD of the HTML
+- **layouts**: (custom) layout templates
+
+
+All of these offer a **combination** of twig, js and css-files.
+The reason you will not find a lot of CSS here, is because of the complexity
+of our Sass. There are lots of imports (dependencies) and cascades that are
+easy to break if we start splitting the CSS.
+We do split off the CSS for the Content Blocks and Features from the rest of the
+theme.  
+For some types of components, loading of these split-off libraries happens in the .info file (eg. for the Content Blocks) so it's always loaded. But others (eg. Features) are not loaded by default because their relevant components are not installed by default.  
+So if you want to use the relevant styling, you need to either add it yourself to .info (globally) or add it conditionally (eg. using the theme hook `_preprocess_page` which already has an example, or in a Twig file).
+
+**Naming** is important for our structure. Sometimes we use numbered folders,
+in order to control the loading order. Files starting with and underscore (_)
+indicate that they are imported or included somewhere.
+
+**In the future**, there will be integration of an atomic styleguide
+(like [Pattern Lab](http://demo.patternlab.io/)). But for now you can find a
+drupal **styleguide** in `admin/appearance/styleguide`
+
+
+### Components vs templates
+
+Because this is a component-driven theme, based on the [Pattern Lab structure](http://patternlab.io/docs/pattern-organization.html), You'll find a bunch of Sass, JS and twig-files together inside the `components/00-theme`-folder.
+We've also removed the drupal templates folder and just moved those templates insid the relevant component folder. You can recognize them by the fact they have the `.html.twig` extention and are always nested in a `templates`-folder within a `_drupal` folder.
+
+- The theme's `.info` file, let's you list aliasses in order to include or extend twig-templates (see under: component-libraries).
+- That way, we can move the content of every template that is in the `templates`-folder to the `components/00-theme`-folders, creating better-named components
+- we also have some extra Twig functions available in there, eg. to make BEM-classes easier to construct. You'll find those in `components/_twig-components`
+- to add JS-files per component, you'll have to use drupal's `attach_library()`-function to add libraries to you component's main twig file,
+The library name is declared in the theme's `libraries`-file.
+The status-component is a good example, you can find the relevant files in `templates/misc/status-messages.html.twig` and `compontent/00-theme/02-molecules/status`
+
+#### Naming conventions
+
+Component files end with `.twig` because we don't need to follow Drupal's templating naming conventions: the shorter, the better. So this naming also helps to separate it from the conventional Drupal templates if they would accidentally share the same name.
+The file names start with an underscore to indicate that these files are 'partials' and are meant to be included somewhere (eg. in Drupal templates or in other component files).
+
+#### BEM
+
+There is a twig-function that can generate BEM-classes for you.
+It looks like this: `{{bem(block, element, [modifier], [extra])}}`
+This function essentially outputs the same stuff as {{ attributes }} but also adds a bunch of classes made with the BEM principles if you pass those variables to it. Keep in mind the modifier and extra classes are passed as arrays.
+That way you can still have the 'normal' drupal classes as well as BEM classes if you need that.
+So the output in html may look something like this:
+`class="block__element block__element--modifierA block__element--modifierB extra_class01 extra_class02 default_drupal_class" id="someidhere" role="group"`

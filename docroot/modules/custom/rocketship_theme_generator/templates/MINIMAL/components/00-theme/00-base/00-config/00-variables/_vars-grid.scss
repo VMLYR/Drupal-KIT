@@ -1,0 +1,26 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Vars: grid
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Grid settings
+// =============================================================================
+
+$grid-columns: 12;
+
+// * Visual Grid (for debug purposes only)
+// =============================================================================
+
+// -- Show visual breakpoint indicators if true
+$visual-indicators: false;
+
+// -- Show grid overlay if true
+$visual-grid: false;
+
+// -- Grid more settings
+$visual-grid-color: red;
+$visual-grid-index: front; // or back
+$visual-grid-opacity: 0.2;

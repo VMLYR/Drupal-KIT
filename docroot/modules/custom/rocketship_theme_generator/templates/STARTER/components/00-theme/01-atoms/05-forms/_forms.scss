@@ -1,0 +1,17 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms: general
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Floating labels
+// =============================================================================
+
+// ** make floating labels for specific forms:
+
+form[class *= "webform-submission"],
+form[class *= "contact"],
+form.is--floating {
+  @include floating-labels-group;
+}

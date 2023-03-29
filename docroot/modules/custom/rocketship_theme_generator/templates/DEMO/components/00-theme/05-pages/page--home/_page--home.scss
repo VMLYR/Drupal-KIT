@@ -1,0 +1,85 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Homepage styling
+// *
+// * Style the Sections and Regions specific for your homepage
+// *
+// * Tip: add classes to your sections, based on what is in it:
+// *      eg. 'home__section--usp-info' would be a section with an usp and an info block
+// * Tip: Lock the possibility for webadmins to add or delete sections in certain parts of the homepage,
+// *      so they don't break the layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+
+// ** row with USP & Info
+
+.florista--homepage-usp-section {
+
+  .layout__sidebar--2-col--left {
+    //
+  }
+
+  .block--type-cb-text {
+    //
+  }
+
+  .block--type-block-usp {
+    //
+  }
+
+
+  // Info
+  .layout__sidebar--2-col--right {
+    padding: rem(40) 0;
+  }
+
+  .layout__content--2-col--right {
+    //
+  }
+
+}
+
+
+// ** Example of targetting first or last layout section of the frontpage
+//    to manipulate spacing, for example
+//    Ideally, you would set a class to that last layout and target that
+//    + lock the ability for content editors might still add a section below it,
+//    unless you lock that option
+
+.path-frontpage .node__content--page--full {
+
+  & > .layout:last-child:not(.has-bg):not(.has-bg-image) {
+    padding-bottom: var(--gap-vert-xs);
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // ** row with USP & Info
+
+  .florista--homepage-usp-section {
+
+    .layout__sidebar--2-col--left {
+      padding-right: rem(40);
+      border-right: 1px solid hsl(var(--clr-gray-light-2));
+    }
+
+    .layout__content--2-col--right {
+      padding-left: rem(10);
+    }
+
+  }
+
+
+}

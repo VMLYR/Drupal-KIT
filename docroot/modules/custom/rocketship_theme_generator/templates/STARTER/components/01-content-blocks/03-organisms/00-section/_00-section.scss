@@ -1,0 +1,654 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Sections with Content Blocks
+// *
+// * General styling for sections (whitespaces, bg colors, ...)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Sections sizing and spacing and positioning
+// =============================================================================
+
+.layout--content-blocks {
+
+  $selfSelector: ".layout--content-blocks";
+
+  --gap-layout-vert-top: #{rem(40)};
+  --gap-layout-vert-bottom: #{rem(40)};
+
+  --width-layout-col-1-1: initial;
+  --width-layout-col-1-2: initial;
+  --width-layout-col-1-3: initial;
+  --width-layout-col-2-3: initial;
+  --width-layout-col-1-4: initial;
+  --width-layout-col-3-4: initial;
+  --width-layout-col-5-12: initial;
+  --width-layout-col-7-12: initial;
+
+  // ---------------------------------------------------------------------------
+
+  // give absolute items something to position themselves to
+  position: relative;
+
+  // ** padding to create space above and below the layout content
+
+  // spacing on top and bottom of the section
+  padding-top: var(--gap-layout-vert-top);
+  padding-bottom: var(--gap-layout-vert-bottom);
+
+  // ** section with backgrounds need padding on sides
+
+  padding-left: var(--gap-layout-hor);
+  padding-right: var(--gap-layout-hor);
+
+  // // no top padding if 2 have matching background-colors
+  // &.has-matching-bg + #{$selfSelector}.has-matching-bg-last {
+  //   padding-top: 0; // no double spacing when same bg
+  // }
+
+  // ** background image: make it stretch (like "cover")
+
+  .media--view-mode-layout-builder-background {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+
+    // -- make img stretch with width (visually cropped height)
+
+    // prevent blazy wrappers from breaking positioning of absolute image
+    // so needs some styling to enable proper position and stretch of the img
+    // basically, match what the sidebar div is doing
+    .media {
+      position: static;
+    }
+
+    // no need for layout shift fix
+    .img-layout-shift {
+      position: static;
+      padding-bottom: 0 !important;
+      background-color: transparent;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: auto;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: auto;
+      max-width: none;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover; // keep image in ratio (not in IE)
+    }
+  }
+
+  .node & .field--name-field-cb-bg-image,
+  .node & .field--name-field-cb-media-bg-image {
+    float: none;
+    margin: 0;
+  }
+
+}
+
+// ** section with stretched backgrounds need no padding on the sides
+
+.layout--bg-stretched {
+  padding-left: 0;
+  padding-right: 0;
+
+  // ** make background-image of the block, stretch width of page
+  .media--view-mode-layout-builder-background {
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+  }
+
+  // ** stretched backgrounds
+
+  &::before {
+    margin-left: calc((-100vw + 100%) / 2);
+    width: 100vw;
+  }
+}
+
+// ** padding change above and below the layout content
+
+.layout--v-space-top-0x {
+  padding-top: 0;
+}
+
+.layout--v-space-bottom-0x {
+  padding-bottom: 0;
+}
+
+.layout--v-space-top-minimal {
+  padding-top: var(--gap-layout-vert-minimal);
+}
+
+.layout--v-space-bottom-minimal {
+  padding-bottom: var(--gap-layout-vert-minimal);
+}
+
+.layout--v-space-top-medium {
+  padding-top: var(--gap-layout-vert-medium);
+}
+
+.layout--v-space-bottom-medium {
+  padding-bottom: var(--gap-layout-vert-medium);
+}
+
+@for $i from 2 through 5 {
+  .layout--v-space-top-#{$i}x {
+    padding-top: calc(var(--gap-layout-vert-top) * $i);
+  }
+
+  .layout--v-space-bottom-#{$i}x {
+    padding-bottom: calc(var(--gap-layout-vert-bottom) * $i);
+  }
+}
+
+.layout__region--content-blocks {
+
+  // Because we will need to position and stretch elements in relation to the layout
+  // we reset the positioning for the regions (eg. the columns)
+  // might also need to reset it on certain blocks, but that is handled in the specific
+  // block sass files
+  position: static;
+
+  // vertical space between regions when displayed as 1 column
+  margin-top: var(--gap-layout-vert-top);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+}
+
+//// ** Page content blocks:
+////
+//// ** last section (with content blocks) + without a bg needs no space at the bottom
+//
+//.layout {
+//
+//  .layout--content-blocks {
+//
+//    &:last-child {
+//      padding-bottom: 0;
+//    }
+//  }
+//}
+
+
+// * Section backgrounds
+// =============================================================================
+
+@if ($structuralOnly == false) {
+
+  // ***************************************************************************
+  // Add your section specific backgrounds here.
+  // See example below.
+  // ***************************************************************************
+
+  // ** section backgrounds
+  //    you can use these to override stuff based on background-color changes as well
+
+  .layout--bg-color {
+    @include full-bg (hsl(var(--clr-layout-bg)), "before", false);
+  }
+
+  .layout--bg--white {
+    --clr-layout-bg: var(--clr-white);
+  }
+
+  .layout--bg--grey {
+    --clr-layout-bg: var(--clr-off-white);
+  }
+
+  .layout--bg--spot-1 {
+    --clr-layout-bg: var(--clr-spot-1);
+  }
+
+  .layout--bg--spot-2 {
+    --clr-layout-bg: var(--clr-spot-2);
+  }
+
+  // .layout--bg--spot-3 {
+  //   --clr-layout-bg: var(--clr-spot-3);
+  // }
+
+  // .layout--bg--black {
+  //   --clr-layout-bg: var(--clr-black);
+  // }
+
+}
+
+@if ($structuralOnly == false) {
+
+  // ** color changes because of the backgrounds
+
+  .layout--bg--spot-1,
+  .layout--bg--spot-2 {
+
+    .content-block {
+
+      // -- override colors
+
+      --clr-cb: var(--clr-white);
+      --clr-cb-heading: var(--clr-white);
+      --clr-cb-spot-1: var(--clr-white);
+      --clr-cb-spot-2: var(--clr-white);
+      --clr-cb-link: var(--clr-white);
+      --clr-cb-link-hover: var(--clr-white);
+      --clr-cb-text-link: var(--clr-white);
+      --clr-cb-text-link-hover: var(--clr-white);
+    }
+
+    color: hsl(var(--clr-base));
+
+    .button {
+
+      // -- make the other buttons look different
+
+      &:nth-child(n+2) {
+        @include button-negative-secondary;
+      }
+    }
+  }
+
+  .layout--bg--spot-2 {
+    //   .button {
+
+    //     @include button-negative-2;
+
+    //     // -- make the other buttons look different
+
+    //     &:nth-child(n+2) {
+    //       @include button-negative-secondary-2;
+    //     }
+    //   }
+  }
+
+  // .layout--bg--spot-3,
+  // .layout--bg--black {
+  //   .button {
+
+  //     @include button-primary;
+
+  //     // -- make the other buttons look different
+
+  //     &:nth-child(n+2) {
+  //       @include button-secondary;
+  //     }
+  //   }
+  // }
+
+}
+
+//// ** override bg color with a gradient background
+////    + go over the image instead of under it, when there is one
+////
+//.layout--bg-image {
+//
+//  // First we fix the z-indexes so color goes OVER the bg image
+//  &::before {
+//    z-index: 0;
+//  }
+//
+//  .media--view-mode-layout-builder-background {
+//    z-index: -1;
+//    opacity: 1; // no transparency on the image needed
+//  }
+//}
+//
+//.layout--bg-image.layout--bg--spot-1 & {
+//
+//  // then we turn the bg color into a gradient
+//  // set a direction using 'to …'
+//  // use positions using %
+//  // use rgba for transparency of colors
+//  // this example:
+//  // - sets a solid bg color until position 50%,
+//  // - then it fades to opacity 0 at position 75%,
+//  // - then it stays at opacity 0 until the end position at 100%
+//  // so the image fades in between position 50% until 100%, and is fully visible from 75% until 100%;
+//
+//  &::before {
+//    background: linear-gradient(to right, rgba(hsl(var(--clr-spot-1)), 1) 50%, rgba(hsl(var(--clr-spot-1)), 0) 75%, rgba(hsl(var(--clr-spot-1)), 0) 100%);
+//  }
+//}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // * Sections sizing and spacing
+  // =============================================================================
+
+  .layout--content-blocks {
+
+    // ** padding to create space above and below the layout content
+
+    --gap-layout-vert-top: #{rem(40)};
+    --gap-layout-vert-bottom: #{rem(40)};
+
+    // -- everything is 50/50 on tablet
+
+    --width-layout-col-1-1: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-1-2: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-1-3: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-2-3: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-1-4: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-3-4: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-5-12: calc((100% / 2) - var(--gap-layout-hor));
+    --width-layout-col-7-12: calc((100% / 2) - var(--gap-layout-hor));
+
+  }
+
+  // * Columns sizing (multi-column sections only)
+  // ============================================================================
+
+  // -- override default col sizing
+
+  // cols wrapper
+  .layout__cols--2-col--content-blocks,
+  .layout__cols--3-col--content-blocks,
+  .layout__cols--4-col--content-blocks {
+    margin-left: calc(var(--gap-layout-hor) / -2);
+    margin-right: calc(var(--gap-layout-hor) / -2);
+  }
+
+  // columns
+  .layout__region--2-col--content-blocks,
+  .layout__region--3-col--content-blocks,
+  .layout__region--4-col--content-blocks {
+    // reset vertical space between regions
+    margin-top: 0;
+    margin-left: calc(var(--gap-layout-hor) / 2);
+    margin-right: calc(var(--gap-layout-hor) / 2);
+  }
+
+  // 1 col
+  .layout__region--2-col--content-blocks {
+    width: var(--width-layout-col-1-1);
+  }
+
+  // col x of 2
+  .layout__region--size-1-2 {
+    width: var(--width-layout-col-1-2);
+  }
+
+  // col x of 3
+  .layout__region--3-col--content-blocks,
+  .layout__region--size-1-3 {
+    width: var(--width-layout-col-1-3);
+  }
+
+  .layout__region--size-2-3 {
+    width: var(--width-layout-col-2-3);
+  }
+
+  // col x of 4
+  .layout__region--4-col--content-blocks,
+  .layout__region--size-1-4 {
+    width: var(--width-layout-col-1-4);
+  }
+
+  .layout__region--size-3-4 {
+    width: var(--width-layout-col-3-4);
+  }
+
+  // of 12
+  .layout__region--size-5-12 {
+    width: var(--width-layout-col-5-12);
+  }
+
+  .layout__region--size-7-12 {
+    width: var(--width-layout-col-7-12);
+  }
+
+  // * Extra columns spacing (multi-column sections only)
+  // =============================================================================
+
+  // -- resetting the gutter
+
+  // cols wrapper: reset margins if no gutters on columns
+  .layout__cols--col-spacing-0x {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // -- columns spacing
+  // -- also need to reset widths on the individual cols, if no margins to take into account
+
+  .layout__region--col-spacing-first-0x,
+  .layout__region--col-spacing-last-0x,
+  .layout__region--col-spacing-middle-0x {
+
+    --width-layout-col-1-1: calc(100% / 2);
+    --width-layout-col-1-2: calc(100% / 2);
+    --width-layout-col-1-3: calc(100% / 2);
+    --width-layout-col-2-3: calc(100% / 2);
+    --width-layout-col-1-4: calc(100% / 2);
+    --width-layout-col-3-4: calc(100% / 2);
+    --width-layout-col-5-12: calc(100% / 2);
+    --width-layout-col-7-12: calc(100% / 2);
+
+    margin-left: 0;
+    margin-right: 0;
+
+    // 1 col
+    &.layout__region--2-col--content-blocks {
+      width: var(--width-layout-col-1-1);
+    }
+
+    // col x of 2
+    &.layout__region--size-1-2 {
+      width: var(--width-layout-col-1-2);
+    }
+
+    // col x of 3
+    &.layout__region--3-col--content-blocks,
+    &.layout__region--size-1-3 {
+      width: var(--width-layout-col-1-3);
+    }
+
+    &.layout__region--size-2-3 {
+      width: var(--width-layout-col-2-3);
+    }
+
+    // col x of 4
+    &.layout__region--4-col--content-blocks,
+    &.layout__region--size-1-4 {
+      width: var(--width-layout-col-1-4);
+    }
+
+    &.layout__region--size-3-4 {
+      width: var(--width-layout-col-3-4);
+    }
+
+    // of 12
+    &.layout__region--size-5-12 {
+      width: var(--width-layout-col-5-12);
+    }
+
+    &.layout__region--size-7-12 {
+      width: var(--width-layout-col-7-12);
+    }
+  }
+
+  // -- increasing col spacing
+
+  @for $i from 1 through 5 {
+
+    // individual
+
+    .layout__region--col-spacing-first-#{$i}x {
+      padding-right: calc(var(--gap-layout-hor) / 2 * #{($i - 1)});
+    }
+
+    .layout__region--col-spacing-last-#{$i}x {
+      padding-left: calc(var(--gap-layout-hor) / 2 * #{($i - 1)});
+    }
+
+    .layout__region--col-spacing-middle-#{$i}x {
+      padding-left: calc(var(--gap-layout-hor) / 2 * #{($i - 1)});
+      padding-right: calc(var(--gap-layout-hor) / 2 * #{($i - 1)});
+    }
+
+  }
+
+
+  // * Columns vertical alignment
+  // =============================================================================
+
+  .layout__cols--v-align-top {
+    // nothing by default, because 'stretched' is default,
+    // which causes equal col heights as well as top alignment
+    // align-items: center;
+  }
+
+  .layout__cols--v-align-bottom {
+    align-items: flex-end;
+  }
+
+  .layout__cols--v-align-center,
+  .layout__cols--v-align-middle {
+    align-items: center;
+  }
+
+  //// ** Page content blocks:
+  ////
+  //// ** last section (with content blocks) + without a bg needs no space at the bottom
+  //
+  //.layout {
+  //
+  //  .layout--content-blocks {
+  //
+  //    &:last-child {
+  //      padding-bottom: 0;
+  //    }
+  //  }
+  //}
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // * Sections sizing and spacing
+  // =============================================================================
+
+  .layout--content-blocks {
+
+    // ** padding to create space above and below the layout content
+
+    --gap-layout-vert-top: #{rem(50)};
+    --gap-layout-vert-bottom: #{rem(50)};
+
+    --width-layout-col-1-3: calc((100% / 3) - var(--gap-layout-hor));
+    --width-layout-col-2-3: calc((100% / 3 * 2) - var(--gap-layout-hor));
+    --width-layout-col-1-4: calc((100% / 4) - var(--gap-layout-hor));
+    --width-layout-col-3-4: calc((100% / 4 * 3) - var(--gap-layout-hor));
+
+  }
+
+
+  // * Extra columns spacing (multi-column sections only)
+  // =============================================================================
+
+  // -- also need to reset widths on the individual cols, if no margins to take into account
+  .layout__region--col-spacing-first-0x,
+  .layout__region--col-spacing-last-0x,
+  .layout__region--col-spacing-middle-0x {
+
+    --width-layout-col-1-3: calc(100% / 3);
+    --width-layout-col-2-3: calc(100% / 3 * 2);
+    --width-layout-col-1-4: calc(100% / 4);
+    --width-layout-col-3-4: calc(100% / 4 * 3);
+
+  }
+
+  //// ** Page content blocks:
+  ////
+  //// ** last section (with content blocks) + without a bg needs no space at the bottom
+  //
+  //.layout {
+  //
+  //  .layout--content-blocks {
+  //
+  //    &:last-child {
+  //      padding-bottom: 0;
+  //    }
+  //  }
+  //}
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // * Sections sizing and spacing
+  // =============================================================================
+
+  .layout--content-blocks {
+
+    // ** padding to create space above and below the layout content
+
+    --gap-layout-vert-top: #{rem(75)};
+    --gap-layout-vert-bottom: #{rem(75)};
+
+    --gap-layout-vert-top-small: #{rem(60)};
+    --gap-layout-vert-bottom-small: #{rem(60)};
+
+    --width-layout-col-5-12: calc((100% / 12 * 5) - var(--gap-layout-hor));
+    --width-layout-col-7-12: calc((100% / 12 * 7) - var(--gap-layout-hor));
+
+  }
+
+  // * Extra columns spacing (multi-column sections only)
+  // =============================================================================
+
+  // -- also need to reset widths on the individual cols, if no margins to take into account
+  .layout__region--col-spacing-first-0x,
+  .layout__region--col-spacing-last-0x,
+  .layout__region--col-spacing-middle-0x {
+
+    --width-layout-col-5-12: calc(100% / 12 * 5);
+    --width-layout-col-7-12: calc(100% / 12 * 7);
+
+  }
+
+  //// ** Page content blocks:
+  ////
+  //// ** last section (with content blocks) + without a bg needs no space at the bottom
+  //
+  //.layout {
+  //
+  //  .layout--content-blocks {
+  //
+  //    &:last-child {
+  //      padding-bottom: 0;
+  //    }
+  //  }
+  //}
+
+}

@@ -1,0 +1,55 @@
+{#
+/**
+ * Available variables:
+ * - button_type: link or button tag
+ * - button_block - blockname prepended to the base classname
+ * - button_element - the base class name of the element
+ * - button_modifiers - array of modifiers to add to the base classname
+ * - button_attributes - array of attribute,value pairs
+ * - button_url - the url this button should poing to
+ * - button_content - the content of the button (typically text)
+ *
+ * Available blocks:
+ * - button_content - used to replace the content of the button with something other than text
+ *   for example: to insert an icon
+ */
+#}
+{% set button_bem_block = button_bem_block|default('button') %}
+{% set button_bem_element = button_bem_element|default(false) %}
+{% if button_bem_modifiers is not defined %}
+  {% set button_bem_modifiers = [] %}
+{% endif %}
+{% if button_bem_extra is not defined %}
+  {% set button_bem_extra = [] %}
+{% endif %}
+
+{% if button_attributes is not defined or button_attributes is null or button_attributes == false %}
+  {% set button_attributes = {} %}
+{% endif %}
+
+{% if button_type == 'link'%}
+  <a
+    {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+    {{bem(button_bem_block, button_bem_element, button_bem_modifiers, button_bem_extra, button_attributes)}}
+    {% if button_url is defined and button_url is not null and button_url != false and button_url|length %}href="{{ button_url }}"{% endif %}
+  >
+{% else %}
+  {% set additional_attributes = {
+    "aria-label": 'button',
+  } %}
+  {% set button_attributes = button_attributes|merge(additional_attributes) %}
+  <button
+    {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+    {{bem(button_bem_block, button_bem_element, button_bem_modifiers, button_bem_extra, button_attributes)}}
+  >
+{% endif %}
+
+{% block button_content %}
+  {{ button_content }}
+{% endblock %}
+
+{% if button_type == 'link'%}
+  </a>
+{% else %}
+  </button>
+{% endif %}

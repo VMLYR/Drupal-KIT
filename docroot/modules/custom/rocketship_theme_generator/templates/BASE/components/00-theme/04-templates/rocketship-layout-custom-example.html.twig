@@ -1,0 +1,120 @@
+{#
+/**
+ * @file
+ * Layout Builder: custom template example
+ *  used for a section, creates named regions inside of it
+ *
+ * Regions:
+ * - sidebar left: region on the left of the main content
+ * - content: main content region
+ * - sidebar right: region on the right of the main content
+ * - …
+ */
+#}
+
+{% set layoutModifier = 'example' %}
+{% set classMain = 'center' %}
+{% set classAsideLeft = 'left' %}
+{% set classAsideRight = 'right' %}
+
+{% set classes = [
+    settings.label|clean_class,
+    'layout',
+    'layout--' ~ layoutModifier,
+] %}
+
+{% set colclasses = [
+    'layout__cols',
+    'layout__cols--' ~ layoutModifier,
+] %}
+
+{% set firstclasses = [
+    'layout__region',
+    'layout-builder__region',
+    'layout__col',
+    'layout__col--' ~ layoutModifier,
+    'layout__col--' ~ layoutModifier ~ '--' ~ classAsideLeft,
+] %}
+
+{% set centerclasses = [
+    'layout__region',
+    'layout-builder__region',
+    'layout__col',
+    'layout__col--' ~ layoutModifier,
+    'layout__col--' ~ layoutModifier ~ '--' ~ classMain,
+] %}
+
+{% set secondclasses = [
+    'layout__region',
+    'layout-builder__region',
+    'layout__col',
+    'layout__col--' ~ layoutModifier,
+    'layout__col--' ~ layoutModifier ~ '--' ~ classAsideRight,
+] %}
+
+{% set cols_attributes = create_attribute() %}
+{% set first_attributes = create_attribute() %}
+{% set center_attributes = create_attribute() %}
+{% set second_attributes = create_attribute() %}
+
+<div{{ attributes.addClass(classes) }}>
+
+  <div{{ cols_attributes.addClass(colclasses) }}>
+
+    <div {{ first_attributes.addClass(firstclasses) }}>
+        {% if content.first_top %}
+            <div {{ region_attributes.first_top.addClass('layout__sidebar__row--top') }}>
+                {{ content.first_top }}
+            </div>
+        {% endif %}
+        {% if content.first_main %}
+            <div {{ region_attributes.first_main.addClass('layout__sidebar__row--main') }}>
+                {{ content.first_main }}
+            </div>
+        {% endif %}
+        {% if content.first_bottom %}
+            <div {{ region_attributes.first_bottom.addClass('layout__sidebar__row--bottom') }}>
+                {{ content.first_bottom }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div {{ center_attributes.addClass(centerclasses) }}>
+        {% if content.center_top %}
+            <div {{ region_attributes.center_top.addClass('layout__content__row--top') }}>
+                {{ content.center_top }}
+            </div>
+        {% endif %}
+        {% if content.center_main %}
+            <div {{ region_attributes.center_main.addClass('layout__content__row--main') }}>
+                {{ content.center_main }}
+            </div>
+        {% endif %}
+        {% if content.center_bottom %}
+            <div {{ region_attributes.center_bottom.addClass('layout__content__row--bottom') }}>
+                {{ content.center_bottom }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div {{ second_attributes.addClass(secondclasses) }}>
+        {% if content.second_top %}
+            <div {{ region_attributes.second_top.addClass('layout__sidebar__row--top') }}>
+                {{ content.second_top }}
+            </div>
+        {% endif %}
+        {% if content.second_main %}
+            <div {{ region_attributes.second_main.addClass('layout__sidebar__row--main') }}>
+                {{ content.second_main }}
+            </div>
+        {% endif %}
+        {% if content.second_bottom %}
+            <div {{ region_attributes.second_bottom.addClass('layout__sidebar__row--bottom') }}>
+                {{ content.second_bottom }}
+            </div>
+        {% endif %}
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+import { Story } from '@storybook/addon-docs';
+
+# Theme settings
+
+Every Rocketship theme has a couple of settings your can enable or fill in, located at: `/admin/appearance/settings`<br />
+There you need to choose your active theme (the Global settings should be okay out-of-the-box).
+
+Depending on the type and version, you will get any on these:
+
+- **Fixed header:** enabling this will activate JS and CSS located in the 'header' organism and makes a fixed header
+- **Language dropdown:** renders the language menu as a dropdown. There is JS and CSS involved, located in the 'menu--language' molecule
+- **Language abbreviation:** will replace the names of the languages in the language menu with 2-letter abbreviations. Eg. 'Dutch' becomes 'nl'. This works in conjunction with a hook alter in Rocketship Core module.
+- **Animated anchor scrolling:** if you want smooth scrolling when an anchor in a page is clicked
+  - **Exceptions:** selectors that need to be excluded. Some anchor links may be in use (for opening a modal, for example) by some other bit of JS and you don't want to break that functionality.

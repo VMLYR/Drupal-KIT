@@ -1,0 +1,145 @@
+{#
+/**
+ * This is strictly an example file to demonstrate markup in Storybook.
+ * It is not intended to be included in any other component.
+ */
+#}
+<form class="is--floating">
+
+  {# Textfield: normal, has value, not required #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: text_not_required.form_element,
+    label: text_not_required.label,
+    input: text_not_required.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Textfield: normal, has value, required #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: text_required.form_element,
+    label: text_required.label,
+    input: text_required.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Textfield: normal, no value,not required #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: no_text_not_required.form_element,
+    label: no_text_not_required.label,
+    input: no_text_not_required.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Textfield: normal, no value, required #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: no_text_required.form_element,
+    label: no_text_required.label,
+    input: no_text_required.input,
+  } %}
+
+  {# Textfield: with prefix #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: prefix.form_element,
+    label: prefix.label,
+    input: prefix.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Textfield: with suffix #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: suffix.form_element,
+    label: suffix.label,
+    input: suffix.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Textfield: autocomplete (won't work bc no Drupal shizzle to make it work)
+    type: entity_autocomplete
+    input attributes:
+      'data-drupal-selector': "edit-entity-autocomplete",
+      'aria-describedby': "edit-entity-autocomplete--description",
+      'data-autocomplete-path': "/entity_reference_autocomplete/node/default/LIzQwXdpjfRcxo8KiHJGan1sHKT7buqIv94pDMHYI2k",
+  #}
+
+  {# Email #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: email.form_element,
+    label: email.label,
+    input: email.input,
+  } %}
+  {# /End Email #}
+
+  {# Date field #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: date.form_element,
+    label: date.label,
+    input: date.input,
+  } %}
+  {# /End Textfield #}
+
+  {# Number #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textfield.twig" with {
+    form_element: number.form_element,
+    label: number.label,
+    input: number.input,
+  } %}
+  {# /End Textfield #}
+
+
+  {# File field #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/upload-file.twig" with {
+    form_element: upload_file.form_element,
+    label: upload_file.label,
+    upload: upload_file.upload,
+  } %}
+  {# /End Filefield #}
+
+  {# Managed file field #}
+  <div id="ajax-wrapper--1">
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/upload-file.twig" with {
+      managed: managed_file.managed,
+      form_element: managed_file.form_element,
+      label: managed_file.label,
+      upload: managed_file.upload,
+      input: managed_file.input,
+    } %}
+  </div>
+  {# /End Managed filefield #}
+
+  {# Managed file field with loader #}
+  <div id="ajax-wrapper--2">
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/upload-file.twig" with {
+      managed: managed_file_loader.managed,
+      loader: managed_file_loader.loader,
+      form_element: managed_file_loader.form_element,
+      label: managed_file_loader.label,
+      upload: managed_file_loader.upload,
+      input: managed_file_loader.input,
+    } %}
+  </div>
+  {# /End Managed filefield #}
+
+  {# Managed file field: file shown #}
+  <div id="ajax-wrapper--3">
+    {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/upload-file.twig" with {
+      managed: managed_file_shown.managed,
+      file_shown: managed_file_shown.file_shown,
+      form_element: managed_file_shown.form_element,
+      label: managed_file_shown.label,
+      upload: managed_file_shown.upload,
+      input: managed_file_shown.input,
+    } %}
+  </div>
+  {# /End Managed filefield #}
+
+  {# Password fields #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/password.twig" %}
+
+  {# textarea #}
+  {% include "@%theme_prefix%-atoms/05-forms/00-styleguide/textarea.twig" with {
+    form_element: textarea.form_element,
+    label: textarea.label,
+    textarea: textarea.textarea,
+  } %}
+
+</form>
