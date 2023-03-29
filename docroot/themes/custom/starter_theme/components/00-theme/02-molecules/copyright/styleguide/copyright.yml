@@ -1,0 +1,9 @@
+label: 'Copyright'
+configuration:
+  label_display: false
+bem_block_modifiers:
+  - provider-rocketship-blocks
+  - rocketship-copyright-block
+  - region-footer
+bem_block_extra:
+ - block-rocketship_blocks

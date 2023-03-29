@@ -1,0 +1,37 @@
+variants:
+  - description: 'no spacing on all cols'
+    col_spacing: '0x'
+  - description: 'default spacing'
+    col_spacing: '1x'
+  - description: '2x spacing on all cols'
+    col_spacing: '2x'
+  - description: '2x spacing on left col'
+    col_spacing_override_column: "1"
+    col_spacing_override: '2x'
+  - description: '2x spacing on right col'
+    col_spacing_override_column: "2"
+    col_spacing_override: '2x'
+  - description: '3x spacing on all cols'
+    col_spacing: '3x'
+  - description: '3x spacing on left col'
+    col_spacing_override_column: "1"
+    col_spacing_override: '3x'
+  - description: '3x spacing on right col'
+    col_spacing_override_column: "2"
+    col_spacing_override: '3x'
+  - description: '4x spacing on all cols'
+    col_spacing: '4x'
+  - description: '4x spacing on left col'
+    col_spacing_override_column: "1"
+    col_spacing_override: '4x'
+  - description: '4x spacing on right col'
+    col_spacing_override_column: "2"
+    col_spacing_override: '4x'
+  - description: '5x spacing on all cols'
+    col_spacing: '5x'
+  - description: '5x spacing on left col'
+    col_spacing_override_column: "1"
+    col_spacing_override: '5x'
+  - description: '5x spacing on right col'
+    col_spacing_override_column: "2"
+    col_spacing_override: '5x'

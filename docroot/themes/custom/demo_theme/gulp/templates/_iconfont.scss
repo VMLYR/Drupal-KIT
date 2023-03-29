@@ -1,0 +1,117 @@
+/* stylelint-disable */
+
+@function icon-char($filename) {
+  $char: '';
+<% _.each(glyphs, function(glyph) { %>
+@if $filename == <%= glyph.fileName %> {
+$char: '\<%= glyph.codePoint %>';
+}<% }); %>
+
+@return $char;
+}
+
+// *
+// * Icon mixin: add a custom icon before or after an element
+//
+// * Settings via an object, containing:
+// * $icon
+// * $element: pseudo-element, default = before,
+// * $position,
+// * $top,
+// * $right,
+// * $bottom,
+// * $left,
+// * $margin,
+// * $size,
+// * $color,
+// * $align:middle,
+//
+// * USAGE:
+// * @include icon(icon: arrow-left, size: 30, margin: 0 rem(10) 0 0);
+@mixin icon($settings) {
+
+  // set variables
+  $icon: map-get($settings, icon);
+  $element: map-get($settings, element);
+  $position: map-get($settings, position);
+  $top: map-get($settings, top);
+  $right: map-get($settings, right);
+  $bottom: map-get($settings, bottom);
+  $left: map-get($settings, left);
+  $margin: map-get($settings, margin);
+  $size: map-get($settings, size);
+  $color: map-get($settings, color);
+  $align: map-get($settings, align);
+
+  // some defaults, used in case no $settings were given
+  $element-default: before;
+  $color-default: inherit;
+  $align-default: middle;
+
+  // if any are not filled in, fall back to defaults
+  @if ($element == null) {
+    $element: $element-default;
+  }
+  @if ($color == null) {
+    $color: $color-default;
+  }
+  @if ($align == null) {
+    $align: $align-default;
+  }
+
+  // can only use this mixin if we are using font for custom icons
+  @if ($custom-icons == true and $custom-icons-type == "font") {
+
+    &:#{$element} {
+      content: icon-char($icon);
+      @if($position != null) {
+        position: $position;
+      }
+      @if($top != null) {
+        top: $top;
+      }
+      @if($right != null) {
+        right: $right;
+      }
+      @if($bottom != null) {
+        bottom: $bottom;
+      }
+      @if($left != null) {
+        left: $left;
+      }
+      display: inline-block;
+      @if ($margin != null) {
+        margin: $margin;
+      }
+      font-family: "iconfont";
+      @if ($size != null) {
+        font-size: rem($size);
+      }
+      font-weight: normal;
+      line-height: 1;
+      // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+      text-decoration: none;
+      vertical-align: $align;
+      color: $color;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-style: normal;
+      font-variant: normal;
+      text-transform: none;
+    }
+
+  }
+
+}
+
+@if ($custom-icons == true and $custom-icons-type == "font") {
+
+	<% _.each(glyphs, function(glyph) { %>.icon-<%= glyph.fileName %> {
+		@include icon((
+      icon: <%= glyph.fileName %>,
+    ));
+	}
+	<% }); %>
+
+}
+/* stylelint-enable */

@@ -1,0 +1,62 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 3 column layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+// .layout--3-col {
+//
+// }
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // 3 columns wrapper
+
+  // content as column, with 2 sidebars
+  .layout__content--3-col--center {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    margin-left: calc(var(--gap-hor) / 2);
+    margin-right: calc(var(--gap-hor) / 2);
+    min-height: 1px;
+    width: calc(50% - var(--gap-hor));
+  }
+
+  // the 2 sidebars
+  .layout__sidebar--3-col--left,
+  .layout__sidebar--3-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    margin-left: calc(var(--gap-hor) / 2);
+    margin-right: calc(var(--gap-hor) / 2);
+    min-height: 1px;
+    width: calc((100% * var(--grid-columns) / 3) - var(--gap-hor));
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // for 2 sidebars
+  .layout__sidebar--3-col--left,
+  .layout__sidebar--3-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 3) - var(--gap-hor));
+  }
+
+}

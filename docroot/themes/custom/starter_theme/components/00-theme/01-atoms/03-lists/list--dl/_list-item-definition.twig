@@ -1,0 +1,5 @@
+{% set bem_dl_term_element = bem_dl_term_element|default('dl-term') %}
+{% set bem_dl_def_element = bem_dl_def_element|default('dl-def') %}
+
+<dt {{ bem(bem_dl_term_block, bem_dl_term_element, bem_dl_term_modifiers) }}>{{ dl_term }}</dt>
+<dd {{ bem(bem_dl_def_block, bem_dl_def_element, bem_dl_def_modifiers) }}>{{ dl_def }}</dd>

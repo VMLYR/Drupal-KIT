@@ -1,0 +1,181 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Search form
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+.main form.search-form {
+
+  position: relative;
+
+  // * Search simple
+  // ===========================================================================
+
+  & > .form__group {
+    position: relative;
+    margin: 0 auto var(--gap-md) auto;
+
+    .form-type--search {
+      @include floating-labels-item-label;
+      @include floating-labels-item-field;
+    }
+
+    input[type="text"],
+    input[type="search"] {
+      padding-right: rem(50);
+    }
+
+    [type="submit"] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 0;
+      height: rem(50);
+      width: rem(50);
+      border: 0 none;
+      text-align: center;
+      background: transparent none;
+
+      @include font-awesome((
+        icon: $fa-var-search,
+        color: hsl(var(--clr-gray-light-3)),
+        size: 21,
+        element: "before"
+      ));
+
+      &::before {
+        position: absolute;
+        left: 0;
+        width: 100%;
+      }
+
+      &:hover {
+        &::before {
+          color: hsl(var(--clr-spot-1));
+        }
+      }
+    }
+  }
+
+  // * Help
+  // ===========================================================================
+
+  .search-help-link {
+
+    display: inline-block;
+    margin-bottom: var(--gap-md);
+
+    @include font-awesome((
+      icon: $fa-var-question-circle,
+      color: hsl(var(--clr-spot-1)),
+      size: 16,
+      element: "before",
+      margin: -1px 5px 0 0
+    ));
+  }
+
+  // * Advanced
+  // ===========================================================================
+
+  .search-advanced {
+    margin-bottom: var(--gap-md);
+
+    fieldset {
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+
+    legend {
+      @include h3;
+      padding: 0;
+      margin: 0 0 rem(10) 0;
+    }
+
+    .criterion legend {
+      @include h4;
+      margin: 0 0 rem(5) 0;
+      font-weight: $font-weight-normal;
+    }
+
+    .form-radiobuttons,
+    .form-checkboxes {
+      label {
+        display: inline-block;
+      }
+    }
+  }
+
+  .details-wrapper {
+    padding: rem(20);
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .main form.search-form {
+
+    // * Advanced
+    // =========================================================================
+
+    .search-advanced {
+
+      .details-wrapper {
+
+        display: flex;
+        flex-direction: columns;
+        flex-wrap: wrap;
+        padding: rem(20) 0;
+
+        // first layer of fieldsets as columns
+
+        & > fieldset {
+          padding: 0 rem(20);
+          width: 25%;
+
+          &:first-child {
+            width: 50%;
+          }
+        }
+
+        .action {
+          padding: 0 rem(20);
+          width: 100%;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .main form.search-form {
+
+    & > .form__group {
+      max-width: 50%;
+    }
+
+    .search-help-link {
+      position: absolute;
+      right: 0;
+      top: rem(15);
+    }
+  }
+
+}

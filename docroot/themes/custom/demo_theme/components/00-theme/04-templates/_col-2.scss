@@ -1,0 +1,107 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 2 column layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+// .layout--2-col {
+//
+// }
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // columns wrapper
+  .layout__cols {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: calc(var(--gap-hor) / -2);
+    margin-right: calc(var(--gap-hor) / -2);
+  }
+
+  // reverse columns direction so sidebar is always first
+  .layout__cols--reversed {
+    flex-direction: row-reverse;
+  }
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    margin-left: calc(var(--gap-hor) / 2);
+    margin-right: calc(var(--gap-hor) / 2);
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc(50% - var(--gap-hor));
+    min-height: 1px;
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    margin-left: calc(var(--gap-hor) / 2);
+    margin-right: calc(var(--gap-hor) / 2);
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc(50% - var(--gap-hor));
+    min-height: 1px;
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 8) - var(--gap-hor));
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 4) - var(--gap-hor));
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // content as column
+  .layout__content--2-col--left,
+  .layout__content--2-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 9) - var(--gap-hor));
+  }
+
+  // sidebar as column
+  .layout__sidebar--2-col--left,
+  .layout__sidebar--2-col--right {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 3) - var(--gap-hor));
+  }
+
+}

@@ -1,0 +1,14 @@
+menu: account
+label: 'User account menu'
+menu_block_bem_modifiers:
+  - 'account'
+menu_block_bem_extra:
+  - 'block--menu'
+  - 'block-system'
+configuration:
+  label_display: false
+items:
+  - title: 'My account'
+    url: '#'
+  - title: 'Log out'
+    url: '#'

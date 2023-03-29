@@ -1,0 +1,16 @@
+nav_primary: true
+nav_secondary: true
+# import data in the stories file
+# here you can add overrides for the nested data
+menu_main:
+  menu_block_bem_modifiers:
+  - region-nav-primary
+menu_secondary:
+  menu_block_bem_modifiers:
+  - region-nav-secondary
+menu_language:
+  menu_block_bem_modifiers:
+  - region-nav-secondary
+social:
+  bem_block_modifiers:
+  - region-nav-secondary

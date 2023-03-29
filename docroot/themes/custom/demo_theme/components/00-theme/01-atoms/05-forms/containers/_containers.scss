@@ -1,0 +1,56 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms: containers (wrappers for buttons and such)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** wraps our submit & other buttons on a form
+
+.main .form-actions {
+
+  // ** buttons under each other
+
+  button,
+  input[type="submit"],
+  [id*="edit-cancel"] {
+    width: 100%;
+    margin-top: var(--gap-sm);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    // make every next button another style
+    // & + button,
+    // & + input[type="submit"],
+    // & + [id*=edit-cancel] {
+    //   @include button-secondary;
+    // }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // ** buttons next to each other
+  .main .form-actions {
+
+    button,
+    input[type="submit"],
+    [id*="edit-cancel"] {
+      width: auto;
+      margin-top: 0;
+      margin-right: var(--gap-sm);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

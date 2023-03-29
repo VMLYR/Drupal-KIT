@@ -1,0 +1,14 @@
+import { Story } from '@storybook/addon-docs';
+
+# Features
+
+In previous iterations of Rocketship, we had modules that preinstalled Content Types such as Blog, News, Events, … <br />
+Since the Layout Builder based version of Rocketship doesn't support this, we have moved the relevant Sass and JS files for such components, into `components/02-features/00-examples`.  <br />
+The files you find in there might still be useful when starting to theme brand new Content Types yourself.
+They demonstrate how you could split off more theming into separately loaded components and they are usefull as theming snippets.
+
+When you want to do your own theming for a Content type, you are still free to add your files to `components/00-theme` but you also have the option to put it into `02-features` instead. <br />
+
+### Keep in mind:
+- Any Sass and JS files in folders of `02-features` will be picked up by Gulp automatically **ONLY** if you include your own component scss file in the root folder of your Feature, which combines all the partial scss files (see any of the Feature examples)
+- You still have to make a theme library and include it in your theme (eg. in the info file, via a theme hook or in a twig template). These are separate components after all.

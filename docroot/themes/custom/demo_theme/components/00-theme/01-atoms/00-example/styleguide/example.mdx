@@ -1,0 +1,141 @@
+import { Story } from '@storybook/addon-docs';
+
+# Making an Atom story component
+
+Take a look at the example files to see what is in there, what you can import and how it works.<br />
+
+## Story file
+
+### Importing dummy data
+
+You have a couple of ways to work with dummy data to your components but the most important one,<br />
+is importing a yml file and passing it to your twig component.
+
+**Example:**<br />
+`import exampleData from './example.yml';` makes that data available in the variable `exampleData`.<br />
+Sending the data to your component, works like this: `__html: exampleTwig(exampleData)`<br />
+Reading a nested key, within the story file, would look like this: `exampleData.my_key`<br />
+Reading nested data in Twig, would look like this: `{{dump(my_key)}}` (no need to call the main variable)
+
+See the example component under `molecules` for strategies to deal with more complex data, like deep merging and overrides.
+
+### Importing library files
+
+As mentioned in the Intro, you can add libraries per Story instead of globally.<br />
+But because `{{attach_libary()}}` doesn't work in Storybook, you need to import the JS files of your libraries directly.<br />
+Just make sure the path is relative to the story.js file of your component.<br />
+
+An example of how it is done, can be found in the Forms components:<br />
+`00-theme/01-atoms/05-forms/styleguide/forms.stories.js`, where we import the form javascript.
+Or the Images atoms: `01-atoms/04-images/styleguide/images.stories.js`,<br />
+where we import a fake Drupal blazy load library.<br />
+
+### Including documentation
+
+the .mdx files are written in markdown and should have the same name as the story file.
+```
+import mdx from './forms.mdx';
+```
+You need to add `mdx` to your story parameters in order for it to load
+```
+parameters: { docs: { page: mdx } },
+```
+
+### Making a Twig component
+
+Just follow the examples in the various story files. You call for a twig file (eg. myTwig) and pass the imported data to it (eg. myData).<br />
+The headings Atom has a few examples on how to use a loop to bundles a whole list of elements but that's usually to be avoided.<br />
+The constant you export, will form the name of your component in the Storybook navigation (camelcase becomes space-separeted words).
+
+```
+export const nameOfMyComponentAsItWillShowUpInTheNavigation = () => (
+  <div dangerouslySetInnerHTML={{ __html: myTwig(myData) }} />
+);
+```
+
+### Making a React components
+
+You can integrate React components (and other JS frameworks) in here as well, <br />
+but that's outside of the scope of our current styleguide implementation so we won't get into this.
+
+The exaple story shows the 3 parts needed to make a React component:
+- import of the react component file, eg. `import Example from '../react/Example.component';`
+- add the component to the default export, eg. `component: Example,`
+- export of the React component to Storybook, eg. `export const react = () => <Example>React Example</Example>;`
+
+## Using Twig files
+
+For our purposes, there are 3 kinds of twig files:
+- the component's original Drupal twig files: located inside a `_drupal/templates` folder per component
+- the component's 'real' twig files: files that are included or embedded into the orginal Drupal files)
+- the components styleguide's twig files: these are basically wrappers for your Storybook component.<br />
+Not used by Drupal. Should include or embed 'real' twig files.
+
+The twig implementation is limited to the capabilities of [TwigJS](https://github.com/twigjs/twig.js/wiki) + whatever Drupal Twig functionality is faked in Storybook (eg. using the .js files in `components/_twig-components`)
+
+Some of those limitations are:
+- in Storybook, the BEM function does not print the drupal `attributes` on an element.
+You need to manually loop and print them yourself (eg.`components/`00-theme/01-atoms/01-links/00-link/_link.twig`) if you need them.
+- `{{ attributes.addClass()}}` doesn’t work either (just outputs a string of what is in addClass), so you need to add extra classes into the attributes directly
+- nested embeds didn't work (but was fixed using a patch)
+- `without` won’t work most of the time because it doesn’t filter stuff from string
+- `|t` outputs the original value instead of a translation (and don't use {% trans %}{% endtrans %}, it breaks your templates)
+- `{{attach_libary()}}` doesn't work (as mentioned above), so you need to import component files in their x.story file
+
+
+
+# Data structure
+
+Here's an overview of the basic keys you need to render Atoms.<br />
+But be aware that different atoms could need different keys (eg. 'buttons') .<br />
+Check those Atoms' YML files to see what data keys and structures they use specifically.
+
+### For atoms as (or inside) fields
+
+Eg. image field, heading tag via a field, a cke field, …
+
+Label settings, you can show or hide a label in the html
+```
+label_hidden: true
+```
+
+There's also a possibility to let a field label render in the html but to hide it visually:<br />
+_Note: this will render the label using a heading h3_ <br />
+_Note 2: you will probably never need this._ <br />
+
+```
+label_hidden: false
+label_display: visually_hidden
+```
+
+Field classes are built up using the BEM principle (using a BEM function in the twig)<br />
+By default it will use the **field_name** and **field_type** to set some basic classes.<br />
+Be sure to set at least the name in yml:<br />
+```
+field_name: media-info-image
+field_type: entity-reference
+```
+Which results in these classes:
+`field field--name-media-info-image field field--type-entity-reference media-info-image``
+
+**Modifiers**, to set proper BEM classes.<br />
+If you need to, you can set extra modifiers. Some fields set extra classes, like for label visibility, that could be useful.<br />
+```
+bem_field_modifiers:
+  - 'label-hidden'
+
+outputs: field--label-hidden
+```
+
+**Extra classes:**<br />
+These are usually passed from the formatters that handle the field. Eg. if blazy is used, it will add classes to the field to indicate this.<br />
+Can be useful to be able to target the kind of field + formatter combination.<br />
+
+Please note that the blazy classes reuse the field name and base class 'field'.
+
+```
+- bem_field_extra:
+  - 'blazy'
+  - 'blazy--field'
+  - 'blazy--field-media-info-image'
+```

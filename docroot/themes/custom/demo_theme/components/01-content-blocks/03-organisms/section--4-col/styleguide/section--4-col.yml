@@ -1,0 +1,11 @@
+label: 'Content'
+template: 'rs-four-col'
+minimal_styling: false
+modifier: null
+extra_classes:
+content:
+  first_main: true
+  second_main: true
+  third_main: true
+  fourth_main: true
+description: default

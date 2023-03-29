@@ -1,0 +1,30 @@
+menu: main
+label: 'Main menu'
+menu_block_bem_modifiers:
+  - 'main'
+  - system-menu-block
+menu_block_bem_extra:
+  - 'block--menu'
+  - 'block-system'
+configuration:
+  label_display: false
+items:
+  - title: 'First item'
+    url: '#'
+  - title: 'Second item'
+    url: '#'
+    below:
+      - title: 'A first submenu item'
+        url: '#'
+      - title: 'A second submenu item'
+        url: '#'
+      - title: 'A second submenu item'
+        url: '#'
+  - title: 'Third item (no link)'
+    url: '#'
+    no_link: true
+  - title: Contact
+    url: '#'
+    link_attributes:
+        class:
+          - 'menu__item--button'

@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Theme override for a views mini-pager.
+ *
+ * Available variables:
+ * - items: List of pager items.
+ *
+ * @see template_preprocess_views_mini_pager()
+ */
+#}
+
+{% if items.previous or items.next %}
+  <nav class="pager pager--mini" role="navigation">
+    <h4  id="pagination-heading" class="visually-hidden">{{ 'Pagination'|t }}</h4>
+    <ul class="pager__items pager__items--mini js-pager__items">
+      {# {% if items.previous %} #}
+        <li class="pager__item pager__item--mini pager__item--previous pager__item--previous--mini">
+          {% if items.previous %}
+          <a class="pager__link pager__link--mini pager__link--prev pager__link--prev--mini" href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
+          {% else %}
+          <span class="pager__link pager__link--mini pager__link--prev pager__link--prev--mini is-disabled">
+          {% endif %}
+            <span class="visually-hidden">{{ 'Previous page'|t }}</span>
+            <i aria-hidden="true" class="page__link__icon--prev page__link__icon--prev--mini page__link__icon page__link__icon--mini">{# {{ items.previous.text|default('‹‹'|t) }} #}</i>
+          {% if items.previous %}</a>{% else %}</span>{% endif %}
+        </li>
+      {# {% endif %} #}
+
+      {% if items.current %}
+        <li class="pager__item pager__item--mini is-active">
+          {{ 'Page'|t }}
+          {{ items.current }}
+        </li>
+      {% endif %}
+      {# {% if items.next %} #}
+        <li class="pager__item pager__item--mini pager__item--next pager__item--next--mini">
+          {% if items.next %}
+          <a class="pager__link pager__link--mini pager__link--next pager__link--next--mini" href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
+          {% else %}
+          <span class="pager__link pager__link--mini pager__link--next pager__link--mini is-disabled">
+          {% endif %}
+            <span class="visually-hidden">{{ 'Next page'|t }}</span>
+            <i aria-hidden="true" class="page__link__icon--next page__link__icon--next--mini page__link__icon page__link__icon--mini">{# {{ items.next.text|default('››'|t) }} #}</i>
+          {% if items.next %}
+          </a>
+          {% else %}
+          </span>
+          {% endif %}
+        </li>
+      {# {% endif %} #}
+    </ul>
+  </nav>
+{% endif %}

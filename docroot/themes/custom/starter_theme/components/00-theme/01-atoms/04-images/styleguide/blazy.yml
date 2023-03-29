@@ -1,0 +1,45 @@
+label_hidden: true
+field_name: media_info_image
+field_type: entity_reference
+bem_field_extra:
+  - 'blazy'
+  - 'blazy--field'
+  - 'blazy--field-media-info-image'
+field_attributes:
+  'data-blazy': ''
+settings:
+  lazy: true
+  use_loading: true
+blazy_bem_modifiers:
+  - 'bundle--image'
+  - blazy
+  - image
+  - loading
+image_src: 'https://placeimg.com/320/180/arch'
+image_alt: 'A 16 by 9 image'
+image_bem_extra:
+  - 'media__image'
+  - 'media__element'
+  - 'b-lazy'
+# drupalSettings:
+#   blazy:
+#     loadInvisible: false
+#     offset: 100
+#     saveViewportOffsetDelay: 50
+#     validateDelay: 25
+#     container: ''
+#     enabled: false
+#     disconnect: false
+#     rootMargin: 0px
+#     threshold:
+#       - 0
+#     isUniform: false
+#     selector: ".b-lazy"
+#     errorClass: b-error
+#     successClass: b-loaded
+#   blazyIo:
+#     enabled: false
+#     disconnect: false
+#     rootMargin: 0px
+#     threshold:
+#       - 0

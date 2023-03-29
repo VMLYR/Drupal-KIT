@@ -1,0 +1,82 @@
+label: 'Hero image'
+configuration:
+  label_display: false
+bem_block_modifiers:
+  # - 'type-content'
+  - 'type-main-visual'
+fields:
+  image:
+    label_hidden: true
+    field_name: field_p_media_image
+    field_type: entity_reference
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'blazy'
+      - 'blazy--field'
+      - 'blazy--field-p-media-image'
+    field_attributes:
+      'data-blazy': ''
+    settings:
+      lazy: true
+      use_loading: true
+    blazy_bem_modifiers:
+      - 'bundle--image'
+      - blazy
+      - image
+      - loading
+    image_src: 'https://placeimg.com/320/135/arch'
+    image_alt: 'An image'
+    image_srcset: 'https://placeimg.com/768/325/arch 480w, https://placeimg.com/940/397/arch 768w, https://placeimg.com/1200/506/arch 940w'
+    image_sizes: '100vw'
+    image_loading: 'lazy'
+    image_bem_extra:
+      - 'media__image'
+      - 'media__element'
+      - 'b-lazy'
+    image_attributes:
+      loading: "lazy"
+    output_image_tag: true
+# paragraph:
+#   content: true
+#   bem_p_block:
+#   bem_p_element:
+#   bem_p_modifiers:
+#     - view-mode-default
+#     - type-p-002
+#   bem_p_extra:
+#     - has-bg-stretched
+#     - p--layout--image_stretched
+#   fields:
+#     image:
+#       label_hidden: true
+#       field_name: field_p_media_image
+#       field_type: entity_reference
+#       bem_field_modifiers:
+#         - 'label-hidden'
+#       bem_field_extra:
+#         - 'blazy'
+#         - 'blazy--field'
+#         - 'blazy--field-p-media-image'
+#       field_attributes:
+#         'data-blazy': ''
+#       settings:
+#         lazy: true
+#         use_loading: true
+#       blazy_bem_modifiers:
+#         - 'bundle--image'
+#         - blazy
+#         - image
+#         - loading
+#       image_src: 'https://placeimg.com/320/142/arch'
+#       image_alt: 'An image'
+#       image_srcset: 'https://placeimg.com/768/325/arch 480w, https://placeimg.com/940/399/arch 768w, https://placeimg.com/1200/360/arch 940w'
+#       image_sizes: '100vw'
+#       image_loading: 'lazy'
+#       image_bem_extra:
+#         - 'media__image'
+#         - 'media__element'
+#         - 'b-lazy'
+#       image_attributes:
+#         loading: "lazy"
+#       output_image_tag: true

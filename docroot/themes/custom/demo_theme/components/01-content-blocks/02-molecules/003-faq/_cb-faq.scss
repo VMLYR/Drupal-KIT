@@ -1,0 +1,166 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Blocks: FAQ
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block--type-cb-faq {
+
+  .field--name-field-p-title,
+  .field--name-field-p-subtitle,
+  .field--name-field-p-teaser {
+    //
+  }
+
+  // space between items & the fields above it (teaser, title, subtitle)
+  .field + .field--type-tabbed-item {
+    margin-top: var(--gap-cb-teaser-wide);
+  }
+
+  // * Accordion
+  // =============================================================================
+
+  .field--type-tabbed-item {
+    border-bottom: 1px solid hsl(var(--clr-border));
+  }
+
+  .field__item--type-tabbed-item {
+    padding: 0;
+    border-top: 1px solid hsl(var(--clr-border));
+
+    // ** question title
+
+    .tab-item__title {
+      position: relative;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: var(--gap-layout-vert) rem(25) var(--gap-layout-vert) 0;
+      cursor: pointer;
+      transition: all $duration $easing;
+
+      // -- Icon
+
+      @if ($structuralOnly == false) {
+
+        @include font-awesome((
+          icon: $fa-var-chevron-down,
+          color: hsl(var(--clr-base)),
+          size: 16,
+          element: "before"));
+
+        &::before {
+          position: absolute;
+          right: 0;
+          top: calc(var(--gap-layout-vert-sm) + 6px);
+          transition: all $duration $easing;
+        }
+
+      } @else {
+
+        &::before {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: rem(10);
+          border-top: 5px solid #000000;
+          border-right: 5px solid transparent;
+          border-bottom: 5px solid transparent;
+          border-left: 5px solid transparent;
+          transform-origin: 50% 25%;
+          transition: all $duration $easing;
+        }
+
+      }
+
+      @if ($structuralOnly == false) {
+
+        // *************************************************************************
+        //  Color change of the title/icon based on bg
+        // *************************************************************************
+
+        .layout--bg--spot-1 &,
+        .layout--bg--spot-2 & {
+          color: hsl(var(--clr-white));
+          &::before {
+            color: hsl(var(--clr-white));
+          }
+        }
+
+      }
+
+    }
+
+    // ** question body
+
+    .tab-item__content {
+      margin-top: 0;
+      // use pos. or neg. margins to make the gap between title & content when open
+      // margin-top: var(--gap-layout-vert-sm);
+      padding-bottom: var(--gap-layout-vert); // same or more than space between paragraphs
+      display: none;
+
+      p,
+      ul,
+      ol,
+      table {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    // ** states
+
+    &:hover,
+    &.js-open {
+
+      .tab-item__title {
+
+        color: hsl(var(--clr-link));
+
+        &::before {
+          transform: rotate(90deg);
+          transform-origin: center center;
+        }
+
+        @if ($structuralOnly == false) {
+
+          // *************************************************************************
+          //  Color change of the icon based on paragraph bg
+          // *************************************************************************
+
+          .layout--bg--spot-1 &,
+          .layout--bg--spot-2 & {
+            color: hsl(var(--clr-white));
+
+            &:hover {
+              color: hsl(var(--clr-white));
+            }
+
+          }
+
+        }
+      }
+
+      .tab-item__content {
+        // slides open using JS
+      }
+    }
+
+    &.js-open {
+
+      .tab-item__title {
+
+        &::before {
+          transform: rotate(180deg);
+          transform-origin: center center;
+        }
+      }
+    }
+  }
+
+}

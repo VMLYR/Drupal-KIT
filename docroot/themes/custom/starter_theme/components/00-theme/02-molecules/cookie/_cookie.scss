@@ -1,0 +1,75 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Cookie policy
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.cookie-policy {
+  position: fixed;
+  bottom: rem(-200);
+  left: 0;
+  right: 0;
+  @include z-index(cookie);
+  padding: rem(15) 0;
+  color: hsl(var(--clr-white));
+  background: hsl(var(--clr-spot-3));
+  transition: all $duration $easing;
+
+  .cookiePolicy-is-visible & {
+    bottom: 0;
+  }
+
+  // Storybook styling override
+  .sb-show-main & {
+    bottom: auto;
+    top: 0;
+  }
+}
+
+.cookie-policy__message {
+  span {
+    display: block;
+  }
+  a {
+    position: relative;
+    @include link-underline((color: var(--clr-white), color-hover: var(--clr-white)));
+  }
+}
+
+.cookie-policy__message--first {
+  font-weight: 700;
+}
+.cookie-policy__dismiss {
+  margin-top: rem(20);
+
+  a {
+    @include button();
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .cookie-policy {
+    padding: rem(25) 0;
+
+    .container {
+      display: flex;
+    }
+  }
+  .cookie-policy__message {
+    flex-grow: 1;
+  }
+  .cookie-policy__dismiss {
+    margin-top: rem(3);
+  }
+
+}

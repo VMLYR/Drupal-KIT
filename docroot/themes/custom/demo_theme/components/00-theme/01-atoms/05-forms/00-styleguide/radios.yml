@@ -1,0 +1,30 @@
+radios:
+  - styleguide: true
+    title: 'Option 1'
+    checked: 'checked'
+    title_display: 'after'
+    label_attributes:
+      for: 'option0'
+  - styleguide: true
+    title: 'Option 2'
+    title_display: 'after'
+    disabled: true
+    label_attributes:
+      for: 'option1'
+  - styleguide: true
+    title: 'Option 3'
+    checked: 'checked'
+    title_display: 'after'
+    disabled: true
+    label_attributes:
+      for: 'option2'
+  - styleguide: true
+    title: 'Option 4'
+    title_display: 'after'
+    label_attributes:
+      for: 'option3'
+  - styleguide: true
+    title: 'Option 5'
+    title_display: 'after'
+    label_attributes:
+      for: 'option4'

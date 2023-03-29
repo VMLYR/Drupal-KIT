@@ -1,0 +1,6 @@
+label_hidden: true
+field_name: field_cb_media
+field_type: entity_reference
+bem_field_modifiers:
+  - 'label-hidden'
+reference:

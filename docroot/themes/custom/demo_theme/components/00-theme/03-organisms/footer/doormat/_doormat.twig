@@ -1,0 +1,39 @@
+{% if page.doormat or page.doormat_02 or page.doormat_03 or page.doormat_04 %}
+<aside class="doormat"  role="complementary">
+  <div class="container">
+    <div class="row row--doormat">
+      {% if page.doormat %}
+      <div class="col col--doormat col--doormat--01">
+        {% block doormat %}
+        {{ page.doormat }}
+        {% endblock %}
+      </div>
+      {% endif %}
+
+      {% if page.doormat_02 %}
+      <div class="col col--doormat col--doormat--02">
+        {% block doormat_02 %}
+        {{ page.doormat_02 }}
+        {% endblock %}
+      </div>
+      {% endif %}
+
+      {% if page.doormat_03 %}
+      <div class="col col--doormat col--doormat--03">
+        {% block doormat_03 %}
+        {{ page.doormat_03 }}
+        {% endblock %}
+      </div>
+      {% endif %}
+
+      {% if page.doormat_04 %}
+      <div class="col col--doormat col--doormat--04">
+        {% block doormat_04 %}
+        {{ page.doormat_04 }}
+        {% endblock %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</aside>
+{% endif %}

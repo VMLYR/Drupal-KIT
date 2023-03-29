@@ -1,0 +1,30 @@
+.ajax-progress-throbber {
+  position: relative;
+  display: inline-block;
+  width: rem(20);
+  height: rem(20);
+
+  .throbber {
+    display: block;
+    width: rem(15);
+    height: rem(15);
+    border: 3px solid hsla(var(--clr-spot-1), .2);
+    border-top-color: hsl(var(--clr-spot-1));
+    border-radius: 100%;
+    background-image: none;
+    animation: spin 1s infinite linear;
+    pointer-events: none;
+  }
+
+  // throber next to button needs realignment
+  button + & {
+    // margin-top: rem(5);
+    margin-left: rem(10);
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

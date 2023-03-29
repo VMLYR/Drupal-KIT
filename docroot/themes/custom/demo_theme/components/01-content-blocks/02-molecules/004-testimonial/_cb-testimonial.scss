@@ -1,0 +1,237 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Blocks: testimonial
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+.block--type-cb-testimonial {
+
+  --image-size-testimonial: #{rem(100)};
+
+  // ---------------------------------------------------------------------------
+
+  position: relative;
+  text-align: center;
+
+  // extra space for image
+  &.has-image,
+  .layout__region--content-blocks &.has-image {
+    padding-top: calc(var(--image-size-testimonial) / 2);
+  }
+
+  // ** user image
+
+  .field--name-field-cb-media {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--image-size-testimonial) / -2);
+    min-width: 0;
+    transform: translateX(-50%);
+
+    @if ($structuralOnly == false) {
+      //
+    } @else {
+      .node & .field--type-image {
+        float: none;
+        margin: 0;
+      }
+    }
+
+    // no need for layout shift fix
+    .img-layout-shift {
+      position: static;
+      padding-bottom: 0 !important;
+      background-color: transparent;
+    }
+
+    // need matching image style
+    img {
+      height: var(--image-size-testimonial);
+      width: var(--image-size-testimonial);
+      max-width: none;
+      border-radius: 100%;
+    }
+  }
+
+  // ** description
+
+  .field--type-text-long,
+  .text-long {
+    position: relative;
+    max-width: rem(900);
+    margin: 0 auto;
+
+    // -- add quote icon
+
+    @if ($structuralOnly == false) {
+
+      @include font-awesome((icon: $fa-var-quote-left, color: hsl(var(--clr-spot-1)), size: 40));
+
+      &::before {
+        position: absolute;
+        top: rem(-24);
+        left: rem(-45);
+      }
+
+    } @else {
+
+      &::before {
+        content: "\201C";
+        position: absolute;
+        top: rem(-24);
+        left: rem(-45);
+        font-size: 80px;
+        line-height: 1;
+      }
+    }
+
+  }
+
+  // ** grouping the info
+  .cb-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    margin-top: rem(20);
+  }
+
+  // ** name & title
+
+  .field--name-field-cb-name,
+  .field--name-field-cb-extra-rule {
+    display: flex;
+    flex-wrap: wrap;
+
+    @if ($structuralOnly == false) {
+      font-weight: $font-weight-bold;
+    } @else {
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .field--name-field-cb-extra-rule {
+    &::before {
+      content: " - ";
+      margin: 0 rem(5);
+    }
+  }
+
+  // ** url
+  .field--name-field-cb-link {
+    //
+  }
+
+  @if ($structuralOnly == false) {
+    // change quote color:
+    //   if content color is a spot color
+    //   or bg color is spot color, in combination with transp or grey content bg
+
+    // &.content-bg--spot-01,
+    // &.content-bg--spot-02,
+    .layout--bg--spot-1 &,
+    .layout--bg--spot-2 & {
+
+      color: hsl(var(--clr-white));
+
+      a {
+        &,
+        &:visited {
+          border-bottom: 1px solid hsla(var(--clr-white), 1);
+          color: hsl(var(--clr-white));
+        }
+
+        &:hover,
+        &:active {
+          border-bottom: 1px solid hsla(var(--clr-white), 0);
+          color: hsl(var(--clr-white));
+        }
+      }
+
+      .field--type-text-long,
+      .text-long {
+        &::before {
+          color: hsl(var(--clr-white));
+        }
+      }
+    }
+
+  }
+
+  // * Grouping the content
+  // =============================================================================
+
+  .cb-content {
+    position: relative; // hook for image
+    z-index: 1; // over the background-image, if any
+    padding-top: rem(40); // space for quote mark
+    padding-left: rem(46); // space for the quote
+  }
+
+  // extra padding if image
+  &.has-image .cb-content {
+    padding-top: calc(var(--gap-layout-vert-top) + (var(--image-size-testimonial) / 2));
+  }
+
+  // if background of the content
+  // need resizing
+
+  &.cb--boxed .cb-content {
+    max-width: rem(512);
+    padding-left: var(--gap-cb-content-hor); // space reset
+
+    // .field--name-field-cb-media {
+    //   margin-left: calc(var(--gap-cb-content-hor) / -2);
+    // }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet and bigger
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-cb-testimonial {
+    //
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & bigger
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block--type-cb-testimonial {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block--type-cb-testimonial {
+
+    &.cb--boxed .cb-content {
+      max-width: rem(920);
+    }
+  }
+
+}

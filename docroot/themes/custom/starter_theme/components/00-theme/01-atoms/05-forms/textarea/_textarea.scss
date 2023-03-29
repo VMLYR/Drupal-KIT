@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Form: textarea
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+textarea {
+  resize: vertical;
+  overflow: auto; // scroll fix
+  min-height: rem(140);
+}
+
+.form-textarea-wrapper {
+  display: block; //possibly needs to be overridden using !important;
+
+  .grippie {
+    display: none;
+  }
+}

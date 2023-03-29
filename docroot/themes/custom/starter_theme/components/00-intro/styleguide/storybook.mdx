@@ -1,0 +1,102 @@
+import { Story } from '@storybook/addon-docs';
+
+# Storybook
+
+The components (and accompanying documentation) for this theme are built using **Storybook**, <br />
+it is based on an implementation done by the Emulsify Drupal theme but you don't need to know about Emulsify to be able to use Storybook. <br />
+The main difference is that we use some node modules and setup to be able to use Twig for building components, because Storybook has no built-in Twig support.
+
+The principles of how Storybook works, can be found here:
+- https://storybook.js.org/docs
+- https://docs.emulsify.info/usage/writing-stories
+
+Under each category (atoms, molecules, …) you will find specific examples, with documentation, of how to build those types of components.<br />
+Other than that, some existing components also contain documentation on how to use or change them (if needed).
+
+## Commands
+
+Storybook runs on webpack and npm. In order to build the styleguide, you need to have installed the packages:<br />
+`npm install`<br />
+And then run one of the storybook commands (found in package.json):
+- "storybook": runs in watch-mode and gives you a url to surf to on localhost
+- "build-storybook": builds an actual folder with the styleguide in it, so you can put it on a remote server to share with others
+
+## Storybook configuration
+
+You will find a `.storybook` folder in side your theme, which contains all manner of setup.<br/>
+If you need to add something extra, it will probably be in the `preview.js`-file<br/>
+
+### importing assets
+
+The main thing you need to know, is that this is the place where you need to import JS and CSS/SASS that needs to be available for ALL components.<br/>
+So any styling or Js inherited from Drupal core, a parent theme or a Drupal module, should be loaded here. <br />
+That includes libraries you explicitely load in your theme.info file<br/>
+Just see the examples and comments already in `preview.js` to see how it is done.
+
+For example, this loads some CSS from stable that is inherited in our Drupal theme. Notice that the path is relative to the `.storybook` folder:<br />
+`import '../../../../core/themes/stable/css/user/user.module.css';`
+
+If your JS has an equivalent node-module, however, you could install it using npm (add it to package.json using --save-dev) and import it directly.<br />
+An example of this, is how we added jquery-ui in `preview.js`.
+
+However, some 3rd party libraries can't be imported directly (eg. AMD modules like jQuery).<br />
+The solution consists of 2 parts:
+- add a new global variable in `main.js` (see the `jQuery` example in there)
+- add a js-file that imports the library and sets up that same global (see `.storybook/jquery-global.js`)
+
+You can find info on how that works over here:
+- https://docs.emulsify.info/help/3rd-party-libraries
+- https://github.com/emulsify-ds/emulsify-drupal/issues/62
+
+Besides importing global assets, you can also import them into specific components using its `x.stories.js` file. <br />
+Info on that can be found in the example components in atoms, molecules, organisms, …
+
+### adding aliases
+
+The normal aliases (as defined in your theme info.yml) have also been added to Storybook, in the top of the `.storybook/webpack.config.js` file.<br />
+If you need to add more, please do so in both places as well.
+
+## Storybook components
+
+The storybook component files should always be wrapped in a `styleguide` folder, in order to differentiate between the dummy Storybook component and the templates used by Drupal directly.
+
+You need at least 2 files to start from, which have the same name:
+- x.stories.js: imports the twig, data and the doc file + creates your dummy component by combining twig and data
+- x.mdx: your markdown documentation
+
+And then there are the component files:<br />
+- YML files: imported at the top of the document, the dummy data that is used by the twig templates
+- twig files: imported at the top of the document. <br />
+Will either be a styleguide twig file that acts as a wrapper (include or embed the 'real' twig files)<br />
+or you can import 'real' twig files directly.
+
+See the documentation for Atoms/00-example, Molecules/00-example and Organisms/00-example for more detailed info on what goes into those files.
+
+## Add-ons
+
+At the top of the content, you get a few tabs and some icons for extra functionality.
+
+- tabs: switch between 'canvas' (rendering of the component) and 'doc' (the documentation for the component category)
+- zoom icons: like a browser zoom
+- color blindness emulation: changes the colors
+- viewport: change the size of your preview, to emulate a fixed screen size (like a mobile phone)
+
+A t the bottom of the content, you have some more things:
+- Accessibility: every component is run through WCAG AA testing and outputs the result. The theme already does a lot of things right, so ideally the issues that pop up should be minimal and you should fix them.
+- Actions: outputs console.log and errors you might get from your stories or loaded js libraries.
+
+## Extra references
+
+- Emulsify:
+  - https://docs.emulsify.info/usage/writing-stories
+  - Issues:
+    - https://github.com/emulsify-ds/emulsify-drupal/issues/62
+    - https://github.com/emulsify-ds/emulsify-drupal/issues/100
+    - https://github.com/emulsify-ds/emulsify-drupal/issues/55
+- Webpack:
+  - https://v4.webpack.js.org/loaders/sass-loader/#resolving-import-at-rules
+- Storybook:
+  - https://storybook.js.org/addons/
+  - https://storybook.js.org/docs/formats/component-story-format/
+  - https://www.learnstorybook.com/design-systems-for-developers/react/en/introduction/
+  - https://www.learnstorybook.com/intro-to-storybook/react/en/simple-component/

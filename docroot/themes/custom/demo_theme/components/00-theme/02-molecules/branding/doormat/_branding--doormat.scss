@@ -1,0 +1,84 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Info block: doormat
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// ===========================================================================
+
+.block--type-site-branding {
+
+  &.block--region-doormat {
+    //
+    .field--name-field-media-info-image {
+
+      img {
+        width: 100%;
+        // max-width: rem(245);
+        margin: 0 auto;
+      }
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-site-branding {
+
+    &.block--region-doormat {
+      //
+      .field--name-field-media-info-image {
+
+        img {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block--type-site-branding {
+
+    &.block--region-doormat {
+      //
+      .field--name-field-media-info-image {
+        //
+      }
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block--type-site-branding {
+
+    &.block--region-doormat {
+      //
+      .field--name-field-media-info-image {
+        //
+      }
+    }
+  }
+
+}

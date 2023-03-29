@@ -1,0 +1,17 @@
+variants:
+  - description: 'default spacing on top and bottom'
+    section_spacing_top: 1x
+    section_spacing_bottom: 1x
+    background_color: grey
+  - description: 'No spacing on top or bottom'
+    section_spacing_top: 0x
+    section_spacing_bottom: 0x
+    background_color: spot_1
+  - description: 'minimal spacing on top and bottom'
+    section_spacing_top: minimal
+    section_spacing_bottom: minimal
+    background_color: grey
+  - description: 'medium spacing on top and bottom'
+    section_spacing_top: medium
+    section_spacing_bottom: medium
+    background_color: spot_1

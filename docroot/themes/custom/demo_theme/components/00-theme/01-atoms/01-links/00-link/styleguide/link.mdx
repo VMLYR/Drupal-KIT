@@ -1,0 +1,26 @@
+import { Story } from '@storybook/addon-docs';
+
+# Link
+
+## Styling
+
+There are helpers in the `_link-helpers.scss` file to help you style links<br />
+- some to quicky set the states of a link (hover, active, …)<br />
+- some to style specific types of links (eg. 'read more') that are recurring
+
+The styling is applied in `_link.scss`<br />
+You will see you can style default link tag, links in CKE and links for specific types (attached to a class)
+
+## tag vs Field
+
+The link atom is not used by Drupal directly, but is included inside other components, replacing Drupal's 'content' output.<br />
+(eg. included in all menu items to render a link tag with classes), <br />
+
+If you want to render a link field, that looks like what Drupal produces, inside a Storybook Molecule, <br />
+you can include `link-field.twig`. This wraps the link inside the correct field wrappers and classes as output by Drupal.<br />
+Examples of that can be found in the 'menu item' atom (which is in turn used by 'menus' molecules).
+
+## Empty link
+
+In some cases, empty links are printed in Drupal. This happens in the navigation when the route is left empty.<br />
+when that happens, the `a`-tag is replaced by a `span`.

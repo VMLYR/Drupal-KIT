@@ -1,0 +1,22 @@
+title_description: 'Tabbed item'
+label_hidden: true
+field_name: field_cb_faq_item
+field_type: tabbed_item
+multiple: true
+bem_field_modifiers:
+  - 'label-hidden'
+items:
+  -
+    title: Question number 1
+    content: |
+      <p>Lorem ipsum dolor sit amet, <a href=\"#\" title=\"test link\">consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+      <ul><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ul>
+      <ol><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ol>
+      <p>Nulla at volutpat diam ut venenatis tellus. Vitae congue eu consequat ac felis donec et odio pellentesque.</p>
+  -
+    title: Another question goes here
+    content: |
+      <p>Lorem ipsum dolor sit amet, <a href=\"#\" title=\"test link\">consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+      <ul><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ul>
+      <ol><li>Leo in vitae turpis massa</li> <li>Lobortis feugiat vivamus</li> <li>at augue eget arcu dictum varius</li></ol>
+      <p>Nulla at volutpat diam ut venenatis tellus. Vitae congue eu consequat ac felis donec et odio pellentesque.</p>

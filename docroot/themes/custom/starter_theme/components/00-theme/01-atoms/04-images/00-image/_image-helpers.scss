@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Images: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Mixins
+// =============================================================================
+
+// ** Image extendable: set image width to 100% and height to auto
+// -- USAGE: @include img-responsive()      without param, uses width
+// -- USAGE: @include img-responsive(true)  set param to true to use max-width instead
+
+@mixin img-responsive($max: true) {
+  @if ($max == false) {
+    width: 100%;
+  } @else {
+    max-width: 100%;
+  }
+  height: auto;
+}

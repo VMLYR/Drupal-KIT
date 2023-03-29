@@ -1,0 +1,48 @@
+{#
+ # Menus that you also want to be in mobile navigation go here
+ #}
+<div class="wrapper--navigation">
+  <a href="#" id="toggle-expand" class="navigation__toggle-expand">
+    <span class="visually-hidden">
+      {{ 'Mobile menu expand icon'|t }}
+    </span>
+    <span class="navigation__toggle-expand__group navigation__toggle-expand__group--open">
+      <span class="navigation__toggle-expand__icon navigation__toggle-expand__icon--open"></span>
+      <span class="navigation__toggle-expand__text navigation__toggle-expand__text--open">{{ 'Menu'|t }}</span>
+    </span>
+    <span class="navigation__toggle-expand__group navigation__toggle-expand__group--closed">
+      <span class="navigation__toggle-expand__icon navigation__toggle-expand__icon--closed"></span>
+      <span class="navigation__toggle-expand__text navigation__toggle-expand__text--closed">{{ 'Close'|t }}</span>
+    </span>
+  </a>
+  <div class="wrapper--navigation__content">
+    {% block nav_content %}
+
+      {# render the navigations and other elements
+         via organisms/header/header--primary component #}
+      {% if nav_primary %}
+      <div class="nav-section nav-section--primary">
+        {% block nav_primary %}
+          {{ nav_primary }}
+        {% endblock %}
+      </div>
+      {% endif %}
+
+      {# secondary menu goes here, or social media links in some cases or if you need to render blocks only visible on Mobile for example #}
+      {% if nav_secondary %}
+      <div class="nav-section nav-section--secondary">
+        {% block nav_secondary %}
+          {{ nav_secondary }}
+        {% endblock %}
+      </div>
+      {% endif %}
+
+      {# if you really need it, you can also add other sections here
+         but don't re-use sections that already exist of your ID's will no longer be unique#}
+      {# {% block fubar %}
+        {{ fubar }}
+      {% endblock %} #}
+
+    {% endblock %}
+  </div>
+</div>

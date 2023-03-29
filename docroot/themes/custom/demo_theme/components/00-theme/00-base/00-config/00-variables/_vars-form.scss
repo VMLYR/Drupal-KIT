@@ -1,0 +1,41 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Config: Variables: Forms
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// ** indicate if you want required fields to be marked, or the optional fields
+$fields-required: false;
+
+// all input types that kinda look like fields
+// use exceptions with ":not" so we don't need a long list of explicit selectors
+// because this produces less CSS
+$text-inputs-list:
+  "input:not([type])",
+  'input:not([type="range"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]):not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="hidden"])';
+
+// As reference, an explicit list of all types that kinda look like a text field
+// src: https://www.w3schools.com/tags/att_input_type.asp
+$text-inputs-types:
+  "color",
+  "date",
+  "datetime",
+  "datetime-local",
+  "email",
+  "month",
+  "number",
+  "password",
+  "search",
+  "tel",
+  "text",
+  "time",
+  "url",
+  "week";
+
+// elements that can look & act as form buttons
+// maybe don't but the default 'button' element in here because you might break styling in admin tools
+$buttons-list:
+  'input[type="button"]',
+  'input[type="reset"]',
+  'input[type="submit"]'
+;

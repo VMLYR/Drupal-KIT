@@ -1,0 +1,15 @@
+<script>
+  // ** Since we are not using a font loader,
+  //    we need to add the html classes that would normally be set by the font loader in the Drupal theme
+  (function() {
+
+    var fontFamilies = ['font-text-01-loaded', 'font-text-02-loaded', 'font-text-03-loaded','font-heading-01-loaded', 'font-heading-02-loaded',  'font-icons-01-loaded', 'font-icons-02-loaded', 'font-icons-03-loaded'];
+
+    const htmlTag = document.querySelector('html');
+    htmlTag.classList.add('fonts-loaded');
+    for (var key in fontFamilies) {
+      htmlTag.classList.add(fontFamilies[key]);
+    }
+
+  })();
+</script>

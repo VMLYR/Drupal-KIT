@@ -1,0 +1,69 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Headings: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Mixins to manage & share the styling
+// =============================================================================
+
+@mixin headings {
+  font-family: $font-fallback;
+  font-weight: $font-weight-bold;
+
+  a,
+  a:visited {
+    text-decoration: none;
+    color: hsl(var(--clr-link));
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: hsl(var(--clr-link));
+  }
+
+  // Only use webfont when it's done loading (replace class with the appropriate one)
+  //
+  // .font-text-01-loaded & {
+  //   font-family: $font-heading;
+  // }
+}
+
+@mixin h1 {
+  @include headings;
+  margin: 0 0 var(--gap-md) 0;
+  @include font-size($h1-size, $h1-line);
+  color: $h1-color;
+}
+
+@mixin h2 {
+  @include headings;
+  margin: 0 0 var(--gap-sm) 0;
+  @include font-size($h2-size, $h2-line);
+  color: $h2-color;
+}
+
+@mixin h3 {
+  @include headings;
+  margin: 0 0 var(--gap-sm) 0;
+  @include font-size($h3-size, $h3-line);
+  color: $h3-color;
+}
+
+@mixin h4 {
+  @include headings;
+  margin: 0 0 var(--gap-sm) 0;
+  @include font-size($h4-size, $h4-line);
+  color: $h4-color;
+}
+
+@mixin h5 {
+  margin: 0 0 var(--gap-xs) 0;
+  @include font-size($font-size-base, $line-height-base);
+  color: hsl(var(--clr-base));
+}
+
+@mixin h6 {
+  @include h5;
+}

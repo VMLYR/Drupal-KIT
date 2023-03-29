@@ -1,0 +1,11 @@
+label: 'Simple header'
+template: 'rs-one-col'
+minimal_styling: false
+modifier: null
+extra_classes: 'cb-header'
+content:
+  content: true
+  before01: false
+  before02: false
+  after01: true
+  after02: false

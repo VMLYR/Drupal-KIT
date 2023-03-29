@@ -1,0 +1,60 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Webform confirmation (and other related pages)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * General
+// =============================================================================
+
+.webform-confirmation,
+.webform-submission {
+  //
+}
+
+.webform-confirmation__message {
+  //
+}
+
+.webform-confirmation__back {
+  //
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .webform-confirmation,
+  .webform-submission {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .webform-confirmation,
+  .webform-submission {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .webform-confirmation,
+  .webform-submission {
+    //
+  }
+}

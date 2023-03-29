@@ -1,0 +1,4 @@
+responsive: true
+no_striping: true
+# attributes:
+#   - class: 'table--reformatted'

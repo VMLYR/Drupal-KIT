@@ -1,0 +1,20 @@
+title_description:
+label_hidden: true
+field_name: block_example_multifield
+field_type: text_with_summary
+bem_field_modifiers:
+  - 'label-hidden'
+multiple: true
+items:
+  -
+    title: "Falli igitur possumus."
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non semper, inquam; Negat esse eam, inquit, propter se expetendam."
+    name: facebook
+  -
+    title: "Nam,ut sint illa vendibiliora, haec uberiora."
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rationis enim perfectio est virtus; Odium autem et invidiam facile vitabis. Nihil illinc huc pervenit."
+    name: facebook
+  -
+    title: "Cur ipse Pythagoras et Aegyptum"
+    description: "Quis enim redargueret? Sed nimis multa. Quid ad utilitatem tantae pecuniae? Nescio quo modo praetervolavit oratio."
+    name: facebook

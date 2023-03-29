@@ -1,0 +1,79 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Files
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * File link
+// =============================================================================
+
+.file {
+  position: relative;
+  display: block;
+  padding-left: rem(20);
+  background: none; // remove drupal's default file icons
+
+  .icon {
+    position: absolute;
+    left: 0;
+    top: rem(-2);
+    width: rem(14);
+    text-align: center;
+  }
+
+  a {
+    display: block;
+  }
+}
+
+.icon--file {
+  @include font-awesome((icon: $fa-var-file, color: hsl(var(--clr-base)), margin: 0 5px 0 0));
+  transition: all $duration $easing;
+}
+
+.icon--image {
+  @include font-awesome((icon: $fa-var-file-image, color: hsl(var(--clr-base)), margin: 0 5px 0 0));
+  transition: all $duration $easing;
+}
+
+.icon--pdf {
+  @include font-awesome((icon: $fa-var-file-pdf, color: hsl(var(--clr-base)), margin: 0 5px 0 0));
+  transition: all $duration $easing;
+}
+
+// * Download link
+// =============================================================================
+
+.list__item--download {
+  @include font-size(14, 18);
+  box-shadow: none;
+  transition: all $duration $easing;
+
+  &:hover {
+    color: hsl(var(--clr-white));
+    background-color: hsl(var(--clr-spot-1));
+    box-shadow: 0 0 0 0.2em hsl(var(--clr-spot-1));
+
+    .icon::before {
+      color: hsl(var(--clr-white));
+    }
+  }
+
+  .icon--file {
+    @include font-awesome((icon: $fa-var-file, color: hsl(var(--clr-spot-1)), margin: 0 5px 0 0));
+  }
+
+  a,
+  a:visited {
+    color: hsl(var(--clr-spot-1));
+    transition: all $duration $easing;
+  }
+
+  a:hover,
+  a:active {
+    color: hsl(var(--clr-white));
+  }
+
+}

@@ -1,0 +1,19 @@
+region: footer
+menu: main
+label: 'Primary footer menu'
+configuration:
+  label_display: false
+menu_block_bem_modifiers:
+  - 'provider-system'
+  - 'system-menu-blockfooter'
+  - region-footer
+menu_block_bem_extra:
+  - 'block-system'
+items:
+  - title: 'Terms of use'
+    url: '#'
+  - title: 'Privacy policy'
+    url: '#'
+  #   no_link: true
+  # - title: 'A third item'
+  #   url: '#'

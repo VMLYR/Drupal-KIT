@@ -1,0 +1,51 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * 4 column layout
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+// .layout--4-col {
+//
+// }
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .layout__region--4-col--01,
+  .layout__region--4-col--02,
+  .layout__region--4-col--03,
+  .layout__region--4-col--04 {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    margin-left: calc(var(--gap-hor) / 2);
+    margin-right: calc(var(--gap-hor) / 2);
+    min-height: 1px;
+    width: calc(50% - var(--gap-hor));
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .layout__region--4-col--01,
+  .layout__region--4-col--02,
+  .layout__region--4-col--03,
+  .layout__region--4-col--04 {
+    flex: 0 0 auto;
+    flex-basis: auto;
+    width: calc((100% * var(--grid-columns) / 4) - var(--gap-hor));
+  }
+
+}

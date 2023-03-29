@@ -1,0 +1,184 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Grid: CSS-grid examples
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// disable this so it doesn't get compiled
+//
+$grid-examples: false;
+
+@if ($grid-examples) {
+
+  // ** wrapper for 12 column system
+  // =============================================================================
+
+  //   --   --   --   --   --   --   --   --   --   --   --   --
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   --   --   --   --   --   --   --   --   --   --   --   --
+  .my-grid {
+    @include grid;
+  }
+
+  // ** column that is 6 cols wide
+  // =============================================================================
+
+  //   ---------------------------   --   --   --   --   --   --
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //   ---------------------------   --   --   --   --   --   --
+  .my-grid__cell-6 {
+    @include grid-col(6);
+  }
+
+
+  // ** column that changes width per breakpoint
+  // =============================================================================
+
+  //    xs-small: 12
+  //    xs-wide: 12
+  //    sm: 6
+  //    md & lg: 4
+
+  //   ---------------------------------------------------------
+  //  |                                                         |
+  //  |                                                         |
+  //   ---------------------------------------------------------
+  //   ---------------------------   --   --   --   --   --   --
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //  |                           | |  | |  | |  | |  | |  | |  |
+  //   ---------------------------   --   --   --   --   --   --
+  //   -----------------   --   --   --   --   --   --   --   --
+  //  |                 | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |                 | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   -----------------   --   --   --   --   --   --   --   --
+  .my-grid__cell-resp {
+    @include grid-col-responsive(12, 12, 6, 4);
+  }
+
+
+  // ** 10 column system and has gap of 5px
+  // =============================================================================
+
+  //   --   --   --   --   --   --   --   --   --   --
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |  | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   --   --   --   --   --   --   --   --   --   --
+  .my-grid--10 {
+    @include grid(10, 5);
+  }
+
+
+  // ** column that is 2 cols wide
+  // =============================================================================
+
+  // in a system of 10 total columns
+  // with a gap of 5px
+
+  //   -------   --   --   --   --   --   --   --   --
+  //  |       | |  | |  | |  | |  | |  | |  | |  | |  |
+  //  |       | |  | |  | |  | |  | |  | |  | |  | |  |
+  //   -------   --   --   --   --   --   --   --   --
+
+  .my-grid__cell--10--5 {
+    @include grid(2, 10, 5);
+  }
+
+  // ** cells stretching over multiple rows
+  // =============================================================================
+
+  //   Uses a combination of:
+  //   flex-direction: column so you can stretch in height
+  //   flex for settin heights
+  //   width for settin widths
+  //   order for positioning the long cells !!!very important!!!
+  //
+  //   -----------   -----------   -----------
+  //  |           | |     2     | |           |
+  //  |     1     | |           | |     3     |
+  //  |           |  -----------  |           |
+  //  |           |  -----------  |           |
+  //  |           | |     4     | |           |
+  //  |           | |           | |           |
+  //   -----------   -----------   -----------
+
+  // <div class="my-grid--alt">
+  //   <div class="my-grid__cell--alt my-grid__cell--tall my-grid__cell--01">Item 1</div>
+  //   <div class="my-grid__cell--alt my-grid__cell--normal my-grid__cell--02">Item 2</div>
+  //   <div class="my-grid__cell--alt my-grid__cell--tall my-grid__cell--03">Item 3</div>
+  //   <div class="my-grid__cell--alt my-grid__cell--normal my-grid__cell--04">Item 4</div>
+  // </div>
+
+  .my-grid--alt {
+    @include grid;
+  }
+
+  // some coloring
+
+  .my-grid__cell--alt {
+    background-color: cyan;
+  }
+
+  // widths of cells
+
+  .my-grid__cell--normal,
+  .my-grid__cell--long {
+    @include grid-col(4);
+  }
+
+  // height of cells
+
+  .my-grid__cell--tall {
+    @include grid-row(2);
+  }
+
+
+  // ** Example of fallback for browsers that don't understand
+  //    the modern CSS-grid syntax
+  // =============================================================================
+
+  // including flex-mixins or properties AFTER CSS-grid properties,
+  // using the '.no-cssgrid' class that is set on the <html> tag by Modernizr
+
+  .my-fallback-grid {
+    @include grid;
+
+    // fallback
+    .no-cssgrid & {
+      // add your fallbacks
+      @include flex-grid;
+    }
+  }
+
+  // some coloring
+
+  .my-fallback-grid__cell {
+    background-color: cyan;
+  }
+
+  // sizing the cells
+
+  .my-fallback-grid__cell--12 {
+    @include grid-col(12);
+
+    // fallback
+    .no-cssgrid & {
+      // add your fallbacks
+      @include flex-col(12);
+    }
+  }
+
+  .my-fallback-grid__cell--4 {
+    @include grid-col(4);
+
+    // fallback
+    .no-cssgrid & {
+      // add your fallbacks
+      @include flex-col(4);
+    }
+  }
+
+}

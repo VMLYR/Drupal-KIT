@@ -1,0 +1,43 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms: fieldset
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+legend {
+  display: block;
+  @include h3;
+  margin: 0;
+  font-weight: $font-weight-bold;
+  white-space: normal;
+  color: hsl(var(--clr-base));
+}
+
+fieldset,
+.form-fieldset,
+.ui-dialog [class*="layout-builder"] fieldset:not(.fieldgroup) {
+  position: relative; // needed for tooltips
+  margin: 0 0 var(--gap-md) 0;
+  padding: rem(10);
+  border: 1px solid hsl(var(--clr-border));
+
+  legend {
+    display: table;
+    box-sizing: border-box;
+    padding: 0 rem(10);
+    max-width: 100%;
+    width: auto;
+  }
+
+  & > .form__element__tooltip,
+  .ui-widget & > .form__element__tooltip {
+    right: 2px;
+    top: -10px;
+  }
+}
+
+.fieldset__error-message {
+  margin-bottom: var(--gap-md);
+  color: hsl(var(--clr-error));
+}

@@ -1,0 +1,50 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Footer: Sticky
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+// ** Variant on: https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+//    https://thatemil.com/blog/2013/11/03/sticky-footers-flexbox-and-ie10/
+
+// stretch window to fill screen, also need this for the flexbox stuff below
+// to work properly in IE
+body,
+html {
+  height: 100%;
+}
+
+// The code below uses flex to make .page fill any open space
+// which pushes any element that comes after (e.g. the doormat and footer) down
+
+// fix for flexboxtweener browsers such as IE10
+.flexboxtweener,
+.flexboxtweener .page {
+  height: 100%;
+}
+
+.page-wrapper {
+  display: flex; // set flex on parent
+  flex-direction: column; // set flex to display children in column
+  min-height: 100vh; // stretch page wrapper to fill the screen vertically
+}
+
+// the stretchy part
+.page {
+  flex: 1 0 auto;
+}
+
+// the normal height parts
+.sticky-top,
+.doormat,
+.footer--primary {
+  flex-shrink: 1;
+}
+
+.sticky-top {
+  min-height: 1px; // IE11 fix to prevent white gap
+}
+

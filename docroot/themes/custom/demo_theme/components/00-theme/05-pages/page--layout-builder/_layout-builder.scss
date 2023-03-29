@@ -1,0 +1,72 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Overrides for Layout Builder preview or styling of elements not currently
+// * styled by lb.css
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// ** Confirming changes
+
+.layout-builder-discard-changes {
+  margin-top: rem(30);
+
+  .form-actions {
+    margin-top: rem(20);
+  }
+}
+
+// ** Actions
+
+#edit-discard-changes {
+  @include button-secondary();
+}
+
+/* Dialog Forms, needed for Layout Builder (in modals & sidebar tray)
+ - use #layout-builder-modal to override modal window stuff specifically
+ - use #drupal-off-canvas to override sidebar tray stuff specifically
+ - for dialogs used in other places, do your styling in a separate Sass-file
+   and leave this generic stying here
+*/
+
+.ui-dialog {
+
+  fieldset legend,
+  fieldset legend.h2,
+  .form-fieldset legend.h2 {
+    @include h4;
+    margin: 0;
+    font-family: $font-heading;
+    font-weight: $font-weight-bold;
+  }
+
+  // default buttons
+  button[type="submit"],
+  .ui-dialog-buttonset button {
+    @include button-primary();
+  }
+
+  // webform reference
+  .field--type-webform.field--widget-webform-entity-reference-select {
+    margin-bottom: rem(15);
+    padding: rem(15);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  // multi-field tooltips
+  .form__multiple-value > .form__element__tooltip {
+    right: 3px;
+    top: 3px;
+  }
+
+}
+
+#layout-builder-modal {
+  .cke_maximized {
+    position: fixed !important;
+  }
+}

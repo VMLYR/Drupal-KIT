@@ -1,0 +1,60 @@
+import { Story } from '@storybook/addon-docs';
+
+# Demo
+
+## Layout Builder Layout Templates
+
+Because our 'real' templates are part of the Rocketship Core module, and how complexly nested it is, it is very difficult to reuse them in Storybook. <br />
+For this reason, we opted to recreate them as static Styleguide components.<br />
+Since the templates from Core should not change in a project, it is fairly safe to use the static ones as an analog.<br />
+
+### Data structure
+
+As always, take a look at the yml files in these styleguide components for usage.
+
+A bunch of variables are all used to build (BEM) classes: <br />
+- `label`: string, functions as the 'modifier' in the BEM system, so it's used to append to the default section and region classes.
+   You normally fill this in when adding or editing a Section<br />
+- `template`: Also a BEM 'modifier'. Please note that all RS templates (except for RS two cols) are 1 column<br />
+- `modifier`: Also a BEM 'modifier', but manually created. You would pass this to your Section in LayoutBuilder, using a text field<br />
+- `minimal_styling`: boolean, indicates if the layout is used 'clean' (true) or for content-blocks (false). Generates different classes depending on the setting.
+- `extra_classes`: array, is used to print (you guessed it) extra classes you would pass to your Section in LayoutBuilder, using a text field<br />
+
+These keys are used to add more configuration:
+- `reversed` to reverse columns visually (also comes from a LayoutBuilder Section configuration option)
+- the regions inside `content` needs to be set to `true` if you want to output anything into those regions
+- `region_type` is only used in 1-col templates (like rs header). Outputs some extra classes.
+
+```
+label: 'Header'
+template: 'rs-header'
+region_type: 'header'
+```
+
+```
+label: 'Rocketship 2-col'
+template: 'rs-two-col'
+modifier: null
+extra_classes: 'home__section home__section--usp-info'
+minimal_styling: true
+reversed: false
+content:
+  first_main: true
+  second_main: true
+```
+
+
+
+## Notes
+
+- Some data in Storybook embedded templates doesn't reset the next time the template is used<br />
+  This means we need to reset it before usage or old and new data will merge (when the merge-filer is used to initialize those variables).<br />
+  The most annoying example so far, is the layout templates<br />
+
+  ```
+  {% set bem_section_modifier = [] %}
+  {% set bem_section_extra = [] %}
+  {% set modifier = false %}
+  {% set bem_region_modifier = [] %}
+  {% set bem_region_extra = [] %}
+  ```

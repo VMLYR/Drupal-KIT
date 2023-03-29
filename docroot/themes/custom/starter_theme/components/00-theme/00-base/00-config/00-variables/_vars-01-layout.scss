@@ -1,0 +1,25 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Variables for Layout: creating whitespace, sizing and positioning
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// ** Z-index
+// =============================================================================
+
+// -- used with mixin: eg. @include z-index(header)
+
+$z-index: (
+  top                : 10010, // the top layer possible, don't put anything before it
+  pb                 : 10000, // develop
+  grid-overlay       : 9999,  // develop
+  cookie             : 1010,  // over everything
+  modal              : 1000,  // over all content and nav
+  admin-toolbar      : 990,   // under modal but over rest
+  header-top         : 920,   // some elements go on the mobile nav
+  mobile-nav         : 910,
+  header-fixed       : 910,
+  header             : 910,
+  status             : 900,   // under all fixed things but above content
+);
+

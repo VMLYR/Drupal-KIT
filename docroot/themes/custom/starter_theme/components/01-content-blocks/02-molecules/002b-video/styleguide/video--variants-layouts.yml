@@ -1,0 +1,14 @@
+variants:
+  - normal:
+    label: 'CB Video - normal'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+  - stretched:
+    label: 'CB Video - stretched'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - has-layout--video-stretched
+      - cb--layout--video-stretched
+      - cb-video--layout--video-stretched

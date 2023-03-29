@@ -1,0 +1,426 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Paragraphs: USP item
+// *
+// * The USP as a group, is styled in the Organisms
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * USP item
+// =============================================================================
+
+.block--type-cb-usp {
+
+  --gap-usp: var(--gap-layout-hor);
+  --image-2cols-usp: #{rem(100)};
+
+
+  // ---------------------------------------------------------------------------
+
+  text-align: center;
+
+  // Image
+
+  .cb-usp-image {
+
+    a,
+    img {
+      display: block;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+
+  }
+
+  &.no-image {
+    .cb-usp-image {
+      display: none;
+    }
+  }
+
+  &.has-image {
+    .cb-usp-image {
+      position: relative;
+      margin: 0 0 rem(20) 0;
+      width: 100%;
+    }
+  }
+
+
+  @if ($structuralOnly == false) {
+
+    //
+
+  } @else {
+
+    .node & .field--name-image-url-field,
+    .node & .field--name-field-cb-image,
+    .node & .field--name-field-cb-media-image,
+    .node & .field--type-rs-display-field:first-child {
+      float: none;
+      margin: 0;
+    }
+  }
+
+  // title
+
+  .field--name-field-cb-title {
+    h2,
+    h3 {
+      margin-bottom: rem(10);
+      @include font-size($h4-size, $h4-line);
+    }
+  }
+
+  // teaser
+
+  .field--name-field-cb-title + .field.field--name-field-cb-text {
+    margin-top: 0; // reset
+  }
+
+  // Content
+
+  // reset margins on last bit of text
+  .field--name-field-cb-text {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Buttons or links
+
+  .field--name-field-cb-button {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; // center the buttons
+
+    .button {
+      @include button-size("sm");
+      margin: var(--gap-layout-vert-sm) rem(5) 0 rem(5);
+
+      &:nth-child(n+2) {
+        @include button-size("sm");
+      }
+    }
+  }
+
+
+  // -- 2 column layout
+
+  .layout--2-col & {
+
+    // Image: make it small
+
+    .cb-usp-image {
+
+      img {
+        height: var(--image-2cols-usp); // max-height of the image, same as the field width
+        width: auto;
+        margin: 0 auto;
+        max-width: none;
+      }
+    }
+
+  }
+
+  // -- 3 column layout
+
+  .layout--3-col & {
+
+    //
+  }
+
+  // -- 4 column layout
+
+  .layout--4-col & {
+
+    &.has-image {
+      .cb-usp-image {
+        //
+      }
+    }
+
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide phone only
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide-only {
+
+  // -- 2 column layout
+
+  .block--type-cb-usp {
+
+    .layout--2-col & {
+
+      .cb-usp-content {
+        text-align: left;
+      }
+
+      &.has-image {
+        display: flex;
+
+        .cb-usp-content {
+          flex: 1 1 auto;
+          padding-left: calc(var(--gap-layout-hor) / 2);
+          width: calc(100% - var(--image-2cols-usp) - (var(--gap-layout-hor) / 2)); // subtract size of image and padding
+
+          .cb-usp-content {
+            flex: none;
+            padding-left: 0;
+            width: auto;
+          }
+        }
+      }
+
+      // Buttons or links
+
+      .field--name-field-cb-button {
+        justify-content: flex-start;
+
+        .button {
+          margin: var(--gap-layout-vert-sm) rem(10) 0 0;
+        }
+      }
+
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // ** By default, we have only 1 image style (3:2 ratio)
+  //    and if we need to fit square sizes into it (eg. 2-columns uses square icon-images)
+  //    we have to crop via CSS by using fixed sizes and overflow hidden
+
+  .block--type-cb-usp {
+    display: flex; // needed to use flex & flex-grow in deeper levels
+    flex-direction: column;
+
+
+    // -- 2 column layout: small image next to text
+
+    .layout--2-col & {
+
+      .cb-usp-content {
+        text-align: left;
+      }
+
+      &.has-image {
+
+        display: flex;
+        flex-direction: row;
+
+        // leave img to a fixed width, and hide the overflow
+        // in case size or crop of image style was not set up properly
+
+        .cb-usp-image {
+          overflow: hidden;
+          flex: 0 1 var(--image-2cols-usp);
+          width: var(--image-2cols-usp);
+
+          // prevent blazy wrappers from breaking positioning of absolute image
+          // so needs some styling to enable proper position and stretch of the img
+          // basically, match what the sidebar div is doing
+          .media {
+            position: static;
+          }
+
+          img {
+            // size already set (see higher in the file)
+
+            // center the image horizontally
+            // that way it crops the image to a square
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+
+        .cb-usp-content {
+          flex: 0 1 calc(100% - var(--image-2cols-usp));
+          width: calc(100% - var(--image-2cols-usp));
+          padding-left: var(--gap-usp);
+
+          .cb-usp-content {
+            flex: none;
+            padding-left: 0;
+            width: auto;
+          }
+        }
+
+      }
+
+      // Buttons or links
+
+      .field--name-field-cb-button {
+        justify-content: flex-start;
+
+        .button {
+          margin: var(--gap-layout-vert-sm) rem(10) 0 0;
+        }
+      }
+
+    }
+
+    // -- 3 column layout: image on top
+
+    .layout--3-col & {
+
+      display: flex; // needed to use flex & flex-grow in deeper levels
+
+      //
+      &.has-image {
+        .cb-usp-image {
+          // -- Example: if need to crop visually, based on height
+          //
+          //overflow: hidden;
+          //width: var(--image-2cols-usp);
+          //
+          //img {
+          //  max-width: none;
+          //  height: 100%;
+          //  width: auto;
+          //  margin: 0 auto;
+          //
+          //  // center the image
+          //  position: relative;
+          //  transform: translateX(-50%);
+          //  left: 50%;
+          //}
+        }
+
+      }
+
+      // push buttons down so they are properly aligned with the other items
+      .field--name-field-cb-text {
+        flex-grow: 1;
+      }
+    }
+
+    // -- 4 column layout: image on top
+
+    .layout--4-col {
+
+      display: flex; // needed to use flex & flex-grow in deeper levels
+
+      //
+      &.has-image {
+        .cb-usp-image {
+          // -- Example: if need to crop visually, based on height
+          //
+          //overflow: hidden;
+          //width: var(--image-2cols-usp);
+          //
+          //img {
+          //  max-width: none;
+          //  height: 100%;
+          //  width: auto;
+          //  margin: 0 auto;
+          //
+          //  // center the image
+          //  position: relative;
+          //  transform: translateX(-50%);
+          //  left: 50%;
+          //}
+        }
+      }
+
+      // push buttons down so they are properly aligned with the other items
+      .field--name-field-cb-text {
+        flex-grow: 1;
+      }
+
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block--type-cb-usp {
+
+    // -- 2 column layout
+
+    .layout--2-col & {
+
+      // Extra space on the sides
+      // padding: 0 rem(50);
+    }
+
+    // -- 3 column layout
+
+    .layout--3-col & {
+
+      //
+
+    }
+
+    // -- 4 column layout
+
+    .layout--4-col & {
+
+      //
+
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block--type-cb-usp {
+
+    // -- 2 column layout
+
+    .layout--2-col {
+
+      // Extra space on the sides
+      padding: 0 rem(80);
+    }
+
+    // -- 3 column layout
+
+    .layout--3-col {
+      //
+    }
+
+    // -- 4 column layout
+
+    .layout--4-col {
+      //
+    }
+  }
+
+}

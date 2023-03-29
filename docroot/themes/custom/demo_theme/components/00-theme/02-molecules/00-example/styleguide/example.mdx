@@ -1,0 +1,185 @@
+import { Story } from '@storybook/addon-docs';
+
+# Making a Molecule story component
+
+We can expand on our Atoms example in order to build Molecules.
+
+At the basic level, Molecules are groups of Atoms. <br />
+So we build our Molecule components by starting with a Twig-file that can act as a wrapper (usually a block)<br />
+and embed fields in it (the so called Atoms).<br />
+To avoid having to do a lot of duplication of Twig and data, we can direclty import the styleguide Atoms we already created.
+
+## Story file
+
+### Working with data
+
+As mentioned in the example component under `Atoms`, there are more ways to deal with data, especially when components get more complex.
+
+In Molecules, it can be handy to have data for the overall block (eg. the label) but combine it with the yml files from existing atoms.<br />
+So we would have multiple imports we need to combine. There are 3 ways to achieve this: <br />
+- passing multiple data objects to your component
+- appending one object to another
+- deep merging the data objects
+
+#### 1) Multiple data objects
+
+If there are any overlapping structures in your 2 data files, the second file will override what is in the first.<br />
+This is a handy way to combine a set of generic data and then add more specific stuff per component variant.<br />
+
+Import:
+
+```
+import infoBlockData from './info-block.yml';
+import infoBlockHomepageData from './info-block--homepage.yml';
+```
+
+Pass it to twig:
+
+```
+__html: exampleTwig({...infoBlockData, ...infoBlockHomepageData})
+
+```
+
+#### 2) Simple append (or override)
+
+A bit more dirty, but if you simply need to append or override one key in your data object <br />
+and don't want to add extra files to do so, you can modify the data object directly.<br />
+A useful case, would be if you want to reuse data from an atom component, into your molecule (eg. image data).
+
+Import and change:
+
+```
+import infoBlockData from './info-block.yml';
+import imageData from '../../../01-atoms/images/styleguide/image.yml';
+
+infoBlockData.fields.image = imageData;
+```
+
+Pass it to twig as you normally would:
+
+```
+__html: exampleTwig(infoBlockData)
+
+```
+
+#### 3) Merge data
+
+Sometimes, your data is more complex and you need to merge nested data objects. One example is when dealing with drupalSettings.
+
+We can add fake drupalSettings to a component by importing it from a yml file, just like any other data, <br />
+but in order to make it available to our component JS-files, we need to merge it with the global `window.drupalSettings`<br />
+In case there is already (nested) data inside drupalSettings, we want to merge our old with our new data.
+
+```
+// node module to enable deep merge
+const merge = require('deepmerge');
+
+// import data that contains a 'drupalSettings' key with data in it
+import infoBlockSettings from './info-block-settings.yml';
+
+// merge the global drupalSettings with our locally imported settings
+// (nested values from first object will override values in second object)
+infoBlockSettings.drupalSettings = merge(infoBlockSettings.drupalSettings || {}, drupalSettings || {});
+// Important: make sure merged data is saved back in the global variable, for use with component JS files
+drupalSettings = infoBlockSettings.drupalSettings
+
+// now we can pass the infoBlockSettings to our twig components and it will contain the COMPLETE drupalSettings
+<div dangerouslySetInnerHTML={{ __html: exampleBlockTwig({...infoBlockSettings, ...infoBlockData}) }} />
+```
+
+Another situation, would be when you want to reuse data from Molecule components into Organisms.<br />
+For example, this is how the menus and blocks are included in the header and footer Organisms.<br />
+
+
+# Data structure
+
+Here's an overview of the basic keys you need to render Molecules.<br />
+But be aware that different Molecules could need different keys.
+
+## For blocks
+
+the entity's title (even if we'll hide it):
+```
+label: 'Example block'
+```
+
+Show or hide the title visually is set in 'configuration'
+```
+configuration:
+  label_hidden: false
+````
+
+If the block title is hidden, you still need to provide the label + a heading_id<br />
+This is because the title needs to be accessible (Drupal builds up that id automatically, Storybook does not)<br />
+_Note: If you don't provide a heading_id, twig will try to make one up based on the BEM block and a timestamp._
+```
+heading_id: "block-example-xyz"
+````
+
+The block type is used to build out classes using a BEM structure. <br />
+You can either pass it as-is in the `block_type` variable (string) <br />
+or put it in the `bem_block_modifiers` variable (array) (more on BEM further below)
+```
+block_type: content
+```
+```
+bem_block_modifiers:
+ - type-content
+```
+
+**Modifiers**, so we get proper BEM classes to style:<br />
+
+- **Block type:** will produce the most important class you will need to style a block. <br />
+Unless it is the block type 'content'. This one is too generic to style by block type class.<br />
+If you don't fill it in here, the block twig will attempt to get the type from the `block_type` variable instead.
+- **Unique id of the node:** (optional) Normally comes from `plugin_id` in Drupal. <br />
+Try to avoid styling blocks by plugin id class name when possible.<br />
+The exception, is when the generic block type 'content' was used to set a block (eg. on the homepage),<br />
+in which case you don't have much choice but to use the plugin id class.<br />
+In the normal Drupal blocks, this is pushed to `attributes['data-bem']`, via a theme function<br />
+- **Region:** (optional) can be handy to style a block in context of its Organism. <br />
+In Drupal blocks, this is also built up in a theme function and passed to `attributes['data-bem']`.
+- **View-mode**: (optional) could be handy for theming by context, if you use different view-modes for a block in different places<br />
+eg. if a social block in the header uses a simplified view-mode (eg. no labels) but the full one in the doormat.<br />
+But that is exceptional.
+- **Provider:** (optional) tells you what gave you the block (eg. layout-builder, system, block_content).<br />
+Not much use for styling
+
+```
+bem_block_modifiers:
+  - type-content
+  - block-content78dd02b1-c1e2-4a8a-bc31-f4b8ad7672f3
+  - region-doormat
+  - view-mode-full
+  - provider-layout-builder
+```
+
+```
+classes output:
+block block--type-content block--region-doormat block--provider-layout-builder block--block-content78dd02b1-c1e2-4a8a-bc31-f4b8ad7672f3 block--view-mode-full
+```
+
+**Extra classes**: <br />
+
+Not that useful for styling unless nested context is important, but then you probably have better classes on the various nested wrappers.<br />
+Eg. the provider pops up here again (via configuration.provider), prefixed with 'block-' (eg. block-layout-builder, block-block_content, block-system, …)
+
+```
+bem_block_extra:
+ - 'block-block_content'
+```
+
+### Block title
+
+As mentioned, heading can be visible or hidden. If hidden, the title content is automatically printed as `aria-label` on the block (for accessibility) and no heading is printed in the html.<br />
+If visible, the title is printed (h2 by default or h4 in footer and doormat blocks) and `aria-labelledby` is printed on the block, containing the `heading_id`
+
+In Storybook components, you might get an accessibility error for duplicate id's on a block or block field.<br />
+This can happen when you have a field label that is visible, and it inherits the block's `heading_id`<br />
+If you encounter that warning, see to it that your block's `heading_id` is different from the `label_id` of your field.
+
+
+### Block fields
+
+See the Atom example documentation
+

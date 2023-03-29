@@ -1,0 +1,186 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Sections with Carousel
+// *
+// * General styling for carousel layouts
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.layout__region--carousel--content-blocks {
+
+  // spacing above the carousel region
+  // this should only render if that top section contains items
+  &.layout__content__row--top {
+    margin-bottom: var(--gap-layout-vert-medium);
+  }
+}
+
+
+// * Slick slider
+// =============================================================================
+
+.layout__content__row--carousel {
+  position: relative;
+  text-align: center;
+
+  // ** reset some block options
+  .block-layout-builder,
+  .block-layout_builder {
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+  // ** items list
+
+  .slick-list {
+    width: calc(100% - 60px);
+    height: auto !important; // Overwrite height added by script
+    margin-left: rem(30);
+    margin-right: rem(30);
+
+    *:focus {
+      outline: none;
+    }
+  }
+
+  // vertical alignment (default is already top & stretched
+
+  .slick-track {
+    display: flex;
+    // align-items: flex-start;
+  }
+
+  .slick-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; //center;
+    align-items: center;
+    align-content: center;
+    height: auto;
+    margin: 0 rem(10);
+  }
+
+
+  &.layout__region--v-align-middle,
+  &.layout__region--v-align-center {
+
+    .slick-track {
+      align-items: center;
+    }
+
+    .slick-slide {
+      justify-content: center;
+    }
+  }
+
+  &.layout__region--v-align-bottom {
+
+    .slick-track {
+      align-items: flex-end;
+    }
+
+    .slick-slide {
+      justify-content: flex-end;
+    }
+  }
+
+  // ** navigation
+
+  .slick-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: rem(30);
+    font-size: 0;
+    cursor: pointer;
+    transition: all $duration $easing;
+
+    //@if ($structuralOnly == false) {
+    //  background: hsl(var(--clr-off-white));
+    //} @else {
+    //  background: rgba(#fff, .75);
+    //}
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all $duration $easing;
+    }
+
+    &.slick-prev {
+      left: 0;
+
+      @if ($structuralOnly == false) {
+
+        @include font-awesome((icon: $fa-var-angle-left, color: hsl(var(--clr-spot-1)), size: 30, type: "light"));
+
+      } @else {
+
+        &::before {
+          display: block;
+          content: "";
+          margin-left: rem(-4);
+          border-top: 7px solid transparent;
+          border-right: 7px solid #000000;
+          border-bottom: 7px solid transparent;
+          border-left: 7px solid transparent;
+        }
+      }
+    }
+
+    &.slick-next {
+      right: 0;
+
+      @if ($structuralOnly == false) {
+
+        @include font-awesome((icon: $fa-var-angle-right, color: hsl(var(--clr-spot-1)), size: 30, type: "light"));
+
+      } @else {
+
+        &::before {
+          display: block;
+          content: "";
+          margin-left: rem(4);
+          border-top: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-bottom: 7px solid transparent;
+          border-left: 7px solid #000000;
+        }
+      }
+    }
+
+    &:hover {
+
+      @if ($structuralOnly == false) {
+
+        //background: hsl(var(--clr-spot-2));
+
+        &::before {
+          color: hsl(var(--clr-spot-2));
+        }
+
+      } @else {
+
+        //background: rgba(#fff, 1);
+
+      }
+    }
+  }
+
+  .layout--bg--spot-1 &,
+  .layout--bg--spot-2 & {
+    .slick-arrow {
+      &::before {
+        color: hsl(var(--clr-white));
+      }
+    }
+  }
+}
+

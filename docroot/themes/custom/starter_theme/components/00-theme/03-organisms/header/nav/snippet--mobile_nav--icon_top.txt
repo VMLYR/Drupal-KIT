@@ -1,0 +1,178 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Snippet: mobile navigation with icon in top right corner
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+@include bp-xs-only {
+
+  // * Building the mobile bar and placing mobile menu on it
+  // ===========================================================================
+
+  .page-wrapper {
+    padding-bottom: calc(var(--menubar-height) - 1); // space for mobile menu
+  }
+
+  // piece of header as a fixed bar that is always present
+  // menu items will go over it:
+  // - top header
+  // - main navigation
+  .header__section--secondary {
+    position: absolute;
+    @include z-index(mobile-nav); // over all other content and header
+    right: 0;
+    top: 0;
+    width: rem(54);
+    height: var(--menubar-height);
+    color: #1f2833;
+  }
+
+
+  // ** Trigger
+
+  .navigation__toggle-expand {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0; // leave space on the left for contact block icons
+
+    display: block;
+
+    padding-top: 0;
+    width: rem(54);
+    height: var(--menubar-height);
+
+    text-align: center;
+
+    &,
+    &:visited {
+      color: hsl(var(--clr-spot-1));
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: hsl(var(--clr-spot-1));
+    }
+
+    .js-open & {
+      position: fixed;
+      z-index: 1; // over the overlay
+    }
+  }
+
+  // -- Trigger: icon
+
+  .navigation__toggle-expand__icon {
+    position: absolute;
+    left: 50%;
+    top: 0;
+
+    display: block;
+
+    padding-top: rem(15);
+
+    transform: translateX(-50%);
+    transition: opacity $duration $easing;
+  }
+
+  .navigation__toggle-expand__icon--open {
+    @include font-awesome((icon: $fa-var-bars, size: 18));
+    opacity: 1;
+
+    .js-open & {
+      opacity: 0;
+    }
+  }
+
+  .navigation__toggle-expand__icon--closed {
+    @include font-awesome((icon: $fa-var-times, size: 21, type: "light"));
+    opacity: 0;
+
+    .js-open & {
+      opacity: 1;
+    }
+  }
+
+  // -- Trigger: text
+
+  .navigation__toggle-expand__text {
+    @include hide;
+  }
+
+  .navigation__toggle-expand__text--open {
+    display: inline-block;
+
+    .js-open & {
+      display: none;
+    }
+  }
+
+  .navigation__toggle-expand__text--closed {
+    display: none;
+
+    .js-open & {
+      display: inline-block;
+    }
+  }
+
+  // -- grouping the menus
+
+  .wrapper--navigation__content {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+    // center the content vertically
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    // make sure we can scroll when there isn't enough room for all the navigations
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; // momentum in iOS
+
+    width: 100vw;
+    height: 0;
+
+    transition: all $duration $easing;
+
+    .js-open > & {
+      height: 100vh;
+      background-color: hsl(var(--clr-mobile-nav-open-bg));
+    }
+  }
+
+  .nav-section--secondary {
+    margin: rem(24) rem(-24) rem(24) rem(-24);
+    padding: rem(24);
+    background-color: hsl(var(--clr-off-white));
+  }
+
+
+  // * Adding the elements of header top to the right places
+  // ===========================================================================
+
+  .wrapper--headers {
+    position: relative; // in order to position header and header top elements in context
+  }
+
+  // ** Language menu is an exception, this stays fixed on top next to logo
+
+  .nav--language-interface {
+    position: absolute;
+    top: 0;
+    right: var(--gap-hor);
+    z-index: 6; // higher than logo, in case of overlap
+  }
+
+  // ** contact and search go over the menu bar
+
+  .block--header_top.block--search {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    @include z-index(header-top); // higher than mobile nav
+  }
+}

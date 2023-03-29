@@ -1,0 +1,199 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Quick edit
+// *
+// * Editing in the page itself, via quick edit toolbar and stuff that pops up
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** Form edit dialog
+// =============================================================================
+
+.quickedit-form-container {
+  //
+}
+
+.quickedit-field.quickedit-highlighted,
+.quickedit-form.quickedit-highlighted,
+.quickedit-field .quickedit-highlighted {
+  box-shadow: 0 0 0 100vw hsla(var(--clr-black), .8);
+}
+
+.quickedit-form {
+
+  max-width: rem(300);
+
+  &.quickedit-editable {
+    //
+  }
+
+  &.quickedit-highlighted {
+
+    margin: rem(5) 0; // otherwise cut off by overflow hidden on a container
+  }
+
+  &.quickedit-editing {
+    //
+  }
+
+  // ** Messages
+
+  .messages {
+    margin-bottom: rem(10);
+
+    abbr.warning {
+      color: hsl(var(--clr-white));
+    }
+  }
+
+  abbr.warning {
+    color: hsl(var(--clr-error));
+  }
+
+  // ** Tables
+
+  .table {
+    table-layout: auto;
+
+    th {
+      h4 {
+        margin: 0;
+      }
+    }
+
+    td {
+      padding: rem(10);
+    }
+  }
+
+  // -- drag
+
+  .link {
+    &,
+    &:visited {
+      color: hsl(var(--clr-link));
+    }
+  }
+
+  .tabledrag-toggle-weight-wrapper {
+    margin-bottom: var(--gap-md);
+    text-align: right;
+  }
+
+  .field-multiple-drag {
+    padding: rem(10);
+  }
+
+  .tabledrag-handle {
+
+    .handle {
+      @include font-awesome((icon: $fa-var-arrows-alt, color: hsl(var(--clr-base)), margin: 0));
+    }
+  }
+
+  // ** various fields
+
+  .form__element {
+    margin-bottom: var(--gap-md);
+  }
+
+  select {
+    min-width: rem(80);
+  }
+
+  // custom colors and layouts
+  [id*="-view-mode"],
+  [id*="-layout"],
+  [id*="-field-p-bg-color"] {
+    display: flex;
+    text-align: center;
+
+    .form-type--radio {
+      padding: 0 rem(10);
+      width: auto;
+    }
+  }
+
+  .form-submit {
+    @include button-primary();
+    margin-top: var(--gap-md);
+  }
+
+  // ** buttons
+
+  .dropbutton-widget {
+
+    button,
+    .button,
+    .dropbutton-toggle button {
+      padding: 0 !important;
+      margin: 0 !important;
+      color: hsl(var(--clr-link)) !important;
+      background: none !important;
+      box-shadow: none !important;
+
+      &::before,
+      &::after {
+        display: none !important;
+      }
+    }
+
+    .dropbutton-arrow {
+      //border-top-color: hsl(var(--clr-link));
+    }
+  }
+
+  .dropbutton {
+
+    li {
+      margin: 0;
+      padding: rem(5);
+    }
+  }
+}
+
+
+// ** UI Dialog
+// =============================================================================
+
+.ui-dialog-titlebar {
+  padding: rem(5);
+}
+
+.ui-dialog-content {
+  padding: rem(5);
+}
+
+// remove this because doesn't look correct in Layout Builder
+// so if we want to use this, we need an extra selector to differentiate
+// .ui-dialog-buttonset {
+//   padding: rem(5);
+
+//   .button {
+//     @include button-size("sm");
+//   }
+// }
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide phone & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide {
+
+  .quickedit-form {
+    max-width: rem(420);
+  }
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .quickedit-form {
+    max-width: rem(600);
+  }
+}

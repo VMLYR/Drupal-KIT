@@ -1,0 +1,7 @@
+page:
+  content:
+    node:
+      view_mode: full
+      bundle: page
+      # isPromoted: false
+      # isSticky: false

@@ -1,0 +1,92 @@
+import { Story } from '@storybook/addon-docs';
+
+# Layout
+
+## Vertical rhythm
+
+In order to set up consistent vertical space (vertical rhythm) and horizontal<br />
+spacing, the theme contains several variables in<br />
+`00-theme/00-base/00-config/00-variables/_vars-01-layout.scss`<br />
+You can tweak these if you need, but keep in mind they are part of a system<br />
+used throughout the whole site to make your life easier. If you just need 1<br />
+element to have a different amount of spacing (eg. the homepage blocks and<br />
+rows), please just use another variable in those elements.
+
+- `var(--gap-md)` is based on the line-height, because this will make space in<br />
+texts (eg paragraphs and lists). Therefor, it is based on the typography<br />
+sizing. It's the basis used in print design for ensuring readability and a<br />
+nice vertical rhythm.
+- `var(--gap-xs)` `var(--gap-sm)`: these are 2 smaller variants of this, used<br />
+when less space is needed. Eg. with small titles or other smaller bits of text.<br />
+The reason these have a fixed size, is because you can't set a minimum margin<br />
+or padding size, so we had to settle for a fixed value instead. So you might<br />
+need to tweak these a bit based on how big your line-height is.<br />
+- `var(--gap-lg)`: The bigger gaps are still based on your typography
+
+## Horizontal space
+
+There is a default gap size defined, that is also the fallback for the grid<br />
+system gaps between columns. Try to keep this value the same as in the designs.<br />
+The container padding is half of the columns gap.
+
+## Positioning layers
+
+That layout variables file also contains a map of z-indexes `$z-index` you can use to<br />
+keep overview of all the layers in your site. This is especially important<br />
+for the mobile menu and other overlays.<br />
+Use the mixin `@include z-index(myMapKey)` to set specific z-indeces.
+
+!!!USE THE MIXIN AND THESE VARIABLES!!!
+
+**Important!**
+
+- Keep in mind that a z-index ONLY works on an element with a position<br />
+(relative/absolute/fixed/…).
+- Remember that if you nest layers, their z-index is always RELATIVE to the<br />
+closest wrapper with a position.
+- For these reasons, the `.container` and several other wrappers do not have a<br />
+default position: relative. We want to avoid having to override these in the<br />
+header.
+- Resetting positioning on an element can always be done by giving it<br />
+`position: static`. This makes the element ignore position, z-index,<br />
+left/right/top/bottom.
+
+## Breakpoints
+
+Breakpoints are set and used in 3 places:
+
+- **in the theme (and dropsolid_core module)**<br />
+`breakpoints.yml`-files:<br />
+These are used for responsive image styles by Drupal
+- **in the Sass**<br />
+  `00-theme/00-base/02-helpers/02-mixins/_mixins-00-breakpoints.scss`<br />
+  `00-theme/00-base/00-config/00-variables/_vars-breakpoints.scss`<br />
+  You get a lot of possible breakpoints here but the most important thing to<br />
+  remember, is that we work from the 'mobile first' principle.<br />
+  **Meaning**: most breakpoints go from smaller to bigger screens using<br />
+  'min-width'.<br />
+  **However**, there are exceptions: we have breakpoints to add styling<br />
+  specific for a certain breakpoint (eg. bp-xs-only is only small phones)<br />
+  OR smaller than a max-width (eg. bp-sm-only is for screens smaller then or<br />
+  equal to tablet).<br />
+  **Why do we have those exceptions?** Because sometimes a mobile design is<br />
+  very different from the bigger screens (eg. mobile menu and navigation) and<br />
+  we don't want to have to undo a bunch of styling.
+
+- **in the JS**<br />
+  `00-base/06-scripts/00-helpers.js`<br />
+  There is a `self.screen` variable set up so you can check on which breakpoint<br />
+  you are. This is used by the JS that does the mobile menu navigation but can<br />
+  come in handy in other places as well.<br />
+  It relies on the getBreakpoint and checkScreensize functions, which refer to<br />
+  a pseudo-element set by CSS.
+
+## Grid system
+
+`00-theme/00-base/05-grid`
+We have a grid system in place that uses flexbox and has fallback stuff for IE.<br />
+Inside this folder, you will find the mixins and examples using html.
+
+You might also notice there is a `_alt` folder. This one contains a couple of<br />
+experimental grid systems, using CSS Grid. Do not use this in production as<br />
+long as IE is supported. The fallback system is complex and unstable.

@@ -1,0 +1,23 @@
+variants:
+  - normal:
+    label: 'CB Text - align-left'
+    fields:
+      title:
+        heading: 'CB Text - align-left'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - has-view-mode--left
+      - cb--view-mode--left
+      - cb-text--view-mode--left
+  - centered:
+    label: 'CB Text - align-centered'
+    fields:
+      title:
+        heading: 'CB Text - align-centered'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - has-view-mode--centered
+      - cb--view-mode--centered
+      - cb-text--view-mode--centered

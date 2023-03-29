@@ -1,0 +1,41 @@
+label: 'CB Focus'
+configuration:
+  label_display: false
+block_type: cb_focus
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  title:
+    heading_display: true
+    heading_level: 2
+    heading: CB Focus
+    field_name: field_cb_title
+    field_type: string
+  subtitle:
+    heading_display: true
+    heading_level: 3
+    heading: Block subtitle
+    field_name: field_cb_subtitle
+    field_type: string
+  teaser:
+    label_hidden: true
+    field_name: field_cb_teaser
+    field_type: string_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: "Risus nec feugiat in fermentum posuere urna. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et ligula."
+  buttons:
+    field_name: 'field_cb_button'
+    field_type: 'link'
+    label_hidden: true
+    items:
+      - content:
+          '#title': 'First field item'
+          '#type': "link"
+      - content:
+          '#type': 'link'
+          '#url': '#'
+          '#title': 'Second field item'

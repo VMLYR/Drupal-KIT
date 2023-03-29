@@ -1,0 +1,25 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Vars: Breakpoints
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// if breakpoints are used & printed (needed for screen size detection in JS to work)
+$set-breakpoints: true !default;
+
+// * Breakpoints
+// =============================================================================
+
+$bp-xs: 320px;
+$bp-xs-small: $bp-xs;
+$bp-xs-small-max: 479px;
+$bp-xs-wide: 480px;
+$bp-xs-max: 767px;
+$bp-xs-wide-max: $bp-xs-max;
+$bp-sm: 768px;
+$bp-sm-max: 939px;
+$bp-md: 940px;
+$bp-md-max: 1199px;
+$bp-lg: 1200px;
+$bp-xl: 1920px;

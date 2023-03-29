@@ -1,0 +1,30 @@
+pager__uid: 0
+current: 1
+items:
+  first:
+    href: '#'
+    attributes: ''
+    text: 'First'
+  previous:
+    href: '#'
+    attributes: ''
+    text: 'Previous'
+  next:
+    href: '#'
+    attributes: ''
+    text: 'Next'
+  last:
+    href: '#'
+    attributes: ''
+    text: 'Last'
+  pages:
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''
+    - href: '#'
+      attributes: ''

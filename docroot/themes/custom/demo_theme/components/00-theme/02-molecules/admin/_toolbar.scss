@@ -1,0 +1,34 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Admin toolbar
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.toolbar-fixed .toolbar-bar {
+  @include z-index(admin-toolbar); // over the status messages
+}
+
+// make some space for Tabs
+// because the JS doesn't always do it properly when window is resized
+.toolbar-horizontal.toolbar-fixed {
+  padding-top: rem(79) !important;
+
+  // ** don't need separate padding for open tray
+  //    because it causes problems with fixed header
+  //&.toolbar-tray-open {
+  //  padding-top: rem(79) !important;
+  //}
+}
+
+.toolbar-tray a {
+  &,
+  &:visited {
+    color: #565656;
+  }
+}
+

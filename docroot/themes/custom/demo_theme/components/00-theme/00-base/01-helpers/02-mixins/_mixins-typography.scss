@@ -1,0 +1,602 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Mixins: Typography
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Overview
+// =============================================================================
+
+// ** font-face
+// ** font-size
+// ** font-awesome
+// ** hide-text
+// ** hide-icontext
+// ** text-nobreak
+// ** ellipsis
+// ** word-break
+// ** m-p-reset
+
+
+// * Mixins
+// =============================================================================
+
+// ** enable font-smoothing can be helpful on older screens,
+//    for fonts that do not have subpixel rendering
+//    or it could not? Who the hell knows…
+
+@mixin font-smoothing($value: off) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+
+// ** use font-face to generate all the different url's for the various font files
+//    By default will only load woff and woff2 files, but you can use legacy formats as well
+//     using the 'legacy' variable
+//    Settings:
+//       font-family,
+//       font-style: normal,
+//       font-weight: normal,
+//       font-display: swap, (best for loading and display of fonts)
+//       file-path, (location of font files, relative to css-folder, or can be absolute using '://')
+//       cache-string: "cache_busting_variable", (this will attempt to bust the cache, set emtpy string "" if you don't want that)
+//       unicode-range: null,
+//       legacy: false, (if set to true, it will try to load older font file formats: eot and ttf)
+// -- USAGE: @include font-face(($font-family: "Montserat", $font-style: "normal"));
+
+@mixin font-face($settings) {
+
+  // some defaults, used in case no $settings were given
+  // or when either of the settings is omitted
+  $font-family-default: "";
+  $font-style-default: normal;
+  $font-weight-default: normal;
+  $font-display-default: swap;
+  $file-path-default: "";
+  $cache-string-default: "cache_busting_variable";
+  $unicode-range-default: null;
+  $legacy-default: false;
+
+  // initiate the actual variables that will be used
+  $font-family: null;
+  $font-style: null;
+  $font-weight: null;
+  $font-display: null;
+  $file-path: null;
+  $cache-string: null;
+  $unicode-range: null;
+  $legacy: null;
+
+  // map the variables to the settings if actual settings are passed
+  @if ($settings != null) {
+    $font-family: map-get($settings, font-family);
+    $font-style: map-get($settings, font-style);
+    $font-weight: map-get($settings, font-weight);
+    $font-display: map-get($settings, font-display);
+    $file-path: map-get($settings, file-path);
+    $cache-string: map-get($settings, cache-string);
+    $unicode-range: map-get($settings, unicode-range);
+    $legacy: map-get($settings, legacy);
+  }
+
+  // if any are not filled in, fall back to defaults
+  @if ($font-family == null) {
+    $font-family: $font-family-default;
+  }
+  @if ($font-style == null) {
+    $font-style: $font-style-default;
+  }
+  @if ($font-weight == null) {
+    $font-weight: $font-weight-default;
+  }
+  @if ($font-display == null) {
+    $font-display: $font-display-default;
+  }
+  @if ($file-path == null) {
+    $file-path: $file-path-default;
+  }
+  @if ($cache-string == null) {
+    $cache-string: $cache-string-default;
+  }
+  @if ($unicode-range == null) {
+    $unicode-range: $unicode-range-default;
+  }
+  @if ($legacy == null) {
+    $legacy: $legacy-default;
+  }
+
+  @font-face {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    src: _font-source-declaration($font-family, $file-path, $cache-string, $legacy);
+    font-display: $font-display;
+    @if ($unicode-range != null) {
+      unicode-range: $unicode-range;
+    }
+    @content;
+  }
+}
+
+
+// ** Font-size mixin: easily set font-size and line-height of an element
+// -- NOTE: default font-size comes from the base vars (eg. 13), default line-height as well (eg. 18)
+// -- USAGE: @include font-size(15, 18) (don't use px!) -> sets font-size to 15 and line-height to a ratio of 18/15 = 1.1385
+// -- USAGE: @include font-size(15, 18, true) -> scales the font-size & line-height per breakpoint. The starting values you pass, are used on bp-lg only
+// -- USAGE: @include font-size(15, 18, true, (scale-xs: 1.3, scale-sm: 1.2, scale-md: 1.1, scale-lg: 1) ) -> pass scaling per breakpoint
+
+@mixin font-size($size: $font-size-base, $line: ($size * math.div($line-height-base, $font-size-base)), $responsive: false, $responsive-params: null) {
+  font-size: rem($size);
+  line-height: rem($line);
+
+  @if ($responsive == true) {
+
+    // some defaults, used in case no $settings were given
+    // or when either of the settings is omitted
+    $scale-xs-default: 1.3;
+    $scale-sm-default: 1.2;
+    $scale-md-default: 1.1;
+    $scale-lg-default: 1;
+
+    // set up the actual variables that will be used
+    $scale-xs: null;
+    $scale-sm: null;
+    $scale-md: null;
+    $scale-lg: null;
+
+    // map the variables to the settings if actual settings are passed
+    @if ($responsive-params != null) {
+      $scale-xs: map-get($responsive-params, scale-xs);
+      $scale-sm: map-get($responsive-params, scale-sm);
+      $scale-md: map-get($responsive-params, scale-md);
+      $scale-lg: map-get($responsive-params, scale-lg);
+    }
+
+    // if any are not filled in, fall back to defaults
+    @if ($scale-xs == null) {
+      $scale-xs: $scale-xs-default;
+    }
+    @if ($scale-sm == null) {
+      $scale-sm: $scale-sm-default;
+    }
+    @if ($scale-md == null) {
+      $scale-md: $scale-md-default;
+    }
+    @if ($scale-lg == null) {
+      $scale-lg: $scale-lg-default;
+    }
+
+    $newSizeXs: math.div($size, $scale-xs);
+    $newLineXs: math.div($line, $scale-xs);
+    $newSizeSm: math.div($size, $scale-sm);
+    $newLineSm: math.div($line, $scale-sm);
+    $newSizeMd: math.div($size, $scale-md);
+    $newLineMd: math.div($line, $scale-md);
+    $newSizeLg: math.div($size, $scale-lg);
+    $newLineLg: math.div($line, $scale-lg);
+
+    @include bp-xs-only {
+
+      @if ($newSizeXs >=  ($font-size-base - 1)) {
+        @include font-size($newSizeXs, $newLineXs);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-sm-only {
+
+      @if ($newSizeSm >=  ($font-size-base - 1)) {
+        @include font-size($newSizeSm, $newLineSm);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-md-only {
+
+      @if ( $newSizeMd >=  ($font-size-base - 1)) {
+        @include font-size($newSizeMd, $newLineMd);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-lg {
+
+      @if ($newLineLg >=  ($font-size-base - 1)) {
+        @include font-size($newSizeLg, $newLineLg);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+  }
+}
+
+
+// *
+// * Font-awesome mixin: add a font-awesome icon before or after an element
+//
+// * NOTE: before is default, margin is default 0.
+//
+// * Settings via an object, containing:
+// * $element: pseudo-element, default = before,
+// * $position,
+// * $left,
+// * $top,
+// * $type:"regular",
+// * $icon: eg. a fontawesome variable,
+// * $color,
+// * $color-secondary: for duotone icons, this is the second the icon, defaults to same as primary,
+// * $size,
+// * $align:middle,
+// * $margin...
+//
+// * USAGE:
+// * $hamburgerIcon: (icon: $fa-var-hamburger, color: hsl(var(--clr-white)), size: 21px);
+// * @include font-awesome($hamburgerIcon);
+// * $duotoneIcon: (icon: $fa-var-hamburger, color: hsl(var(--clr-white)), color-secondary: hsl(var(--clr-white)), size: 21px)
+// * @include font-awesome($hamburgerIcon);
+
+@mixin font-awesome($settings) {
+
+  // set variables
+  $type: map-get($settings, type);
+  $icon: map-get($settings, icon);
+  $element: map-get($settings, element);
+  $position: map-get($settings, position);
+  $left: map-get($settings, left);
+  $right: map-get($settings, right);
+  $top: map-get($settings, top);
+  $bottom: map-get($settings, bottom);
+  $bottom: map-get($settings, bottom);
+
+
+  // some defaults, used in case no $settings were given
+  // or when either of the settings is omitted
+  $swap-opacity-default: false;
+  $opacity-default: 1;
+  $opacity-secondary-default: .4;
+  $color-default: inherit;
+
+  // set up the actual variables that will be used
+  $swap-opacity: null;
+  $opacity: null;
+  $opacity-secondary: null;
+  $color: null;
+  $color-secondary: null;
+
+  // map the variables to the settings if actual settings are passed
+  @if ($settings != null) {
+    $swap-opacity: map-get($settings, swap-opacity);
+    $opacity: map-get($settings, opacity);
+    $opacity-secondary: map-get($settings, opacity-secondary);
+    $color: map-get($settings, color);
+    $color-secondary: map-get($settings, color-secondary);
+  }
+
+  // if any are not filled in, fall back to defaults
+  @if ($swap-opacity == null) {
+    $swap-opacity: $swap-opacity-default;
+  }
+  @if ($opacity == null) {
+    $opacity: $opacity-default;
+  }
+  @if ($opacity-secondary == null) {
+    $opacity-secondary: $opacity-secondary-default;
+  }
+  @if ($color == null) {
+    $color: $color-default;
+  }
+  // secondary color falls back to primary if none set
+  @if ($color-secondary == null) {
+    $color-secondary: $color;
+  }
+
+  // can only use this mixin if we are using font for custom icons
+  // as well as no custom icons set
+  @if ($custom-icons == false) {
+
+    // if using duotone icons, we need to stack 2 pseudo-elements
+    @if ($type == "duotone") {
+
+      &::before,
+      &::after {
+        display: inline-block;
+      }
+
+      &::before {
+
+        @include font-awesome-pseudo($settings);
+        opacity: $opacity;
+
+        @if($position != null) {
+          position: $position;
+        } @else {
+          position: relative;
+          line-height: inherit;
+          vertical-align: bottom;
+        }
+        @if($left != null) {
+          left: $left;
+        }
+        @else if($left == null and $right != null) {
+          right: $right;
+        }
+        @if($top != null) {
+          top: $top;
+        }
+        @else if($top == null and $bottom != null) {
+          bottom: $bottom;
+        }
+      }
+
+      &::after {
+
+        // all second icons in the duotone stack use the same variant name: '10' + the original icon unicode
+        // so we can manipulate that string in Sass to obtain that icon
+        // eg: \f805 becomes \10f805
+        $icon-secondary: str-insert($icon, "10", 2);
+
+        // copy the icon settings but replace the color + the icon
+        // by basically merging the original map with a new one only containing the color
+        $settings-secondary: map-merge($settings, (color: $color-secondary, icon: $icon-secondary));
+
+        @include font-awesome-pseudo($settings-secondary);
+        opacity: $opacity-secondary;
+
+        @if($position != null) {
+          position: $position;
+        } @else {
+          position: absolute;
+          left: 0;
+          line-height: inherit;
+          vertical-align: bottom;
+        }
+        @if($left != null) {
+          left: $left;
+        }
+        @else if($left == null and $right != null) {
+          right: $right;
+        }
+        @if($top != null) {
+          top: $top;
+        }
+        @else if($top == null and $bottom != null) {
+          bottom: $bottom;
+        }
+      }
+
+      @if ($swap-opacity) {
+        &::before {
+          opacity: $opacity-secondary;
+        }
+
+        &::after {
+          opacity: $opacity;
+        }
+      }
+
+      // if no duotone needed, we can add fontawesome styling to a single pseudo-element only
+    } @else {
+
+      @if ($element == "after" or $element == ":after" or $element == "::after") {
+        &::after {
+          @if($position != null) {
+            position: $position;
+          }
+          @if($left != null) {
+            left: $left;
+          }
+          @else if($left == null and $right != null) {
+            right: $right;
+          }
+          @if($top != null) {
+            top: $top;
+          }
+          @else if($top == null and $bottom != null) {
+            bottom: $bottom;
+          }
+          @include font-awesome-pseudo($settings);
+        }
+      } @else {
+        &::before {
+          @if($position != null) {
+            position: $position;
+          }
+          @if($left != null) {
+            left: $left;
+          }
+          @else if($left == null and $right != null) {
+            right: $right;
+          }
+          @if($top != null) {
+            top: $top;
+          }
+          @else if($top == null and $bottom != null) {
+            bottom: $bottom;
+          }
+          @include font-awesome-pseudo($settings);
+        }
+      }
+
+    }
+
+  }
+
+}
+
+@mixin font-awesome-pseudo($settings) {
+
+  // -- set variables
+
+  $type: map-get($settings, type);
+  $icon: map-get($settings, icon);
+  $color: map-get($settings, color);
+  $size: map-get($settings, size);
+  $align: map-get($settings, align);
+  $margin: map-get($settings, margin);
+
+  // -- fontawesome defaults:
+  //
+  // $fa-font-path:         "../webfonts" !default;
+  // $fa-font-size-base:    16px !default;
+  // $fa-font-display:      auto !default;
+  // $fa-css-prefix:        fa !default;
+  // $fa-version:           "5.12.0" !default;
+  // $fa-border-color:      #eee !default;
+  // $fa-inverse:           #fff !default;
+  // $fa-li-width:          2em !default;
+  // $fa-fw-width:          math.div(20em / 16);
+  // $fa-primary-opacity:   1 !default;
+  // $fa-secondary-opacity: .4 !default;
+
+  content: unquote("\"#{ $icon }\"");
+  display: inline-block;
+  $newMargin: if(length($margin) == 0, 0px, $margin);
+  margin: $newMargin;
+
+  @include font-awesome-core;
+
+  @if ($align == null) {
+    // vertical-align: -.125em;
+    vertical-align: middle;
+  } @else {
+    vertical-align: $align;
+  }
+
+  // -- set default size
+
+  @if ($size == 16px or $size == 16 or $size == null) {
+    $size: $fa-font-size-base;
+  }
+
+  font-size: rem($size);
+
+  // -- set font style/weight
+
+  @if ($fontawesome-version == "free") {
+
+    @if ($type == "brand") {
+      font-family: "Font Awesome 5 Brands", sans-serif;
+      font-weight: normal;
+    } @else if ($type == "regular") {
+      font-family: "Font Awesome 5 Free", sans-serif;
+      font-weight: 400;
+    } @else {
+      // solid (so anything marked as "light" will fallback to this)
+      font-family: "Font Awesome 5 Free", sans-serif;
+      font-weight: 900;
+    }
+
+  } @else {
+
+    @if ($type == "duotone") {
+      font-family: "Font Awesome 5 Duotone", sans-serif;
+      font-weight: 900;
+    } @else if ($type == "brand") {
+      font-family: "Font Awesome 5 Brands", sans-serif;
+      font-weight: normal;
+    } @else if ($type == "regular") {
+      font-family: "Font Awesome 5 Pro", sans-serif;
+      font-weight: 400;
+    } @else if ($type == "light") {
+      font-family: "Font Awesome 5 Pro", sans-serif;
+      font-weight: 300;
+    } @else {
+      // solid
+      font-family: "Font Awesome 5 Pro", sans-serif;
+      font-weight: 900;
+    }
+  }
+
+  color: $color;
+
+}
+
+@mixin font-awesome-core {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+
+// ** Hide an element's content
+
+@mixin hide-text {
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+// ** hide text of an element with a font-awesome icon without hiding icon itself
+
+@mixin hide-icontext() {
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+
+  &::before {
+    text-indent: -110%; // compensate for text-indent
+  }
+}
+
+// ** Don't break up text
+
+@mixin text-nobreak {
+  white-space: nowrap;
+  -ms-word-break: keep-all;
+  word-break: keep-all;
+}
+
+// ** end text if no space
+
+@mixin ellipsis($width: 100%) {
+  display: inline-block;
+  overflow: hidden;
+  max-width: $width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+// ** Break long strings (eg. emailaddresses)
+
+@mixin word-break($hyphen:false) {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  @if ($hyphen) {
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
+
+// ** remove all padding and margin on element
+
+@mixin m-p-reset {
+  margin: 0;
+  padding: 0;
+}

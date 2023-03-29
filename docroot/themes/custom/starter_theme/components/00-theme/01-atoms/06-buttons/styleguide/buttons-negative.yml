@@ -1,0 +1,24 @@
+- button_type: 'link'
+  button_content: 'Primary Button'
+  button_bem_modifiers:
+    - 'negative'
+  button_negative: true
+- button_type: 'link'
+  button_content: 'Primary Button (disabled)'
+  button_bem_modifiers:
+    - 'negative'
+  button_bem_extra:
+    - 'disabled'
+  button_negative: true
+- button_type: 'link'
+  button_content: 'Secondary Button'
+  button_bem_modifiers:
+    - 'negative-secondary'
+  button_negative: true
+- button_type: 'link'
+  button_content: 'Secondary Button (disabled)'
+  button_bem_modifiers:
+    - 'negative-secondary'
+  button_bem_extra:
+    - 'disabled'
+  button_negative: true

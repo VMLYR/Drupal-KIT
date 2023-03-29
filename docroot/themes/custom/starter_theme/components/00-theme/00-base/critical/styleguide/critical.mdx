@@ -1,0 +1,53 @@
+import { Story } from '@storybook/addon-docs';
+
+# Critical CSS
+
+Adding Critical CSS can cut down on loading times for your styling, especially on pages with complex designs. <br />
+It should save you some points in Google Lighthouse and such because it shortens the time to first render.
+
+What it is, is CSS that is loaded inline, in the head of specific urls of your site and is achieved in 2 parts.
+
+## CSS file creation
+
+There is a gulp task which will collect the CSS needed for 'above the fold' rendering on various breakpoints, based on 2 variables:
+- the url
+- a name to give to the file
+The resulting CSS-file gets saved in your theme's `css/critical` folder. <br />
+You should make at least 1 file for the homepage and 1 based on the basic page with a text and story paragraph. <br />
+If you want to make more, start with extra files per type of page that has major theming differences above the fold, eg. detail page per content type.
+
+`gulp css:critical --criticalUrl https://my-url.com/ --criticalName home`
+
+
+## CSS loading
+
+In order to load the CSS file(s) in the HEAD, per path, we have 2 solutions:
+- Manual
+- Using a module
+
+### Manual
+
+Add your CSS-files to `_html--master.twig`, right below the head-placeholder token:
+
+```
+{# Example: adding Critical CSS for frontpage + all the rest #}
+{% if is_front %}
+  <style>{{ source( base_path ~ directory ~ '/css/critical/home.css')|replace({'../fonts': base_path ~ directory ~ '/fonts'})|replace({'../images': base_path ~ directory ~ '/images'})|raw }}</style>
+{% else %}
+  <style>{{ source( base_path ~ directory ~ '/css/critical/default-critical.css')|replace({'../fonts': base_path ~ directory ~ '/fonts'})|replace({'../images': base_path ~ directory ~ '/images'})|raw }}</style>
+{% endif %}
+
+```
+
+This example loads 1 file for the path of the frontpage (based on the boolean variable `is_front`, which has been created using a theme function ages ago), and a generic file for all the other paths. <br />
+You can finetune this yourself to check more paths, by adding your own expression to the `HOOK_preprocess` function that checks specific paths and save that in a variable as well. <br />
+Or check existing Drupal variables directly in the twig template (but it's a bit cleaner to put logic in the theme functions instead of in Twig)
+
+*Note:* The critical CSS files will only work if all relative paths are replaced with absolute ones (as you can see has been done for `../fonts` ).
+
+### Using the module
+
+As an alternative, the 'critical_css' module (on drupal.org) lets you define a path to your CSS files and will attempt to load them based on the file name (read the module's info). <br />
+Eg. the module will provide Twig naming suggestions if you have Twig debug enabled. The proposed name of a critical css file, is always based on the node name. For example, the front page needs `css/critical/front.css` or `css/critical/path-front.css`
+
+However, I've encountered some breaking issues (eg. the admin theme switching to the front-end theme for no reason). I also have no idea if it reliably handles relative paths and fonts so you'll have to test it for yourself.

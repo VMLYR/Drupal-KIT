@@ -1,0 +1,188 @@
+:root {
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // *
+  // * Variables: basic colors
+  // *
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // ** Palette
+
+  --clr-spot-1: 196 100% 53%; // #10bfff Bright blue
+  --clr-spot-2: 337, 100%, 44%; // #de0055 Red
+  --clr-spot-3: 207, 100%, 16%; // #002c50 Dark blue
+
+  --clr-black: 0, 0%, 0%; // #000
+  --clr-white: 0, 0%, 100%;// #fff
+
+  --clr-off-white: 0, 0%, 95%; // #f3f3f3
+
+  --clr-gray-light-1: 0, 0%, 90%; // #e5e5e5
+  --clr-gray-light-2: 0, 0%, 82%; // #d1d1d1
+  --clr-gray-light-3: 0, 0%, 64%; // #a2a2a2
+  --clr-gray: 0, 0%, 44%; // #707070
+  --clr-gray-dark: 0, 0%, 33%; // #545454
+  --clr-gray-dark-2: 0, 0%, 13%; // #212121
+
+  // ** Main
+
+  --clr-base: 0, 0%, 19%; // #303030
+  --clr-base-dark: 0, 0%, 29%; // #4a4a4a
+  --clr-base-bg: 0, 0%, 100%; // #fff
+
+  --clr-heading: 0, 0%, 19%; // #303030
+
+  --clr-link: var(--clr-spot-2);
+  --clr-link-hover: var(--clr-spot-1);
+  --clr-link-active: var(--clr-spot-1);
+
+  --clr-text-link: var(--clr-spot-2);
+  --clr-text-link-hover: var(--clr-spot-2);
+  --clr-text-link-active: var(--clr-spot-1);
+
+  --clr-button: var(--clr-white);
+  --clr-button-bg: var(--clr-spot-1);
+  --clr-button-hover: var(--clr-white);
+  --clr-button-hover-bg: var(--clr-spot-2);
+
+  --clr-border: var(--clr-gray-light-2);
+
+  // * Regions
+
+  --clr-header-top-bg: var(--clr-off-white);
+  --clr-navigation-bg: var(--clr-spot-1);
+
+  --clr-nav-submenu: var(--clr-spot-1-light);
+  --clr-mobile-nav: var(--clr-base);
+  --clr-mobile-nav-bg: var(--clr-gray-light-3);
+  --clr-mobile-nav-open: var(--clr-white);
+  --clr-mobile-nav-open-bg: var(--clr-spot-1);
+
+  --clr-doormat: var(--clr-gray-light-1);
+  --clr-doormat-bg: var(--clr-gray-dark-2);
+  --clr-footer: var(--clr-white);
+  --clr-footer-bg: var(--clr-black);
+
+  // ** Tabs
+  --clr-tabs-background: var(--clr-gray-dark);
+  --clr-tab-text: var(--clr-white);
+  --clr-tab-bg: var(--clr-gray);
+  --clr-tab-bg-hover: var(--clr-link);
+  --clr-tab-bg-active: var(--clr-link);
+  --clr-tab-bg-active-2: var(--clr-white);
+
+  // * Alerts
+  --clr-error: 6, 78%, 57%; // #e74c3c
+  --clr-error-dark: 6, 63%, 46%; // #c0392b
+  --clr-status: 150, 52%, 51%; // #3fc380
+  --clr-status-dark: 156, 100%, 35%; // #00b16a
+  --clr-warning: 32, 82%, 56%; // #eb9532
+  --clr-warning-dark: 16, 87%, 62%; // #f2784b
+  --clr-neutral: 203, 100%, 37%; // #0074bd
+
+  // ** Forms
+
+  --clr-placeholder: var(--clr-gray-light-2);
+
+  --clr-form: var(--clr-base);
+  --clr-form-border: var(--clr-border);
+
+  --clr-form-inactive: var(--clr-gray-light-1);
+  --clr-form-active: var(--clr-spot-1);
+  --clr-form-active-border: var(--clr-spot-1-light);
+
+  --clr-form-disabled: var(--clr-gray-light-1);
+  --clr-form-disabled-bg: var(--clr-white);
+  --clr-form-disabled-border: var(--clr-gray-light-1);
+  --clr-form-error-border: var(--clr-error);
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // *
+  // * Variables: typography
+  // *
+  ////////////////////////////////////////////////////////////////////////////////
+
+  --font-size-base: #{rem(14)};
+  --line-height-base: #{rem(24)};
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // *
+  // * Variables: Spacing
+  // *
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // ** Vertical spacing
+  // =============================================================================
+
+  // smaller gap
+  --gap-xs: #{rem(5)}; // the smallest vertical distance you will need
+  --gap-sm: #{rem(15)}; // eg. could use $font-size-base instead;
+  // traditionally, we use the line-height to create a vertical rhythm
+  // this is used to create space after p-text and other typography
+  --gap-md: var(--line-height-base);
+  // bigger gap
+  --gap-lg: calc(var(--font-size-base) + var(--line-height-base));
+
+  // space above and below certain elements: eg.blocks with a bg
+  --gap-vert-xs: var(--line-height-base);
+  --gap-vert-sm: var(--line-height-base);
+  --gap-vert-md: #{rem(40)};
+  --gap-vert-lg: #{rem(50)};
+  --gap-vert-lg-2: #{rem(110)};
+
+  // Use the following variable to apply a space that increases with screen size
+  --gap-vert: var(--line-height-base);
+
+  @include bp-sm {
+    --gap-vert: var(--gap-vert-sm);
+  }
+
+  @include bp-md {
+    --gap-vert: var(--gap-vert-md);
+  }
+
+  @include bp-lg {
+    --gap-vert: var(--gap-vert-lg);
+  }
+
+  @include bp-xl {
+    --gap-vert: var(--gap-vert-lg-2);
+  }
+
+  // ** Horizontal spacing
+  // =============================================================================
+
+  // used by the grid for it's gutters
+  // DON'T override this if you only want to change the grid gutters
+  --gap-hor: #{rem(30)};
+
+  // space on the side of your main container so content doesn't stick to the sides
+  --container-padding: #{rem(15)};
+
+  // ** Fixed sizes
+  // =============================================================================
+
+  // used for things like the mobile menu icon & fixed menu bar
+  --menubar-height: #{rem(60)};
+  --mobile-header-space: #{rem(120)};
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // *
+  // * Variables: Grid
+  // *
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // * Grid settings
+  // =============================================================================
+
+  --grid-columns: $grid-columns;
+
+  // for container sizing
+  --max-width: #{rem(1200)};
+  --max-width-md: var(--max-width);
+  --max-width-sm: #{rem(940)};
+  --max-width-xs: none;
+}

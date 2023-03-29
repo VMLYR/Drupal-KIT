@@ -1,0 +1,6 @@
+link_content: An image file link
+link_url: '#atoms-links-file--file-image'
+attributes:
+  class:
+    - 'file--image'
+    - 'mime-image-jpeg'

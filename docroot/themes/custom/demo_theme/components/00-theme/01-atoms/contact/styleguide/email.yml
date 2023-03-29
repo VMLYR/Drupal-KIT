@@ -1,0 +1,8 @@
+field_name: field_office_email
+field_type: email
+bem_field_modifiers:
+  - 'label-hidden'
+multiple: true
+items:
+  -
+    mail: "info@dropsolid.com"

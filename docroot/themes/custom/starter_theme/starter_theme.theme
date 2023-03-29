@@ -1,0 +1,910 @@
+<?php
+/**
+ * @file
+ * Functions to support theming in the Rocketship starter theme theme.
+ */
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\Template\Attribute;
+use Drupal\block\Entity\Block;
+
+// for theme settings
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Theme\ThemeSettings;
+use Drupal\system\Form\ThemeSettingsForm;
+use Drupal\Core\Form;
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * @param $libraries
+ * @param $extension
+ */
+function starter_theme_library_info_alter(&$libraries, $extension) {
+  if(isset($libraries['drupal.tableresponsive'])) {
+    unset($libraries['drupal.tableresponsive']);
+  }
+
+  /* EXAMPLE: override library file attributes
+  if (isset($libraries['drimage'])) {
+    $libraries['drimage']['js']['js/drimage.min.js'] = [
+      'minified' => TRUE,
+      'attributes' => [
+        'defer' => TRUE,
+      ],
+    ];
+  }
+  */
+}
+
+/**
+ * Implements HOOK_page_attachments_HOOK().
+ *
+ * @param page
+ */
+function starter_theme_page_attachments_alter(array &$page) {
+  $theme_path = \Drupal::service('extension.list.theme')->getPath('starter_theme');
+  $header_tags = array(
+    // Responsive helper tags (based on html 5 boilerplate)
+    // Will always be needed: if it does not need to be zoomable the value must be changed here
+      'viewport' => array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'viewport',
+              'content' => 'width=device-width, initial-scale=1, minimum-scale=1',
+          ),
+      ),
+  );
+  foreach ($header_tags as $name => $tag) {
+    $page['#attached']['html_head'][] = [$tag, $name];
+  }
+}
+
+/**
+ * Implements template_preprocess(&$variables, $hook, $info).
+ *
+ * @param $variables
+ * @param $hook
+ * @param $info
+ */
+function starter_theme_preprocess(&$variables, $hook, $info) {
+
+  // get base path in order to properly construct theme path in twig, using {{ base_path ~ directory }}
+  // https://drupal.stackexchange.com/questions/184148/get-path-to-image-src-from-twig-template#187083
+  $variables['base_path'] = base_path();
+
+  // Try adding 'is_front' var to preprocess. This is needed for the branding block.
+  // An exception might be thrown.
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+
+    // Add a variable for the root path. This can be used to create a class and
+    // theme the page depending on the current path (e.g. node, admin, user) as
+    // well as more specific data like is-front.// get root path
+    if ($variables['is_front']) {
+      $variables['root_path'] = FALSE;
+    }
+    else {
+      $system_path = \Drupal::service('path.current')->getPath();
+      $variables['root_path'] = explode('/', $system_path) [1];
+    }
+  }
+  catch (Exception $e) {
+    // If the database is not yet available, set default values for these variables.
+    $variables['is_front'] = FALSE;
+    $variables['db_is_active'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_html(&$variables) {
+  // We get the twig service to see if the debug is active
+  $twig_service = \Drupal::service('twig');
+  if ($twig_service->isDebug()) {
+    $variables['attributes']['class'][] = 'theme-debug-mode';
+  }
+
+  // Set 404 & 403 classes for theming
+
+  // We check in current request is an exception to check which error is.
+  $status = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
+  // Check different conditions to add body classes.
+  if ($status && ($status->getStatusCode() == 404 || $status->getStatusCode() == 403 || $status->getStatusCode() == 500 || $status->getStatusCode() == 503)) {
+    $variables['attributes']['class'][] = 'page--' . $status->getStatusCode();
+  }
+
+  // Add information about the number of sidebars.
+  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'layout-two-sidebars';
+  }
+  elseif (!empty($variables['page']['sidebar_first'])) {
+    $variables['attributes']['class'][] = 'layout-one-sidebar';
+    $variables['attributes']['class'][] = 'layout-sidebar-first';
+  }
+  elseif (!empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'layout-one-sidebar';
+    $variables['attributes']['class'][] = 'layout-sidebar-second';
+  }
+  else {
+    $variables['attributes']['class'][] = 'layout-no-sidebars';
+  }
+
+  if (!empty($variables['page']['featured_top'])) {
+    $variables['attributes']['class'][] = 'has-featured-top';
+  }
+
+  if (!empty($variables['page']['primary_menu'])) {
+    $variables['attributes']['class'][] = 'has-off-canvas';
+  }
+
+  switch (\Drupal::service('path.current')->getPath()) {
+    case '/user/login':
+    case '/user/password':
+      $variables['attributes']['class'][] = 'user-pages';
+    case '/project/switch':
+      $variables['attributes']['class'][] = 'centered';
+      break;
+  }
+
+  // Get the contents of the SVG sprite.
+
+  $inlineSVG = \Drupal::theme()->getActiveTheme()->getPath() . '/images/generated/sprite-inline.svg';
+
+  if (file_exists($inlineSVG)) {
+    $icons = file_get_contents($inlineSVG);
+
+    // Add a new render array to page_bottom so the icons
+    // get added to the page.
+    $variables['page_bottom']['icons'] = array(
+      '#type' => 'inline_template',
+      '#template' => '<span class="hidden">' . $icons . '</span>',
+    );
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_page(&$variables) {
+  // Set the options that apply to both page and maintenance page.
+  _starter_theme_process_page($variables);
+
+  // Since the title and the shortcut link are both block level elements,
+  // positioning them next to each other is much simpler with a wrapper div.
+  if (!empty($variables['title_suffix']['add_or_remove_shortcut']) && $variables['title']) {
+    // Add a wrapper div using the title_prefix and title_suffix render elements.
+    $variables['title_prefix']['shortcut_wrapper'] = array(
+      '#markup' => '<div class="shortcut-wrapper clearfix">',
+      '#weight' => 100,
+    );
+    $variables['title_suffix']['shortcut_wrapper'] = array(
+      '#markup' => '</div>',
+      '#weight' => -99,
+    );
+    // Make sure the shortcut link is the first item in title_suffix.
+    $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+  }
+
+  // make custom theme settings available in the javascript
+
+  $variables['header_fixed'] = theme_get_setting('header_fixed');
+  $variables['language_dropdown'] = theme_get_setting('language_dropdown');
+  $variables['scroll_to'] = theme_get_setting('scroll_to');
+  $variables['scroll_to_exceptions'] = theme_get_setting('scroll_to_exceptions');
+  $variables['lazy_loading'] = theme_get_setting('lazy_loading');
+  $variables['lazy_loading_fallback'] = theme_get_setting('lazy_loading_fallback');
+  $variables['prevent_layout_shift'] = theme_get_setting('prevent_layout_shift');
+
+  $language = \Drupal::languageManager()->getCurrentLanguage();
+  if (isset($language) && $language !== null) {
+    $language_id = $language->getId();
+    if (isset($language_id) && $language_id !== null) {
+      $variables['#attached']['drupalSettings']['language'] = $language_id;
+    }
+  }
+
+  $variables['#attached']['drupalSettings']['theme_settings']['header_fixed'] = $variables['header_fixed'];
+  $variables['#attached']['drupalSettings']['theme_settings']['language_dropdown'] = $variables['language_dropdown'];
+  $variables['#attached']['drupalSettings']['theme_settings']['scroll_to'] = $variables['scroll_to'];
+  $variables['#attached']['drupalSettings']['theme_settings']['scroll_to_exceptions'] = $variables['scroll_to_exceptions'];
+  $variables['#attached']['drupalSettings']['theme_settings']['lazy_loading'] = theme_get_setting('lazy_loading');
+  $variables['#attached']['drupalSettings']['theme_settings']['lazy_loading_fallback'] = theme_get_setting('lazy_loading_fallback');
+  $variables['#attached']['drupalSettings']['theme_settings']['prevent_layout_shift'] = theme_get_setting('prevent_layout_shift');
+
+  // load certain libraries only if certain modules are enabled
+
+  // ** Example of conditionally loaded library:
+  //
+  //$moduleHandler = \Drupal::service('module_handler');
+  //
+  // if ($moduleHandler->moduleExists('dropsolid_blog_core') || $moduleHandler->moduleExists('rocketship_blog_core')) {
+  //   $variables['#attached']['library'][] = 'starter_theme/feature_blog';
+  // }
+
+}
+
+function starter_theme_preprocess_block(&$variables) {
+
+  // add extra names to build better block classes using BEM
+  // + fix the id's to be unique
+
+  $variables['attributes']['data-bem'] = [];
+
+  if (!empty($variables['id'])) {
+    $myId = $variables['id'];
+
+    // make unique ID
+    $variables['id'] = Html::getUniqueId($myId);
+
+    $block = Block::load($myId);
+    if (!empty($block)) {
+      $originalId = $block->getOriginalId();
+      $region = $block->getRegion();
+      if (!empty($region) && !empty($originalId)) {
+        $regionArr = preg_split("/(_\d)+/", $region); // only use the part before '_number'
+        $region = $regionArr[0];
+        $variables['attributes']['data-bem']['region'] = $region;
+        $variables['attributes']['data-bem']['originalId'] = $originalId;
+      }
+    }
+
+  } else if (!empty($variables['elements']['#id'])) {
+    $myId = $variables['elements']['#id'];
+
+    // make unique ID
+    $variables['elements']['#id'] = Html::getUniqueId($myId);
+
+    $block = Block::load($myId);
+    if (!empty($block)) {
+      $originalId = $block->getOriginalId();
+      $region = $block->getRegion();
+      if (!empty($region) && !empty($originalId)) {
+        $regionArr = preg_split("/(_\d)+/", $region); // only use the part before '_number'
+        $region = $regionArr[0];
+        $variables['attributes']['data-bem']['region'] = $region;
+        $variables['attributes']['data-bem']['originalId'] = $originalId;
+      }
+    }
+
+  } else {
+    if (isset($variables['elements']['#configuration']['region'])) {
+      $region = $variables['elements']['#configuration']['region'];
+      $regionArr = preg_split("/(_\d)+/", $region); // only use the part before '_number'
+      $region = $regionArr[0];
+      $variables['attributes']['data-bem']['region'] = $region;
+    }
+  }
+
+  if(isset($variables['elements']['content']['#block_content']) && $variables['elements']['content']['#block_content'] instanceof \Drupal\block_content\BlockContentInterface){
+    /** @var \Drupal\block_content\BlockContentInterface $content_block */
+    $content_block = $variables['elements']['content']['#block_content'];
+    $type = $content_block->bundle();
+
+    // if it's a content block, give it a extra class denoting that
+    if (substr($type, 0, 3) === 'cb_') {
+      $variables['attributes']['class'][] = 'content-block';
+    }
+
+    $variables['attributes']['data-bem']['type'] = $type;
+  }
+
+  // Add a class 'nav--language--dropdown' to language block if dropdown mode is enabled.
+  if (isset($variables['base_plugin_id']) && $variables['base_plugin_id'] === 'language_block' && theme_get_setting('language_dropdown')) {
+    $variables['menu_block_bem_extra'][] = 'nav--language--dropdown';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for links of language block.
+ */
+function starter_theme_preprocess_links__language_block(&$variables) {
+  $variables['language_dropdown'] = theme_get_setting('language_dropdown');
+  $variables['language'] = \Drupal::languageManager()->getCurrentLanguage();
+
+  if ($variables['language_dropdown']) {
+    foreach ($variables['links'] as &$link) {
+      if (isset($link['link'])) {
+        $link['link']['#options']['attributes']['class'][] = 'nav__link--language--dropdown';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for PAGE.
+ */
+function starter_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $path_args = explode('/', trim(\Drupal::service('path.current')->getPath(), '/'));
+
+  $theme_suggestions = theme_get_suggestions($path_args, 'page');
+
+  // Remove duplicates
+  $duplicated_suggestions = array_intersect($theme_suggestions,$suggestions);
+  $unique_suggestions = array_diff($suggestions,$theme_suggestions);
+  $suggestions = array_merge($duplicated_suggestions,$unique_suggestions);
+
+  $http_error_suggestions = [
+    'system.401' => 'page__system__401',
+    'system.403' => 'page__system__403',
+    'system.404' => 'page__system__404',
+  ];
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (isset($http_error_suggestions[$route_name])) {
+    $suggestions[] = 'page__error';
+    $suggestions[] = $http_error_suggestions[$route_name];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_maintenance_page(&$variables) {
+  // By default, site_name is set to Drupal if no db connection is available or during site installation.
+  // Setting site_name to an empty string makes the site and update pages look cleaner.
+  // @see template_preprocess_maintenance_page
+  if (!$variables['db_is_active']) {
+    $variables['site_name'] = '';
+  }
+
+  // Bartik has custom styling for the maintenance page.
+  $variables['#attached']['library'][] = 'bartik/maintenance_page';
+
+  // Set the options that apply to both page and maintenance page.
+  _starter_theme_process_page($variables);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_node(&$variables) {
+  // Remove the "Add new comment" link on teasers or when the comment form is displayed on the page.
+  if ($variables['teaser'] || !empty($variables['content']['comments']['comment_form'])) {
+    unset($variables['content']['links']['comment']['#links']['comment-add']);
+  }
+
+  $node = $variables['node'];
+  $createdTime = $node->getCreatedTime();
+  $date = \Drupal::service('date.formatter')->format($createdTime, 'custom', t('l F jS Y \a\t h:i'));
+  $variables['date'] = $date;
+}
+
+/**
+ * HOOK_preprocess_image
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_image(&$variables) {
+
+  // if, by any chance, your images don't print the 'loading' attribute
+  // it is because the data is missing and needs to be passed via another, more specific preprocess function
+  // You need to use that one, just like we did for Responsive Images using TEMPLATE__preprocess_responsive_image
+  // If no preprocess can be found or none work, or it's too much of a hassle,
+  // you can try enabling the attribute in here.
+  // And if that doesn't work, you can try TEMPLATE_preprocess_field instead
+  // (there is an example further below)
+  //
+  // $variables['attributes']['loading'] = 'lazy';
+
+  if (theme_get_setting('lazy_loading')) {
+    // Make fallback flag available in Twig, for all images rendering using the img tag
+    // we've also set this using preprocess_field, for all images that don't pass through here
+    $variables['lazy_loading_fallback'] = theme_get_setting('lazy_loading_fallback');
+  }
+
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  if (theme_get_setting('prevent_layout_shift') && !$is_admin_route) {
+
+    $uri = $variables['uri'];
+    $image_width = $variables['width'];
+    $image_height = $variables['height'];
+
+    // sometimes, the uri is for a data rendered image (eg. an SVG) or other type of placeholder,
+    // set by a dynamic loading implementation like 'drimage'
+    // and the real uri is hidden deeper down in a data attribute
+
+    // check we're dealing with some kind of dynamic loading implementation by fetching data-src
+    if ( isset($variables['attributes']) && isset($variables['attributes']['data-src']) ) {
+      $uri = $variables['attributes']['data-src'];
+      if (isset($uri) && file_exists($uri)) {
+        list($image_width, $image_height) = getimagesize($uri);
+      }
+    // otherwise, we have the real deal with the normal 'uri',
+    // and we check we have width and height coming from the attributes
+    } else {
+      // if no sizes found, calculate them via the uri
+      if (!isset($image_width) || !isset($image_height)) {
+        if (isset($uri) && file_exists($uri)) {
+          list($image_width, $image_height) = getimagesize($uri);
+        }
+      }
+    }
+
+    // build an inline style to make space for the image
+    if (isset($image_width) && isset($image_height)) {
+      $variables['attributes']['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+    };
+
+  }
+}
+
+/**
+ * HOOK_preprocess_image
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_responsive_image(&$variables) {
+
+  // force lazy loading for responsive image by default
+  // seems to be missing in Core
+  if (theme_get_setting('lazy_loading')) {
+    $variables['attributes']['loading'] = 'lazy';
+  }
+
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  if (theme_get_setting('prevent_layout_shift') && !$is_admin_route) {
+
+    $uri = $variables['uri'];
+    $image_width = $variables['width'];
+    $image_height = $variables['height'];
+
+    // sometimes, the uri is for a data rendered image (eg. an SVG) or other type of placeholder,
+    // set by a dynamic loading implementation like 'drimage'
+    // and the real uri is hidden deeper down in a data attribute
+
+    // check we're dealing with some kind of dynamic loading implementation by fetching data-src
+    if ( isset($variables['attributes']) && isset($variables['attributes']['data-src']) ) {
+      $uri = $variables['attributes']['data-src'];
+      if (isset($uri) && file_exists($uri)) {
+        list($image_width, $image_height) = getimagesize($uri);
+      }
+    // otherwise, we have the real deal with the normal 'uri',
+    // and we check we have width and height coming from the attributes
+    } else {
+      // if no sizes found, calculate them via the uri
+      if (!isset($image_width) || !isset($image_height)) {
+        if (isset($uri) && file_exists($uri)) {
+          list($image_width, $image_height) = getimagesize($uri);
+        }
+      }
+    }
+
+    // build an inline style to make space for the image
+    if (isset($image_width) && isset($image_height)) {
+      $variables['attributes']['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+    };
+
+  }
+
+}
+
+function starter_theme_preprocess_image_style(&$variables) {
+
+  // force lazy loading for responsive image by default
+  // seems to be missing in Core
+  // However, we need some exceptions, eg. for preview images (otherwise it breaks)
+
+  if (theme_get_setting('lazy_loading')) {
+    $loading = 'eager'; // no lazy loading to start
+
+    // make lazy loading if none of these use cases
+    if ((isset($variables['image']['style_name']) && $variables['image']['style_name'] !== 'preview')
+      || (isset($variables['image']['#style_name']) && $variables['image']['#style_name'] !== 'preview')) {
+      $loading = 'lazy';
+    }
+
+    $variables['image']['#attributes']['loading'] = $loading;
+  }
+
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  if (theme_get_setting('prevent_layout_shift') && !$is_admin_route) {
+    $uri = $variables['image']['#uri'];
+    $image_width = $variables['image']['#width'];
+    $image_height = $variables['image']['#height'];
+
+    // if no sizes found, calculate them via the uri
+    if ((!isset($image_width) || !isset($image_height))) {
+      if (isset($uri) && file_exists($uri)) {
+        list($image_width, $image_height) = getimagesize($uri);
+      }
+    }
+
+    // build an inline style to make space for the image
+    if (isset($image_width) && isset($image_height)) {
+      $variables['image']['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+    };
+  }
+
+}
+
+/**
+ * HOOK_drimage_formatter
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_drimage_formatter(&$variables) {
+
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  if (theme_get_setting('prevent_layout_shift') && !$is_admin_route) {
+
+    // if image handling is scale, calculate ratio via the original sizes
+    if ($variables['data']['image_handling'] === 'scale') {
+
+      $uri = $variables['data']['original_source'];
+      $image_width = $variables['data']['original_width'];
+      $image_height = $variables['data']['original_height'];
+
+      if ((!isset($image_width) || !isset($image_height))) {
+        if (isset($uri) && file_exists($uri)) {
+          list($image_width, $image_height) = getimagesize($uri);
+        }
+      }
+
+      // build an inline style to make space for the image
+      if (isset($image_width) && isset($image_height)) {
+        $variables['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+      };
+
+    } else {
+
+      if (isset($variables['data']['aspect_ratio'])) {
+        $image_width = $variables['data']['aspect_ratio']['width'];
+        $image_height = $variables['data']['aspect_ratio']['height'];
+
+        if (isset($image_width) && isset($image_width)) {
+          $variables['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+        }
+
+      }
+
+    }
+
+  }
+}
+
+/**
+ * HOOK_preprocess_field
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_field(&$variables) {
+
+  if ($variables['field_type'] === 'image') {
+
+    if (!empty($variables['items'])) {
+      foreach ($variables['items'] as $delta => &$item) {
+
+        if (!isset($item['content']['#item_attributes'])) {
+          $item['content']['#item_attributes']  = [];
+        }
+
+        if (theme_get_setting('lazy_loading')) {
+          // make fallback flag available in Twig here,
+          // in case there's images that don't go via preprocess_image
+          if (!isset($item['content']['lazy_loading_fallback'])) {
+            $item['content']['#item_attributes']['lazy_loading_fallback'] = theme_get_setting('lazy_loading_fallback');
+          }
+
+          // If preprocess_image doesn't work,
+          // and there are no TEMPLATE_preprocess_HOOK functions that work,
+          // As a last resort, you can force the lazy loading attribute via the field preprocess
+          //
+          // // set attr on img
+          // if (!isset($item['content']['#item_attributes']['loading'])) {
+          //   $item['content']['#item_attributes']['loading'] = 'lazy';
+          // }
+        }
+
+        // if (!isset($variables['content']['#item_attributes']['height']) || !isset($variables['content']['#item_attributes']['width'])) {
+          // $variables['content']['#item_attributes']['width'] = 1;
+          // $variables['content']['#item_attributes']['height'] = 4;
+        // }
+
+        if (isset($variables['content']['#item_attributes']['height']) && isset($variables['content']['#item_attributes']['width'])) {
+          $item['content']['#item_attributes']['aspect'] = round($variables['content']['#item_attributes']['height'] / $variables['content']['#item_attributes']['width'] * 10000) / 100 . '%';
+        }
+
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu.html.twig.
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_menu(&$variables) {
+  $variables['attributes']['class'][] = 'clearfix';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for inputs.
+ *
+ * Add suggestions for custom twig files for inputs.
+ *
+ * @param $suggestions
+ * @param $variables
+ */
+function starter_theme_theme_suggestions_input_alter(array &$suggestions, array $variables) {
+  if (isset($variables['element']['#type']) && $variables['element']['#type'] == 'entity_autocomplete') {
+    $suggestions[] = 'input__textfield__autocomplete';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function starter_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+
+  if (isset($variables['elements']['#id'])) {
+    $block_id = $variables['elements']['#id'];
+    $block = \Drupal\block\Entity\Block::load($block_id);
+    if (!empty($block)) {
+      $region = $block->getRegion();
+      if ($region !== null) {
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $region;
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $region . '__' . $block_id;
+      }
+    }
+  }
+}
+
+/**
+ * Helper function for handling the site name and slogan.
+ *
+ * @param $variables
+ */
+function _starter_theme_process_page(&$variables) {
+  $site_config = \Drupal::config('system.site');
+  // Always print the site name and slogan, but if they are toggled off, we'll just hide them visually.
+  $variables['hide_site_name'] = theme_get_setting('features.name') ? FALSE : TRUE;
+  $variables['hide_site_slogan'] = theme_get_setting('features.slogan') ? FALSE : TRUE;
+  if ($variables['hide_site_name']) {
+    // If toggle_name is FALSE, the site_name will be empty, so we rebuild it.
+    $variables['site_name'] = $site_config->get('name');
+  }
+  if ($variables['hide_site_slogan'] && $site_config->get('slogan')) {
+    // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
+    $variables['site_slogan']['#markup'] = $site_config->get('slogan');
+  }
+
+  if (isset($variables['page']['#title'])) {
+   // $variables['title'] = render($variables['page']['#title']);
+  }
+
+  if (isset($variables['page']['content']['messages'])) {
+    $variables['page']['messages'] = $variables['page']['content']['messages'];
+    unset($variables['page']['content']['messages']);
+  }
+}
+
+/**
+ * Implements template_preprocess_table().
+ *
+ * @param $variables
+ */
+function starter_theme_preprocess_table(&$variables) {
+
+  // Turn zebra striping (odd/even) off
+  $variables['no_striping'] = TRUE;
+
+  // Replacing drupal responsive, 'cause it's crap:
+  //
+  // - turn off the resp. table lib
+  // - remodel the html output:
+  // --- wrapper with classes AROUND the table: done in TWIG template
+  // --- add th's text into data-attributes on the td's in the Twig templates:
+  //     done in theme function
+  //
+  // Any tables that are not affected with this,
+  // will be handled by a javascript function called in the table component
+  // that checks for the presence of the responsive wrapper
+
+  // !!! IF YOU DON'T WANT A SPECIFIC TABLE TO BE RESPONSIVE, SET THE 'RESPONSIVE' ATTRIBUTE TO FALSE
+  //     VIA A THEME FUNCTION OR IN AN OVERRIDDEN TWIG TEMPLATE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //     eg. // $yourTableVariables['responsive'] = FALSE;
+  //
+  //     (except for CKE tables, those are purely done via the JS below)
+
+  if ($variables['responsive']) {
+
+    // change this to 'table--reformatted' to get 'reformatted' responsive behavior
+    // where cells go in 1 column on mobile, prefixed by the associated title
+    $variables['attributes']['class'][] = 'table--scroll';
+
+    _starter_theme_responsive_table($variables);
+
+    if (isset($variables['#attached']) && isset($variables['#attached']['library'])) {
+      $index = array_search('core/drupal.tableresponsive', $variables['#attached']['library']);
+      if ($index !== FALSE) {
+        unset($variables['#attached']['library'][$index]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_table for office hours
+ * @param $variables
+ */
+function starter_theme_preprocess_office_hours_table(&$variables) {
+
+  // we don't want the office hours table to be responsive
+  // because it will no longer be functional
+  //
+  // HOWEVER: better would be not to render it as a table but as divs
+  //
+  $variables['table']['#responsive'] = FALSE;
+}
+
+/**
+* Implements hook_preprocess_views_view().
+*/
+function starter_theme_preprocess_views_view_table(&$variables) {
+
+  // We want tables from views to be using scrolling
+  // this usually works better for most purposes (eg. for sortable tables)
+  $variables['responsive']= TRUE;
+  $variables['attributes']['class'][] = 'table--scroll';
+
+  _starter_theme_responsive_table($variables);
+}
+
+/**
+* Adds an option to the background color field.
+*
+* @param array $options
+*   Contains all the options for background color fied.
+*/
+function starter_theme_rocketship_layout_bg_color_options_list(array &$options) {
+
+  // ** Example: Selectively adding or removing colors:
+
+  // // make a new array to loop, mirroring our original one
+  // $newOptions = $options;
+
+  // // clear the options so we can rebuild it & selectively replace some colors
+  // $options = [];
+
+  // // loop the new array
+  // // and only add the colors we want into our color options
+  // foreach($newOptions as $key => $value) {
+
+  //   // so we remove 'grey' and style the transparent color to be grey in style.admin.scss
+  //   if (substr( $key, 0, 4 ) !== "grey") {
+  //     $options[$key] = $value;
+  //   }
+
+  // }
+
+  // ** Example: adding colors
+  // -- be advised: this bypasses the config, so you need to add styling in admin style scss for the admin preview
+
+  //   $options['spot-03/aabbcc/aabbcc'] = 'spot-03/aabbcc/aabbcc';
+
+}
+
+function starter_theme_dropsolid_event_rocketship_layout_bg_color_options_list(array &$options) {
+  starter_theme_rocketship_layout_bg_color_options_list($options);
+}
+
+function starter_theme_rocketship_event_rocketship_layout_bg_color_options_list(array &$options) {
+  starter_theme_rocketship_layout_bg_color_options_list($options);
+}
+
+/**
+* Add extra theme settings
+*
+* https://www.drupal.org/docs/8/theming-drupal-8/creating-advanced-theme-settings
+* https://drupal.stackexchange.com/questions/191983/how-do-i-add-custom-theme-settings
+* https://drupal.stackexchange.com/questions/220400/how-to-make-custom-fieldset-collapsed-by-default-in-drupal-8#220402
+*/
+function starter_theme_form_system_theme_settings_alter(&$form, Drupal\Core\Form\FormStateInterface $form_state, $form_id = NULL) {
+
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  $form['theme_settings'] = array(
+    '#type' => 'details',
+    '#title' => t('Theme settings'),
+    '#open' => TRUE,
+  );
+
+  $form['theme_settings']['language_abbr'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Language abbreviations'),
+    '#default_value' => theme_get_setting('language_abbr'),
+    '#description'   => t('Do you want language abbreviations (eg. \'nl\') or the default language labels to be used when displaying the language menu?'),
+  );
+
+  $form['theme_settings']['language_dropdown'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Language dropdown'),
+    '#default_value' => theme_get_setting('language_dropdown'),
+    '#description'   => t('This setting will turn your language menu into a dropdown. Relies on Sass and JS in your theme component\'s molecules/menus/menu--language folder'),
+  );
+
+  $form['theme_settings']['scroll_to'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Animated anchor scrolling'),
+    '#default_value' => theme_get_setting('scroll_to'),
+    '#description'   => t('This setting will turn on animated scrolling for anchor links in the same page. Relies on JS in your theme component\'s 00-base/06-scripts folder'),
+  );
+
+  $form['theme_settings']['scroll_to_exceptions'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Exceptions'),
+    '#default_value' => theme_get_setting('scroll_to_exceptions'),
+    '#description'   => t('This field allows you to pass anchor link selectors that should not have animated scrolling. <br />Pass one or multiple comma-separated css selectors like this: <code>a[href="#my_exception"], a.no-smooth-scroll</code> <br />Be careful to avoid having multiple anchor links pointing to the same anchor.'),
+  );
+
+  $form['theme_settings']['lazy_loading'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Lazy loading'),
+    '#default_value' => theme_get_setting('lazy_loading'),
+    '#description'   => t('Enforce native lazy loading for all images'),
+  );
+
+  $form['theme_settings']['lazy_loading_fallback'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Lazy loading fallback'),
+    '#default_value' => theme_get_setting('lazy_loading_fallback'),
+    '#description'   => t('Enables lazy loading for browsers that don\'t support it. Uses a JS solution but is not compatible with IE11. You would need to change that yourself in <code>components/00-theme/01-atoms/04-images/00-image/images.js</code><br /> Will NOT work if native lazy loading is disabled.'),
+  );
+
+  $form['theme_settings']['prevent_layout_shift'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Prevent layout shift from images'),
+    '#default_value' => theme_get_setting('prevent_layout_shift'),
+    '#description'   => t('Prevent elements on the page from jumping once images are fully loaded, by automagically filling the image space.'),
+  );
+
+}
+
+/**
+ * Custom function for responsive tables
+ *
+ * @param $variables
+ */
+function _starter_theme_responsive_table($variables) {
+
+  $rows = $variables['rows'];
+  foreach($variables['rows'] as $row) {
+    $cells = array();
+    foreach($row['cells'] as $key => $cell) {
+      if (isset($variables['header'][$key]['content'])) {
+        $headerTitle = $variables['header'][$key]['content'];
+        if ($headerTitle instanceof Link) {
+          $headerTitle = $headerTitle->toString();
+        }
+        $cell['attributes']['data-title'] = $headerTitle;
+      }
+      $cells[] = $cell;
+    }
+    $row = $cells;
+    $rows[] = $row;
+  }
+  $variables['rows'] = $rows;
+}
+

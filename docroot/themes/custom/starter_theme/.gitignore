@@ -1,0 +1,35 @@
+#ignore sass cache files
+
+.sass-cache
+
+# Yarn/NPM
+node_modules
+config-templates
+yarn.lock
+
+# Ignore maps because they tend to give conflicts on merge
+
+*/*.map
+**/*.map
+
+# Ignore install script depencencies
+themevars.txt
+
+# Ignore compiled files.
+dist
+
+# Storybook
+.out
+
+# System
+.DS_Store
+
+# Git deploy
+.publish
+
+# Composer
+composer.lock
+/vendor/
+
+# Jest
+.coverage

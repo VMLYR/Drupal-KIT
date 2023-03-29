@@ -1,0 +1,173 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * General Mixins (put specific ones in component files where applicable)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Overview
+// =============================================================================
+
+// ** clearfix
+// ** hide
+// ** full-bg
+// ** stretch
+// ** square
+// ** max-width
+// ** z-index
+
+// * Mixins
+// =============================================================================
+
+// ** Clearfix.
+// * Adds clearfix based on http://bourbon.io/docs/#clearfix
+// * use example =   @include clearfix
+
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+// ** Remove an element completely from view
+// but keep them available for screen readers.
+//
+// Used for information required for screen reader users to understand and use
+// the site where visual display is undesirable. Information provided in this
+// manner should be kept concise, to avoid unnecessary burden on the user.
+// "!important" is used to prevent unintentional overrides.
+
+@mixin hide {
+  position: absolute !important;
+  display: block !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  overflow: hidden !important;
+  height: rem(1) !important;
+  width: rem(1) !important;
+  word-wrap: normal !important;
+
+  &.focusable:focus {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    @include z-index("top", true);
+    display: block !important;
+    clip: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+    background: hsl(var(--clr-white));
+  }
+}
+
+
+// ** Make an element inside .container fill the viewport width and stay in place
+
+@mixin stretch {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+}
+
+
+// ** Adds fullwidth background using given color.
+// options:
+// $color: the background color
+// $element: the pseudo-element
+// $stretch: if the background stretches horizontally to the edges of the browser window
+
+@mixin full-bg ($color, $element: before, $stretch: true) {
+  position: relative;
+  z-index: 5;
+
+  &:#{$element} {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    display: block;
+    height: 100%;
+    @if($stretch == true) {
+      margin-left: calc((-100vw + 100%) / 2);
+      width: 100vw;
+    }
+
+    background-color: $color;
+  }
+}
+
+
+/**
+ * Square mixin
+ *
+ * @param [Number] $dimensions = the height and width of the element
+ */
+@mixin square($dimensions) {
+  width: $dimensions;
+  height: $dimensions;
+}
+
+
+// /**
+//  * Toggle element: Make stuff able to toggle open
+//  * options: change the "open" class
+//  */
+// @mixin toggle-element($openClass: "js-open") {
+//   @media screen {
+//     height: 100%;
+//     min-height: 100%;
+//     overflow: hidden;
+//     transition: max-height $duration $easing;
+
+//     .js & {
+//       max-height: 0;
+//     }
+//     .#{$openClass} & {
+//       max-height: 100vh;
+//     }
+//   }
+// }
+
+@mixin max-width($width: null) {
+
+  @if ($width == null) {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    margin: 0 auto;
+    max-width: var(--max-width-xs);
+
+    @include bp-sm {
+      max-width: none;
+    }
+
+    @include bp-md {
+      max-width: var(--max-width-sm);
+    }
+
+    @include bp-lg {
+      max-width: var(--max-width);
+    }
+  } @else {
+    max-width: $width;
+  }
+}
+
+
+// -- call z-index from a list so you never lose overview
+//    and set it to important if you really really really need it
+// usage: @include(modal, important); => z-index: 1000 !important;
+@mixin z-index($key, $important: null) {
+  @if ($important == null or $important == false) {
+    z-index: map-get($z-index, $key);
+  } @else {
+    z-index: map-get($z-index, $key) !important;
+  }
+}

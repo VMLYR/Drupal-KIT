@@ -1,0 +1,28 @@
+import { Story } from '@storybook/addon-docs';
+
+# Forms
+
+## Floating labels
+
+We use floating labels in the forms, much like is used in Google's Material Design.<br />
+`01-atoms/05-forms/_forms--helpers.scss` defines the styling in mixins, either on a group of labels or individual label.<br />
+`01-atoms/05-forms/_forms.scss` calls the mixins for groups of labels in specific forms, or individual labels.<br />
+`01-atoms/05-forms/forms.js` builds classes for the styling to work, on user interaction.<br />
+
+We also mark fields as being 'optional' instead of marking the ones that are 'required'. <br />
+The styling and twig for this element is located in the `form-label`-folder. <br />
+If you need to replace with 'required' fields, you can remove that element <br />
+in the Twig-file or hide it in the Sass, and style the other element instead.
+
+## Buttons
+
+The default `input` used by the Drupal base theme is replaced with a `button` element, to give developers an easy way to enhance their form submit eg. enabling them to use the `::before` and `::after` pseudo elements to add an icon.  
+However, keep in mind that the value that is printed, is taken from the attributes and Drupal applies Html::escape to all form element attributes.  
+Temporary solution: decode specific entities back  
+
+Example in  `/components/00-theme/01-atoms/05-forms/input/_input.twig`:
+```
+{{ value|replace({'&#039;': "'", '&lt;': '<', '&gt;': '>'}) }}
+```
+
+Add your own html entities in here if you are planning on using html characters as the text in a form submit button.

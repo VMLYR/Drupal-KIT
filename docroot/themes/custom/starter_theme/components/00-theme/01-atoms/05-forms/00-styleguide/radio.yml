@@ -1,0 +1,7 @@
+styleguide: true
+title: 'Option 1'
+checked: 'checked'
+required: true
+title_display: 'after'
+label_attributes:
+  for: 'option'

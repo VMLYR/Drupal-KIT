@@ -1,0 +1,92 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Main menu
+// *
+// * you can copy (or even move) styling from menus/menu/_menu.scss into separate menu scss files (like this one)
+// * if you need to split styling between different types of menus
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// -- only style first level menu (not contextual menu or sublevels)
+
+.nav--main > .menu {
+  //
+}
+
+// -- styling for all items (even sublevels)
+
+.menu__item--main {
+
+  //
+
+  a,
+  span {
+    //
+
+    &,
+    &:visited {
+      //
+    }
+
+    &.menu__item--active,
+    &.js-active-anchor,
+    &.active,
+    &:hover {
+      //
+    }
+  }
+}
+
+// -- item which contains a submenu
+
+.menu__item--main.has-sub {
+
+  //
+
+  &.js-open {
+    //
+  }
+}
+
+// -- submenu
+
+.menu--main.menu--sub {
+  //
+}
+
+// -- submenu items
+
+.menu__item--main.menu__item--sub {
+
+  a,
+  span {
+    //
+  }
+
+  // visible after interaction
+  .menu__item--main.js-open & {
+    //
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: only on mobile phone
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-only {
+  //
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+// -- switch to big menu when desktop
+// -- change to bp-md if you want to switch later
+// -- don't forget to change the breakpoint check in JS .mobileMenu() as well
+
+@include bp-sm {
+  //
+}

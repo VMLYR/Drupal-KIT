@@ -1,0 +1,117 @@
+// Demo UI
+
+.motion {
+  padding: 0 1rem;
+}
+
+.motion__grid {
+  @media (min-width: 920px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.motion__grid-item {
+  @media (min-width: 920px) {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 49%;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.demo-motion {
+  padding: 3rem;
+  border-radius: 2px;
+  text-align: center;
+  color: hsl(var(--clr-white));
+  background-color: hsl(var(--clr-spot-1));
+  cursor: pointer;
+
+  &::before {
+    display: block;
+    content: "Duration: #{$duration}";
+  }
+
+  &::after {
+    content: "Timing Function: #{$easing}";
+  }
+
+  span {
+    display: block;
+    margin: 0.25rem;
+  }
+}
+
+// ** Demo the default transition settings with some examples
+
+// Fade
+
+.demo-motion--fade {
+  @include transition;
+
+  &:hover {
+    color: hsl(var(--clr-white));
+    background-color: hsl(var(--clr-spot-2));
+  }
+}
+
+// Slide-up
+
+.demo-motion--slide-up {
+  @include transition(transform);
+
+  &::before {
+    content: "Duration: #{$duration}";
+    display: block;
+  }
+
+  &::after {
+    content: "Timing Function: #{$easing}";
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+}
+
+// Slide-down
+
+.demo-motion--slide-down {
+  @include transition(transform);
+
+  &::before {
+    content: "Duration: #{$duration}";
+    display: block;
+  }
+
+  &::after {
+    content: "Timing Function: #{$easing}";
+  }
+
+  &:hover {
+    transform: translateY(10px);
+  }
+}
+
+// Expand
+
+.demo-motion--expand {
+  @include transition(transform);
+
+  &::before {
+    content: "Duration: #{$duration}";
+    display: block;
+  }
+
+  &::after {
+    content: "Timing Function: #{$easing}";
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}

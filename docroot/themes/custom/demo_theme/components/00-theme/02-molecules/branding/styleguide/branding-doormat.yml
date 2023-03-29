@@ -1,0 +1,47 @@
+label: 'Site branding doormat'
+configuration:
+  label_display: false
+heading_level: 4
+bem_block_modifiers:
+  - 'block-content3fcb9e7e-22a2-49b4-bbad-08bd619bc81e'
+  - 'type-site-branding'
+  - 'region-doormat'
+fields:
+  image:
+    label_hidden: true
+    field_name: field_media_info_image
+    field_type: entity_reference
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'blazy'
+      - 'blazy--field'
+      - 'blazy--field-media-info-image'
+    field_attributes:
+      'data-blazy': ''
+    settings:
+      lazy: true
+      use_loading: true
+    blazy_bem_modifiers:
+      - 'bundle--image'
+      - blazy
+      - image
+      - loading
+    image_src: 'logo.svg'
+    image_alt: 'A logo'
+    image_bem_extra:
+      - 'media__image'
+      - 'media__element'
+      - 'b-lazy'
+    image_attributes:
+      loading: "lazy"
+    output_image_tag: true
+  body:
+    label_hidden: true
+    field_name: body
+    field_type: text_with_summary
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'text-long'
+    content: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendu sit amet, consectetur adipiscing elit.</p>"

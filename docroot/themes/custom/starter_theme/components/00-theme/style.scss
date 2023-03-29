@@ -1,0 +1,23 @@
+@import "00-base/_libs.scss";
+@import "00-base/00-config/**/*.scss";
+@import "00-base/01-helpers/**/*.scss";
+// @import "00-base/02-fonts/_fonts.scss"; // fonts should be loaded via JS
+
+@import "00-base/_css-variables.scss";
+
+// ** Vendors: load individually
+
+// enable this one, if you want to use Fontawesome default classes, variables & mixins
+@import "00-base/04-vendors/fontawesome/fontawesome.scss";
+@import "00-base/04-vendors/colorbox/colorbox.scss";
+
+@import "00-base/05-grid/**/*.scss";
+
+@import "00-base/0*-motion/**/*.scss";
+@import "00-base/0*-icons/**/*.scss";
+
+@import "01-atoms/**/*.scss";
+@import "02-molecules/**/*.scss";
+@import "03-organisms/**/*.scss";
+@import "04-templates/**/*.scss";
+@import "05-pages/**/*.scss";

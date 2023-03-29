@@ -1,0 +1,7 @@
+name: Trusthome
+slogan: "We protect your home"
+link_href: "#"
+img_src: 'logo.svg'
+bem_logo_modifiers:
+  - 'header'
+  - region-header

@@ -1,0 +1,25 @@
+import { Story } from '@storybook/addon-docs';
+
+# Pages
+
+Pages are constructed using a couple of nested templates:
+- the `_page--master.twig` template, which renders the correct page wrappers and prints the stuff around the page content (eg. header and footer)
+- the `_block.twig` template (from Molecules), to display a system block
+- the `_node.twig` template (from Organisma), to display the content of the 'basic page' node, in 'full' view mode <br />
+
+The page master template holds the regions to load all the menus and blocks that you find in Drupal's Block Layout.
+
+## Structure
+
+### block
+
+For data structure, see 00-Example in the Molecules.
+
+We don't do anything with this block, it's just a wrapper from Drupal.<br />
+So we don't bother including the block template and just dump the div directly.
+
+### Node
+
+For data structure, see 00-Example in the Organisms.
+
+It's always going to be a 'full' view mode with pages.

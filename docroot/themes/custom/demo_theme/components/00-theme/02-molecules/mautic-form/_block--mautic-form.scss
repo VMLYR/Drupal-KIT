@@ -1,0 +1,104 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Mautic form block type
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+.block--type-mautic-form {
+  padding-top: var(--gap-vert);
+  padding-bottom: var(--gap-vert);
+  @include full-bg(hsl(var(--clr-off-white)));
+
+  .field {
+    max-width: rem(710);
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .field--name-field-mautic-title,
+  .field--name-field-mautic-text {
+    text-align: center;
+  }
+  .field--name-field-mautic-formid {
+    margin-top: rem(30);
+  }
+
+  .mauticform-row {
+    margin-bottom: rem(15);
+    width: 100%;
+
+    // because we still run into floating elements instead of flexbox sometimes
+    @include clearfix;
+  }
+  .mauticform-label {
+    display: block;
+    margin-bottom: rem(2);
+  }
+  .mauticform-required .mauticform-label {
+    &::after {
+      content: "*";
+      display: inline-block;
+      vertical-align: top;
+      margin-left: rem(2);
+      color: hsl(var(--clr-error));
+      @include font-size(10);
+    }
+  }
+  .mauticform-checkboxgrp,
+  .mauticform-radiogrp {
+    .mauticform-label {
+      margin-bottom: rem(10);
+      font-weight: $font-weight-normal;
+    }
+  }
+  .mauticform-freetext {
+    @include font-size($font-size-sm, $line-height-sm);
+  }
+  .mauticform-errormsg {
+    color: hsl(var(--clr-error));
+    @include font-size($font-size-sm, $line-height-sm);
+  }
+  .mauticform-button-wrapper {
+    margin-top: rem(25);
+  }
+  .mauticform-button {
+    @include button;
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-mautic-form {
+
+    .mauticform-page-wrapper {
+      @include flex-grid(12, 20);
+      display: flex !important; // Overwrite display block on error
+      margin-top: 0;
+    }
+    .mauticform-row {
+      @include flex-col(12, 12, 20);
+      margin-top: 0;
+
+      &.half {
+        @include flex-col(6, 12, 20);
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: wide screens
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block--type-mautic-form {
+    --gap-vert: var(--gap-vert-lg-2);
+  }
+}

@@ -1,0 +1,283 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Lists: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Mixins
+// =============================================================================
+
+// ** list-reset
+// -- Reset list item defaults when no margin, padding, list styles needed
+@mixin list-reset {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// ** Styling for lists in text
+// -- http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/
+// USAGE: @include list; (without parameter, defaults to unsorted style)
+// --     @include list((type: "sorted")) gives you a sorted list
+// --     @include list($some-variable) use a variable to add your settings (don't forget the extra brackets!)
+//
+// settings:
+// -- type: "sorted" or "unsorted"
+// -- spacing: space between the individual list items (uses margin-bottom for this)
+
+// -- bullet: ("unsorted" list only) a keyword for the shape ("disk", "circle", "square")
+// -- bullet-color: ("unsorted" list only) color of the bullet
+// -- bullet-size: ("unsorted" list only) px width & height (if shape) OR px font size (if icon)
+// -- bullet-weight: ("unsorted" list only) (only if icon) the font-awesome type: "light", "regular", "solid" or "brand"
+
+// -- number-font: ("sorted" list only) the font used for the number
+// -- number-space: ("sorted" list only) space available for the number to live in (space between left hand side and start of the text
+// -- number-color: ("sorted" list only) color of the number
+// -- number-delimiter: character that comes after the bullet in sorted lists ("." by default)
+//
+@mixin list($settings: null) {
+
+  // some defaults, used in case no $settings were given
+  // or when either of the settings is omitted
+  $type-default: "unsorted";
+  $bullet-default: "disk";
+  $bullet-color-default: hsl(var(--clr-spot-1));
+  $bullet-size-default: 6;
+  $number-font-default: $font-heading;
+  $number-color-default: $bullet-color-default;
+  $spacing-default: 6;
+  $number-delimiter-default: ".";
+
+  // set up the actual variables that will be used
+  $type: null;
+  $bullet: null;
+  $bullet-color: null;
+  $bullet-size: null;
+  $number-font: null;
+  $number-color: null;
+  $spacing: null;
+  $number-delimiter: null;
+
+  // map the variables to the settings if actual settings are passed
+  @if ($settings != null) {
+    $type: map-get($settings, type);
+    $bullet: map-get($settings, bullet);
+    $bullet-color: map-get($settings, bullet-color);
+    $bullet-size: map-get($settings, bullet-size);
+    $number-font: map-get($settings, number-font);
+    $number-color: map-get($settings, number-color);
+    $spacing: map-get($settings, spacing);
+    $number-delimiter: map-get($settings, number-delimiter);
+  }
+
+  // if any are not filled in, fall back to defaults
+  @if ($type == null) {
+    $type: $type-default;
+  }
+  @if ($bullet == null) {
+    $bullet: $bullet-default;
+  }
+  @if ($bullet-color == null) {
+    $bullet-color: $bullet-color-default;
+  }
+  @if ($bullet-size == null) {
+    $bullet-size: $bullet-size-default;
+  }
+  @if ($number-font == null) {
+    $number-font: $number-font-default;
+  }
+  @if ($number-color == null) {
+    $number-color: $number-color-default;
+  }
+  @if ($spacing == null) {
+    $spacing: $spacing-default;
+  }
+  @if ($number-delimiter == null) {
+    $number-delimiter: $number-delimiter-default;
+  }
+
+  // Shared styling
+
+  display: block;
+  padding-left: 0;
+  margin-left: 0;
+
+  & > li {
+    position: relative; // Create a positioning context
+    display: block;
+    margin-bottom: rem($spacing);
+    list-style: none; // Disable the normal item numbering
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // ** list with numbers
+
+  @if $type == "sorted" {
+
+    $listSettings: (
+      type: $type,
+      number-font: $number-font,
+      number-color: $number-color,
+      spacing: $spacing,
+      number-delimiter: $number-delimiter
+    );
+
+    @include list-sorted($listSettings);
+
+    // ** list with bullets
+
+  } @else {
+
+    $listSettings: (
+      type: $type,
+      bullet: $bullet,
+      bullet-color: $bullet-color,
+      bullet-size: $bullet-size,
+      spacing: $spacing,
+      number-delimiter: $number-delimiter
+    );
+
+    @include list-unsorted($listSettings);
+
+  }
+
+}
+
+
+@mixin list-sorted($settings: null) {
+
+  // map the variables to the settings if actual settings are passed
+  $number-font: map-get($settings, number-font);
+  $number-color: map-get($settings, number-color);
+  $spacing: map-get($settings, spacing);
+  $number-delimiter: map-get($settings, number-delimiter);
+
+  counter-reset: listStyle1; // Initiate a counter
+
+  & > li {
+    padding-left: rem(26); // space for the counter
+    counter-increment: listStyle1; // Increment the counter by 1
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: counter(listStyle1) "."; // Use the counter as content
+      font-weight: $font-weight-bold;
+      @include font-size($font-size-base, $line-height-base);
+      color: $number-color;
+
+      // optional: for looong numbered lists, to make sure the number-delimiters are aligned, you can align them to the right
+      //
+      // width: rem($number-space - 12); // leave some space so it doesn"t stick to the text
+      // text-align: right; // align on the number-delimiter
+    }
+
+    // 2nd & 3rd levels: get their own counter
+    //
+    ol {
+      counter-reset: listStyle2;
+
+      > li {
+        counter-increment: listStyle2; // Increment the new counter by 1
+
+        &::before {
+          content: counter(listStyle2, lower-alpha) ".";
+        }
+      }
+    }
+
+    ol > li > ol {
+      counter-reset: listStyle3;
+
+      > li {
+        counter-increment: listStyle3; // Increment the new counter by 1
+
+        &::before {
+          content: counter(listStyle3, lower-roman) ".";
+        }
+      }
+    }
+
+  }
+
+  // Only use webfont when it's done loading
+  @if ($number-font == $font-base) {
+    .font-text-01-loaded & > li::before {
+      font-family: $number-font;
+    }
+  } @else {
+    .font-text-02-loaded & > li::before {
+      font-family: $number-font;
+    }
+  }
+
+}
+
+
+@mixin list-unsorted($settings: null) {
+
+  $bullet: map-get($settings, bullet);
+  $bullet-color: map-get($settings, bullet-color);
+  $bullet-size: map-get($settings, bullet-size);
+  $spacing: map-get($settings, spacing);
+
+  & > li {
+    padding-left: rem(13 + $bullet-size); // space for the counter
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 1px; // push it in a bit because round shapes tend to look bigger and thus outside the edge
+      top: rem(math.div($line-height-base, 2)); // half of line-height
+      display: block;
+      margin-top: -1px; // pull it up a bit, to align with letters x-height
+      width: rem($bullet-size);
+      height: rem($bullet-size);
+
+      @if ($bullet == "circle") {
+        border: 1px solid $bullet-color;
+        border-radius: 50%;
+      }
+
+      @else if ($bullet == "disk") {
+        border-radius: 50%;
+        background: $bullet-color;
+      }
+
+      @else {
+        background: $bullet-color;
+      }
+    }
+
+    ul {
+      // second level: circle bullet
+
+      li {
+        &::before {
+          border: 1px solid $bullet-color;
+          border-radius: 50%;
+          background: transparent;
+        }
+
+        // third level: square filled bullet
+
+        li {
+          &::before {
+            border: 0 none;
+            border-radius: 0;
+            background: $bullet-color;
+          }
+        }
+      }
+
+    }
+  }
+
+}

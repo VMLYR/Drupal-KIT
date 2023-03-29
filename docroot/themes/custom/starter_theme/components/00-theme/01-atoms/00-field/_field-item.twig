@@ -1,0 +1,9 @@
+{% set bem_fielditem_block = bem_fielditem_block ?? false %}
+{% set bem_fielditem_element = bem_fielditem_element|default('item') %}
+{% set bem_fielditem_modifiers = bem_fielditem_modifiers|default([]) %}
+
+<div{{ bem(bem_fielditem_block, bem_fielditem_element, bem_fielditem_modifiers) }}>
+  {% block fielditem_content %}
+    {{ content }}
+  {% endblock %}
+</div>

@@ -1,0 +1,54 @@
+{#
+  Set BEM classes using a function:
+  bem(element, modifiers = array(), block, extra = array())
+#}
+
+{% set bem_block = bem_block|default('block') %}
+
+{# could be set to false if you don't want to use element #}
+{% set bem_element = bem_element|default('element') %}
+
+{# we can use if/else statements to see if we need to add certain modifiers #}
+{% if bem_modifiers is not defined %}
+  {% set bem_modifiers = [
+    (has_parent and 'form-actions' in attributes.class|keys) ? 'modifier01',
+    (has_parent and 'form-actions' in attributes.class|keys) ? 'modifier02'
+  ]
+%}
+{% endif %}
+{# we user merge in case there are already modifiers passed
+   to the twig templates via variables #}
+{% set bem_modifiers = bem_modifiers|merge([
+    'modifier01',
+    'modifier02'
+  ])
+%}
+
+{# for extra classes, we can add some custom ones
+  + we don't have to worry about the default classes present in attributes, these will
+    automatically get added by the BEM-function
+  we can use if/else statements to see if we need to add them #}
+{%
+  set classes = [
+    (has_parent and 'form-actions' in attributes.class|keys) ? 'extra_01',
+    (has_parent and 'form-actions' in attributes.class|keys) ? 'extra_02',
+  ]
+%}
+
+{% if bem_extra is not defined %}
+  {% set bem_extra = [] %}
+{% endif %}
+
+{% set bem_extra = bem_extra|merge(classes) %}
+
+{# output the BEM stuff #}
+
+<div {{bem(bem_block, bem_element, bem_modifiers, bem_extra)}}>
+
+  {{some_variable}}
+
+  {% block content %}
+    foo bar
+  {% endblock %}
+
+</div>

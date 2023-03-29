@@ -1,0 +1,177 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * CSS grid
+// *
+// * More info on CSS-grid:
+//    https://css-tricks.com/snippets/css/complete-guide-grid/
+//
+// * More on Flexbox (used here for fallback):
+//    https://css-tricks.com/snippets/css/complete-guide-grid/
+//                           _
+//                          (_)
+// __      ____ _ _ __ _ __  _ _ __   __ _
+// \ \ /\ / / _` | '__| '_ \| | '_ \ / _` |
+//  \ V  V / (_| | |  | | | | | | | | (_| |
+//   \_/\_/ \__,_|_|  |_| |_|_|_| |_|\__, |
+//                                    __/ |
+//                                   |___/
+//
+// * Since CSS-grid is NOT SUPPORTED properly in IE 11 & early Edge
+// * and there are no easy fallbacks,
+// * I have disabled autoprefixer for all grid properties
+// * So please use the Flex Grid at _00-grid-flex.scss for production
+//  _    _
+// | |  | |
+// | |__| | _____      _______   _____ _ __
+// |  __  |/ _ \ \ /\ / / _ \ \ / / _ \ '__|
+// | |  | | (_) \ V  V /  __/\ V /  __/ |
+// |_|  |_|\___/ \_/\_/ \___| \_/ \___|_|
+//
+// * If you DO feel the need to use CSS grid:
+//
+// * 1) be aware that it WILL look different in IE
+// *    and the client has to be able to live with that
+// * 2) OR you need to make up fallbacks yourself
+// * 3) ignore legacy CSS-grid syntax, it is nearly impossible to combine
+// *    with the modern one
+// *
+// * Fallback examples: see _grid-grid-examples.scss
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * CSS-Grid mixins
+// =============================================================================
+
+// ** make a uniform grid
+//
+//    Variables:
+//    - $columns: total columns of your grid system
+//    - $gap: gap between the columns
+//    - $autofit: makes all columns fit in 1 row to fill the space
+//                !WARNING! This prevents wrapping
+@mixin grid($columns: var(--grid-columns), $gap: var(--gap-hor), $autofit: false) {
+  display: grid;
+  // only set gap for columns, because we need row gap fallback for IE
+  // so we'll use margins for that
+  grid-column-gap: rem($gap);
+
+  // align your grid with top of its container
+  justify-content: start;
+
+  // make the columns fill the space or not
+  @if ($autofit) {
+    // all columns autosize to fit next to each other and fill the row
+    // BUT !!! this means there is no wrapping possible and long content overflows the columns
+    // https://stackoverflow.com/a/48344865/767808
+    // https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+
+  } @else {
+    // all columns same 1col size by default
+    grid-template-columns: repeat($columns, minmax(0, 1fr));
+  }
+
+  // & > * {
+  //   position: relative;
+  // }
+}
+
+
+// ** set width of individual grid cell
+//
+//    Variables:
+//    - $number: number of columns your item is wide
+@mixin grid-col($number, $gap: var(--gap-hor)) {
+  position: relative;
+  margin-bottom: rem($gap);
+  grid-column-end: span #{$number};
+}
+
+
+// ** can't really pull a cell away
+//    so we fake it
+//
+//    Variables:
+//    - $size: $number of columns to move
+//    - $gap: gap between the columns
+@mixin grid-col-pull($number, $gap: var(--gap-hor)) {
+  position: relative;
+  left: calc((-100% / #{$number}) - (#{rem($gap)} / 2));
+}
+
+
+// ** change the left position of a grid cell by passing the new left position
+//
+//    Variables:
+//    - $number: eg. 3, means your col will be pushed to the 3'rd position in the row
+//                     but this also pushes the next cells away, so be careful
+@mixin grid-col-push($number, $gap: var(--gap-hor)) {
+  // grid-column-start: #{$number}; // works differently than what we want
+  position: relative;
+  left: calc((100% / #{$number}) + (#{rem($gap)} / 2));
+}
+
+
+// ** set height of individual grid cell
+//
+//    Variables:
+//    - $number: number of rows your item is high
+@mixin grid-row($number) {
+  grid-row-end: span #{$number};
+}
+
+// // ** change the top position of a grid cell by passing the new top position
+// //
+// //    Variables:
+// //    - $number: eg. 3, means your cell will be pushed down to the 3'rd position in the row
+// //                     but this also pushes the next cells away, so be careful
+// @mixin grid-row-push($number) {
+//   // grid-row-start: #{$number};
+//   display: block;
+//   position: relative;
+//   top: calc((100% / #{$number}) + (#{rem($gap)} / 2));
+// }
+
+
+// // ** can't really pull a cell away
+// //    so we fake it by pulling the children
+// //
+// //    Variables:
+// //    - $size: $number of columns to move
+// //    - $gap: gap between the columns
+// @mixin grid-row-pull($number, $gap: var(--gap-hor)) {
+//   display: block;
+//   position: relative;
+//   top: calc((100% / #{$number}) - (#{rem($gap)} / 2));
+// }
+
+
+// * Make grid classes and examples
+// =============================================================================
+
+.grid {
+  @include grid;
+}
+
+// ** generate classes: by column size on the grid
+// ** generate push classes: by column position
+// ** generate pull classes: by column size
+
+
+@for $i from 1 through $grid-columns {
+
+  .cell--#{$i} {
+    @include grid-col($i);
+  }
+
+  &.cell--pull--#{$i} {
+    @include grid-col-pull($i);
+  }
+
+  &.cell--push--#{$i} {
+    @include grid-col-push($i);
+  }
+}
+

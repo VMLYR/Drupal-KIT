@@ -1,0 +1,81 @@
+variants:
+  - normal:
+    label: 'CB Testimonial - no image - no bg'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+  - image:
+    label: 'CB Testimonial - image'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - has-image
+    fields:
+      image:
+        label_hidden: true
+        field_name: field_cb_media
+        field_type: entity_reference
+        bem_field_extra:
+          - 'blazy'
+          - 'blazy--field'
+          - 'blazy--field-media-info-image'
+        field_attributes:
+          'data-blazy': ''
+        settings:
+          lazy: true
+          use_loading: true
+        blazy_bem_modifiers:
+          - 'bundle--image'
+          - blazy
+          - image
+          - loading
+        image_src: 'https://placeimg.com/100/100/people'
+        image_alt: 'A 16 by 9 image'
+        image_bem_extra:
+          - 'media__image'
+          - 'media__element'
+          - 'b-lazy'
+        image_attributes:
+          loading: "lazy"
+  - bg:
+    label: 'CB Testimonial - bg'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - cb--boxed
+      - cb--testimonial-boxed
+  - image_bg:
+    label: 'CB Testimonial - image + bg'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - cb--boxed
+      - cb--testimonial-boxed
+      - has-image
+    fields:
+      image:
+        label_hidden: true
+        field_name: field_cb_media
+        field_type: entity_reference
+        bem_field_extra:
+          - 'blazy'
+          - 'blazy--field'
+          - 'blazy--field-media-info-image'
+        field_attributes:
+          'data-blazy': ''
+        settings:
+          lazy: true
+          use_loading: true
+        blazy_bem_modifiers:
+          - 'bundle--image'
+          - blazy
+          - image
+          - loading
+        image_src: 'https://placeimg.com/100/100/people'
+        image_alt: 'A 16 by 9 image'
+        image_bem_extra:
+          - 'media__image'
+          - 'media__element'
+          - 'b-lazy'
+        image_attributes:
+          loading: "lazy"

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# loop and execute pre-commit files in directory if it exists
+
+PRECOMMITFOLDER="$(dirname "$0")/pre-commit.d"
+
+if [ -d $PRECOMMITFOLDER ]; then
+
+  # only go in pre-commit.d if it has files in it to execute
+  if find $PRECOMMITFOLDER -mindepth 1 | read; then
+
+    cd $PRECOMMITFOLDER
+
+    # skip hidden files
+    if [ -n "$(find . \( ! -regex './\..*' \) -type f -maxdepth 1)" ]; then
+
+      echo "has files "
+
+      for hook in *; do
+        bash $hook
+        RESULT=$?
+        if [ $RESULT != 0 ]; then
+          # echo "pre-commit.d/$hook returned non-zero: $RESULT, abort commit"
+          echo "abort commit"
+          exit $RESULT
+        fi
+      done
+    fi
+  else
+    echo "no pre-commit files to loop"
+  fi
+fi
+
+
+# nothing found? let the commit happen
+exit 0

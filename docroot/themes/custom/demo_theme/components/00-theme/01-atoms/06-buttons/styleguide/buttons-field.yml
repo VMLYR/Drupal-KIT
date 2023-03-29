@@ -1,0 +1,18 @@
+field_name: 'field-button'
+field_type: 'link'
+label_hidden: true
+items:
+  - content:
+      '#title': 'First field item'
+      '#type': "link"
+      # '#options':
+      #   attributes:
+      #     'data-test': 'test'
+
+  - content:
+      '#type': 'link'
+      '#url': '#'
+      '#title': 'Second field item'
+      # '#options':
+      #   attributes:
+      #     'data-test': 'test'

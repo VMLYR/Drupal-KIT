@@ -1,0 +1,155 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Simple CSS grid, with fallbacks
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Simple CSS-Grid mixins
+// =============================================================================
+
+// ** make a uniform grid
+//
+//    Variables:
+//    - $columns: total columns of your grid system
+//    - $gap: gap between the columns
+//    - $autofit: makes all columns fit in 1 row to fill the space
+//                !WARNING! This prevents wrapping
+@mixin simple-grid($columns: var(--grid-columns), $gap: var(--gap-hor)) {
+  display: grid;
+  // only set gap for columns, because we need row gap fallback for IE
+  // so we'll use margins for that
+  grid-column-gap: rem($gap);
+
+  // align your grid with top of its container
+  justify-content: start;
+
+  // all cells fit in a x-cols grid, 1fr wide
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+
+  .no-cssgrid & {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 1px;
+    margin-left: calc(#{rem($gap)} / -2);
+    margin-right: calc(#{rem($gap)} / -2);
+
+    // cells wil be next to each other, without a % width or gaps
+  }
+}
+
+
+// ** set width of individual grid cell
+//
+//    Variables:
+//    - $number: number of columns your item is wide
+@mixin simple-grid-col($number, $columns: var(--grid-columns), $gap: var(--gap-hor)) {
+  position: relative;
+  margin-bottom: rem($gap);
+  grid-column-end: span #{$number};
+
+  .no-cssgrid & {
+    margin-left: calc(#{rem($gap)} / 2);
+    margin-right: calc(#{rem($gap)} / 2);
+    min-height: 1px;
+    width: calc((100% * #{$number} / #{$columns}) - #{rem($gap)}); // mainly for IE
+    flex: 0 0 calc((100% * #{$number} / #{$columns}) - #{rem($gap)});
+    // IE11 doesn't understand calc() in shorthand
+    flex-basis: calc((100% * #{$number} / #{$columns}) - #{rem($gap)});
+  }
+}
+
+
+// ** pushing call works differently in grid vs flex
+//    so we'll fake it using position relative
+//
+//    Variables:
+//    - $size: $number of columns to move
+//    - $gap: gap between the columns
+@mixin simple-grid-col-pull($number, $columns: var(--grid-columns), $gap: var(--gap-hor)) {
+  position: relative;
+  left: calc((-100% / #{$number}) - (#{rem($gap)} / 2));
+
+  .no-cssgrid & {
+    display: block;
+    left: calc(100% * $number / $columns);
+  }
+}
+
+
+// ** pushing call works differently in grid vs flex
+//    so we'll fake it using position relative
+@mixin simple-grid-col-push($number, $columns: var(--grid-columns), $gap: var(--gap-hor)) {
+  position: relative;
+  left: calc((100% / #{$number}) + (#{rem($gap)} / 2));
+
+  .no-cssgrid & {
+    display: block;
+    left: calc(100% * $number / $columns);
+  }
+}
+
+
+// ** create cells that span multiple rows: this is for the row wrapper
+
+@mixin simple-grid-rows($height, $gap: var(--gap-hor)) {
+  position: relative;
+  height: $height; // need a height in order to stretch over
+
+
+  .no-cssgrid & {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; // very important !!!
+    margin-left: calc(#{rem($gap)} / -2);
+    margin-right: calc(#{rem($gap)} / -2);
+  }
+}
+
+// ** set height of individual grid cell
+//
+//    Variables:
+//    - $height: number of rows your item is high
+//    - $rows: number of rows you need in total
+//    - $gap: horizontal gap between the cells
+@mixin simple-grid-row($height, $rows: 2, $gap: var(--gap-hor)) {
+
+  grid-row-end: span #{$height};
+
+  .no-cssgrid & {
+    flex: 0 0 calc((100% * #{$height} / #{$rows}) - #{rem($gap)});
+    // IE11 doesn't understand calc() in shorthand
+    flex-basis: calc((100% * #{$height} / #{$rows}) - #{rem($gap)});
+  }
+}
+
+
+// * Make grid columns per breakpoint
+// =============================================================================
+
+.simple-grid {
+  @include simple-grid;
+}
+
+// ** generate classes: by column size on the grid
+// ** generate push classes: by column position
+// ** generate pull classes: by column size
+
+
+@for $i from 1 through var(--grid-columns) {
+
+  .simple-grid__col--#{$i} {
+    @include simple-grid-col($i);
+  }
+
+  &.simple-grid__col--pull--#{$i} {
+    @include simple-grid-col-pull($i);
+  }
+
+  &.simple-grid__col--push--#{$i} {
+    @include simple-grid-col-push($i);
+  }
+}
+

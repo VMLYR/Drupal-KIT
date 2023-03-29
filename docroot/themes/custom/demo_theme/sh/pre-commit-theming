@@ -1,0 +1,81 @@
+#!/bin/sh
+# don't forget: pre-commit hook files need the right permissions: chmod +x pre-commit
+
+# current directory
+#dir=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+
+echo "pre-commit for theming"
+
+RESTORE='\033[0m'
+RED='\033[00;31m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+
+# go to hooks folder
+cd ..
+
+FILE="$PWD/themevars"
+THEMEFOLDER=$(cat "$FILE")
+GULP=${THEMEFOLDER}/node_modules/.bin/gulp
+
+# we want to check for references to sourcemaps in certain files' content
+FORBIDDEN=( 'DO NOT COMMIT' 'console.log(' 'sourceMappingURL=' )
+
+# need to remap the git index because we started out a folder too deep
+GIT_INDEX_FILE="$PWD/../index"
+
+# search all the staged code
+for j in "${FORBIDDEN[@]}"
+do
+  for i in `git diff --cached --name-only --diff-filter=ACM`
+  do
+    # the trick is here...use `git show :file` to output what is staged
+    # test it against each of the FORBIDDEN strings ($j)
+    if [ ${i: -4} == ".css" ] && echo `git show :$i` | grep -q "$j"; then
+      # only if file path contains css/ and are in themes folder
+      if [[ $i == *'css/'* ]] && [[ $i == *'themes/'* ]]; then
+        FOUND+="${BLUE}$i ${RED}contains ${RESTORE}\"$j\"${RESTORE}\n"
+      fi
+    fi
+
+    if [ ${i: -3} == ".js" ] && echo `git show :$i` | grep -q "$j"; then
+      # only if file path contains js/ and themes/
+      if [[ $i == *'js/'* ]] && [[ $i == *'themes/'* ]]; then
+        FOUND+="${BLUE}$i ${RED}contains ${RESTORE}\"$j\"${RESTORE}\n"
+      fi
+    fi
+  done
+done
+
+# run linting on JS and CSS
+# https://medium.com/@rifat/gulp-jshint-git-hooks-3bb0ca07b7b5
+if git diff --cached --name-only --diff-filter=ACM | grep '.js$' >/dev/null 2>&1
+then
+  ${GULP} --cwd ${THEMEFOLDER} js:lint:precommit
+  retVal=$?
+  if [ $retVal -eq 1 ]; then
+    echo "Error"
+    FOUND+="\n${RED}JS Linter warnings:${RESTORE} Please run the gulp js:lint command (fix the warnings if needed), rerun gulp js:prod + commit any new files\n\n"
+  fi
+fi
+
+if git diff --cached --name-only --diff-filter=ACM | grep '.css$' >/dev/null 2>&1
+then
+  ${GULP} --cwd ${THEMEFOLDER} css:lint:precommit
+  retVal=$?
+  if [ $retVal -eq 1 ]; then
+    echo "Error"
+    FOUND+="\n${RED}CSS Linter warnings:${RESTORE} Please fix any CSS issues listed above. Afterwards, rerun gulp css:prod + commit any new files\n\n"
+  fi
+fi
+
+# if FOUND is not empty, REJECT the COMMIT
+# PRINT the results (colorful-like)
+if [[ ! -z $FOUND ]]; then
+  printf "${YELLOW}COMMIT REJECTED\n"
+  printf "$FOUND"
+  exit 1
+fi
+
+# nothing found? let the commit happen
+exit 0

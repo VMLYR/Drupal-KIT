@@ -1,0 +1,107 @@
+title_description:
+label_hidden: true
+field_name: field_cb_menu_overview
+field_type: clickthrough_field_type
+multiple: true
+bem_field_modifiers:
+  - 'label-hidden'
+items:
+  - title: Porta pulvinar
+  - title: Pellentesque
+  - title: Quisque id
+  - title: Porta pulvinar
+    description: |
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+  - title: Pellentesque
+    description: |
+      <p>Ultricies integer quis auctor elit sed vulputate mi sit amet. Nibh ipsum consequat nisl vel pretium lectus quam id leo.</p>
+  - title: Quisque id
+    description: |
+      <p>Sit amet nisl purus in. Elementum eu facilisis sed odio morbi quis commodo odio aenean.</p>
+  - title: Porta pulvinar
+    description: |
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+    image:
+      label_hidden: true
+      field_name: menu_clickthrough_image
+      field_type: entity_reference
+      bem_field_extra:
+        - 'blazy'
+        - 'blazy--field'
+        - 'blazy--menu-clickthrough-image'
+      field_attributes:
+        'data-blazy': ''
+      settings:
+        lazy: true
+        use_loading: true
+      blazy_bem_modifiers:
+        - 'bundle--image'
+        - blazy
+        - image
+        - loading
+      image_src: 'https://placeimg.com/100/100/arch'
+      image_alt: 'A 100 x 100 image'
+      image_bem_extra:
+        - 'media__image'
+        - 'media__element'
+        - 'b-lazy'
+      image_attributes:
+        loading: "lazy"
+  - title: Pellentesque
+    description: |
+      <p>Ultricies integer quis auctor elit sed vulputate mi sit amet. Nibh ipsum consequat nisl vel pretium lectus quam id leo.</p>
+    image:
+      label_hidden: true
+      field_name: menu_clickthrough_image
+      field_type: entity_reference
+      bem_field_extra:
+        - 'blazy'
+        - 'blazy--field'
+        - 'blazy--menu-clickthrough-image'
+      field_attributes:
+        'data-blazy': ''
+      settings:
+        lazy: true
+        use_loading: true
+      blazy_bem_modifiers:
+        - 'bundle--image'
+        - blazy
+        - image
+        - loading
+      image_src: 'https://placeimg.com/100/100/arch'
+      image_alt: 'A 100 x 100 image'
+      image_bem_extra:
+        - 'media__image'
+        - 'media__element'
+        - 'b-lazy'
+      image_attributes:
+        loading: "lazy"
+  - title: Quisque id
+    description: |
+      <p>Sit amet nisl purus in. Elementum eu facilisis sed odio morbi quis commodo odio aenean.</p>
+    image:
+      label_hidden: true
+      field_name: menu_clickthrough_image
+      field_type: entity_reference
+      bem_field_extra:
+        - 'blazy'
+        - 'blazy--field'
+        - 'blazy--menu-clickthrough-image'
+      field_attributes:
+        'data-blazy': ''
+      settings:
+        lazy: true
+        use_loading: true
+      blazy_bem_modifiers:
+        - 'bundle--image'
+        - blazy
+        - image
+        - loading
+      image_src: 'https://placeimg.com/100/100/arch'
+      image_alt: 'A 100 x 100 image'
+      image_bem_extra:
+        - 'media__image'
+        - 'media__element'
+        - 'b-lazy'
+      image_attributes:
+        loading: "lazy"

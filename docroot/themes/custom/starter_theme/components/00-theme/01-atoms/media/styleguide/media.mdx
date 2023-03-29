@@ -1,0 +1,17 @@
+import { Story } from '@storybook/addon-docs';
+
+# Media reference field
+
+## Data structure
+
+```
+media_bundle: the type of media (eg. video)
+media_published: if it's published or not
+view_mode: the view_mode
+```
+
+`media_bundle` and `media_published` are abstractions of the data in Drupal, which comes from nested elements inside the `media` object:
+- `media.isPublished()`
+- `media.bundle()`
+
+The reason for the abstraction, is that TwigJS can't handle these functions by default.

@@ -1,0 +1,90 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Form: Upload file
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+// ** wrapper for upload file field + button
+.webform-document-file {
+
+  .button {
+    margin-top: rem(10);
+  }
+}
+
+// ** wrapper around the field
+.file-upload-wrapper {
+  //
+}
+
+// ** the field itself
+input[type="file"] {
+  //
+}
+
+// * Field with upload button
+// =============================================================================
+
+.form-managed-file {
+
+  align-items: center;
+
+  .messages {
+    margin-bottom: rem(10);
+  }
+
+  button {
+    margin-top: rem(10);
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // ** wrapper for upload file field + button
+  .webform-document-file {
+    display: flex;
+    flex-wrap: wrap;
+
+    // goes full-width below the input field
+    .description {
+      flex: 1 1 auto;
+    }
+
+    .button {
+      margin-left: rem(10);
+      margin-top: 0;
+    }
+  }
+
+  // ** wrapper around the field
+  .file-upload-wrapper {
+    flex-grow: 1; // fill space minus the button
+    width: auto;
+  }
+
+  // ** Field with upload button
+
+  .form-managed-file {
+    display: flex;
+    flex-wrap: wrap; // need this to wrap, in case an error message happens
+
+    .messages {
+      width: 100%;
+    }
+
+    button {
+      margin-top: 0;
+      margin-left: rem(10);
+    }
+  }
+}

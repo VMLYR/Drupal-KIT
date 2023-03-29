@@ -1,0 +1,80 @@
+{% set image_bem_block = image_bem_block ?? false %}
+{% set image_bem_element = image_bem_element|default('image') %}
+{% set image_modifiers = image_modifiers|default([]) %}
+{% set image_bem_extra = image_bem_extra|default([]) %}
+{% set image_loading = image_loading|default(attributes.loading) %}
+{% set lazy_loading_fallback = lazy_loading_fallback|default(attributes.lazy_loading_fallback) %}
+{% set aspect = aspect|default(attributes.aspect) %}
+{% set extra_classes = extra_classes|default([]) %}
+{% set extra_style = extra_style|default('') %}
+{% set is_picture = is_picture ?? false %}
+
+{# if there is no alt property filled in, it won't render as an attribute
+   but we need it for accessibility, so we force it to render an empty prop instead
+   Or we could set another attribute instead: role="presentation", on decorative images, that would also be a good fix
+#}
+{% set alternativeAlt = image_alt %}
+{% if image_alt is null or image_alt is not defined or image_alt is empty %}
+{% set alternativeAlt = '' %}
+{% endif %}
+
+{#
+  if 'src' is a part of the img attributes, replace with data-src
+  if lazy loading is active
+#}
+{% if image_loading and image_loading == 'lazy' and attributes.src %}
+  {% if image_src is not defined or image_src is null or image_src is empty %}
+    {% set image_src = attributes.src %}
+  {% endif %}
+
+  {% set attributes = attributes.removeAttribute('src') %}
+{% endif %}
+
+{% if aspect %}
+  {% set inline_style = inline_style ~ "padding-bottom: " ~ aspect ~ ";"  %}
+  {% set extra_classes = extra_classes|merge(['img-layout-shift'])%}
+
+  {% if attributes.aspect %}
+    {% set attributes = attributes.removeAttribute('aspect') %}
+  {% endif %}
+{% endif %}
+
+{% if image_loading and image_loading == 'lazy' %}
+  {% set extra_classes = extra_classes|merge(['lazy-wrapper'])%}
+{% endif %}
+
+{% if is_picture != true and extra_classes %}
+  <div class="{{extra_classes|join(' ')}}"{% if inline_style %} style="{{ inline_style }}"{% endif %}>
+{% endif %}
+
+<img
+  {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+  {{ bem(image_bem_block, image_bem_element, image_modifiers, image_bem_extra, attributes) }}
+
+  {% if image_srcset %}
+    srcset="{{ image_srcset }}"
+  {% endif %}
+  {% if image_sizes %}
+    sizes="{{ image_sizes }}"
+  {% endif %}
+
+  alt="{{ alternativeAlt }}"
+  {% if image_title %}
+    title="{{ image_title }}"
+  {% endif %}
+
+  {% if image_loading is not empty and image_loading != null %}
+    loading="{{ image_loading }}"
+    {% if image_loading == 'lazy' and (lazy_loading_fallback is not empty and lazy_loading_fallback == true) %}
+      data-src="{{ image_src }}"
+    {% else %}
+      src="{{ image_src }}"
+    {% endif %}
+  {% else %}
+    src="{{ image_src }}"
+  {% endif %}
+/>
+
+{% if is_picture != true and extra_classes %}
+</div>
+{% endif %}

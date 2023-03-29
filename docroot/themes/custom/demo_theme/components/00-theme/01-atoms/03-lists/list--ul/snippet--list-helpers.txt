@@ -1,0 +1,361 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Lists: helpers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// ** Extended mixin for list styling
+
+// ** Styling for lists in text
+// -- http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/
+// USAGE: @include list; (without parameter, defaults to unsorted style)
+// --     @include list((type: "sorted")) gives you a sorted list
+// --     @include list($some-variable) use a variable to add your settings (don't forget the extra brackets!)
+//
+// settings:
+// -- type: "sorted" or "unsorted"
+// -- spacing: space between the individual list items (uses margin-bottom for this)
+
+// -- bullet: ("unsorted" list only) a font-awesome icon variable (eg. $fa-var-checked) OR a keyword for the shape ("disk", "circle", "square")
+// -- bullet-space: ("unsorted" list only) space available for the bullet to live in (space between left hand side and start of the text
+// -- bullet-color: ("unsorted" list only) color of the bullet
+// -- bullet-size: ("unsorted" list only) px width & height (if shape) OR px font size (if icon)
+// -- bullet-weight: ("unsorted" list only) (only if icon) the font-awesome type: "light", "regular", "solid" or "brand"
+
+// -- number-font: ("sorted" list only) the font used for the number
+// -- number-space: ("sorted" list only) space available for the number to live in (space between left hand side and start of the text
+// -- number-color: ("sorted" list only) color of the number
+// -- number-delimiter: character that comes after the bullet in unsorted lists ("." by default)
+//
+@mixin list($settings: null) {
+
+  // some defaults, used in case no $settings were given
+  // or when either of the settings is omitted
+  $type-default: "unsorted";
+  $bullet-default: $fa-var-circle;
+  $bullet-space-default: 19;
+  $bullet-color-default: hsl(var(--clr-spot-1));
+  $bullet-size-default-icon: 6;
+  $bullet-size-default-shape: 6;
+  $bullet-weight-default-icon: "solid";
+  $bullet-weight-default-shape: $font-weight-bold;
+  $number-font-default: $font-heading;
+  $number-space-default: 26;
+  $number-color-default: $bullet-color-default;
+  $spacing-default: 6;
+  $number-delimiter-default: ".";
+
+  // set up the actual variables that will be used
+  $type: null;
+  $bullet: null;
+  $bullet-space: null;
+  $bullet-color: null;
+  $bullet-size: null;
+  $bullet-weight: null;
+  $number-font: null;
+  $number-space: null;
+  $number-color: null;
+  $spacing: null;
+  $number-delimiter: null;
+
+  // map the variables to the settings if actual settings are passed
+  @if ($settings != null) {
+    $type: map-get($settings, type);
+    $bullet: map-get($settings, bullet);
+    $bullet-space: map-get($settings, bullet-space);
+    $bullet-color: map-get($settings, bullet-color);
+    $bullet-size: map-get($settings, bullet-size);
+    $bullet-weight: map-get($settings, bullet-weight);
+    $number-font: map-get($settings, number-font);
+    $number-space: map-get($settings, number-space);
+    $number-color: map-get($settings, number-color);
+    $spacing: map-get($settings, spacing);
+    $number-delimiter: map-get($settings, number-delimiter);
+  }
+
+  // if any are not filled in, fall back to defaults
+  @if ($type == null) {
+    $type: $type-default;
+  }
+  @if ($bullet == null) {
+    $bullet: $bullet-default;
+  }
+  @if ($bullet-space == null) {
+    $bullet-space: $bullet-space-default;
+  }
+  @if ($bullet-color == null) {
+    $bullet-color: $bullet-color-default;
+  }
+  @if ($bullet-size == null) {
+
+    // if icon, use a font-size
+    @if ($bullet != "circle" or $bullet != "disk" or $bullet != "square") {
+      $bullet-size: $bullet-size-default-icon;
+
+      // otherwise, use a shape
+    } @else {
+      $bullet-size: $bullet-size-default-shape;
+    }
+
+  }
+  @if ($bullet-weight == null) {
+
+    // only need weight if using icons
+    @if ($bullet != "circle" or $bullet != "disk" or $bullet != "square") {
+      $bullet-weight: $bullet-weight-default-icon;
+    }
+  }
+  @if ($number-font == null) {
+    $number-font: $number-font-default;
+  }
+  @if ($number-space == null) {
+    $number-space: $number-space-default;
+  }
+  @if ($number-color == null) {
+    $number-color: $number-color-default;
+  }
+  @if ($spacing == null) {
+    $spacing: $spacing-default;
+  }
+  @if ($number-delimiter == null) {
+    $number-delimiter: $number-delimiter-default;
+  }
+
+  // Shared styling
+
+  display: block;
+  padding-left: 0;
+  margin-left: 0;
+
+  & > li {
+    position: relative; // Create a positioning context
+    display: block;
+    margin-bottom: rem($spacing);
+    list-style: none; // Disable the normal item numbering
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // ** list with numbers
+
+  @if $type == "sorted" {
+
+    $listSettings: (
+      type: $type,
+      number-font: $number-font,
+      number-space: $number-space,
+      number-color: $number-color,
+      spacing: $spacing,
+      number-delimiter: $number-delimiter
+    );
+
+    @include list-sorted($listSettings);
+
+    // ** list with bullets
+
+  } @else {
+
+    $listSettings: (
+      type: $type,
+      bullet: $bullet,
+      bullet-space: $bullet-space,
+      bullet-color: $bullet-color,
+      bullet-size: $bullet-size,
+      spacing: $spacing,
+      number-delimiter: $number-delimiter
+    );
+
+    @include list-unsorted($listSettings);
+
+  }
+}
+
+
+@mixin list-sorted($settings: null) {
+
+  // map the variables to the settings if actual settings are passed
+  $number-font: map-get($settings, number-font);
+  $number-space: map-get($settings, number-space);
+  $number-color: map-get($settings, number-color);
+  $spacing: map-get($settings, spacing);
+  $number-delimiter: map-get($settings, number-delimiter);
+
+  counter-reset: listStyle1; // Initiate a counter
+
+  & > li {
+    padding-left: rem($number-space); // space for the counter
+    counter-increment: listStyle1; // Increment the counter by 1
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: counter(listStyle1) "."; // Use the counter as content
+      font-family: $number-font;
+      font-weight: $font-weight-bold;
+      @include font-size($font-size-base, $line-height-base);
+      color: $number-color;
+
+      // optional: for looong numbered lists, to make sure the number-delimiters are aligned, you can align them to the right
+      //
+      // width: rem($number-space - 12); // leave some space so it doesn"t stick to the text
+      // text-align: right; // align on the number-delimiter
+    }
+
+    // 2nd & 3rd levels: get their own counter
+    //
+    ol {
+      counter-reset: listStyle2;
+
+      > li {
+        counter-increment: listStyle2; // Increment the new counter by 1
+
+        &::before {
+          content: counter(listStyle2, lower-alpha) ".";
+        }
+      }
+    }
+
+    ol > li > ol {
+      counter-reset: listStyle3;
+
+      > li {
+        counter-increment: listStyle3; // Increment the new counter by 1
+
+        &::before {
+          content: counter(listStyle3, lower-roman) ".";
+        }
+      }
+    }
+
+    // (option 2) 2nd level, keep the count but add a subnumber
+    //
+    //ol {
+    //
+    //  > li {
+    //    counter-increment: listStyle1; // Increment the counter by 1
+    //    padding-left: rem($number-space + 5); // extra space
+    //
+    //    &::before {
+    //      content: counters(listStyle1, ".") " ";
+    //    }
+    //  }
+    //}
+    //
+    // ol > li > ol {
+    //
+    //  > li {
+    //    padding-left: rem($number-space + 5 + 5); // more extra space
+    //  }
+    //}
+  }
+
+}
+
+
+@mixin list-unsorted($settings: null) {
+
+  $bullet: map-get($settings, bullet);
+  $bullet-space: map-get($settings, bullet-space);
+  $bullet-color: map-get($settings, bullet-color);
+  $bullet-size: map-get($settings, bullet-size);
+  $bullet-weight: map-get($settings, bullet-weight);
+  $spacing: map-get($settings, spacing);
+
+  // first level: default to disc bullet
+
+  & > li {
+    padding-left: rem($bullet-space); // space for the counter
+
+    // ** no shape name given, so we assume it's an icon
+
+    @if ($bullet != "circle" or $bullet != "disk" or $bullet != "square") {
+
+      $my-bullet: (
+        icon: $bullet,
+        color: $bullet-color,
+        size: $bullet-size,
+        type: $bullet-weight,
+        position: absolute,
+        top: rem(math.div($line-height-base, 2)), // half of line-height
+        left: 0
+      );
+
+      @include font-awesome($my-bullet);
+
+      &::before {
+        margin-top: -1px; // pull it up a bit, to align with letters x-height
+      }
+
+      > ul > li {
+        // second level: change shape
+
+        &::before {
+          content: unquote("\"#{ $fa-var-square }\"");
+        }
+      }
+
+      // third level: yet another shape
+      > ul > li > ul > li {
+        &::before {
+          content: unquote("\"#{ $fa-var-diamond }\"");
+        }
+      }
+
+      // ** normal shape
+
+    } @else {
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 1px; // push it in a bit because round shapes tend to look bigger and thus outside the edge
+        top: rem(math.div($line-height-base, 2)); // half of line-height
+        display: block;
+        margin-top: -1px; // pull it up a bit, to align with letters x-height
+        width: rem($bullet-size);
+        height: rem($bullet-size);
+
+        @if ($bullet == "circle") {
+          border: 1px solid $bullet-color;
+          border-radius: 50%;
+        }
+
+        @else if ($bullet == "disk") {
+          border-radius: 50%;
+          background: $bullet-color;
+        }
+
+        @else {
+          background: $bullet-color;
+        }
+      }
+
+      ul {
+        // second level: circle bullet
+
+        li {
+          &::before {
+            border: 1px solid $number-color;
+            background: transparent;
+          }
+
+          // third level: square filled bullet
+
+          li {
+            &::before {
+              border: 0 none;
+              border-radius: 0;
+              background: $bullet-color
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

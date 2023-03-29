@@ -1,0 +1,7 @@
+variants:
+  - description: 'align top (default)'
+    valign: top
+  - description: 'align middle'
+    valign: middle
+  - description: 'align bottom'
+    valign: bottom

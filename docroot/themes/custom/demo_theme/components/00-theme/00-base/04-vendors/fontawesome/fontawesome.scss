@@ -1,0 +1,28 @@
+/*!
+ * Font Awesome Pro 5.15.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license (Commercial License)
+ */
+
+// variables to switch versions of Font Awesome
+@import "../../00-config/00-variables/_vars-icons.scss";
+
+// ** the helpers we need to use Font Awesome in our theme
+@import "variables";
+@import "mixins";
+
+// ** We don't need this stuff, because we write our own CSS
+//    but it's handy to have as a reference
+//
+// @import 'variables';
+// @import 'mixins';
+// @import 'core';
+// @import 'larger';
+// @import 'fixed-width';
+// @import 'list';
+// @import 'bordered-pulled';
+// @import 'animated';
+// @import 'rotated-flipped';
+// @import 'stacked';
+// @import 'icons';
+// @import 'screen-reader';
+

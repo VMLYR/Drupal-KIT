@@ -1,0 +1,213 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Images
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Image tag
+// =============================================================================
+
+img {
+  display: block;
+  border-style: none;
+  vertical-align: middle;
+  @include img-responsive();
+}
+
+// specific for media with responsive images, override the fallback image set by inline stying
+.media__element {
+  background-repeat: no-repeat !important;
+}
+
+.media--type-image {
+  // make sure preloader gets positioned correctly
+  position: relative;
+}
+
+// ** adding preloaders
+
+@mixin lazy-image($wrapper) {
+
+  #{$wrapper} {
+    position: relative;
+
+    // need positioning on these wrappers
+    // so make sure they take up space for the stretched image positioning
+    .media--view-mode-layout-builder-background & {
+      position: static;
+    }
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      display: block;
+      height: rem(30);
+      width: rem(30);
+      max-width: none;
+      border-radius: 50%;
+      background-color: hsl(var(--clr-spot-1));
+      transform: translateX(-50%) translateY(-50%);
+      animation: blast 1s infinite ease-out;
+      content: "";
+      margin-left: rem(-15);
+      margin-top: rem(-15);
+    }
+
+    &::after {
+      position: absolute;
+      z-index: -2;
+      top: 0;
+      left: 0;
+      display: block;
+      height: 100%;
+      width: 100%;
+      background-color: hsl(var(--clr-gray-light-1));
+      content: "";
+      opacity: .75;
+      // box-shadow: inset 0 0 0 4px hsl(var(--clr-border));
+    }
+
+    &.js-loaded {
+      background-color: transparent;
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+        // background-color: transparent;
+        // box-shadow: none;
+      }
+    }
+
+  }
+}
+
+@include lazy-image(".lazy-wrapper");
+@include lazy-image(".drimage");
+// blazy override
+@include lazy-image(".media--loading:not([data-animation]), .is-b-loading:not([data-animation])");
+
+// Don't need preloaders on these:
+// - cloned Slick elements
+//  since they won't get detected by the lazyloading JS
+// - Colorbox
+//
+.slick-cloned,
+#colorbox {
+  .lazy-wrapper,
+  .drimage {
+    &::before {
+      display: none;
+    }
+
+    img {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
+/* During image load, show bounding box for the image
+   Might make the bg color dynamic at some point */
+
+.img-layout-shift {
+  position: relative;
+  display: block;
+  background-color: hsl(var(--clr-off-white));
+
+  // need positioning on these wrappers
+  // so make sure they take up space for the stretched image positioning
+  .media--view-mode-layout-builder-background & {
+    position: static;
+  }
+
+  & > img {
+    position: absolute;
+  }
+}
+
+// * Picture tag
+// =============================================================================
+
+picture {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%; /* stretch to fit its containing element */
+}
+
+picture img {
+  width: 100%; /* stretch to fill the picture element */
+}
+
+
+// * Images in CKE
+// =============================================================================
+
+.text-long {
+
+  @include clearfix;
+
+  // -- alignment and sizing responsive
+  img,
+  figure,
+  [data-entity-type="media"] {
+    &,
+    &.align-left,
+    &.align-right,
+    &.align-center {
+      display: block;
+      float: none;
+      margin: 0 0 var(--gap-hor) 0;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+
+    @include bp-sm {
+      &.align-left {
+        float: left;
+        margin: 0 var(--gap-hor) var(--gap-hor) 0;
+      }
+
+      &.align-right {
+        float: right;
+        margin: 0 0 var(--gap-hor) var(--gap-hor);
+      }
+
+      &.align-center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  figure,
+  [data-entity-type="media"] {
+
+    &.align-center {
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    img {
+      // reset for nested img in figure
+      float: none;
+      padding: 0;
+    }
+  }
+
+  figcaption {
+    margin-top: rem(10);
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: hsl(var(--clr-gray));
+  }
+}

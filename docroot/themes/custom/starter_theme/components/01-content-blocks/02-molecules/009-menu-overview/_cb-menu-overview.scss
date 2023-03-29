@@ -1,0 +1,317 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Block: menu overview
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+.block--type-cb-menu-overview {
+
+  --gap-menu-overview: #{rem(20)};
+
+  // ---------------------------------------------------------------------------
+
+  // ** default link color
+
+  a {
+    &,
+    &:visited {
+      color: hsl(var(--clr-base));
+    }
+
+    &:hover,
+    &:active {
+      color: hsl(var(--clr-link-hover));
+    }
+  }
+
+  @if ($structuralOnly == false) {
+
+    // ** keep same colors when on colored bg's
+    //    because the items are wrapped in colored blocks
+    .layout--bg--spot-1 &,
+    .layout--bg--spot-2 &,
+    .layout--bg--spot-3 & {
+
+      a,
+      .field-cb-menu-overview__item__title a {
+
+        &,
+        &:visited {
+          color: hsl(var(--clr-base));
+        }
+
+        &:hover,
+        &:active {
+          color: hsl(var(--clr-link-hover));
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.field-cb-menu-overview__overview {
+  @include list-reset;
+  margin-top: rem(-10);
+}
+
+// ** item
+
+.field-cb-menu-overview__item {
+  @include list-reset;
+  position: relative;
+  margin-top: rem(10);
+  text-align: center;
+  color: hsl(var(--clr-base));
+  background-color: hsl(var(--clr-off-white));
+}
+
+
+// -- image
+
+.field-cb-menu-overview__item__visual {
+
+  // if there's an image:
+  &,
+  .block--provider-layout-builder & {
+    position: relative;
+    margin: 0 auto;
+    width: rem(100);
+    height: rem(100);
+
+    img {
+      display: block;
+      max-width: none;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @if ($structuralOnly == false) {
+    // default styling: arrow icon
+    @include font-awesome((
+      icon: $fa-var-chevron-right, size: 32, type: "solid"
+    ));
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: rem(100);
+      height: rem(100);
+      line-height: rem(100);
+      text-align: center;
+    }
+
+  } @else {
+    //
+  }
+
+
+}
+
+// -- title
+
+.field-cb-menu-overview__item__title {
+  font-family: $font-fallback;
+  @include font-size($font-size-base, $line-height-base);
+  margin-bottom: 0;
+  font-weight: $font-weight-bold;
+  text-transform: none;
+  color: hsl(var(--clr-base));
+
+  a {
+    &,
+    &:visited {
+      color: hsl(var(--clr-base));
+    }
+
+    &:hover,
+    &:active {
+      color: hsl(var(--clr-link-hover));
+    }
+  }
+
+  // load font-family after font loaded
+  .font-text-01-loaded & {
+    font-family: $font-base;
+  }
+}
+
+// -- content
+
+.field-cb-menu-overview__item__content {
+  padding: rem(15);
+  min-height: rem(100);
+  color: hsl(var(--clr-base));
+}
+
+.field-cb-menu-overview__item__description {
+  margin-top: rem(5);
+}
+
+// ** Link
+// -- read more link
+//    make it go over everything as an overlay
+
+.field-cb-menu-overview__item__link {
+
+  > a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0 none;
+    @include hide-text;
+  }
+
+  // in case of <nolink>, this does not need to be seen
+  > span {
+    display: none;
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: only xs wide
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-wide {
+
+  .field-cb-menu-overview__overview {
+    @include flex-grid(12, var(--gap-menu-overview));
+  }
+
+  .field-cb-menu-overview__item {
+    @include flex-col(6, 12, var(--gap-menu-overview));
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .field-cb-menu-overview__overview {
+    @include flex-grid(12, var(--gap-menu-overview));
+  }
+
+  .field-cb-menu-overview__item {
+    @include flex-col(6, 12, var(--gap-menu-overview));
+    display: flex;
+    text-align: left;
+  }
+
+  // -- image
+
+  .field-cb-menu-overview__item__visual {
+
+    &,
+    .block--provider-layout-builder & {
+      flex-basis: rem(100);
+      width: rem(100);
+    }
+  }
+
+  .field-cb-menu-overview__item__content {
+    flex-basis: calc(100% - #{rem(100)});
+    width: calc(100% - #{rem(100)});
+  }
+
+  // ** 2 col layout override
+
+  .layout--2-col {
+
+    .field-cb-menu-overview__item {
+      @include flex-col(12, 12, var(--gap-menu-overview));
+      display: block;
+      text-align: center;
+    }
+
+    .field-cb-menu-overview__item__visual {
+
+      &,
+      .block--provider-layout-builder & {
+        width: auto;
+      }
+    }
+
+    .field-cb-menu-overview__item__content {
+      width: auto;
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .field-cb-menu-overview__item {
+    flex-basis: calc((100% / 3) - #{rem(40)});
+    width: calc((100% / 3) - #{rem(40)});
+  }
+
+  // ** 2 col layout override
+
+  .layout--2-col {
+
+    .field-cb-menu-overview__item {
+      display: flex;
+      text-align: left;
+    }
+
+    .field-cb-menu-overview__item__visual {
+
+      &,
+      .block--provider-layout-builder & {
+        flex-basis: rem(100);
+        width: rem(100);
+      }
+    }
+
+    .field-cb-menu-overview__item__content {
+      flex-basis: calc(100% - #{rem(100)});
+      width: calc(100% - #{rem(100)});
+    }
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large screen
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // ** 2 col layout override
+
+  .layout--2-col {
+
+    .field-cb-menu-overview__item {
+      @include flex-col(6, 12, var(--gap-menu-overview));
+    }
+  }
+
+  // ** small cols layout override
+
+  .layout__region--size-1-3,
+  .layout__region--size-1-4 {
+
+    .field-cb-menu-overview__item {
+      @include flex-col(12, 12, 20);
+    }
+  }
+}

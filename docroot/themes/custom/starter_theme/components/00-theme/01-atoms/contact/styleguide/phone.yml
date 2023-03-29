@@ -1,0 +1,8 @@
+field_name: field_office_phone
+field_type: telephone
+bem_field_modifiers:
+  - 'label-hidden'
+multiple: true
+items:
+  -
+    tel: "+32 (0)9227 86 54"

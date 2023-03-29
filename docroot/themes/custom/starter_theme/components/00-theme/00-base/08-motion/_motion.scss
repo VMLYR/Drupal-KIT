@@ -1,0 +1,16 @@
+// ** You can add your keyframe animations and custom transitions for CSS animation here
+
+/*
+ Pulse
+*/
+
+@keyframes blast {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.1);
+  }
+  100% {
+    opacity: .5;
+    transform: scale(1);
+  }
+}

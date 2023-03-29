@@ -1,0 +1,29 @@
+import { Story } from '@storybook/addon-docs';
+
+# Making an Organism story component
+
+The complexity of the Organisms, is that you are nesting Molecules inside an Organism template.<br />
+In order to properly do this, you need to have Storybook components for those Molecules + data to import or merge
+
+Look at the header nav or the footer Organisms for how this works.
+
+A more complex organism, is one that consists of nesting other organisms. Examples for that can be found in the header.<br />
+Eg. 'nav' is an organism that is nested in 'header primary' and in its turn is nested in 'complete header'
+
+## Data structure
+
+### Node
+
+In the yml file, you'll find this grouped under the 'page' key. <br />
+
+These are the most important keys, which are used to build the BEM classes: <br />
+
+- **view_mode:** string, the name of the view mode. In case of basic page CT, it's 'full', <br />
+                 teasers are either 'teaser' or 'front' or some variation on that
+- **bundle:** string, named after the CT, in the case of basic page it is 'page'
+- **isPromoted:** boolean, to indicate this node is displayed in a certain view mode <br />
+            (eg. you see this on teasers that are in a view on the homepage)
+- **isSticky:** boolean, if showed at the top of a view
+
+_Note: some of this data structure is simplified in the node twig in order to make it easier to work with<br />
+       for example, in reality 'isPromoted' is a function inside a nested object but with some Twig trickery it is turned into a simple key_

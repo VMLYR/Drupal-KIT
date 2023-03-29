@@ -1,0 +1,14 @@
+<li class="field-cb-menu-overview__item field-cb-menu-overview__item--cb-017">
+  <div class="field-cb-menu-overview__item__visual field-cb-menu-overview__item__visual--cb-017">
+    {% block item_image %}{{ image }}{% endblock %}
+  </div>
+  <div class="field-cb-menu-overview__item__content">
+    <h3 class="field-cb-menu-overview__item__title">{% block item_title %}{{ title }}{% endblock %}</h3>
+    <div class="field-cb-menu-overview__item__description">
+      {% block item_description %}{{ description }}{% endblock %}
+    </div>
+  </div>
+  <div class="field-cb-menu-overview__item__link">
+    {% block item_link %}{{ link }}{% endblock %}
+  </div>
+</li>

@@ -1,0 +1,265 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Buttons (in forms and text)
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+// * Mixins
+// =============================================================================
+
+// ** Button mixins: use this for buttons used on the site
+// -- OPTIONS:
+//    - background: the background-color you want (will darken on hover), default from config = spot color
+//    - color: the text color you want (no change on hover by default), default from config = white
+//    - border: a border around your button, will darken on hover
+//    - size: default is false (normal size), it references another mixin to set more sizes (@mixin button-size)
+// -- NOTE: remove what doesn't apply to the buttons used on the site or edit to your needs
+
+@mixin button-size($size) {
+  @if ($size == "sm") {
+    padding: rem(9) rem(14) rem(9) rem(14);
+    @include font-size(12, 14);
+  }
+
+  @if ($size == "md") {
+    padding: rem(10) rem(19);
+    @include font-size($font-size-base, $line-height-base);
+  }
+
+  @if ($size == "lg") {
+    // padding: rem(18) rem(25) rem(15) rem(25);
+    // @include font-size(16, 22);
+  }
+}
+
+@mixin button($settings: null) {
+
+  // some defaults, used in case no $settings were given
+  // or when either of the settings is omitted
+  $color-default: var(--clr-button);
+  $background-default: var(--clr-button-bg);
+  $border-default: false;
+  $border-width-default: 2px;
+  $hover-default: var(--clr-button);
+  $hover-bg-default: var(--clr-button-hover-bg);
+  $hover-border-default: false;
+  $size-default: "md";
+  $border-radius-default: 0;
+  $box-shadow-default: false;
+
+  // set up the actual variables that will be used
+  $color: null;
+  $background: null;
+  $border: null;
+  $border-width: null;
+  $hover: null;
+  $hover-bg: null;
+  $hover-border: null;
+  $size: null;
+  $border-radius: null;
+  $box-shadow: null;
+
+  // map the variables to the settings if actual settings are passed
+  @if ($settings != null) {
+    $color: map-get($settings, color);
+    $background: map-get($settings, background);
+    $border: map-get($settings, border);
+    $border-width: map-get($settings, border-width);
+    $hover: map-get($settings, hover);
+    $hover-bg: map-get($settings, hover-bg);
+    $hover-border: map-get($settings, hover-border);
+    $size: map-get($settings, size);
+    $border-radius: map-get($settings, border-radius);
+    $box-shadow: map-get($settings, box-shadow);
+  }
+
+  // if any are not filled in, fall back to defaults
+  @if ($background == null) {
+    $background: $background-default;
+  }
+  @if ($border == null) {
+    $border: $border-default;
+  }
+  @if ($border-width == null) {
+    $border-width: $border-width-default;
+  }
+  @if ($color == null) {
+    $color: $color-default;
+  }
+  @if ($hover == null) {
+    $hover: $hover-default;
+  }
+  @if ($hover-bg == null) {
+    $hover-bg: $hover-bg-default;
+  }
+  @if ($hover-border == null) {
+    $hover-border: $hover-border-default;
+  }
+  @if ($size == null) {
+    $size: $size-default;
+  }
+  @if ($border-radius == null) {
+    $border-radius: $border-radius-default;
+  }
+  @if ($box-shadow == null) {
+    $box-shadow: $box-shadow-default;
+  }
+
+  cursor: pointer;
+  display: inline-block;
+  border: 0 none;
+  border-radius: $border-radius;
+  // load what defines the size: font-size + line-height, padding, …
+  @include button-size($size);
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  @if ($background == transparent) {
+    background: transparent;
+  } @else {
+    background: hsl($background);
+  }
+  background-repeat: no-repeat;
+
+  outline: none;
+  transition: background $duration $easing, color $duration $easing, box-shadow $duration $easing;
+
+  // Only use webfont when it's done loading (replace class & var with the appropriate one)
+  //
+  .font-text-01-loaded & {
+    font-family: $font-base;
+  }
+
+  // add border via box-shadow, so we don't have to mess with changes in padding when there is none
+  // also keep into account that there might already be a box-shadow, so you have to combine the 2
+
+  // shadow + border
+  @if ($box-shadow != false and $border != false) {
+    box-shadow: 0 3px 20px hsla(var(--clr-black), .2), inset 0 0 0 $border-width hsl($border);
+
+    // only shadow
+  } @else if ($box-shadow != false) {
+    box-shadow: 0 3px 20px hsla(var(--clr-black), .2);
+
+    // only border
+  } @else if ($border != false) {
+    box-shadow: inset 0 0 0 $border-width hsl($border);
+  }
+
+  &,
+  &:visited {
+    color: hsl($color);
+  }
+
+  &:hover,
+  &:active {
+    border: 0 none;
+    color: hsl($hover);
+    background: hsl($hover-bg);
+    outline: none;
+
+    // shadow + hover border
+    @if ($box-shadow != false and $hover-border != false) {
+      box-shadow: 0 3px 20px hsla(var(--clr-black), .2), inset 0 0 0 $border-width hsl($hover-border);
+
+      // only shadow
+    } @else if ($box-shadow != false and $hover-border == false) {
+
+      // if normal state has border, let's animate to that
+      @if ($border != false) {
+        box-shadow: 0 3px 20px hsla(var(--clr-black), .2), inset 0 0 0 $border-width hsla($border, 0);
+
+        // otherwise, just leave the shadow
+      } @else {
+        box-shadow: 0 3px 20px hsla(var(--clr-black), .2);
+      }
+
+      // only hover border
+    } @else if ($box-shadow == false and $hover-border != false) {
+      box-shadow: inset 0 0 0 $border-width hsl($hover-border);
+
+      // no hover borders && no shadow
+    } @else {
+
+      // normal state does have border, so we need to animate to 0% opacity
+      @if ($border != false) {
+        box-shadow: inset 0 0 0 $border-width hsla($border, 0);
+      }
+
+      // normal state does not have a border, so we don't need to do anything
+
+    }
+  }
+
+  &:focus,
+  &:focus:hover {
+    outline: 0;
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled] {
+    pointer-events: none; // no support in IE10
+    cursor: default;
+    opacity: .5;
+  }
+}
+
+// ** Example of use: to make a specific button
+//
+// -- Need a gradient background instead of a color? Just use the gradient property.
+//    eg. background: linear-gradient(to right, red, yellow),
+//    eg. hover-bg: linear-gradient(to right, yellow, red),
+//
+@mixin button-primary($size:"md") {
+  $settings-button-primary: (
+    color: var(--clr-button),
+    background: var(--clr-button-bg),
+    hover: var(--clr-button-hover),
+    hover-bg: var(--clr-button-hover-bg),
+    size: $size,
+    box-shadow: true
+  );
+  @include button($settings-button-primary);
+}
+
+@mixin button-secondary($size:"md") {
+  $settings-button-secondary: (
+    color: var(--clr-button-bg),
+    border: var(--clr-button-bg),
+    background: var(--clr-button),
+    hover: var(--clr-button),
+    hover-bg: var(--clr-button-hover-bg),
+    hover-border: false,
+    size: $size
+  );
+  @include button($settings-button-secondary);
+}
+
+@mixin button-negative($size:"md") {
+  $settings-button-negative: (
+    color: var(--clr-spot-1),
+    background: var(--clr-white),
+    border: var(--clr-white),
+    hover: var(--clr-spot-2),
+    hover-bg: var(--clr-white),
+    size: $size
+  );
+  @include button($settings-button-negative);
+}
+
+@mixin button-negative-secondary($size:"md") {
+  $settings-button-negative-secondary: (
+    color: var(--clr-white),
+    background: transparent,
+    border: var(--clr-white),
+    hover: var(--clr-spot-2),
+    hover-bg: var(--clr-white),
+    hover-border: false,
+    size: $size
+  );
+  @include button($settings-button-negative-secondary);
+}

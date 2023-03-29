@@ -1,0 +1,7 @@
+autoplay: 0 # set to 1 to activate autoplay
+slidesToShow_large_screen: "5"
+slidesToShow_medium_screen: "4"
+slidesToShow_phone: "1"
+slidesToShow_tablet: "3"
+slidesToShow_xl_phone: "2"
+top_layout_spacing: "1x"

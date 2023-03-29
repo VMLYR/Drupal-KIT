@@ -1,0 +1,7 @@
+styleguide: true
+title: 'Option Single'
+title_display: 'after'
+checked: 'checked'
+required: true
+label_attributes:
+  for: 'checkbox'

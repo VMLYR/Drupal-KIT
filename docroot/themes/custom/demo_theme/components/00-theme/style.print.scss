@@ -1,0 +1,209 @@
+@charset "UTF-8";
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Print css
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@media print {
+
+  // ** typography
+
+  body {
+    margin: 1cm; // use own value
+    // font-family: Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 140%;
+  }
+
+  h1 {
+    margin: 0 0 1.5em !important;
+    font-size: 21pt !important;
+  }
+
+  h2 {
+    margin: 0 0 0.5em !important;
+    font-size: 16pt !important;
+  }
+
+  h3 {
+    margin: 0 0 0.5em !important;
+    font-size: 14pt !important;
+  }
+
+  h4 {
+    margin: 0 0 0.5em !important;
+    font-size: 12pt !important;
+  }
+
+  pre {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  blockquote {
+    //
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  td,
+  td img {
+    vertical-align: top;
+  }
+
+  thead {
+    display: table-header-group;
+  } // css-discuss.incutio.com/wiki/Printing_Tables
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  // links
+
+  a:link,
+  a:visited {
+    color: gray;
+  }
+
+  // print URLs after link text - use with caution
+  //
+  // a:link::after, a:visited::after {
+  //   content: " (" attr(href) ") ";
+  //   font-size: 85%;
+  //   font-weight: normal;
+  //   color: #666;
+  // }
+
+  // See http://www.alistapart.com/articles/improvingprint for urls in footnote (with javascript)
+  abbr::after {
+    content: " (" attr(title) ")";
+  }
+
+  // Don"t show links for images
+  .ir a::after {
+    content: "";
+  }
+
+  .latest-news article a,
+  .latest-news article a:visited,
+  h2 a,
+  h2 a:visited,
+  h3 a,
+  h3 a:visited {
+    text-decoration: none;
+  }
+
+  // hidden elements
+
+  #toolbar-administration,
+  #toolbar-bar,
+  nav.tabs,
+  .visually-hidden,
+  .doormat,
+  footer.footer--primary,
+  .header__section--secondary,
+  .wrapper--navigation,
+  .header-top,
+  .nav--system,
+  [role="navigation"],
+  .block--provider-webform,
+  .js-webform-details-toggle,
+  .main form.search-form,
+  .pager,
+  .social-widgets,
+  .node__meta--full {
+    display: none !important;
+  }
+
+  // header
+  // =============================================================================
+
+  .block__branding__image img {
+    width: 2cm;
+    height: auto;
+  }
+
+  // images
+  // =============================================================================
+
+  .text-long {
+
+    // -- alignment and sizing responsive
+    img,
+    figure {
+      &,
+      &.align-left,
+      &.align-right,
+      &.align-center {
+        display: block;
+        float: none;
+        margin: 0 0 0.4cm;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+      }
+    }
+
+    figure {
+
+      &.align-center {
+        img {
+          margin: 0 auto;
+        }
+      }
+
+      img {
+        // reset for nested img in figure
+        float: none;
+        padding: 0;
+      }
+    }
+  }
+
+  // Fix whitespace overflow caused by Google Tag manager
+  .frame .stretch {
+    padding-bottom: 0 !important;
+  }
+
+  // images & sliders
+  // =============================================================================
+
+  #cboxOverlay,
+  #colorbox,
+  .slick-slide,
+  .slick--optionset--thumbnail-navigation {
+    display: none;
+  }
+
+  .slick-current {
+    display: block;
+  }
+
+  // tables
+  // =============================================================================
+
+  //
+
+}

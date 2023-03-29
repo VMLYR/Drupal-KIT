@@ -1,0 +1,65 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Tabs
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+.tabs {
+  background-color: hsl(var(--clr-tabs-background));
+}
+
+// Tab Navigation
+.tabs__nav {
+  @include list-reset;
+  padding: 0;
+  text-align: right;
+}
+
+// Drupal Local Tasks variant
+.tabs__nav--local-tasks {
+  //
+}
+
+.tabs__link--local-tasks {
+  //
+}
+
+
+// * Tab Content (hidden only in full #tabs js version)
+// =============================================================================
+
+.tabs__tab {
+  display: none;
+
+  &.is-active {
+    display: inline-block;
+  }
+}
+
+.tabs__content {
+  padding: calc(var(--gap-hor) / 2);
+}
+
+// No-js fallback
+.tabs.no-js {
+  .tabs__tab.is-active {
+    display: block;
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .tabs__nav {
+    padding: var(--gap-sm) calc(var(--gap-hor) / 2) 0 calc(var(--gap-hor) / 2);
+  }
+}

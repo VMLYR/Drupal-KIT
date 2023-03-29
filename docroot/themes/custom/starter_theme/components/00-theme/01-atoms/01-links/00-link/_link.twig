@@ -1,0 +1,69 @@
+{#
+/**
+ * Available variables:
+ * - link_content - the content of the link (typically text)
+ * - link_url - the url this link should point to
+ * - link_attributes - array of attribute,value pairs
+ * - bem_link_element - the base class name
+ * - bem_link_modifiers - array of modifiers to add to the base classname
+ * - bem_link_block - blockname prepended to the base classname
+ * - no_link - if there is no link provided, fall back to span instead of a-tag
+ *
+ * Available blocks:
+ * - link_content - used to replace the content of the link
+ *     Example: to insert the image component
+ */
+#}
+
+{# do we want the link title to show up (eg. NOT in most navigations, for accessibility reasons but yes in other links)#}
+{% set has_link_title = has_link_title ?? true %}
+
+{# if a menu item has no link to pass (see _menu-item.twig), this will be true #}
+{% set no_link = no_link ?? false %}
+
+{% set bem_link_block = bem_link_block ?? false %}
+
+{% set bem_link_element = bem_link_element|default('link') %}
+
+{% if bem_link_modifiers is not defined %}
+  {% set bem_link_modifiers = [] %}
+{% endif %}
+
+{% if not link_attribute_class %}
+  {% set link_attribute_class = [] %}
+{% endif %}
+
+{% set bem_link_extra = bem_link_extra|default([])|merge(link_attribute_class) %}
+
+{% set link_attributes = link_attributes|default([]) %}
+
+{# if a menu item has no link to pass (see _menu-item.twig), this will be true #}
+{% if no_link %}
+  {% set bem_link_modifiers = bem_link_modifiers|merge(['empty']) %}
+  <span
+  {{ bem(bem_link_block, bem_link_element, bem_link_modifiers, bem_link_extra) }}
+  >
+{% else %}
+
+  {# we might NOT want the link title to show up (eg. in most navigations, for accessibility reasons)#}
+  {% if has_link_title != true %}
+    {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+    <a {% if bem_link_block or bem_link_element or link_attributes %}{{ bem(bem_link_block, bem_link_element, bem_link_modifiers, bem_link_extra, link_attributes)|without('title') }}{% endif %}
+      href="{{ link_url }}"
+    >
+
+  {% else %}
+    {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+    <a {% if bem_link_block or bem_link_element or link_attributes %}{{ bem(bem_link_block, bem_link_element, bem_link_modifiers, bem_link_extra, link_attributes) }}{% endif %}
+      href="{{ link_url }}"
+    >
+  {% endif %}
+{% endif %}
+  {% block link_content %}
+    {{ link_content }}
+  {% endblock %}
+{% if no_link %}
+  </span>
+{% else %}
+  </a>
+{% endif %}

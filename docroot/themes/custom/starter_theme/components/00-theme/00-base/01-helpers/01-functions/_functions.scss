@@ -1,0 +1,190 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Functions: kinda like mixins but shorter syntax (no @include needed)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+@use "sass:string";
+
+// * Some handy functions
+// =============================================================================
+
+/// Strips the unit from a number.
+///
+/// @param {Number (With Unit)} $value
+///
+/// @example scss - Usage
+///   $dimension: strip-unit(10em);
+///
+/// @example css - CSS Output
+///   $dimension: 10;
+///
+/// @return {Number (Unitless)}
+
+@function strip-unit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return math.div($value, ($value * 0 + 1));
+  }
+
+  @return $value;
+}
+
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+
+@function em($pxval, $base: $rem-base) {
+  $pxval: strip-unit($pxval);
+  $base: strip-unit($base);
+
+  // check if it's a CSS variable and make sure it is wrapped in var(), output that
+  // we assume, when it's a CSS variable, that the value is already in em
+  // otherwise it can not work with current logic of the mixins
+
+  @if (type-of($pxval) != "number" and str-index($pxval, "var(")) {
+    @return $pxval;
+  }
+  @if (type-of($pxval) != "number" and string.slice($pxval, 1, 2) == "--") {
+    @return var($pxval);
+  }
+
+
+  @return math.div($pxval, $base) * 1em;
+}
+
+
+// Convert pixels to rems
+// eg. for a relational value of 12px write rem(12)
+// Assumes $rem-base is the font-size of <html>
+// if you change the $rem-base, you'll get different calculations of course
+// eg. base 10px => adding rem(10) => 10/10 = 1rem
+
+@function rem($pxval) {
+  $pxval: strip-unit($pxval);
+  $base: $rem-base;
+  $base: strip-unit($base);
+
+  // check if it's a CSS variable and make sure it is wrapped in var(), output that
+  // we assume, when it's a CSS variable, that the value is already in rem
+  // otherwise it can not work with current logic of the mixins
+
+  @if (type-of($pxval) != "number" and str-index($pxval, "var(")) {
+    @return $pxval;
+  }
+  @if (type-of($pxval) != "number" and string.slice($pxval, 1, 2) == "--") {
+    @return var($pxval);
+  }
+
+  @return math.div($pxval, $base) * 1rem;
+}
+
+
+/// Checks if a list contains a value(s).
+///
+/// @argument {list} $list
+///   The list to check against.
+///
+/// @argument {list} $values
+///   A single value or list of values to check for.
+///
+/// @return {boolean}
+///
+/// @access private
+
+@function _contains(
+  $list,
+  $values...
+) {
+  @each $value in $values {
+    @if type-of(index($list, $value)) != "number" {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+
+/// Builds the `src` list for an `@font-face` declaration.
+///
+/// @link https://goo.gl/Ru1bKP
+///
+/// @argument {string} $font-family
+///
+/// @argument {string} $file-path
+///
+/// @return {list}
+///
+/// @require {function} _contains
+///
+/// @access private
+
+@function _font-source-declaration(
+  $font-family,
+  $file-path,
+  $cache-string: "",
+  $legacy: false
+) {
+  $src: ();
+
+  $file-formats: ("woff2", "woff");
+
+  @if ($legacy != false) {
+    $file-formats: ("ttf", "woff2", "woff", "eot");
+  }
+
+  // Set string for IE without a ?
+  $ie-cache-string: $cache-string;
+
+  // Add ? for all other cases
+  @if $cache-string != "" {
+    $cache-string: "?" + $cache-string;
+  }
+
+  $formats-map: (
+    woff2: "#{$file-path}.woff2#{$cache-string}" format("woff2"),
+    woff: "#{$file-path}.woff#{$cache-string}" format("woff"),
+  );
+
+  @if ($legacy != false) {
+    $formats-map: (
+      eot: "#{$file-path}.eot?#{$ie-cache-string}#iefix" format("embedded-opentype"),
+      woff2: "#{$file-path}.woff2#{$cache-string}" format("woff2"),
+      woff: "#{$file-path}.woff#{$cache-string}" format("woff"),
+      ttf: "#{$file-path}.ttf#{$cache-string}" format("truetype"),
+    );
+  }
+
+  @each $key, $values in $formats-map {
+    @if _contains($file-formats, $key) {
+      $file-path: nth($values, 1);
+      $font-format: nth($values, 2);
+
+      $src: append($src, url($file-path) $font-format, comma);
+    }
+  }
+
+  @return $src;
+}
+
+// Gets an attribute from the sass map
+@function sprite-attr($icon, $attr) {
+  $newIcon: map-get($iconsGroup, $icon);
+  @if $newIcon == null {
+    @warn "Can't find an icon with the name #{$icon}";
+  }
+  @return map-get($newIcon, $attr);
+}
+
+@function icon-attr($icon) {
+  $attr: (
+    width: sprite-attr($icon, width),
+    height: sprite-attr($icon, height),
+    x: sprite-attr($icon, backgroundx),
+    y: sprite-attr($icon, backgroundy)
+  );
+
+  @return $attr;
+}

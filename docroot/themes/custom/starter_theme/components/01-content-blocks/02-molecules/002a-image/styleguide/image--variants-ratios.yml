@@ -1,0 +1,53 @@
+variants:
+  - ratio01:
+    label: 'CB Image - 3:2'
+  - ratio02:
+    label: 'CB Image - 1:4'
+    fields:
+      media:
+        reference:
+          field:
+            label_hidden: true
+            image_src: 'https://placeimg.com/400/100/arch'
+            image_alt: 'A 1:4 image'
+            image_sizes: '100vw'
+            image_loading: 'lazy'
+            image_srcset: 'https://placeimg.com/800/200/arch 480w, https://placeimg.com/1000/125/arch 768w, https://placeimg.com/1200/300/arch 940w'
+  - ratio03:
+    label: 'CB Image - 4:1'
+    fields:
+      media:
+        reference:
+          field:
+            label_hidden: true
+            image_src: 'https://placeimg.com/100/400/arch'
+            image_alt: 'A 4:1 image'
+            image_sizes: '100vw'
+            image_loading: 'lazy'
+            image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  - ratio04:
+    label: 'CB Image - 3:2'
+  - ratio05:
+    label: 'CB Image - 1:4'
+    fields:
+      media:
+        reference:
+          field:
+            label_hidden: true
+            image_src: 'https://placeimg.com/400/100/arch'
+            image_alt: 'A 1:4 image'
+            image_sizes: '100vw'
+            image_loading: 'lazy'
+            image_srcset: 'https://placeimg.com/800/200/arch 480w, https://placeimg.com/1000/125/arch 768w, https://placeimg.com/1200/300/arch 940w'
+  - ratio06:
+    label: 'CB Image - 4:1'
+    fields:
+      media:
+        reference:
+          field:
+            label_hidden: true
+            image_src: 'https://placeimg.com/100/400/arch'
+            image_alt: 'A 2:3 image'
+            image_sizes: '100vw'
+            image_loading: 'lazy'
+            image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'

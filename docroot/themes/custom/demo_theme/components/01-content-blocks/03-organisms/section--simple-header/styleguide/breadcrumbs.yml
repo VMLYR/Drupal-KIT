@@ -1,0 +1,16 @@
+label: 'Breadcrumbs'
+configuration:
+  label_display: false
+bem_block_modifiers:
+  - system-breadcrumb-block
+  - provider-system
+bem_block_extra:
+  - block-system
+  - layout-builder-block
+breadcrumbs:
+  breadcrumb:
+    - url: '#'
+      text: 'Home'
+    - url: '#'
+      text: 'Parent Page'
+    - text: 'Current Page'

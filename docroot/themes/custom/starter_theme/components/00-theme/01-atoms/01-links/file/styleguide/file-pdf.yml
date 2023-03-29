@@ -1,0 +1,5 @@
+link_content: A PDF link
+link_url: '#atoms-links-file--file-pdf'
+attributes:
+  class:
+    - 'file--pdf'

@@ -1,0 +1,10 @@
+label: 'Content'
+template: 'rs-three-col'
+minimal_styling: false
+modifier: null
+extra_classes:
+content:
+  first_main: true
+  center_main: true
+  second_main: true
+description: default

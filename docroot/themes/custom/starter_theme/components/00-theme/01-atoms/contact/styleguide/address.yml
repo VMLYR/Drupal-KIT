@@ -1,0 +1,13 @@
+field_name: field_office_address
+field_type: address
+bem_field_modifiers:
+  - 'label-hidden'
+organization: Dropsolid
+address_line1: Moutstraat 60
+postal_code: 9000
+locality:
+  code: Gent
+country:
+  name: Belgium
+# given_name:
+# family_name:

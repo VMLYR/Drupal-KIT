@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Theme override for a form element label.
+ *
+ * Available variables:
+ * - title: The label's text.
+ * - title_display: Elements title_display setting.
+ * - required: An indicator for whether the associated form element is required.
+ * - attributes: A list of HTML attributes for the label.
+ *
+ * @see template_preprocess_form_element_label()
+ */
+#}
+{%
+  set classes = [
+    'form__label',
+  ]
+%}
+
+{# all options for title_display: before, after, inline, invisible, none #}
+{% if title_display == 'after' %}
+  {% set classes = classes|merge(['option'])%}
+{% elseif title_display == 'invisible' %}
+  {% set classes = classes|merge(['visually-hidden'])%}
+{% endif %}
+
+{% if required %}
+  {% set classes = classes|merge(['js-form-required', 'form-required'])%}
+{% endif %}
+
+{# unfortunately, Twig js doesn't understand the translate filter,
+   so we can't use it for the Styleguide. Set a normal string for default values #}
+{% set titleRequired = 'Required field'|t %}
+{% set titleOptional = 'Optional'|t %}
+
+{% if title is not empty or required -%}
+  <label {{ bem(false, false, false, classes, attributes) }}>
+    {{ title }}
+    <abbr class="form__label__required" title="{{titleRequired}}"{% if required is null or required == false %} aria-hidden="true"{% endif %}>
+      *
+    </abbr>
+    <span class="form__label__not-required" title="{{titleOptional}}"{% if required is not null and required %} aria-hidden="true"{% endif %}>
+      ({{titleOptional}})
+    </span>
+  </label>
+{%- endif %}

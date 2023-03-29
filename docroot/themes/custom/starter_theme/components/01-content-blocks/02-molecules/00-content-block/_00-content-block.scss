@@ -1,0 +1,498 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Content Blocks
+// *
+// * General styling for content blocks (whitespaces, general fields, ...)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Generic styles & fields
+// =============================================================================
+
+.content-block {
+
+  // content padding (eg. in Testimonial)
+
+  --gap-cb-content-hor: #{rem(80)};
+  --gap-cb-content-vert: #{rem(40)};
+
+  // fields spacing
+
+  --gap-cb-title-vert: var(--gap-layout-vert-sm);
+  --gap-cb-subtitle-vert: 20; // var(--gap-layout-vert-sm);
+  --gap-cb-teaser-vert: var(--gap-layout-vert-sm);
+  --gap-cb-teaser-wide: var(--gap-layout-vert-medium); // space between group of title-subtitle-teaser & fields underneath
+
+  // buttons spacing
+  --gap-cb-buttons-vert: var(--gap-layout-vert);
+
+  --gap-cb-button-hor: #{rem(10)};
+  --gap-cb-button-vert: #{rem(10)};
+
+  // ---------------------------------------------------------------------------
+
+  position: relative;
+
+  // by default, we accept that blocks in a col will flow in a column
+  // space between the blocks mirrors == the minimal layout spacing option on layouts
+  margin-top: var(--gap-layout-vert-minimal);
+
+  // reset on first block (so it doesn't add to the layout bottom space)
+  &.first-child,
+  &:first-child {
+    margin-top: 0;
+  }
+
+  // -- use context-specific CSS vars so we can override styling when needed
+
+  color: hsl(var(--clr-cb));
+
+  a,
+  a:visited {
+    color: hsl(var(--clr-cb-text-link));
+  }
+
+  a:hover,
+  a:active {
+    color: hsl(var(--clr-cb-text-link-hover));
+  }
+
+  .field--name-field-cb-title,
+  .field--name-field-cb-subtitle {
+    h2,
+    h3,
+    h4 {
+      color: hsl(var(--clr-cb-heading));
+
+      a,
+      a:visited {
+        color: hsl(var(--clr-cb-text-link));
+      }
+
+      a:hover,
+      a:active {
+        color: hsl(var(--clr-cb-text-link-hover));
+      }
+    }
+  }
+
+  // CKE lists
+
+  .filter-type ul:not(.inline),
+  .text-long ul:not(.inline) {
+
+    & > li::before {
+      color: hsl(var(--clr-cb-spot-1));
+      background-color: hsl(var(--clr-cb-spot-1));
+    }
+
+  }
+
+  .filter-type ol:not(.inline),
+  .text-long ol:not(.inline) {
+
+    & > li::before {
+      color: hsl(var(--clr-cb-spot-1));
+    }
+
+  }
+
+  // CKE links
+  .text-long a:not(.button):not(.cke-button):not(.cke-button--secondary) {
+    a,
+    a:visited {
+      border-color: hsl(var(--clr-cb-text-link));
+      color: hsl(var(--clr-cb-text-link));
+    }
+
+    a:hover,
+    a:active {
+      border-color: hsl(var(--clr-cb-text-link-hover));
+      color: hsl(var(--clr-cb-text-link-hover));
+    }
+  }
+
+  hr {
+    border-top-color: hsl(var(--clr-cb));
+  }
+
+  // quotes
+
+  blockquote {
+    color: hsl(var(--clr-cb));
+  }
+
+  // breadcrumb
+
+  .breadcrumb {
+    color: hsl(var(--clr-cb));
+  }
+
+  .breadcrumb__item {
+    &::before {
+      color: hsl(var(--clr-cb));
+    }
+  }
+
+  .breadcrumb__element {
+    color: hsl(var(--clr-cb));
+  }
+
+  .breadcrumb__link {
+    a,
+    a:visited {
+      border-color: hsl(var(--clr-cb-text-link));
+      color: hsl(var(--clr-cb-text-link));
+    }
+
+    a:hover,
+    a:active {
+      border-color: hsl(var(--clr-cb-text-link-hover));
+      color: hsl(var(--clr-cb-text-link-hover));
+    }
+  }
+
+  // other types of links
+  .field--name-field-blog-tags,
+  .field--name-node-title,
+  .field--name-node-link,
+  .field--name-field-cb-link {
+    color: hsl(var(--clr-cb));
+
+    a {
+      &,
+      &:visited,
+      &:hover,
+      &:active {
+        color: hsl(var(--clr-cb-text-link));
+      }
+    }
+  }
+
+  // -- some resets for fields as lists
+  .field__items {
+    @include list-reset;
+  }
+
+  .field__item {
+    @include list-reset;
+  }
+
+  // alignment from a view mode (layout class on the block)
+  // can be overridden by CKE for individual parts of the text in a field that has CKEditor
+  // if a CKE text field is added
+  // Exception applies for centered layout
+  //
+
+  .field {
+    .text-align-centered {
+      text-align: center;
+    }
+
+    .text-align-right {
+      text-align: right;
+    }
+
+    .text-align-justify {
+      text-align: justify;
+    }
+  }
+
+  // -- Body text
+
+  .field--type-text-long,
+  .text-long {
+    > p,
+    > ul,
+    > ol {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @if ($structuralOnly == false) {
+
+    //
+
+  } @else {
+
+    .field img {
+      display: block;
+      margin: 0;
+    }
+
+  }
+
+  // needs better class name, but this is one that is inside b016
+  .info-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+}
+
+// ** recurring elements
+
+.field--name-field-cb-title {
+  h2,
+  h3 {
+    @include font-size($h2-size, $h2-line);
+    margin-bottom: var(--gap-cb-title-vert);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.field--name-field-cb-subtitle {
+  h3,
+  h4 {
+    @include font-size($h3-size, $h3-line);
+    margin-bottom: var(--gap-cb-subtitle-vert);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.field--name-field-cb-teaser {
+  margin-bottom: var(--gap-cb-teaser-vert);
+  font-weight: normal;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// space between field teaser or title or subtitle & fields after that
+// Note: by default this is the same space as the vertical space between blocks in 1 col layout,
+//       and the same space as 'minimal' vertical padding you can set on Layouts
+.field--name-field-cb-title + .field:not(.field--name-field-cb-subtitle):not(.field--name-field-cb-teaser):not(.field--name-field-cb-button),
+.field--name-field-cb-subtitle + .field:not(.field--name-field-cb-teaser):not(.field--name-field-cb-button),
+.field--name-field-cb-teaser + .field:not(.field--name-field-cb-button) {
+  margin-top: var(--gap-cb-teaser-wide);
+}
+
+// -- Buttons
+
+.field--name-field-cb-button {
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--gap-cb-buttons-vert) - var(--gap-cb-button-vert));
+  text-align: left;
+
+  .button {
+    margin: var(--gap-cb-button-vert) var(--gap-cb-button-hor) 0 0;
+
+    @if ($structuralOnly == false) {
+
+      @include button-primary;
+
+      // -- make the other buttons look different
+
+      &:nth-child(n+2) {
+        @include button-secondary;
+      }
+
+      // -- more Examples:
+      //
+      //// 2nd button
+      //&:nth-child(2) {
+      //  @include button-secondary();
+      //}
+      //
+      //// 3rd button and all buttons after that
+      //&:nth-child(n+3) a {
+      //
+      //}
+    }
+  }
+
+}
+
+
+// * Backgrounds set on blocks
+// =============================================================================
+
+// ** eg. if has background or background-color, there should be padding
+//        as we have on a testimonial block for example
+
+// ***************************************************************************
+// Add your paragraph specific backgrounds here for the block content
+// See example below.
+// ***************************************************************************
+
+// ** background for content of a block (eg. Testimonial)
+//    you can use these to override stuff based on background-color changes as well
+//    eg. different button colors.
+
+// -- Grey box on a colored layout => make sure the box stays grey
+
+.cb--boxed,
+.content-bg--grey,
+.layout--bg--spot-1 .cb--boxed,
+.layout--bg--spot-2 .cb--boxed,
+.layout--bg--spot-3 .cb--boxed,
+.layout--bg--black .cb--boxed,
+.layout--bg--spot-1 .content-bg--grey,
+.layout--bg--spot-2 .content-bg--grey,
+.layout--bg--spot-3 .content-bg--grey,
+.layout--bg--black .content-bg--grey {
+
+  @if ($structuralOnly == false) {
+
+    &.content-block {
+      // ** override colors set by the bg-color class
+
+      --clr-content-bg: var(--clr-gray-light-1);
+
+      --clr-cb: var(--clr-base);
+      --clr-cb-heading: var(--clr-heading);
+      --clr-cb-spot-1: var(--clr-spot-1);
+      --clr-cb-link: var(--clr-link);
+      --clr-cb-link-hover: var(--clr-link-hover);
+      --clr-cb-text-link: var(--clr-text-link);
+      --clr-cb-text-link-hover: var(--clr-text-link-hover);
+
+      color: hsl(var(--clr-cb));
+    }
+
+    & > .cb-content {
+      background-color: hsl(var(--clr-content-bg));
+
+      // if background of the content
+      // need spacing
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--gap-cb-content-hor);
+      padding-right: var(--gap-cb-content-hor);
+      padding-bottom: var(--gap-cb-content-vert);
+    }
+
+  }
+
+}
+
+// -- box with a specific bg color
+
+@if ($structuralOnly == false) {
+
+  // ** here we change the colors when main 3 colors are in use
+  //    change this as you see fit, or use as an example
+  //
+  // -- Grey box on a grey layout => change the box colors
+  // -- colored box on any layout => make sure the box colors stick
+
+  .layout--bg--grey .cb--boxed,
+  .layout--content-blocks .content-bg--spot-1,
+  .layout--content-blocks .content-bg--spot-2,
+  .layout--content-blocks .content-bg--spot-3,
+  .layout--content-blocks .content-bg--black {
+
+    &.content-block {
+      --clr-cb: var(--clr-white);
+      --clr-cb-heading: var(--clr-white);
+      --clr-cb-spot-1: var(--clr-white);
+      --clr-cb-link: var(--clr-white);
+      --clr-cb-link-hover: var(--clr-white);
+      --clr-cb-text-link: var(--clr-white);
+      --clr-cb-text-link-hover: var(--clr-white);
+    }
+
+    & > .cb-content {
+      //
+    }
+  }
+
+  // ** this is for individual colors
+
+  .layout--bg--grey .cb--boxed > .cb-content {
+    --clr-content-bg: var(--clr-spot-1);
+  }
+
+  .layout--content-blocks .content-bg--white > .cb-content {
+    --clr-content-bg: var(--clr-white);
+  }
+
+  .layout--content-blocks .content-bg--spot-1 > .cb-content {
+    --clr-content-bg: var(--clr-spot-1);
+  }
+
+  .layout--content-blocks .content-bg--spot-2 > .cb-content {
+    --clr-content-bg: var(--clr-spot-2);
+  }
+
+  // .layout--content-blocks .content-bg--spot-3 > .cb-content {
+  //   --clr-content-bg: var(--clr-spot-3);
+  // }
+
+  // .layout--content-blocks .content-bg--black > .cb-content {
+  //   --clr-content-bg: var(--clr-black);
+  // }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // * Spacing between blocks in a column
+  // =============================================================================
+
+  // by default, we accept that blocks in a col will flow in a column
+
+  .content-block {
+    //
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  // * Spacing between blocks in a column
+  // =============================================================================
+
+  // by default, we accept that blocks in a col will flow in a column
+
+  .content-block {
+    //
+  }
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // * Spacing between blocks in a column
+  // =============================================================================
+
+  // by default, we accept that blocks in a col will flow in a column
+
+  .content-block {
+
+    //
+
+  }
+
+}
+

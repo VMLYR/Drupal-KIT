@@ -1,0 +1,133 @@
+<html lang="en" dir="ltr" xmlns:article="http://ogp.me/ns/article#" xmlns:book="http://ogp.me/ns/book#" xmlns:product="http://ogp.me/ns/product#" xmlns:profile="http://ogp.me/ns/profile#" xmlns:video="http://ogp.me/ns/video#" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+
+    <script>
+        WebFontConfig = {
+                    google: {
+            families: ["Open+Sans:400,400i,700"]
+          },
+          custom: {
+            families: ["FontAwesome"],
+            urls: ["../../../../css/style.fonts.css"]
+          }
+        };
+        (function(d) {
+          var wf = d.createElement('script'), s = d.scripts[0];
+          wf.src = '../../../../' + '/js/libs/webfontloader.js';
+          wf.async = true;
+          s.parentNode.insertBefore(wf, s);
+        })(document);
+      </script>
+
+    <title>Flex grid examples</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--[if lte IE 8]>
+    <script src="/core/assets/vendor/html5shiv/html5shiv.min.js?v=3.7.3"></script>
+    <![endif]-->
+    <script src="../../../../../dropsolid-theme-base-8/js/libs/modernizr.custom.js?v=3.6.0"></script>
+
+    <style media="all">
+      @import url("../../../../css/style.css");
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <h1>Flex grid examples</h1>
+
+      <p>[yoursite.local/themes/custom/dropsolid-theme-flex-8/components/00-theme/00-base/05-grid/grid-flex-examples.html]</p>
+
+      <h2>Simple grid: Columns in CSS-grid with Flexbox fallback</h2>
+
+      <section class="example__section">
+        <h3>12 columns system</h3>
+
+        <div class="flex-grid">
+          <div class="my-flex-grid__col my-flex-grid__col--1 ">Col 1</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--2 ">Col 2</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--3 ">Col 3</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--4 ">Col 4</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--5 ">Col 5</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--6 ">Col 6</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--7 ">Col 7</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--8 ">Col 8</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--9 ">Col 9</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--10 ">Col 10</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--11 ">Col 11</div>
+
+          <div class="my-flex-grid__col my-flex-grid__col--12 ">Col 12</div>
+        </div>
+      </section>
+
+
+      <section class="example__section">
+        <h3>column that changes width per breakpoint</h3>
+
+        <div class="flex-grid">
+
+          <div class="my-flex-grid__col-resp">
+            <span class="visible-xs">12 cols</span>
+            <span class="visible-sm"> 6 cols</span>
+            <span class="visible-md"> 4 cols</span>
+            <span class="visible-lg">4 cols</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="example__section">
+        <h3>5 column system with gap of 20px</h3>
+
+        <div class="flex-grid--5">
+
+          <div class="my-flex-grid__col--5--1">
+            <span>1</span>
+          </div>
+
+          <div class="my-flex-grid__col--5--2">
+            <span>2</span>
+          </div>
+
+          <div class="my-flex-grid__col--5--3">
+            <span>3</span>
+          </div>
+
+          <div class="my-flex-grid__col--5--4">
+            <span>4</span>
+          </div>
+
+          <div class="my-flex-grid__col--5--5">
+            <span>5</span>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="example__section">
+        <h3>cells stretching over multiple rows</h3>
+
+        <div class="my-row-w-fallback">
+          <div class="my-cell-w-fallback my-cell-w-fallback--tall my-cell-w-fallback--01">Item 1</div>
+          <div class="my-cell-w-fallback my-cell-w-fallback--normal my-cell-w-fallback--02">Item 2</div>
+          <div class="my-cell-w-fallback my-cell-w-fallback--tall my-cell-w-fallback--03">Item 3</div>
+          <div class="my-cell-w-fallback my-cell-w-fallback--normal my-cell-w-fallback--04">Item 4</div>
+        </div>
+      </section>
+
+    </div>
+
+  </body>
+</html>

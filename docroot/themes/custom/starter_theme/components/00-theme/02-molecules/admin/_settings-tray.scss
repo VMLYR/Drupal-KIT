@@ -1,0 +1,39 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Settings Tray
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** elements in toolbar
+// =============================================================================
+
+//// too light to see a bar
+//body {
+//
+//  #toolbar-bar.js-settings-tray-edit-mode {
+//    background-color: #DDDDDD;
+//  }
+//
+//  // same as hover
+//  &.adminimal-admin-toolbar .toolbar .toolbar-bar .toolbar-tab > .toolbar-item.is-active,
+//  &.adminimal-admin-toolbar .toolbar .toolbar-bar .toolbar-tab > .toolbar-item:focus {
+//    background-color: #2369A6;
+//    background-image: linear-gradient(to bottom, #007BC6, #0071B8);
+//    color: hsl(var(--clr-white));
+//  }
+//
+//  &.adminimal-admin-toolbar .toolbar .toolbar-bar .toolbar-tab > .toolbar-item {
+//    background-image: none;
+//    background-color: #2D2D2D;
+//    color: hsl(var(--clr-white));
+//    text-decoration: none;
+//  }
+//
+//  &.adminimal-admin-toolbar .toolbar .toolbar-bar .toolbar-tab > .toolbar-item:hover {
+//    background-image: linear-gradient(to bottom, #007BC6, #0071B8);
+//    background-color: #2369A6;
+//    color: hsl(var(--clr-white));
+//  }
+//}

@@ -1,0 +1,193 @@
+# replace Modernizr from core because doesn't display when logged out
+modernizr-custom:
+  version: "3.6.0"
+  header: true
+  js:
+    js/libs/modernizr.custom.js: { minified: true }
+
+# Normalize library is included by classy but we replace it with our own in parent theme
+# Modernizr is included but only when logged in, so we add our own in parent theme
+# etc...
+global:
+#  version: 1 Remove because a bug keeps caching the css even on cache clear
+  css:
+    theme:
+      css/style.css: {}
+      css/style.print.css: {}
+  js:
+    js/dest/scripts.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+    - core/modernizr
+
+# Component libraries
+
+component_status:
+  js:
+    js/dest/status.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+component_sticky_header:
+  js:
+    js/dest/header--sticky.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+
+component_search:
+  js:
+    js/dest/search-block.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+component_menu:
+  js:
+    js/dest/menu--mobile.js: { attributes: { defer: true } }
+    js/dest/menu--dropdown.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+component_language:
+  js:
+    js/dest/menu--language.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+
+component_forms:
+  js:
+    js/dest/forms.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+component_tables:
+  js:
+    js/dest/tables.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+component_images:
+  js:
+    js/dest/images.js: { attributes: { defer: true } }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+# Admin styling overrides
+# this is attached when in admin area and quickedit is turned on
+admin_overrides:
+  css:
+    theme:
+      css/style.admin.css: {}
+
+# content blocks
+rocketship_content_blocks:
+  css:
+    theme:
+      css/style.content-blocks.css: {}
+      css/style.content-blocks.print.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+# EXAMPLES for adding Feature libs:
+#
+# feature_blog:
+#   css:
+#     theme:
+#       css/style.blog.css: {}
+#       css/style.blog.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_news:
+#   css:
+#     theme:
+#       css/style.news.css: {}
+#       css/style.news.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_office:
+#   css:
+#     theme:
+#       css/style.office.css: {}
+#       css/style.office.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_realisation:
+#   css:
+#     theme:
+#       css/style.realisation.css: {}
+#       css/style.realisation.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_service:
+#   css:
+#     theme:
+#       css/style.service.css: {}
+#       css/style.service.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_product:
+#   css:
+#     theme:
+#       css/style.product.css: {}
+#       css/style.product.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_job:
+#   css:
+#     theme:
+#       css/style.job.css: {}
+#       css/style.job.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once
+
+# feature_event:
+#   css:
+#     theme:
+#       css/style.event.css: {}
+#       css/style.event.print.css: {}
+#   dependencies:
+#     - core/jquery
+#     - core/drupal
+#     - core/once

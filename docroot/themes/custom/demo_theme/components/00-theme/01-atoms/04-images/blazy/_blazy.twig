@@ -1,0 +1,149 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a formatted blazy image/media field.
+ *
+ * The Blazy supports core image, responsive image and media entity.
+ * If iframe switcher is enabled, audio/video iframe will be hidden below image
+ * overlay, and only visible when toggled. Otherwise iframe only, and image is
+ * emptied.
+ *
+ * Available variables:
+ *   - captions: An optional renderable array of inline or lightbox captions.
+ *   - image: A collection of image data.
+ *   - attributes: An array of attributes applied to .media container.
+ *   - iframe: A renderable array of iframe with its attributes and SRC.
+ *   - settings: An array containing the given settings.
+ *   - url: An optional URL the image can be linked to, can be any of
+ *       audio/video, or entity URLs, when using Colorbox/Photobox, or Link to
+ *       content options.
+ *   - url_attributes: An array of URL attributes, lightbox or content links.
+ *   - noscript: The fallback image for non-js users.
+ *   - postscript: Any extra content to put into blazy goes here. Use keyed or
+ *       indexed array to not conflict with or nullify other providers, e.g.:
+ *       postscript.cta, or postscript.widget. Avoid postscript = cta.
+ *   - content: Various Media entities like Facebook, Instagram, local Video,
+ *       etc. Basically content is the replacement for (Responsive) image
+ *       and oEmbed video. This makes it possible to have a mix of Media
+ *       entities, image and videos on a Blazy Grid, Slick, GridStack, etc.
+ *       Regular Blazy features are still disabled by default at
+ *       \Drupal\blazy\BlazyDefault::richSettings() to avoid complication.
+ *       However you can override them accordingly as needed, such as lightbox
+ *       for local Video with/o a pre-configured poster image. The #settings
+ *       are provided under content variables for more work. Originally
+ *       content is a theme_field() output, trimmed down to bare minimum.
+ *
+ * @see template_preprocess_blazy()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set blazy_bem_block = blazy_bem_block|default('media') %}
+{% set blazy_bem_element = blazy_bem_element|default(false) %}
+
+{% if not blazy_bem_modifiers %}
+  {% set blazy_bem_modifiers = [] %}
+{% endif %}
+
+{% if not blazy_bem_extra %}
+  {% set blazy_bem_extra = [] %}
+{% endif %}
+
+{# add modifiers dynamically #}
+{% if content %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['rendered']) %}{% endif %}
+{% if settings.bundle %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['bundle--' ~ settings.bundle|clean_class]) %}{% endif %}
+{% if settings.namespace %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge([settings.namespace]) %}{% endif %}
+{% if settings.lazy and settings.use_loading %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['loading']) %}{% endif %}
+{% if settings.media_switch  %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['switch', 'switch--' ~ settings.media_switch|clean_class]) %}{% endif %}
+{% if settings.player %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['player']) %}{% endif %}
+{% if settings.ratio %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['ratio', 'ratio--' ~ settings.ratio]) %}{% endif %}
+{% if settings.responsive_image_style_id %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge(['responsive']) %}{% endif %}
+{% if settings.type %}{% set blazy_bem_modifiers = blazy_bem_modifiers|merge([settings.type]) %}{% endif %}
+
+{# add extra classes dynamically #}
+{% if settings.classes %}{% set blazy_bem_extra = blazy_bem_extra|merge([settings.classes|join(' ')|clean_class]) %}{% endif %}
+
+{% set player %}
+  {% block blazy_player %}
+    {% if settings.player %}
+      <span class="media__icon media__icon--close"></span>
+      <span class="media__icon media__icon--play" data-url="{{ settings.embed_url }}"></span>
+    {% else %}
+      {{ iframe }}
+    {% endif %}
+  {% endblock %}
+{% endset %}
+
+{% set media %}
+  {% block blazy_media %}
+    {# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+    <div {{ bem(blazy_bem_block, blazy_bem_element, blazy_bem_modifiers, blazy_bem_extra, attributes) }} >
+      {{ noscript }}
+      {% block blazy_image %}
+        {{ content }}
+        {{ image }}
+        {{ player }}
+        {{ settings.icon }}
+      {% endblock %}
+    </div>
+  {% endblock %}
+{% endset %}
+
+{% set blazy %}
+  {% block blazy_content %}
+    {% if media_attributes %}<div{{ media_attributes }}>{% endif %}
+      {% if url and not settings.player %}
+
+        {# Need to add descriptive text to an image wrapped in a link, for accessibility reasons #}
+        {% set read_more = '' %}
+        {% set target = '' %}
+
+        {% if settings.media_switch is defined and settings.media_switch == 'colorbox'%}
+          {% set read_more = 'See bigger image in a lightbox' %}
+        {% elseif settings.media_switch is defined and settings.media_switch == 'content' %}
+          {% if settings.title is defined %}
+            {% set read_more = 'Read more about' | t %}
+            {% set target = ' ' ~ settings.title %}
+          {% endif %}
+        {% endif %}
+
+        <a href="{{ url }}"{{ url_attributes }}{% if read_more is not empty %} aria-label="{{read_more}}{{target}}"{% endif %}>
+          {{ media }}
+        </a>
+
+        {# Allows fieldable captions with A tag, such as social share. #}
+        {% if captions and captions.lightbox is not empty %}
+          <div class="litebox-caption visually-hidden">
+            {{- captions.lightbox -}}
+          </div>
+        {% endif %}
+
+      {% else %}
+        {{- media -}}
+      {% endif %}
+    {% if media_attributes %}</div>{% endif %}
+  {% endblock %}
+
+  {% if captions and captions.inline is defined %}
+    {% block blazy_caption %}
+      <div{{ caption_attributes }}>
+        {% for caption in captions.inline %}
+          {% if caption.content %}
+            <{{ caption.tag }} {{ caption.attributes }}>{{ caption.content }}</{{ caption.tag }}>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endblock %}
+  {% endif %}
+
+  {{ postscript }}
+
+{% endset %}
+
+{% if wrapper_attributes %}
+  <div{{ wrapper_attributes }}>
+    {{ blazy }}
+  </div>
+{% else %}
+  {{ blazy }}
+{% endif %}

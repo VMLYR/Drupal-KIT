@@ -1,0 +1,14 @@
+button_cke: true
+paragraph_content: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum..
+buttons:
+  - button_content: 'Primary CKE button'
+    button_type: 'link'
+    button_url: '#atoms-buttons--buttons-as-field'
+    button_bem_block: 'cke-button'
+  - button_type: 'link'
+    button_content: 'Secondary CKE Button'
+    button_url: '#atoms-button--cke-button-secondary'
+    button_bem_block: 'cke-button'
+    button_bem_modifiers:
+      - 'secondary'
+

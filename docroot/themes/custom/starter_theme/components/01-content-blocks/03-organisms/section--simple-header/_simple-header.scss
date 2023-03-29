@@ -1,0 +1,194 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Section: simple header
+// *
+// * This is a 1-col section that contains the Node title + breadcrumb
+// * out of the box.
+// * Breadcrumb is optional (can be removed) and other elements added
+// * to build custom headers
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.cb-header {
+
+  // ** header content
+
+  .block--type-cb-title {
+    margin: 0;
+
+    h1 {
+      margin-bottom: 0;
+    }
+
+    // ** When using the subtitle,
+    //    put margins or paddings on the heading-tag, NOT on the field wrapper itself.
+    //    Because of a bug, the field wrapper itself gets rendered, even if there is no heading text filled in
+    //    so this is a way to prevent that div from taking up space
+    h2 {
+      margin-top: var(--gap-layout-vert);
+    }
+  }
+
+  // ** We have 2 subregions available if we need to add extra groupings
+  //    one already contains the breadcrumbs, the other is empty
+
+  .layout__subregion-01 {
+    margin-top: rem(10);
+  }
+
+  // ** In case we have a Title block with the extra fields filled in,
+  //    we can add some variant styling
+  .cb-title--extended {
+
+    text-align: center;
+
+    .field--name-field-cb-button {
+      justify-content: center;
+      text-align: center;
+    }
+
+    & + .layout__subregion-01 {
+      margin-top: var(--gap-layout-vert);
+    }
+  }
+
+}
+
+// ** Header variant: with bg image
+
+.cb-header.layout--bg-image {
+  padding: var(--gap-layout-vert-top) 0 var(--gap-layout-vert-bottom) 0;
+
+  .layout__region--1-col--content-blocks {
+
+    h1,
+    h2 {
+      margin-bottom: 0;
+    }
+
+    // -- the stuff that goes under the title
+
+    .field {
+      font-weight: $font-weight-bold;
+    }
+
+    .field--name-created {
+      margin-top: rem(15);
+    }
+
+    .breadcrumb {
+      justify-content: left;
+    }
+  }
+
+  .layout__subregion-02 {
+    position: relative;
+    z-index: 1; // over the bg image
+    margin-top: var(--gap-layout-vert-top);
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .cb-header {
+    //
+  }
+
+  // ** Header variant: with bg image
+
+  .cb-header.layout--bg-image {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+
+    // width: 100%; // IE bugfix
+    // height: rem(270); // no min-height because IE11 doesn't understand it
+
+    // .layout__subregion-01 {
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   justify-content: center;
+    //   text-align: center;
+
+    //   .field {
+    //     display: block;
+    //     margin-top: rem(15);
+    //     margin-left: rem(10);
+    //     margin-right: rem(10);
+    //   }
+
+    //   // title fills width
+    //   .block--field-blocknodeblogfield-node-title-replacement {
+    //     width: 100%;
+    //   }
+    // }
+
+    // .layout__subregion-02 {
+    //   position: absolute;
+    //   left: 0;
+    //   bottom: 0;
+    //   z-index: 5; // go over the header img and bg
+
+    //   // spread items evenly in 1 row
+    //   display: flex;
+    //   justify-content: space-between;
+
+    //   width: 100%;
+    //   padding: rem(--gap-layout-vert-top) 0 rem(--gap-layout-vert-bottom) 0;
+    // }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: desktop & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .cb-header {
+    //
+  }
+
+  // ** Header variant: with bg image
+
+  .cb-header.layout--bg-image {
+    // height: rem(370); // no min-height because IE11 doesn't understand it
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  // ** need smaller spacing on headers
+
+  .cb-header {
+    padding-top: var(--gap-layout-vert-top-small);
+    padding-bottom: var(--gap-layout-vert-bottom-small);
+  }
+
+  // ** Header variant: with bg image
+
+  .cb-header.layout--bg-image {
+    // height: rem(470); // no min-height because IE11 doesn't understand it
+  }
+
+}

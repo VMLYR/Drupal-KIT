@@ -1,0 +1,28 @@
+region: doormat
+menu: main
+label: 'Sitemap'
+configuration:
+  label_display: true
+heading_level: 4
+heading_id: block-sitemap-menu-xyz
+menu_block_bem_modifiers:
+  - system-menu-block
+  - region-doormat
+menu_block_bem_extra:
+  - 'block--menu'
+  - 'block-system'
+items:
+  - title: 'A first item'
+    url: '#'
+  - title: 'A second item'
+    url: '#'
+  - title: 'A third item, without link'
+    url: '#'
+    no_link: true
+  - title: 'A fourth item'
+    url: '#'
+  - title: Contact
+    url: '#'
+    link_attributes:
+        class:
+          - 'menu__item--button'

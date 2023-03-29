@@ -1,0 +1,69 @@
+/* stylelint-disable */
+@charset "UTF-8";
+
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Visual grid
+// *
+// * visualize a grid using an overlay
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+@mixin grid-column-gradient($values...) {
+  background-image: -webkit-linear-gradient(left, $values);
+  background-image: -moz-linear-gradient(left, $values);
+  background-image: -ms-linear-gradient(left, $values);
+  background-image: -o-linear-gradient(left, $values);
+  background-image: unquote("linear-gradient(to left, #{$values})");
+}
+
+$l: ();
+
+@for $i from 1 through $grid-columns {
+  $j: $i + 1;
+  $l: append($l, rgba($visual-grid-color, 1) calc((100% / $grid-columns * $i) + (var(--gap-hor) / 2)), comma);
+  $l: append($l, rgba($visual-grid-color, 1) calc((100% / $grid-columns * $j) - (var(--gap-hor) / 2)), comma);
+  $l: append($l, rgba($visual-grid-color, 0) calc((100% / $grid-columns * $j)  - (var(--gap-hor) / 2)), comma);
+  $l: append($l, rgba($visual-grid-color, 0) calc((100% / $grid-columns * $j)  + (var(--gap-hor) / 2)), comma);
+}
+
+@if $visual-grid == true or $visual-grid == yes {
+  body::before {
+    position: fixed !important;
+    right: 0 !important;
+    left: 0 !important;
+    display: inline-block !important;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+
+    background-image: linear-gradient(to right, rgba($visual-grid-color, 0) 0, rgba($visual-grid-color, 0) calc(var(--gap-hor) / 2), rgba($visual-grid-color, 1) calc(var(--gap-hor) / 2), rgba($visual-grid-color, 1) calc(50% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc(50% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc(50% + (var(--gap-hor) / 2)), rgba($visual-grid-color, 1) calc(50% + (var(--gap-hor) / 2)), rgba($visual-grid-color, 1) calc(100% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc(100% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) 100%);
+    content: "" !important;
+    opacity: $visual-grid-opacity;
+    pointer-events: none !important;
+
+    @if $visual-grid-index == back {
+      z-index: -1 !important;
+    }
+
+    @else if $visual-grid-index == front {
+      @include z-index(grid-overlay, important);
+    }
+
+    @include bp-sm {
+      max-width: none;
+      background-image: linear-gradient(to right, rgba($visual-grid-color, 0) 0, rgba($visual-grid-color, 0) calc(var(--gap-hor) / 2), rgba($visual-grid-color, 1) calc(var(--gap-hor) / 2), rgba($visual-grid-color, 1) calc((100% / $grid-columns) - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc((100% / $grid-columns) - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc((100% / $grid-columns) + (var(--gap-hor) / 2)), $l, rgba($visual-grid-color, 1) calc(-100% + (var(--gap-hor) / 2)), rgba($visual-grid-color, 1) calc(100% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) calc(100% - (var(--gap-hor) / 2)), rgba($visual-grid-color, 0) 100%);
+    }
+
+    @include bp-md {
+      max-width: var(--max-width) !important;
+    }
+
+    @include bp-lg {
+      max-width: var(--max-width) !important;
+    }
+  }
+}
+/* stylelint-enable */

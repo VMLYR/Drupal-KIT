@@ -1,0 +1,106 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Social media sharing inside meta info of a node
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.social-widgets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; // make title and icons go on same line
+}
+
+.social-widgets__group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social-widgets__title {
+  @include font-size($font-size-base, $line-height-sm);
+  margin: 0 rem(10) 0 0;
+}
+
+.social-link {
+  margin-left: rem(10);
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  a {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    width: rem(32);
+    height: rem(32);
+    font-size: 0;
+    text-align: center;
+
+    @include font-awesome((
+      icon: $fa-var-share-square,
+      size: 32,
+      type: "regular",
+      color: hsl(var(--clr-base))
+    ));
+
+    &:hover {
+      &::before {
+        color: hsl(var(--clr-link));
+      }
+    }
+  }
+
+  .facebook {
+    @include font-awesome((
+      icon: $fa-var-facebook-f,
+      size: 22,
+      type: "brand"
+    ));
+  }
+
+  .twitter {
+    @include font-awesome((
+      icon: $fa-var-twitter,
+      size: 26,
+      type: "brand"
+    ));
+  }
+
+  .pinterest {
+    @include font-awesome((
+      icon: $fa-var-pinterest,
+      size: 28,
+      type: "brand"
+    ));
+  }
+
+  .linkedin {
+    @include font-awesome((
+      icon: $fa-var-linkedin,
+      size: 28,
+      type: "brand"
+    ));
+  }
+
+  .print {
+    @include font-awesome((
+      icon: $fa-var-print,
+      size: 22,
+      type: "solid"
+    ));
+  }
+
+  .e_mail {
+    @include font-awesome((
+      icon: $fa-var-envelope,
+      size: 28,
+      type: "solid"
+    ));
+  }
+}
+

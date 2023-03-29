@@ -1,0 +1,111 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Typography Mixins: extra or extended
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Overview
+// =============================================================================
+
+// ** font-size (responsive scaling)
+
+
+// * Mixins
+// =============================================================================
+
+// ** Font-size mixin: easily set font-size and line-height of an element
+// -- NOTE: default font-size comes from the base vars (eg. 13), default line-height as well (eg. 18)
+// -- USAGE: @include font-size(15, 18) (don't use px!) -> sets font-size to 15 and line-height to a ratio of 18/15 = 1.1385
+// -- USAGE: @include font-size(15, 18, true) -> scales the font-size & line-height per breakpoint. The starting values you pass, are used on bp-lg only
+// -- USAGE: @include font-size(15, 18, true, (scale-xs: 1.3, scale-sm: 1.2, scale-md: 1.1, scale-lg: 1) ) -> pass scaling per breakpoint
+
+@mixin font-size($size: $font-size-base, $line: ($size * math.div($line-height-base, $font-size-base)), $responsive: false, $responsive-params: null) {
+  font-size: rem($size);
+  line-height: rem($line);
+
+  @if ($responsive == true) {
+
+    // some defaults, used in case no $settings were given
+    // or when either of the settings is omitted
+    $scale-xs-default: 1.3;
+    $scale-sm-default: 1.2;
+    $scale-md-default: 1.1;
+    $scale-lg-default: 1;
+
+    // set up the actual variables that will be used
+    $scale-xs: null;
+    $scale-sm: null;
+    $scale-md: null;
+    $scale-lg: null;
+
+    // map the variables to the settings if actual settings are passed
+    @if ($responsive-params != null) {
+      $scale-xs: map-get($responsive-params, scale-xs);
+      $scale-sm: map-get($responsive-params, scale-sm);
+      $scale-md: map-get($responsive-params, scale-md);
+      $scale-lg: map-get($responsive-params, scale-lg);
+    }
+
+    // if any are not filled in, fall back to defaults
+    @if ($scale-xs == null) {
+      $scale-xs: $scale-xs-default;
+    }
+    @if ($scale-sm == null) {
+      $scale-sm: $scale-sm-default;
+    }
+    @if ($scale-md == null) {
+      $scale-md: $scale-md-default;
+    }
+    @if ($scale-lg == null) {
+      $scale-lg: $scale-lg-default;
+    }
+
+    $newSizeXs: math.div($size, $scale-xs);
+    $newLineXs: math.div($line,  $scale-xs);
+    $newSizeSm: math.div($size, $scale-sm);
+    $newLineSm: math.div($line,  $scale-sm);
+    $newSizeMd: math.div($size, $scale-md);
+    $newLineMd: math.div($line,  $scale-md);
+    $newSizeLg: math.div($size, $scale-lg);
+    $newLineLg: math.div($line,  $scale-lg);
+
+    @include bp-xs-only {
+
+      @if ($newSizeXs >=  ($font-size-base - 1)) {
+        @include font-size($newSizeXs, $newLineXs);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-sm-only {
+
+      @if ($newSizeSm >=  ($font-size-base - 1)) {
+        @include font-size($newSizeSm, $newLineSm);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-md-only {
+
+      @if ( $newSizeMd >=  ($font-size-base - 1)) {
+        @include font-size($newSizeMd, $newLineMd);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+    @include bp-lg {
+
+      @if ($newLineLg >=  ($font-size-base - 1)) {
+        @include font-size($newSizeLg, $newLineLg);
+      } @else {
+        @include font-size($font-size-base, $line-height-base);
+      }
+    }
+
+  }
+}

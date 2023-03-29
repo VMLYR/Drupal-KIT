@@ -1,0 +1,253 @@
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+-
+  label_hidden: true
+  field_name: media_image
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-image'
+  field_attributes:
+    'data-blazy': ''
+  url: "#test-url"
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/400/arch'
+  image_alt: 'A 2:3 image'
+  image_sizes: '100vw'
+  image_srcset: 'https://placeimg.com/216/768/arch 480w, https://placeimg.com/627/940/arch 768w, https://placeimg.com/800/1200/arch 940w'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'
+  output_image_tag: true
+

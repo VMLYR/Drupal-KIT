@@ -1,0 +1,11 @@
+label: 'B003 Video'
+configuration:
+  label_display: false
+block_type: cb_video
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  media:

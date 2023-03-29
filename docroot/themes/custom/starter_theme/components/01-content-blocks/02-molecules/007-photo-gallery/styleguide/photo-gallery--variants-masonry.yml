@@ -1,0 +1,15 @@
+variants:
+  - masonry:
+    label: 'CB Photo Gallery - masonry'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - block--view-mode-photo-gallery-masonry
+  - masonry_more:
+    label: 'CB Photo Gallery - masonry + load more'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - block--view-mode-photo-gallery-masonry
+      - has--load-more
+      - has--visible-items

@@ -1,0 +1,63 @@
+
+.block__branding__image--header {
+  position: relative;
+  display: block;
+
+  img {
+    // height: rem(35);
+    // width: auto;
+    // max-width: none;
+    transition: all $duration $easing;
+  }
+}
+
+.block__branding__name--header,
+.block__branding__slogan--header {
+  @include hide;
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: sm
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block__branding__image--header {
+    padding-top: rem(9);
+
+    img {
+      // height: rem(42);
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: md
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-md {
+
+  .block__branding__image--header {
+
+    img {
+      // height: rem(50);
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: md
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .block__branding__image--header {
+
+    img {
+      // height: rem(58);
+    }
+  }
+}

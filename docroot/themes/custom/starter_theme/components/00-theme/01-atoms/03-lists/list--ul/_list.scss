@@ -1,0 +1,154 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Lists
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// * Styling basic tags
+// =============================================================================
+
+ul,
+ol,
+dl {
+  margin: 0 0 var(--gap-sm) 0;
+
+  & ul,
+  & ol {
+    margin-top: var(--gap-sm);
+    margin-bottom: var(--gap-sm);
+  }
+
+  li {
+    margin-bottom: rem(6);
+    list-style-position: inside;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+ul {
+  padding: 0 0 0 rem(20);
+}
+
+ol {
+  padding: 0 0 0 rem(24);
+}
+
+dl {
+
+  padding: 0 0 0 rem(24);
+
+  dt {
+    margin-top: var(--gap-sm);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  dt + dd {
+    margin-top: var(--gap-sm);
+  }
+
+  dd {
+    margin-bottom: rem(6);
+  }
+}
+
+nav {
+  ul,
+  ol {
+    @include list-reset();
+
+    & > li {
+      @include list-reset();
+    }
+  }
+}
+
+// * Lists styled by selector
+// =============================================================================
+
+ul.inline {
+  @include list-reset();
+  margin: rem(-5) rem(-5) var(--gap-md) rem(-5);
+
+  li {
+    display: inline-block;
+    margin: rem(5) rem(5) 0 rem(5);
+    padding: 0;
+  }
+}
+
+
+// * Styling lists in CKE
+// =============================================================================
+
+.filter-type,
+.text-long {
+
+  // a couple of ":not" selectors to exclude overlapping styles
+
+  ul:not(.inline) {
+    $list-settings: (
+      type: "unsorted",
+      bullet: "disk",
+      bullet-size: 6
+    );
+    @include list($list-settings);
+    overflow: hidden; // fix overlap bullets with floating elements
+
+    p {
+      margin-bottom: var(--gap-sm); // same as the li's
+    }
+  }
+
+  ol {
+    $list-settings: (
+      type: "sorted"
+    );
+    @include list($list-settings);
+    overflow: hidden; // fix overlap bullets with floating elements
+
+    p {
+      margin-bottom: var(--gap-sm); // same as the li's
+    }
+  }
+
+  ul:not(.inline),
+  ol {
+
+    &.is-horizontal {
+      margin-right: calc(var(--gap-hor) * -1);
+
+      li {
+        display: inline-block;
+        margin-right: var(--gap-hor);
+      }
+    }
+
+    // last list should not have space so it aligns with bottom of text div
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // reset margins
+    &.no-margin {
+      margin-bottom: 0;
+    }
+  }
+
+  // except for nested lists
+  li {
+    > ol,
+    > ul:not(.inline) {
+      &:last-child {
+        margin-bottom: var(--gap-sm);
+      }
+    }
+  }
+}

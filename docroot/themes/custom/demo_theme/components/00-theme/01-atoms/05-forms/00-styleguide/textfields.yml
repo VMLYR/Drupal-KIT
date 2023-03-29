@@ -1,0 +1,472 @@
+text_not_required:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Some textfield'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-some-textfield--description
+      content: Normal textfield, has value, not required.
+  label:
+    title: 'Some textfield'
+    attributes:
+      for: 'edit-some-textfield'
+  input:
+    attributes:
+      value: 'Some value'
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: some_textfield
+      type: text
+      id: 'edit-some-textfield'
+      'aria-describedby': 'edit-some-textfield--description'
+text_required:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Another textfield'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-another-textfield--description
+      content: Normal textfield, has value, is required.
+  label:
+    required: 'required'
+    title: 'Another textfield'
+    attributes:
+      for: 'edit-another-textfield'
+  input:
+    attributes:
+      required: 'required'
+      value: 'Some value'
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: another_textfield
+      type: text
+      id: 'edit-another-textfield'
+      'aria-describedby': 'edit-another-textfield--description'
+no_text_not_required:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Yet another textfield'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-yet-another-textfield--description
+      content: Normal textfield, no value, is required.
+  label:
+    title: 'Yet another textfield'
+    attributes:
+      for: 'edit-yet-another-textfield'
+  input:
+    attributes:
+      value: ''
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: yet_another_textfield
+      type: text
+      id: 'edit-yet-another-textfield'
+      'aria-describedby': 'edit-yet-another-textfield--description'
+no_text_required:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Fourth textfield'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-fourth-textfield--description
+      content: Normal textfield, no value, not required.
+  label:
+    required: 'required'
+    title: 'Fourth textfield'
+    attributes:
+      for: 'edit-fourth-textfield'
+  input:
+    attributes:
+      required: 'required'
+      value: ''
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: fourth_textfield
+      type: text
+      id: 'edit-fourth-textfield'
+      'aria-describedby': 'edit-fourth-textfield--description'
+prefix:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Textfield with prefix'
+    disabled: ''
+    errors:
+    prefix: '<small><span class="prefix-value">€</span></small>'
+    suffix: ''
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-textfield-with-prefix--description
+      content: Normal textfield, with prefix.
+  label:
+    title: 'This is a textfield with prefix'
+    attributes:
+      for: 'edit-textfield-with-prefix'
+  input:
+    attributes:
+      value: ''
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: textfield_with_prefix
+      type: text
+      id: 'edit-textfield-with-prefix'
+      'aria-describedby': 'edit-textfield-with-prefix--description'
+suffix:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textfield'
+    name: 'Textfield with suffix'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: '<small><span class="suffix-value">sposhagis_coprarechehu_wrimeregutri</span></small>'
+    description_display: 'after'
+    description:
+      attributes:
+        id: edit-textfield-with-suffix--description
+      content: Normal textfield, with suffix.
+  label:
+    title: 'This is a textfield with suffix'
+    attributes:
+      for: 'edit-textfield-with-suffix'
+  input:
+    attributes:
+      value: ''
+      class:
+        - 'form-text'
+      size: 60
+      'maxlength': 128
+      name: textfield_with_suffix
+      type: text
+      id: 'edit-textfield-with-suffix'
+      'aria-describedby': 'edit-textfield-with-suffix--description'
+date:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'date'
+    name: 'Date field'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-date-field--description
+    #   content: A date field.
+  label:
+    title: 'Date field'
+    attributes:
+      for: 'edit-date-field'
+  input:
+    attributes:
+      value: ''
+      class:
+        - 'form-date'
+      size: 60
+      'maxlength': 128
+      name: date_field
+      type: date
+      id: 'edit-date-field'
+      'data-drupal-date-format': 'Y-m-d'
+      # 'aria-describedby': 'edit-date-field--description'
+number:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'number'
+    name: 'Number field'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-number-field--description
+    #   content: A number field.
+  label:
+    title: 'Number field'
+    attributes:
+      for: 'edit-number-field'
+  input:
+    attributes:
+      value: 5
+      class:
+        - 'form-number'
+      size: 60
+      'maxlength': 128
+      name: number_field
+      type: number
+      id: 'edit-number-field'
+      # 'aria-describedby': 'edit-number-field--description'
+upload_file:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'file'
+    name: 'File upload'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-file-upload--description
+    #   content: Normal textfield, no value, is required.
+  label:
+    title: 'File upload'
+    attributes:
+      for: 'edit-file-upload'
+  upload:
+    attributes:
+      value: ''
+      class:
+        - 'form-file'
+      size: 60
+      'maxlength': 128
+      name: file_upload
+      type: file
+      id: 'edit-file-upload'
+      # 'aria-describedby': 'edit-file-upload--description'
+managed_file:
+  count: 1
+  managed: true
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'managed_file'
+    name: 'File upload'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-managed-file-upload--description
+    #   content: Normal textfield, no value, is required.
+  label:
+    title: 'Managed file upload'
+    attributes:
+      for: 'edit-managed-file-upload'
+  upload:
+    attributes:
+      value: ''
+      class:
+        - 'js-form-file'
+        - 'form-file'
+        - 'form__file'
+      size: 22
+      name: 'files[managed_file]'
+      type: file
+      id: 'edit-managed-file-upload'
+      # 'aria-describedby': 'edit-managed-file-upload--description'
+  input:
+    attributes:
+      value: 'Upload'
+      class:
+        - 'js-hide'
+        - 'js-form-submit'
+        - 'form-submit'
+      name: managed_file_upload_button
+      type: submit
+      id: 'edit-managed-file-upload-button--ImU455IaMVg'
+      'data-drupal-selector': 'edit-managed-file-upload-button'
+managed_file_loader:
+  count: 2
+  managed: true
+  loader: true
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'managed_file'
+    name: 'File upload'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-managed-file-upload--description
+    #   content: Normal textfield, no value, is required.
+  label:
+    title: 'Managed file upload'
+    attributes:
+      for: 'edit-managed-file-upload-02'
+  upload:
+    attributes:
+      value: ''
+      class:
+        - 'js-form-file'
+        - 'form-file'
+        - 'form__file'
+      size: 22
+      name: 'files[managed_file]'
+      type: file
+      id: 'edit-managed-file-upload-02'
+      # 'aria-describedby': 'edit-managed-file-upload--description'
+  input:
+    attributes:
+      value: 'Upload'
+      class:
+        - 'js-hide'
+        - 'js-form-submit'
+        - 'form-submit'
+      name: managed_file_upload_button_02
+      type: submit
+      id: 'edit-managed-file-upload-button--02'
+      'data-drupal-selector': 'edit-managed-file-upload-button-02'
+managed_file_shown:
+  count: 3
+  managed: true
+  file_shown: true
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'managed_file'
+    name: 'File upload'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    # description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-managed-file-upload--description
+    #   content: Normal textfield, no value, is required.
+  label:
+    title: 'Managed file upload'
+    attributes:
+      for: 'edit-managed-file-upload-03'
+  upload:
+    attributes:
+      value: ''
+      class:
+        - 'js-form-file'
+        - 'form-file'
+        - 'form__file'
+      size: 22
+      name: 'files[managed_file]'
+      type: file
+      id: 'edit-managed-file-upload-03'
+      # 'aria-describedby': 'edit-managed-file-upload--description'
+  input:
+    attributes:
+      value: 'Upload'
+      class:
+        - 'js-hide'
+        - 'js-form-submit'
+        - 'form-submit'
+      name: managed_file_upload_button_03
+      type: submit
+      id: 'edit-managed-file-upload-button--03'
+      'data-drupal-selector': 'edit-managed-file-upload-button-03'
+email:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'email'
+    name: 'Email address'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    # description:
+    #   attributes:
+    #   content: Eu mi bibendum neque egestas congue quisque.
+  label:
+    required: 'required'
+    title: 'Email address'
+    attributes:
+      for: 'edit-email-address'
+  input:
+    attributes:
+      required: 'required'
+      value: ''
+      class:
+        - 'form-email'
+      size: 60
+      'maxlength': 128
+      name: email_address
+      type: email
+      id: 'edit-email-address'
+      # 'aria-describedby': 'edit-textfield--description'
+textarea:
+  form_element:
+    label_display: 'before'
+    title_display: 'before'
+    type: 'textarea'
+    name: 'A message'
+    disabled: ''
+    errors:
+    prefix: ''
+    suffix: ''
+    description_display: 'after'
+    # description:
+    #   attributes:
+    #     id: edit-message--description
+    #   content: Normal message
+  label:
+    title: 'A message'
+    attributes:
+      for: 'edit-message'
+  textarea:
+    attributes:
+      value: ''
+      class:
+        - 'form-item__textfield'
+        - 'form-item__textarea'
+      rows: 8
+      cols: 48
+      name: 'message'
+      type: 'textarea'
+      id: 'edit-message'
+      required: "required"
+      # 'aria-describedby': 'edit-message--description'

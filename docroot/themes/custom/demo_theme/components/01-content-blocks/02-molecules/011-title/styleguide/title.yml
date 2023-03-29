@@ -1,0 +1,18 @@
+label: 'CB Title'
+configuration:
+  label_display: false
+block_type: cb_title
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  title:
+    heading_display: true
+    heading_level: 1
+    heading: CB Title
+    field_name: field_cb_node_title_replacement
+    field_type: contentblock_title_replacement
+    bem_field_modifiers:
+      - 'label-hidden'

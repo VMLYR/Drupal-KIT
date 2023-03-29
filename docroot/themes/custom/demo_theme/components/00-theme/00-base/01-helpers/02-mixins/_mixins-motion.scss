@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Motion/animation Mixins
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Overview
+// =============================================================================
+
+// ** transition
+
+// * Mixins
+// =============================================================================
+
+@mixin transition($transition-property: all, $transition-duration: $duration, $transition-timing-function: $easing) {
+  transition: $transition-property $transition-duration $transition-timing-function;
+}

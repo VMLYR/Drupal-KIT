@@ -1,0 +1,49 @@
+primary: 'Primary tabs'
+menu_block_bem_block: false
+menu_block_bem_element: 'nav'
+menu_block_bem_modifiers:
+  - 'local-tasks-block'
+  - 'provider-core'
+  - 'region-tabs'
+  - ''
+menu_block_bem_extra:
+  - 'tabs'
+  - 'block--menu'
+  - 'block-core'
+# attributes:
+has_link_title: false
+label: "Tabs"
+configuration:
+  label_display: false
+items:
+  - bem_link_block: 'tabs'
+    bem_link_element: 'link'
+    bem_link_extra:
+      - is-active
+    bem_item_modifiers:
+      - 'local-tasks'
+    link_content: 'View'
+    link_url: '#'
+  - bem_link_block: 'tabs'
+    bem_link_element: 'link'
+    bem_item_modifiers:
+      - 'local-tasks'
+    link_content: 'Edit'
+    link_url: '#'
+    link_attributes:
+      class:
+        - 'is-active'
+  - bem_link_block: 'tabs'
+    bem_link_element: 'link'
+    bem_item_modifiers:
+      - 'local-tasks'
+    link_content: 'Delete'
+    link_url: '#'
+    no_link: true
+  - bem_link_block: 'tabs'
+    bem_link_element: 'link'
+    bem_item_modifiers:
+      - 'local-tasks'
+    link_content: 'Layout'
+    link_url: '#'
+

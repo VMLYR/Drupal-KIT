@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - demo_theme
+id: demo_theme_search
+theme: demo_theme
+region: header_top
+weight: -1
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: visible
+visibility: {  }

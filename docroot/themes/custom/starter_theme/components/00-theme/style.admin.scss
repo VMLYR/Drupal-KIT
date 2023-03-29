@@ -1,0 +1,64 @@
+//////////////////////////////////////////////////////////////////////////////
+//   *
+//   * Styling-overrides for elements of the admin theme
+//   *
+//////////////////////////////////////////////////////////////////////////////
+
+
+@import "00-base/_libs.scss";
+@import "00-base/00-config/**/*.scss";
+@import "00-base/0*-colors/*.scss"; // Don't include the styleguide sub-folder
+@import "00-base/01-helpers/**/*.scss";
+@import "00-base/02-fonts/**/*.scss";
+
+
+// * Eg. Overrides for background-color palette
+// =============================================================================
+
+/*
+.layout-field-bg-color {
+
+  .white {
+    background: hsl(var(--clr-off-white));
+    color: hsl(var(--clr-black));
+    a {
+      color: hsl(var(--clr-black));
+    }
+    a:hover,
+    a:focus,
+    a:active,
+    a.is-active {
+      color: hsl(var(--clr-black));
+    }
+  }
+
+  .grey {
+    background: hsl(var(--clr-gray-light-1));
+    color: hsl(var(--clr-black));
+    a {
+      color: hsl(var(--clr-black));
+    }
+    a:hover,
+    a:focus,
+    a:active,
+    a.is-active {
+      color: hsl(var(--clr-black));
+    }
+  }
+
+  .spot_01 {
+    background: hsl(var(--clr-spot-1));
+    color: hsl(var(--clr-white));
+    a {
+      color: hsl(var(--clr-white));
+    }
+    a:hover,
+    a:focus,
+    a:active,
+    a.is-active {
+      color: hsl(var(--clr-white));
+    }
+  }
+
+}
+*/

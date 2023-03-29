@@ -1,0 +1,35 @@
+checkboxes:
+  - styleguide: true
+    title: 'Option 1'
+    checked: 'checked'
+    required: false
+    title_display: 'after'
+    label_attributes:
+      for: 'checkbox0'
+  - styleguide: true
+    title: 'Option 2'
+    required: false
+    disabled: true
+    title_display: 'after'
+    label_attributes:
+      for: 'checkbox1'
+  - styleguide: true
+    title: 'Option 3'
+    checked: 'checked'
+    required: false
+    disabled: true
+    title_display: 'after'
+    label_attributes:
+      for: 'checkbox2'
+  - styleguide: true
+    title: 'Option 4'
+    required: false
+    title_display: 'after'
+    label_attributes:
+      for: 'checkbox3'
+  - styleguide: true
+    title: 'Option 5'
+    required: false
+    title_display: 'after'
+    label_attributes:
+      for: 'checkbox4'

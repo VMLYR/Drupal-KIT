@@ -1,0 +1,69 @@
+variants:
+  - normal:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 01
+      text:
+        content: |
+          <p>Nulla at volutpat</p>
+  - 02:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 02
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Nulla at volutpat diam ut venenatis tellus. Vitae congue eu consequat ac felis donec et odio pellentesque.</p>
+  - 03:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 03
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Lorem ipsum dolor sit amet, <a href=\"#\" title=\"test link\">consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+  - 04:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 04
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Aliquam bibendum ultricies lobortis. Nunc sit amet sagittis turpis, nec lacinia augue.</p>
+  - 05:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 05
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Aliquam bibendum ultricies lobortis. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna.</p>
+  - 06:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 06
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Aliquam bibendum ultricies lobortis. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+  - 07:
+    label: CB Text normal
+    fields:
+      title:
+        heading: CB Text 07
+      teaser:
+        content: 'Quisque aliquet ullamcorper eros. '
+      text:
+        content: |
+          <p>Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>

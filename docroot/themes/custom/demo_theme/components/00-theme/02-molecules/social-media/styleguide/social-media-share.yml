@@ -1,0 +1,36 @@
+label: 'Social'
+configuration:
+  label_display: false
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+ - block-layout_builder
+groups:
+  -
+    name: facebook
+    link_attributes:
+      target: '_blank'
+    bem_link_element: facebook
+    link_content: Facebook
+    link_url: '#'
+  -
+    name: twitter
+    link_attributes:
+      target: '_blank'
+    bem_link_element: twitter
+    link_content: Twitter
+    link_url: '#'
+  -
+    name: print
+    link_attributes:
+      target: '_blank'
+    bem_link_element: print
+    link_content: Print
+    link_url: 'javascript:window.print()'
+  -
+    name: e_mail
+    link_attributes:
+      target: '_blank'
+    bem_link_element: e_mail
+    link_content: "E-mail"
+    link_url: 'mailto:?&subject=Nondum autem explanatum satis, erat, quid maxime natura vellet.&body=http://mysite.com'

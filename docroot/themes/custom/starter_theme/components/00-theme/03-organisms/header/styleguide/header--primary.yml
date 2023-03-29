@@ -1,0 +1,6 @@
+page:
+  header: true
+# import data in the stories file
+# here you can add overrides for the nested data
+# nav:
+# branding:

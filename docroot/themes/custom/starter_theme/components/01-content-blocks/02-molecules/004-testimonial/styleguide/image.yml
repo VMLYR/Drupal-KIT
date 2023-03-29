@@ -1,0 +1,24 @@
+image:
+  label_hidden: true
+  field_name: field_cb_media
+  field_type: entity_reference
+  bem_field_extra:
+    - 'blazy'
+    - 'blazy--field'
+    - 'blazy--field-media-info-image'
+  field_attributes:
+    'data-blazy': ''
+  settings:
+    lazy: true
+    use_loading: true
+  blazy_bem_modifiers:
+    - 'bundle--image'
+    - blazy
+    - image
+    - loading
+  image_src: 'https://placeimg.com/100/100/people'
+  image_alt: 'A 16 by 9 image'
+  image_bem_extra:
+    - 'media__image'
+    - 'media__element'
+    - 'b-lazy'

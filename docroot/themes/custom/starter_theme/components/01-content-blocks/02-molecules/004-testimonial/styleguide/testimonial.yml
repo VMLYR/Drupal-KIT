@@ -1,0 +1,44 @@
+label: 'CB Text'
+configuration:
+  label_display: false
+block_type: cb_testimonial
+bem_block_modifiers:
+  - provider-layout-builder
+bem_block_extra:
+  - content-block
+  - block-layout_builder
+fields:
+  image:
+  text:
+    label_hidden: true
+    field_name: field_cb_text
+    field_type: text_long
+    bem_field_modifiers:
+      - 'label-hidden'
+    bem_field_extra:
+      - 'text-long'
+    content: |
+      <p>Lorem ipsum dolor sit amet, <a href=\"#\" title=\"test link\">consectetur adipiscing</a> elit. Aliquam bibendum ultricies lobortis. Quisque aliquet ullamcorper eros. Nunc sit amet sagittis turpis, nec lacinia augue. Aliquam id nibh magna. Donec neque libero, condimentum vel purus a, faucibus egestas magna.</p>
+      <p>Nulla at volutpat diam ut venenatis tellus. Vitae congue eu consequat ac felis donec et odio pellentesque.</p>
+  name:
+    label_hidden: true
+    field_name: field_cb_name
+    field_type: string
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: <p>Bart Bartsoen</p>
+  extra_rule:
+    label_hidden: true
+    field_name: field_cb_extra_rule
+    field_type: string
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: CEO
+  link:
+    label_hidden: true
+    field_name: field_cb_link
+    field_type: link
+    bem_field_modifiers:
+      - 'label-hidden'
+    content: <a href="/homepage" target="_blank">website</a>
+

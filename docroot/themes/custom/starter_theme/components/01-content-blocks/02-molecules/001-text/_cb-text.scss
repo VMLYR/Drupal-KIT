@@ -1,0 +1,75 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * BOO1 Text
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+@use "sass:math";
+
+// *
+// =============================================================================
+
+.block--type-cb-text {
+  //
+}
+
+// ** View modes (layout): defaults to "left"
+
+.cb-text--view-mode--centered {
+
+  text-align: center;
+
+  // center content (combo with max-width)
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // lists centering
+  //
+  // IF you only want the list-items to be centered instead of the whole list,
+  // move the 3 lines into the "ul, ol" declaration
+  .text-long {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul,
+    ol {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .field--buttons {
+    justify-content: center;
+    text-align: center;
+
+    .button {
+      margin-left: rem(5);
+      margin-right: rem(5);
+    }
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: large
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-lg {
+
+  .layout--1-col--content-blocks .block--type-cb-text {
+
+    .field-cb-title,
+    .field-cb-subtitle,
+    .field-cb-teaser,
+    .field-cb-text,
+    .field--type-string-long,
+    .field--type-text-long,
+    .field--type-string {
+      max-width: (math.div(100%, 12) * 9);
+    }
+  }
+}

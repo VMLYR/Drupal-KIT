@@ -1,0 +1,102 @@
+$color: #39596a;
+
+.storybook__divider--hor {
+  display:block;
+  margin: 20px 0;
+  height: 1px;
+  border: 0 none;
+  background: #ccc;
+}
+
+.storybook__content-section {
+  position: relative;
+  display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  min-height: 500px;
+  color: $color;
+  overflow: hidden;
+
+  // bg stretched but no color yet
+  &::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    content: '';
+  }
+
+  .text {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, .5);
+    border: 2px dashed lighten($color, 50%);
+    border-radius: 10px;
+  }
+
+  // set color to strechted bg
+  &.has--bg {
+    &::before {
+      background-color: lighten($color, 50%);
+    }
+
+    .text {
+      background-color: rgba(white, .5);
+    }
+  }
+}
+
+.storybook__content__label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 999;
+  transform: translateX(-50%) translateY(-50%);
+  padding: rem(10);
+  border-radius: rem(5);
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $color;
+  background-color: lighten($color, 50%);
+  border: 2px dotted lighten($color, 20%);
+  pointer-events: none;
+}
+
+.storybook__content__label--layout {
+  position: absolute;
+  top: auto;
+  right: 50%;
+  transform: translateX(-50%);
+  padding: rem(5);
+  width: rem(200);
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.storybook__content__label--section {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  transform: none;
+  padding: rem(5);
+  font-size: 18px;
+}
+
+.storybook__content-section--page {
+  min-height: 900px;
+}

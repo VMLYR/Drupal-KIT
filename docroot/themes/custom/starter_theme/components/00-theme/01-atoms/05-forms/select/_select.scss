@@ -1,0 +1,133 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Forms: select (dropdown)
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Default select using a wrapper
+// =============================================================================
+
+// -- Style select arrow using a wrapper
+// -- http://lea.verou.me/2011/03/custom-select-drop-downs-with-css3/
+
+select {
+  appearance: none;
+  display: block;
+  height: rem(44);
+  width: 100%;
+  padding: 0 rem(40) 0 rem(10);
+  border: 1px solid hsl(var(--clr-form-border));
+  border-radius: 0;
+  line-height: rem(42); // height - borders
+  color: hsl(var(--clr-form));
+  background-color: hsl(var(--clr-white));
+  background-image: linear-gradient(45deg, transparent 50%, hsl(var(--clr-form)) 50%), linear-gradient(135deg, hsl(var(--clr-form)) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 18px, calc(100% - 15px) 18px, calc(100% - 2.5em) 8px;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+
+  // Remove fugly arrow in IE
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus,
+  &:focus:hover {
+    border-color: hsl(var(--clr-form-active-border));
+    color: hsl(var(--clr-form-active));
+    outline: 0;
+  }
+
+  &:disabled,
+  &[disabled] {
+    border-color: hsl(var(--clr-form-disabled-border));
+    border-style: dashed;
+    color: hsl(var(--clr-form-disabled));
+    background: hsl(var(--clr-form-disabled-bg));
+    opacity: .5;
+  }
+}
+
+.form__dropdown {
+  position: relative;
+
+  // reset arrow and stuff
+
+  select {
+    background-image: none;
+  }
+
+  // custom arrow
+
+  $select-arrow: (icon: $fa-var-chevron-down, color: hsl(var(--clr-base)), size: 14, element: "after");
+  @include font-awesome($select-arrow);
+
+  &::after {
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+// * Styling using Select2 plugin (for multiselects and normal dropdowns)
+// =============================================================================
+
+/* stylelint-disable */
+
+// -- disable stylelint because need more nesting to override the default styling
+
+form {
+
+  .select2-container--default {
+
+    .select2-selection--multiple {
+
+      min-height: 0;
+
+      // take styling from our input fields
+      padding: rem(23) rem(20) rem(6) rem(20);
+      border: 1px solid hsl(var(--clr-form-border));
+      border-radius: 0;
+      line-height: 0; // reset, we will set it on the li's
+
+      .select2-selection__rendered {
+        // compensate for the li's margins
+        margin-left: rem(-5);
+
+        li {
+          margin-bottom: 0;
+
+          &.select2-selection__choice {
+            line-height: 1.5; // height of the content, changing this influences the height of the field
+          }
+        }
+      }
+
+      // reset the default input styles because not visible
+      // they will go on the 'multiple' wrapper
+      input[type="search"] {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 none !important;
+      }
+    }
+
+    &.select2-container--focus {
+      .select2-selection--multiple {
+        border-color: hsl(var(--clr-form-active-border));
+      }
+    }
+
+    &.select2-container--disabled {
+      .select2-selection--multiple {
+        border-color: hsl(var(--clr-form-disabled-border));
+      }
+    }
+
+  }
+}
+
+/* stylelint-enable */

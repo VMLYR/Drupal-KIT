@@ -1,0 +1,16 @@
+
+// * Devel fix
+// =============================================================================
+
+// might be redundant at this point
+
+div.krumo-root {
+  color: hsl(var(--clr-black));
+
+  * {
+    float: none;
+  }
+  a.krumo-name {
+    color: #404000;
+  }
+}

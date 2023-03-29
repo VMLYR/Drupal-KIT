@@ -1,0 +1,14 @@
+variants:
+  - normal:
+    label: 'CB Image - normal'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+  - stretched:
+    label: 'CB Image - stretched'
+    bem_block_extra:
+      - content-block
+      - block-layout_builder
+      - has-layout-mode--stretched
+      - cb--layout-mode--stretched
+      - cb-image--layout-mode--stretched

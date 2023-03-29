@@ -1,0 +1,10 @@
+link_content: Link text
+link_url: '#atoms-links-link--link-field'
+field_name: field_link_test
+field_type: link
+#label:,
+#label_hidden:
+#bem_field_modifiers:
+#bem_field_extra:
+#link_attributes
+#no_link

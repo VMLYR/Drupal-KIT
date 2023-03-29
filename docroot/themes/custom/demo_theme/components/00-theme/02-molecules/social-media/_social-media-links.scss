@@ -1,0 +1,112 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Social media profiles links
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// *
+// =============================================================================
+
+.block-socialmedialinks,
+.block--type-social-media {
+
+  &.block--region-doormat {
+
+    .field {
+      position: relative;
+      margin-bottom: rem(8);
+      padding-left: rem(23);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 3px;
+        display: block;
+      }
+
+      a {
+        display: block;
+
+        @include link-underline((color: var(--clr-spot-1), inverse: true));
+
+        &:hover {
+          &::before {
+            color: hsl(var(--clr-spot-2));
+          }
+        }
+      }
+    }
+
+    .field--name-field-social-link-facebook {
+      @include font-awesome((
+        icon: $fa-var-facebook-f,
+        size: 14,
+        type: "brand",
+        color: hsl(var(--clr-spot-2))
+      ));
+    }
+
+    .field--name-field-social-link-twitter {
+      @include font-awesome((
+        icon: $fa-var-twitter,
+        size: 14,
+        type: "brand",
+        color: hsl(var(--clr-spot-2))
+      ));
+    }
+
+    .field--name-field-social-link-pinterest {
+      @include font-awesome((
+        icon: $fa-var-pinterest,
+        size: 14,
+        type: "brand",
+        color: hsl(var(--clr-spot-2))
+      ));
+    }
+
+    .field--name-field-social-link-linkedin {
+      @include font-awesome((
+        icon: $fa-var-linkedin,
+        size: 14,
+        type: "brand",
+        color: hsl(var(--clr-spot-2))
+      ));
+    }
+
+    .field--name-field-social-link-instagram {
+      @include font-awesome((
+        icon: $fa-var-instagram,
+        size: 14,
+        type: "brand",
+        color: hsl(var(--clr-spot-2))
+      ));
+    }
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-only {
+
+  .block-socialmedialinks,
+  .block--type-social-media {
+
+    &.block--region-doormat {
+
+      // ** center text w icons next to it
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+{% set value = attributes.value %}
+
+{% set required = required|default(attributes.required) %}
+
+{% if attributes.type == 'submit' %}
+  {% set button_bem_block = button_bem_block|default(false) %}
+  {% set button_bem_element = button_bem_element|default('button') %}
+  {% set button_bem_modifiers = button_bem_modifiers|default([]) %}
+  {% set button_bem_extra = button_bem_extra|default([]) %}
+
+  {% set additional_attributes = {
+    "aria-label": 'button',
+  } %}
+
+  {% if attributes.class != null %}
+    {% set button_bem_extra = button_bem_extra|merge(attributes.class) %}
+  {% endif %}
+
+  <button
+    {{ bem(button_bem_block, button_bem_element, button_bem_modifiers, button_bem_extra) }}
+    {{ add_attributes(attributes|merge(additional_attributes)) }}
+  >
+    {#
+      value is taken from attributes and Drupal applies Html::escape to all form element attributes
+      temporary solution: decode specific entities back
+    #}
+    {{ value|replace({'&#039;': "'", '&lt;': '<', '&gt;': '>'}) }}
+  </button>
+{% else %}
+  {%
+    set classes = [
+      'form__input--' ~ attributes.type,
+    ]
+  %}
+
+  {% if required and attributes.type != image %}
+    {% set classes = classes|merge(['required', 'form__input--required'])%}
+  {% endif %}
+
+  <input {{ bem(false, false, false, classes, attributes) }}
+    {% if attributes.type == 'image' %} alt="Submit"{% endif %}
+  />{{ children }}
+{% endif %}
+

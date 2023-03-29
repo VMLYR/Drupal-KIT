@@ -1,0 +1,139 @@
+///////////////////////////////////////////////////////////////////////
+// *
+// * User
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// * Better login forms
+// =============================================================================
+
+.user-box {
+  //
+}
+
+.user-box__middle {
+  position: relative;
+  padding: rem(35) rem(20) rem(20) rem(20);
+  margin: rem(24) auto 0 auto; // keep space on top for lock icon
+  max-width: rem(350);
+  border: 1px solid hsl(var(--clr-border));
+  background-color: hsl(var(--clr-off-white));
+
+  @include font-awesome((icon: $fa-var-lock, color: hsl(var(--clr-base)), size: 18, element: "after", type: "light"));
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 50%;
+    display: block;
+    transform: translateX(-50%);
+  }
+
+  &::before {
+    content: "";
+    top: rem(-24);
+    width: rem(48);
+    height: rem(48);
+    border: 1px solid hsl(var(--clr-border));
+    border-radius: 50%;
+    background-color: hsl(var(--clr-white));
+  }
+
+  &::after {
+    top: rem(-8);
+  }
+
+  h1 {
+    @include h2;
+  }
+
+
+  .form__element {
+    margin: 0 0 rem(15) 0;
+  }
+
+  // -- buttons
+
+  input[type="submit"],
+  button[type="submit"] {
+    width: 100%;
+  }
+
+  // -- secondary header
+
+  .paragraph--type-simple-header::before {
+    display: none !important;
+  }
+}
+
+.user-box__links {
+  @include list-reset;
+  margin-top: var(--gap-md);
+
+  li {
+    @include font-size(12, 14);
+    @include font-awesome((icon: $fa-var-chevron-right, color: hsl(var(--clr-gray)), margin: 0 5px 0 0, size: 9));
+  }
+}
+
+.user-box__bottom {
+  padding: rem(20);
+  text-align: center;
+}
+
+
+// ** registration page
+
+.user-box__middle--register {
+  padding: rem(35) rem(20) rem(20) rem(20);
+
+  max-width: var(--max-width-sm);
+
+  input[type="submit"],
+  button[type="submit"] {
+
+    @include bp-sm {
+      width: auto;
+    }
+  }
+}
+
+
+// * User create / edit page
+// =============================================================================
+
+.password-strength__meter {
+  margin-top: rem(10);
+  background: hsl(var(--clr-off-white));
+}
+.password-strength__indicator {
+  background-color: hsl(var(--clr-off-white));
+  transition: width $duration $easing;
+
+  &.is-weak {
+    background-color: hsl(var(--clr-error));
+  }
+  &.is-fair {
+    background-color: hsl(var(--clr-warning));
+  }
+  &.is-good {
+    background-color: hsl(var(--clr-neutral));
+  }
+  &.is-strong {
+    background-color: hsl(var(--clr-status));
+  }
+}
+
+.confirm-parent {
+
+  .password-confirm {
+    .ok {
+      color: hsl(var(--clr-status));
+    }
+    .error {
+      color: hsl(var(--clr-error));
+    }
+  }
+}
+

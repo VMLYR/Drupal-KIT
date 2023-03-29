@@ -1,0 +1,25 @@
+
+
+.block--type-main-visual {
+
+  img {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    max-width: none;
+    transform: translateX(-50vw);
+  }
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet & wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  .block--type-main-visual {
+    //
+  }
+
+}

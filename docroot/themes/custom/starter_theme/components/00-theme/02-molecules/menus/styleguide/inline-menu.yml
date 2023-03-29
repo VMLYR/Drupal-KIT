@@ -1,0 +1,14 @@
+menu: 'inline'
+label: 'Inline menu'
+configuration:
+  label_display: false
+items:
+  - title: 'A first item'
+    url: '#'
+  - title: 'A second item'
+    url: '#'
+  - title: 'A third item, without link'
+    url: '#'
+    no_link: true
+  - title: 'A fourth item'
+    url: '#'

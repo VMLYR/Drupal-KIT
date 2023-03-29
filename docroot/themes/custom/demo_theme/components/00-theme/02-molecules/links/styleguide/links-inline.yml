@@ -1,0 +1,16 @@
+heading: false
+attributes: ' class="inline"'
+links:
+  - attributes: ' class="thicafracupo"'
+    link: '<a href="#">thicafracupo</a>'
+  - attributes: ' class="hoches"'
+    text_attributes: ' class="fubar"'
+    text: 'An item with an empty href'
+  - attributes: ' class="sibriu"'
+    text: 'An item with an empty href and no text attributes'
+  - attributes: ' class="vasosuslu"'
+    link: '<a href="#">vasosuslu</a>'
+  - attributes: ' class="rawusabru"'
+    link: '<a href="#">rawusabru</a>'
+  - attributes: ' class="phisakuvug"'
+    link: '<a href="#">phisakuvug</a>'

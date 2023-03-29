@@ -1,0 +1,37 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Paragraphs colors only
+// *
+// * Not used in the theme
+// * we use this to generate a CSS-template
+// * which is used by the Rocketship Paragraphs module for generating the colors
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// ** our active theme's Sass
+//    which is symlinked on npm install in active theme
+
+@import "../00-theme/00-base/_libs.scss";
+@import "../00-theme/00-base/00-config/**/*.scss";
+@import "../00-theme/00-base/01-helpers/**/*.scss";
+
+// enable this one, if you want to use Fontawesome default classes, variables & mixins
+@import "../00-theme/00-base/04-vendors/fontawesome/fontawesome.scss";
+// we need to use the grid
+@import "../00-theme/00-base/05-grid/**/*.scss";
+
+// we need our theme's atoms helpers
+@import "../00-theme/01-atoms/**/*helpers.scss";
+
+// no Dropsolid-specific stuff
+$structuralOnly: true;
+
+// ** our folder
+
+@import "00-base/**/*.scss";
+@import "01-atoms/**/*.scss";
+@import "02-molecules/**/*.scss";
+@import "03-organisms/**/*.scss";
+@import "04-templates/**/*.scss";
+@import "05-pages/**/*.scss";

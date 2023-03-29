@@ -1,0 +1,331 @@
+////////////////////////////////////////////////////////////////////////////////
+// *
+// * Menu
+// *
+// * Load all the styling + the structural CSS
+// * for the menu in the right order and breakpoints
+// * You can change breakpoints to have mobile navigation for wider screens
+// *
+// * Eg.: replace bp-xs-only with bp-sm-max if you want the mobile menu to work on phone + tablet screens
+// *      and replace bp-sm with bp-md for the full navigation to be used on desktop screens and wider
+// *
+// * Don't forget to also modify the breakpoint in the mobile nav javascript
+// *   located in: 02-molecules/menus/menu/menu--mobile.js
+// * and in the organisms > header/nav Sass
+// *
+// *
+////////////////////////////////////////////////////////////////////////////////
+
+
+// -- TIP: to make your life easier,
+//    use the breakpoints further down, to style the links and items to make your life easier
+//    because styling is usually radically different between phone & wider
+
+
+// * General styling
+// ===========================================================================
+
+.wrapper--navigation__content {
+
+  .menu {
+    //
+  }
+
+  // styling for all items (even sublevels)
+
+  .menu__item {
+    //
+  }
+
+  .menu__link {
+    //
+
+    &,
+    &:visited {
+      //
+    }
+
+    &.menu__link--active,
+    &.js-active-anchor,
+    &.active,
+    &:hover {
+      //
+    }
+  }
+
+  // item with submenu
+
+  .menu__item--with-sub {
+
+    &.js-open {
+
+      .menu__item--sub {
+        //
+      }
+    }
+  }
+
+  // link of item with submenu
+  .menu__link--with-sub {
+    //
+  }
+
+  // submenu
+  // hidden by default
+  .menu--sub {
+    //
+  }
+
+  .menu__item--sub {
+    //
+  }
+
+  .menu__link--sub {
+    //
+  }
+
+}
+
+// * Submenus (this usually has some overlapping styles between breakpoints)
+// ===========================================================================
+
+.menu__item--with-sub {
+  // hook for icon
+  position: relative;
+
+  // clickable icon to open/close submenu on touch (added via JS)
+  .expand-sub {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: rem(38);
+    height: rem(38);
+    transform: rotate(0);
+    transition: all $easing $duration;
+
+    @include font-awesome((
+      icon: $fa-var-chevron-down,
+      size: 10,
+      margin: 0
+    ));
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-style: normal;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+
+  &.js-open {
+
+    & > .menu__item--sub {
+      max-height: rem(100);
+      transition: all .25s ease-in;
+    }
+
+    // rotate the icon
+    .expand-sub {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// hide submenu items by default
+.menu__item--with-sub > .menu__item--sub {
+  overflow: hidden;
+  max-height: 0;
+  transition: all .25s ease-out;
+}
+
+
+// -- submenu items
+//    (hide by using max-height on items instead of menu itself, it's more flexible that way)
+
+.menu__item--sub {
+  overflow: hidden;
+  max-height: 0;
+  transition: all .25s ease-out;
+}
+
+// visible after interaction
+.menu__item.js-open .menu__item--sub {
+  max-height: rem(100);
+  transition: all .25s ease-in;
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: only on mobile phone
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-xs-only {
+
+  // mobile elements of the menu (lists, listitems, links)
+
+  // * styling the navigations within the mobile menu
+  // ===========================================================================
+
+  .wrapper--navigation__content {
+
+    .menu {
+      //
+    }
+
+    // styling for all items (even sublevels)
+
+    .menu__item {
+      //
+    }
+
+    .menu__link {
+      cursor: pointer;
+      display: block;
+      padding: rem(9) calc(var(--gap-hor) * 2);
+
+      &,
+      &:visited {
+        //
+      }
+
+      &.menu__link--active,
+      &.js-active-anchor,
+      &.active,
+      &:hover {
+        // 
+      }
+    }
+
+    // item with submenu
+
+    .menu__item--with-sub {
+
+      &.js-open {
+
+        .menu__item--sub {
+          //
+        }
+      }
+    }
+
+    // link of item with submenu
+    .menu__link--with-sub {
+      //
+    }
+
+    // submenu
+    // hidden by default
+    .menu--sub {
+      //
+    }
+
+    .js-open > .menu--sub {
+      background-color: hsl(var(--clr-nav-submenu));
+    }
+
+    .menu__item--sub {
+      //
+    }
+
+    .menu__link--sub {
+      // indentation
+      padding-left: var(--gap-hor);
+    }
+
+  }
+
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * Breakpoint: tablet and wider
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+@include bp-sm {
+
+  // * styling the navigations
+  // ===========================================================================
+
+  .navigation__toggle-expand {
+    display: none;
+  }
+
+  .wrapper--navigation__content {
+
+    .menu {
+
+      // make menu go inline
+
+      // display: flex;
+      // margin: 0 rem(-10) 0 rem(-10);
+    }
+
+    .menu__item {
+      // margin: 0 rem(10) 0 rem(10);
+    }
+
+    .menu__link {
+
+      &,
+      &:visited {
+        // color: hsl(var(--clr-white));
+      }
+
+      &.menu__link--active,
+      &.js-active-anchor,
+      &.active,
+      &:hover {
+        //
+      }
+    }
+
+    // item with submenu
+
+    .menu__item--with-sub {
+
+      padding-right: rem(30);
+
+      // visible after interaction
+      &.js-open {
+
+        & > .menu--sub {
+          //
+        }
+
+        .menu__item--sub {
+          //
+        }
+      }
+
+      // clickable icon to open/close submenu on touch (added via JS)
+      .expand-sub {
+        width: rem(24);
+        height: rem(24);
+      }
+    }
+
+    // submenu
+    // hidden by default
+    .menu--sub {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      flex-direction: column;
+      margin: 0;
+      min-width: rem(150);
+    }
+
+    .menu__item--sub {
+      margin: 0;
+    }
+
+    .menu__link--sub {
+      //
+    }
+
+  }
+
+}

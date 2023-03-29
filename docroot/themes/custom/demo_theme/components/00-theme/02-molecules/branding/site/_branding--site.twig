@@ -1,0 +1,59 @@
+{% set link_title = link_title|default('Home'|t) %}
+{% set link_href = link_href|default(path('<front>')) %}
+
+{% set img_src = img_src|default(null) %}
+{% if img_src is not defined or img_src == null %}
+  {% if site_logo %}
+    {% set img_src = site_logo %}
+  {% else %}
+    {% set img_src = content.site_logo['#uri'] %}
+  {% endif %}
+{% endif %}
+
+{% set img_alt = img_alt|default(link_title) %}
+{% set name = name|default(site_name) %}
+{% set slogan = slogan|default(site_slogan) %}
+
+
+{% set bem_logo_block = bem_logo_block|default('block') %}
+
+{% set bem_logo_element = bem_logo_element|default('branding') %}
+
+{% if bem_logo_modifiers is not defined %}
+  {% set bem_logo_modifiers = [] %}
+{% endif %}
+
+{% if configuration.view_mode %} {% set bem_logo_modifiers = bem_logo_modifiers|merge(['view-mode-' ~ configuration.view_mode|clean_class|replace({'_': '-'})]) %}{% endif %}
+{% if configuration.provider %} {% set bem_logo_modifiers = bem_logo_modifiers|merge(['provider-' ~ configuration.provider|clean_class|replace({'_': '-'})]) %}{% endif %}
+{% if plugin_id %} {% set bem_logo_modifiers = bem_logo_modifiers|merge([plugin_id|clean_class|replace({'_': '-'})]) %}{% endif %}
+{# {% if attributes['data-bem'].originalId %} {% set bem_logo_modifiers = bem_logo_modifiers|merge(['id-' ~ attributes['data-bem'].originalId|clean_class|replace({'_': '-'})]) %}{% endif %} #}
+{% if attributes['data-bem'].region %} {% set bem_logo_modifiers = bem_logo_modifiers|merge(['region-' ~ attributes['data-bem'].region|clean_class|replace({'_': '-'})]) %}{% endif %}
+{% if attributes['data-bem'].type %} {% set bem_logo_modifiers = bem_logo_modifiers|merge(['type-' ~ attributes['data-bem'].type|clean_class|replace({'_': '-'})]) %}{% endif %}
+{% if configuration.view_mode and configuration.type %} {% set bem_logo_modifiers = bem_logo_modifiers|merge([configuration.type|clean_class|replace({'_': '-'}) ~ '--' ~  configuration.view_mode|clean_class|replace({'_': '-'})]) %}{% endif %}
+
+
+{% if bem_logo_extra is not defined %}
+  {% set bem_logo_extra = [] %}
+{% endif %}
+
+{% if configuration.provider %}
+  {% set bem_logo_extra = bem_logo_extra|merge(['block-' ~ configuration.provider]) %}
+{% endif %}
+
+<div {{ bem(bem_logo_block, bem_logo_element, bem_logo_modifiers, bem_logo_extra) }}>
+  {{title_prefix}}
+  {{title_suffix}}
+  {% block block_content %}
+    {% if img_src %}
+      <a {{ bem(bem_logo_block ~ '__' ~ bem_logo_element, 'image', bem_logo_modifiers) }} href="{{ link_href }}" title="{{ link_title }}" rel="home">
+        <img src="{{ img_src }}" alt="{{ img_alt }}" />
+      </a>
+    {% endif %}
+    {% if name %}
+      <a  {{ bem(bem_logo_block ~ '__' ~ bem_logo_element, 'name', bem_logo_modifiers) }} href="{{ link_href }}" title="{{ link_title }}" rel="home">{{ name }}</a>
+    {% endif %}
+    {% if slogan %}
+      <span {{ bem(bem_logo_block ~ '__' ~ bem_logo_element, 'slogan', bem_logo_modifiers) }}>{{ slogan }}</span>
+    {% endif %}
+  {% endblock %}
+</div>

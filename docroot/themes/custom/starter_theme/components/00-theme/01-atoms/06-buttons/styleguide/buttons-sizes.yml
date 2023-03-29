@@ -1,0 +1,18 @@
+- button_type: 'link'
+  button_content: 'Small button'
+  button_url: '#atoms-button--primary'
+  button_bem_modifiers:
+    - 'primary'
+    - 'sm'
+- button_type: 'link'
+  button_content: 'Medium button'
+  button_url: '#atoms-button--primary'
+  button_bem_modifiers:
+    - 'primary'
+    - 'md'
+- button_type: 'link'
+  button_content: 'large button'
+  button_url: '#atoms-button--primary'
+  button_bem_modifiers:
+    - 'primary'
+    - 'lg'

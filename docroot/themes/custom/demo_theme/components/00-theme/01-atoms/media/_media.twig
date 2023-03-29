@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'media',
+  ]
+%}
+
+{% set media_bundle = media_bundle|default('') %}
+{% set media_published = media_published|default(false) %}
+
+{% if media %}
+  {% if media_bundle is empty %} {% set media_bundle = media.bundle() %} {% endif %}
+  {% if media_published == false %} {% set media_published = media.isPublished() %} {% endif %}
+{% endif %}
+
+{% if media_bundle %}{% set classes = classes|merge(['media--type-' ~ media_bundle|clean_class])%}{% endif %}
+{% if not media_published %}{% set classes = classes|merge(['media--unpublished'])%}{% endif %}
+
+{% if view_mode %}{% set classes = classes|merge(['media--view-mode-' ~ view_mode|clean_class])%}{% endif %}
+{# because 'attributes' method doesn't work in styleguide, as part of BEM or standalone, we need to pass the attributes manually#}
+<article {{ bem(false, false, false, classes, attributes)}} >
+  {{ title_suffix.contextual_links }}
+  {% block media_content %}
+  {% if content %}
+    {{ content }}
+  {% endif %}
+  {% endblock %}
+</article>

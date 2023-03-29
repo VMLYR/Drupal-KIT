@@ -1,0 +1,22 @@
+- button_type: 'link'
+  button_content: 'Primary Button'
+  button_url: '#atoms-button--primary'
+  button_bem_modifiers:
+    - 'primary'
+- button_type: 'link'
+  button_content: 'Primary Button (disabled)'
+  button_bem_modifiers:
+    - 'primary'
+  button_bem_extra:
+    - 'disabled'
+- button_type: 'link'
+  button_content: 'Secondary Button'
+  button_url: '#atoms-button--secondary'
+  button_bem_modifiers:
+    - 'secondary'
+- button_type: 'link'
+  button_content: 'Secondary Button (disabled)'
+  button_bem_modifiers:
+    - 'secondary'
+  button_bem_extra:
+    - 'disabled'
