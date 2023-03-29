@@ -46,6 +46,16 @@ dependencies:
   - drupal:update
   - drupal:user
   - drupal:views
+  - drupal:config_translation
+  - drupal:content_translation
+  - drupal:locale
+  - drupal:language
+  - layout_builder_at:layout_builder_at
+  - rabbit_hole:rabbit_hole
+  - rabbit_hole:rh_media
+  - rabbit_hole:rh_node
+  - rabbit_hole:rh_taxonomy
+  - rabbit_hole:rh_user
 install:
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_links_access_filter
@@ -88,6 +98,16 @@ install:
   - drupal:update
   - drupal:user
   - drupal:views
+  - drupal:config_translation
+  - drupal:content_translation
+  - drupal:locale
+  - drupal:language
+  - layout_builder_at:layout_builder_at
+  - rabbit_hole:rabbit_hole
+  - rabbit_hole:rh_media
+  - rabbit_hole:rh_node
+  - rabbit_hole:rh_taxonomy
+  - rabbit_hole:rh_user
 themes:
   - gin
   - olivero
