@@ -1,0 +1,14 @@
+uuid: f0f9d7b2-9352-4ea6-a4c7-965e72e0b1d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.lb_page
+id: node_type_lb_page
+entity_type_id: node_type
+entity_id: lb_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

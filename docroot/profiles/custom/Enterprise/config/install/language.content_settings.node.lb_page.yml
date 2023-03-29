@@ -1,0 +1,16 @@
+uuid: e2a8d818-0c84-407e-8576-3920e7f3f1c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.lb_page
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.lb_page
+target_entity_type_id: node
+target_bundle: lb_page
+default_langcode: current_interface
+language_alterable: true

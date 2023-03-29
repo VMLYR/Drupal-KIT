@@ -1,0 +1,22 @@
+uuid: c5757ec2-0fdc-4058-83f3-9e3274c297d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lb_page.layout_builder__layout
+    - node.type.lb_page
+  module:
+    - user
+id: node.lb_page.default
+targetEntityType: node
+bundle: lb_page
+mode: default
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  layout_builder__layout: true
