@@ -21,8 +21,13 @@ jobs:
           key: ${{ runner.os }}-lando${{ matrix.lando.version }}-${{ github.ref }}
           restore-keys: |
             ${{ runner.os }}-lando${{ matrix.lando.version }}-
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: List Files
         run: ls
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}        
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
       - name: Start Lando
