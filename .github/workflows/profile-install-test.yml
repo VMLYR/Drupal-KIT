@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Install Lando
         run: |
-          sudo curl -fsSL -o /usr/local/bin/lando "https://files.lando.dev/cli/lando-linux-x64-${LANDO_VERSION}"
-          sudo chmod +x /usr/local/bin/lando
+          wget https://files.lando.dev/installer/lando-x64-stable.deb
+          sudo dpkg -i lando-x64-stable.deb
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v3
