@@ -56,6 +56,7 @@ dependencies:
   - rabbit_hole:rh_node
   - rabbit_hole:rh_taxonomy
   - rabbit_hole:rh_user
+  - rocketship_core:rocketship_core
 install:
   - admin_toolbar:admin_toolbar
   - admin_toolbar:admin_toolbar_links_access_filter
@@ -108,6 +109,7 @@ install:
   - rabbit_hole:rh_node
   - rabbit_hole:rh_taxonomy
   - rabbit_hole:rh_user
+  - rocketship_core:rocketship_core
 themes:
   - gin
   - olivero
