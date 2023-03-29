@@ -42,7 +42,7 @@ layout_preview:
     - core/drupal.announce
     - core/drupal.debounce
     - core/jquery
-    - core/jquery.once
+    - core/once
     - rocketship_core/scroll
 
 scroll:

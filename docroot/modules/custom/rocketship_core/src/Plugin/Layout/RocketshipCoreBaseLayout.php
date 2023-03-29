@@ -338,7 +338,7 @@ abstract class RocketshipCoreBaseLayout extends LayoutDefault implements PluginF
     }
 
     $theme = \Drupal::configFactory()->get('system.theme')->get('default');
-    $path = drupal_get_path('theme', $theme) . '/' . "$theme.theme";
+    $path = \Drupal::service('extension.list.theme')->getPath($theme) . '/' . "$theme.theme";
     if (is_file($path)) {
       require_once $path;
     }
@@ -393,7 +393,7 @@ abstract class RocketshipCoreBaseLayout extends LayoutDefault implements PluginF
     $settings = \Drupal::config('rocketship_core.settings');
     $variants = $settings->get('color_variants');
     $cssPath = 'public://css';
-    $cssTemplatePath = drupal_get_path('module', 'rocketship_core') . '/css/style.content-blocks.colors.min.css';
+    $cssTemplatePath = \Drupal::service('extension.list.module')->getPath('rocketship_core') . '/css/style.content-blocks.colors.min.css';
     // Make an array of the Changed CSS to save.
     $finalCSS = '';
 

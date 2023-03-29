@@ -27,4 +27,4 @@ cb_photo_gallery:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - core/once

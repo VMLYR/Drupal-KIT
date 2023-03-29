@@ -144,7 +144,7 @@ class MigrateGenerator {
       $this->created_migrates[$this->module_name . '_menu_link_content_menu_link_content'] = $this->module_name . '_menu_link_content_menu_link_content';
     }
 
-    $path = drupal_get_path('module', 'rocketship_core');
+    $path = \Drupal::service('extension.list.module')->getPath('rocketship_core');
     $files = [
       $path . '/assets/templates/generated_migrate_info_file.yml.twig' => "$dir/$this->module_name.info.yml",
       $path . '/assets/templates/generated_migrate_install_file.php.twig' => "$dir/$this->module_name.install",

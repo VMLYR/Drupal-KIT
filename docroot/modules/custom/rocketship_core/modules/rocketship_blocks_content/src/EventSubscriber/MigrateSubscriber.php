@@ -88,7 +88,7 @@ class MigrateSubscriber implements EventSubscriberInterface {
     $entity_type_id = 'node';
     $entity_type_storage = $this->entityTypeManager->getStorage($entity_type_id);
 
-    $path = drupal_get_path('module', 'rocketship_blocks_content');
+    $path = \Drupal::service('extension.list.module')->getPath('rocketship_blocks_content');
     $handle = fopen("$path/assets/csv/rocketship_blocks_content_node_page.csv", "r");
     // skip first line
     fgetcsv($handle);

@@ -4,7 +4,7 @@
  * Implements hook_migration_plugins_alter().
  */
 function {{ module_name }}_migration_plugins_alter(&$definitions) {
-  $path = drupal_get_path('module', '{{ module_name }}');
+  $path = \Drupal::service('extension.list.module')->getPath('{{ module_name }}');
   $migrations = _{{ module_name }}_content_migrates();
 
   foreach ($migrations as $migration) {

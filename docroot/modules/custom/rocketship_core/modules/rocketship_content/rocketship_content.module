@@ -4,7 +4,7 @@
  * Implements hook_migration_plugins_alter().
  */
 function rocketship_content_migration_plugins_alter(&$definitions) {
-  $path = drupal_get_path('module', 'rocketship_content');
+  $path = \Drupal::service('extension.list.module')->getPath('rocketship_content');
   $migrations = _rocketship_content_content_migrates();
 
   foreach ($migrations as $migration) {

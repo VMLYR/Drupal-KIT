@@ -55,7 +55,7 @@ class ChooseBlockController extends ChooseBlockControllerCore {
    */
   protected function getBlockLinks(SectionStorageInterface $section_storage, int $delta, $region, array $blocks) {
     $links = [];
-    $icons_folder_path = drupal_get_path('module', 'rocketship_blocks') . '/assets/images/';
+    $icons_folder_path = \Drupal::service('extension.list.module')->getPath('rocketship_blocks') . '/assets/images/';
     $default_icon_path = file_create_url($icons_folder_path . 'default-block.svg');
     foreach ($blocks as $block_id => $block) {
       $description = '';
