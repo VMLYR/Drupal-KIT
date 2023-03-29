@@ -4,7 +4,7 @@ on: [push]
 jobs:
   Install-Lando-And-Test:
     runs-on: ubuntu-latest
-    stpes:
+    steps:
       - name: Install Lando
         run: |
           sudo curl -fsSL -o /usr/local/bin/lando "https://files.lando.dev/cli/lando-linux-x64-${{ matrix.lando.version }}"
