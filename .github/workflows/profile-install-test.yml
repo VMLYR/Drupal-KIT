@@ -21,6 +21,10 @@ jobs:
           key: ${{ runner.os }}-lando${{ matrix.lando.version }}-${{ github.ref }}
           restore-keys: |
             ${{ runner.os }}-lando${{ matrix.lando.version }}-
+      - name: List Files
+        run: |
+          pwd
+          ls
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
       - name: Start Lando
