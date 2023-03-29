@@ -28,8 +28,6 @@ jobs:
               ${{ runner.os }}-php-
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: List Files
-        run: ls
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}        
