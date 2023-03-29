@@ -14,6 +14,21 @@ jobs:
         run: |
           sudo curl -fsSL -o /usr/local/bin/lando "https://files.lando.dev/cli/lando-linux-x64-${LANDO_VERSION}"
           sudo chmod +x /usr/local/bin/lando
+      - name: Setup Lando cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.lando/cache
+          key: ${{ runner.os }}-lando${{ matrix.lando.version }}-${{ github.ref }}
+          restore-keys: |
+            ${{ runner.os }}-lando${{ matrix.lando.version }}-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+              ${{ runner.os }}-php-
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: List Files
