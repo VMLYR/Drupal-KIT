@@ -34,4 +34,6 @@ jobs:
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
       - name: Start Lando
-        run: lando start
+        run: |
+          lando --clear
+          lando start
