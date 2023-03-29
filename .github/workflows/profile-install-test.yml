@@ -1,9 +1,6 @@
 name: Profile Install Test
 run-name: Testing installing the Enterprise profile.
-on:
-  push:
-    branches:
-      - *
+on: [push]
 jobs:
   Install-Lando-And-Test:
     runs-on: ubuntu-latest
