@@ -216,7 +216,7 @@
             "gitignore": false,
             "locations": {
                 "web-root": "docroot/",
-                "config-root": "config/"                
+                "config-root": "config/"
             }
         },
         "installer-types": [
@@ -226,7 +226,7 @@
         "installer-paths": {
             ".docksal/commands/kit": [
                 "vmlyr-drupal/kit-docksal-commands"
-            ],            
+            ],
             "docroot/core": ["type:drupal-core"],
             "docroot/libraries/{$name}": [
                 "type:drupal-library",
@@ -271,6 +271,9 @@
             },
             "drupal/unified_twig_ext": {
                 "https://www.drupal.org/project/unified_twig_ext/issues/3299379": "https://www.drupal.org/files/issues/2023-02-04/unified_twig_exit-drupal-9-to-10.patch"
+            },
+            "drupal/section_library": {
+                "https://www.drupal.org/project/section_library/issues/3348151: Fix jQuery Once": "https://www.drupal.org/files/issues/2023-03-16/3348151-5.patch"
             }
         },
         "patchLevel": {
