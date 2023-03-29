@@ -32,6 +32,7 @@
         "drupal/blazy": "^2.14",
         "drupal/block_content_permissions": "^1.11",
         "drupal/block_form_alter": "^2.0",
+        "drupal/classy": "^1.0",
         "drupal/color": "^1.0",
         "drupal/colorbox": "^2.0",
         "drupal/components": "^3.0@beta",
@@ -117,6 +118,7 @@
         "drupal/swiftmailer": "^2.4",
         "drupal/taxonomy_access_fix": "^4.0@beta",
         "drupal/token": "^1.11",
+        "drupal/unified_twig_ext": "^1.0",
         "drupal/userprotect": "^1.2",
         "drupal/video_embed_field": "^2.5",
         "drupal/view_unpublished": "^1.0",
@@ -266,6 +268,9 @@
             },
             "drupal/easy_install": {
                 "https://www.drupal.org/project/easy_install/issues/3297022: Update to D10": "https://www.drupal.org/files/issues/2022-11-05/D10-easy_install.patch"
+            },
+            "drupal/unified_twig_ext": {
+                "https://www.drupal.org/project/unified_twig_ext/issues/3299379": "https://www.drupal.org/files/issues/2023-02-04/unified_twig_exit-drupal-9-to-10.patch"
             }
         },
         "patchLevel": {
@@ -275,7 +280,7 @@
             "include-keys": ["homepage", "support"]
         },
         "drupal-lenient": {
-            "allowed-list": ["drupal/field_limiter", "drupal/layout_builder_extra_templates", "drupal/layout_builder_restrictions_by_role", "drupal/view_unpublished", "drupal/node_title_help_text", "drupal/easy_install"]
+            "allowed-list": ["drupal/field_limiter", "drupal/layout_builder_extra_templates", "drupal/layout_builder_restrictions_by_role", "drupal/view_unpublished", "drupal/node_title_help_text", "drupal/easy_install", "drupal/unified_twig_ext"]
         }
     }
 }
