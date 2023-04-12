@@ -14,4 +14,5 @@ runs:
         rm -rf lando-x64-stable.deb
         ls -a /home/runner
         ls -a ~/
+        lando config
       shell: bash
