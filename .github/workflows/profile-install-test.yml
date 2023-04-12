@@ -21,10 +21,12 @@ jobs:
           sudo chmod -R 777 /home/runner/.lando
           ls -a /home/runner
           ls -a ~/
-          lando config
       - uses: actions/checkout@v3
       - name: Copy Lando Yml
-        run: cp .lando.profile.yml .lando.local.yml
+        run:  |
+          cp env.github env
+          lando config
+          cp .lando.profile.yml .lando.local.yml
       - name: List out lando files
         run: ls -a /home/runner
       - name: Start Lando
