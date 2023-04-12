@@ -12,8 +12,7 @@ jobs:
         uses: ./.github/workflows/install-lando
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
+      - name: List out lando files
+        run: ls -Ra /home/runner/.lando
       - name: Start Lando
         run: lando start
-      - name: Start Lando
-        run: |
-          lando start
