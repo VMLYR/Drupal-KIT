@@ -12,4 +12,5 @@ runs:
         wget https://files.lando.dev/installer/lando-x64-stable.deb
         sudo dpkg -i lando-x64-stable.deb
         rm -rf lando-x64-stable.deb
+        ls -a /home/runner
       shell: bash
