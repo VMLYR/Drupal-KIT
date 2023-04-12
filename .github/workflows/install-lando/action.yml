@@ -13,6 +13,7 @@ runs:
         sudo dpkg -i lando-x64-stable.deb
         rm -rf lando-x64-stable.deb
         mkdir /home/runner/.lando
+        sudo chmod -R 777 /home/runner/.lando
         ls -a /home/runner
         ls -a ~/
         lando config
