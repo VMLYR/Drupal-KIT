@@ -20,7 +20,7 @@ jobs:
           mkdir /home/runner/.lando
           sudo chmod -R 777 /home/runner/.lando
           mkdir /home/runner/.lando/cache
-          /home/runner/.lando/cache/D10LB.tooling.cache
+          touch /home/runner/.lando/cache/D10LB.tooling.cache
           ls -a /home/runner
           ls -a ~/
       - uses: actions/checkout@v3
