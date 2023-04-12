@@ -13,6 +13,6 @@ jobs:
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
       - name: List out lando files
-        run: ls -Ra /home/runner/.lando
+        run: ls -a /home/runner
       - name: Start Lando
         run: lando start
