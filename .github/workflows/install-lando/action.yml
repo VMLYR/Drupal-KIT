@@ -1,0 +1,15 @@
+name: "Install Lando"
+description: "Installs lando on the project"
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu `lsb_release -cs` test"
+        sudo apt update
+        sudo apt install docker-ce
+        wget https://files.lando.dev/installer/lando-x64-stable.deb
+        sudo dpkg -i lando-x64-stable.deb
+        rm -rf lando-x64-stable.deb
+      shell: bash
