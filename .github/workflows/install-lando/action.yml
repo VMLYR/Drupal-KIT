@@ -13,4 +13,5 @@ runs:
         sudo dpkg -i lando-x64-stable.deb
         rm -rf lando-x64-stable.deb
         ls -a /home/runner
+        ls -a ~/
       shell: bash
