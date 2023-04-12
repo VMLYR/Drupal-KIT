@@ -7,9 +7,9 @@ jobs:
   Install-Lando-And-Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Install Lando
         uses: ./.github/workflows/install-lando
+      - uses: actions/checkout@v3
       - name: Copy Lando Yml
         run: cp .lando.profile.yml .lando.local.yml
       - name: List out lando files
