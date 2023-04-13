@@ -31,9 +31,13 @@ jobs:
           lando config
           cp .lando.profile.yml .lando.local.yml
           ls -a /home/runner
-          ls -a /home/runner/.lando/         
-          ls -a /home/runner/.lando/cache          
+          ls -a /home/runner/.lando/
+          ls -a /home/runner/.lando/cache
       - name: List out lando files
         run: ls -a /home/runner
       - name: Start Lando
-        run: lando start
+        run: |
+          lando start
+          lando rebuild -y
+      - name: Install
+        run: lando nightwatch --tag=Enterprise
