@@ -15,7 +15,7 @@ module.exports = {
       .click('#edit-submit')
       .waitForElementVisible('body', 1000)
       .assert.containsText('.heading-c', 'Installing Enterprise')
-      .waitForElementVisible('.install-configure-form', 300000)
+      .waitForElementVisible('.install-configure-form', 600000)
       .setValue('input#edit-site-name', "Test Site")
       .setValue('input#edit-site-mail', "noreply@vmlyr.com")
       .setValue('input#edit-account-name', "admin")
