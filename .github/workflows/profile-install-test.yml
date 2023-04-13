@@ -40,4 +40,6 @@ jobs:
           lando start
           lando rebuild -y
       - name: Install
-        run: lando nightwatch --tag=Enterprise
+        run: |
+          cp scripts/nightwatch.conf.js docroot/core/tests/Drupal/Nightwatch/nightwatch.conf.js
+          lando nightwatch --tag=Enterprise
