@@ -1,0 +1,6 @@
+name: dkit10
+services:
+  appserver:
+    overrides:
+      environment:
+        DRUPAL_TEST_BASE_URL: https://dkit10.lndo.site/
