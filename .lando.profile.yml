@@ -1,4 +1,4 @@
-name: Dkit10
+name: dkit10
 services:
   appserver:
     overrides:
