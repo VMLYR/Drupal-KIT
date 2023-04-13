@@ -6,12 +6,6 @@ module.exports = {
   },
   'Run the install profile': (browser) => {
     browser
-    .drupalRelativeURL('core/install.php')
-    .source((result) => {
-        // Source will be stored in result.value
-        console.log(result.value);
-    });
-    browser
       .drupalRelativeURL('core/install.php')
       .waitForElementVisible('body', 1000)
       .assert.visible('.install-page')      
