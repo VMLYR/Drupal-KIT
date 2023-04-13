@@ -20,16 +20,14 @@ jobs:
           mkdir /home/runner/.lando
           sudo chmod -R 777 /home/runner/.lando
           mkdir /home/runner/.lando/cache
-          touch /home/runner/.lando/cache/D10LB.tooling.cache
           ls -a /home/runner
           ls -a ~/
       - uses: actions/checkout@v3
       - name: Copy Lando Yml
         run:  |
-          cp env.github env
-          cat env
-          lando config
-          cp .lando.profile.yml .lando.local.yml
+          # cp env.github env
+          # cat env
+          # cp .lando.profile.yml .lando.local.yml
           ls -a /home/runner
           ls -a /home/runner/.lando/         
           ls -a /home/runner/.lando/cache          
