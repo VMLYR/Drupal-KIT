@@ -363,7 +363,7 @@
 
       var anchorLinks = $('a[href*="#"]').not('a[href="#"]');
 
-      anchorLinks.once('js-once-scrollable-anchors').each(function() {
+      once('js-once-scrollable-anchors', anchorLinks).each(function() {
 
         var anchorLink = $(this);
 
@@ -374,7 +374,7 @@
         }
 
         // click anchor link and animate scroll to it
-        anchorLink.once('js-once-scrollable-anchor-click').click(function (e) {
+        once('js-once-scrollable-anchor-click', anchorLink).click(function (e) {
 
           // if there are links to ignore for smooth scroll
           // or anchorLink is not an exception
@@ -469,7 +469,7 @@
       // if that anchor is not excluded
       window.onpopstate = function(event) {
 
-        anchorLinks.once('js-once-scrollable-anchors-popstate').each(function() {
+        once('js-once-scrollable-anchors-popstate', anchorLinks).each(function() {
 
           var anchorLink = $(this);
 

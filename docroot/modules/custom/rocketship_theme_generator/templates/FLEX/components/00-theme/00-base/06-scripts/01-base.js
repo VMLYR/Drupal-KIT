@@ -509,7 +509,7 @@
       // if that anchor is not excluded
       window.onpopstate = function(event) {
 
-        anchorLinks.once('js-once-scrollable-anchors-popstate').each(function() {
+        once('js-once-scrollable-anchors-popstate', anchorLinks).each(function() {
 
           var anchorLink = $(this);
 
