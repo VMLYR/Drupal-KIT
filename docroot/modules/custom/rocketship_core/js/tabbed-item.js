@@ -17,11 +17,7 @@
 
       $('.tabbed-title').each(handleTabTitle);
 
-      const tabbedTitles = document.querySelectorAll('.tabbed-title:not(.tabbed-item)');
-      tabbedTitles.forEach(function (tabbedTitle) {
-        tabbedTitle.addEventListener('keyup', handleTabTitle);
-      });
-
+      $('.tabbed-title').once('tabbed-item').keyup(handleTabTitle);
     }
   }
 })(jQuery, Drupal);
