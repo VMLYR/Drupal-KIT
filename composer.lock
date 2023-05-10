@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3792bcf69f2dcae5bee27e349d185dcd",
+    "content-hash": "894df3053a626cbfaaa41fcdd934ae42",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6862,6 +6862,61 @@
             "support": {
                 "source": "http://git.drupal.org/project/node_keep.git",
                 "issues": "https://www.drupal.org/project/issues/node_keep"
+            }
+        },
+        {
+            "name": "drupal/node_title_help_text",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/node_title_help_text.git",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/node_title_help_text-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "7e1dd939eaec5d996e463654aafae9eb055f515c"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1592935557",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Devendra Jadhav",
+                    "homepage": "https://www.drupal.org/u/jadhavdevendra",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "makbul_khan8",
+                    "homepage": "https://www.drupal.org/user/991152"
+                },
+                {
+                    "name": "vinmassaro",
+                    "homepage": "https://www.drupal.org/user/525104"
+                }
+            ],
+            "description": "Allows you to add help text to node title.",
+            "homepage": "https://www.drupal.org/project/node_title_help_text",
+            "support": {
+                "source": "https://cgit.drupalcode.org/node_title_help_text",
+                "issues": "https://drupal.org/project/issues/node_title_help_text",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
             }
         },
         {
