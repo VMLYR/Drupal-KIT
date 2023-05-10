@@ -57,17 +57,24 @@
         return;
       }
 
-      $('.layout--carousel').once().each(function () {
+      const carouselLayouts = document.querySelectorAll('.layout--carousel:not(.once)');
+      carouselLayouts.forEach(function (carouselLayout) {
+        carouselLayout.classList.add('once');
         var slider = $(this).find('.layout__content__row--carousel');
 
         if (typeof drupalSettings.rocketshipUI_layout_carousel !== 'undefined') {
 
-          slider.find('.block-layout_builder').once().each(function () {
-            var slide = $(this);
+          const slideElements = slider.querySelectorAll('.block-layout_builder:not(.once)');
+          slideElements.forEach(function (slideElement) {
+            const slide = slideElement;
             if (typeof slide.closest('.slide') === 'undefined' || slide.closest('.slide').length === 0) {
-              slide.wrap('<div class="slide"></div>');
+              const slideWrapper = document.createElement('div');
+              slideWrapper.classList.add('slide');
+              slide.parentNode.insertBefore(slideWrapper, slide);
+              slideWrapper.appendChild(slide);
             }
           });
+
 
           // Init slick
           slider.slick({

@@ -17,7 +17,11 @@
 
       $('.tabbed-title').each(handleTabTitle);
 
-      $('.tabbed-title').once('tabbed-item').keyup(handleTabTitle);
+      const tabbedTitles = document.querySelectorAll('.tabbed-title:not(.tabbed-item)');
+      tabbedTitles.forEach(function (tabbedTitle) {
+        tabbedTitle.addEventListener('keyup', handleTabTitle);
+      });
+
     }
   }
 })(jQuery, Drupal);

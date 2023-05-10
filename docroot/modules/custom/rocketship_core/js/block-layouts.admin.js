@@ -104,38 +104,23 @@
 
       group.addClass('cb-field-layouts');
 
-      group.find('input:radio').once('js-once-cb-layoutPicker-radio').each(function () {
-        var optionLabel = $(this).next('label');
+      const radioInputs = group.querySelectorAll('input:radio:not(.js-once-cb-layoutPicker-radio)');
+      radioInputs.forEach(function (radio) {
+        const optionLabel = radio.nextElementSibling;
 
-        var layout = $(this).val();
-        var text = optionLabel.text().replace('_', '-');
-        var textClean = text
-          // remove first and last space
-          .trim()
-          // lowercase char only
-          .toLowerCase()
-          // replace all consecutive spaces with 1 dash
-          .replace(/\s+/g, '-')
-          // replace or remove various characters or substrings
-          .replace('_', '-')
-          .replace(':', '-')
-          .replace('*', '')
-          .replace('--', '-')
-          .replace('-(optional)', '')
-          .replace(')', '')
-          .replace('(', '');
+        const layout = radio.value;
+        let text = optionLabel.textContent.replace('_', '-');
+        const textClean = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[_:*()]/g, '').replace('--', '-');
 
-        // wrap the text in a div & put under the radio
+        const textDiv = document.createElement('div');
+        textDiv.classList.add('text');
+        textDiv.innerHTML = optionLabel.innerHTML;
+        optionLabel.parentNode.appendChild(textDiv);
 
-        optionLabel.parent().append('<div class="text">' + optionLabel.html() + '</div>');
+        const optionClass = layout.replace('_', '-');
 
-        // add a class for styling
-
-        var optionClass = layout.replace('_', '-');
-
-        optionLabel.addClass(prefix + '-' + optionClass);
-        optionLabel.addClass(prefix + '-' + textClean);
-
+        optionLabel.classList.add(prefix + '-' + optionClass);
+        optionLabel.classList.add(prefix + '-' + textClean);
       });
 
     });
@@ -260,22 +245,19 @@
       };
 
       // find the active layout on load, and pass to the layout handler
-      layout.find('input:radio:checked').once('js-once-cb-CKEOverride-radio').each(function () {
-
-        var value = $(this).val();
-
+      const checkedRadio = layout.querySelector('input:radio:checked:not(.js-once-cb-CKEOverride-radio)');
+      if (checkedRadio) {
+        const value = checkedRadio.value;
         layoutHandler(value);
-
-      });
+      }
 
       // change of layout should also call the layoutHandler
-      layout.find('input:radio').once('js-once-cb-CKEOverride-radio-change').change(function () {
-
-          var value = $(this).val();
-
+      const radioInputs = layout.querySelectorAll('input:radio:not(.js-once-cb-CKEOverride-radio-change)');
+      radioInputs.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          const value = radio.value;
           layoutHandler(value);
-
-
+        });
       });
 
     });

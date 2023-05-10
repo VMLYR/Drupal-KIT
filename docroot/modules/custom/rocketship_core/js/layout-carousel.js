@@ -92,10 +92,13 @@
 
     if (typeof settings.rocketshipUI_layout_carousel !== 'undefined') {
 
-      slider.find('.block-layout_builder').once('js-build-slide').each(function () {
-        var slide = $(this);
+      const slideElements = slider.querySelectorAll('.block-layout_builder:not(.js-build-slide)');
+      slideElements.forEach(function (slide) {
         if (typeof slide.closest('.slide') === 'undefined' || slide.closest('.slide').length === 0) {
-          slide.wrap('<div class="slide"></div>');
+          const wrapper = document.createElement('div');
+          wrapper.classList.add('slide');
+          slide.parentNode.insertBefore(wrapper, slide);
+          wrapper.appendChild(slide);
         }
       });
 
