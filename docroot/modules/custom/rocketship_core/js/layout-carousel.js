@@ -92,7 +92,7 @@
 
     if (typeof settings.rocketshipUI_layout_carousel !== 'undefined') {
 
-      slider.find('.block-layout_builder').once('js-build-slide').each(function () {
+      once('js-build-slide', '.block-layout_builder', slider).forEach((slider) => {
         var slide = $(this);
         if (typeof slide.closest('.slide') === 'undefined' || slide.closest('.slide').length === 0) {
           slide.wrap('<div class="slide"></div>');

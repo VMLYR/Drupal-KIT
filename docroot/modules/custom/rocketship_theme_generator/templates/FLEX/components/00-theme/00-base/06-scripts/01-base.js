@@ -74,7 +74,7 @@
           content = $('#main-content');
       if (skipLink.length && content.length) {
         // when you click on the skiplink, force focus on the target
-        skipLink.once('js-once-skip-link').each(function() {
+        once('js-once-skip-link', skipLink).each(function() {
           $(this).on('click', function(e) {
             content.trigger('focus');
             e.preventDefault();
@@ -149,7 +149,7 @@
         preventTabReset = false;
 
     // For each of our elements
-    elements.once('js-once-cardlink').each(function() {
+    once('js-once-cardlink', elements).each(function() {
 
       var el = $(this),
           link, hrefProp, targetProp, down, up;
@@ -183,7 +183,7 @@
         // make the div clickable
         // (ignore if a child link is clicked, so be sure to check target!)
 
-        el.once('js-once-cardlink-mousedown').on('mousedown', function(e) {
+        once('js-once-cardlink-mousedown', el).on('mousedown', function(e) {
           down = +new Date();
 
           if (e.ctrlKey || e.metaKey) {
@@ -191,7 +191,7 @@
           }
         });
 
-        el.once('js-once-cardlink-mouseup').on('mouseup', function(e) {
+        once('js-once-cardlink-mouseup', el).on('mouseup', function(e) {
 
           up = +new Date();
 
@@ -373,7 +373,7 @@
         }
 
         // 2) check all of anchorLinks if there are any + if not an exception
-        myAnchorLinks.once('js-once-scrollable-anchors-active').each(function() {
+        once('js-once-scrollable-anchors-active', myAnchorLinks).each(function() {
 
           var myLink = $(this);
 
@@ -403,7 +403,7 @@
 
       var anchorLinks = $('a[href*="#"]').not('a[href="#"]');
 
-      anchorLinks.once('js-once-scrollable-anchors').each(function() {
+      once('js-once-scrollable-anchors', anchorLinks).each(function() {
 
         var anchorLink = $(this);
 
@@ -414,7 +414,7 @@
         }
 
         // click anchor link and animate scroll to it
-        anchorLink.once('js-once-scrollable-anchor-click').click(function (e) {
+        once('js-once-scrollable-anchor-click', anchorLink).click(function (e) {
 
           // if there are links to ignore for smooth scroll
           // or anchorLink is not an exception

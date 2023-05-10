@@ -94,7 +94,7 @@
    */
   self.layoutPicker = function(group, prefix) {
 
-    group.once('js-once-cb-layoutPicker').each(function() {
+    once('js-once-cb-layoutPicker', group).each(function() {
 
       var group = $(this);
 
@@ -104,10 +104,10 @@
 
       group.addClass('cb-field-layouts');
 
-      group.find('input:radio').once('js-once-cb-layoutPicker-radio').each(function () {
-        var optionLabel = $(this).next('label');
+      once('js-once-cb-layoutPicker-radio', 'input:radio', group).forEach((group) => {
+        var optionLabel = $(group).next('label');
 
-        var layout = $(this).val();
+        var layout = $(group).val();
         var text = optionLabel.text().replace('_', '-');
         var textClean = text
           // remove first and last space
@@ -151,7 +151,7 @@
    */
   self.CKEOverride = function(layout) {
 
-    layout.once('js-once-cb-CKEOverride').each(function() {
+    once('js-once-cb-CKEOverride', layout).each(function() {
 
       var layout = $(this);
       var textareaField = layout.parent().find('.js-form-type-textarea');
@@ -260,18 +260,18 @@
       };
 
       // find the active layout on load, and pass to the layout handler
-      layout.find('input:radio:checked').once('js-once-cb-CKEOverride-radio').each(function () {
+      once('js-once-cb-CKEOverride-radio', 'input:radio:checked', layout).forEach((layout) => {
 
-        var value = $(this).val();
+        var value = $(layout).val();
 
         layoutHandler(value);
 
       });
 
       // change of layout should also call the layoutHandler
-      layout.find('input:radio').once('js-once-cb-CKEOverride-radio-change').change(function () {
+      once('js-once-cb-CKEOverride-radio-change', 'input:radio', layout).forEach((layout) => {
 
-          var value = $(this).val();
+          var value = $(layout).val();
 
           layoutHandler(value);
 

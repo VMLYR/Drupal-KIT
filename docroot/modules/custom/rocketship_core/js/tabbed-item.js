@@ -17,7 +17,7 @@
 
       $('.tabbed-title').each(handleTabTitle);
 
-      $('.tabbed-title').once('tabbed-item').keyup(handleTabTitle);
+      once('tabbed-item', '.tabbed-title').keyup(handleTabTitle);
     }
   }
 })(jQuery, Drupal);

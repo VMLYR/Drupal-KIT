@@ -580,7 +580,7 @@
    */
    self.tooltips = function(tooltips) {
 
-    tooltips.once('js-once-tooltips').each(function () {
+    once('js-once-tooltips', tooltips).each(function () {
       var tooltip = $(this),
         button = tooltip.find('.form__element__tooltip__button'),
         message = tooltip.find('.form__element__tooltip__message');

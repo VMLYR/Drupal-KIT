@@ -56,7 +56,7 @@
     // if input exists
     if (input.length) {
       // iterate all inputs
-      input.once('js-once-input').each(function() {
+      once('js-once-input', input).each(function() {
         var input = $(this);
 
         var wrapper = '.form__element';
@@ -111,7 +111,7 @@
     }
 
     if (textarea.length) {
-      textarea.once('js-once-textarea').each(function() {
+      once('js-once-textarea', textarea).each(function() {
         var textarea = $(this);
 
         var wrapper = '.form__element';
@@ -147,7 +147,7 @@
     }
 
     if (select.length) {
-      select.once('js-once-select').each(function() {
+      once('js-once-select', select).each(function() {
 
         var select = $(this);
 
@@ -195,7 +195,7 @@
    * wrap select in order to create custom styling for arrow and such
    */
   self.customSelect = function (select) {
-    select.once('js-once-select-wrap').each(function() {
+    once('js-once-select-wrap', select).each(function() {
       if($(this).closest('.form__dropdown').length < 1) {
         $(this).wrap('<div class="form__dropdown"></div>');
       }
@@ -209,7 +209,7 @@
    */
   self.textareaScroll = function (textarea) {
 
-    textarea.once('js-once-textarea-scroll').each(function() {
+    once('js-once-textarea-scroll', textarea).each(function() {
 
       var myTextarea = $(this);
 

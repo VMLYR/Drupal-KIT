@@ -89,7 +89,7 @@
     // if coming from CKE
     var ckeClass = '.cke_show_borders, .text-long';
 
-    tables.once('js-once-set-responsive-tables').each(function() {
+    once('js-once-set-responsive-tables', tables).each(function() {
 
       var table = $(this);
       var pageTable = table.closest('.page').length;
@@ -189,14 +189,14 @@
       heightMax = 0;
 
     // loop rows
-    trs.once('js-once-check-th-position').each(function(i) {
+    once('js-once-check-th-position', trs).each(function(i) {
 
       var tr = $(this);
 
       // loop cells
       var ths = table.find('th');
 
-      ths.once('js-once-check-th-position').each(function(j) {
+      once('js-once-check-th-position', ths).each(function(j) {
 
         var th = $(this);
 

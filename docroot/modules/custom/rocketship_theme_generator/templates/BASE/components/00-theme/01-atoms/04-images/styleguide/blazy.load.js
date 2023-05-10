@@ -6,7 +6,7 @@
       // ** Find all images with blazy class
       var blazies = $('.b-lazy');
 
-      blazies.once('js-blazy-load').each(function(i) {
+      once('js-blazy-load', blazies).each(function(i) {
 
         var el = $(this),
             loadingWrapper = el.closest('.media--loading'),

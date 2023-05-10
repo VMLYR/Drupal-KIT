@@ -74,7 +74,7 @@
   self.search = function(trigger, wrapper) {
 
     // open/close wrapper
-    trigger.once('js-once-search').click(function(e) {
+    once('js-once-search', trigger).click(function(e) {
       // check for screen size bigger than phone
       // if(self.screen == 'xs'/* || self.screen == 'sm'*/) {
         // add classes (css handles the animation & open/close)

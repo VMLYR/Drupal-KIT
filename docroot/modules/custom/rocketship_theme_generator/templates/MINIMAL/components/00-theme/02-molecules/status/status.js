@@ -77,7 +77,7 @@
    */
   self.drupalMessages = function (message) {
 
-    message.once('js-once-status').each(function() {
+    once('js-once-status', message).each(function() {
 
       var myMessage = $(this);
 

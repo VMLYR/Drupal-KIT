@@ -94,7 +94,7 @@
 
   self.dropdownMenu = function(params) {
 
-    params.nav.once('js-once-dropdown').each(function() {
+    once('js-once-dropdown', params.nav).each(function() {
 
       var nav = $(this),
           interaction = params.interaction,
@@ -103,7 +103,7 @@
           sum = 0;
 
       // find the first level children of an menu
-      firstLevel.once('js-once-dropdown-item').each(function(index) {
+      once('js-once-dropdown-item', firstLevel).each(function(index) {
 
         var item = $(this),
           itemLink = item.children('a, span').first(),

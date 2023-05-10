@@ -45,11 +45,11 @@
    */
   self.layoutResets = function(layouts) {
 
-    layouts.once('js-once-layouts-resets').each(function() {
+    once('js-once-layouts-resets', layouts).each(function() {
 
       var layout = $(this);
 
-      layout.once('js-once-layout-reset').each(function() {
+      once('js-once-layout-reset', layout).each(function() {
 
         var layoutItem = $(this),
           p = layoutItem,
