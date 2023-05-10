@@ -32,6 +32,7 @@ dependencies:
   - drupal:menu_ui
   - drupal:mysql
   - drupal:node
+  - drupal:node_title_help_text
   - drupal:page_cache
   - drupal:path
   - drupal:path_alias
