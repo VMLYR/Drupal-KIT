@@ -43,7 +43,7 @@ function %machine_name%_library_info_alter(&$libraries, $extension) {
  * @param page
  */
 function %machine_name%_page_attachments_alter(array &$page) {
-  $theme_path = \Drupal::service('extension.list.module')->getPath('$mmachine_name%');
+  $theme_path = \Drupal::service('extension.list.theme')->getPath('%machine_name%');
 
   $header_tags = array(
     // Responsive helper tags (based on html 5 boilerplate)
@@ -445,7 +445,7 @@ function %machine_name%_preprocess_image(&$variables) {
 
     // build an inline style to make space for the image
     if (isset($image_width) && isset($image_height)) {
-      $variables['attributes']['aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
+      $variables['attributes']['#aspect'] = round($image_height / $image_width * 10000) / 100 . '%';
     };
 
   }
@@ -696,7 +696,7 @@ function _%machine_name%_process_page(&$variables) {
   }
 
   if (isset($variables['page']['#title'])) {
-    $variables['title'] = render($variables['page']['#title']);
+    $variables['title'] = \Drupal::service('renderer')->render($variables['title']['#markup']);
   }
 
   if (isset($variables['page']['content']['messages'])) {
