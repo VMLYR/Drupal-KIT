@@ -8,21 +8,21 @@
       a.length && n.setresponsiveTables(a)
     }
   }, n.setresponsiveTables = function (e) {
-    once("js-once-set-responsive-tables", e).each((function () {
-      var e = t(this), s = e.closest(".page").length;
+    once("js-once-set-responsive-tables", e).forEach((e) => {
+      var e = t(e), s = e.closest(".page").length;
       s || (s = e.closest(".sb-show-main").length), s && (e.closest(".cke_show_borders, .text-long").length ? (n.tableSetAttributes(e), e.hasClass("table--reformatted") ? e.closest("div").hasClass("table-responsive") || e.wrap('<div class="table-responsive is-reformatted"></div>') : (e.closest("div").hasClass("table-responsive") || e.wrap('<div class="table-responsive has-scroll"></div>'), n.tableScroll(e, e.closest(".table-responsive")))) : e.closest(".table-responsive").hasClass("has-scroll") && n.tableScroll(e, e.closest(".table-responsive")))
-    }))
+    })
   }, n.tableScroll = function (e, a) {
     e.find("caption").insertBefore(a);
     var n = e.find("tr"), i = !1, o = !1, h = !1, l = !1, c = 0;
-    if (once("js-once-check-th-position", n).each((function (s) {
-      t(this);
+    if (once("js-once-check-th-position", n).forEach((n) => {
+      t(n);
       var a = e.find("th");
-      once("js-once-check-th-position", a).each((function (e) {
-        var s = t(this);
+      once("js-once-check-th-position", a).forEach((a) => {
+        var s = t(n);
         0 === e && s.parent("tr").parent("tbody").length && (h = !0, l = !0), e === a.length - 1 && s.parent("tr").parent("tbody").length && (h = !0, !0), s.closest("thead").length && (i = !0, o = !0), s.closest("tfoot").length && (i = !0, !0)
-      }))
-    })), i) a.addClass("js-table--th-row"), o ? a.addClass("js-table--th-top") : a.addClass("js-table--th-bottom"), d(e), s.rocketshipUI.optimizedResize().add((function () {
+      })
+    }), i) a.addClass("js-table--th-row"), o ? a.addClass("js-table--th-top") : a.addClass("js-table--th-bottom"), d(e), s.rocketshipUI.optimizedResize().add((function () {
       d(e)
     })); else if (h) {
       a.addClass("js-table--th-col"), l ? a.addClass("js-table--th-left") : a.addClass("js-table--th-right");

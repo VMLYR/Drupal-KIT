@@ -12,10 +12,10 @@
       }
     }
   }, t.dropdownMenu = function (e) {
-    once("js-once-dropdown", e.nav).each((function () {
-      var s = n(this), r = e.interaction, i = s.children("ul").children("li");
-      once("js-once-dropdown-item", i).each((function (a) {
-        var i, c, u = n(this), h = u.children("a, span").first(), v = u.find(".expand-sub");
+    once("js-once-dropdown", e.nav).forEach((nav) => {
+      var s = n(nav), r = e.interaction, i = s.children("ul").children("li");
+      once("js-once-dropdown-item", i).forEach((i) => {
+        var i, c, u = n(i), h = u.children("a, span").first(), v = u.find(".expand-sub");
         u.hasClass("has-sub") && ((i = void 0 !== v && v.length ? v : u) === u && "click" != r || (u.on("touchstart", (function () {
           t.touch = !0
         })), u.on("touchend", (function () {
@@ -41,14 +41,14 @@
         })), n(o).mouseup((function (n) {
           c = u, u.hasClass("expanded") && c.hasClass("js-open") && (u.is(n.target) || 0 !== u.has(n.target).length || t.navPrimaryClose(c))
         }))))
-      }));
+      });
       a.addEventListener("resize", (function (e) {
         i.each((function () {
           var e = n(this);
           t.navPrimaryClose(e)
         }))
       }), !1)
-    }))
+    })
   }, t.navHeight = function (n) {
     for (var e = n.find("li.expanded"), a = 0, o = 0; o < e.length; ++o) {
       var t = e.eq(o).find("ul").outerHeight(!0);

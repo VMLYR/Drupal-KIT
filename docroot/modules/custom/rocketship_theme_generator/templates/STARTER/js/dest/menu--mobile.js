@@ -9,7 +9,7 @@
     }
   }, i.mobileMenu = function (n, s) {
     var clickHandler = function (e) {
-      if (s && s[0].classList.contains("js-open")) {
+      if (s && s.length && s[0].classList.contains("js-open")) {
         s[0].classList.remove("js-open");
       } else if (s) {
         s[0].classList.add("js-open");
