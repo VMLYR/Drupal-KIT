@@ -175,14 +175,14 @@
           var g = {el: e(d), offset: t, speed: 1e3};
           s.scrollTo(g)
         }
-        p.once("js-once-scrollable-anchors-active").each((function () {
-          var o = e(this);
+        once("js-once-scrollable-anchors-active", p).forEach((p)=> {
+          var o = e(p);
           if (null === r || !o.is(r)) {
             t = f();
             var n = {el: e(d), offset: t, speed: 1e3};
             s.scrollTo(n), o.addClass("js-active-anchor")
           }
-        }))
+        })
       }
       var v = document.querySelectorAll('a[href*="#"]:not(a[href="#"])');
       v.forEach(function (element) {

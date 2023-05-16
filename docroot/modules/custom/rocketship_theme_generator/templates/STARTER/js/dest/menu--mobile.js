@@ -9,7 +9,12 @@
     }
   }, i.mobileMenu = function (n, s) {
     var clickHandler = function (e) {
-      "xs" == i.screen && (s.classList.contains("js-open") ? s.classList.remove("js-open") : s.classList.add("js-open")), e.preventDefault()
+      if (s && s[0].classList.contains("js-open")) {
+        s[0].classList.remove("js-open");
+      } else if (s) {
+        s[0].classList.add("js-open");
+      }
+      e.preventDefault();
     };
 
     var once = function (element, event, handler) {

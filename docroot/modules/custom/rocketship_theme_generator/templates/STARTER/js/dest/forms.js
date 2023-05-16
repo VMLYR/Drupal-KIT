@@ -8,8 +8,8 @@
       (l.length || i.length) && t.focusFields(l, i, o), o.length && t.customSelect(o), i.length && t.textareaScroll(i), t.stateCheck()
     }
   }, t.focusFields = function (e, s, l) {
-    e.length && once("js-once-input", e).each((function () {
-      var e = a(this), s = ".form__element";
+    e.length && once("js-once-input", e).forEach((e)=> {
+      var e = a(e), s = ".form__element";
       e.closest(s).length < 1 && (s = ".form-wrapper"), e.focus((function (e) {
         var l = a(this);
         l.closest(s).addClass("is-active").find("label").addClass("is-active"), "search_block_form" == l.attr("name") && l.parent().addClass("is-active").find("label").addClass("is-active")
@@ -17,7 +17,7 @@
         var l = a(this);
         l.closest(s).removeClass("is-active").find("label").removeClass("is-active"), "search_block_form" == l.attr("name") && l.parent().removeClass("is-active").find("label").removeClass("is-active"), l.val() ? (l.closest(s).addClass("has-value").find("label").addClass("has-value"), "search_block_form" == l.attr("name") && l.parent().addClass("has-value").find("label").addClass("has-value")) : (l.closest(s).removeClass("has-value").find("label").removeClass("has-value"), "search_block_form" == l.attr("name") && l.parent().removeClass("has-value").find("label").removeClass("has-value"))
       })), e.val() && (e.closest(s).addClass("has-value").find("label").addClass("has-value"), "search_block_form" == e.attr("name") && e.parent().addClass("has-value").find("label").addClass("has-value"))
-    })), s.length && once("js-once-textarea", s).each((function () {
+    }), s.length && once("js-once-textarea", s).each((function () {
       var e = a(this), s = ".form__element";
       e.closest(s).length < 1 && (s = ".form-wrapper"), e.focus((function (e) {
         a(this).closest(s).addClass("is-active").find("label").addClass("is-active")
