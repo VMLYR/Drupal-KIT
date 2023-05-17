@@ -103,9 +103,9 @@
     var total = block.length;
 
     // check all photogallery blocks to see if they are in masonry view mode
-    once('js-photo-gallery-masonryCheck', block).each(function (i) {
+    once('js-photo-gallery-masonryCheck', block).forEach((block, i) => {
 
-      var block = $(this),
+      var block = $(block),
         id = 'p-photogallery-' + i;
 
       block.attr('id', id);

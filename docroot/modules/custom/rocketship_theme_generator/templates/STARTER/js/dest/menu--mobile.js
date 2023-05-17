@@ -29,7 +29,9 @@
     once(n[0], 'click', clickHandler);
 
     e(o).on("resize", function () {
-      "xs" != i.screen && s.classList.contains("js-open") && s.classList.remove("js-open")
+      if (s && s.length && s[0].classList.contains("js-open")) {
+        s[0].classList.remove("js-open");
+      }
     });
   }
 })(jQuery, Drupal, window, document);
