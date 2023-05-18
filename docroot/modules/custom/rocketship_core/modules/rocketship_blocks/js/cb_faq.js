@@ -66,9 +66,9 @@
    */
   self.faqCollapsable = function (faq) {
 
-    once('js-once-faq-collapsable', faq).each(function () {
+    once('js-once-faq-collapsable', faq).forEach((faq) => {
 
-      var faqItem = $(this),
+      var faqItem = $(faq),
         trigger = faqItem.find('.tab-item__title'),
         target = faqItem.find('.tab-item__content');
 

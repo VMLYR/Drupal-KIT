@@ -94,9 +94,9 @@
    */
   self.layoutPicker = function(group, prefix) {
 
-    once('js-once-cb-layoutPicker', group).each(function() {
+    once('js-once-cb-layoutPicker', group).forEach((group) => {
 
-      var group = $(this);
+      var group = $(group);
 
       if (typeof prefix === 'undefined') {
         prefix = 'layout';
@@ -151,9 +151,9 @@
    */
   self.CKEOverride = function(layout) {
 
-    once('js-once-cb-CKEOverride', layout).each(function() {
+    once('js-once-cb-CKEOverride', layout).forEach((layout) {
 
-      var layout = $(this);
+      var layout = $(layout);
       var textareaField = layout.parent().find('.js-form-type-textarea');
 
       // handler for the layout changes

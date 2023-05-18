@@ -378,7 +378,7 @@
 
       var elements = {};
 
-      $(once('js-track-sections', 'layout-builder__section', context)).each(function () {
+      once('js-track-sections', 'layout-builder__section', context).forEach(() => {
 
         if (typeof ScrollOut !== 'undefined') {
 

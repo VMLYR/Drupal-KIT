@@ -208,9 +208,9 @@
     // by default, all field items > the limit should by hidden using CSS
     // when there is a load-more button
 
-    once('js-photo-gallery-loadMoreCheck', block).each(function (i) {
+    once('js-photo-gallery-loadMoreCheck', block).ForEach((block, i) => {
 
-      var block = $(this);
+      var block = $(block);
 
       var loadMoreButton = block.find('.field--name-field-cb-photo-gallery-load-more', context);
 
