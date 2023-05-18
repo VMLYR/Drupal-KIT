@@ -57,13 +57,13 @@
         return;
       }
 
-      once('.layout--carousel').each(function () {
-        var slider = $(this).find('.layout__content__row--carousel');
+      once('.layout--carousel').forEach((elem) => {
+        var slider = $(elem).find('.layout__content__row--carousel');
 
         if (typeof drupalSettings.rocketshipUI_layout_carousel !== 'undefined') {
 
-          once('.block-layout_builder', slider).each(function () {
-            var slide = $(this);
+          once('.block-layout_builder', slider).forEach((slider) => {
+            var slide = $(slider);
             if (typeof slide.closest('.slide') === 'undefined' || slide.closest('.slide').length === 0) {
               slide.wrap('<div class="slide"></div>');
             }

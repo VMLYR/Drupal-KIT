@@ -88,9 +88,9 @@ import MagicGrid from "magic-grid";
     var total = block.length;
 
     // check all photogallery blocks to see if they are in masonry view mode
-    once('js-photo-gallery-masonryCheck', block).each(function (i) {
+    once('js-photo-gallery-masonryCheck', block).forEach((block, i) => {
 
-      var block = $(this),
+      var block = $(block),
         id = 'p-photogallery-' + i;
 
       block.attr('id', id);
@@ -137,9 +137,9 @@ import MagicGrid from "magic-grid";
     // by default, all field items > the limit should by hidden using CSS
     // when there is a load-more button
 
-    once('js-photo-gallery-loadMoreCheck', block).each(function (i) {
+    once('js-photo-gallery-loadMoreCheck', block).forEach((block, i) => {
 
-      var block = $(this);
+      var block = $(block);
 
       var loadMoreButton = block.find('.field--name-field-cb-photo-gallery-load-more', context);
 
@@ -160,17 +160,17 @@ import MagicGrid from "magic-grid";
             block.addClass('has--visible-items');
           }
 
-          $('.field__item', block).each(function (index) {
+          $('.field__item', block).forEach((block, index) => {
 
-            var item = $(this);
+            var item = $(block);
 
             // remove the classes
             if (index > parseInt(itemLimit - 1)) {
 
               if (item.hasClass('is--visible')) {
-                $(this).removeClass('is--visible');
+                $(block).removeClass('is--visible');
               } else {
-                $(this).addClass('is--visible');
+                $(block).addClass('is--visible');
               }
             }
           });

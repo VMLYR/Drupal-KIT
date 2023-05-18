@@ -101,7 +101,7 @@ tooling:
     cmd: drush kit:check-url
   kit/conf:
     service: appserver
-    description: Import/exprot environment specific configuration for a site
+    description: Import/export environment specific configuration for a site
     cmd: drush kit:conf
   kit/gulp:
     service: node

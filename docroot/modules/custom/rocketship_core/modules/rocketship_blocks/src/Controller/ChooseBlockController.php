@@ -8,7 +8,7 @@ use Drupal\layout_builder_restrictions\Controller\ChooseBlockController as Choos
 use Drupal\layout_builder\SectionStorageInterface;
 
 /**
- * Class ChooseBlockController
+ * Class ChooseBlockController.
  *
  * @package Drupal\rocketship_blocks\Controller
  */
@@ -50,13 +50,13 @@ class ChooseBlockController extends ChooseBlockControllerCore {
   /**
    * {@inheritdoc}
    *
-   * todo: rework some of this markup shit. Figure out what to do with
+   * Comment: @todo: rework some of this markup shit. Figure out what to do with
    * these default icons. Per category? Something else?
    */
   protected function getBlockLinks(SectionStorageInterface $section_storage, int $delta, $region, array $blocks) {
     $links = [];
     $icons_folder_path = \Drupal::service('extension.list.module')->getPath('rocketship_blocks') . '/assets/images/';
-    $default_icon_path = file_create_url($icons_folder_path . 'default-block.svg');
+    $default_icon_path = \Drupal::service('file_url_generator')->generateAbsoluteString($icons_folder_path . 'default-block.svg');
     foreach ($blocks as $block_id => $block) {
       $description = '';
       $icon_path = $default_icon_path;

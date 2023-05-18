@@ -224,7 +224,7 @@ class PositionBasedImageFormatter extends ImageFormatterBase implements Containe
         // context to ensure different file URLs are generated for different
         // sites in a multisite setup, including HTTP and HTTPS versions of the
         // same site. Fix in https://www.drupal.org/node/2646744.
-        $url = Url::fromUri(file_create_url($image_uri));
+        $url = Url::fromUri(\Drupal::service('file_url_generator')->generateAbsoluteString($image_uri));
         $cache_contexts[] = 'url.site';
       }
       $cache_tags = Cache::mergeTags($base_cache_tags, $file->getCacheTags());
