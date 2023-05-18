@@ -89,9 +89,9 @@
     // if coming from CKE
     var ckeClass = '.cke_show_borders, .text-long';
 
-    once('js-once-set-responsive-tables', tables).each(function() {
+    once('js-once-set-responsive-tables', tables).forEach((tables) => {
 
-      var table = $(this);
+      var table = $(tables);
       var pageTable = table.closest('.page').length;
 
       // for tables in Styleguide as well
@@ -189,16 +189,16 @@
       heightMax = 0;
 
     // loop rows
-    once('js-once-check-th-position', trs).each(function(i) {
+    once('js-once-check-th-position', trs).forEach((trs, i) => {
 
-      var tr = $(this);
+      var tr = $(trs);
 
       // loop cells
       var ths = table.find('th');
 
-      once('js-once-check-th-position', ths).each(function(j) {
+      once('js-once-check-th-position', ths).forEach((ths, j) => {
 
-        var th = $(this);
+        var th = $(ths);
 
         // we have th's in the left column of the table body
         if (j === 0 && th.parent('tr').parent('tbody').length) {

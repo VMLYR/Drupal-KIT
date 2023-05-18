@@ -94,18 +94,18 @@
 
   self.dropdownMenu = function(params) {
 
-    once('js-once-dropdown', params.nav).each(function() {
+    once('js-once-dropdown', params.nav).forEach((params.nav) => {
 
-      var nav = $(this),
+      var nav = $(params.nav),
           interaction = params.interaction,
           menu =  nav.children('ul'),
           firstLevel = menu.children('li'),
           sum = 0;
 
       // find the first level children of an menu
-      once('js-once-dropdown-item', firstLevel).each(function(index) {
+      once('js-once-dropdown-item', firstLevel).forEach((firstLevel, index) => {
 
-        var item = $(this),
+        var item = $(firstLevel),
           itemLink = item.children('a, span').first(),
           icon = item.find('.expand-sub'),
           touchTrigger,

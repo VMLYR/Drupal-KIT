@@ -75,8 +75,8 @@
           content = $('#main-content');
       if (skipLink.length && content.length) {
         // when you click on the skiplink, force focus on the target
-        once('js-once-skip-link', skipLink).each(function() {
-          $(this).on('click', function(e) {
+        once('js-once-skip-link', skipLink).forEach((skipLink) => {
+          $(skipLink).on('click', function(e) {
             content.trigger('focus');
             e.preventDefault();
           });
@@ -109,9 +109,9 @@
         preventTabReset = false;
 
     // For each of our elements
-    once('js-once-cardlink', elements).each(function() {
+    once('js-once-cardlink', elements).forEach((elements) => {
 
-      var el = $(this),
+      var el = $(elements),
           link, hrefProp, targetProp, down, up;
 
       // is a selector was passed to the function
@@ -333,9 +333,9 @@
         }
 
         // 2) check all of anchorLinks if there are any + if not an exception
-        once('js-once-scrollable-anchors-active', myAnchorLinks).each(function() {
+        once('js-once-scrollable-anchors-active', myAnchorLinks).forEach((myAnchorLinks) => {
 
-          var myLink = $(this);
+          var myLink = $(myAnchorLinks);
 
           // set an active class & scrollTo (if not part of the exclusion list)
           if (exceptions === null || !myLink.is(exceptions)) {
@@ -363,9 +363,9 @@
 
       var anchorLinks = $('a[href*="#"]').not('a[href="#"]');
 
-      once('js-once-scrollable-anchors', anchorLinks).each(function() {
+      once('js-once-scrollable-anchors', anchorLinks).forEach((anchorLinks) => {
 
-        var anchorLink = $(this);
+        var anchorLink = $(anchorLinks);
 
         if (exceptions === null || !anchorLink.is(exceptions)) {
 
@@ -469,9 +469,9 @@
       // if that anchor is not excluded
       window.onpopstate = function(event) {
 
-        once('js-once-scrollable-anchors-popstate', anchorLinks).each(function() {
+        once('js-once-scrollable-anchors-popstate', anchorLinks).forEach((anchorLinks) => {
 
-          var anchorLink = $(this);
+          var anchorLink = $(anchorLinks);
 
           if (exceptions === null || !anchorLink.is(exceptions)) {
 

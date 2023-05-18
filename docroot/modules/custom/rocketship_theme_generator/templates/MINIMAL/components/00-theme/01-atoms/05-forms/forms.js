@@ -56,8 +56,8 @@
     // if input exists
     if (input.length) {
       // iterate all inputs
-      once('js-once-input', input).each(function() {
-        var input = $(this);
+      once('js-once-input', input).forEach((input) => {
+        var input = $(input);
 
         var wrapper = '.form__element';
 
@@ -111,8 +111,8 @@
     }
 
     if (textarea.length) {
-      once('js-once-textarea', textarea).each(function() {
-        var textarea = $(this);
+      once('js-once-textarea', textarea).forEach((textarea) => {
+        var textarea = $(textarea);
 
         var wrapper = '.form__element';
 
@@ -147,9 +147,9 @@
     }
 
     if (select.length) {
-      once('js-once-select', select).each(function() {
+      once('js-once-select', select).forEach((select) => {
 
-        var select = $(this);
+        var select = $(select);
 
         var wrapper = '.form__element';
 
@@ -195,9 +195,9 @@
    * wrap select in order to create custom styling for arrow and such
    */
   self.customSelect = function (select) {
-    once('js-once-select-wrap', select).each(function() {
-      if($(this).closest('.form__dropdown').length < 1) {
-        $(this).wrap('<div class="form__dropdown"></div>');
+    once('js-once-select-wrap', select).forEach((select) => {
+      if($(select).closest('.form__dropdown').length < 1) {
+        $(select).wrap('<div class="form__dropdown"></div>');
       }
     });
   };
@@ -209,9 +209,9 @@
    */
   self.textareaScroll = function (textarea) {
 
-    once('js-once-textarea-scroll', textarea).each(function() {
+    once('js-once-textarea-scroll', textarea).forEach((textarea) => {
 
-      var myTextarea = $(this);
+      var myTextarea = $(textarea);
 
       var checkScrollPosition = function(self) {
         // if text scrolls by, set a class on field
