@@ -107,9 +107,13 @@ class KitScriptHandler {
     // Add additional items back to the package.
     $composer->getPackage()->setExtra($extra);
 
-    // Re-generate hashsalt.
-    $event->getIO()->write('Generating Hash Salt');
-    $fs->dumpFile($config_root . '/salt.txt', Crypt::randomBytesBase64(55));
+    // Generate hashsalt.
+    if (!$fs->exists($config_root . '/salt.txt')) {
+      $event->getIO()->write('Generating Hash Salt');
+      $fs->dumpFile($config_root . '/salt.txt', Crypt::randomBytesBase64(55));
+    } else {
+      $event->getIO()->write('Hash Salt Already Exists');
+    }
 
     // Run modified scaffold.
     $handler = new Handler($composer, $event->getIO());
