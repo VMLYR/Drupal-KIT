@@ -13,7 +13,15 @@ services:
       environment:
         XDEBUG_MODE: null
         LANDO_HOST_IP: 172.17.0.1
+  database:
+    creds:
+      user: user
+      password: user
+      database: www
 tooling:
+  drop-tables:
+    service: database
+    cmd: mysql -uuser -puser www < /app/scripts/mysql/drop-tables.sql
   xdebug-on:
     service: appserver
     description: Enable xdebug for Apache.
