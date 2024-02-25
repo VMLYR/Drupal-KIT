@@ -1,0 +1,26 @@
+name: NewKit
+recipe: drupal10
+config:
+  php: '8.2'
+  webroot: docroot
+  composer_version: 2
+services:
+  appserver:
+    xdebug: true
+    config:
+      php: .lando.php.ini
+    overrides:
+      environment:
+        XDEBUG_MODE: null
+        LANDO_HOST_IP: 172.17.0.1
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Enabling xdebug"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Disabling xdebug"
+    user: root
