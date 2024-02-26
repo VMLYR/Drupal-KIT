@@ -1,9 +1,12 @@
 name: NewKit
-recipe: drupal10
+recipe: acquia
 config:
   php: '8.2'
   webroot: docroot
   composer_version: 2
+proxy:
+  node:
+    - newkitsb.lndo.site:6006
 services:
   appserver:
     xdebug: true
@@ -18,6 +21,10 @@ services:
       user: user
       password: user
       database: www
+  node:
+    type: node:18
+    ports:
+      - 6006
 tooling:
   drop-tables:
     service: database
