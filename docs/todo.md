@@ -1,0 +1,55 @@
+# todo list
+
+## Documentation
+
+- Readme
+- [Install](install.md)
+- CI/CD
+- Analytics
+- Multisites
+- Search
+  - Database
+  - Solr
+- Drush
+- Local Settings
+- Production Settings
+- Components
+- SDC
+- Storybook
+- Unit Tests
+  - PHP
+  - JS
+- Linting
+- Caching
+- Libraries
+- Localization
+- GDPR
+- Webforms
+- Images
+- Theme
+  - BEM
+  - REM v PX
+  - SASS
+  - JavaScript
+- SSO
+- Security
+- Performance
+- Config Split
+- Updating Lando
+- Acquia
+- Pantheon
+- CDN
+- Caching
+- Feature Flags
+- SEO
+  - Schema
+  - Meta-tags
+  - Robots
+  - Sitemap
+- Accessilbity
+- Workflow
+- Workspaces
+- Patching
+- .htaccess updates
+- Debugging
+- Profiling
