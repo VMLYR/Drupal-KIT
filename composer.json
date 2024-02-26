@@ -1,8 +1,18 @@
 {
-    "name": "drupal/recommended-project",
-    "description": "Project template for Drupal projects with a relocated document root",
+    "name": "vml-drupal/kit",
+    "description": "Project template for VML Drupal 10+ projects with composer and Layout Builder.",
     "type": "project",
     "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Garrett Rathbone",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Michael Smith",
+            "role": "Maintainer"
+        }
+    ],
     "homepage": "https://www.drupal.org/project/drupal",
     "support": {
         "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
@@ -74,6 +84,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "php-http/discovery": true
         },
+        "discard-changes": true,
         "sort-packages": true
     },
     "extra": {
