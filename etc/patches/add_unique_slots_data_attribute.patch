@@ -1,0 +1,25 @@
+diff --git a/src/Controller/EditBlockLayout.php b/src/Controller/EditBlockLayout.php
+index c983a20..580a4d4 100644
+--- a/src/Controller/EditBlockLayout.php
++++ b/src/Controller/EditBlockLayout.php
+@@ -65,7 +65,7 @@ class EditBlockLayout extends ControllerBase {
+     // Replace the div containing the layout block with the nested layout builder UI.
+     $nested_storage_path_pieces = SectionStorageHandler::decodeNestedStoragePath($nested_storage_path);
+     $current_layout_block_uuid = end($nested_storage_path_pieces);
+-    $response->addCommand(new ReplaceCommand("[data-block-uuid='$current_layout_block_uuid']", $layout));
++    $response->addCommand(new ReplaceCommand("[data-block-uuid--slot='$current_layout_block_uuid']", $layout));
+ 
+     // Update the LB+ UI.
+     $page_bottom = [];
+diff --git a/src/Element/LayoutBuilderPlus.php b/src/Element/LayoutBuilderPlus.php
+index c23353a..645d8a8 100644
+--- a/src/Element/LayoutBuilderPlus.php
++++ b/src/Element/LayoutBuilderPlus.php
+@@ -261,6 +261,7 @@ class LayoutBuilderPlus extends RenderElement implements ContainerFactoryPluginI
+           $build['section'][$region][$uuid]['#attributes']['class'][] = 'js-layout-builder-block';
+           $build['section'][$region][$uuid]['#attributes']['class'][] = 'layout-builder-block';
+           $build['section'][$region][$uuid]['#attributes']['data-block-uuid'] = $uuid;
++          $build['section'][$region][$uuid]['#attributes']['data-block-uuid--slot'] = $uuid;
+           $build['section'][$region][$uuid]['#attributes']['data-layout-builder-highlight-id'] = $this->blockUpdateHighlightId($uuid);
+           $build['section'][$region][$uuid]['#contextual_links'] = [
+             'layout_builder_block' => [

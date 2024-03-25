@@ -27,6 +27,7 @@
     "require": {
         "chi-teck/drupal-code-generator": "^3",
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
         "drupal/admin_toolbar_links_access_filter": "^3.4",
         "drupal/admin_toolbar_tools": "^3.4",
@@ -37,6 +38,7 @@
         "drupal/core-recommended": "^10.2",
         "drupal/devel": "^5.1",
         "drupal/drimage": "^2.2",
+        "drupal/entity_reference_revisions": "^1.11",
         "drupal/environment_indicator": "^4.0",
         "drupal/field_group": "^3.4",
         "drupal/field_group_settings": "^4.0",
@@ -52,6 +54,7 @@
         "drupal/layout_builder_modal": "^1.2",
         "drupal/layout_builder_restrictions": "^2.19",
         "drupal/lb_plus": "^2.1",
+        "drupal/link_attributes": "^2.1",
         "drupal/linkit": "^6.1",
         "drupal/list_inline_block": "^1.1",
         "drupal/login_emailusername": "^2.1",
@@ -82,7 +85,8 @@
             "drupal/core-project-message": true,
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true
         },
         "discard-changes": true,
         "sort-packages": true
@@ -142,6 +146,11 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "patches": {
+            "drupal/lb_plus": {
+              "Add data attribute for unique slot to layout builder.": "etc/patches/add_unique_slots_data_attribute.patch"
+            }
         }
     }
 }
