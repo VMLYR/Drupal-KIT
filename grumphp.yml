@@ -28,9 +28,28 @@ grumphp:
             level: null
             force_patterns: []
             ignore_patterns: []
-            triggered_by: ['php']
+            triggered_by: ['php', 'module']
             memory_limit: "-1"
             use_grumphp_paths: true
+        git_branch_name:
+            whitelist:
+                - "feature/*"
+                - "bugfix/*"
+                - "task/*"
+            blacklist:
+                - "develop"
+                - "development"
+                - "master"
+                - "main"
+            additional_modifiers: ''
+            allow_detached_head: true
+        yamllint:
+            whitelist_patterns: []
+            ignore_patterns: []
+            object_support: false
+            exception_on_invalid_type: false
+            parse_constant: false
+            parse_custom_tags: false
     parallel:
         enabled: true
         max_workers: 32
