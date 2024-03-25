@@ -5,7 +5,8 @@ on:
     branches: [ "feature/enterprise" ]
   pull_request:
     branches: [ "feature/enterprise" ]
-
+  workflow_dispatch:
+    # Inputs the workflow accepts.
 permissions:
   contents: read
 
