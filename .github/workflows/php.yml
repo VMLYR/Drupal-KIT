@@ -36,9 +36,9 @@ jobs:
     - name: Linting w/ Grump
       run: |
         ls . | php ./vendor/bin/grumphp run
-        ls-ld docroot/modules/custom | php ./vendor/bin/grumphp run
-        ls-ld docroot/themes/custom | php ./vendor/bin/grumphp run
-        ls-ld docroot/profiles/custom | php ./vendor/bin/grumphp run
+        find docroot/modules/custom/. | php ./vendor/bin/grumphp run
+        find docroot/themes/custom/. | php ./vendor/bin/grumphp run
+        find docroot/profiles/custom/. | php ./vendor/bin/grumphp run
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
