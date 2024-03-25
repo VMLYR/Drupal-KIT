@@ -1,0 +1,19 @@
+parameters:
+    paths:
+        - '%rootDir%/../../../docroot/modules/custom'
+    excludePaths:
+        - 'docroot/sites/default'
+    fileExtensions:
+        - php
+        - module
+        - inc
+    level: 1
+    ignoreErrors:
+        # While technically correct, it is used in so many places it would be
+        # too much work to refactor for now.
+        - '#\\Drupal calls should be avoided in classes, use dependency injection instead#'
+        # This is just how Drupal DI works.
+        - '#Unsafe usage of new static\(\)#'
+        # For some reason some functions are borking - can try to fix this when we have some more time.
+        - '#Function \S*feature_\S* not found( while trying to analyse it \- autoloading is probably not configured properly)?\.#'
+        - '#Function template_\S* not found while trying to analyse it \- autoloading is probably not configured properly\.#'
