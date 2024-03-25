@@ -34,7 +34,11 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: Linting w/ Grump
-      run: git ls-files | php ./vendor/bin/grumphp run --verbose
+      run: |
+        ls . | php ./vendor/bin/grumphp run
+        ls-ld docroot/modules/custom | php ./vendor/bin/grumphp run
+        ls-ld docroot/themes/custom | php ./vendor/bin/grumphp run
+        ls-ld docroot/profiles/custom | php ./vendor/bin/grumphp run
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
