@@ -1,0 +1,28 @@
+# Name of workflow to be displyed on Github Console
+name: Build and Test Application
+
+# Triggers the workflow on separate events
+on:
+  pull_request:
+    # Trigger the worflow on pull request event for main branch
+    branches:
+      - feature/enterprise
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # "build" workflow
+  build:
+
+    name: Build and Test
+    #The type of runner on which job will run
+    runs-on: ubuntu-latest
+
+    # steps can run commands, setup tasks or run an action
+    steps:
+      - name: Checkout Source Code
+        # action/checkout@v2 checks-out your repo under github workspace.
+        uses: actions/checkout@v2
+
+      # Run build on the code
+      - name: Build
+        run: composer install -y
